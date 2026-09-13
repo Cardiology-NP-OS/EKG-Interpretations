@@ -1,0 +1,15 @@
+{
+  "schema": "ekg-ptbxl-source-smoke-v1",
+  "dataset": "PTB-XL",
+  "version": "1.0.3",
+  "record_id": "00001",
+  "purpose": "real-signal-ingestion-integrity-smoke-only",
+  "source_metadata_is_gold": false,
+  "expected": {
+    "ptbxl_database.csv": "7600de9c1b27d181d850b3c6038a35d7c3ddb6bb33b702e3a20252a6859d216b",
+    "00001_lr.dat": "308012fb657e1eea29a86902a8576e2e173594bd16f11ec1f45c7445cec97572",
+    "00001_lr.hea": "051aa38ee3f530df1f2dd35ec097439a54befceef18c60d4157da2a5628aefbb",
+    "00001_hr.dat": "0797d0a8c43d5cc05bb0a73026a0f6d9f358b459849674ebd38abd9120241bcf",
+    "00001_hr.hea": "c0ca9920530399329471389871e18828fb22f9eeea60932dccf077f33750c788"
+  }
+}

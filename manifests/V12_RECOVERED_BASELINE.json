@@ -1,0 +1,16 @@
+{
+  "schema": "ekg-v12-recovered-baseline-v1",
+  "recovery_generation": "V13",
+  "identity_claim": "semantic-recovery-not-byte-identical",
+  "historical_v12": {
+    "commit": "b41f5705532d19bc738f59600bd0234b5414422d",
+    "tag": "v12-endpoint-evidence-claim-integrity",
+    "deterministic_tests_reported": 533,
+    "packaged_files_reported": 394,
+    "release_gate_reported": "PASS"
+  },
+  "evidence_tier": "engineering_harness_only",
+  "adjudicated_clinical_gold_ecgs": 0,
+  "clinical_accuracy_claimed": false,
+  "native_ptbxl_labels_are_project_gold": false
+}
