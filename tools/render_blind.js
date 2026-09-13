@@ -1,7 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { verify, DATA } = require("./verify_source");
+const {
+  verifyAt,
+  DATA,
+  SOURCE_MANIFEST,
+} = require("./verify_source");
 
 const ROOT = path.resolve(__dirname, "..");
 
@@ -31,11 +35,11 @@ function waveformPath(values, x, y, width, height) {
   }).join(" ");
 }
 
-function renderBlind(outputFile) {
-  const source = verify();
+function renderBlindAt(dataRoot, outputFile, sourceManifest = SOURCE_MANIFEST) {
+  const source = verifyAt(dataRoot, sourceManifest);
   const lr = source.records.lr;
   const leads = loadLeadSamples(
-    path.join(DATA, "00001_lr.dat"), lr.leads, lr.samples
+    path.join(dataRoot, "00001_lr.dat"), lr.leads, lr.samples
   );
   const width = 1200;
   const rowHeight = 110;
@@ -71,6 +75,10 @@ function renderBlind(outputFile) {
   };
 }
 
+function renderBlind(outputFile) {
+  return renderBlindAt(DATA, outputFile, SOURCE_MANIFEST);
+}
+
 if (require.main === module) {
   const output = process.argv[2] ||
     path.join(ROOT, "runtime", "blind", "record.svg");
@@ -86,4 +94,9 @@ if (require.main === module) {
   }
 }
 
-module.exports = { loadLeadSamples, renderBlind, waveformPath };
+module.exports = {
+  loadLeadSamples,
+  renderBlind,
+  renderBlindAt,
+  waveformPath,
+};

@@ -1,0 +1,29 @@
+name: EKG Recovery CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-contract-ci:
+    name: Synthetic contract CI (non-clinical)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run self-contained contract tests
+        run: npm test
+      - name: Run CI evidence-boundary gate
+        run: npm run gate:ci
+      - name: Report external-source preflight
+        env:
+          EKG_PTBXL_RECORD_DIR: ${{ runner.temp }}/ptbxl-not-provided
+        run: npm run source:preflight

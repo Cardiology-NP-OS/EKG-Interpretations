@@ -12,9 +12,11 @@ It is **not byte-identical to the lost V12 repository**. The known V12 release s
 - Passing this repository's gate does not establish clinical diagnostic accuracy.
 
 ## Commands
-- `npm test` — deterministic recovery/clinical smoke tests.
-- `npm run verify:clinical` — verify PTB-XL source bytes and paired 100/500 Hz consistency.
+- `npm test` / `npm run test:ci` — self-contained synthetic contract tests; no clinical data.
+- `npm run gate:ci` — GitHub CI gate; proves engineering contracts only.
+- `npm run test:source` — tests against the external verified PTB-XL smoke source.
+- `npm run verify:source` — verify PTB-XL source bytes and paired 100/500 Hz consistency.
 - `npm run render:blind` — render blinded review derivative outside Git.
-- `npm run gate` — run the complete recovered-baseline release gate.
+- `npm run gate:source` / `npm run gate` — full external-source engineering gate.
 
-See `RECOVERY_PROVENANCE.md`, `docs/V12_EVIDENCE_SEMANTICS.md`, and `docs/V13_REAL_SIGNAL_EXECUTION.md`.
+The CI gate never substitutes synthetic evidence for source evidence. See `docs/CI_EVIDENCE_BOUNDARIES.md`, `RECOVERY_PROVENANCE.md`, `docs/V12_EVIDENCE_SEMANTICS.md`, and `docs/V13_REAL_SIGNAL_EXECUTION.md`.
