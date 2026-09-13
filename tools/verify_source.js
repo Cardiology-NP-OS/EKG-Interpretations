@@ -7,7 +7,9 @@ const DEFAULT_DATA = path.resolve(
   ROOT, "..", "EKG_INTERPRETATIONS_DATA", "ptbxl", "1.0.3", "record_00001"
 );
 const DATA = path.resolve(process.env.EKG_PTBXL_RECORD_DIR || DEFAULT_DATA);
-const manifest = require(path.join(ROOT, "manifests", "PTBXL_RECORD_00001.json"));
+const SOURCE_MANIFEST = require(
+  path.join(ROOT, "manifests", "PTBXL_RECORD_00001.json")
+);
 
 function sha256(file) {
   return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
@@ -30,18 +32,18 @@ function requireCondition(condition, code) {
   if (!condition) throw new Error(code);
 }
 
-function verify() {
+function verifyAt(dataRoot, sourceManifest = SOURCE_MANIFEST) {
   const hashes = {};
-  for (const [name, expected] of Object.entries(manifest.expected)) {
-    const file = path.join(DATA, name);
+  for (const [name, expected] of Object.entries(sourceManifest.expected)) {
+    const file = path.join(dataRoot, name);
     requireCondition(fs.existsSync(file), `SOURCE_MISSING:${name}`);
     const actual = sha256(file);
     requireCondition(actual === expected, `SOURCE_SHA256_MISMATCH:${name}`);
     hashes[name] = actual;
   }
 
-  const lr = parseHeader(path.join(DATA, "00001_lr.hea"));
-  const hr = parseHeader(path.join(DATA, "00001_hr.hea"));
+  const lr = parseHeader(path.join(dataRoot, "00001_lr.hea"));
+  const hr = parseHeader(path.join(dataRoot, "00001_hr.hea"));
   const canonicalLeads = ["I","II","III","AVR","AVL","AVF","V1","V2","V3","V4","V5","V6"];
   requireCondition(lr.record === "00001_lr", "LR_RECORD_ID");
   requireCondition(hr.record === "00001_hr", "HR_RECORD_ID");
@@ -57,11 +59,11 @@ function verify() {
     "HR_LEADS"
   );
   requireCondition(
-    fs.statSync(path.join(DATA, "00001_lr.dat")).size === 12 * 1000 * 2,
+    fs.statSync(path.join(dataRoot, "00001_lr.dat")).size === 12 * 1000 * 2,
     "LR_DATA_SIZE"
   );
   requireCondition(
-    fs.statSync(path.join(DATA, "00001_hr.dat")).size === 12 * 5000 * 2,
+    fs.statSync(path.join(dataRoot, "00001_hr.dat")).size === 12 * 5000 * 2,
     "HR_DATA_SIZE"
   );
 
@@ -70,11 +72,15 @@ function verify() {
     pass: true,
     evidence_tier: "engineering_harness_only",
     clinical_accuracy_claimed: false,
-    data_root: DATA,
+    data_root: dataRoot,
     hashes,
     records: { lr, hr },
   };
   return result;
+}
+
+function verify() {
+  return verifyAt(DATA, SOURCE_MANIFEST);
 }
 
 if (require.main === module) {
@@ -90,4 +96,11 @@ if (require.main === module) {
   }
 }
 
-module.exports = { verify, parseHeader, sha256, DATA };
+module.exports = {
+  verify,
+  verifyAt,
+  parseHeader,
+  sha256,
+  DATA,
+  SOURCE_MANIFEST,
+};

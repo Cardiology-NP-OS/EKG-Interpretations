@@ -1,12 +1,19 @@
 {
   "name": "ekg-interpretations-recovered",
-  "version": "13.0.0-recovery.1",
+  "version": "13.0.0-recovery.2",
   "private": true,
-  "description": "Recovered V12 semantic baseline with V13 real-signal execution on Machine B",
+  "description": "Recovered V12 semantic baseline with V13 evidence-bounded execution",
   "scripts": {
-    "test": "node tests/recovery.test.js",
-    "verify:clinical": "node tools/verify_source.js",
+    "test": "npm run test:ci",
+    "test:ci": "node tests/ci_contract.test.js",
+    "test:source": "node tests/recovery.test.js",
+    "verify:source": "node tools/verify_source.js",
+    "verify:clinical": "npm run verify:source",
+    "source:preflight": "node tools/source_preflight.js",
+    "source:require": "node tools/source_preflight.js --require",
     "render:blind": "node tools/render_blind.js",
-    "gate": "node tools/release_gate.js"
+    "gate:ci": "node tools/ci_gate.js",
+    "gate:source": "node tools/release_gate.js",
+    "gate": "npm run gate:source"
   }
 }
