@@ -1,0 +1,12 @@
+{
+  "name": "ekg-interpretations-recovered",
+  "version": "13.0.0-recovery.1",
+  "private": true,
+  "description": "Recovered V12 semantic baseline with V13 real-signal execution on Machine B",
+  "scripts": {
+    "test": "node tests/recovery.test.js",
+    "verify:clinical": "node tools/verify_source.js",
+    "render:blind": "node tools/render_blind.js",
+    "gate": "node tools/release_gate.js"
+  }
+}
