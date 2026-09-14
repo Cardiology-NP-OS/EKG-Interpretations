@@ -270,6 +270,60 @@ test("non-finite numeric measurements cannot produce PASS", () => {
   }
 });
 
+test("schema-invalid quality certainty and measurement enums cannot pass", () => {
+  let result = auditFinalization({ ...base(), primary_pattern_confidence: "certain" });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("unsupported_certainty"));
+
+  result = auditFinalization({ ...base(), technical_quality: { grade: "excellent", limitations: [] } });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("invalid_quality_grade"));
+
+  result = auditFinalization({ ...base(), measurements: [{ name: "not_a_metric", value: 1, source: "machine" }] });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("invalid_measurement_name"));
+
+  result = auditFinalization({ ...base(), measurements: [{ name: "qrs", value: 1, source: "invented" }] });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("invalid_measurement_source"));
+});
+
+test("punctuation unicode and fallback routing stay deterministic", () => {
+  for (const raw of ["qt-audit", "qt/audit", "machine.vs.human", "analyze!!!", "xx analyze yy", "fast rhythm strip now", "qt\u200baudit"]) {
+    eq(resolveMode(raw).code, "unknown_mode");
+  }
+  for (const raw of ["qt\u00a0audit", "qt\u2003audit", "learn\u00a0/\u00a0blind\u00a0test"]) {
+    eq(resolveMode(raw).blocked, false);
+  }
+});
+
+test("unsupported and learning transitions cannot bypass route semantics", () => {
+  let payload = base("fast_rhythm_strip");
+  payload.previous_mode = "analyze";
+  payload.transition_context = { reaudit_completed: true };
+  let result = auditFinalization(payload);
+  eq(result.verdict, "BLOCKED");
+  ok(codes(result).includes("unsupported_schema_mode"));
+
+  payload = base("analyze");
+  payload.previous_mode = "fast_rhythm_strip";
+  payload.transition_context = { reaudit_completed: true };
+  result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("invalid_previous_mode"));
+
+  payload = base("learn_blind_test");
+  payload.previous_mode = "analyze";
+  payload.transition_context = { reaudit_completed: true };
+  result = auditFinalization(payload);
+  eq(result.verdict, "BLOCKED");
+  ok(codes(result).includes("learning_precommit_unrepresentable"));
+
+  payload.audit_context.learner_committed = true;
+  result = auditFinalization(payload);
+  eq(result.verdict, "PASS");
+});
+
 if (process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({
   schema: "ekg-l04-mode-audit-tests-v1",

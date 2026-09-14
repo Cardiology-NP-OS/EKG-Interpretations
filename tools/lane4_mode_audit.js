@@ -10,6 +10,26 @@ const CONTRACT_PATH = path.join(
   "MODE_SELF_AUDIT_CONTRACT.json"
 );
 const CONTRACT = JSON.parse(fs.readFileSync(CONTRACT_PATH, "utf8"));
+const OUTPUT_SCHEMA = JSON.parse(fs.readFileSync(path.join(
+  ROOT,
+  "clinical_control",
+  "v12_1_candidate",
+  "source_core",
+  "07_OUTPUT_SCHEMA.json"
+), "utf8"));
+const QUALITY_GRADES = new Set(
+  OUTPUT_SCHEMA.properties.technical_quality.properties.grade.enum
+);
+const PATTERN_CONFIDENCES = new Set(
+  OUTPUT_SCHEMA.properties.interpretation.properties.primary_pattern.properties.confidence.enum
+);
+const MEASUREMENT_NAMES = new Set([
+  ...OUTPUT_SCHEMA.properties.measurements.items.properties.name.enum,
+  "st_deviation",
+]);
+const MEASUREMENT_SOURCES = new Set(
+  OUTPUT_SCHEMA.properties.measurements.items.properties.source.enum
+);
 
 function normalize(value) {
   return String(value).trim().toLowerCase().replace(/_/g, " ").replace(/\s+/g, " ");
@@ -109,6 +129,13 @@ function auditFinalization(payload = {}) {
   }
 
   const quality = payload.technical_quality || {};
+  if (quality.grade !== undefined && !QUALITY_GRADES.has(quality.grade)) {
+    add(violations, "invalid_quality_grade", quality.grade);
+  }
+  if (payload.primary_pattern_confidence !== undefined &&
+      !PATTERN_CONFIDENCES.has(payload.primary_pattern_confidence)) {
+    add(violations, "unsupported_certainty", payload.primary_pattern_confidence);
+  }
   if (["limited", "poor", "cannot_interpret"].includes(quality.grade) &&
       !nonEmptyArray(quality.limitations)) {
     add(violations, "quality_limitations_missing", quality.grade);
@@ -128,6 +155,12 @@ function auditFinalization(payload = {}) {
       if (!measurement || typeof measurement !== "object") {
         add(violations, "malformed_measurement", measurement);
         continue;
+      }
+      if (measurement.name !== undefined && !MEASUREMENT_NAMES.has(measurement.name)) {
+        add(violations, "invalid_measurement_name", measurement.name);
+      }
+      if (measurement.source !== undefined && !MEASUREMENT_SOURCES.has(measurement.source)) {
+        add(violations, "invalid_measurement_source", measurement.source);
       }
       const numeric = typeof measurement.value === "number";
       const finiteNumeric = numeric && Number.isFinite(measurement.value);
