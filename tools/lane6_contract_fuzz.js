@@ -142,8 +142,12 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
   if (!unique(pids)) errors.push('duplicate pattern id');
   if (!unique(fids)) errors.push('duplicate failure id');
   if (!unique(skeys)) errors.push('duplicate source key');
+  if (pids.some((id) => typeof id !== 'string' || id.trim() === '')) errors.push('blank pattern id');
+  if (fids.some((id) => typeof id !== 'string' || id.trim() === '')) errors.push('blank failure id');
+  if (skeys.some((key) => typeof key !== 'string' || key.trim() === '')) errors.push('blank source key');
   for (const item of ps) {
     if (!Array.isArray(item.source_keys) || item.source_keys.length === 0) errors.push('pattern without source key: ' + item.id);
+    if (Array.isArray(item.source_keys) && !unique(item.source_keys)) errors.push('duplicate pattern source key: ' + item.id);
     for (const key of item.source_keys || []) if (!sourceSet.has(key)) errors.push('unsupported source key: ' + key);
   }
   return errors;
@@ -639,6 +643,13 @@ expectOutputReject('acquisition_consistent_with_flatline', (x) => { x.acquisitio
 
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
+expectRegistryReject('duplicate_pattern_source_keys', (pd) => { pd.patterns[0].source_keys.push(pd.patterns[0].source_keys[0]); });
+expectRegistryReject('blank_pattern_id', (pd) => { pd.patterns[0].id = ''; });
+expectRegistryReject('blank_failure_id', (pd, fd) => { fd.failure_modes[0].id = ''; });
+expectRegistryReject('blank_unused_source_key', (pd, fd, sd) => {
+  const item = sd.sources.find((source) => source.key === 'imdrf_gmlp_2025');
+  item.key = '';
+});
 expectRegistryReject('unsupported_source_key', (pd) => { pd.patterns[0].source_keys.push('not_registered'); });
 expectRegistryReject('stale_pattern_registry_version', (pd) => { pd.version = '4.0'; });
 expectRegistryReject('stale_failure_registry_version', (pd, fd) => { fd.version = '2.0'; });
@@ -648,6 +659,19 @@ expectRegistryReject('malformed_matching_registry_timestamps', (pd, fd, sd) => {
   pd.snapshot_date = '2026-99-99';
   sd.snapshot_date = '2026-99-99';
 });
+
+const registryIdentityMismatches = [];
+for (const target of ['pattern', 'failure', 'unused_source']) {
+  for (const badValue of [null, '', '   ']) {
+    const pd = clone(patternsDoc); const fd = clone(failuresDoc); const sd = clone(sourcesDoc);
+    if (target === 'pattern') pd.patterns[0].id = badValue;
+    if (target === 'failure') fd.failure_modes[0].id = badValue;
+    if (target === 'unused_source') sd.sources.find((source) => source.key === 'imdrf_gmlp_2025').key = badValue;
+    const rejected = registryErrors(pd, fd, sd).length > 0;
+    if (!rejected) registryIdentityMismatches.push({ target, badValue });
+  }
+}
+check('generated_registry_identity_matrix_9', registryIdentityMismatches.length === 0, registryIdentityMismatches);
 
 const qualityMatrixMismatches = [];
 for (const quality of ['adequate', 'limited', 'poor', 'cannot_interpret']) {
