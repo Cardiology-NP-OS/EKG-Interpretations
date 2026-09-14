@@ -362,7 +362,7 @@ test("manifest filename identity collision is rejected before inventory matching
 
 test("pinned import manifest traversal segments are rejected before file access", () => {
   const p = manifestClone();
-  for (const value of ["../outside.json", "..\\outside.json", "nested/../../outside.json"]) {
+  for (const value of ["../outside.json", "..\\outside.json", "nested/../inside.json", "nested/../../outside.json"]) {
     p.pinned_import_manifest.path = value;
     assert.throws(
       () => verifier.verifyImportManifest(p),
@@ -378,6 +378,24 @@ test("portable absolute pinned paths are rejected before file access", () => {
       /TEST_IMPORT_PATH_ABSOLUTE/
     );
   }
+});
+
+test("Windows drive-qualified relative pinned paths are rejected before file access", () => {
+  for (const value of ["C:outside.json", "z:nested\\outside.json"]) {
+    assert.throws(
+      () => verifier.resolveContainedPath(ROOT, value, "TEST_IMPORT"),
+      /TEST_IMPORT_PATH_DRIVE_QUALIFIED/
+    );
+  }
+});
+
+test("pinned import manifest must resolve to a regular file", () => {
+  const p = manifestClone();
+  p.pinned_import_manifest.path = ".";
+  assert.throws(
+    () => verifier.verifyImportManifest(p),
+    /IMPORT_MANIFEST_NOT_REGULAR_FILE/
+  );
 });
 
 test("registered pinned import manifest path resolves within repository root", () => {

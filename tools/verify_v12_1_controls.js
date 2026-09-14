@@ -171,7 +171,9 @@ function verifyDirectory(dir, p, label, boundary = null) {
 function verifyImportManifest(p) {
   const file = resolveContainedPath(ROOT, p.pinned_import_manifest.path, "IMPORT_MANIFEST");
   requireCondition(fs.existsSync(file), "IMPORT_MANIFEST_MISSING");
-  requireNoLinkAncestry(file, ROOT, "IMPORT_MANIFEST");
+  requireNoLinkAncestry(file, path.parse(file).root, "IMPORT_MANIFEST");
+  const stat = fs.lstatSync(file);
+  requireCondition(stat.isFile() && !stat.isSymbolicLink(), "IMPORT_MANIFEST_NOT_REGULAR_FILE");
   requireCondition(sha256File(file) === IMPORT_MANIFEST_SHA256, "IMPORT_MANIFEST_SHA256_MISMATCH");
   const m = JSON.parse(fs.readFileSync(file, "utf8"));
   requireCondition(m.schema === "ekg-v12-1-clinical-control-import-v1", "IMPORT_MANIFEST_SCHEMA");
@@ -293,14 +295,23 @@ function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
   const workingTree = {};
   const index = {};
   const committed = {};
+  const attributes = { working_tree: {}, index: {}, committed: {} };
   for (const exp of p.source_set.files) {
     const rel = path.posix.join(
       "clinical_control", "v12_1_candidate", "source_text", "remaining_controls", exp.name
     );
     const file = path.join(importedDir, exp.name);
-    const attr = spawnSync("git", ["check-attr", "text", "--", rel], { cwd: repoRoot, encoding: "utf8" });
-    requireCondition(attr.status === 0, "GIT_ATTR_CHECK_FAILED:" + exp.name);
-    requireCondition(/: text: unset\s*$/.test(attr.stdout), "GIT_TEXT_POLICY_NOT_UNSET:" + exp.name);
+    const attrChecks = [
+      ["working_tree", ["check-attr", "text", "--", rel], "GIT_WORKTREE"],
+      ["index", ["check-attr", "--cached", "text", "--", rel], "GIT_INDEX"],
+      ["committed", ["check-attr", "--source=HEAD", "text", "--", rel], "GIT_HEAD"],
+    ];
+    for (const [layer, args, prefix] of attrChecks) {
+      const attr = spawnSync("git", args, { cwd: repoRoot, encoding: "utf8" });
+      requireCondition(attr.status === 0, prefix + "_ATTR_CHECK_FAILED:" + exp.name);
+      requireCondition(/: text: unset\s*$/.test(attr.stdout), prefix + "_TEXT_POLICY_NOT_UNSET:" + exp.name);
+      attributes[layer][exp.name] = "unset";
+    }
 
     const stage = spawnSync("git", ["ls-files", "--stage", "--", rel], { cwd: repoRoot, encoding: "utf8" });
     requireCondition(stage.status === 0 && /^100644\s/.test(stage.stdout), "GIT_INDEX_MODE_MISMATCH:" + exp.name);
