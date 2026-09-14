@@ -420,13 +420,13 @@ function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
     ["index", ["check-attr", "--cached", "text", "--", manifestRel], "GIT_INDEX"],
     ["committed", ["check-attr", "--source=HEAD", "text", "--", manifestRel], "GIT_HEAD"],
   ]) {
-    const attr = gitSpawn(repoRoot, args, { encoding: "utf8" });
+    const attr = spawnSync("git", args, { cwd: repoRoot, encoding: "utf8" });
     requireCondition(attr.status === 0, prefix + "_IMPORT_MANIFEST_ATTR_CHECK_FAILED");
     requireCondition(/: text: unset\s*$/.test(attr.stdout), prefix + "_IMPORT_MANIFEST_TEXT_POLICY_NOT_UNSET");
     manifestAttributes[layer] = "unset";
   }
-  const manifestIndex = gitSpawn(repoRoot, ["show", ":" + manifestRel], { encoding: null, maxBuffer: 2 * 1024 * 1024 });
-  const manifestHead = gitSpawn(repoRoot, ["show", "HEAD:" + manifestRel], { encoding: null, maxBuffer: 2 * 1024 * 1024 });
+  const manifestIndex = spawnSync("git", ["show", ":" + manifestRel], { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 });
+  const manifestHead = spawnSync("git", ["show", "HEAD:" + manifestRel], { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 });
   requireCondition(manifestIndex.status === 0, "GIT_INDEX_IMPORT_MANIFEST_MISSING");
   requireCondition(manifestHead.status === 0, "GIT_HEAD_IMPORT_MANIFEST_MISSING");
   const manifestHashes = {
