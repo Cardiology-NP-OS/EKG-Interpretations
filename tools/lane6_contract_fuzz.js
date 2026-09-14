@@ -296,10 +296,25 @@ function deepErrors(output) {
     if (e.source_kind === 'visual_fiducial' && e.exact_numeric_claim_allowed) {
       const c = e.calibration_id ? calibrationById.get(e.calibration_id) : null;
       if (!c) errors.push('F10 exact visual measurement without calibration');
-      else if (c.geometry_state === 'unknown' || c.geometry_state === 'perspective_uncorrected') {
-        errors.push('F10 exact visual measurement with unsafe geometry');
+      else {
+        if (c.geometry_state === 'unknown' || c.geometry_state === 'perspective_uncorrected') {
+          errors.push('F10 exact visual measurement with unsafe geometry');
+        }
+        if (!c.exact_time_measurement_allowed && !c.exact_voltage_measurement_allowed) {
+          errors.push('F10 exact visual measurement despite calibration disallowing exact measurement');
+        }
+      }
+      if (!Array.isArray(e.fiducials) || e.fiducials.length === 0) {
+        errors.push('F10 exact visual measurement missing fiducials');
       }
     }
+    if (e.uncertainty && typeof e.uncertainty.lower === 'number' && Number.isFinite(e.uncertainty.lower) &&
+        typeof e.uncertainty.upper === 'number' && Number.isFinite(e.uncertainty.upper) &&
+        e.uncertainty.lower > e.uncertainty.upper) {
+      errors.push('measurement uncertainty interval reversed');
+    }
+    const fiducialIds = asArray(e.fiducials).map((item) => item.fiducial_id);
+    if (!unique(fiducialIds)) errors.push('duplicate fiducial id');
   }
 
   if (!Array.isArray(output.limitations) || output.limitations.length === 0) errors.push('limitations must be explicit');
@@ -483,6 +498,24 @@ expectOutputReject('calculated_qtc_without_formula', (x) => {
   x.technical_quality.grade = 'adequate';
   x.measurements.push({ name: 'qtc', value: 1, unit: 'synthetic', source: 'calculated', confidence: 'low' });
 }, true);
+expectOutputReject('visual_exact_calibration_disallows_exact_measurement', (x) => {
+  x.technical_quality.grade = 'adequate';
+  const ev = makeMeasurementEvidence('m1', 'c1');
+  ev.source_kind = 'visual_fiducial'; ev.method = 'manual_fiducial'; ev.exact_numeric_claim_allowed = true;
+  ev.fiducials = [{ fiducial_id: 'f1', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }];
+  ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) };
+  x.measurement_evidence = [ev];
+  x.geometry_calibrations = [{ version: '1.0', calibration_id: 'c1', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: false, exact_voltage_measurement_allowed: false, supporting_evidence: ['synthetic fixture'] }];
+}, true);
+expectOutputReject('visual_exact_missing_fiducials', (x) => {
+  x.technical_quality.grade = 'adequate';
+  const ev = makeMeasurementEvidence('m1', 'c1');
+  ev.source_kind = 'visual_fiducial'; ev.method = 'manual_fiducial'; ev.exact_numeric_claim_allowed = true;
+  ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) }; x.measurement_evidence = [ev];
+  x.geometry_calibrations = [{ version: '1.0', calibration_id: 'c1', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: true, exact_voltage_measurement_allowed: true, supporting_evidence: ['synthetic fixture'] }];
+}, true);
+expectOutputReject('reversed_uncertainty_interval', (x) => { const ev = makeMeasurementEvidence('m1'); ev.uncertainty = { lower: 2, upper: 1, unit: 'synthetic', method: 'conservative_interval' }; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('duplicate_fiducial_ids', (x) => { const ev = makeMeasurementEvidence('m1'); ev.fiducials = [{ fiducial_id: 'dup', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }, { fiducial_id: 'dup', kind: 'other', x_px: 2, y_px: 2, point_uncertainty_px: 0 }]; x.measurement_evidence = [ev]; }, true);
 
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
@@ -577,6 +610,7 @@ for (const geometryState of [null, 'native', 'perspective_uncorrected', 'unknown
     ev.method = 'manual_fiducial';
     ev.exact_numeric_claim_allowed = exactAllowed;
     ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) };
+    ev.fiducials = [{ fiducial_id: 'f1', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }];
     candidate.measurement_evidence = [ev];
     if (geometryState) {
       candidate.geometry_calibrations = [{
