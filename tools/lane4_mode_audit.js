@@ -223,6 +223,22 @@ function auditFinalization(payload = {}) {
     for (const gap of gaps) add(violations, "structured_output_required_field_missing", gap);
     const schemaIssues = schemaValueIssues(OUTPUT_SCHEMA, payload.structured_output);
     for (const issue of schemaIssues) add(violations, "structured_output_schema_violation", issue);
+
+    const emittedQuality = payload.structured_output?.technical_quality || {};
+    const emittedPrimary = payload.structured_output?.interpretation?.primary_pattern || {};
+    if (emittedQuality.grade === "cannot_interpret" && emittedPrimary.confidence === "high") {
+      add(violations, "structured_output_high_confidence_forbidden_by_quality", emittedQuality.grade);
+    }
+    if (payload.technical_quality?.grade !== undefined &&
+        emittedQuality.grade !== undefined &&
+        payload.technical_quality.grade !== emittedQuality.grade) {
+      add(violations, "structured_output_audit_mismatch", "technical_quality.grade");
+    }
+    if (payload.primary_pattern_confidence !== undefined &&
+        emittedPrimary.confidence !== undefined &&
+        payload.primary_pattern_confidence !== emittedPrimary.confidence) {
+      add(violations, "structured_output_audit_mismatch", "interpretation.primary_pattern.confidence");
+    }
   }
 
   if (!route.blocked) {

@@ -190,6 +190,43 @@ test("conditional exact-measurement evidence binding is enforced", () => {
   assert.equal(result.verdict, "PASS");
 });
 
+test("emitted structured semantics cannot bypass or contradict audit state", () => {
+  let output = validValue(schema);
+  output.technical_quality.grade = "cannot_interpret";
+  output.technical_quality.limitations = ["uninterpretable"];
+  output.interpretation.primary_pattern.confidence = "high";
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_high_confidence_forbidden_by_quality"));
+
+  output = validValue(schema);
+  result = auditFinalization({
+    ...base(),
+    technical_quality: { grade: "limited", limitations: ["artifact"] },
+    structured_output: output,
+  });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_audit_mismatch"));
+
+  output = validValue(schema);
+  result = auditFinalization({
+    ...base(),
+    primary_pattern_confidence: "low",
+    structured_output: output,
+  });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_audit_mismatch"));
+
+  output = validValue(schema);
+  result = auditFinalization({
+    ...base(),
+    technical_quality: { grade: output.technical_quality.grade, limitations: [] },
+    primary_pattern_confidence: output.interpretation.primary_pattern.confidence,
+    structured_output: output,
+  });
+  assert.equal(result.verdict, "PASS");
+});
+
 console.log(JSON.stringify({
   schema: "ekg-l04-structured-output-tests-v1",
   pass: true,
