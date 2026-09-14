@@ -1,0 +1,47 @@
+{
+  "schema": "ekg-v12-1-clinical-control-import-v1",
+  "status": "QUARANTINED_CANDIDATE",
+  "activation_allowed": false,
+  "source_pack": {
+    "name": "EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip",
+    "sha256": "c8d911ec42dc09ece708f8bafe4956a9f90853129ead04a8851383ebdb845ef5",
+    "runtime_validator_pass": true,
+    "runtime_project_version": "12.0",
+    "structured_output_schema_version": "3.1",
+    "criteria_snapshot": "2026-09-12",
+    "source_registry_version": "2.0",
+    "active_runtime_sources": 16
+  },
+  "policy": {
+    "replace_current_signal_engine": false,
+    "clinical_rules_active": false,
+    "pattern_registry_active": false,
+    "calculation_engine_active": false,
+    "source_authority_active": false,
+    "requires_independent_validation_before_activation": true
+  },
+  "inventory": [
+    {"name":"07_OUTPUT_SCHEMA.json","bytes":30712,"sha256":"11ecf971bfe707ec620501ccf7631da20db6be358393d893c3983facba7a8d1f"},
+    {"name":"12_CLINICAL_CRITERIA_REGISTRY.md","bytes":7949,"sha256":"7c771f498304ebdaaf3cfd98c0ea7d14e08e8d35c01180c7b91c76f7a35c6f1e"},
+    {"name":"13_ANESTHESIA_PERIOP_OVERLAY.md","bytes":3689,"sha256":"d71fbe33db50d08765e6b4df76d634f60209f5925e39fceec84939385187abfc"},
+    {"name":"18_SELF_AUDIT_RUBRIC.md","bytes":2471,"sha256":"b1951e29de6f092d526ab0914b2e016bd9d0febb8fa9b604270c99e6b356d760"},
+    {"name":"19_RESPONSE_TEMPLATES.md","bytes":2396,"sha256":"5e4e854adcb601da62ab8cb6482b9196deefdfdb98b226e750ded4c4b4655702"},
+    {"name":"23_PATTERN_REGISTRY.json","bytes":53264,"sha256":"05764e9437862f6c4f1948c6f0385abb320764c4cb0f2007ce7c426df7d31fdb"},
+    {"name":"24_PHENOTYPE_DIAGNOSIS_BOUNDARIES.md","bytes":5156,"sha256":"5ccbbf00a3d0d5db033271407ebd9530c72f2c4c4f5a96007a0a9d7e959e9865"},
+    {"name":"25_CALCULATION_ENGINE.py","bytes":8762,"sha256":"872d7df0df0a6d50604583fe6ff8f6fdce0d50e14da4669f408f8a4c9235d82d"},
+    {"name":"29_IMAGE_QUALITY_PROTOCOL.md","bytes":2279,"sha256":"4720e1b2b22dd3c5100c24cebba0ebfec262a1f4f5956f298a63b9505568d459"},
+    {"name":"30_CURRENT_SOURCE_MAP_2026.md","bytes":5504,"sha256":"5d9fc89a372c702fed968770e83dc8de2d6b78a35105b93b93780e69c7368f16"},
+    {"name":"31_MODE_ROUTER.md","bytes":1248,"sha256":"bb56095c78bb5e324502ce978d7bfddaa0e0bf580fa73717936d8116decf7b72"},
+    {"name":"32_REPORTING_LANGUAGE.md","bytes":1304,"sha256":"5af12b60931bf5a4bc860a3e406c69ef1c6b787e4bdce6b11510737aa03e6c03"},
+    {"name":"35_INPUT_SECURITY.md","bytes":2780,"sha256":"e9f2e59bfcafc109b41b8d76b52f8ac82b35d19543bf05656e41c5e750dc552e"},
+    {"name":"36_FAILURE_MODE_REGISTRY.json","bytes":7852,"sha256":"2d24e87df7296a9f18220f6cba96b2d26c0ad52b7adde22889439dc15d4abae2"},
+    {"name":"63_SOURCE_REGISTRY.json","bytes":15450,"sha256":"c1d9d116755931487a9b5434832aa2827763bf7ef772449963588da20b20b89e"},
+    {"name":"68_STRUCTURED_OUTPUT_GUIDE.md","bytes":2115,"sha256":"2c4efb9d84e6c5a76df8b646d51572a6e0da681f52749f5a89bc410a12097364"}
+  ],
+  "observed_counts": {
+    "patterns": 59,
+    "failure_modes": 30,
+    "source_records": 21,
+    "output_schema_required_top_level_fields": 12
+  }
+}
