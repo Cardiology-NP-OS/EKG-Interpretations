@@ -295,7 +295,19 @@ function deepErrors(output) {
     }
   }
   for (const obs of asArray(output.lead_observations)) {
-    if (obs.measurement_evidence_ref && !evidenceSet.has(obs.measurement_evidence_ref)) errors.push('missing lead evidence reference');
+    if (obs.measurement_evidence_ref) {
+      if (!evidenceSet.has(obs.measurement_evidence_ref)) errors.push('missing lead evidence reference');
+      else {
+        const e = evidenceById.get(obs.measurement_evidence_ref);
+        if (e.lead !== null && e.lead !== undefined && e.lead !== obs.lead) errors.push('lead observation/evidence lead mismatch');
+        const compatibleEvidenceSources = {
+          user: ['user_provided'], machine: ['machine_reported'],
+          calculated: ['calculated'], visual: ['visual_fiducial'],
+          mixed: ['visual_fiducial', 'user_provided', 'machine_reported', 'calculated', 'digital_signal']
+        }[obs.source];
+        if (compatibleEvidenceSources && !compatibleEvidenceSources.includes(e.source_kind)) errors.push('lead observation/evidence source mismatch');
+      }
+    }
     const labelsExplicitlyHidden = output.technical_quality && output.technical_quality.lead_labels_visible === false;
     const layoutEstablishesIdentity = output.lead_layout && output.lead_layout.status === 'verified' &&
       output.lead_layout.labels_verified === true && output.lead_layout.specific_lead_claims_allowed === true;
@@ -558,6 +570,16 @@ expectOutputReject('cannot_interpret_calculated_numeric', (x) => {
 expectOutputReject('hidden_labels_named_visual_lead', (x) => {
   x.technical_quality.lead_labels_visible = false;
   x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }];
+}, true);
+expectOutputReject('lead_observation_evidence_lead_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('obs-1'); ev.lead = 'II'; ev.source_kind = 'user_provided'; ev.method = 'user_input';
+  x.measurement_evidence = [ev];
+  x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'user', confidence: 'low', measurement_evidence_ref: 'obs-1' }];
+}, true);
+expectOutputReject('lead_observation_evidence_source_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('obs-1'); ev.lead = 'I'; ev.source_kind = 'machine_reported'; ev.method = 'machine_printout';
+  x.measurement_evidence = [ev];
+  x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'user', confidence: 'low', measurement_evidence_ref: 'obs-1' }];
 }, true);
 expectOutputReject('serial_comparison_without_binding', (x) => {
   x.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
@@ -844,6 +866,26 @@ for (const [measurementSource, expectedEvidenceSource] of Object.entries(measure
   }
 }
 check('generated_measurement_evidence_source_binding_matrix_24', measurementEvidenceSourceMismatches.length === 0, measurementEvidenceSourceMismatches);
+
+const leadObservationEvidenceMismatches = [];
+const observationSourceMap = {
+  visual: ['visual_fiducial'], user: ['user_provided'], machine: ['machine_reported'],
+  calculated: ['calculated'], mixed: ['visual_fiducial', 'digital_signal', 'machine_reported', 'user_provided', 'calculated']
+};
+for (const [observationSource, allowedEvidenceSources] of Object.entries(observationSourceMap)) {
+  for (const evidenceSource of Object.keys(evidenceMethodMap)) {
+    const candidate = makeFixture();
+    candidate.technical_quality.grade = 'adequate';
+    const ev = makeMeasurementEvidence('obs-source-matrix');
+    ev.lead = 'I'; ev.source_kind = evidenceSource; ev.method = evidenceMethodMap[evidenceSource];
+    candidate.measurement_evidence = [ev];
+    candidate.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: observationSource, confidence: 'low', measurement_evidence_ref: 'obs-source-matrix' }];
+    const rejected = deepErrors(candidate).length > 0;
+    const expectedReject = !allowedEvidenceSources.includes(evidenceSource);
+    if (rejected !== expectedReject) leadObservationEvidenceMismatches.push({ observationSource, evidenceSource, rejected });
+  }
+}
+check('generated_lead_observation_evidence_source_binding_matrix_30', leadObservationEvidenceMismatches.length === 0, leadObservationEvidenceMismatches);
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
