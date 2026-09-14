@@ -352,10 +352,20 @@ function deepErrors(output) {
         asArray(e.fiducials).length > 0 || e.exact_numeric_claim_allowed)) {
       errors.push('unavailable measurement evidence carries asserted measurement state');
     }
-    if (e.uncertainty && typeof e.uncertainty.lower === 'number' && Number.isFinite(e.uncertainty.lower) &&
-        typeof e.uncertainty.upper === 'number' && Number.isFinite(e.uncertainty.upper) &&
-        e.uncertainty.lower > e.uncertainty.upper) {
-      errors.push('measurement uncertainty interval reversed');
+    if (e.uncertainty) {
+      const lowerPresent = typeof e.uncertainty.lower === 'number' && Number.isFinite(e.uncertainty.lower);
+      const upperPresent = typeof e.uncertainty.upper === 'number' && Number.isFinite(e.uncertainty.upper);
+      if (lowerPresent !== upperPresent) errors.push('measurement uncertainty interval partially populated');
+      if (lowerPresent && upperPresent && e.uncertainty.lower > e.uncertainty.upper) {
+        errors.push('measurement uncertainty interval reversed');
+      }
+      if (lowerPresent && upperPresent && !Object.is(e.uncertainty.unit, e.unit)) {
+        errors.push('measurement uncertainty unit mismatch');
+      }
+      if (e.uncertainty.method === 'not_available' &&
+          (lowerPresent || upperPresent || e.uncertainty.unit !== null)) {
+        errors.push('measurement uncertainty marked not_available with asserted interval state');
+      }
     }
     const fiducialIds = asArray(e.fiducials).map((item) => item.fiducial_id);
     if (!unique(fiducialIds)) errors.push('duplicate fiducial id');
@@ -614,6 +624,10 @@ expectOutputReject('visual_exact_missing_fiducials', (x) => {
   x.geometry_calibrations = [{ version: '1.0', calibration_id: 'c1', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: true, exact_voltage_measurement_allowed: true, supporting_evidence: ['synthetic fixture'] }];
 }, true);
 expectOutputReject('reversed_uncertainty_interval', (x) => { const ev = makeMeasurementEvidence('m1'); ev.uncertainty = { lower: 2, upper: 1, unit: 'synthetic', method: 'conservative_interval' }; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('partial_uncertainty_interval_lower_only', (x) => { const ev = makeMeasurementEvidence('m1'); ev.unit = 'synthetic'; ev.uncertainty = { lower: 1, upper: null, unit: 'synthetic', method: 'conservative_interval' }; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('partial_uncertainty_interval_upper_only', (x) => { const ev = makeMeasurementEvidence('m1'); ev.unit = 'synthetic'; ev.uncertainty = { lower: null, upper: 2, unit: 'synthetic', method: 'conservative_interval' }; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('uncertainty_unit_mismatch', (x) => { const ev = makeMeasurementEvidence('m1'); ev.unit = 'unit-a'; ev.uncertainty = { lower: 1, upper: 2, unit: 'unit-b', method: 'conservative_interval' }; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('uncertainty_not_available_with_interval_state', (x) => { const ev = makeMeasurementEvidence('m1'); ev.unit = 'synthetic'; ev.uncertainty = { lower: 1, upper: 2, unit: 'synthetic', method: 'not_available' }; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('duplicate_fiducial_ids', (x) => { const ev = makeMeasurementEvidence('m1'); ev.fiducials = [{ fiducial_id: 'dup', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }, { fiducial_id: 'dup', kind: 'other', x_px: 2, y_px: 2, point_uncertainty_px: 0 }]; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('evidence_source_method_mismatch', (x) => { const ev = makeMeasurementEvidence('m1'); ev.source_kind = 'digital_signal'; ev.method = 'user_input'; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('unavailable_evidence_with_numeric_value', (x) => { const ev = makeMeasurementEvidence('m1'); ev.value = 1; x.measurement_evidence = [ev]; }, true);
@@ -908,6 +922,37 @@ for (const hasAssetId of [false, true]) {
   }
 }
 check('generated_evidence_source_asset_identity_matrix_4', assetIdentityMismatches.length === 0, assetIdentityMismatches);
+
+const uncertaintyMatrixMismatches = [];
+for (const lowerPresent of [false, true]) {
+  for (const upperPresent of [false, true]) {
+    for (const method of ['conservative_interval', 'source_reported', 'not_available']) {
+      for (const unitState of ['match', 'other', 'null']) {
+        const candidate = makeFixture();
+        const ev = makeMeasurementEvidence('uncertainty-matrix');
+        ev.unit = 'unit-a';
+        const uncertaintyUnit = unitState === 'match' ? 'unit-a' : unitState === 'other' ? 'unit-b' : null;
+        ev.uncertainty = {
+          lower: lowerPresent ? 1 : null,
+          upper: upperPresent ? 2 : null,
+          unit: uncertaintyUnit,
+          method
+        };
+        candidate.measurement_evidence = [ev];
+        const rejected = deepErrors(candidate).length > 0;
+        const partialInterval = lowerPresent !== upperPresent;
+        const unitMismatch = lowerPresent && upperPresent && uncertaintyUnit !== ev.unit;
+        const unavailableCarriesState = method === 'not_available' &&
+          (lowerPresent || upperPresent || uncertaintyUnit !== null);
+        const expectedReject = partialInterval || unitMismatch || unavailableCarriesState;
+        if (rejected !== expectedReject) {
+          uncertaintyMatrixMismatches.push({ lowerPresent, upperPresent, method, unitState, rejected });
+        }
+      }
+    }
+  }
+}
+check('generated_uncertainty_state_matrix_36', uncertaintyMatrixMismatches.length === 0, uncertaintyMatrixMismatches);
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
