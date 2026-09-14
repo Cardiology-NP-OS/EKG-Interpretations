@@ -130,18 +130,22 @@ function auditFinalization(payload = {}) {
         continue;
       }
       const numeric = typeof measurement.value === "number";
-      if (numeric && !["user", "machine", "estimated", "calculated"].includes(measurement.source)) {
+      const finiteNumeric = numeric && Number.isFinite(measurement.value);
+      if (numeric && !finiteNumeric) {
+        add(violations, "nonfinite_measurement", measurement.name || null);
+      }
+      if (finiteNumeric && !["user", "machine", "estimated", "calculated"].includes(measurement.source)) {
         add(violations, "numeric_measurement_missing_source", measurement.name || null);
       }
-      if (numeric && measurement.name === "qtc" &&
+      if (finiteNumeric && measurement.name === "qtc" &&
           !(typeof measurement.formula === "string" && measurement.formula.trim())) {
         add(violations, "qtc_formula_missing", measurement.name);
       }
-      if (numeric && ["rr", "pr", "qrs", "qt"].includes(measurement.name) &&
+      if (finiteNumeric && ["rr", "pr", "qrs", "qt"].includes(measurement.name) &&
           measurement.source === "estimated" && payload.paper_speed_verified !== true) {
         add(violations, "estimated_time_without_verified_speed", measurement.name);
       }
-      if (numeric && measurement.name === "st_deviation" &&
+      if (finiteNumeric && measurement.name === "st_deviation" &&
           (payload.gain_verified !== true || payload.geometry_undistorted !== true)) {
         add(violations, "st_deviation_without_verified_geometry", measurement.name);
       }

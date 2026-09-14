@@ -260,6 +260,16 @@ test("aliases tolerate case whitespace and underscore normalization only", () =>
   }
 });
 
+test("non-finite numeric measurements cannot produce PASS", () => {
+  for (const value of [NaN, Infinity, -Infinity]) {
+    const payload = base();
+    payload.measurements = [{ name: "qrs", value, source: "machine" }];
+    const result = auditFinalization(payload);
+    eq(result.verdict, "REVISE");
+    ok(codes(result).includes("nonfinite_measurement"));
+  }
+});
+
 if (process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({
   schema: "ekg-l04-mode-audit-tests-v1",
