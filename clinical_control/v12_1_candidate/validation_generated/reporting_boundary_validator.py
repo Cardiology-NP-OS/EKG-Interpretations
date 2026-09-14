@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "source_core"
-TEXT = ROOT / "source_text"
+TEXT = ROOT / "source_text" / "remaining_controls"
 
 EXPECTED_HASHES = {
     "19_RESPONSE_TEMPLATES.md": "5e4e854adcb601da62ab8cb6482b9196deefdfdb98b226e750ded4c4b4655702",
