@@ -1,0 +1,429 @@
+{
+  "version": "2.0",
+  "snapshot_date": "2026-09-12",
+  "policy": "Use the newest applicable authoritative source. Older standards remain active only where not superseded and where they define core ECG measurement/terminology.",
+  "sources": [
+    {
+      "key": "udmi_2026",
+      "title": "Fifth Universal Definition of Myocardial Infarction",
+      "year": 2026,
+      "organizations": [
+        "ESC",
+        "ACC",
+        "AHA",
+        "WHF"
+      ],
+      "type": "international_consensus_definition",
+      "status": "current",
+      "doi": "10.1093/eurheartj/ehag101",
+      "url": "https://academic.oup.com/eurheartj/advance-article/doi/10.1093/eurheartj/ehag101/8766309",
+      "applies_to": [
+        "acute ischemia ECG features",
+        "conventional ST-elevation thresholds",
+        "posterior findings",
+        "de Winter",
+        "Wellens",
+        "Sgarbossa context",
+        "pathologic Q waves",
+        "MI diagnostic boundary"
+      ],
+      "notes": "Use for current ECG features of myocardial ischemia/infarction and the boundary that ECG alone does not establish clinical MI."
+    },
+    {
+      "key": "acs_2025",
+      "title": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes",
+      "year": 2025,
+      "organizations": [
+        "ACC",
+        "AHA",
+        "ACEP",
+        "NAEMSP",
+        "SCAI"
+      ],
+      "type": "clinical_practice_guideline",
+      "status": "current",
+      "doi": "10.1161/CIR.0000000000001309",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309",
+      "applies_to": [
+        "serial ECGs",
+        "ACS workflow context",
+        "additional leads",
+        "clinical integration"
+      ],
+      "notes": "Use for ACS workflow context; a nondiagnostic initial ECG does not exclude ACS."
+    },
+    {
+      "key": "brady_2018",
+      "title": "2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay",
+      "year": 2018,
+      "organizations": [
+        "ACC",
+        "AHA",
+        "HRS"
+      ],
+      "type": "clinical_practice_guideline",
+      "status": "current_for_scope",
+      "doi": "10.1161/CIR.0000000000000628",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000628",
+      "applies_to": [
+        "AV block terminology",
+        "2:1 AV block boundary",
+        "high-grade AV block",
+        "complete AV block"
+      ],
+      "notes": "Use for AV-conduction terminology and classification boundaries."
+    },
+    {
+      "key": "aha_ecg_part2_2007",
+      "title": "AHA/ACCF/HRS Recommendations for the Standardization and Interpretation of the Electrocardiogram, Part II: Electrocardiography Diagnostic Statement List",
+      "year": 2007,
+      "organizations": [
+        "AHA",
+        "ACCF",
+        "HRS"
+      ],
+      "type": "scientific_statement",
+      "status": "current_for_core_terminology",
+      "doi": "10.1161/CIRCULATIONAHA.106.180201",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.106.180201",
+      "applies_to": [
+        "ECG diagnostic terminology",
+        "rhythm naming"
+      ],
+      "notes": "Legacy but still useful for standardized ECG terminology."
+    },
+    {
+      "key": "aha_ecg_part3_2009",
+      "title": "AHA/ACCF/HRS Recommendations for the Standardization and Interpretation of the Electrocardiogram, Part III: Intraventricular Conduction Disturbances",
+      "year": 2009,
+      "organizations": [
+        "AHA",
+        "ACCF",
+        "HRS"
+      ],
+      "type": "scientific_statement",
+      "status": "current_for_core_criteria",
+      "doi": "10.1161/CIRCULATIONAHA.108.191095",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.108.191095",
+      "applies_to": [
+        "QRS duration",
+        "RBBB",
+        "LBBB",
+        "fascicular block",
+        "axis"
+      ],
+      "notes": "Use for adult conduction morphology/duration framework."
+    },
+    {
+      "key": "aha_ecg_part4_2009",
+      "title": "AHA/ACCF/HRS Recommendations for the Standardization and Interpretation of the Electrocardiogram, Part IV: ST Segment, T and U Waves, and QT Interval",
+      "year": 2009,
+      "organizations": [
+        "AHA",
+        "ACCF",
+        "HRS"
+      ],
+      "type": "scientific_statement",
+      "status": "current_for_measurement_conventions",
+      "doi": "10.1161/CIRCULATIONAHA.108.191096",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.108.191096",
+      "applies_to": [
+        "ST/T/U terminology",
+        "QT measurement",
+        "QT correction cautions"
+      ],
+      "notes": "Use for measurement conventions; newer disease-specific guidance supersedes disease criteria when applicable."
+    },
+    {
+      "key": "aha_ecg_part5_2009",
+      "title": "AHA/ACCF/HRS Recommendations for the Standardization and Interpretation of the Electrocardiogram, Part V: Cardiac Chamber Hypertrophy",
+      "year": 2009,
+      "organizations": [
+        "AHA",
+        "ACCF",
+        "HRS"
+      ],
+      "type": "scientific_statement",
+      "status": "current_for_ecg_voltage_criteria",
+      "doi": "10.1161/CIRCULATIONAHA.108.191097",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.108.191097",
+      "applies_to": [
+        "ECG chamber hypertrophy criteria",
+        "voltage criteria"
+      ],
+      "notes": "Electrical criteria do not equal imaging-defined anatomic hypertrophy."
+    },
+    {
+      "key": "esc_va_scd_2022",
+      "title": "2022 ESC Guidelines for the Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death",
+      "year": 2022,
+      "organizations": [
+        "ESC"
+      ],
+      "type": "clinical_practice_guideline",
+      "status": "current",
+      "doi": "10.1093/eurheartj/ehac262",
+      "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/ventricular-arrhythmias-and-the-prevention-of-sudden-cardiac-death/",
+      "applies_to": [
+        "ventricular arrhythmias",
+        "Brugada context",
+        "long QT context",
+        "short QT context",
+        "inherited arrhythmia syndromes"
+      ],
+      "notes": "Use for syndrome context and ventricular-arrhythmia framework; ECG phenotype alone may be insufficient for syndrome diagnosis."
+    },
+    {
+      "key": "brugada_provocation_2025",
+      "title": "Multi-society clinical consensus statement on pharmacological provocation testing in cardiac electrophysiology",
+      "year": 2025,
+      "organizations": [
+        "EHRA",
+        "EAPCI",
+        "ESC",
+        "AEPC",
+        "PACES",
+        "HRS",
+        "APHRS",
+        "LAHRS"
+      ],
+      "type": "expert_consensus",
+      "status": "current",
+      "doi": "10.1093/europace/euaf067",
+      "url": "https://academic.oup.com/europace/article/27/4/euaf067/8100200",
+      "applies_to": [
+        "type-1 Brugada ECG pattern",
+        "high right-precordial leads",
+        "J-point measurement"
+      ],
+      "notes": "Supports phenotype-level type-1 Brugada morphology and cautions around syndrome diagnosis after provocation testing."
+    },
+    {
+      "key": "esc_myo_peri_2025",
+      "title": "2025 ESC Guidelines for the Management of Myocarditis and Pericarditis",
+      "year": 2025,
+      "organizations": [
+        "ESC"
+      ],
+      "type": "clinical_practice_guideline",
+      "status": "current",
+      "doi": "10.1093/eurheartj/ehaf192",
+      "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/myocarditis-and-pericarditis/",
+      "applies_to": [
+        "pericarditis context",
+        "myopericardial inflammatory syndromes",
+        "ECG as one component of diagnostic assessment"
+      ],
+      "notes": "Supersedes the 2015 ESC pericardial guideline for active project guidance."
+    },
+    {
+      "key": "esc_pacing_2021",
+      "title": "2021 ESC Guidelines on Cardiac Pacing and Cardiac Resynchronization Therapy",
+      "year": 2021,
+      "organizations": [
+        "ESC"
+      ],
+      "type": "clinical_practice_guideline",
+      "status": "current",
+      "doi": "10.1093/eurheartj/ehab364",
+      "url": "https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/cardiac-pacing-and-cardiac-resynchronization-therapy/",
+      "applies_to": [
+        "pacing context",
+        "device management boundary"
+      ],
+      "notes": "From an ECG alone, limit conclusions to supportable pacing/sensing/capture observations."
+    },
+    {
+      "key": "svt_2015",
+      "title": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia",
+      "year": 2015,
+      "organizations": [
+        "ACC",
+        "AHA",
+        "HRS"
+      ],
+      "type": "clinical_practice_guideline",
+      "status": "current_for_scope",
+      "doi": "10.1161/CIR.0000000000000311",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000311",
+      "applies_to": [
+        "pre-excitation",
+        "accessory pathways",
+        "SVT context"
+      ],
+      "notes": "Use for adult pre-excitation/accessory-pathway context, not standalone risk prediction from one ECG."
+    },
+    {
+      "key": "aha_ecg_part1_2007",
+      "title": "AHA/ACCF/HRS Recommendations for the Standardization and Interpretation of the Electrocardiogram, Part I: Technology",
+      "year": 2007,
+      "organizations": [
+        "AHA",
+        "ACCF",
+        "HRS"
+      ],
+      "type": "scientific_statement",
+      "status": "current_for_measurement_conventions",
+      "doi": "10.1161/CIRCULATIONAHA.106.180200",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.106.180200",
+      "applies_to": [
+        "ECG acquisition technology",
+        "paper speed",
+        "gain",
+        "technical quality"
+      ],
+      "notes": "Use for acquisition/technology conventions when not superseded by device-specific standards."
+    },
+    {
+      "key": "aha_monitoring_2017",
+      "title": "Update to Practice Standards for Electrocardiographic Monitoring in Hospital Settings",
+      "year": 2017,
+      "organizations": [
+        "AHA"
+      ],
+      "type": "scientific_statement",
+      "status": "current_for_scope",
+      "doi": "10.1161/CIR.0000000000000527",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000527",
+      "applies_to": [
+        "QT monitoring context",
+        "hospital ECG monitoring"
+      ],
+      "notes": "Supports QT-monitoring cautions; not a substitute for 12-lead diagnostic evaluation."
+    },
+    {
+      "key": "modified_sgarbossa_2012",
+      "title": "Diagnosis of ST-Elevation Myocardial Infarction in the Presence of Left Bundle Branch Block With the ST-Elevation to S-Wave Ratio in a Modified Sgarbossa Rule",
+      "year": 2012,
+      "organizations": [],
+      "type": "peer_reviewed_primary_study",
+      "status": "current_for_scope",
+      "doi": "10.1016/j.annemergmed.2012.07.119",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22939607/",
+      "applies_to": [
+        "modified Sgarbossa proportional discordance"
+      ],
+      "notes": "Primary derivation evidence for proportional ST/S discordance; use as a narrow supporting source, not a general guideline."
+    },
+    {
+      "key": "imdrf_gmlp_2025",
+      "title": "Good Machine Learning Practice for Medical Device Development: Guiding Principles",
+      "year": 2025,
+      "organizations": [
+        "IMDRF",
+        "FDA"
+      ],
+      "type": "regulatory_guidance",
+      "status": "current",
+      "doi": null,
+      "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles",
+      "applies_to": [
+        "AI evaluation governance",
+        "data independence",
+        "human-AI team performance",
+        "total product lifecycle",
+        "change management"
+      ],
+      "notes": "Engineering alignment reference only; repository does not claim regulatory compliance."
+    },
+    {
+      "key": "mlmd_transparency_principles",
+      "title": "Transparency for Machine Learning-Enabled Medical Devices: Guiding Principles",
+      "year": 2024,
+      "organizations": [
+        "FDA",
+        "Health Canada",
+        "MHRA"
+      ],
+      "type": "regulatory_guidance",
+      "status": "current",
+      "doi": null,
+      "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles",
+      "applies_to": [
+        "transparency",
+        "limitations",
+        "data characterization",
+        "performance communication",
+        "human factors"
+      ],
+      "notes": "Used as a transparency design reference; not a certification claim."
+    },
+    {
+      "key": "tripod_ai_2024",
+      "title": "TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods",
+      "year": 2024,
+      "organizations": [
+        "TRIPOD+AI"
+      ],
+      "type": "reporting_guideline",
+      "status": "current",
+      "doi": "10.1136/bmj-2023-078378",
+      "url": "https://www.bmj.com/content/385/bmj-2023-078378",
+      "applies_to": [
+        "model reporting",
+        "development reporting",
+        "evaluation transparency"
+      ],
+      "notes": "Reporting framework; applicability depends on study design."
+    },
+    {
+      "key": "probast_ai_2025",
+      "title": "PROBAST+AI: updated quality, risk of bias, and applicability assessment tool",
+      "year": 2025,
+      "organizations": [
+        "PROBAST+AI"
+      ],
+      "type": "risk_of_bias_tool",
+      "status": "current",
+      "doi": "10.1136/bmj-2024-082505",
+      "url": "https://www.bmj.com/content/388/bmj-2024-082505",
+      "applies_to": [
+        "risk of bias",
+        "applicability",
+        "data sources",
+        "outcomes",
+        "analysis"
+      ],
+      "notes": "Used to structure internal risk-of-bias thinking; not a formal completed PROBAST+AI assessment."
+    },
+    {
+      "key": "stard_ai_2025",
+      "title": "The STARD-AI reporting guideline for diagnostic accuracy studies using artificial intelligence",
+      "year": 2025,
+      "organizations": [
+        "STARD-AI"
+      ],
+      "type": "reporting_guideline",
+      "status": "current",
+      "doi": "10.1038/s41591-025-03953-8",
+      "url": "https://www.nature.com/articles/s41591-025-03953-8",
+      "applies_to": [
+        "diagnostic accuracy reporting",
+        "dataset practices",
+        "AI index test",
+        "bias and fairness"
+      ],
+      "notes": "Use if/when reporting diagnostic-accuracy studies."
+    },
+    {
+      "key": "decide_ai_2022",
+      "title": "DECIDE-AI reporting guideline for early-stage clinical evaluation of AI decision support systems",
+      "year": 2022,
+      "organizations": [
+        "DECIDE-AI"
+      ],
+      "type": "reporting_guideline",
+      "status": "current_for_scope",
+      "doi": "10.1038/s41591-022-01772-9",
+      "url": "https://www.nature.com/articles/s41591-022-01772-9",
+      "applies_to": [
+        "early clinical evaluation",
+        "human factors",
+        "workflow integration",
+        "safety",
+        "versioning"
+      ],
+      "notes": "Relevant if system progresses to live early-stage clinical decision-support evaluation."
+    }
+  ]
+}

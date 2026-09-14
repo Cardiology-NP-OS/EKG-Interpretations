@@ -1,0 +1,1589 @@
+{
+  "version": "5.0",
+  "snapshot_date": "2026-09-12",
+  "default_population": "adult",
+  "confidence_rule": "High confidence requires assessable required features and no major unresolved contradiction.",
+  "patterns": [
+    {
+      "id": "sinus_rhythm",
+      "label": "Sinus rhythm",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Consistent sinus P-wave morphology",
+        "Each sinus P is followed by QRS",
+        "Stable AV relationship"
+      ],
+      "supportive_evidence": [
+        "Regular or mildly physiologic variability"
+      ],
+      "major_confounders_or_mimics": [
+        "Ectopic atrial rhythm",
+        "Artifact obscuring atrial activity"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Pattern label only; rate determines brady/tachy modifiers.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "sinus_bradycardia",
+      "label": "Sinus bradycardia",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Sinus rhythm mechanics",
+        "Ventricular rate below expected adult resting range"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Athletic/physiologic state",
+        "Medication/context effects"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "ECG rate label does not establish hemodynamic significance.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "sinus_tachycardia",
+      "label": "Sinus tachycardia",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Sinus rhythm mechanics",
+        "Elevated ventricular rate"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Atrial tachycardia near sinus node",
+        "Artifact"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Etiology cannot be determined from ECG alone.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "sinus_arrhythmia",
+      "label": "Sinus arrhythmia",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Sinus P morphology preserved",
+        "Cyclic RR variability"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "PACs",
+        "SA exit disturbance"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Clinical significance depends on context.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "pac",
+      "label": "Premature atrial complex pattern",
+      "domain": "ectopy",
+      "required_or_defining_evidence": [
+        "Premature atrial depolarization with altered P morphology",
+        "Usually narrow conducted QRS unless aberrant/block"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Sinus arrhythmia",
+        "Artifact",
+        "Junctional premature beat"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Do not infer burden from a short sample.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "pvc",
+      "label": "Premature ventricular complex pattern",
+      "domain": "ectopy",
+      "required_or_defining_evidence": [
+        "Premature wide QRS not preceded by a clearly conducting sinus P",
+        "Abnormal ventricular morphology"
+      ],
+      "supportive_evidence": [
+        "Compensatory pause may be present"
+      ],
+      "major_confounders_or_mimics": [
+        "Aberrantly conducted PAC",
+        "Paced beat"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Morphology alone does not establish structural disease.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "esc_va_scd_2022"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "af",
+      "label": "Atrial fibrillation pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Irregularly irregular ventricular response when AV conduction is variable",
+        "No consistent organized sinus P waves"
+      ],
+      "supportive_evidence": [
+        "Fibrillatory baseline may be visible"
+      ],
+      "major_confounders_or_mimics": [
+        "Frequent ectopy",
+        "Artifact",
+        "Multifocal atrial tachycardia"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "A noisy irregular strip is not sufficient if atrial activity cannot be assessed.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "atrial_flutter",
+      "label": "Atrial flutter pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Organized repetitive atrial activity",
+        "Atrial activity not sinus P morphology"
+      ],
+      "supportive_evidence": [
+        "Sawtooth-type flutter waves",
+        "Fixed or variable AV conduction"
+      ],
+      "major_confounders_or_mimics": [
+        "Atrial tachycardia",
+        "Artifact"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Mechanism/context may require longer tracing.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "svt_2015"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "mat",
+      "label": "Multifocal atrial tachycardia pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Irregular rhythm",
+        "At least three distinct P-wave morphologies when clearly visible",
+        "Variable PR intervals",
+        "Tachycardic rate"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "AF",
+        "Frequent PACs",
+        "Artifact"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Only use when P-wave morphology is actually discernible.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "svt_2015",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "junctional_rhythm",
+      "label": "Junctional rhythm pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Narrow QRS rhythm unless aberrancy",
+        "Sinus P waves absent before QRS or retrograde/closely related P waves"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Low atrial rhythm",
+        "AV block escape rhythm"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Etiology and AV-node level require context.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "svt_2015"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "regular_nct",
+      "label": "Regular narrow-complex tachycardia",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Regular tachycardia",
+        "Narrow QRS unless rate-related aberrancy"
+      ],
+      "supportive_evidence": [
+        "P waves may be hidden or retrograde"
+      ],
+      "major_confounders_or_mimics": [
+        "Sinus tachycardia",
+        "Atrial flutter with fixed conduction",
+        "Atrial tachycardia"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Do not force AVNRT vs AVRT vs atrial tachycardia without evidence.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "svt_2015",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "first_degree_av_delay",
+      "label": "First-degree AV delay",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "1:1 AV conduction",
+        "PR >200 ms when accurately measurable"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Misidentified P onset/QRS onset"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Guideline terminology recognizes this as AV delay rather than true block.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "brady_2018",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "mobitz_i",
+      "label": "Second-degree AV block, Mobitz I pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "Intermittent nonconducted P wave",
+        "Inconstant/progressive PR behavior surrounding the dropped beat"
+      ],
+      "supportive_evidence": [
+        "Grouped beating"
+      ],
+      "major_confounders_or_mimics": [
+        "Blocked PACs",
+        "2:1 block"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Describe the PR sequence, not just the name.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "brady_2018",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "mobitz_ii",
+      "label": "Second-degree AV block, Mobitz II pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "Intermittent nonconducted P wave",
+        "Constant PR intervals in conducted beats",
+        "Pattern is not pure 2:1"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Blocked PACs",
+        "2:1 AV block",
+        "Artifact"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Use only when constant conducted PR intervals are demonstrable.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "brady_2018",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "two_to_one_av",
+      "label": "2:1 AV block",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "Every other P wave conducts to QRS"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Blocked atrial bigeminy"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Do not classify as Mobitz I or II from 2:1 pattern alone.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "brady_2018",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "high_grade_av",
+      "label": "High-grade AV block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "At least two consecutive P waves fail to conduct",
+        "Some AV conduction remains"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Complete AV block",
+        "Blocked atrial ectopy"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Urgency depends on rate, escape, symptoms, and context.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "brady_2018",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "complete_av",
+      "label": "Third-degree/complete AV block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "No evidence of AV conduction",
+        "Atrial and ventricular activity dissociated"
+      ],
+      "supportive_evidence": [
+        "Escape rhythm present"
+      ],
+      "major_confounders_or_mimics": [
+        "Isorhythmic AV dissociation"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Confirm independent atrial and ventricular activity.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "brady_2018",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "complete_rbbb",
+      "label": "Complete right bundle branch block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "QRS >=120 ms in adult",
+        "Compatible terminal rightward morphology in V1/V2",
+        "Broad/delayed terminal S in lateral leads"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "RV pacing",
+        "Brugada pattern",
+        "Nonspecific IVCD"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Duration alone is insufficient.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part3_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "incomplete_rbbb",
+      "label": "Incomplete right bundle branch block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "QRS 110-119 ms in adult",
+        "Compatible RBBB morphology"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Normal variant rSr'",
+        "Brugada pattern"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Use morphology + duration.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part3_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "complete_lbbb",
+      "label": "Complete left bundle branch block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "QRS >=120 ms in adult",
+        "Broad/notched/slurred lateral R-wave morphology",
+        "Expected LBBB precordial/lateral morphology"
+      ],
+      "supportive_evidence": [
+        "Secondary ST-T discordance"
+      ],
+      "major_confounders_or_mimics": [
+        "LV pacing",
+        "Nonspecific IVCD",
+        "LVH"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Duration alone is insufficient; ischemia evaluation needs LBBB-aware criteria.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part3_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "nonspecific_ivcd",
+      "label": "Nonspecific intraventricular conduction delay",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "QRS prolonged",
+        "Does not satisfy complete RBBB/LBBB morphology"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Ventricular pacing",
+        "Pre-excitation"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Descriptive diagnosis, not etiology.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part3_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "lafb",
+      "label": "Left anterior fascicular block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "Left/superior frontal axis compatible with LAFB",
+        "Supporting limb-lead morphology"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Inferior infarct pattern",
+        "LVH",
+        "Lead reversal"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Do not diagnose from axis alone.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part3_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "lpfb",
+      "label": "Left posterior fascicular block pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "Rightward frontal axis compatible with LPFB",
+        "Supporting limb-lead morphology",
+        "More common alternative causes of right-axis deviation excluded"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "RVH",
+        "Pulmonary disease/right-heart strain",
+        "Lead reversal"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Diagnosis of exclusion; uncommon.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part3_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "preexcitation",
+      "label": "Ventricular pre-excitation pattern",
+      "domain": "conduction",
+      "required_or_defining_evidence": [
+        "Shortened AV conduction/PR when measurable",
+        "Delta-wave/slurred initial QRS upstroke",
+        "Widened/fused QRS morphology"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "BBB",
+        "Ventricular pacing"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Pattern does not alone determine accessory-pathway risk.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "svt_2015",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "atrial_pacing",
+      "label": "Atrial paced rhythm",
+      "domain": "pacing",
+      "required_or_defining_evidence": [
+        "Atrial pacing spikes preceding atrial depolarization when visible",
+        "Subsequent AV conduction as present"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Artifact spikes"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Do not infer device mode/programming.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "esc_pacing_2021"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "ventricular_pacing",
+      "label": "Ventricular paced rhythm",
+      "domain": "pacing",
+      "required_or_defining_evidence": [
+        "Ventricular pacing spike preceding paced QRS when visible",
+        "Wide paced QRS morphology"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "LBBB-like native conduction",
+        "Artifact"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Do not infer device mode/programming.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "esc_pacing_2021"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "failure_capture",
+      "label": "Possible pacing failure to capture",
+      "domain": "pacing",
+      "required_or_defining_evidence": [
+        "Pacing stimulus visible without expected subsequent depolarization on repeated cycles"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Artifact",
+        "Stimulus marker misidentification"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Requires prompt device/clinical correlation; ECG does not establish cause.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "esc_pacing_2021"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "undersensing_pattern",
+      "label": "Possible pacemaker undersensing pattern",
+      "domain": "pacing",
+      "required_or_defining_evidence": [
+        "Pacing stimuli occur despite intrinsic depolarizations when timing clearly supports inappropriate sensing behavior"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Fusion/pseudofusion",
+        "Artifact"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Do not infer programming cause.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "esc_pacing_2021"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "aivr",
+      "label": "Accelerated idioventricular rhythm pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Ventricular-origin wide QRS rhythm",
+        "Rate faster than ventricular escape but not necessarily tachycardic"
+      ],
+      "supportive_evidence": [
+        "AV dissociation/fusion may occur"
+      ],
+      "major_confounders_or_mimics": [
+        "Slow VT",
+        "Ventricular pacing"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Rate/context matter; avoid arbitrary mechanism certainty from short strip.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "esc_va_scd_2022",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "monomorphic_wct",
+      "label": "Regular monomorphic wide-complex tachycardia",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Regular tachycardia",
+        "Wide QRS",
+        "Stable QRS morphology"
+      ],
+      "supportive_evidence": [
+        "AV dissociation/capture/fusion if visible support VT"
+      ],
+      "major_confounders_or_mimics": [
+        "SVT with aberrancy",
+        "Pre-excited tachycardia",
+        "Paced tachycardia"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "When uncertain, call WCT and keep VT a major consideration.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "esc_va_scd_2022"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "polymorphic_vt",
+      "label": "Polymorphic ventricular tachycardia pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Rapid wide-complex tachycardia with beat-to-beat QRS morphology/axis variation"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Artifact",
+        "VF"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Do not call torsades unless twisting morphology/QT context supports it.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "esc_va_scd_2022"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "torsades_pattern",
+      "label": "Torsades de pointes pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Polymorphic VT with waxing/waning twisting QRS axis around baseline"
+      ],
+      "supportive_evidence": [
+        "Prolonged QT context supports"
+      ],
+      "major_confounders_or_mimics": [
+        "Other polymorphic VT",
+        "Artifact"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Torsades is a rhythm phenotype; cause still requires context.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "esc_va_scd_2022",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "vf",
+      "label": "Ventricular fibrillation pattern",
+      "domain": "rhythm",
+      "required_or_defining_evidence": [
+        "Chaotic ventricular electrical activity without organized QRS complexes"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Severe artifact"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Confirm not artifact whenever possible.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part2_2007",
+        "esc_va_scd_2022"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "left_axis",
+      "label": "Left-axis deviation",
+      "domain": "axis",
+      "required_or_defining_evidence": [
+        "Frontal QRS axis < -30 degrees when measured or quadrant evidence supports"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Lead reversal"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Axis is descriptive; cause requires context.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part3_2009"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "right_axis",
+      "label": "Right-axis deviation",
+      "domain": "axis",
+      "required_or_defining_evidence": [
+        "Frontal QRS axis > +90 degrees when measured or quadrant evidence supports"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Lead reversal",
+        "Normal variant depending on age/body habitus"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Adult default only.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part3_2009"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "lvh_voltage",
+      "label": "LVH voltage pattern",
+      "domain": "voltage",
+      "required_or_defining_evidence": [
+        "One or more validated voltage criteria are met when gain/lead quality are known"
+      ],
+      "supportive_evidence": [
+        "Secondary repolarization abnormalities may coexist"
+      ],
+      "major_confounders_or_mimics": [
+        "Young/thin habitus",
+        "Athletic remodeling",
+        "BBB"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "ECG voltage has limited sensitivity/specificity; do not equate with anatomic LVH.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part5_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "lvh_repolarization",
+      "label": "LVH-type secondary repolarization pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "High-voltage/LVH context",
+        "Discordant ST depression/T-wave inversion pattern consistent with secondary repolarization"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Acute ischemia",
+        "LBBB"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Can confound ischemia interpretation; do not dismiss dynamic/concordant changes.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part5_2009",
+        "aha_ecg_part4_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "right_heart_strain",
+      "label": "Right-heart strain pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "Rightward/right-precordial pattern compatible with RV pressure/strain",
+        "Anterior/inferior T-wave changes may be present"
+      ],
+      "supportive_evidence": [
+        "RBBB/right axis may coexist"
+      ],
+      "major_confounders_or_mimics": [
+        "Chronic pulmonary disease",
+        "RVH",
+        "Acute pulmonary vascular stress"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "ECG cannot diagnose pulmonary embolism.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "low_voltage",
+      "label": "Low QRS voltage pattern",
+      "domain": "voltage",
+      "required_or_defining_evidence": [
+        "Low QRS amplitudes by accepted limb/precordial voltage criteria when gain is confirmed"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Obesity",
+        "Pericardial effusion",
+        "COPD",
+        "Infiltrative disease"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Etiology cannot be assigned from ECG alone.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part5_2009",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "electrical_alternans",
+      "label": "Electrical alternans pattern",
+      "domain": "morphology",
+      "required_or_defining_evidence": [
+        "Beat-to-beat alternation in QRS amplitude/axis beyond obvious artifact"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Bigeminy",
+        "Motion artifact"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Does not by itself diagnose tamponade.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "esc_myo_peri_2025"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "prolonged_qt",
+      "label": "Prolonged QT/QTc pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "QT/QTc exceeds applicable reference threshold with reliable measurement"
+      ],
+      "supportive_evidence": [
+        "T-wave morphology may support"
+      ],
+      "major_confounders_or_mimics": [
+        "Wide QRS",
+        "U-wave fusion",
+        "Rate correction artifact"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "A prolonged QTc is not synonymous with congenital LQTS.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "esc_va_scd_2022",
+        "aha_ecg_part1_2007",
+        "aha_monitoring_2017"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "short_qt",
+      "label": "Short QT pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "QT/QTc appears abnormally short with reliable measurement"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Measurement error",
+        "High rate/correction artifact",
+        "Hypercalcemia context"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Do not diagnose short-QT syndrome from one tracing.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "esc_va_scd_2022",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "brugada_type1",
+      "label": "Type-1 Brugada ECG pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "Type-1 coved right-precordial ST morphology",
+        "J-point elevation >=0.2 mV when calibrated",
+        "T-wave inversion in V1/V2 in standard or high right-precordial position"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "RBBB",
+        "Lead-placement artifact",
+        "Hyperkalemia",
+        "Ischemia"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "ECG pattern is not by itself Brugada syndrome.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "esc_va_scd_2022",
+        "brugada_provocation_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "early_repolarization",
+      "label": "Early repolarization pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "J-point elevation/notching/slurring in compatible leads",
+        "Pattern otherwise consistent with early repolarization"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Acute ischemia",
+        "Pericarditis",
+        "Brugada pattern"
+      ],
+      "default_urgency": "routine",
+      "diagnostic_boundary": "Pattern and syndrome/risk are not equivalent.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "esc_va_scd_2022",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "stemi_threshold",
+      "label": "Conventional ST-elevation threshold pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "New ST elevation at J point in >=2 contiguous leads meeting sex/age/lead thresholds when calibration and context permit"
+      ],
+      "supportive_evidence": [
+        "Reciprocal changes increase concern"
+      ],
+      "major_confounders_or_mimics": [
+        "LVH",
+        "LBBB",
+        "Pacing",
+        "Pericarditis-like pattern",
+        "Early repolarization"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Threshold status is not the same as final MI diagnosis.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "st_depression_ischemia",
+      "label": "Ischemic ST-depression pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "New horizontal/downsloping ST depression >=0.5 mm at J point in >=2 contiguous leads when calibrated"
+      ],
+      "supportive_evidence": [
+        "Dynamic/reciprocal changes support"
+      ],
+      "major_confounders_or_mimics": [
+        "LVH strain",
+        "BBB",
+        "Rate-related change",
+        "Medication effect"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "ECG finding requires clinical context.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "hyperacute_t",
+      "label": "Hyperacute T-wave pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "Broad symmetric T waves disproportionately large to preceding QRS in contiguous leads"
+      ],
+      "supportive_evidence": [
+        "Dynamic evolution/reciprocal change supports"
+      ],
+      "major_confounders_or_mimics": [
+        "Hyperkalemia-like pattern",
+        "Early repolarization"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Can be an early occlusion pattern without classic ST-elevation thresholds.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "de_winter",
+      "label": "de Winter pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "Prominent symmetric precordial T waves",
+        "Upsloping ST depression in precordial leads"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Hyperkalemia-like pattern",
+        "Other repolarization variants"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Treat as occlusion-pattern concern, not a final MI diagnosis.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "wellens_pattern",
+      "label": "Wellens-type anterior T-wave pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "Biphasic or deeply inverted T waves in V2-V3 with compatible morphology"
+      ],
+      "supportive_evidence": [
+        "Extension to neighboring precordial leads may occur"
+      ],
+      "major_confounders_or_mimics": [
+        "LVH/BBB",
+        "CNS/repolarization abnormalities"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Syndrome-level interpretation requires appropriate clinical context.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "posterior_occlusion_pattern",
+      "label": "Posterior ischemia/occlusion pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "ST depression in V1-V3 compatible with reciprocal posterior injury",
+        "Dominant anterior R waves may support"
+      ],
+      "supportive_evidence": [
+        "Posterior leads V7-V9 can add evidence"
+      ],
+      "major_confounders_or_mimics": [
+        "RBBB/right-precordial abnormalities"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Not proven without clinical integration; posterior leads may help.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "sgarbossa_concern",
+      "label": "Sgarbossa-type ischemia/occlusion concern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "LBBB or ventricular paced QRS context",
+        "Concordant or excessively discordant ST deviation compatible with Sgarbossa/modified framework"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Baseline paced/LBBB repolarization"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Use a validated Sgarbossa framework; do not apply ordinary ST thresholds naively.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "modified_sgarbossa_2012",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "diffuse_subendocardial",
+      "label": "Diffuse subendocardial ischemia pattern",
+      "domain": "ischemia",
+      "required_or_defining_evidence": [
+        "Widespread ST depression with a distribution compatible with subendocardial ischemia"
+      ],
+      "supportive_evidence": [
+        "ST elevation in aVR may coexist"
+      ],
+      "major_confounders_or_mimics": [
+        "LVH strain",
+        "Rate-related change",
+        "Electrolyte/medication effects"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Do not infer a specific coronary anatomy from aVR alone.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "pathologic_q",
+      "label": "Pathologic Q-wave pattern",
+      "domain": "infarction_marker",
+      "required_or_defining_evidence": [
+        "Q waves meeting applicable duration/depth criteria in contiguous leads when measurable"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Normal septal q waves",
+        "Lead placement",
+        "Cardiomyopathy",
+        "Pre-excitation"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Does not alone prove prior MI.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "udmi_2026",
+        "acs_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "pericarditis_like",
+      "label": "Pericarditis-like ECG pattern",
+      "domain": "repolarization",
+      "required_or_defining_evidence": [
+        "Widespread ST elevation and/or PR depression with compatible distribution"
+      ],
+      "supportive_evidence": [
+        "Reciprocal PR elevation in aVR may support"
+      ],
+      "major_confounders_or_mimics": [
+        "Acute coronary occlusion",
+        "Early repolarization"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Acute pericarditis is a clinical diagnosis requiring additional criteria.",
+      "must_name_supporting_leads_when_regional": true,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "esc_myo_peri_2025",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input",
+        "lead_labels"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "hyperkalemia_like",
+      "label": "Hyperkalemia-like ECG pattern",
+      "domain": "metabolic",
+      "required_or_defining_evidence": [
+        "Repolarization/conduction morphology compatible with potassium excess"
+      ],
+      "supportive_evidence": [
+        "May include peaked T waves, PR/QRS changes in more advanced patterns"
+      ],
+      "major_confounders_or_mimics": [
+        "Hyperacute ischemic T waves",
+        "Brugada phenocopy"
+      ],
+      "default_urgency": "emergent",
+      "diagnostic_boundary": "Never diagnose or estimate potassium concentration from ECG alone.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "udmi_2026"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "hypokalemia_like",
+      "label": "Hypokalemia-like ECG pattern",
+      "domain": "metabolic",
+      "required_or_defining_evidence": [
+        "ST depression/T-wave flattening and prominent U-wave/T-U changes compatible with potassium depletion"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Medication effect",
+        "Ischemia"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Correlate with measured electrolytes.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "udmi_2026",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "gain_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "hypocalcemia_like",
+      "label": "Hypocalcemia-like prolonged repolarization pattern",
+      "domain": "metabolic",
+      "required_or_defining_evidence": [
+        "QT prolongation predominantly via ST-segment lengthening may be compatible"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Drug effect",
+        "Congenital/acquired long QT"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Correlate with measured calcium and context.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "udmi_2026",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "hypercalcemia_like",
+      "label": "Hypercalcemia-like short repolarization pattern",
+      "domain": "metabolic",
+      "required_or_defining_evidence": [
+        "Short QT/ST segment morphology may be compatible"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Measurement/correction error",
+        "Short-QT phenotype"
+      ],
+      "default_urgency": "prompt_review",
+      "diagnostic_boundary": "Correlate with measured calcium and context.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "udmi_2026",
+        "aha_ecg_part1_2007"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [
+        "paper_speed_or_explicit_numeric_input"
+      ],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    },
+    {
+      "id": "hypothermia_like",
+      "label": "Hypothermia-like J-wave pattern",
+      "domain": "metabolic",
+      "required_or_defining_evidence": [
+        "Prominent J/Osborn-type waves in compatible context"
+      ],
+      "supportive_evidence": [],
+      "major_confounders_or_mimics": [
+        "Early repolarization",
+        "Brugada-like morphology"
+      ],
+      "default_urgency": "urgent",
+      "diagnostic_boundary": "Temperature/context required; ECG alone does not diagnose hypothermia.",
+      "must_name_supporting_leads_when_regional": false,
+      "source_keys": [
+        "aha_ecg_part4_2009",
+        "udmi_2026"
+      ],
+      "population": "adult_default",
+      "measurement_dependencies": [],
+      "requires_clinical_context_for_syndrome_or_etiology": true
+    }
+  ],
+  "source_registry": "63_SOURCE_REGISTRY.json",
+  "source_traceability_rule": "Every active pattern must reference at least one authoritative source key; disease/syndrome labels remain bounded by diagnostic_boundary."
+}

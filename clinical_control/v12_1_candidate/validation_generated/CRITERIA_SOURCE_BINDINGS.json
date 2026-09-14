@@ -1,0 +1,52 @@
+{
+  "schema": "ekg-v12-1-criteria-source-bindings-v1",
+  "candidate_active": false,
+  "source_of_clinical_truth": [
+    "source_core/63_SOURCE_REGISTRY.json",
+    "source_text/30_CURRENT_SOURCE_MAP_2026.md",
+    "source_text/12_CLINICAL_CRITERIA_REGISTRY.md"
+  ],
+  "note": "Validation-side bindings only. No new clinical criteria are introduced.",
+  "sections": [
+    {
+      "section_id": "criteria-01-acquisition-measurement",
+      "criteria_heading_prefix": "# 1. Acquisition / Measurement",
+      "source_keys": ["aha_ecg_part1_2007"]
+    },
+    {
+      "section_id": "criteria-02-frontal-qrs-axis",
+      "criteria_heading_prefix": "# 2. Frontal QRS Axis",
+      "source_keys": ["aha_ecg_part3_2009"]
+    },
+    {
+      "section_id": "criteria-03-qrs-conduction",
+      "criteria_heading_prefix": "# 3. QRS Duration / Conduction",
+      "source_keys": ["aha_ecg_part3_2009", "brady_2018"]
+    },
+    {
+      "section_id": "criteria-04-av-block",
+      "criteria_heading_prefix": "# 4. AV Block Terminology",
+      "source_keys": ["brady_2018"]
+    },
+    {
+      "section_id": "criteria-05-qt-qtc",
+      "criteria_heading_prefix": "# 5. QT / QTc",
+      "source_keys": ["aha_ecg_part4_2009", "aha_monitoring_2017"]
+    },
+    {
+      "section_id": "criteria-06-acute-ischemia",
+      "criteria_heading_prefix": "# 6. Acute Ischemia / Infarction ECG Findings",
+      "source_keys": ["udmi_2026", "acs_2025", "modified_sgarbossa_2012"]
+    },
+    {
+      "section_id": "criteria-07-pathologic-q-waves",
+      "criteria_heading_prefix": "# 7. Pathologic Q Waves",
+      "source_keys": ["udmi_2026"]
+    },
+    {
+      "section_id": "criteria-08-negative-rule",
+      "criteria_heading_prefix": "# 8. Important Negative Rule",
+      "source_keys": ["acs_2025", "udmi_2026"]
+    }
+  ]
+}

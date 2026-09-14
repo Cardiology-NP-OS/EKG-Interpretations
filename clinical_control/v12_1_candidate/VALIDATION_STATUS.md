@@ -2,37 +2,90 @@
 
 Status: **QUARANTINED / INACTIVE**
 
-## Archive provenance
+## Original uploaded archive
 
-Actual uploaded archive SHA-256:
+User upload:
 
-`61aa14599f66df4067b0e3e8671a6860e6d324c97b891e4b18a391a61c89e396`
-
-The archive manifest lists 27 expected files. Of those:
-- 21 are present and match their manifest SHA-256 values;
-- 0 present files have hash mismatches;
-- 6 expected files are absent.
-
-Because the bundled validator requires one of the absent files, the validator is currently blocked/fail-closed. This supersedes the earlier provisional archive SHA/validator-pass claim.
-
-## Runtime-source integrity
-
-All 16 active clinical/control runtime-source files present in the archive match the hashes registered in `IMPORT_MANIFEST.json`.
-
-This establishes byte identity only. It does not establish clinical correctness or activation authority.
-
-## Calculation engine
-
-`25_CALCULATION_ENGINE.py` was imported byte-for-byte into the quarantine.
+`EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip`
 
 SHA-256:
 
-`872d7df0df0a6d50604583fe6ff8f6fdce0d50e14da4669f408f8a4c9235d82d`
+`c8d911ec42dc09ece708f8bafe4956a9f90853129ead04a8851383ebdb845ef5`
 
-Permanent deterministic suite:
+Direct audit of the original upload:
+- manifest entries expected: **27**
+- manifest entries present and hash-matched: **27**
+- hash mismatches: **0**
+- missing manifest entries: **0**
+- archive complete against manifest: **true**
+- bundled runtime validator: **PASS**
+- active runtime sources: **16**
+- runtime: **12.0**
+- structured output schema: **3.1**
+- criteria snapshot: **2026-09-12**
+- source registry: **2.0**
 
-`tests/test_calculation_engine.py`
+This supersedes the temporary provenance correction that incorrectly identified a generated derivative archive as the original upload.
 
-Current result: **40/40 PASS**.
+## Generated derivative distinction
 
-The calculation engine remains inactive clinical runtime code.
+A generated quarantine derivative also exists:
+
+`v12_1_clinical_control_candidate.zip`
+
+SHA-256:
+
+`61aa14599f66df4067b0e3e8671a6860e6d324c97b891e4b18a391a61c89e396`
+
+That derivative is not the user-uploaded source pack and must not be used as the source-pack identity.
+
+## Runtime-source integrity
+
+All 16 active clinical/control runtime-source files match the hashes registered in `IMPORT_MANIFEST.json`.
+
+The machine-readable core currently imported into quarantine contains:
+- output schema;
+- 59-pattern registry;
+- 30-failure-mode registry;
+- 21-source registry;
+- deterministic calculation engine.
+
+Exact source bytes are preserved with Git `-text` attributes.
+
+## Candidate validation
+
+- engineering CI: **30/30 PASS**
+- verified PTB-XL source tests: **5/5 PASS**
+- candidate calculation engine: **40/40 PASS**
+- candidate registry/schema contracts: **27/27 PASS**
+- total quarantined candidate tests: **67/67 PASS**
+
+The candidate remains inactive clinical runtime code. Validator PASS and contract-test PASS do not establish diagnostic accuracy.
+
+## Criteria/source traceability closure
+
+The original package references traceability artifacts that were not included in the uploaded archive:
+- `64_SOURCE_TRACEABILITY.py`;
+- `59_TRACEABILITY_MATRIX.md`;
+- `17_CHANGELOG.md`.
+
+The quarantine now supplies governed validation-side replacements under `validation_generated/`. They do not alter the uploaded source files.
+
+The audit verifies:
+- all eight existing criteria sections bind to known machine-registry source keys;
+- all 13 DOI references in the original human source map resolve to the machine source registry;
+- all pattern-registry source keys resolve;
+- the generated matrix is deterministic and current.
+
+Two criteria-bound source keys were present in the machine registry but omitted from the original human-readable source map:
+- `aha_ecg_part1_2007`;
+- `aha_monitoring_2017`.
+
+They are represented only in a validation-side supplement; the uploaded source map remains byte-identical.
+
+Current quarantined candidate gate: **80/80 PASS**:
+- registry/schema contracts: 27;
+- calculation engine: 40;
+- criteria/source traceability: 13.
+
+No diagnostic-accuracy claim is made and the candidate remains inactive.
