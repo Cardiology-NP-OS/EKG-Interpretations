@@ -127,16 +127,93 @@ function verifyImportManifest(p) {
   return m;
 }
 
-function classifyArchiveHash(hash) {
+function classifyArtifactHash(hash, p = loadProvenanceManifest()) {
   const value = String(hash || "").toLowerCase();
-  if (value === ORIGINAL_SHA256) return { identity: "original_user_archive", name: ORIGINAL_NAME };
-  if (value === DERIVATIVE_SHA256) throw new Error("SOURCE_ARCHIVE_IS_GENERATED_DERIVATIVE");
+  if (value === ORIGINAL_SHA256) {
+    return {
+      classification: "original_user_archive",
+      name: ORIGINAL_NAME,
+      sha256: value,
+      authoritative_source_pack: true,
+      source_pack_identity: true,
+    };
+  }
+  if (value === DERIVATIVE_SHA256) {
+    return {
+      classification: "generated_quarantine_derivative",
+      name: "v12_1_clinical_control_candidate.zip",
+      sha256: value,
+      authoritative_source_pack: false,
+      source_pack_identity: false,
+    };
+  }
+  const transport = (p.non_authoritative_transport_observations || [])
+    .find(item => item.sha256 === value);
+  if (transport) {
+    return {
+      classification: "non_authoritative_transport_artifact",
+      name: transport.name,
+      sha256: value,
+      authoritative_source_pack: false,
+      source_pack_identity: false,
+    };
+  }
+  return {
+    classification: "unknown_artifact",
+    name: null,
+    sha256: value || null,
+    authoritative_source_pack: false,
+    source_pack_identity: false,
+  };
+}
+
+function inspectSourceArtifact(file, p = loadProvenanceManifest()) {
+  const resolved = path.resolve(file);
+  if (!fs.existsSync(resolved)) {
+    return {
+      classification: "absent",
+      path: resolved,
+      exists: false,
+      authoritative_source_pack: false,
+      source_pack_identity: false,
+    };
+  }
+  const stat = fs.lstatSync(resolved);
+  if (!stat.isFile() || stat.isSymbolicLink()) {
+    return {
+      classification: "non_regular_artifact",
+      path: resolved,
+      exists: true,
+      authoritative_source_pack: false,
+      source_pack_identity: false,
+    };
+  }
+  return {
+    path: resolved,
+    exists: true,
+    ...classifyArtifactHash(sha256File(resolved), p),
+  };
+}
+
+function classifyArchiveHash(hash, p = loadProvenanceManifest()) {
+  const result = classifyArtifactHash(hash, p);
+  if (result.classification === "original_user_archive") {
+    return { identity: result.classification, name: result.name };
+  }
+  if (result.classification === "generated_quarantine_derivative") {
+    throw new Error("SOURCE_ARCHIVE_IS_GENERATED_DERIVATIVE");
+  }
+  if (result.classification === "non_authoritative_transport_artifact") {
+    throw new Error("SOURCE_ARCHIVE_IS_NONAUTHORITATIVE_TRANSPORT");
+  }
   throw new Error("SOURCE_ARCHIVE_SHA256_MISMATCH");
 }
 
-function verifyArchive(file) {
-  requireCondition(fs.existsSync(file), "SOURCE_ARCHIVE_MISSING");
-  return classifyArchiveHash(sha256File(file));
+function verifyArchive(file, p = loadProvenanceManifest()) {
+  const inspection = inspectSourceArtifact(file, p);
+  requireCondition(inspection.classification !== "absent", "SOURCE_ARCHIVE_MISSING");
+  requireCondition(inspection.classification !== "non_regular_artifact", "SOURCE_ARCHIVE_NOT_REGULAR_FILE");
+  return classifyArchiveHash(inspection.sha256, p);
 }
 function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
   const workingTree = {};
@@ -243,6 +320,8 @@ module.exports = {
   verifyImportManifest,
   verifyGitBytePolicyAt,
   verifyGitBytePolicy,
+  classifyArtifactHash,
+  inspectSourceArtifact,
   classifyArchiveHash,
   verifyArchive,
   verify,

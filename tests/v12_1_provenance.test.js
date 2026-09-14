@@ -175,11 +175,64 @@ test("generated derivative hash is explicitly rejected", () => {
   );
 });
 
-test("unknown or reconstructed archive hashes are not promoted to original identity", () => {
+test("known transport artifact hashes are explicitly non-authoritative", () => {
   const p = verifier.loadProvenanceManifest();
   for (const item of p.non_authoritative_transport_observations) {
-    assert.throws(() => verifier.classifyArchiveHash(item.sha256), /SOURCE_ARCHIVE_SHA256_MISMATCH/);
+    const classification = verifier.classifyArtifactHash(item.sha256, p);
+    assert.equal(classification.classification, "non_authoritative_transport_artifact");
+    assert.equal(classification.source_pack_identity, false);
+    assert.throws(
+      () => verifier.classifyArchiveHash(item.sha256, p),
+      /SOURCE_ARCHIVE_IS_NONAUTHORITATIVE_TRANSPORT/
+    );
   }
+});
+
+test("unknown hash remains unknown and cannot become original source identity", () => {
+  const p = verifier.loadProvenanceManifest();
+  const unknown = "0".repeat(64);
+  const classification = verifier.classifyArtifactHash(unknown, p);
+  assert.equal(classification.classification, "unknown_artifact");
+  assert.equal(classification.authoritative_source_pack, false);
+  assert.throws(() => verifier.classifyArchiveHash(unknown, p), /SOURCE_ARCHIVE_SHA256_MISMATCH/);
+});
+
+test("artifact classifier distinguishes original and generated derivative by hash only", () => {
+  const p = verifier.loadProvenanceManifest();
+  const original = verifier.classifyArtifactHash(verifier.ORIGINAL_SHA256, p);
+  const derivative = verifier.classifyArtifactHash(verifier.DERIVATIVE_SHA256, p);
+  assert.equal(original.classification, "original_user_archive");
+  assert.equal(original.authoritative_source_pack, true);
+  assert.equal(derivative.classification, "generated_quarantine_derivative");
+  assert.equal(derivative.authoritative_source_pack, false);
+});
+
+test("missing path is classified absent without trusting an original-looking filename", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-discovery-"));
+  const file = path.join(dir, "EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip");
+  const result = verifier.inspectSourceArtifact(file);
+  assert.equal(result.classification, "absent");
+  assert.equal(result.exists, false);
+  assert.equal(result.authoritative_source_pack, false);
+});
+
+test("directory named like original archive is non-regular and rejected", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-discovery-"));
+  const file = path.join(dir, "EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip");
+  fs.mkdirSync(file);
+  const result = verifier.inspectSourceArtifact(file);
+  assert.equal(result.classification, "non_regular_artifact");
+  assert.throws(() => verifier.verifyArchive(file), /SOURCE_ARCHIVE_NOT_REGULAR_FILE/);
+});
+
+test("unknown bytes cannot be promoted by the original archive filename", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-discovery-"));
+  const file = path.join(dir, "EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip");
+  fs.writeFileSync(file, Buffer.from("not the original archive bytes"));
+  const result = verifier.inspectSourceArtifact(file);
+  assert.equal(result.classification, "unknown_artifact");
+  assert.equal(result.source_pack_identity, false);
+  assert.throws(() => verifier.verifyArchive(file), /SOURCE_ARCHIVE_SHA256_MISMATCH/);
 });
 
 test("Git attributes, working tree, index, and committed HEAD preserve exact source bytes", () => {
