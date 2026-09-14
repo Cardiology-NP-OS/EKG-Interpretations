@@ -308,6 +308,18 @@ function deepErrors(output) {
         errors.push('F10 exact visual measurement missing fiducials');
       }
     }
+    const expectedMethodBySource = {
+      visual_fiducial: ['manual_fiducial', 'automated_fiducial_unvalidated'],
+      digital_signal: ['digital_sample'], machine_reported: ['machine_printout'],
+      user_provided: ['user_input'], calculated: ['formula'], unavailable: ['unavailable']
+    };
+    if (expectedMethodBySource[e.source_kind] && !expectedMethodBySource[e.source_kind].includes(e.method)) {
+      errors.push('measurement evidence source/method mismatch');
+    }
+    if (e.source_kind === 'unavailable' && (e.value !== null || e.calibration_id !== null ||
+        asArray(e.fiducials).length > 0 || e.exact_numeric_claim_allowed)) {
+      errors.push('unavailable measurement evidence carries asserted measurement state');
+    }
     if (e.uncertainty && typeof e.uncertainty.lower === 'number' && Number.isFinite(e.uncertainty.lower) &&
         typeof e.uncertainty.upper === 'number' && Number.isFinite(e.uncertainty.upper) &&
         e.uncertainty.lower > e.uncertainty.upper) {
@@ -343,6 +355,12 @@ function deepErrors(output) {
       (Array.isArray(acquisition.duplicate_signal_pairs) && acquisition.duplicate_signal_pairs.length > 0) ||
       (Array.isArray(acquisition.flatline_leads) && acquisition.flatline_leads.length > 0);
     if (hasAssessmentEvidence) errors.push('acquisition marked not_assessed despite assessment evidence');
+  }
+
+  if (acquisition && acquisition.status === 'consistent' &&
+      ((Array.isArray(acquisition.duplicate_signal_pairs) && acquisition.duplicate_signal_pairs.length > 0) ||
+       (Array.isArray(acquisition.flatline_leads) && acquisition.flatline_leads.length > 0))) {
+    errors.push('acquisition marked consistent despite explicit signal-integrity defects');
   }
 
   const layout = output.lead_layout;
@@ -531,6 +549,11 @@ expectOutputReject('visual_exact_missing_fiducials', (x) => {
 }, true);
 expectOutputReject('reversed_uncertainty_interval', (x) => { const ev = makeMeasurementEvidence('m1'); ev.uncertainty = { lower: 2, upper: 1, unit: 'synthetic', method: 'conservative_interval' }; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('duplicate_fiducial_ids', (x) => { const ev = makeMeasurementEvidence('m1'); ev.fiducials = [{ fiducial_id: 'dup', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }, { fiducial_id: 'dup', kind: 'other', x_px: 2, y_px: 2, point_uncertainty_px: 0 }]; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('evidence_source_method_mismatch', (x) => { const ev = makeMeasurementEvidence('m1'); ev.source_kind = 'digital_signal'; ev.method = 'user_input'; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('unavailable_evidence_with_numeric_value', (x) => { const ev = makeMeasurementEvidence('m1'); ev.value = 1; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('unavailable_evidence_with_exact_claim', (x) => { const ev = makeMeasurementEvidence('m1'); ev.exact_numeric_claim_allowed = true; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('acquisition_consistent_with_duplicate_signal', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], duplicate_signal_pairs: ['I-II'] }; }, true);
+expectOutputReject('acquisition_consistent_with_flatline', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], flatline_leads: ['I'] }; }, true);
 
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
@@ -722,6 +745,40 @@ for (const sourceKind of Object.keys(sourceMethods)) {
   }
 }
 check('generated_evidence_source_geometry_matrix_48', evidenceMatrixMismatches.length === 0, evidenceMatrixMismatches);
+
+const sourceMethodMatrixMismatches = [];
+const allowedMethodsBySource = {
+  visual_fiducial: ['manual_fiducial', 'automated_fiducial_unvalidated'], digital_signal: ['digital_sample'],
+  machine_reported: ['machine_printout'], user_provided: ['user_input'], calculated: ['formula'], unavailable: ['unavailable']
+};
+const allEvidenceMethods = ['manual_fiducial', 'automated_fiducial_unvalidated', 'digital_sample', 'machine_printout', 'user_input', 'formula', 'unavailable'];
+for (const [sourceKind, allowedMethods] of Object.entries(allowedMethodsBySource)) {
+  for (const method of allEvidenceMethods) {
+    const candidate = makeFixture();
+    const ev = makeMeasurementEvidence('method-matrix');
+    ev.source_kind = sourceKind; ev.method = method;
+    candidate.measurement_evidence = [ev];
+    const rejected = deepErrors(candidate).length > 0;
+    const expectedReject = !allowedMethods.includes(method);
+    if (rejected !== expectedReject) sourceMethodMatrixMismatches.push({ sourceKind, method, rejected });
+  }
+}
+check('generated_evidence_source_method_matrix_42', sourceMethodMatrixMismatches.length === 0, sourceMethodMatrixMismatches);
+
+const unavailableStateMismatches = [];
+for (let mask = 0; mask < 16; mask += 1) {
+  const candidate = makeFixture();
+  const ev = makeMeasurementEvidence('unavailable-matrix');
+  if (mask & 1) ev.value = 1;
+  if (mask & 2) ev.calibration_id = 'asserted-calibration';
+  if (mask & 4) ev.fiducials = [{ fiducial_id: 'f', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }];
+  if (mask & 8) ev.exact_numeric_claim_allowed = true;
+  candidate.measurement_evidence = [ev];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = mask !== 0;
+  if (rejected !== expectedReject) unavailableStateMismatches.push({ mask, rejected });
+}
+check('generated_unavailable_evidence_state_matrix_16', unavailableStateMismatches.length === 0, unavailableStateMismatches);
 
 let seed = 0x6c06f00d;
 function randomIndex(max) {
