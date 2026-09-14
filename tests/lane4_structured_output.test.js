@@ -37,6 +37,24 @@ function skeleton(node) {
   return null;
 }
 
+function validValue(node) {
+  if (!node || typeof node !== "object") return null;
+  if (Object.prototype.hasOwnProperty.call(node, "const")) return node.const;
+  if (Array.isArray(node.enum)) return node.enum[0];
+  const types = Array.isArray(node.type) ? node.type : node.type ? [node.type] : [];
+  const type = types.includes("null") ? "null" : types[0];
+  if (type === "object") {
+    const value = {};
+    for (const key of node.required || []) value[key] = validValue(node.properties[key]);
+    return value;
+  }
+  if (type === "array") return [];
+  if (type === "string") return "";
+  if (type === "boolean") return false;
+  if (type === "number" || type === "integer") return 0;
+  return null;
+}
+
 let passed = 0;
 function test(name, fn) {
   fn();
@@ -66,9 +84,38 @@ test("required fields inside emitted array items are enforced", () => {
   assert.ok(result.violations.some((item) => item.detail === "$.measurements[0].name"));
 });
 
-test("schema-required structural skeleton does not fail completeness gate", () => {
+test("presence-only structural skeleton still fails semantic schema checks", () => {
   const result = auditFinalization({ ...base(), structured_output: skeleton(schema) });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_schema_violation"));
+});
+
+test("schema-valid structural fixture passes bounded structured-output gate", () => {
+  const result = auditFinalization({ ...base(), structured_output: validValue(schema) });
   assert.equal(result.verdict, "PASS");
+});
+
+test("const enum type and additional-property violations cannot pass", () => {
+  let output = validValue(schema);
+  output.schema_version = "9.9";
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "$.schema_version:const"));
+
+  output = validValue(schema);
+  output.urgency.level = "instant";
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.ok(result.violations.some((item) => item.detail === "$.urgency.level:enum"));
+
+  output = validValue(schema);
+  output.urgency.reason = 42;
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.ok(result.violations.some((item) => item.detail === "$.urgency.reason:type"));
+
+  output = validValue(schema);
+  output.unexpected = true;
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.ok(result.violations.some((item) => item.detail === "$.unexpected:additional_property"));
 });
 
 console.log(JSON.stringify({
