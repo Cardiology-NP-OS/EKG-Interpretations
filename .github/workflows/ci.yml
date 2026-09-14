@@ -41,3 +41,5 @@ jobs:
           python-version: "3.12"
       - name: Run quarantined candidate gate
         run: python clinical_control/v12_1_candidate/tests/run_candidate_gate.py
+      - name: Run PKT-EP1-07 measurement evidence gate
+        run: python clinical_control/v12_1_candidate/tests/run_pkt07_gate.py

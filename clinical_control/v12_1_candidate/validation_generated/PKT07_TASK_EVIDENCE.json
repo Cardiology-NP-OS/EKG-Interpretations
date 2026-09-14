@@ -1,0 +1,35 @@
+{
+  "schema": "ekg-pkt07-task-evidence-v1",
+  "packet_id": "PKT-EP1-07",
+  "packet_sha256": "6be31408b39e44517b32f226bd80eda91496f91c448eba004d25aa8e597f53d0",
+  "candidate_active": false,
+  "clinical_accuracy_claimed": false,
+  "source_engine_sha256": "872d7df0df0a6d50604583fe6ff8f6fdce0d50e14da4669f408f8a4c9235d82d",
+  "task_evidence": [
+    {"task_id":"T0097","status":"COMPLETE","evidence":["validation_generated/PKT07_MEASUREMENT_EVIDENCE_SCHEMA.json","tests/test_measurement_evidence_adapter.py"]},
+    {"task_id":"T0098","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::manual_measurement","manual_origin_preserved"]},
+    {"task_id":"T0099","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::waveform_measurement_request","waveform_extraction_not_implemented"]},
+    {"task_id":"T0100","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::rate_from_rr","rate_rr_60"]},
+    {"task_id":"T0101","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::qtc_records","four_qtc_formulas","qtc_formula_identity"]},
+    {"task_id":"T0102","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::interval_measurement","qrs_category_deterministic"]},
+    {"task_id":"T0103","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::axis_measurement","axis_category_deterministic"]},
+    {"task_id":"T0104","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py::st_from_display_mm","st_gain_normalized","st_threshold_not_diagnosis"]},
+    {"task_id":"T0105","status":"COMPLETE","evidence":["digital_missing_calibration_fails_closed","st_missing_lead_indeterminate","st_missing_calibration_indeterminate"]},
+    {"task_id":"T0106","status":"COMPLETE","evidence":["validation_generated/MEASUREMENT_ERROR_TAXONOMY.json","quality_state_fail_closed"]},
+    {"task_id":"T0107","status":"COMPLETE","evidence":["cross_rate_duration_consistent","cross_rate_calculation_consistent"]},
+    {"task_id":"T0108","status":"COMPLETE","evidence":["validation_generated/PKT07_SYNTHETIC_GOLDEN_VECTORS.json","synthetic_vectors_not_clinical_gold"]},
+    {"task_id":"T0109","status":"COMPLETE","evidence":["validation_generated/measurement_evidence_adapter.py","engine_bytes_unchanged","candidate_inactive_contract"]},
+    {"task_id":"T0110","status":"COMPLETE","evidence":["map_to_structured_output","structured_map_no_interpretation","source_schema_record_0..9"]},
+    {"task_id":"T0111","status":"COMPLETE","evidence":["reject_unit_mismatch","reject_nan","reject_inf","reject_bad_asset_hash","reject_conflicting_measurements","reject_negative_sample_delta","reject_zero_sample_rate"]},
+    {"task_id":"T0112","status":"AWAITING_INDEPENDENT_VERIFICATION","evidence":[]}
+  ],
+  "local_gate_summary": {
+    "pkt07_measurement_tests": "65/65 PASS",
+    "candidate_gate": "80/80 PASS",
+    "real_source_gate": "5/5 PASS",
+    "lane4_mode_audit": "32 tests / 515 assertions PASS",
+    "lane4_source_gate": "6/6 PASS",
+    "lane4_structured_output": "19/19 PASS",
+    "lane6_contract_fuzz": "249/249 PASS"
+  }
+}

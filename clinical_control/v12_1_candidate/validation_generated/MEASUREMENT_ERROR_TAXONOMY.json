@@ -1,0 +1,22 @@
+{
+  "schema": "ekg-pkt07-measurement-error-taxonomy-v1",
+  "candidate_active": false,
+  "clinical_accuracy_claimed": false,
+  "states": [
+    "AVAILABLE",
+    "INDETERMINATE",
+    "NOT_IMPLEMENTED"
+  ],
+  "reasons": [
+    "MISSING_REQUIRED_INPUT",
+    "MALFORMED_INPUT",
+    "NONFINITE_INPUT",
+    "UNIT_MISMATCH",
+    "MISSING_LEAD_IDENTITY",
+    "MISSING_CALIBRATION",
+    "CONFLICTING_EVIDENCE",
+    "UNSUPPORTED_MEASUREMENT",
+    "AUTOMATIC_FIDUCIAL_EXTRACTION_NOT_IMPLEMENTED"
+  ],
+  "rule": "Unsupported, malformed, nonfinite, conflicting, or prerequisite-incomplete evidence must not be converted into a diagnostic conclusion."
+}
