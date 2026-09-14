@@ -171,6 +171,80 @@ test("require-source mode fails closed when no source path is supplied", () => {
   assert.match(child.stderr, /SOURCE_CONTROL_DIR_REQUIRED/);
 });
 
+test("directory substituted for expected file fails closed", () => {
+  const dir = fixture();
+  const target = path.join(dir, verifier.TARGET_FILES[0]);
+  fs.unlinkSync(target);
+  fs.mkdirSync(target);
+  assert.throws(
+    () => verifier.verifyDirectory(dir, verifier.loadProvenanceManifest(), "TEST_SOURCE"),
+    /NOT_REGULAR_FILE/
+  );
+});
+
+test("zero-length source file fails byte-count validation", () => {
+  const dir = fixture();
+  fs.writeFileSync(path.join(dir, verifier.TARGET_FILES[1]), Buffer.alloc(0));
+  assert.throws(
+    () => verifier.verifyDirectory(dir, verifier.loadProvenanceManifest(), "TEST_SOURCE"),
+    /BYTE_COUNT_MISMATCH/
+  );
+});
+
+test("truncated source file fails byte-count validation", () => {
+  const dir = fixture();
+  const target = path.join(dir, verifier.TARGET_FILES[2]);
+  fs.writeFileSync(target, fs.readFileSync(target).subarray(0, 17));
+  assert.throws(
+    () => verifier.verifyDirectory(dir, verifier.loadProvenanceManifest(), "TEST_SOURCE"),
+    /BYTE_COUNT_MISMATCH/
+  );
+});
+
+test("case-mutated manifest inventory is rejected", () => {
+  const p = manifestClone();
+  p.source_set.files[0].name = p.source_set.files[0].name.toLowerCase();
+  assert.throws(() => verifier.validateProvenanceManifest(p), /SOURCE_SET_INVENTORY/);
+});
+
+test("duplicate manifest entry cannot replace a distinct target", () => {
+  const p = manifestClone();
+  p.source_set.files[1] = { ...p.source_set.files[0] };
+  assert.throws(
+    () => verifier.validateProvenanceManifest(p),
+    /SOURCE_SET_INVENTORY|SOURCE_SET_DUPLICATE_NAME/
+  );
+});
+
+test("self-consistent manifest rebinding cannot bless mutated source bytes", () => {
+  const dir = fixture();
+  const p = manifestClone();
+  const name = verifier.TARGET_FILES[3];
+  const target = path.join(dir, name);
+  fs.appendFileSync(target, Buffer.from([0x0a]));
+  const entry = p.source_set.files.find(x => x.name === name);
+  entry.bytes = fs.statSync(target).size;
+  entry.sha256 = verifier.sha256File(target);
+  assert.equal(Object.keys(verifier.verifyDirectory(dir, p, "TEST_SOURCE")).length, 9);
+  assert.throws(() => verifier.verifyImportManifest(p), /IMPORT_TARGET_BYTES|IMPORT_TARGET_SHA256/);
+});
+
+test("unknown archive bytes fail end-to-end archive verification", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-archive-"));
+  const file = path.join(dir, "not-the-original.zip");
+  fs.writeFileSync(file, Buffer.from("generated or reconstructed bytes"));
+  assert.throws(() => verifier.verifyArchive(file), /SOURCE_ARCHIVE_SHA256_MISMATCH/);
+});
+
+test("require-archive mode fails closed when no archive path is supplied", () => {
+  const tool = path.join(__dirname, "..", "tools", "verify_v12_1_controls.js");
+  const env = { ...process.env };
+  delete env.EKG_V12_1_ORIGINAL_ARCHIVE;
+  const child = spawnSync(process.execPath, [tool, "--require-archive"], { env, encoding: "utf8" });
+  assert.notEqual(child.status, 0);
+  assert.match(child.stderr, /SOURCE_ARCHIVE_REQUIRED/);
+});
+
 if (process.exitCode) {
   console.error(JSON.stringify({
     schema: "ekg-v12-1-provenance-test-results-v1",
