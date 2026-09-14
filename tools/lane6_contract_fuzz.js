@@ -274,8 +274,25 @@ function deepErrors(output) {
   const evidenceIds = evidence.map((item) => item.measurement_id);
   if (!unique(evidenceIds)) errors.push('duplicate measurement evidence id');
   const evidenceSet = new Set(evidenceIds);
+  const evidenceById = new Map(evidence.map((item) => [item.measurement_id, item]));
   for (const m of asArray(output.measurements)) {
-    if (m.measurement_evidence_ref && !evidenceSet.has(m.measurement_evidence_ref)) errors.push('missing measurement evidence reference');
+    if (m.measurement_evidence_ref) {
+      if (!evidenceSet.has(m.measurement_evidence_ref)) errors.push('missing measurement evidence reference');
+      else {
+        const e = evidenceById.get(m.measurement_evidence_ref);
+        if (e.metric !== m.name) errors.push('measurement/evidence metric mismatch');
+        if (!Object.is(e.value, m.value)) errors.push('measurement/evidence value mismatch');
+        if (!Object.is(e.unit, m.unit)) errors.push('measurement/evidence unit mismatch');
+        if (m.lead !== undefined && m.lead !== null && e.lead !== m.lead) errors.push('measurement/evidence lead mismatch');
+        const expectedEvidenceSource = {
+          user: 'user_provided', machine: 'machine_reported',
+          calculated: 'calculated', unavailable: 'unavailable'
+        }[m.source];
+        if (expectedEvidenceSource && e.source_kind !== expectedEvidenceSource) {
+          errors.push('measurement/evidence source mismatch');
+        }
+      }
+    }
   }
   for (const obs of asArray(output.lead_observations)) {
     if (obs.measurement_evidence_ref && !evidenceSet.has(obs.measurement_evidence_ref)) errors.push('missing lead evidence reference');
@@ -495,6 +512,30 @@ expectOutputReject('missing_measurement_evidence_ref', (x) => {
 }, true);
 expectOutputReject('duplicate_measurement_evidence_id', (x) => {
   x.measurement_evidence = [makeMeasurementEvidence('m1'), makeMeasurementEvidence('m1')];
+}, true);
+expectOutputReject('measurement_evidence_metric_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('linked-1'); ev.metric = 'qrs'; ev.value = 1; ev.unit = 'ms'; ev.source_kind = 'user_provided'; ev.method = 'user_input';
+  x.measurements.push({ name: 'other', value: 1, unit: 'ms', source: 'user', confidence: 'low', measurement_evidence_ref: 'linked-1' }); x.measurement_evidence = [ev];
+}, true);
+expectOutputReject('measurement_evidence_value_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('linked-1'); ev.value = 2; ev.unit = 'ms'; ev.source_kind = 'user_provided'; ev.method = 'user_input';
+  x.measurements.push({ name: 'other', value: 1, unit: 'ms', source: 'user', confidence: 'low', measurement_evidence_ref: 'linked-1' }); x.measurement_evidence = [ev];
+}, true);
+expectOutputReject('measurement_evidence_unit_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('linked-1'); ev.value = 1; ev.unit = 'mV'; ev.source_kind = 'user_provided'; ev.method = 'user_input';
+  x.measurements.push({ name: 'other', value: 1, unit: 'ms', source: 'user', confidence: 'low', measurement_evidence_ref: 'linked-1' }); x.measurement_evidence = [ev];
+}, true);
+expectOutputReject('measurement_evidence_lead_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('linked-1'); ev.lead = 'II'; ev.source_kind = 'user_provided'; ev.method = 'user_input';
+  x.measurements.push({ name: 'other', value: null, unit: null, source: 'user', confidence: 'low', lead: 'I', measurement_evidence_ref: 'linked-1' }); x.measurement_evidence = [ev];
+}, true);
+expectOutputReject('measurement_evidence_user_source_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('linked-1'); ev.source_kind = 'machine_reported'; ev.method = 'machine_printout';
+  x.measurements.push({ name: 'other', value: null, unit: null, source: 'user', confidence: 'low', measurement_evidence_ref: 'linked-1' }); x.measurement_evidence = [ev];
+}, true);
+expectOutputReject('measurement_evidence_machine_source_mismatch', (x) => {
+  const ev = makeMeasurementEvidence('linked-1'); ev.source_kind = 'user_provided'; ev.method = 'user_input';
+  x.measurements.push({ name: 'other', value: null, unit: null, source: 'machine', confidence: 'low', measurement_evidence_ref: 'linked-1' }); x.measurement_evidence = [ev];
 }, true);
 expectOutputReject('missing_calibration_ref', (x) => {
   x.measurement_evidence = [makeMeasurementEvidence('m1', 'missing-calibration')];
@@ -780,6 +821,29 @@ for (let mask = 0; mask < 16; mask += 1) {
 }
 check('generated_unavailable_evidence_state_matrix_16', unavailableStateMismatches.length === 0, unavailableStateMismatches);
 
+const measurementEvidenceSourceMismatches = [];
+const measurementSourceMap = {
+  user: 'user_provided', machine: 'machine_reported',
+  calculated: 'calculated', unavailable: 'unavailable'
+};
+const evidenceMethodMap = {
+  visual_fiducial: 'manual_fiducial', digital_signal: 'digital_sample', machine_reported: 'machine_printout',
+  user_provided: 'user_input', calculated: 'formula', unavailable: 'unavailable'
+};
+for (const [measurementSource, expectedEvidenceSource] of Object.entries(measurementSourceMap)) {
+  for (const evidenceSource of Object.keys(evidenceMethodMap)) {
+    const candidate = makeFixture();
+    candidate.technical_quality.grade = 'adequate';
+    const ev = makeMeasurementEvidence('source-matrix');
+    ev.source_kind = evidenceSource; ev.method = evidenceMethodMap[evidenceSource];
+    candidate.measurement_evidence = [ev];
+    candidate.measurements.push({ name: 'other', value: null, unit: null, source: measurementSource, confidence: 'low', measurement_evidence_ref: 'source-matrix' });
+    const rejected = deepErrors(candidate).length > 0;
+    const expectedReject = evidenceSource !== expectedEvidenceSource;
+    if (rejected !== expectedReject) measurementEvidenceSourceMismatches.push({ measurementSource, evidenceSource, rejected });
+  }
+}
+check('generated_measurement_evidence_source_binding_matrix_24', measurementEvidenceSourceMismatches.length === 0, measurementEvidenceSourceMismatches);
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
