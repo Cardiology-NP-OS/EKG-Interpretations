@@ -59,6 +59,8 @@
   },
   "quality_rules": {
     "limited_grades_require_limitations": ["limited", "poor", "cannot_interpret"],
+    "crop_or_occlusion_requires_limitation": true,
+    "perspective_distortion_requires_limitation": true,
     "cannot_interpret_blocks_high_confidence_pattern": true,
     "cannot_interpret_blocks_model_exact_measurements": true
   },
@@ -82,6 +84,14 @@
     "unsupported_exact_axis_interval_st",
     "routine_interpreted_as_safe"
   ],
+  "failure_control_flags": {
+    "lead_label_guessing": "F09",
+    "geometry_measurement_error": "F10",
+    "source_instruction_injection": "F25",
+    "unnecessary_phi_echo": "F26",
+    "patient_specific_treatment_order": "F29",
+    "hidden_contradiction": "F30"
+  },
   "pass_semantics": {
     "verdicts": ["PASS", "REVISE", "BLOCKED"],
     "pass_requires_zero_violations": true,

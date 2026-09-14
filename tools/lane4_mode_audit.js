@@ -123,6 +123,9 @@ function auditFinalization(payload = {}) {
   for (const flag of CONTRACT.mandatory_fail_flags || []) {
     if (payload[flag] === true) add(violations, "mandatory_fail", flag);
   }
+  for (const [flag, failureId] of Object.entries(CONTRACT.failure_control_flags || {})) {
+    if (payload[flag] === true) add(violations, "failure_control", failureId + ":" + flag);
+  }
 
   if (route.blocked && payload.normal_output_emitted === true) {
     add(blockers, "unsupported_mode_normal_output", route.code);
@@ -139,6 +142,12 @@ function auditFinalization(payload = {}) {
   if (["limited", "poor", "cannot_interpret"].includes(quality.grade) &&
       !nonEmptyArray(quality.limitations)) {
     add(violations, "quality_limitations_missing", quality.grade);
+  }
+  if (quality.crop_or_occlusion === true && !nonEmptyArray(quality.limitations)) {
+    add(violations, "quality_limitation_missing_for_crop", "crop_or_occlusion");
+  }
+  if (quality.perspective_distortion === true && !nonEmptyArray(quality.limitations)) {
+    add(violations, "quality_limitation_missing_for_perspective", "perspective_distortion");
   }
   if (quality.grade === "cannot_interpret" && payload.primary_pattern_confidence === "high") {
     add(violations, "high_confidence_forbidden_by_quality", quality.grade);

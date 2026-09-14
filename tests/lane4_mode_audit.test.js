@@ -324,6 +324,34 @@ test("unsupported and learning transitions cannot bypass route semantics", () =>
   eq(result.verdict, "PASS");
 });
 
+test("crop and perspective quality contradictions require explicit limitations", () => {
+  let payload = base();
+  payload.technical_quality = { grade: "adequate", limitations: [], crop_or_occlusion: true };
+  let result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("quality_limitation_missing_for_crop"));
+
+  payload = base();
+  payload.technical_quality = { grade: "adequate", limitations: [], perspective_distortion: true };
+  result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("quality_limitation_missing_for_perspective"));
+
+  payload.technical_quality.limitations = ["perspective distortion present"];
+  eq(auditFinalization(payload).verdict, "PASS");
+});
+
+test("failure-registry controls cannot be acknowledged and still PASS", () => {
+  for (const [flag, failureId] of Object.entries(CONTRACT.failure_control_flags)) {
+    const payload = base();
+    payload[flag] = true;
+    const result = auditFinalization(payload);
+    eq(result.verdict, "REVISE");
+    ok(codes(result).includes("failure_control"));
+    ok(result.violations.some((item) => item.detail === failureId + ":" + flag));
+  }
+});
+
 if (process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({
   schema: "ekg-l04-mode-audit-tests-v1",
