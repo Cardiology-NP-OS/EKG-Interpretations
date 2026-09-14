@@ -138,29 +138,57 @@ function verifyArchive(file) {
   requireCondition(fs.existsSync(file), "SOURCE_ARCHIVE_MISSING");
   return classifyArchiveHash(sha256File(file));
 }
-function verifyGitBytePolicy(p) {
-  const hashes = {};
+function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
+  const workingTree = {};
+  const index = {};
+  const committed = {};
   for (const exp of p.source_set.files) {
     const rel = path.posix.join(
       "clinical_control", "v12_1_candidate", "source_text", "remaining_controls", exp.name
     );
-    const attr = spawnSync("git", ["check-attr", "text", "--", rel], { cwd: ROOT, encoding: "utf8" });
+    const file = path.join(importedDir, exp.name);
+    const attr = spawnSync("git", ["check-attr", "text", "--", rel], { cwd: repoRoot, encoding: "utf8" });
     requireCondition(attr.status === 0, "GIT_ATTR_CHECK_FAILED:" + exp.name);
     requireCondition(/: text: unset\s*$/.test(attr.stdout), "GIT_TEXT_POLICY_NOT_UNSET:" + exp.name);
-    const indexed = spawnSync("git", ["show", ":" + rel], { cwd: ROOT, encoding: null, maxBuffer: 2 * 1024 * 1024 });
+
+    const stage = spawnSync("git", ["ls-files", "--stage", "--", rel], { cwd: repoRoot, encoding: "utf8" });
+    requireCondition(stage.status === 0 && /^100644\s/.test(stage.stdout), "GIT_INDEX_MODE_MISMATCH:" + exp.name);
+    const headMode = spawnSync("git", ["ls-tree", "HEAD", "--", rel], { cwd: repoRoot, encoding: "utf8" });
+    requireCondition(
+      headMode.status === 0 && /^100644 blob\s/.test(headMode.stdout),
+      "GIT_HEAD_MODE_MISMATCH:" + exp.name
+    );
+
+    const indexed = spawnSync("git", ["show", ":" + rel], { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 });
     requireCondition(indexed.status === 0, "GIT_INDEX_SOURCE_MISSING:" + exp.name);
-    const actual = sha256Buffer(indexed.stdout);
-    requireCondition(actual === exp.sha256, "GIT_INDEX_SHA256_MISMATCH:" + exp.name);
-    hashes[exp.name] = actual;
+    const indexedHash = sha256Buffer(indexed.stdout);
+    requireCondition(indexedHash === exp.sha256, "GIT_INDEX_SHA256_MISMATCH:" + exp.name);
+
+    const head = spawnSync("git", ["show", "HEAD:" + rel], { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 });
+    requireCondition(head.status === 0, "GIT_HEAD_SOURCE_MISSING:" + exp.name);
+    const committedHash = sha256Buffer(head.stdout);
+    requireCondition(committedHash === exp.sha256, "GIT_HEAD_SHA256_MISMATCH:" + exp.name);
+
+    const workingHash = sha256File(file);
+    requireCondition(workingHash === exp.sha256, "GIT_WORKTREE_SHA256_MISMATCH:" + exp.name);
+    requireCondition(indexedHash === committedHash && committedHash === workingHash, "GIT_THREE_WAY_MISMATCH:" + exp.name);
+
+    workingTree[exp.name] = workingHash;
+    index[exp.name] = indexedHash;
+    committed[exp.name] = committedHash;
   }
-  return hashes;
+  return { working_tree: workingTree, index, committed };
+}
+
+function verifyGitBytePolicy(p) {
+  return verifyGitBytePolicyAt(ROOT, IMPORTED_DIR, p);
 }
 
 function verify(options = {}) {
   const p = loadProvenanceManifest();
   verifyImportManifest(p);
   const imported = verifyDirectory(IMPORTED_DIR, p, "REPO_CONTROL");
-  const gitIndex = verifyGitBytePolicy(p);
+  const gitBytes = verifyGitBytePolicy(p);
   let source = null;
   let archive = null;
   if (options.sourceDir) source = verifyDirectory(path.resolve(options.sourceDir), p, "SOURCE_CONTROL");
@@ -173,7 +201,9 @@ function verify(options = {}) {
     source_pack_sha256: ORIGINAL_SHA256,
     exact_file_count: TARGET_FILES.length,
     imported_hashes: imported,
-    git_index_hashes: gitIndex,
+    git_working_tree_hashes: gitBytes.working_tree,
+    git_index_hashes: gitBytes.index,
+    git_committed_hashes: gitBytes.committed,
     external_source_verified: Boolean(source),
     original_archive_verified: Boolean(archive),
   };
@@ -211,6 +241,7 @@ module.exports = {
   loadProvenanceManifest,
   verifyDirectory,
   verifyImportManifest,
+  verifyGitBytePolicyAt,
   verifyGitBytePolicy,
   classifyArchiveHash,
   verifyArchive,

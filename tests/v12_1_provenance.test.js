@@ -5,6 +5,11 @@ const path = require("path");
 const { spawnSync } = require("child_process");
 const verifier = require("../tools/verify_v12_1_controls");
 
+const ROOT = path.resolve(__dirname, "..");
+const CONTROL_REL = path.join(
+  "clinical_control", "v12_1_candidate", "source_text", "remaining_controls"
+);
+
 let passed = 0;
 function test(name, fn) {
   try {
@@ -27,6 +32,26 @@ function fixture() {
 
 function manifestClone() {
   return JSON.parse(JSON.stringify(verifier.loadProvenanceManifest()));
+}
+
+function runGit(cwd, args, options = {}) {
+  const child = spawnSync("git", args, {
+    cwd,
+    encoding: "utf8",
+    input: options.input,
+  });
+  assert.equal(child.status, 0, child.stderr || child.stdout);
+  return child.stdout.trim();
+}
+
+function repoFixture() {
+  const parent = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-git-"));
+  const repo = path.join(parent, "repo");
+  runGit(parent, ["clone", "--no-hardlinks", ROOT, repo]);
+  return {
+    repo,
+    importedDir: path.join(repo, CONTROL_REL),
+  };
 }
 
 test("generated provenance manifest is explicitly non-clinical and candidate remains inactive", () => {
@@ -157,9 +182,13 @@ test("unknown or reconstructed archive hashes are not promoted to original ident
   }
 });
 
-test("Git attributes and staged index preserve exact source bytes", () => {
+test("Git attributes, working tree, index, and committed HEAD preserve exact source bytes", () => {
   const hashes = verifier.verifyGitBytePolicy(verifier.loadProvenanceManifest());
-  assert.equal(Object.keys(hashes).length, 9);
+  assert.equal(Object.keys(hashes.working_tree).length, 9);
+  assert.equal(Object.keys(hashes.index).length, 9);
+  assert.equal(Object.keys(hashes.committed).length, 9);
+  assert.deepEqual(hashes.working_tree, hashes.index);
+  assert.deepEqual(hashes.index, hashes.committed);
 });
 
 test("require-source mode fails closed when no source path is supplied", () => {
@@ -243,6 +272,68 @@ test("require-archive mode fails closed when no archive path is supplied", () =>
   const child = spawnSync(process.execPath, [tool, "--require-archive"], { env, encoding: "utf8" });
   assert.notEqual(child.status, 0);
   assert.match(child.stderr, /SOURCE_ARCHIVE_REQUIRED/);
+});
+
+test("staged index tamper is rejected even when working tree and HEAD remain exact", () => {
+  const { repo, importedDir } = repoFixture();
+  const p = verifier.loadProvenanceManifest();
+  const name = verifier.TARGET_FILES[0];
+  const rel = path.join(CONTROL_REL, name);
+  const target = path.join(importedDir, name);
+  const original = fs.readFileSync(target);
+  fs.appendFileSync(target, Buffer.from([0x0a]));
+  runGit(repo, ["add", "--", rel]);
+  fs.writeFileSync(target, original);
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, p),
+    /GIT_INDEX_SHA256_MISMATCH/
+  );
+});
+
+test("committed HEAD tamper is rejected even when index and working tree are restored", () => {
+  const { repo, importedDir } = repoFixture();
+  const p = verifier.loadProvenanceManifest();
+  const name = verifier.TARGET_FILES[1];
+  const rel = path.join(CONTROL_REL, name);
+  const target = path.join(importedDir, name);
+  const original = fs.readFileSync(target);
+  fs.appendFileSync(target, Buffer.from([0x0a]));
+  runGit(repo, ["add", "--", rel]);
+  runGit(repo, ["-c", "user.name=EKG Provenance Test", "-c", "user.email=provenance@example.invalid", "commit", "-m", "tamper fixture"]);
+  fs.writeFileSync(target, original);
+  runGit(repo, ["add", "--", rel]);
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, p),
+    /GIT_HEAD_SHA256_MISMATCH/
+  );
+});
+
+test("Git symlink-mode substitution is rejected without filesystem symlink privileges", () => {
+  const { repo, importedDir } = repoFixture();
+  const p = verifier.loadProvenanceManifest();
+  const name = verifier.TARGET_FILES[2];
+  const rel = path.join(CONTROL_REL, name).replace(/\\/g, "/");
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "../wrong-target" });
+  runGit(repo, ["update-index", "--cacheinfo", "120000," + blob + "," + rel]);
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, p),
+    /GIT_INDEX_MODE_MISMATCH/
+  );
+});
+
+test("committed Git symlink mode is rejected after index and worktree are restored", () => {
+  const { repo, importedDir } = repoFixture();
+  const p = verifier.loadProvenanceManifest();
+  const name = verifier.TARGET_FILES[3];
+  const rel = path.join(CONTROL_REL, name).replace(/\\/g, "/");
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "../wrong-target" });
+  runGit(repo, ["update-index", "--cacheinfo", "120000," + blob + "," + rel]);
+  runGit(repo, ["-c", "user.name=EKG Provenance Test", "-c", "user.email=provenance@example.invalid", "commit", "-m", "symlink-mode fixture"]);
+  runGit(repo, ["restore", "--source=HEAD^", "--staged", "--worktree", "--", rel]);
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, p),
+    /GIT_HEAD_MODE_MISMATCH/
+  );
 });
 
 if (process.exitCode) {
