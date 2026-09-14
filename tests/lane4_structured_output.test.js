@@ -118,6 +118,78 @@ test("const enum type and additional-property violations cannot pass", () => {
   assert.ok(result.violations.some((item) => item.detail === "$.unexpected:additional_property"));
 });
 
+test("pattern and uniqueItems violations cannot pass", () => {
+  let output = validValue(schema);
+  output.interpretation.primary_pattern.pattern_id = "BAD PATTERN!";
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "$.interpretation.primary_pattern.pattern_id:pattern"));
+
+  output = validValue(schema);
+  output.verification = ["same", "same"];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "$.verification:unique_items"));
+});
+
+test("declared string-length and numeric-bound violations cannot pass", () => {
+  function outputWithGeometry() {
+    const output = validValue(schema);
+    const geometry = validValue(schema.properties.geometry_calibrations.items);
+    geometry.calibration_id = "cal_1";
+    output.geometry_calibrations = [geometry];
+    return { output, geometry };
+  }
+
+  let fixture = outputWithGeometry();
+  fixture.geometry.supporting_evidence = [""];
+  let result = auditFinalization({ ...base(), structured_output: fixture.output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "$.geometry_calibrations[0].supporting_evidence[0]:min_length"));
+
+  fixture = outputWithGeometry();
+  fixture.geometry.x_pixels_per_mm = 0;
+  result = auditFinalization({ ...base(), structured_output: fixture.output });
+  assert.ok(result.violations.some((item) => item.detail === "$.geometry_calibrations[0].x_pixels_per_mm:exclusive_minimum"));
+
+  fixture = outputWithGeometry();
+  fixture.geometry.x_scale_uncertainty_fraction = -0.1;
+  result = auditFinalization({ ...base(), structured_output: fixture.output });
+  assert.ok(result.violations.some((item) => item.detail === "$.geometry_calibrations[0].x_scale_uncertainty_fraction:minimum"));
+
+  fixture = outputWithGeometry();
+  fixture.geometry.x_scale_uncertainty_fraction = 1;
+  result = auditFinalization({ ...base(), structured_output: fixture.output });
+  assert.ok(result.violations.some((item) => item.detail === "$.geometry_calibrations[0].x_scale_uncertainty_fraction:exclusive_maximum"));
+});
+
+test("conditional exact-measurement evidence binding is enforced", () => {
+  function outputWithEvidence(sourceKind, exactAllowed, assetId, assetSha256) {
+    const output = validValue(schema);
+    const evidence = validValue(schema.properties.measurement_evidence.items);
+    evidence.measurement_id = "m1";
+    evidence.source_kind = sourceKind;
+    evidence.exact_numeric_claim_allowed = exactAllowed;
+    evidence.evidence_source = { asset_id: assetId, asset_sha256: assetSha256, record_id: null };
+    output.measurement_evidence = [evidence];
+    return output;
+  }
+
+  let output = outputWithEvidence("visual_fiducial", true, null, null);
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "$.measurement_evidence[0].evidence_source.asset_id:type"));
+  assert.ok(result.violations.some((item) => item.detail === "$.measurement_evidence[0].evidence_source.asset_sha256:type"));
+
+  output = outputWithEvidence("digital_signal", true, "asset_1", "a".repeat(64));
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "PASS");
+
+  output = outputWithEvidence("machine_reported", true, null, null);
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "PASS");
+});
+
 console.log(JSON.stringify({
   schema: "ekg-l04-structured-output-tests-v1",
   pass: true,

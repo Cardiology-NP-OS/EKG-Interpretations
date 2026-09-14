@@ -96,7 +96,9 @@ function nonEmptyArray(value) {
 
 function missingRequiredFields(schema, value, at = "$", gaps = []) {
   if (!schema || typeof schema !== "object") return gaps;
-  if (schema.type === "object") {
+  const objectLike = schema.type === "object" ||
+    (!schema.type && schema.properties && value && typeof value === "object" && !Array.isArray(value));
+  if (objectLike) {
     if (!value || typeof value !== "object" || Array.isArray(value)) {
       gaps.push(at);
       return gaps;
@@ -121,6 +123,18 @@ function missingRequiredFields(schema, value, at = "$", gaps = []) {
   return gaps;
 }
 
+function schemaConditionMatches(schema, value) {
+  const gaps = missingRequiredFields(schema, value, "$", []);
+  const issues = schemaValueIssues(schema, value, "$", []);
+  return gaps.length === 0 && issues.length === 0;
+}
+
+function applySubschema(schema, value, at, issues) {
+  const gaps = missingRequiredFields(schema, value, at, []);
+  for (const gap of gaps) issues.push(gap + ":required");
+  schemaValueIssues(schema, value, at, issues);
+}
+
 function schemaValueIssues(schema, value, at = "$", issues = []) {
   if (!schema || typeof schema !== "object") return issues;
   if (Object.prototype.hasOwnProperty.call(schema, "const") && value !== schema.const) {
@@ -128,6 +142,22 @@ function schemaValueIssues(schema, value, at = "$", issues = []) {
   }
   if (Array.isArray(schema.enum) && !schema.enum.some((item) => Object.is(item, value))) {
     issues.push(at + ":enum");
+  }
+  if (typeof schema.pattern === "string" && typeof value === "string") {
+    const pattern = new RegExp(schema.pattern);
+    if (!pattern.test(value)) issues.push(at + ":pattern");
+  }
+  if (typeof value === "string" && Number.isInteger(schema.minLength) && value.length < schema.minLength) {
+    issues.push(at + ":min_length");
+  }
+  if (typeof value === "string" && Number.isInteger(schema.maxLength) && value.length > schema.maxLength) {
+    issues.push(at + ":max_length");
+  }
+  if (typeof value === "number" && Number.isFinite(value)) {
+    if (typeof schema.minimum === "number" && value < schema.minimum) issues.push(at + ":minimum");
+    if (typeof schema.maximum === "number" && value > schema.maximum) issues.push(at + ":maximum");
+    if (typeof schema.exclusiveMinimum === "number" && value <= schema.exclusiveMinimum) issues.push(at + ":exclusive_minimum");
+    if (typeof schema.exclusiveMaximum === "number" && value >= schema.exclusiveMaximum) issues.push(at + ":exclusive_maximum");
   }
   const allowedTypes = Array.isArray(schema.type) ? schema.type : schema.type ? [schema.type] : [];
   if (allowedTypes.length) {
@@ -141,7 +171,13 @@ function schemaValueIssues(schema, value, at = "$", issues = []) {
       return issues;
     }
   }
-  if (schema.type === "object" && value && typeof value === "object" && !Array.isArray(value)) {
+  if (schema.type === "array" && Array.isArray(value) && schema.uniqueItems === true) {
+    const serialized = value.map((item) => JSON.stringify(item));
+    if (new Set(serialized).size !== serialized.length) issues.push(at + ":unique_items");
+  }
+  const objectLike = (schema.type === "object" || (!schema.type && schema.properties)) &&
+    value && typeof value === "object" && !Array.isArray(value);
+  if (objectLike) {
     if (schema.additionalProperties === false) {
       for (const key of Object.keys(value)) {
         if (!Object.prototype.hasOwnProperty.call(schema.properties || {}, key)) issues.push(at + "." + key + ":additional_property");
@@ -152,6 +188,14 @@ function schemaValueIssues(schema, value, at = "$", issues = []) {
     }
   } else if (schema.type === "array" && Array.isArray(value) && schema.items) {
     value.forEach((item, index) => schemaValueIssues(schema.items, item, at + "[" + index + "]", issues));
+  }
+  for (const clause of schema.allOf || []) {
+    if (clause.if) {
+      const branch = schemaConditionMatches(clause.if, value) ? clause.then : clause.else;
+      if (branch) applySubschema(branch, value, at, issues);
+    } else {
+      applySubschema(clause, value, at, issues);
+    }
   }
   return issues;
 }
