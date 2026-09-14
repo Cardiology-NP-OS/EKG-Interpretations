@@ -291,7 +291,70 @@ function verifyArchive(file, p = loadProvenanceManifest()) {
   requireCondition(inspection.classification !== "non_regular_artifact", "SOURCE_ARCHIVE_NOT_REGULAR_FILE");
   return classifyArchiveHash(inspection.sha256, p);
 }
+
+function parseNullGitRecords(buffer) {
+  return buffer.toString("utf8").split("\0").filter(Boolean);
+}
+
+function verifyGitSubtreeInventoryAt(repoRoot, p) {
+  const prefix = path.posix.join(
+    "clinical_control", "v12_1_candidate", "source_text", "remaining_controls"
+  );
+  const expectedPaths = p.source_set.files.map(x => prefix + "/" + x.name).sort();
+
+  const staged = spawnSync(
+    "git",
+    ["ls-files", "--stage", "-z", "--", prefix],
+    { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 }
+  );
+  requireCondition(staged.status === 0, "GIT_INDEX_INVENTORY_COMMAND_FAILED");
+  const indexRecords = parseNullGitRecords(staged.stdout).map(record => {
+    const match = /^([0-9]{6}) ([0-9a-f]+) ([0-3])\t([\s\S]+)$/.exec(record);
+    requireCondition(Boolean(match), "GIT_INDEX_INVENTORY_RECORD_INVALID");
+    const [, mode, , stage, gitPath] = match;
+    requireCondition(stage === "0", "GIT_INDEX_UNMERGED:" + gitPath);
+    requireCondition(mode === "100644", "GIT_INDEX_MODE_MISMATCH:" + gitPath);
+    requireCondition(gitPath.startsWith(prefix + "/"), "GIT_INDEX_PATH_OUTSIDE_SUBTREE:" + gitPath);
+    const relative = gitPath.slice(prefix.length + 1);
+    requireCondition(!relative.includes("/") && !relative.includes("\\"), "GIT_INDEX_NESTED_PATH:" + relative);
+    return { path: gitPath, relative };
+  });
+  requireDistinctFilenameIdentities(indexRecords.map(x => x.relative), "GIT_INDEX_SUBTREE");
+  requireCondition(
+    sameArray(indexRecords.map(x => x.path).sort(), expectedPaths),
+    "GIT_INDEX_INVENTORY_MISMATCH"
+  );
+
+  const head = spawnSync(
+    "git",
+    ["ls-tree", "-r", "-z", "HEAD", "--", prefix],
+    { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 }
+  );
+  requireCondition(head.status === 0, "GIT_HEAD_INVENTORY_COMMAND_FAILED");
+  const headRecords = parseNullGitRecords(head.stdout).map(record => {
+    const match = /^([0-9]{6}) ([^ ]+) ([0-9a-f]+)\t([\s\S]+)$/.exec(record);
+    requireCondition(Boolean(match), "GIT_HEAD_INVENTORY_RECORD_INVALID");
+    const [, mode, type, , gitPath] = match;
+    requireCondition(mode === "100644" && type === "blob", "GIT_HEAD_MODE_MISMATCH:" + gitPath);
+    requireCondition(gitPath.startsWith(prefix + "/"), "GIT_HEAD_PATH_OUTSIDE_SUBTREE:" + gitPath);
+    const relative = gitPath.slice(prefix.length + 1);
+    requireCondition(!relative.includes("/") && !relative.includes("\\"), "GIT_HEAD_NESTED_PATH:" + relative);
+    return { path: gitPath, relative };
+  });
+  requireDistinctFilenameIdentities(headRecords.map(x => x.relative), "GIT_HEAD_SUBTREE");
+  requireCondition(
+    sameArray(headRecords.map(x => x.path).sort(), expectedPaths),
+    "GIT_HEAD_INVENTORY_MISMATCH"
+  );
+
+  return {
+    index_paths: indexRecords.map(x => x.path).sort(),
+    committed_paths: headRecords.map(x => x.path).sort(),
+  };
+}
+
 function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
+  const subtreeInventory = verifyGitSubtreeInventoryAt(repoRoot, p);
   const workingTree = {};
   const index = {};
   const committed = {};
@@ -339,7 +402,7 @@ function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
     index[exp.name] = indexedHash;
     committed[exp.name] = committedHash;
   }
-  return { working_tree: workingTree, index, committed };
+  return { working_tree: workingTree, index, committed, attributes, subtree_inventory: subtreeInventory };
 }
 
 function verifyGitBytePolicy(p) {
@@ -366,6 +429,8 @@ function verify(options = {}) {
     git_working_tree_hashes: gitBytes.working_tree,
     git_index_hashes: gitBytes.index,
     git_committed_hashes: gitBytes.committed,
+    git_text_attribute_policy: gitBytes.attributes,
+    git_subtree_inventory: gitBytes.subtree_inventory,
     external_source_verified: Boolean(source),
     original_archive_verified: Boolean(archive),
   };
@@ -408,6 +473,7 @@ module.exports = {
   requireNoLinkAncestry,
   filenameIdentityKey,
   requireDistinctFilenameIdentities,
+  verifyGitSubtreeInventoryAt,
   verifyGitBytePolicyAt,
   verifyGitBytePolicy,
   classifyArtifactHash,

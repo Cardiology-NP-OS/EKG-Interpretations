@@ -244,6 +244,62 @@ test("Git attributes, working tree, index, and committed HEAD preserve exact sou
   assert.deepEqual(hashes.index, hashes.committed);
 });
 
+test("Git text attribute policy is identical across working tree, index, and committed HEAD", () => {
+  const result = verifier.verifyGitBytePolicy(verifier.loadProvenanceManifest());
+  assert.equal(Object.keys(result.attributes.working_tree).length, 9);
+  assert.equal(Object.keys(result.attributes.index).length, 9);
+  assert.equal(Object.keys(result.attributes.committed).length, 9);
+  assert.deepEqual(result.attributes.working_tree, result.attributes.index);
+  assert.deepEqual(result.attributes.index, result.attributes.committed);
+});
+
+test("working-tree-only gitattributes tamper is rejected", () => {
+  const { repo, importedDir } = repoFixture();
+  fs.appendFileSync(
+    path.join(repo, ".gitattributes"),
+    "\nclinical_control/v12_1_candidate/source_text/remaining_controls/*.md text\n"
+  );
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, verifier.loadProvenanceManifest()),
+    /GIT_WORKTREE_TEXT_POLICY_NOT_UNSET/
+  );
+});
+
+test("staged-index-only gitattributes tamper is rejected", () => {
+  const { repo, importedDir } = repoFixture();
+  const attrs = path.join(repo, ".gitattributes");
+  fs.appendFileSync(
+    attrs,
+    "\nclinical_control/v12_1_candidate/source_text/remaining_controls/*.md text\n"
+  );
+  runGit(repo, ["add", "--", ".gitattributes"]);
+  runGit(repo, ["restore", "--source=HEAD", "--worktree", "--", ".gitattributes"]);
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_TEXT_POLICY_NOT_UNSET/
+  );
+});
+
+test("committed-HEAD-only gitattributes tamper is rejected", () => {
+  const { repo, importedDir } = repoFixture();
+  const attrs = path.join(repo, ".gitattributes");
+  fs.appendFileSync(
+    attrs,
+    "\nclinical_control/v12_1_candidate/source_text/remaining_controls/*.md text\n"
+  );
+  runGit(repo, ["add", "--", ".gitattributes"]);
+  runGit(repo, [
+    "-c", "user.name=EKG Provenance Test",
+    "-c", "user.email=provenance@example.invalid",
+    "commit", "-m", "attribute tamper fixture",
+  ]);
+  runGit(repo, ["restore", "--source=HEAD^", "--staged", "--worktree", "--", ".gitattributes"]);
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, verifier.loadProvenanceManifest()),
+    /GIT_HEAD_TEXT_POLICY_NOT_UNSET/
+  );
+});
+
 test("require-source mode fails closed when no source path is supplied", () => {
   const tool = path.join(__dirname, "..", "tools", "verify_v12_1_controls.js");
   const env = { ...process.env };
@@ -446,6 +502,83 @@ test("require-archive mode fails closed when no archive path is supplied", () =>
   const child = spawnSync(process.execPath, [tool, "--require-archive"], { env, encoding: "utf8" });
   assert.notEqual(child.status, 0);
   assert.match(child.stderr, /SOURCE_ARCHIVE_REQUIRED/);
+});
+
+test("Git subtree inventory is exactly the nine registered source paths", () => {
+  const result = verifier.verifyGitSubtreeInventoryAt(ROOT, verifier.loadProvenanceManifest());
+  assert.equal(result.index_paths.length, 9);
+  assert.equal(result.committed_paths.length, 9);
+  assert.deepEqual(result.index_paths, result.committed_paths);
+});
+
+test("extra staged source-like path is rejected even when registered blobs remain exact", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  const rel = prefix + "/EXTRA.md";
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "extra staged bytes" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + rel]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_INVENTORY_MISMATCH/
+  );
+});
+
+test("extra committed source-like path is rejected after index is restored", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  const rel = prefix + "/EXTRA.md";
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "extra committed bytes" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + rel]);
+  runGit(repo, [
+    "-c", "user.name=EKG Provenance Test",
+    "-c", "user.email=provenance@example.invalid",
+    "commit", "-m", "extra subtree fixture",
+  ]);
+  runGit(repo, ["update-index", "--force-remove", "--", rel]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_HEAD_INVENTORY_MISMATCH/
+  );
+});
+
+test("staged case-alias source path is rejected by filename identity", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  const original = verifier.TARGET_FILES[0];
+  const alias = original.toLowerCase();
+  assert.notEqual(alias, original);
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "case alias bytes" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + prefix + "/" + alias]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_SUBTREE_FILENAME_IDENTITY_COLLISION/
+  );
+});
+
+test("staged Unicode compatibility alias source path is rejected by filename identity", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  const original = verifier.TARGET_FILES[0];
+  const alias = "１３" + original.slice(2);
+  assert.equal(verifier.filenameIdentityKey(alias), verifier.filenameIdentityKey(original));
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "unicode alias bytes" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + prefix + "/" + alias]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_SUBTREE_FILENAME_IDENTITY_COLLISION/
+  );
+});
+
+test("nested staged source subtree entry is rejected before inventory comparison", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  const rel = prefix + "/nested/EXTRA.md";
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "nested bytes" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + rel]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_NESTED_PATH/
+  );
 });
 
 test("staged index tamper is rejected even when working tree and HEAD remain exact", () => {
