@@ -266,6 +266,10 @@ function makeMeasurementEvidence(id, calibrationId = null) {
   };
 }
 
+function makeCalibration(overrides = {}) {
+  return { version: '1.0', calibration_id: 'cal-1', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: false, exact_voltage_measurement_allowed: false, supporting_evidence: ['synthetic fixture'], ...overrides };
+}
+
 function applyVisualExactFixture(output, metric, timeAllowed, voltageAllowed) {
   output.technical_quality.grade = 'adequate';
   const ev = makeMeasurementEvidence('visual-exact', 'visual-cal');
@@ -273,7 +277,7 @@ function applyVisualExactFixture(output, metric, timeAllowed, voltageAllowed) {
   ev.fiducials = [{ fiducial_id: 'f1', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }];
   ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) };
   output.measurement_evidence = [ev];
-  output.geometry_calibrations = [{ version: '1.0', calibration_id: 'visual-cal', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: timeAllowed, exact_voltage_measurement_allowed: voltageAllowed, supporting_evidence: ['synthetic fixture'] }];
+  output.geometry_calibrations = [makeCalibration({ calibration_id: 'visual-cal', exact_time_measurement_allowed: timeAllowed, exact_voltage_measurement_allowed: voltageAllowed })];
 }
 
 const validLeads = new Set(schema.properties.lead_observations.items.properties.lead.enum);
@@ -376,6 +380,17 @@ function deepErrors(output) {
   const calibrationIds = calibrations.map((item) => item.calibration_id);
   if (!unique(calibrationIds)) errors.push('duplicate calibration id');
   const calibrationById = new Map(calibrations.map((item) => [item.calibration_id, item]));
+  for (const c of calibrations) {
+    if (!Array.isArray(c.supporting_evidence) || c.supporting_evidence.length === 0) errors.push('calibration missing supporting evidence');
+    if ((c.geometry_state === 'unknown' || c.geometry_state === 'perspective_uncorrected') &&
+        (c.exact_time_measurement_allowed || c.exact_voltage_measurement_allowed)) {
+      errors.push('unsafe calibration geometry permits exact measurement');
+    }
+    if (c.source === 'unknown' && (c.exact_time_measurement_allowed || c.exact_voltage_measurement_allowed)) {
+      errors.push('unknown calibration source permits exact measurement');
+    }
+    if (c.source === 'derived_homography' && c.homography_applied !== true) errors.push('derived homography source without applied homography');
+  }
   for (const e of evidence) {
     const assetIdPresent = typeof e.evidence_source?.asset_id === 'string' && e.evidence_source.asset_id.length > 0;
     const assetHashPresent = typeof e.evidence_source?.asset_sha256 === 'string' && e.evidence_source.asset_sha256.length > 0;
@@ -680,6 +695,10 @@ expectOutputReject('visual_exact_calibration_disallows_exact_measurement', (x) =
 }, true);
 expectOutputReject('visual_exact_interval_with_voltage_only_calibration', (x) => { applyVisualExactFixture(x, 'qt', false, true); }, true);
 expectOutputReject('visual_exact_st_deviation_with_time_only_calibration', (x) => { applyVisualExactFixture(x, 'st_deviation', true, false); }, true);
+expectOutputReject('calibration_unsafe_geometry_allows_exact', (x) => { x.geometry_calibrations = [makeCalibration({ geometry_state: 'unknown', exact_time_measurement_allowed: true })]; }, true);
+expectOutputReject('calibration_unknown_source_allows_exact', (x) => { x.geometry_calibrations = [makeCalibration({ source: 'unknown', exact_voltage_measurement_allowed: true })]; }, true);
+expectOutputReject('derived_homography_without_applied_homography', (x) => { x.geometry_calibrations = [makeCalibration({ source: 'derived_homography', geometry_state: 'perspective_corrected', homography_applied: false })]; }, true);
+expectOutputReject('calibration_missing_supporting_evidence', (x) => { x.geometry_calibrations = [makeCalibration({ supporting_evidence: [] })]; }, true);
 expectOutputReject('visual_exact_missing_fiducials', (x) => {
   x.technical_quality.grade = 'adequate';
   const ev = makeMeasurementEvidence('m1', 'c1');
@@ -898,7 +917,7 @@ for (const geometryState of [null, 'native', 'perspective_uncorrected', 'unknown
       }];
     }
     const rejected = deepErrors(candidate).length > 0;
-    const expectedReject = exactAllowed && (geometryState === null || geometryState === 'perspective_uncorrected' || geometryState === 'unknown');
+    const expectedReject = (geometryState === 'perspective_uncorrected' || geometryState === 'unknown') || (exactAllowed && geometryState === null);
     if (rejected !== expectedReject) geometryMatrixMismatches.push({ geometryState, exactAllowed, rejected });
   }
 }
@@ -911,6 +930,24 @@ for (const metric of ['rr','pr','qrs','qt','qtc','st_deviation']) for (const tim
   if (rejected !== expectedReject) metricCalibrationPermissionMismatches.push({metric,timeAllowed,voltageAllowed,rejected});
 }
 check('generated_visual_metric_calibration_permission_matrix_24', metricCalibrationPermissionMismatches.length === 0, metricCalibrationPermissionMismatches);
+
+const calibrationStateMismatches = [];
+for (const geometryState of ['native','unknown','perspective_uncorrected']) for (const timeAllowed of [false,true]) for (const voltageAllowed of [false,true]) {
+  const candidate = makeFixture(); candidate.geometry_calibrations = [makeCalibration({ geometry_state: geometryState, exact_time_measurement_allowed: timeAllowed, exact_voltage_measurement_allowed: voltageAllowed })];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = geometryState !== 'native' && (timeAllowed || voltageAllowed);
+  if (rejected !== expectedReject) calibrationStateMismatches.push({geometryState,timeAllowed,voltageAllowed,rejected});
+}
+check('generated_calibration_geometry_permission_matrix_12', calibrationStateMismatches.length === 0, calibrationStateMismatches);
+
+const calibrationSourceMismatches = [];
+for (const source of ['visible_grid_manual','unknown']) for (const timeAllowed of [false,true]) for (const voltageAllowed of [false,true]) {
+  const candidate = makeFixture(); candidate.geometry_calibrations = [makeCalibration({ source, exact_time_measurement_allowed: timeAllowed, exact_voltage_measurement_allowed: voltageAllowed })];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = source === 'unknown' && (timeAllowed || voltageAllowed);
+  if (rejected !== expectedReject) calibrationSourceMismatches.push({source,timeAllowed,voltageAllowed,rejected});
+}
+check('generated_calibration_source_permission_matrix_8', calibrationSourceMismatches.length === 0, calibrationSourceMismatches);
 
 expectOutputReject('acquisition_not_assessed_with_findings', (x) => {
   x.acquisition_integrity = { status: 'not_assessed', source_kind: 'unknown', findings: ['synthetic assessment evidence'] };
@@ -982,8 +1019,8 @@ for (const sourceKind of Object.keys(sourceMethods)) {
           supporting_evidence: ['synthetic fixture']
         }];
         const rejected = deepErrors(candidate).length > 0;
-        const expectedReject = sourceKind === 'visual_fiducial' && exactAllowed &&
-          (!hasFiducial || geometryState === null || geometryState === 'perspective_uncorrected');
+        const expectedReject = geometryState === 'perspective_uncorrected' || (sourceKind === 'visual_fiducial' && exactAllowed &&
+          (!hasFiducial || geometryState === null));
         if (rejected !== expectedReject) evidenceMatrixMismatches.push({ sourceKind, geometryState, exactAllowed, hasFiducial, rejected });
       }
     }
