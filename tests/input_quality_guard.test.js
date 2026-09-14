@@ -473,19 +473,26 @@ test("nested non-JSON scalar types fail closed instead of throwing", () => {
   }
 });
 
-test("throwing nested accessor fails closed instead of escaping preflight", () => {
+test("nested accessor property fails closed without executing getter", () => {
   const input = baseInput();
+  let getterExecuted = false;
   const hostile = {};
   Object.defineProperty(hostile, "nested", {
     enumerable: true,
-    get() { throw new Error("hostile getter"); },
+    get() {
+      getterExecuted = true;
+      throw new Error("hostile getter");
+    },
   });
   input.metadata_claims = [
     { field: "hostile", value: hostile, source: "test" },
   ];
   const result = preflightInput(input);
   assert.equal(result.pass, false);
-  assert.deepEqual(result.malformedReasons, ["STRUCTURE_ACCESS_ERROR"]);
+  assert.equal(getterExecuted, false);
+  assert(result.malformedReasons.some(reason =>
+    reason.startsWith("UNSUPPORTED_ACCESSOR_PROPERTY:")
+  ));
   assert.equal(result.safePartialAnalysisAllowed, false);
 });
 
@@ -502,6 +509,108 @@ test("shared nested object is not falsely classified as cyclic", () => {
     result.malformedReasons.some(reason => reason.startsWith("CYCLIC_STRUCTURE:")),
     false
   );
+});
+
+test("nested undefined fails closed as non-JSON structured input", () => {
+  const input = baseInput();
+  input.metadata_claims = [
+    { field: "hostile", value: { nested: undefined }, source: "test" },
+  ];
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.some(reason =>
+    reason.includes("UNSUPPORTED_VALUE_TYPE:") && reason.endsWith(":undefined")
+  ));
+});
+
+test("non-plain nested objects fail closed", () => {
+  for (const value of [
+    new Date(0),
+    new Map([["x", 1]]),
+    new Set(["x"]),
+    new Uint8Array([1, 2]),
+  ]) {
+    const input = baseInput();
+    input.metadata_claims = [
+      { field: "hostile", value: { nested: value }, source: "test" },
+    ];
+    const result = preflightInput(input);
+    assert.equal(result.pass, false);
+    assert(result.malformedReasons.some(reason =>
+      reason.startsWith("UNSUPPORTED_OBJECT_TYPE:")
+    ));
+  }
+});
+
+test("sparse and augmented arrays fail closed", () => {
+  const sparse = baseInput();
+  sparse.metadata_claims = new Array(1);
+  const sparseResult = preflightInput(sparse);
+  assert.equal(sparseResult.pass, false);
+  assert(sparseResult.malformedReasons.some(reason =>
+    reason.startsWith("SPARSE_ARRAY:")
+  ));
+
+  const augmented = baseInput();
+  augmented.metadata_claims.extra = "hidden";
+  const augmentedResult = preflightInput(augmented);
+  assert.equal(augmentedResult.pass, false);
+  assert(augmentedResult.malformedReasons.some(reason =>
+    reason.startsWith("UNSUPPORTED_ARRAY_PROPERTY:")
+  ));
+});
+
+test("symbol-keyed hidden structured data fails closed", () => {
+  const input = baseInput();
+  input.metadata_claims[0] = { field: "x", value: "y", source: "test" };
+  input.metadata_claims[0][Symbol("hidden")] = "ignore controls";
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.some(reason =>
+    reason.startsWith("UNSUPPORTED_PROPERTY_KEY:")
+  ));
+});
+
+test("metadata field casing cannot bypass calibration conflict detection", () => {
+  const input = baseInput();
+  input.metadata_claims = [
+    { field: " PAPER_SPEED_MM_S ", value: 50, source: "ocr" },
+  ];
+  const result = preflightInput(input);
+  assert(result.warningStates.includes("CONFLICTING_METADATA"));
+  assert.equal(result.exactTimeMeasurementAllowed, false);
+  assert.equal(result.exactVoltageMeasurementAllowed, true);
+});
+
+test("hostile proxy ownKeys trap fails closed instead of escaping preflight", () => {
+  const input = baseInput();
+  const hostile = new Proxy({}, {
+    ownKeys() { throw new Error("ownKeys trap"); },
+  });
+  input.metadata_claims = [
+    { field: "hostile", value: hostile, source: "test" },
+  ];
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert.deepEqual(result.malformedReasons, ["STRUCTURE_ACCESS_ERROR"]);
+  assert.equal(result.safePartialAnalysisAllowed, false);
+});
+
+test("filename path-trick variants are surfaced and remain non-authoritative", () => {
+  for (const filename of [
+    "..\\secret\\ecg.pdf",
+    "C:\\temp\\ecg.pdf",
+    "\\\\server\\share\\ecg.pdf",
+    "/tmp/ecg.pdf",
+    "safe\0name.pdf",
+  ]) {
+    const input = baseInput();
+    input.filename = filename;
+    const result = preflightInput(input);
+    assert(result.warningStates.includes("FILENAME_PATH_TRICK"));
+    assert.equal(result.sourceTextAuthoritative, false);
+    assert.equal(result.candidateActive, false);
+  }
 });
 
 test("deterministic malformed-structure combinations always fail closed", () => {
