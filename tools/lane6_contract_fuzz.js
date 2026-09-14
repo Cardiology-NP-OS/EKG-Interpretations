@@ -19,6 +19,7 @@ const clone = (value) => structuredClone(value);
 const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 const unique = (values) => new Set(values).size === values.length;
 const asArray = (value) => Array.isArray(value) ? value : [];
+const isIsoDate = (value) => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value + 'T00:00:00Z'));
 let passed = 0;
 const failed = [];
 const findings = [];
@@ -135,6 +136,8 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
   if (fd.version !== '3.0') errors.push('failure registry version');
   if (sd.version !== '2.0') errors.push('source registry version');
   if (pd.snapshot_date !== sd.snapshot_date) errors.push('registry snapshot mismatch');
+  if (!isIsoDate(pd.snapshot_date)) errors.push('invalid pattern registry snapshot date');
+  if (!isIsoDate(sd.snapshot_date)) errors.push('invalid source registry snapshot date');
   if (pd.source_registry !== '63_SOURCE_REGISTRY.json') errors.push('source registry filename mismatch');
   if (!unique(pids)) errors.push('duplicate pattern id');
   if (!unique(fids)) errors.push('duplicate failure id');
@@ -227,6 +230,12 @@ function deepErrors(output) {
     errors.push('criteria/source snapshot mismatch');
   }
   if (md.source_registry_version !== sourcesDoc.version) errors.push('stale source registry version');
+  if (output.input && output.input.tracing_type === 'rhythm_strip' && output.axis !== undefined && output.axis !== null) {
+    errors.push('rhythm strip contains unsupported axis assessment');
+  }
+  if (md.analysis_mode === 'perioperative' && !isObject(output.perioperative_lens)) {
+    errors.push('perioperative mode missing appended perioperative lens');
+  }
 
   const primary = output.interpretation && output.interpretation.primary_pattern;
   if (primary && primary.pattern_id !== null && primary.pattern_id !== undefined) {
@@ -249,6 +258,13 @@ function deepErrors(output) {
 
   for (const m of asArray(output.measurements)) {
     if (m.lead !== null && m.lead !== undefined && !validLeads.has(m.lead)) errors.push('invalid measurement lead');
+    if (output.technical_quality && output.technical_quality.grade === 'cannot_interpret' &&
+        typeof m.value === 'number' && Number.isFinite(m.value) && (m.source === 'estimated' || m.source === 'calculated')) {
+      errors.push('model-derived exact measurement despite cannot_interpret');
+    }
+    if (m.name === 'qtc' && m.source === 'calculated' && (typeof m.formula !== 'string' || m.formula.trim() === '')) {
+      errors.push('calculated QTc missing formula');
+    }
   }
   for (const e of asArray(output.measurement_evidence)) {
     if (e.lead !== null && e.lead !== undefined && !validLeads.has(e.lead)) errors.push('invalid evidence lead');
@@ -263,6 +279,12 @@ function deepErrors(output) {
   }
   for (const obs of asArray(output.lead_observations)) {
     if (obs.measurement_evidence_ref && !evidenceSet.has(obs.measurement_evidence_ref)) errors.push('missing lead evidence reference');
+    const labelsExplicitlyHidden = output.technical_quality && output.technical_quality.lead_labels_visible === false;
+    const layoutEstablishesIdentity = output.lead_layout && output.lead_layout.status === 'verified' &&
+      output.lead_layout.labels_verified === true && output.lead_layout.specific_lead_claims_allowed === true;
+    if (labelsExplicitlyHidden && !layoutEstablishesIdentity && (obs.source === 'visual' || obs.source === 'mixed')) {
+      errors.push('named visual lead claim without established lead identity');
+    }
   }
 
   const calibrations = asArray(output.geometry_calibrations);
@@ -312,6 +334,12 @@ function deepErrors(output) {
   }
 
   const binding = output.serial_binding;
+  if (md.analysis_mode === 'comparison' && !binding) {
+    errors.push('comparison mode missing serial binding state');
+  }
+  if (Array.isArray(output.serial_comparison) && output.serial_comparison.length > 0 && !binding) {
+    errors.push('serial comparison present without serial binding');
+  }
   if (binding) {
     if (binding.comparison_scope === 'not_allowed' && binding.temporal_change_language_allowed) {
       errors.push('temporal change allowed while comparison not allowed');
@@ -371,6 +399,9 @@ expectOutputReject('invalid_type', (x) => setPath(x, ['measurements'], {}));
 expectOutputReject('wrong_schema_version', (x) => { x.schema_version = '999'; });
 expectOutputReject('stale_registry_version', (x) => { x.analysis_metadata.source_registry_version = '1.0'; });
 expectOutputReject('stale_criteria_snapshot', (x) => { x.analysis_metadata.criteria_snapshot = '2000-01-01'; });
+expectOutputReject('guide_unclassified_pattern_id_conflict', (x) => {
+  x.interpretation.primary_pattern.pattern_id = 'unclassified';
+}, true);
 expectOutputReject('unsupported_pattern_id', (x) => {
   x.interpretation.primary_pattern.pattern_id = 'not_a_registered_pattern';
 }, true);
@@ -432,6 +463,26 @@ expectOutputReject('malformed_primary_evidence_array', (x) => {
 });
 expectOutputReject('false_pass_flag', (x) => { x.pass = true; });
 expectOutputReject('false_ready_flag', (x) => { x.ready_for_clinical_use = true; });
+expectOutputReject('cannot_interpret_calculated_numeric', (x) => {
+  x.measurements.push({ name: 'other', value: 1, unit: 'synthetic', source: 'calculated', confidence: 'low' });
+}, true);
+expectOutputReject('hidden_labels_named_visual_lead', (x) => {
+  x.technical_quality.lead_labels_visible = false;
+  x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }];
+}, true);
+expectOutputReject('serial_comparison_without_binding', (x) => {
+  x.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
+}, true);
+expectOutputReject('comparison_mode_without_binding', (x) => { x.analysis_metadata.analysis_mode = 'comparison'; }, true);
+expectOutputReject('perioperative_mode_without_lens', (x) => { x.analysis_metadata.analysis_mode = 'perioperative'; }, true);
+expectOutputReject('rhythm_strip_with_axis', (x) => {
+  x.input.tracing_type = 'rhythm_strip';
+  x.axis = { category: null, degrees: null, confidence: 'low', evidence: [] };
+}, true);
+expectOutputReject('calculated_qtc_without_formula', (x) => {
+  x.technical_quality.grade = 'adequate';
+  x.measurements.push({ name: 'qtc', value: 1, unit: 'synthetic', source: 'calculated', confidence: 'low' });
+}, true);
 
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
@@ -440,6 +491,81 @@ expectRegistryReject('stale_pattern_registry_version', (pd) => { pd.version = '4
 expectRegistryReject('stale_failure_registry_version', (pd, fd) => { fd.version = '2.0'; });
 expectRegistryReject('stale_source_registry_version', (pd, fd, sd) => { sd.version = '1.0'; });
 expectRegistryReject('malformed_registry_timestamp', (pd) => { pd.snapshot_date = 'not-a-date'; });
+expectRegistryReject('malformed_matching_registry_timestamps', (pd, fd, sd) => {
+  pd.snapshot_date = '2026-99-99';
+  sd.snapshot_date = '2026-99-99';
+});
+
+const qualityMatrixMismatches = [];
+for (const quality of ['adequate', 'limited', 'poor', 'cannot_interpret']) {
+  for (const confidence of ['low', 'moderate', 'high']) {
+    for (const hasContradiction of [false, true]) {
+      const candidate = makeFixture();
+      candidate.technical_quality.grade = quality;
+      candidate.interpretation.primary_pattern.confidence = confidence;
+      if (hasContradiction) candidate.interpretation.primary_pattern.evidence_against = ['synthetic contradiction'];
+      const rejected = deepErrors(candidate).length > 0;
+      const expectedReject = (quality === 'cannot_interpret' && confidence !== 'low') ||
+        (confidence === 'high' && hasContradiction);
+      if (rejected !== expectedReject) qualityMatrixMismatches.push({ quality, confidence, hasContradiction, rejected });
+    }
+  }
+}
+check('generated_quality_confidence_contradiction_matrix_24', qualityMatrixMismatches.length === 0, qualityMatrixMismatches);
+
+const layoutMatrixMismatches = [];
+for (const labelsVerified of [false, true]) {
+  for (const status of ['verified', 'ambiguous']) {
+    for (const specificAllowed of [false, true]) {
+      for (const hasNamedObservation of [false, true]) {
+        const candidate = makeFixture();
+        candidate.technical_quality.lead_labels_visible = labelsVerified;
+        candidate.lead_layout = {
+          layout_type: 'unknown', labels_verified: labelsVerified, status,
+          specific_lead_claims_allowed: specificAllowed
+        };
+        if (hasNamedObservation) {
+          candidate.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }];
+        }
+        const rejected = deepErrors(candidate).length > 0;
+        const expectedReject = (status === 'verified' && !labelsVerified) ||
+          (specificAllowed && (status !== 'verified' || !labelsVerified)) ||
+          (hasNamedObservation && (!labelsVerified || status === 'ambiguous' || !specificAllowed));
+        if (rejected !== expectedReject) layoutMatrixMismatches.push({ labelsVerified, status, specificAllowed, hasNamedObservation, rejected });
+      }
+    }
+  }
+}
+check('generated_lead_layout_matrix_16', layoutMatrixMismatches.length === 0, layoutMatrixMismatches);
+
+const serialMatrixMismatches = [];
+const serialStates = ['same_family_verified', 'same_family_user_asserted', 'different_family', 'identity_unknown'];
+for (const state of serialStates) {
+  for (const scope of ['patient_serial', 'trace_only', 'not_allowed']) {
+    for (const temporalAllowed of [false, true]) {
+      for (const hasComparison of [false, true]) {
+        const candidate = makeFixture();
+        candidate.serial_binding = {
+          state,
+          comparison_scope: scope,
+          evidence_source: state === 'same_family_verified' ? 'pseudonymous_family_token' :
+            state === 'same_family_user_asserted' ? 'user_assertion' : 'none',
+          temporal_change_language_allowed: temporalAllowed,
+          reason: 'synthetic'
+        };
+        if (hasComparison) {
+          candidate.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
+        }
+        const rejected = deepErrors(candidate).length > 0;
+        const expectedReject = (scope === 'not_allowed' && temporalAllowed) ||
+          ((state === 'different_family' || state === 'identity_unknown') && scope === 'patient_serial') ||
+          (!temporalAllowed && hasComparison);
+        if (rejected !== expectedReject) serialMatrixMismatches.push({ state, scope, temporalAllowed, hasComparison, rejected });
+      }
+    }
+  }
+}
+check('generated_serial_binding_matrix_48', serialMatrixMismatches.length === 0, serialMatrixMismatches);
 
 let seed = 0x6c06f00d;
 function randomIndex(max) {
@@ -488,6 +614,10 @@ function collectUnboundedNumberPaths(rule, at = '$', out = []) {
 
 const unboundedNumberPaths = [...new Set(collectUnboundedNumberPaths(schema))];
 findings.push('Schema numeric fields without explicit upper bound: ' + unboundedNumberPaths.length);
+if (!patternById.has('unclassified')) {
+  findings.push('Structured-output guide reserves pattern_id unclassified, but pattern registry does not define it; shallow schema accepts it and deep registry validation rejects it.');
+}
+findings.push('secondary_findings remains free-text only, limiting deterministic registry-level contradiction checks.');
 
 const result = {
   schema: 'ekg-lane6-contract-fuzz-v1',
