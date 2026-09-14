@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TEXT = ROOT / "source_text" / "remaining_controls"
+TEXT = ROOT / "source_text"
 MANIFEST = ROOT / "IMPORT_MANIFEST.json"
 
 EXPECTED_HASHES = {
@@ -71,13 +71,13 @@ check("ischemia_ecg_not_final_diagnosis", "distinguish ECG evidence from final d
 check("nondiagnostic_ecg_not_acs_ruleout", "a nondiagnostic ECG does not rule out ACS" in overlay)
 check(
     "qt_does_not_imply_imminent_torsades",
-    "distinguish â€œprolonged QT measurementâ€ from â€œtorsades is imminent.â€" in overlay,
+    "distinguish “prolonged QT measurement” from “torsades is imminent.”" in overlay,
 )
 check(
     "no_surgical_clearance_from_ecg",
-    "Do not declare â€œsafe to proceedâ€ or â€œcancel surgeryâ€ from ECG alone." in overlay,
+    "Do not declare “safe to proceed” or “cancel surgery” from ECG alone." in overlay,
 )
-check("electrolyte_morphology_not_diagnosis", "considerâ€”but do not diagnose from ECG alone" in overlay)
+check("electrolyte_morphology_not_diagnosis", "consider—but do not diagnose from ECG alone" in overlay)
 check(
     "electrolyte_required_correlation_wording",
     "This morphology can be seen with ___; correlate with measured electrolytes/clinical context." in overlay,
@@ -108,7 +108,7 @@ check(
 check("urgency_not_diagnosis", "Urgency is also not diagnosis." in boundaries)
 check(
     "diagnostic_certainty_language_restricted",
-    all(s in boundaries for s in ["â€œprovesâ€", "â€œdefinitiveâ€", "â€œthis patient hasâ€¦â€", "â€œrules outâ€¦â€", "â€œsafeâ€", "â€œclearedâ€"]),
+    all(s in boundaries for s in ["“proves”", "“definitive”", "“this patient has…”", "“rules out…”", "“safe”", "“cleared”"]),
 )
 check(
     "missing_calibration_blocks_exact_measurement",
@@ -148,7 +148,7 @@ red_team_cases = {
         (overlay, "ECG alone cannot answer"),
     ],
     "phenotype_vs_cause": [
-        (overlay, "considerâ€”but do not diagnose from ECG alone"),
+        (overlay, "consider—but do not diagnose from ECG alone"),
         (boundaries, "Hyperkalemia-like morphology"),
     ],
     "historical_diagnosis_vs_current_tracing": [
