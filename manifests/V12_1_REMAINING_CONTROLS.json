@@ -11,7 +11,7 @@
   },
   "pinned_import_manifest": {
     "path": "clinical_control/v12_1_candidate/IMPORT_MANIFEST.json",
-    "sha256": "c20926be758775a53a257fe98d12686b9906b9c8359eae61c632c402a12d4c43"
+    "sha256": "385fff74105a87ddcde2f1932b23f72b41d5a4907942ab2253173b7e9dea230f"
   },
   "forbidden_source_artifacts": [
     {

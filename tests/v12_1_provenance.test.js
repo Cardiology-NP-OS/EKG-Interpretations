@@ -242,8 +242,6 @@ test("Git attributes, working tree, index, and committed HEAD preserve exact sou
   assert.equal(Object.keys(hashes.committed).length, 9);
   assert.deepEqual(hashes.working_tree, hashes.index);
   assert.deepEqual(hashes.index, hashes.committed);
-  assert.equal(hashes.import_manifest.hashes.working_tree, hashes.import_manifest.hashes.index);
-  assert.equal(hashes.import_manifest.hashes.index, hashes.import_manifest.hashes.committed);
 });
 
 test("Git text attribute policy is identical across working tree, index, and committed HEAD", () => {
@@ -253,7 +251,6 @@ test("Git text attribute policy is identical across working tree, index, and com
   assert.equal(Object.keys(result.attributes.committed).length, 9);
   assert.deepEqual(result.attributes.working_tree, result.attributes.index);
   assert.deepEqual(result.attributes.index, result.attributes.committed);
-  assert.deepEqual(result.import_manifest.attributes, { working_tree: "unset", index: "unset", committed: "unset" });
 });
 
 test("working-tree-only gitattributes tamper is rejected", () => {

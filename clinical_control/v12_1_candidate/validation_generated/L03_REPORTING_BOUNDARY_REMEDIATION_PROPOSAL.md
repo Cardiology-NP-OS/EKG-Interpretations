@@ -1,6 +1,6 @@
 # L03 Reporting-Boundary Remediation Proposal
 
-**Status: PROPOSAL ONLY â€” INACTIVE**
+**Status: PROPOSAL ONLY — INACTIVE**
 
 This generated artifact records deterministic structural findings only. It does not modify source authority, establish clinical validity, or authorize activation.
 
