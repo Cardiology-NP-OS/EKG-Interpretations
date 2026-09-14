@@ -28,6 +28,9 @@ const PATTERN_URGENCIES = new Set(['routine','prompt_review','urgent','emergent'
 const FAILURE_SEVERITIES = new Set(['critical','major']);
 const SOURCE_TYPES = new Set(['international_consensus_definition','clinical_practice_guideline','scientific_statement','expert_consensus','peer_reviewed_primary_study','regulatory_guidance','reporting_guideline','risk_of_bias_tool']);
 const SOURCE_STATUSES = new Set(['current','current_for_scope','current_for_core_terminology','current_for_core_criteria','current_for_measurement_conventions','current_for_ecg_voltage_criteria']);
+const PATTERN_MEASUREMENT_DEPENDENCIES = new Set(['paper_speed_or_explicit_numeric_input','lead_labels','gain_or_explicit_numeric_input']);
+const TIME_CALIBRATED_METRICS = new Set(['rr','pr','qrs','qt','qtc']);
+const VOLTAGE_CALIBRATED_METRICS = new Set(['st_deviation']);
 let passed = 0;
 const failed = [];
 const findings = [];
@@ -168,6 +171,8 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
     if (typeof item.requires_clinical_context_for_syndrome_or_etiology !== 'boolean') errors.push('invalid pattern context flag');
     if (!Array.isArray(item.source_keys) || item.source_keys.length === 0) errors.push('pattern without source key: ' + item.id);
     if (Array.isArray(item.source_keys) && !unique(item.source_keys)) errors.push('duplicate pattern source key: ' + item.id);
+    if (Array.isArray(item.measurement_dependencies) && !unique(item.measurement_dependencies)) errors.push('duplicate pattern measurement dependency: ' + item.id);
+    for (const dependency of asArray(item.measurement_dependencies)) if (!PATTERN_MEASUREMENT_DEPENDENCIES.has(dependency)) errors.push('unsupported pattern measurement dependency: ' + dependency);
     for (const key of asArray(item.source_keys)) if (!sourceSet.has(key)) errors.push('unsupported source key: ' + key);
   }
   for (const item of fsx) {
@@ -259,6 +264,16 @@ function makeMeasurementEvidence(id, calibrationId = null) {
     exact_numeric_claim_allowed: false,
     evidence_source: { asset_id: null, asset_sha256: null }
   };
+}
+
+function applyVisualExactFixture(output, metric, timeAllowed, voltageAllowed) {
+  output.technical_quality.grade = 'adequate';
+  const ev = makeMeasurementEvidence('visual-exact', 'visual-cal');
+  ev.metric = metric; ev.source_kind = 'visual_fiducial'; ev.method = 'manual_fiducial'; ev.exact_numeric_claim_allowed = true;
+  ev.fiducials = [{ fiducial_id: 'f1', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }];
+  ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) };
+  output.measurement_evidence = [ev];
+  output.geometry_calibrations = [{ version: '1.0', calibration_id: 'visual-cal', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: timeAllowed, exact_voltage_measurement_allowed: voltageAllowed, supporting_evidence: ['synthetic fixture'] }];
 }
 
 const validLeads = new Set(schema.properties.lead_observations.items.properties.lead.enum);
@@ -375,6 +390,12 @@ function deepErrors(output) {
         }
         if (!c.exact_time_measurement_allowed && !c.exact_voltage_measurement_allowed) {
           errors.push('F10 exact visual measurement despite calibration disallowing exact measurement');
+        }
+        if (TIME_CALIBRATED_METRICS.has(e.metric) && !c.exact_time_measurement_allowed) {
+          errors.push('F10 exact interval measurement despite calibration disallowing exact time');
+        }
+        if (VOLTAGE_CALIBRATED_METRICS.has(e.metric) && !c.exact_voltage_measurement_allowed) {
+          errors.push('F10 exact voltage measurement despite calibration disallowing exact voltage');
         }
       }
       if (!Array.isArray(e.fiducials) || e.fiducials.length === 0) {
@@ -657,6 +678,8 @@ expectOutputReject('visual_exact_calibration_disallows_exact_measurement', (x) =
   x.measurement_evidence = [ev];
   x.geometry_calibrations = [{ version: '1.0', calibration_id: 'c1', source: 'visible_grid_manual', geometry_state: 'native', x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0, exact_time_measurement_allowed: false, exact_voltage_measurement_allowed: false, supporting_evidence: ['synthetic fixture'] }];
 }, true);
+expectOutputReject('visual_exact_interval_with_voltage_only_calibration', (x) => { applyVisualExactFixture(x, 'qt', false, true); }, true);
+expectOutputReject('visual_exact_st_deviation_with_time_only_calibration', (x) => { applyVisualExactFixture(x, 'st_deviation', true, false); }, true);
 expectOutputReject('visual_exact_missing_fiducials', (x) => {
   x.technical_quality.grade = 'adequate';
   const ev = makeMeasurementEvidence('m1', 'c1');
@@ -700,6 +723,8 @@ expectRegistryReject('blank_source_organization_member', (pd, fd, sd) => { sd.so
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
 expectRegistryReject('duplicate_pattern_source_keys', (pd) => { pd.patterns[0].source_keys.push(pd.patterns[0].source_keys[0]); });
+expectRegistryReject('duplicate_pattern_measurement_dependency', (pd) => { pd.patterns[0].measurement_dependencies = ['lead_labels','lead_labels']; });
+expectRegistryReject('unsupported_pattern_measurement_dependency', (pd) => { pd.patterns[0].measurement_dependencies = ['not_registered_dependency']; });
 expectRegistryReject('blank_pattern_id', (pd) => { pd.patterns[0].id = ''; });
 expectRegistryReject('blank_failure_id', (pd, fd) => { fd.failure_modes[0].id = ''; });
 expectRegistryReject('blank_unused_source_key', (pd, fd, sd) => {
@@ -767,6 +792,17 @@ for (const target of ['required_or_defining_evidence','supportive_evidence','maj
   if (registryErrors(pd, fd, sd).length === 0) registryBlankArrayMismatches.push(target);
 }
 check('generated_registry_blank_array_member_matrix_7', registryBlankArrayMismatches.length === 0, registryBlankArrayMismatches);
+
+const registryMeasurementDependencyMismatches = [];
+for (const state of ['paper_speed_or_explicit_numeric_input','lead_labels','gain_or_explicit_numeric_input','unsupported','duplicate']) {
+  const pd = clone(patternsDoc); const fd = clone(failuresDoc); const sd = clone(sourcesDoc);
+  pd.patterns[0].measurement_dependencies = state === 'unsupported' ? ['not_registered_dependency'] :
+    state === 'duplicate' ? ['lead_labels','lead_labels'] : [state];
+  const rejected = registryErrors(pd, fd, sd).length > 0;
+  const expectedReject = state === 'unsupported' || state === 'duplicate';
+  if (rejected !== expectedReject) registryMeasurementDependencyMismatches.push({ state, rejected });
+}
+check('generated_pattern_measurement_dependency_matrix_5', registryMeasurementDependencyMismatches.length === 0, registryMeasurementDependencyMismatches);
 
 const qualityMatrixMismatches = [];
 for (const quality of ['adequate', 'limited', 'poor', 'cannot_interpret']) {
@@ -867,6 +903,14 @@ for (const geometryState of [null, 'native', 'perspective_uncorrected', 'unknown
   }
 }
 check('generated_visual_geometry_exactness_matrix_8', geometryMatrixMismatches.length === 0, geometryMatrixMismatches);
+const metricCalibrationPermissionMismatches = [];
+for (const metric of ['rr','pr','qrs','qt','qtc','st_deviation']) for (const timeAllowed of [false,true]) for (const voltageAllowed of [false,true]) {
+  const candidate = makeFixture(); applyVisualExactFixture(candidate, metric, timeAllowed, voltageAllowed);
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = TIME_CALIBRATED_METRICS.has(metric) ? !timeAllowed : !voltageAllowed;
+  if (rejected !== expectedReject) metricCalibrationPermissionMismatches.push({metric,timeAllowed,voltageAllowed,rejected});
+}
+check('generated_visual_metric_calibration_permission_matrix_24', metricCalibrationPermissionMismatches.length === 0, metricCalibrationPermissionMismatches);
 
 expectOutputReject('acquisition_not_assessed_with_findings', (x) => {
   x.acquisition_integrity = { status: 'not_assessed', source_kind: 'unknown', findings: ['synthetic assessment evidence'] };
