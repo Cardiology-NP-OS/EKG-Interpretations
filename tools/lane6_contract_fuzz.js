@@ -321,6 +321,9 @@ function deepErrors(output) {
   if (!unique(calibrationIds)) errors.push('duplicate calibration id');
   const calibrationById = new Map(calibrations.map((item) => [item.calibration_id, item]));
   for (const e of evidence) {
+    const assetIdPresent = typeof e.evidence_source?.asset_id === 'string' && e.evidence_source.asset_id.length > 0;
+    const assetHashPresent = typeof e.evidence_source?.asset_sha256 === 'string' && e.evidence_source.asset_sha256.length > 0;
+    if (assetIdPresent !== assetHashPresent) errors.push('partial evidence source asset identity');
     if (e.calibration_id && !calibrationById.has(e.calibration_id)) errors.push('missing calibration reference');
     if (e.source_kind === 'visual_fiducial' && e.exact_numeric_claim_allowed) {
       const c = e.calibration_id ? calibrationById.get(e.calibration_id) : null;
@@ -615,6 +618,8 @@ expectOutputReject('duplicate_fiducial_ids', (x) => { const ev = makeMeasurement
 expectOutputReject('evidence_source_method_mismatch', (x) => { const ev = makeMeasurementEvidence('m1'); ev.source_kind = 'digital_signal'; ev.method = 'user_input'; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('unavailable_evidence_with_numeric_value', (x) => { const ev = makeMeasurementEvidence('m1'); ev.value = 1; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('unavailable_evidence_with_exact_claim', (x) => { const ev = makeMeasurementEvidence('m1'); ev.exact_numeric_claim_allowed = true; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('evidence_source_asset_id_without_hash', (x) => { const ev = makeMeasurementEvidence('m1'); ev.evidence_source = { asset_id: 'asset-1', asset_sha256: null }; x.measurement_evidence = [ev]; }, true);
+expectOutputReject('evidence_source_hash_without_asset_id', (x) => { const ev = makeMeasurementEvidence('m1'); ev.evidence_source = { asset_id: null, asset_sha256: '0'.repeat(64) }; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('acquisition_consistent_with_duplicate_signal', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], duplicate_signal_pairs: ['I-II'] }; }, true);
 expectOutputReject('acquisition_consistent_with_flatline', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], flatline_leads: ['I'] }; }, true);
 
@@ -886,6 +891,23 @@ for (const [observationSource, allowedEvidenceSources] of Object.entries(observa
   }
 }
 check('generated_lead_observation_evidence_source_binding_matrix_30', leadObservationEvidenceMismatches.length === 0, leadObservationEvidenceMismatches);
+
+const assetIdentityMismatches = [];
+for (const hasAssetId of [false, true]) {
+  for (const hasAssetHash of [false, true]) {
+    const candidate = makeFixture();
+    const ev = makeMeasurementEvidence('asset-identity');
+    ev.evidence_source = {
+      asset_id: hasAssetId ? 'asset-1' : null,
+      asset_sha256: hasAssetHash ? '0'.repeat(64) : null
+    };
+    candidate.measurement_evidence = [ev];
+    const rejected = deepErrors(candidate).length > 0;
+    const expectedReject = hasAssetId !== hasAssetHash;
+    if (rejected !== expectedReject) assetIdentityMismatches.push({ hasAssetId, hasAssetHash, rejected });
+  }
+}
+check('generated_evidence_source_asset_identity_matrix_4', assetIdentityMismatches.length === 0, assetIdentityMismatches);
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
