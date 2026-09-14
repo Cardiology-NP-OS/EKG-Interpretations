@@ -19,4 +19,4 @@ It is **not byte-identical to the lost V12 repository**. The known V12 release s
 - `npm run render:blind` — render blinded review derivative outside Git.
 - `npm run gate:source` / `npm run gate` — full external-source engineering gate.
 
-The CI gate never substitutes synthetic evidence for source evidence. See `docs/CI_EVIDENCE_BOUNDARIES.md`, `RECOVERY_PROVENANCE.md`, `docs/V12_EVIDENCE_SEMANTICS.md`, and `docs/V13_REAL_SIGNAL_EXECUTION.md`.
+The CI gate never substitutes synthetic evidence for source evidence. Signal inspection remains non-diagnostic engineering output; see `docs/SIGNAL_INSPECTION_BOUNDARIES.md`. Also see `docs/CI_EVIDENCE_BOUNDARIES.md`, `RECOVERY_PROVENANCE.md`, `docs/V12_EVIDENCE_SEMANTICS.md`, and `docs/V13_REAL_SIGNAL_EXECUTION.md`.

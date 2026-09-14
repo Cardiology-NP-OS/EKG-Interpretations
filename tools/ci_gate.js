@@ -9,6 +9,11 @@ const REQUIRED = [
   "manifests/PTBXL_RECORD_00001.json",
   "tests/synthetic_fixture.js",
   "tests/ci_contract.test.js",
+  "tests/signal_core.test.js",
+  "tests/inspection_report.test.js",
+  "lib/wfdb_signal.js",
+  "manifests/SOURCE_INSPECTION_SCHEMA.json",
+  "tools/inspect_signal.js",
   "tools/verify_source.js",
   "tools/render_blind.js",
   "tools/source_preflight.js",
@@ -48,22 +53,29 @@ function gate() {
     "NATIVE_LABEL_BOUNDARY"
   );
 
-  const child = spawnSync(
-    process.execPath,
-    [path.join(ROOT, "tests", "ci_contract.test.js")],
-    { cwd: ROOT, encoding: "utf8" }
-  );
-  requireCondition(child.status === 0, "CI_CONTRACT_TESTS_FAILED");
-  requireCondition(
-    child.stdout.includes('"pass":true'),
-    "CI_CONTRACT_RECEIPT_MISSING"
-  );
+  const suites = [
+    ["ci_contract.test.js", "CI_CONTRACT_TESTS_FAILED"],
+    ["signal_core.test.js", "SIGNAL_CORE_TESTS_FAILED"],
+    ["inspection_report.test.js", "INSPECTION_REPORT_TESTS_FAILED"],
+  ];
+  for (const [file, code] of suites) {
+    const child = spawnSync(
+      process.execPath,
+      [path.join(ROOT, "tests", file)],
+      { cwd: ROOT, encoding: "utf8" }
+    );
+    requireCondition(child.status === 0, code);
+    requireCondition(child.stdout.includes('"pass":true'), code + "_RECEIPT");
+  }
 
   return {
     schema: "ekg-ci-release-gate-v1",
     pass: true,
     evidence_tier: "synthetic-contract-ci-only",
     ci_contract_tests_passed: 7,
+    signal_core_tests_passed: 8,
+    inspection_report_tests_passed: 4,
+    ci_tests_total: 19,
     clinical_data_used: false,
     external_ptbxl_validation_performed: false,
     clinical_accuracy_claimed: false,
