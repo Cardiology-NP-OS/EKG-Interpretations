@@ -31,7 +31,7 @@ The pack contains a clinical/control layer that the current repository does not 
 
 ## Activation rule
 
-Nothing in this candidate directory is clinical runtime authority merely because it was uploaded or because its own runtime validator passes.
+Nothing in this candidate directory is clinical runtime authority merely because it was uploaded. The actual uploaded archive is incomplete relative to its own manifest, so its bundled runtime validator is currently blocked and does not pass. The 16 active runtime-source files that are present do match their expected SHA-256 values.
 
 Activation requires:
 1. exact-source import with SHA-256 matching `IMPORT_MANIFEST.json`;

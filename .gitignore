@@ -7,3 +7,5 @@ runtime/
 .external_cache/
 *.tmp
 *.log
+__pycache__/
+*.pyc
