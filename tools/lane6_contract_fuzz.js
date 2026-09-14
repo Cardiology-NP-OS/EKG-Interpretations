@@ -20,6 +20,8 @@ const isObject = (value) => value !== null && typeof value === 'object' && !Arra
 const unique = (values) => new Set(values).size === values.length;
 const asArray = (value) => Array.isArray(value) ? value : [];
 const isIsoDate = (value) => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value + 'T00:00:00Z'));
+const nonEmptyString = (value) => typeof value === 'string' && value.trim() !== '';
+const stringArray = (value) => Array.isArray(value) && value.every((item) => typeof item === 'string');
 let passed = 0;
 const failed = [];
 const findings = [];
@@ -125,12 +127,15 @@ function requiredStringErrors(value, rule, at = '$', errors = []) {
 
 function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
   const errors = [];
-  const ps = pd.patterns || [];
-  const fsx = fd.failure_modes || [];
-  const ss = sd.sources || [];
-  const pids = ps.map((item) => item.id);
-  const fids = fsx.map((item) => item.id);
-  const skeys = ss.map((item) => item.key);
+  const ps = Array.isArray(pd.patterns) ? pd.patterns : [];
+  const fsx = Array.isArray(fd.failure_modes) ? fd.failure_modes : [];
+  const ss = Array.isArray(sd.sources) ? sd.sources : [];
+  if (!Array.isArray(pd.patterns)) errors.push('patterns registry must be array');
+  if (!Array.isArray(fd.failure_modes)) errors.push('failure registry must be array');
+  if (!Array.isArray(sd.sources)) errors.push('source registry must be array');
+  const pids = ps.map((item) => isObject(item) ? item.id : undefined);
+  const fids = fsx.map((item) => isObject(item) ? item.id : undefined);
+  const skeys = ss.map((item) => isObject(item) ? item.key : undefined);
   const sourceSet = new Set(skeys);
   if (pd.version !== '5.0') errors.push('pattern registry version');
   if (fd.version !== '3.0') errors.push('failure registry version');
@@ -146,9 +151,26 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
   if (fids.some((id) => typeof id !== 'string' || id.trim() === '')) errors.push('blank failure id');
   if (skeys.some((key) => typeof key !== 'string' || key.trim() === '')) errors.push('blank source key');
   for (const item of ps) {
+    if (!isObject(item)) { errors.push('malformed pattern record'); continue; }
+    for (const key of ['id','label','domain','default_urgency','diagnostic_boundary','population']) if (!nonEmptyString(item[key])) errors.push('invalid pattern string field: ' + key);
+    for (const key of ['required_or_defining_evidence','supportive_evidence','major_confounders_or_mimics','source_keys','measurement_dependencies']) if (!stringArray(item[key])) errors.push('invalid pattern array field: ' + key);
+    if (typeof item.must_name_supporting_leads_when_regional !== 'boolean') errors.push('invalid pattern regional flag');
+    if (typeof item.requires_clinical_context_for_syndrome_or_etiology !== 'boolean') errors.push('invalid pattern context flag');
     if (!Array.isArray(item.source_keys) || item.source_keys.length === 0) errors.push('pattern without source key: ' + item.id);
     if (Array.isArray(item.source_keys) && !unique(item.source_keys)) errors.push('duplicate pattern source key: ' + item.id);
-    for (const key of item.source_keys || []) if (!sourceSet.has(key)) errors.push('unsupported source key: ' + key);
+    for (const key of asArray(item.source_keys)) if (!sourceSet.has(key)) errors.push('unsupported source key: ' + key);
+  }
+  for (const item of fsx) {
+    if (!isObject(item)) { errors.push('malformed failure record'); continue; }
+    for (const key of ['id','name','detection','response','severity']) if (!nonEmptyString(item[key])) errors.push('invalid failure string field: ' + key);
+  }
+  for (const item of ss) {
+    if (!isObject(item)) { errors.push('malformed source record'); continue; }
+    for (const key of ['key','title','type','status','url','notes']) if (!nonEmptyString(item[key])) errors.push('invalid source string field: ' + key);
+    if (typeof item.year !== 'number' || !Number.isFinite(item.year)) errors.push('invalid source year');
+    if (!stringArray(item.organizations)) errors.push('invalid source organizations');
+    if (!stringArray(item.applies_to)) errors.push('invalid source applies_to');
+    if (!(item.doi === null || nonEmptyString(item.doi))) errors.push('invalid source doi');
   }
   return errors;
 }
@@ -641,6 +663,17 @@ expectOutputReject('evidence_source_hash_without_asset_id', (x) => { const ev = 
 expectOutputReject('acquisition_consistent_with_duplicate_signal', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], duplicate_signal_pairs: ['I-II'] }; }, true);
 expectOutputReject('acquisition_consistent_with_flatline', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], flatline_leads: ['I'] }; }, true);
 
+expectRegistryReject('patterns_root_not_array', (pd) => { pd.patterns = {}; });
+expectRegistryReject('failure_modes_root_not_array', (pd, fd) => { fd.failure_modes = {}; });
+expectRegistryReject('sources_root_not_array', (pd, fd, sd) => { sd.sources = {}; });
+expectRegistryReject('pattern_record_not_object', (pd) => { pd.patterns[0] = 'bad-record'; });
+expectRegistryReject('failure_record_not_object', (pd, fd) => { fd.failure_modes[0] = 'bad-record'; });
+expectRegistryReject('source_record_not_object', (pd, fd, sd) => { sd.sources[0] = 'bad-record'; });
+expectRegistryReject('pattern_missing_label', (pd) => { delete pd.patterns[0].label; });
+expectRegistryReject('failure_missing_response', (pd, fd) => { delete fd.failure_modes[0].response; });
+expectRegistryReject('source_missing_title', (pd, fd, sd) => { delete sd.sources[0].title; });
+expectRegistryReject('pattern_source_keys_wrong_type', (pd) => { pd.patterns[0].source_keys = 'not-an-array'; });
+expectRegistryReject('source_year_wrong_type', (pd, fd, sd) => { sd.sources[0].year = '2026'; });
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
 expectRegistryReject('duplicate_pattern_source_keys', (pd) => { pd.patterns[0].source_keys.push(pd.patterns[0].source_keys[0]); });
@@ -672,6 +705,21 @@ for (const target of ['pattern', 'failure', 'unused_source']) {
   }
 }
 check('generated_registry_identity_matrix_9', registryIdentityMismatches.length === 0, registryIdentityMismatches);
+const registryRootShapeMismatches = [];
+for (const target of ['patterns', 'failure_modes', 'sources']) {
+  for (const badValue of [null, {}, 'bad-root']) {
+    const pd = clone(patternsDoc); const fd = clone(failuresDoc); const sd = clone(sourcesDoc);
+    if (target === 'patterns') pd.patterns = badValue;
+    if (target === 'failure_modes') fd.failure_modes = badValue;
+    if (target === 'sources') sd.sources = badValue;
+    try {
+      if (registryErrors(pd, fd, sd).length === 0) registryRootShapeMismatches.push({ target, badValue, reason: 'accepted' });
+    } catch (error) {
+      registryRootShapeMismatches.push({ target, badValue, reason: 'threw', error: error.message });
+    }
+  }
+}
+check('generated_registry_root_shape_matrix_9', registryRootShapeMismatches.length === 0, registryRootShapeMismatches);
 
 const qualityMatrixMismatches = [];
 for (const quality of ['adequate', 'limited', 'poor', 'cannot_interpret']) {
@@ -977,6 +1025,27 @@ for (const lowerPresent of [false, true]) {
   }
 }
 check('generated_uncertainty_state_matrix_36', uncertaintyMatrixMismatches.length === 0, uncertaintyMatrixMismatches);
+const conditionalAssetMismatches = [];
+for (const sourceKind of ['visual_fiducial','digital_signal','machine_reported','user_provided','calculated','unavailable']) {
+  for (const exactAllowed of [false, true]) {
+    for (const identityState of ['none','both','id_only','hash_only']) {
+      const candidate = makeFixture();
+      const ev = makeMeasurementEvidence('conditional-asset');
+      ev.source_kind = sourceKind;
+      ev.exact_numeric_claim_allowed = exactAllowed;
+      ev.evidence_source = {
+        asset_id: identityState === 'both' || identityState === 'id_only' ? 'asset-1' : null,
+        asset_sha256: identityState === 'both' || identityState === 'hash_only' ? '0'.repeat(64) : null
+      };
+      candidate.measurement_evidence = [ev];
+      const rejected = schemaErrors(candidate, schema).length > 0;
+      const conditionalExact = exactAllowed && (sourceKind === 'visual_fiducial' || sourceKind === 'digital_signal');
+      const expectedReject = conditionalExact && identityState !== 'both';
+      if (rejected !== expectedReject) conditionalAssetMismatches.push({ sourceKind, exactAllowed, identityState, rejected });
+    }
+  }
+}
+check('generated_schema_conditional_asset_matrix_48', conditionalAssetMismatches.length === 0, conditionalAssetMismatches);
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
