@@ -22,6 +22,12 @@ const asArray = (value) => Array.isArray(value) ? value : [];
 const isIsoDate = (value) => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(value + 'T00:00:00Z'));
 const nonEmptyString = (value) => typeof value === 'string' && value.trim() !== '';
 const stringArray = (value) => Array.isArray(value) && value.every((item) => typeof item === 'string');
+const nonEmptyStringArray = (value) => Array.isArray(value) && value.every(nonEmptyString);
+const PATTERN_DOMAINS = new Set(['rhythm','ectopy','conduction','pacing','axis','voltage','repolarization','morphology','ischemia','infarction_marker','metabolic']);
+const PATTERN_URGENCIES = new Set(['routine','prompt_review','urgent','emergent']);
+const FAILURE_SEVERITIES = new Set(['critical','major']);
+const SOURCE_TYPES = new Set(['international_consensus_definition','clinical_practice_guideline','scientific_statement','expert_consensus','peer_reviewed_primary_study','regulatory_guidance','reporting_guideline','risk_of_bias_tool']);
+const SOURCE_STATUSES = new Set(['current','current_for_scope','current_for_core_terminology','current_for_core_criteria','current_for_measurement_conventions','current_for_ecg_voltage_criteria']);
 let passed = 0;
 const failed = [];
 const findings = [];
@@ -154,6 +160,10 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
     if (!isObject(item)) { errors.push('malformed pattern record'); continue; }
     for (const key of ['id','label','domain','default_urgency','diagnostic_boundary','population']) if (!nonEmptyString(item[key])) errors.push('invalid pattern string field: ' + key);
     for (const key of ['required_or_defining_evidence','supportive_evidence','major_confounders_or_mimics','source_keys','measurement_dependencies']) if (!stringArray(item[key])) errors.push('invalid pattern array field: ' + key);
+    for (const key of ['required_or_defining_evidence','supportive_evidence','major_confounders_or_mimics','source_keys','measurement_dependencies']) if (Array.isArray(item[key]) && !nonEmptyStringArray(item[key])) errors.push('blank pattern array member: ' + key);
+    if (!PATTERN_DOMAINS.has(item.domain)) errors.push('unsupported pattern domain');
+    if (!PATTERN_URGENCIES.has(item.default_urgency)) errors.push('unsupported pattern urgency');
+    if (item.population !== 'adult_default') errors.push('unsupported pattern population');
     if (typeof item.must_name_supporting_leads_when_regional !== 'boolean') errors.push('invalid pattern regional flag');
     if (typeof item.requires_clinical_context_for_syndrome_or_etiology !== 'boolean') errors.push('invalid pattern context flag');
     if (!Array.isArray(item.source_keys) || item.source_keys.length === 0) errors.push('pattern without source key: ' + item.id);
@@ -163,6 +173,7 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
   for (const item of fsx) {
     if (!isObject(item)) { errors.push('malformed failure record'); continue; }
     for (const key of ['id','name','detection','response','severity']) if (!nonEmptyString(item[key])) errors.push('invalid failure string field: ' + key);
+    if (!FAILURE_SEVERITIES.has(item.severity)) errors.push('unsupported failure severity');
   }
   for (const item of ss) {
     if (!isObject(item)) { errors.push('malformed source record'); continue; }
@@ -170,6 +181,10 @@ function registryErrors(pd = patternsDoc, fd = failuresDoc, sd = sourcesDoc) {
     if (typeof item.year !== 'number' || !Number.isFinite(item.year)) errors.push('invalid source year');
     if (!stringArray(item.organizations)) errors.push('invalid source organizations');
     if (!stringArray(item.applies_to)) errors.push('invalid source applies_to');
+    if (Array.isArray(item.organizations) && !nonEmptyStringArray(item.organizations)) errors.push('blank source organization');
+    if (Array.isArray(item.applies_to) && !nonEmptyStringArray(item.applies_to)) errors.push('blank source applies_to');
+    if (!SOURCE_TYPES.has(item.type)) errors.push('unsupported source type');
+    if (!SOURCE_STATUSES.has(item.status)) errors.push('unsupported source status');
     if (!(item.doi === null || nonEmptyString(item.doi))) errors.push('invalid source doi');
   }
   return errors;
@@ -674,6 +689,14 @@ expectRegistryReject('failure_missing_response', (pd, fd) => { delete fd.failure
 expectRegistryReject('source_missing_title', (pd, fd, sd) => { delete sd.sources[0].title; });
 expectRegistryReject('pattern_source_keys_wrong_type', (pd) => { pd.patterns[0].source_keys = 'not-an-array'; });
 expectRegistryReject('source_year_wrong_type', (pd, fd, sd) => { sd.sources[0].year = '2026'; });
+expectRegistryReject('unsupported_pattern_domain', (pd) => { pd.patterns[0].domain = 'not_registered_domain'; });
+expectRegistryReject('unsupported_pattern_urgency', (pd) => { pd.patterns[0].default_urgency = 'not_registered_urgency'; });
+expectRegistryReject('unsupported_pattern_population', (pd) => { pd.patterns[0].population = 'not_registered_population'; });
+expectRegistryReject('unsupported_failure_severity', (pd, fd) => { fd.failure_modes[0].severity = 'not_registered_severity'; });
+expectRegistryReject('unsupported_source_type', (pd, fd, sd) => { sd.sources[0].type = 'not_registered_type'; });
+expectRegistryReject('unsupported_source_status', (pd, fd, sd) => { sd.sources[0].status = 'not_registered_status'; });
+expectRegistryReject('blank_pattern_traceability_member', (pd) => { pd.patterns[0].source_keys[0] = '   '; });
+expectRegistryReject('blank_source_organization_member', (pd, fd, sd) => { sd.sources[0].organizations[0] = '   '; });
 expectRegistryReject('duplicate_pattern_ids', (pd) => { pd.patterns[1].id = pd.patterns[0].id; });
 expectRegistryReject('duplicate_source_keys', (pd, fd, sd) => { sd.sources[1].key = sd.sources[0].key; });
 expectRegistryReject('duplicate_pattern_source_keys', (pd) => { pd.patterns[0].source_keys.push(pd.patterns[0].source_keys[0]); });
@@ -720,6 +743,30 @@ for (const target of ['patterns', 'failure_modes', 'sources']) {
   }
 }
 check('generated_registry_root_shape_matrix_9', registryRootShapeMismatches.length === 0, registryRootShapeMismatches);
+
+const registryValueDomainMismatches = [];
+const registryValueMutators = [
+  ['pattern_domain', (pd) => { pd.patterns[0].domain = 'not_registered_domain'; }],
+  ['pattern_urgency', (pd) => { pd.patterns[0].default_urgency = 'not_registered_urgency'; }],
+  ['pattern_population', (pd) => { pd.patterns[0].population = 'not_registered_population'; }],
+  ['failure_severity', (pd, fd) => { fd.failure_modes[0].severity = 'not_registered_severity'; }],
+  ['source_type', (pd, fd, sd) => { sd.sources[0].type = 'not_registered_type'; }],
+  ['source_status', (pd, fd, sd) => { sd.sources[0].status = 'not_registered_status'; }]
+];
+for (const [target, mutate] of registryValueMutators) {
+  const pd = clone(patternsDoc); const fd = clone(failuresDoc); const sd = clone(sourcesDoc);
+  mutate(pd, fd, sd);
+  if (registryErrors(pd, fd, sd).length === 0) registryValueDomainMismatches.push(target);
+}
+check('generated_registry_value_domain_matrix_6', registryValueDomainMismatches.length === 0, registryValueDomainMismatches);
+
+const registryBlankArrayMismatches = [];
+for (const target of ['required_or_defining_evidence','supportive_evidence','major_confounders_or_mimics','source_keys','measurement_dependencies','organizations','applies_to']) {
+  const pd = clone(patternsDoc); const fd = clone(failuresDoc); const sd = clone(sourcesDoc);
+  if (target === 'organizations' || target === 'applies_to') sd.sources[0][target] = ['   ']; else pd.patterns[0][target] = ['   '];
+  if (registryErrors(pd, fd, sd).length === 0) registryBlankArrayMismatches.push(target);
+}
+check('generated_registry_blank_array_member_matrix_7', registryBlankArrayMismatches.length === 0, registryBlankArrayMismatches);
 
 const qualityMatrixMismatches = [];
 for (const quality of ['adequate', 'limited', 'poor', 'cannot_interpret']) {
