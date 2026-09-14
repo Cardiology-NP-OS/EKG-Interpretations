@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-source-inspection-report-v1",
+  "title": "EKG Source Inspection Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "evidenceTier",
+    "clinicalAccuracyClaimed",
+    "diagnosticInterpretationIncluded",
+    "sourceFilesVerified",
+    "sourceHashes",
+    "pairConsistency",
+    "records"
+  ],
+  "properties": {
+    "schema": {"const": "ekg-source-inspection-report-v1"},
+    "evidenceTier": {"const": "engineering_harness_only"},
+    "clinicalAccuracyClaimed": {"const": false},
+    "diagnosticInterpretationIncluded": {"const": false},
+    "sourceFilesVerified": {"type": "integer", "minimum": 1},
+    "sourceHashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "pairConsistency": {
+      "type": "object",
+      "required": ["leadCount", "durationSeconds", "sampleRateRatio", "sameLeadOrder"],
+      "properties": {
+        "leadCount": {"const": 12},
+        "durationSeconds": {"type": "number"},
+        "sampleRateRatio": {"type": "number"},
+        "sameLeadOrder": {"const": true}
+      }
+    },
+    "records": {
+      "type": "object",
+      "required": ["lowRate", "highRate"],
+      "properties": {
+        "lowRate": {"$ref": "#/$defs/record"},
+        "highRate": {"$ref": "#/$defs/record"}
+      }
+    }
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "required": [
+        "schema", "record", "leadCount", "sampleRate", "sampleCount",
+        "durationSeconds", "diagnosticInterpretationIncluded", "leads"
+      ],
+      "properties": {
+        "schema": {"const": "ekg-wfdb-inspection-v1"},
+        "record": {"type": "string"},
+        "leadCount": {"const": 12},
+        "sampleRate": {"type": "number"},
+        "sampleCount": {"type": "integer"},
+        "durationSeconds": {"type": "number"},
+        "diagnosticInterpretationIncluded": {"const": false},
+        "leads": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "required": ["leadName", "unit", "gain", "baseline", "summary", "preview"]
+          }
+        }
+      }
+    }
+  }
+}
