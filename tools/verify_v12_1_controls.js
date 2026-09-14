@@ -40,6 +40,53 @@ function sameArray(a, b) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
+function isPathContained(root, candidate) {
+  const base = path.resolve(root);
+  const resolved = path.resolve(candidate);
+  const relative = path.relative(base, resolved);
+  return relative === "" || (
+    relative !== ".." &&
+    !relative.startsWith(".." + path.sep) &&
+    !path.isAbsolute(relative)
+  );
+}
+
+function resolveContainedPath(root, relativePath, label) {
+  requireCondition(typeof relativePath === "string" && relativePath.length > 0, label + "_PATH_INVALID");
+  const portableAbsolute = (
+    path.isAbsolute(relativePath) ||
+    path.win32.isAbsolute(relativePath) ||
+    path.posix.isAbsolute(relativePath)
+  );
+  requireCondition(!portableAbsolute, label + "_PATH_ABSOLUTE");
+  requireCondition(
+    !/^[A-Za-z]:/.test(relativePath),
+    label + "_PATH_DRIVE_QUALIFIED"
+  );
+  requireCondition(
+    !String(relativePath).split(/[\\/]+/).some(part => part === ".."),
+    label + "_PATH_TRAVERSAL"
+  );
+  const resolved = path.resolve(root, relativePath);
+  requireCondition(isPathContained(root, resolved), label + "_PATH_ESCAPE");
+  return resolved;
+}
+
+function requireNoLinkAncestry(targetPath, boundary, label) {
+  const resolvedTarget = path.resolve(targetPath);
+  const resolvedBoundary = path.resolve(boundary);
+  requireCondition(isPathContained(resolvedBoundary, resolvedTarget), label + "_OUTSIDE_BOUNDARY");
+  const relative = path.relative(resolvedBoundary, resolvedTarget);
+  const parts = relative ? relative.split(path.sep).filter(Boolean) : [];
+  let current = resolvedBoundary;
+  for (const part of parts) {
+    current = path.join(current, part);
+    const stat = fs.lstatSync(current);
+    requireCondition(!stat.isSymbolicLink(), label + "_SYMLINK_ANCESTRY:" + current);
+  }
+  return resolvedTarget;
+}
+
 function filenameIdentityKey(name) {
   return String(name).normalize("NFKC").replace(/[ .]+$/g, "").toLowerCase();
 }
@@ -97,10 +144,13 @@ function expectedMap(p) {
   return new Map(p.source_set.files.map(x => [x.name, x]));
 }
 
-function verifyDirectory(dir, p, label) {
-  requireCondition(fs.existsSync(dir), label + "_DIR_MISSING");
+function verifyDirectory(dir, p, label, boundary = null) {
+  const resolvedDir = path.resolve(dir);
+  requireCondition(fs.existsSync(resolvedDir), label + "_DIR_MISSING");
+  const trustBoundary = boundary ? path.resolve(boundary) : path.parse(resolvedDir).root;
+  requireNoLinkAncestry(resolvedDir, trustBoundary, label);
   const expected = expectedMap(p);
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const entries = fs.readdirSync(resolvedDir, { withFileTypes: true });
   const rawNames = entries.map(x => x.name);
   requireDistinctFilenameIdentities(rawNames, label);
   const names = [...rawNames].sort();
@@ -110,7 +160,7 @@ function verifyDirectory(dir, p, label) {
     requireCondition(entry.isFile() && !entry.isSymbolicLink(), label + "_NOT_REGULAR_FILE:" + entry.name);
     const exp = expected.get(entry.name);
     requireCondition(Boolean(exp), label + "_UNEXPECTED_FILE:" + entry.name);
-    const file = path.join(dir, entry.name);
+    const file = path.join(resolvedDir, entry.name);
     requireCondition(fs.statSync(file).size === exp.bytes, label + "_BYTE_COUNT_MISMATCH:" + entry.name);
     const actual = sha256File(file);
     requireCondition(actual === exp.sha256, label + "_SHA256_MISMATCH:" + entry.name);
@@ -119,7 +169,9 @@ function verifyDirectory(dir, p, label) {
   return hashes;
 }
 function verifyImportManifest(p) {
-  const file = path.join(ROOT, p.pinned_import_manifest.path);
+  const file = resolveContainedPath(ROOT, p.pinned_import_manifest.path, "IMPORT_MANIFEST");
+  requireCondition(fs.existsSync(file), "IMPORT_MANIFEST_MISSING");
+  requireNoLinkAncestry(file, ROOT, "IMPORT_MANIFEST");
   requireCondition(sha256File(file) === IMPORT_MANIFEST_SHA256, "IMPORT_MANIFEST_SHA256_MISMATCH");
   const m = JSON.parse(fs.readFileSync(file, "utf8"));
   requireCondition(m.schema === "ekg-v12-1-clinical-control-import-v1", "IMPORT_MANIFEST_SCHEMA");
@@ -340,6 +392,9 @@ module.exports = {
   loadProvenanceManifest,
   verifyDirectory,
   verifyImportManifest,
+  isPathContained,
+  resolveContainedPath,
+  requireNoLinkAncestry,
   filenameIdentityKey,
   requireDistinctFilenameIdentities,
   verifyGitBytePolicyAt,

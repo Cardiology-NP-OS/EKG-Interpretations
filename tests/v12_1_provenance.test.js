@@ -277,6 +277,37 @@ test("filesystem junction reparse substitution for expected source file fails cl
   );
 });
 
+test("source-directory parent junction is rejected even when redirected bytes are exact", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-parent-link-"));
+  const realParent = path.join(root, "real-parent");
+  const realDir = path.join(realParent, "controls");
+  fs.mkdirSync(realDir, { recursive: true });
+  for (const name of verifier.TARGET_FILES) {
+    fs.copyFileSync(path.join(verifier.IMPORTED_DIR, name), path.join(realDir, name));
+  }
+  const aliasParent = path.join(root, "alias-parent");
+  fs.symlinkSync(realParent, aliasParent, process.platform === "win32" ? "junction" : "dir");
+  const redirectedDir = path.join(aliasParent, "controls");
+  assert.throws(
+    () => verifier.verifyDirectory(redirectedDir, verifier.loadProvenanceManifest(), "TEST_SOURCE"),
+    /TEST_SOURCE_SYMLINK_ANCESTRY/
+  );
+});
+
+test("link ancestry helper rejects redirected parent paths directly", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-ancestry-"));
+  const realParent = path.join(root, "real-parent");
+  fs.mkdirSync(realParent);
+  const target = path.join(realParent, "source.txt");
+  fs.writeFileSync(target, "source");
+  const aliasParent = path.join(root, "alias-parent");
+  fs.symlinkSync(realParent, aliasParent, process.platform === "win32" ? "junction" : "dir");
+  assert.throws(
+    () => verifier.requireNoLinkAncestry(path.join(aliasParent, "source.txt"), root, "TEST"),
+    /TEST_SYMLINK_ANCESTRY/
+  );
+});
+
 test("zero-length source file fails byte-count validation", () => {
   const dir = fixture();
   fs.writeFileSync(path.join(dir, verifier.TARGET_FILES[1]), Buffer.alloc(0));
@@ -327,6 +358,32 @@ test("manifest filename identity collision is rejected before inventory matching
     () => verifier.validateProvenanceManifest(p),
     /SOURCE_SET_FILENAME_IDENTITY_COLLISION/
   );
+});
+
+test("pinned import manifest traversal segments are rejected before file access", () => {
+  const p = manifestClone();
+  for (const value of ["../outside.json", "..\\outside.json", "nested/../../outside.json"]) {
+    p.pinned_import_manifest.path = value;
+    assert.throws(
+      () => verifier.verifyImportManifest(p),
+      /IMPORT_MANIFEST_PATH_TRAVERSAL/
+    );
+  }
+});
+
+test("portable absolute pinned paths are rejected before file access", () => {
+  for (const value of ["/outside.json", "C:\\outside.json", "\\\\server\\share\\outside.json"]) {
+    assert.throws(
+      () => verifier.resolveContainedPath(ROOT, value, "TEST_IMPORT"),
+      /TEST_IMPORT_PATH_ABSOLUTE/
+    );
+  }
+});
+
+test("registered pinned import manifest path resolves within repository root", () => {
+  const p = verifier.loadProvenanceManifest();
+  const resolved = verifier.resolveContainedPath(ROOT, p.pinned_import_manifest.path, "TEST_IMPORT");
+  assert.equal(verifier.isPathContained(ROOT, resolved), true);
 });
 
 test("case-mutated manifest inventory is rejected", () => {
