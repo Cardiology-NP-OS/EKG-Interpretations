@@ -4,9 +4,9 @@
   "activation_allowed": false,
   "source_pack": {
     "name": "EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip",
-    "sha256": "61aa14599f66df4067b0e3e8671a6860e6d324c97b891e4b18a391a61c89e396",
-    "runtime_validator_pass": false,
-    "runtime_validator_status": "BLOCKED_MISSING_EXPECTED_FILE",
+    "sha256": "c8d911ec42dc09ece708f8bafe4956a9f90853129ead04a8851383ebdb845ef5",
+    "runtime_validator_pass": true,
+    "runtime_validator_status": "PASS",
     "runtime_project_version": "12.0",
     "structured_output_schema_version": "3.1",
     "criteria_snapshot": "2026-09-12",
@@ -14,20 +14,18 @@
     "active_runtime_sources": 16
   },
   "archive_validation": {
-    "manifest_entries_matched": 21,
+    "manifest_entries_expected": 27,
+    "manifest_entries_matched": 27,
     "manifest_hash_mismatches": 0,
-    "manifest_entries_missing": 6,
+    "manifest_entries_missing": 0,
     "active_runtime_source_hashes_match": true,
-    "archive_complete_against_manifest": false,
-    "missing_manifest_files": [
-      "ADMIN_ONLY_DO_NOT_UPLOAD/01_PROJECT_BOOTSTRAP_CHECKLIST.md",
-      "ADMIN_ONLY_DO_NOT_UPLOAD/02_LANE_BOOTSTRAPS.md",
-      "ADMIN_ONLY_DO_NOT_UPLOAD/04_UPGRADE_RUNBOOK.md",
-      "ADMIN_ONLY_DO_NOT_UPLOAD/05_CONTEXT_AND_DRIFT_POLICY.md",
-      "PASTE_IN_PROJECT_INSTRUCTIONS/00_PROJECT_INSTRUCTIONS.md",
-      "REPO_PATCH_PROPOSAL/README.md"
-    ],
-    "supersedes_pack_sha256": "c8d911ec42dc09ece708f8bafe4956a9f90853129ead04a8851383ebdb845ef5"
+    "archive_complete_against_manifest": true,
+    "generated_derivative": {
+      "name": "v12_1_clinical_control_candidate.zip",
+      "sha256": "61aa14599f66df4067b0e3e8671a6860e6d324c97b891e4b18a391a61c89e396",
+      "purpose": "generated quarantine derivative; not the original user upload",
+      "must_not_be_used_as_source_pack_identity": true
+    }
   },
   "policy": {
     "replace_current_signal_engine": false,

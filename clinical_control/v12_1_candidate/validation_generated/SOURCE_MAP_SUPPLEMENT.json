@@ -1,0 +1,16 @@
+{
+  "schema": "ekg-v12-1-source-map-supplement-v1",
+  "candidate_active": false,
+  "original_source_map_sha256": "5d9fc89a372c702fed968770e83dc8de2d6b78a35105b93b93780e69c7368f16",
+  "reason": "Criteria-bound registry sources omitted from the original human-readable current source map.",
+  "entries": [
+    {
+      "source_key": "aha_ecg_part1_2007",
+      "reason": "Clinical Criteria section 1 defines acquisition scale/technology conventions; the registry assigns this source to ECG acquisition technology, paper speed, gain, and technical quality."
+    },
+    {
+      "source_key": "aha_monitoring_2017",
+      "reason": "Clinical Criteria section 5 cites AHA hospital-monitoring guidance for QT-monitoring context; the registry assigns this source to QT monitoring and hospital ECG monitoring."
+    }
+  ]
+}

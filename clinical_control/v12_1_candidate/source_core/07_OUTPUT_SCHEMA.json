@@ -1,0 +1,1365 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ekg-interpretations:schema:analysis:3.1",
+  "title": "EKG INTERPRETATIONS Structured Analysis v3.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "analysis_metadata",
+    "input",
+    "technical_quality",
+    "urgency",
+    "measurements",
+    "rhythm",
+    "lead_observations",
+    "st_t_assessment",
+    "interpretation",
+    "limitations",
+    "verification"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "3.1"
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tracing_type",
+        "population"
+      ],
+      "properties": {
+        "tracing_type": {
+          "enum": [
+            "twelve_lead",
+            "limited_lead",
+            "rhythm_strip",
+            "monitor_screenshot",
+            "unknown"
+          ]
+        },
+        "population": {
+          "enum": [
+            "adult",
+            "pediatric",
+            "unknown"
+          ]
+        },
+        "clinical_context_provided": {
+          "type": "boolean"
+        },
+        "serial_comparison": {
+          "type": "boolean"
+        }
+      }
+    },
+    "technical_quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grade",
+        "limitations"
+      ],
+      "properties": {
+        "grade": {
+          "enum": [
+            "adequate",
+            "limited",
+            "poor",
+            "cannot_interpret"
+          ]
+        },
+        "lead_labels_visible": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "lead_set_complete": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "paper_speed_mm_s": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gain_mm_mV": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "calibration_source": {
+          "enum": [
+            "visible",
+            "user",
+            "machine",
+            "unknown"
+          ]
+        },
+        "artifact": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "baseline_wander",
+              "motion",
+              "muscle",
+              "electrical",
+              "clipping",
+              "other"
+            ]
+          }
+        },
+        "crop_or_occlusion": {
+          "type": "boolean"
+        },
+        "perspective_distortion": {
+          "type": "boolean"
+        },
+        "possible_lead_reversal_or_misplacement": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "urgency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "reason",
+        "uncertainty"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "emergent",
+            "urgent",
+            "prompt_review",
+            "routine",
+            "educational_only"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "uncertainty": {
+          "type": "string"
+        },
+        "recommended_verification": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "value",
+          "unit",
+          "source",
+          "confidence"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "atrial_rate",
+              "ventricular_rate",
+              "rr",
+              "pr",
+              "qrs",
+              "qt",
+              "qtc",
+              "axis",
+              "other"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "enum": [
+              "user",
+              "machine",
+              "estimated",
+              "calculated",
+              "unavailable"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "moderate",
+              "low"
+            ]
+          },
+          "lead": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "formula": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "measurement_evidence_ref": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9._-]+$"
+          }
+        }
+      }
+    },
+    "rhythm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finding",
+        "confidence",
+        "regularity",
+        "atrial_activity",
+        "av_relationship",
+        "evidence",
+        "contradictions"
+      ],
+      "properties": {
+        "finding": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "moderate",
+            "low"
+          ]
+        },
+        "regularity": {
+          "enum": [
+            "regular",
+            "regularly_irregular",
+            "irregularly_irregular",
+            "variable",
+            "unknown"
+          ]
+        },
+        "atrial_activity": {
+          "type": "string"
+        },
+        "av_relationship": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "lead_observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lead",
+          "observations",
+          "source",
+          "confidence"
+        ],
+        "properties": {
+          "lead": {
+            "enum": [
+              "I",
+              "II",
+              "III",
+              "aVR",
+              "aVL",
+              "aVF",
+              "V1",
+              "V2",
+              "V3",
+              "V4",
+              "V5",
+              "V6",
+              "V3R",
+              "V4R",
+              "V5R",
+              "V6R",
+              "V7",
+              "V8",
+              "V9",
+              "other"
+            ]
+          },
+          "observations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "st_deviation_mm": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "st_direction": {
+            "enum": [
+              "elevation",
+              "depression",
+              "isoelectric",
+              "indeterminate"
+            ]
+          },
+          "t_wave": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "qrs_morphology": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "moderate",
+              "low"
+            ]
+          },
+          "source": {
+            "enum": [
+              "visual",
+              "user",
+              "machine",
+              "calculated",
+              "mixed"
+            ]
+          },
+          "observation_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9._-]+$"
+          },
+          "measurement_evidence_ref": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9._-]+$"
+          }
+        }
+      }
+    },
+    "axis": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "degrees": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "moderate",
+            "low"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "degrees",
+        "confidence",
+        "evidence"
+      ]
+    },
+    "conduction_morphology": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding",
+          "confidence",
+          "evidence",
+          "contradictions"
+        ],
+        "properties": {
+          "finding": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "moderate",
+              "low"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contradictions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "st_t_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ischemia_concern": {
+          "enum": [
+            "concerning",
+            "not_clearly_concerning",
+            "indeterminate"
+          ]
+        },
+        "occlusion_pattern_concern": {
+          "enum": [
+            "concerning",
+            "not_clearly_concerning",
+            "indeterminate"
+          ]
+        },
+        "conventional_st_elevation_threshold": {
+          "enum": [
+            "met",
+            "not_met",
+            "not_assessable"
+          ]
+        },
+        "patterns_considered": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mimics_or_confounders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "threshold_context": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "threshold_sex",
+            "age_years",
+            "source"
+          ],
+          "properties": {
+            "threshold_sex": {
+              "enum": [
+                "male",
+                "female",
+                "unknown"
+              ]
+            },
+            "age_years": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "source": {
+              "enum": [
+                "user",
+                "machine",
+                "unknown"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "ischemia_concern",
+        "occlusion_pattern_concern",
+        "conventional_st_elevation_threshold",
+        "patterns_considered",
+        "mimics_or_confounders",
+        "evidence",
+        "contradictions"
+      ]
+    },
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_pattern",
+        "secondary_findings",
+        "differential",
+        "contradiction_summary"
+      ],
+      "properties": {
+        "primary_pattern": {
+          "type": "object",
+          "required": [
+            "label",
+            "confidence",
+            "evidence_for",
+            "evidence_against"
+          ],
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "confidence": {
+              "enum": [
+                "high",
+                "moderate",
+                "low"
+              ]
+            },
+            "evidence_for": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evidence_against": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pattern_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^[a-z0-9_]+$"
+            }
+          },
+          "additionalProperties": false
+        },
+        "secondary_findings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "differential": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "why_it_fits",
+              "why_it_may_not_fit",
+              "discriminator"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "why_it_fits": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "why_it_may_not_fit": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "discriminator": {
+                "type": "string"
+              },
+              "pattern_id": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-z0-9_]+$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "contradiction_summary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "serial_comparison": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "required": [
+          "domain",
+          "prior",
+          "current",
+          "change",
+          "confidence"
+        ],
+        "properties": {
+          "domain": {
+            "type": "string"
+          },
+          "prior": {
+            "type": "string"
+          },
+          "current": {
+            "type": "string"
+          },
+          "change": {
+            "enum": [
+              "unchanged",
+              "new",
+              "resolved",
+              "increased",
+              "decreased",
+              "indeterminate",
+              "similar",
+              "different"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "moderate",
+              "low"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "verification": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "perioperative_lens": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "hemodynamic_relevance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "anesthesia_relevance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "context_needed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "teaching_pearl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "analysis_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_version",
+        "criteria_snapshot",
+        "source_registry_version",
+        "analysis_mode"
+      ],
+      "properties": {
+        "project_version": {
+          "const": "12.0"
+        },
+        "criteria_snapshot": {
+          "const": "2026-09-12"
+        },
+        "source_registry_version": {
+          "const": "2.0"
+        },
+        "analysis_mode": {
+          "enum": [
+            "general",
+            "comparison",
+            "qt_audit",
+            "ischemia_audit",
+            "wct_audit",
+            "machine_vs_human",
+            "perioperative",
+            "learning"
+          ]
+        }
+      }
+    },
+    "geometry_calibrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "calibration_id",
+          "source",
+          "geometry_state",
+          "x_pixels_per_mm",
+          "y_pixels_per_mm",
+          "paper_speed_mm_s",
+          "gain_mm_per_mV",
+          "x_scale_uncertainty_fraction",
+          "y_scale_uncertainty_fraction",
+          "residual_error_fraction_small_box",
+          "exact_time_measurement_allowed",
+          "exact_voltage_measurement_allowed",
+          "supporting_evidence"
+        ],
+        "properties": {
+          "version": {
+            "const": "1.0"
+          },
+          "calibration_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+$"
+          },
+          "source": {
+            "enum": [
+              "native_digital_geometry",
+              "visible_grid_manual",
+              "calibration_pulse_manual",
+              "user_supplied_scale",
+              "derived_homography",
+              "unknown"
+            ]
+          },
+          "geometry_state": {
+            "enum": [
+              "native",
+              "uniformly_scaled",
+              "anisotropically_scaled",
+              "rotated",
+              "perspective_corrected",
+              "perspective_uncorrected",
+              "unknown"
+            ]
+          },
+          "x_pixels_per_mm": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "exclusiveMinimum": 0
+          },
+          "y_pixels_per_mm": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "exclusiveMinimum": 0
+          },
+          "paper_speed_mm_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "exclusiveMinimum": 0
+          },
+          "gain_mm_per_mV": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "exclusiveMinimum": 0
+          },
+          "x_scale_uncertainty_fraction": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "y_scale_uncertainty_fraction": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "residual_error_fraction_small_box": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "exact_time_measurement_allowed": {
+            "type": "boolean"
+          },
+          "exact_voltage_measurement_allowed": {
+            "type": "boolean"
+          },
+          "local_calibration": {
+            "type": "boolean"
+          },
+          "homography_applied": {
+            "type": "boolean"
+          },
+          "supporting_evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "measurement_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "version",
+          "measurement_id",
+          "metric",
+          "lead",
+          "value",
+          "unit",
+          "source_kind",
+          "method",
+          "calibration_id",
+          "fiducials",
+          "uncertainty",
+          "exact_numeric_claim_allowed",
+          "evidence_source"
+        ],
+        "properties": {
+          "version": {
+            "const": "1.0"
+          },
+          "measurement_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+$"
+          },
+          "metric": {
+            "enum": [
+              "atrial_rate",
+              "ventricular_rate",
+              "rr",
+              "pr",
+              "qrs",
+              "qt",
+              "qtc",
+              "st_deviation",
+              "axis",
+              "other"
+            ]
+          },
+          "lead": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_kind": {
+            "enum": [
+              "visual_fiducial",
+              "digital_signal",
+              "machine_reported",
+              "user_provided",
+              "calculated",
+              "unavailable"
+            ]
+          },
+          "method": {
+            "enum": [
+              "manual_fiducial",
+              "automated_fiducial_unvalidated",
+              "digital_sample",
+              "machine_printout",
+              "user_input",
+              "formula",
+              "unavailable"
+            ]
+          },
+          "calibration_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fiducials": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "fiducial_id",
+                "kind",
+                "x_px",
+                "y_px",
+                "point_uncertainty_px"
+              ],
+              "properties": {
+                "fiducial_id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._-]+$"
+                },
+                "kind": {
+                  "enum": [
+                    "p_onset",
+                    "p_end",
+                    "qrs_onset",
+                    "qrs_end",
+                    "r_peak",
+                    "t_end",
+                    "j_point",
+                    "baseline",
+                    "rr_start",
+                    "rr_end",
+                    "other"
+                  ]
+                },
+                "x_px": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "y_px": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "point_uncertainty_px": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "uncertainty": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lower",
+              "upper",
+              "unit",
+              "method"
+            ],
+            "properties": {
+              "lower": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "upper": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "unit": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "method": {
+                "enum": [
+                  "conservative_interval",
+                  "source_reported",
+                  "not_available"
+                ]
+              }
+            }
+          },
+          "exact_numeric_claim_allowed": {
+            "type": "boolean"
+          },
+          "evidence_source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "asset_id",
+              "asset_sha256"
+            ],
+            "properties": {
+              "asset_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "asset_sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "record_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "source_kind": {
+                  "enum": [
+                    "visual_fiducial",
+                    "digital_signal"
+                  ]
+                },
+                "exact_numeric_claim_allowed": {
+                  "const": true
+                }
+              },
+              "required": [
+                "source_kind",
+                "exact_numeric_claim_allowed"
+              ]
+            },
+            "then": {
+              "properties": {
+                "evidence_source": {
+                  "properties": {
+                    "asset_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "asset_sha256": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    }
+                  },
+                  "required": [
+                    "asset_id",
+                    "asset_sha256"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "acquisition_integrity": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "source_kind",
+        "findings"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "consistent",
+            "possible_inconsistency",
+            "insufficient_data",
+            "not_assessed"
+          ]
+        },
+        "source_kind": {
+          "enum": [
+            "digital_signal",
+            "visual_reconstruction",
+            "unknown"
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limb_relation_max_normalized_rmse": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "duplicate_signal_pairs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flatline_leads": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "lead_layout": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "layout_type",
+        "labels_verified",
+        "status",
+        "specific_lead_claims_allowed"
+      ],
+      "properties": {
+        "layout_type": {
+          "enum": [
+            "standard_3x4_rhythm",
+            "standard_6x2",
+            "twelve_vertical",
+            "custom",
+            "unknown"
+          ]
+        },
+        "labels_verified": {
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "ambiguous"
+          ]
+        },
+        "specific_lead_claims_allowed": {
+          "type": "boolean"
+        },
+        "missing_standard_leads": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "duplicate_primary_labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "position_mismatches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "serial_binding": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "comparison_scope",
+        "evidence_source",
+        "temporal_change_language_allowed",
+        "reason"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "same_family_verified",
+            "same_family_user_asserted",
+            "different_family",
+            "identity_unknown"
+          ]
+        },
+        "comparison_scope": {
+          "enum": [
+            "patient_serial",
+            "trace_only",
+            "not_allowed"
+          ]
+        },
+        "evidence_source": {
+          "enum": [
+            "pseudonymous_family_token",
+            "source_metadata",
+            "user_assertion",
+            "none"
+          ]
+        },
+        "temporal_change_language_allowed": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
