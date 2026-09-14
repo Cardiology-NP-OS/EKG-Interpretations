@@ -226,6 +226,41 @@ function auditFinalization(payload = {}) {
 
     const emittedQuality = payload.structured_output?.technical_quality || {};
     const emittedPrimary = payload.structured_output?.interpretation?.primary_pattern || {};
+    const emittedRhythm = payload.structured_output?.rhythm || {};
+    const emittedMeasurements = Array.isArray(payload.structured_output?.measurements) ?
+      payload.structured_output.measurements : [];
+    if (["limited", "poor", "cannot_interpret"].includes(emittedQuality.grade) &&
+        !nonEmptyArray(emittedQuality.limitations)) {
+      add(violations, "structured_output_quality_limitations_missing", emittedQuality.grade);
+    }
+    if (emittedQuality.crop_or_occlusion === true && !nonEmptyArray(emittedQuality.limitations)) {
+      add(violations, "structured_output_quality_limitation_missing_for_crop", "crop_or_occlusion");
+    }
+    if (emittedQuality.perspective_distortion === true && !nonEmptyArray(emittedQuality.limitations)) {
+      add(violations, "structured_output_quality_limitation_missing_for_perspective", "perspective_distortion");
+    }
+    if (emittedRhythm.finding && !nonEmptyArray(emittedRhythm.evidence)) {
+      add(violations, "structured_output_rhythm_evidence_missing", emittedRhythm.finding);
+    }
+    if (emittedPrimary.label && !nonEmptyArray(emittedPrimary.evidence_for)) {
+      add(violations, "structured_output_primary_pattern_evidence_missing", emittedPrimary.label);
+    }
+    for (const measurement of emittedMeasurements) {
+      if (!measurement || typeof measurement !== "object") continue;
+      const numeric = typeof measurement.value === "number" && Number.isFinite(measurement.value);
+      if (numeric && !["user", "machine", "estimated", "calculated"].includes(measurement.source)) {
+        add(violations, "structured_output_numeric_measurement_missing_source", measurement.name || null);
+      }
+      if (numeric && measurement.name === "qtc" &&
+          !(typeof measurement.formula === "string" && measurement.formula.trim())) {
+        add(violations, "structured_output_qtc_formula_missing", measurement.name);
+      }
+      if (numeric && ["rr", "pr", "qrs", "qt"].includes(measurement.name) &&
+          measurement.source === "estimated" &&
+          !(typeof emittedQuality.paper_speed_mm_s === "number" && Number.isFinite(emittedQuality.paper_speed_mm_s) && emittedQuality.paper_speed_mm_s > 0)) {
+        add(violations, "structured_output_estimated_time_without_verified_speed", measurement.name);
+      }
+    }
     if (emittedQuality.grade === "cannot_interpret" && emittedPrimary.confidence === "high") {
       add(violations, "structured_output_high_confidence_forbidden_by_quality", emittedQuality.grade);
     }
@@ -238,6 +273,26 @@ function auditFinalization(payload = {}) {
         emittedPrimary.confidence !== undefined &&
         payload.primary_pattern_confidence !== emittedPrimary.confidence) {
       add(violations, "structured_output_audit_mismatch", "interpretation.primary_pattern.confidence");
+    }
+    if (payload.technical_quality?.crop_or_occlusion !== undefined &&
+        emittedQuality.crop_or_occlusion !== undefined &&
+        payload.technical_quality.crop_or_occlusion !== emittedQuality.crop_or_occlusion) {
+      add(violations, "structured_output_audit_mismatch", "technical_quality.crop_or_occlusion");
+    }
+    if (payload.technical_quality?.perspective_distortion !== undefined &&
+        emittedQuality.perspective_distortion !== undefined &&
+        payload.technical_quality.perspective_distortion !== emittedQuality.perspective_distortion) {
+      add(violations, "structured_output_audit_mismatch", "technical_quality.perspective_distortion");
+    }
+    if (payload.rhythm_finding !== undefined &&
+        emittedRhythm.finding !== undefined &&
+        payload.rhythm_finding !== emittedRhythm.finding) {
+      add(violations, "structured_output_audit_mismatch", "rhythm.finding");
+    }
+    if (payload.primary_pattern_label !== undefined &&
+        emittedPrimary.label !== undefined &&
+        payload.primary_pattern_label !== emittedPrimary.label) {
+      add(violations, "structured_output_audit_mismatch", "interpretation.primary_pattern.label");
     }
   }
 

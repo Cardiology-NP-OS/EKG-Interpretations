@@ -227,6 +227,124 @@ test("emitted structured semantics cannot bypass or contradict audit state", () 
   assert.equal(result.verdict, "PASS");
 });
 
+test("emitted rhythm and primary pattern require supporting evidence", () => {
+  let output = validValue(schema);
+  output.rhythm.finding = "named rhythm";
+  output.rhythm.evidence = [];
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_rhythm_evidence_missing"));
+
+  output = validValue(schema);
+  output.interpretation.primary_pattern.label = "named pattern";
+  output.interpretation.primary_pattern.evidence_for = [];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_primary_pattern_evidence_missing"));
+});
+
+test("emitted quality degraders require explicit limitations", () => {
+  for (const grade of ["limited", "poor", "cannot_interpret"]) {
+    const output = validValue(schema);
+    output.technical_quality.grade = grade;
+    output.technical_quality.limitations = [];
+    const result = auditFinalization({ ...base(), structured_output: output });
+    assert.equal(result.verdict, "REVISE");
+    assert.ok(codes(result).includes("structured_output_quality_limitations_missing"));
+  }
+  for (const field of ["crop_or_occlusion", "perspective_distortion"]) {
+    const output = validValue(schema);
+    output.technical_quality[field] = true;
+    output.technical_quality.limitations = [];
+    const result = auditFinalization({ ...base(), structured_output: output });
+    assert.equal(result.verdict, "REVISE");
+    assert.ok(codes(result).some((code) => code.startsWith("structured_output_quality_limitation_missing_")));
+  }
+});
+
+test("emitted numeric measurements obey provenance formula and speed rules", () => {
+  let output = validValue(schema);
+  let measurement = validValue(schema.properties.measurements.items);
+  measurement.name = "qrs";
+  measurement.value = 100;
+  measurement.source = "unavailable";
+  output.measurements = [measurement];
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_numeric_measurement_missing_source"));
+
+  output = validValue(schema);
+  measurement = validValue(schema.properties.measurements.items);
+  measurement.name = "qtc";
+  measurement.value = 450;
+  measurement.source = "calculated";
+  measurement.formula = null;
+  output.measurements = [measurement];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_qtc_formula_missing"));
+
+  output = validValue(schema);
+  measurement = validValue(schema.properties.measurements.items);
+  measurement.name = "qt";
+  measurement.value = 400;
+  measurement.source = "estimated";
+  output.technical_quality.paper_speed_mm_s = null;
+  output.measurements = [measurement];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_estimated_time_without_verified_speed"));
+});
+
+test("cross-representation acquisition and interpretation contradictions cannot pass", () => {
+  let output = validValue(schema);
+  output.technical_quality.crop_or_occlusion = true;
+  output.technical_quality.limitations = ["crop"];
+  let result = auditFinalization({
+    ...base(),
+    technical_quality: { grade: output.technical_quality.grade, limitations: ["none"], crop_or_occlusion: false },
+    structured_output: output,
+  });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "technical_quality.crop_or_occlusion"));
+
+  output = validValue(schema);
+  output.technical_quality.perspective_distortion = true;
+  output.technical_quality.limitations = ["perspective"];
+  result = auditFinalization({
+    ...base(),
+    technical_quality: { grade: output.technical_quality.grade, limitations: ["none"], perspective_distortion: false },
+    structured_output: output,
+  });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "technical_quality.perspective_distortion"));
+
+  output = validValue(schema);
+  output.rhythm.finding = "rhythm A";
+  output.rhythm.evidence = ["evidence"];
+  result = auditFinalization({ ...base(), rhythm_finding: "rhythm B", rhythm_evidence: ["evidence"], structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "rhythm.finding"));
+
+  output = validValue(schema);
+  output.interpretation.primary_pattern.label = "pattern A";
+  output.interpretation.primary_pattern.evidence_for = ["evidence"];
+  result = auditFinalization({ ...base(), primary_pattern_label: "pattern B", primary_pattern_evidence_for: ["evidence"], structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(result.violations.some((item) => item.detail === "interpretation.primary_pattern.label"));
+
+  output = validValue(schema);
+  output.technical_quality.crop_or_occlusion = false;
+  result = auditFinalization({
+    ...base(),
+    technical_quality: { grade: output.technical_quality.grade, limitations: [], crop_or_occlusion: false },
+    rhythm_finding: output.rhythm.finding,
+    primary_pattern_label: output.interpretation.primary_pattern.label,
+    structured_output: output,
+  });
+  assert.equal(result.verdict, "PASS");
+});
+
 console.log(JSON.stringify({
   schema: "ekg-l04-structured-output-tests-v1",
   pass: true,
