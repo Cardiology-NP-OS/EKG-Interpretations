@@ -296,6 +296,20 @@ function parseNullGitRecords(buffer) {
   return buffer.toString("utf8").split("\0").filter(Boolean);
 }
 
+function parseGitIndexRecord(record) {
+  const match = /^([0-9]{6}) ([0-9a-f]+) ([0-3])\t([\s\S]+)$/.exec(record);
+  requireCondition(Boolean(match), "GIT_INDEX_INVENTORY_RECORD_INVALID");
+  const [, mode, oid, stage, gitPath] = match;
+  return { mode, oid, stage, gitPath };
+}
+
+function parseGitHeadRecord(record) {
+  const match = /^([0-9]{6}) ([^ ]+) ([0-9a-f]+)\t([\s\S]+)$/.exec(record);
+  requireCondition(Boolean(match), "GIT_HEAD_INVENTORY_RECORD_INVALID");
+  const [, mode, type, oid, gitPath] = match;
+  return { mode, type, oid, gitPath };
+}
+
 function verifyGitSubtreeInventoryAt(repoRoot, p) {
   const prefix = path.posix.join(
     "clinical_control", "v12_1_candidate", "source_text", "remaining_controls"
@@ -309,9 +323,7 @@ function verifyGitSubtreeInventoryAt(repoRoot, p) {
   );
   requireCondition(staged.status === 0, "GIT_INDEX_INVENTORY_COMMAND_FAILED");
   const indexRecords = parseNullGitRecords(staged.stdout).map(record => {
-    const match = /^([0-9]{6}) ([0-9a-f]+) ([0-3])\t([\s\S]+)$/.exec(record);
-    requireCondition(Boolean(match), "GIT_INDEX_INVENTORY_RECORD_INVALID");
-    const [, mode, , stage, gitPath] = match;
+    const { mode, stage, gitPath } = parseGitIndexRecord(record);
     requireCondition(stage === "0", "GIT_INDEX_UNMERGED:" + gitPath);
     requireCondition(mode === "100644", "GIT_INDEX_MODE_MISMATCH:" + gitPath);
     requireCondition(gitPath.startsWith(prefix + "/"), "GIT_INDEX_PATH_OUTSIDE_SUBTREE:" + gitPath);
@@ -332,9 +344,7 @@ function verifyGitSubtreeInventoryAt(repoRoot, p) {
   );
   requireCondition(head.status === 0, "GIT_HEAD_INVENTORY_COMMAND_FAILED");
   const headRecords = parseNullGitRecords(head.stdout).map(record => {
-    const match = /^([0-9]{6}) ([^ ]+) ([0-9a-f]+)\t([\s\S]+)$/.exec(record);
-    requireCondition(Boolean(match), "GIT_HEAD_INVENTORY_RECORD_INVALID");
-    const [, mode, type, , gitPath] = match;
+    const { mode, type, gitPath } = parseGitHeadRecord(record);
     requireCondition(mode === "100644" && type === "blob", "GIT_HEAD_MODE_MISMATCH:" + gitPath);
     requireCondition(gitPath.startsWith(prefix + "/"), "GIT_HEAD_PATH_OUTSIDE_SUBTREE:" + gitPath);
     const relative = gitPath.slice(prefix.length + 1);
@@ -473,6 +483,9 @@ module.exports = {
   requireNoLinkAncestry,
   filenameIdentityKey,
   requireDistinctFilenameIdentities,
+  parseNullGitRecords,
+  parseGitIndexRecord,
+  parseGitHeadRecord,
   verifyGitSubtreeInventoryAt,
   verifyGitBytePolicyAt,
   verifyGitBytePolicy,

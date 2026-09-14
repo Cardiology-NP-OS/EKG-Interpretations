@@ -281,6 +281,8 @@ function applyVisualExactFixture(output, metric, timeAllowed, voltageAllowed) {
 }
 
 const validLeads = new Set(schema.properties.lead_observations.items.properties.lead.enum);
+const finitePositive = (value) => typeof value === 'number' && Number.isFinite(value) && value > 0;
+const DISTORTED_GEOMETRY_STATES = new Set(['uniformly_scaled','anisotropically_scaled','rotated','perspective_corrected']);
 
 function deepErrors(output) {
   const errors = schemaErrors(output, schema);
@@ -290,6 +292,12 @@ function deepErrors(output) {
     errors.push('criteria/source snapshot mismatch');
   }
   if (md.source_registry_version !== sourcesDoc.version) errors.push('stale source registry version');
+  if (output.technical_quality) {
+    for (const key of ['paper_speed_mm_s','gain_mm_mV']) {
+      const value = output.technical_quality[key];
+      if (value !== null && value !== undefined && !finitePositive(value)) errors.push('invalid technical quality scale: ' + key);
+    }
+  }
   if (output.input && output.input.tracing_type === 'rhythm_strip' && output.axis !== undefined && output.axis !== null) {
     errors.push('rhythm strip contains unsupported axis assessment');
   }
@@ -389,6 +397,9 @@ function deepErrors(output) {
     if (c.source === 'unknown' && (c.exact_time_measurement_allowed || c.exact_voltage_measurement_allowed)) {
       errors.push('unknown calibration source permits exact measurement');
     }
+    if (c.exact_time_measurement_allowed && (!finitePositive(c.x_pixels_per_mm) || !finitePositive(c.paper_speed_mm_s))) errors.push('time calibration scale incomplete');
+    if (c.exact_voltage_measurement_allowed && (!finitePositive(c.y_pixels_per_mm) || !finitePositive(c.gain_mm_per_mV))) errors.push('voltage calibration scale incomplete');
+    if (DISTORTED_GEOMETRY_STATES.has(c.geometry_state) && (c.exact_time_measurement_allowed || c.exact_voltage_measurement_allowed) && c.local_calibration !== true) errors.push('distorted geometry lacks local calibration');
     if (c.source === 'derived_homography' && c.homography_applied !== true) errors.push('derived homography source without applied homography');
   }
   for (const e of evidence) {
@@ -468,12 +479,20 @@ function deepErrors(output) {
   }
 
   const acquisition = output.acquisition_integrity;
-  if (acquisition && acquisition.status === 'not_assessed') {
-    const hasAssessmentEvidence = (Array.isArray(acquisition.findings) && acquisition.findings.length > 0) ||
-      (typeof acquisition.limb_relation_max_normalized_rmse === 'number' && Number.isFinite(acquisition.limb_relation_max_normalized_rmse)) ||
-      (Array.isArray(acquisition.duplicate_signal_pairs) && acquisition.duplicate_signal_pairs.length > 0) ||
-      (Array.isArray(acquisition.flatline_leads) && acquisition.flatline_leads.length > 0);
-    if (hasAssessmentEvidence) errors.push('acquisition marked not_assessed despite assessment evidence');
+  const hasAssessmentEvidence = acquisition ? ((Array.isArray(acquisition.findings) && acquisition.findings.length > 0) ||
+    (typeof acquisition.limb_relation_max_normalized_rmse === 'number' && Number.isFinite(acquisition.limb_relation_max_normalized_rmse)) ||
+    (Array.isArray(acquisition.duplicate_signal_pairs) && acquisition.duplicate_signal_pairs.length > 0) ||
+    (Array.isArray(acquisition.flatline_leads) && acquisition.flatline_leads.length > 0)) : false;
+  if (acquisition) {
+    for (const key of ['findings','duplicate_signal_pairs','flatline_leads']) {
+      if (Array.isArray(acquisition[key]) && !nonEmptyStringArray(acquisition[key])) errors.push('blank acquisition array member: ' + key);
+      if (Array.isArray(acquisition[key]) && !unique(acquisition[key])) errors.push('duplicate acquisition array member: ' + key);
+    }
+    for (const lead of asArray(acquisition.flatline_leads)) if (!validLeads.has(lead)) errors.push('invalid acquisition flatline lead');
+    if (acquisition.status === 'possible_inconsistency' && !hasAssessmentEvidence) errors.push('possible acquisition inconsistency lacks evidence');
+  }
+  if (acquisition && acquisition.status === 'not_assessed' && hasAssessmentEvidence) {
+    errors.push('acquisition marked not_assessed despite assessment evidence');
   }
 
   if (acquisition && acquisition.status === 'consistent' &&
@@ -484,6 +503,19 @@ function deepErrors(output) {
 
   const layout = output.lead_layout;
   if (layout) {
+    for (const key of ['missing_standard_leads','duplicate_primary_labels','position_mismatches']) {
+      if (Array.isArray(layout[key]) && !nonEmptyStringArray(layout[key])) errors.push('blank layout array member: ' + key);
+      if (Array.isArray(layout[key]) && !unique(layout[key])) errors.push('duplicate layout array member: ' + key);
+    }
+    for (const lead of asArray(layout.missing_standard_leads)) if (!validLeads.has(lead)) errors.push('invalid missing standard lead');
+    for (const lead of asArray(layout.duplicate_primary_labels)) if (!validLeads.has(lead)) errors.push('invalid duplicate primary lead');
+    const missingLeads = new Set(asArray(layout.missing_standard_leads));
+    for (const obs of asArray(output.lead_observations)) {
+      if (obs.source === 'visual' && missingLeads.has(obs.lead)) errors.push('visual observation references missing lead');
+    }
+    if (output.technical_quality && output.technical_quality.lead_set_complete === true && missingLeads.size > 0) {
+      errors.push('lead set marked complete despite missing standard leads');
+    }
     if (layout.status === 'verified' && !layout.labels_verified) errors.push('verified layout without verified labels');
     if (layout.status === 'verified' && Array.isArray(layout.duplicate_primary_labels) && layout.duplicate_primary_labels.length > 0) {
       errors.push('verified layout contains duplicate primary labels');
@@ -575,6 +607,10 @@ expectOutputReject('unsupported_pattern_id', (x) => {
 expectOutputReject('invalid_measurement_lead', (x) => {
   x.measurements.push({ name: 'other', value: null, unit: null, source: 'unavailable', confidence: 'low', lead: 'NOT_A_LEAD' });
 }, true);
+expectOutputReject('technical_quality_zero_paper_speed', (x) => { x.technical_quality.paper_speed_mm_s = 0; }, true);
+expectOutputReject('technical_quality_negative_paper_speed', (x) => { x.technical_quality.paper_speed_mm_s = -1; }, true);
+expectOutputReject('technical_quality_zero_gain', (x) => { x.technical_quality.gain_mm_mV = 0; }, true);
+expectOutputReject('technical_quality_negative_gain', (x) => { x.technical_quality.gain_mm_mV = -1; }, true);
 expectOutputReject('missing_limitations', (x) => delete x.limitations);
 expectOutputReject('absent_contradiction_summary', (x) => delete x.interpretation.contradiction_summary);
 expectOutputReject('nan_measurement', (x) => {
@@ -699,6 +735,11 @@ expectOutputReject('calibration_unsafe_geometry_allows_exact', (x) => { x.geomet
 expectOutputReject('calibration_unknown_source_allows_exact', (x) => { x.geometry_calibrations = [makeCalibration({ source: 'unknown', exact_voltage_measurement_allowed: true })]; }, true);
 expectOutputReject('derived_homography_without_applied_homography', (x) => { x.geometry_calibrations = [makeCalibration({ source: 'derived_homography', geometry_state: 'perspective_corrected', homography_applied: false })]; }, true);
 expectOutputReject('calibration_missing_supporting_evidence', (x) => { x.geometry_calibrations = [makeCalibration({ supporting_evidence: [] })]; }, true);
+expectOutputReject('calibration_time_scale_incomplete', (x) => { x.geometry_calibrations = [makeCalibration({ exact_time_measurement_allowed: true, x_pixels_per_mm: null })]; }, true);
+expectOutputReject('calibration_time_speed_incomplete', (x) => { x.geometry_calibrations = [makeCalibration({ exact_time_measurement_allowed: true, paper_speed_mm_s: null })]; }, true);
+expectOutputReject('calibration_voltage_scale_incomplete', (x) => { x.geometry_calibrations = [makeCalibration({ exact_voltage_measurement_allowed: true, y_pixels_per_mm: null })]; }, true);
+expectOutputReject('calibration_voltage_gain_incomplete', (x) => { x.geometry_calibrations = [makeCalibration({ exact_voltage_measurement_allowed: true, gain_mm_per_mV: null })]; }, true);
+expectOutputReject('calibration_transformed_without_local', (x) => { x.geometry_calibrations = [makeCalibration({ geometry_state: 'uniformly_scaled', exact_time_measurement_allowed: true, local_calibration: false })]; }, true);
 expectOutputReject('visual_exact_missing_fiducials', (x) => {
   x.technical_quality.grade = 'adequate';
   const ev = makeMeasurementEvidence('m1', 'c1');
@@ -719,6 +760,9 @@ expectOutputReject('evidence_source_asset_id_without_hash', (x) => { const ev = 
 expectOutputReject('evidence_source_hash_without_asset_id', (x) => { const ev = makeMeasurementEvidence('m1'); ev.evidence_source = { asset_id: null, asset_sha256: '0'.repeat(64) }; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('acquisition_consistent_with_duplicate_signal', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], duplicate_signal_pairs: ['I-II'] }; }, true);
 expectOutputReject('acquisition_consistent_with_flatline', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], flatline_leads: ['I'] }; }, true);
+expectOutputReject('acquisition_possible_without_evidence', (x) => { x.acquisition_integrity = { status: 'possible_inconsistency', source_kind: 'visual_reconstruction', findings: [] }; }, true);
+expectOutputReject('acquisition_blank_finding', (x) => { x.acquisition_integrity = { status: 'insufficient_data', source_kind: 'unknown', findings: [''] }; }, true);
+expectOutputReject('acquisition_invalid_flatline_label', (x) => { x.acquisition_integrity = { status: 'possible_inconsistency', source_kind: 'digital_signal', findings: [], flatline_leads: ['NOT_A_LEAD'] }; }, true);
 
 expectRegistryReject('patterns_root_not_array', (pd) => { pd.patterns = {}; });
 expectRegistryReject('failure_modes_root_not_array', (pd, fd) => { fd.failure_modes = {}; });
@@ -949,6 +993,39 @@ for (const source of ['visible_grid_manual','unknown']) for (const timeAllowed o
 }
 check('generated_calibration_source_permission_matrix_8', calibrationSourceMismatches.length === 0, calibrationSourceMismatches);
 
+const calibrationScaleMismatches = [];
+for (const timeAllowed of [false,true]) for (const xPresent of [false,true]) for (const speedPresent of [false,true])
+for (const voltageAllowed of [false,true]) for (const yPresent of [false,true]) for (const gainPresent of [false,true]) {
+  const candidate = makeFixture();
+  candidate.geometry_calibrations = [makeCalibration({
+    exact_time_measurement_allowed: timeAllowed, x_pixels_per_mm: xPresent ? 1 : null,
+    paper_speed_mm_s: speedPresent ? 1 : null, exact_voltage_measurement_allowed: voltageAllowed,
+    y_pixels_per_mm: yPresent ? 1 : null, gain_mm_per_mV: gainPresent ? 1 : null
+  })];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = (timeAllowed && (!xPresent || !speedPresent)) || (voltageAllowed && (!yPresent || !gainPresent));
+  if (rejected !== expectedReject) calibrationScaleMismatches.push({timeAllowed,xPresent,speedPresent,voltageAllowed,yPresent,gainPresent,rejected});
+}
+check('generated_calibration_scale_permission_matrix_64', calibrationScaleMismatches.length === 0, calibrationScaleMismatches);
+
+const localCalibrationMismatches = [];
+for (const geometryState of ['native','uniformly_scaled','anisotropically_scaled','rotated','perspective_corrected']) {
+  for (const localCalibration of [false,true]) {
+    for (const dimension of ['time','voltage']) {
+      const candidate = makeFixture();
+      candidate.geometry_calibrations = [makeCalibration({
+        geometry_state: geometryState, local_calibration: localCalibration,
+        exact_time_measurement_allowed: dimension === 'time',
+        exact_voltage_measurement_allowed: dimension === 'voltage'
+      })];
+      const rejected = deepErrors(candidate).length > 0;
+      const expectedReject = geometryState !== 'native' && !localCalibration;
+      if (rejected !== expectedReject) localCalibrationMismatches.push({geometryState,localCalibration,dimension,rejected});
+    }
+  }
+}
+check('generated_local_calibration_geometry_matrix_20', localCalibrationMismatches.length === 0, localCalibrationMismatches);
+
 expectOutputReject('acquisition_not_assessed_with_findings', (x) => {
   x.acquisition_integrity = { status: 'not_assessed', source_kind: 'unknown', findings: ['synthetic assessment evidence'] };
 }, true);
@@ -957,6 +1034,20 @@ expectOutputReject('verified_layout_with_duplicate_primary_labels', (x) => {
 }, true);
 expectOutputReject('verified_layout_with_position_mismatch', (x) => {
   x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, position_mismatches: ['synthetic mismatch'] };
+}, true);
+expectOutputReject('lead_set_complete_with_missing_standard_lead', (x) => {
+  x.technical_quality.lead_set_complete = true;
+  x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] };
+}, true);
+expectOutputReject('layout_invalid_missing_lead_label', (x) => {
+  x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['NOT_A_LEAD'] };
+}, true);
+expectOutputReject('layout_blank_position_mismatch', (x) => {
+  x.lead_layout = { layout_type: 'custom', labels_verified: true, status: 'ambiguous', specific_lead_claims_allowed: false, position_mismatches: [''] };
+}, true);
+expectOutputReject('visual_observation_on_missing_lead', (x) => {
+  x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] };
+  x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }];
 }, true);
 
 const acquisitionMatrixMismatches = [];
@@ -973,6 +1064,21 @@ for (let mask = 0; mask < 16; mask += 1) {
   if (rejected !== expectedReject) acquisitionMatrixMismatches.push({ mask, rejected });
 }
 check('generated_acquisition_not_assessed_matrix_16', acquisitionMatrixMismatches.length === 0, acquisitionMatrixMismatches);
+
+const acquisitionSupportMismatches = [];
+for (const evidenceKind of ['none','finding','rmse','duplicate','flatline']) {
+  const candidate = makeFixture();
+  const acquisition = { status: 'possible_inconsistency', source_kind: 'visual_reconstruction', findings: [] };
+  if (evidenceKind === 'finding') acquisition.findings = ['synthetic'];
+  if (evidenceKind === 'rmse') acquisition.limb_relation_max_normalized_rmse = 0;
+  if (evidenceKind === 'duplicate') acquisition.duplicate_signal_pairs = ['I-II'];
+  if (evidenceKind === 'flatline') acquisition.flatline_leads = ['I'];
+  candidate.acquisition_integrity = acquisition;
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = evidenceKind === 'none';
+  if (rejected !== expectedReject) acquisitionSupportMismatches.push({evidenceKind,rejected});
+}
+check('generated_acquisition_support_matrix_5', acquisitionSupportMismatches.length === 0, acquisitionSupportMismatches);
 
 const layoutConflictMismatches = [];
 for (const status of ['verified', 'ambiguous']) {
@@ -992,6 +1098,30 @@ for (const status of ['verified', 'ambiguous']) {
   }
 }
 check('generated_layout_conflict_matrix_8', layoutConflictMismatches.length === 0, layoutConflictMismatches);
+
+const leadCompletenessMismatches = [];
+for (const leadSetComplete of [false,true]) for (const hasMissingLead of [false,true]) {
+  const candidate = makeFixture(); candidate.technical_quality.lead_set_complete = leadSetComplete;
+  candidate.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: hasMissingLead ? ['I'] : [] };
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = leadSetComplete && hasMissingLead;
+  if (rejected !== expectedReject) leadCompletenessMismatches.push({leadSetComplete,hasMissingLead,rejected});
+}
+check('generated_lead_set_completeness_matrix_4', leadCompletenessMismatches.length === 0, leadCompletenessMismatches);
+
+const missingLeadObservationMismatches = [];
+for (const hasMissingLead of [false,true]) for (const observationLead of ['I','II']) for (const source of ['visual','user']) {
+  const candidate = makeFixture();
+  candidate.lead_layout = {
+    layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified',
+    specific_lead_claims_allowed: true, missing_standard_leads: hasMissingLead ? ['I'] : []
+  };
+  candidate.lead_observations = [{ lead: observationLead, observations: ['synthetic'], source, confidence: 'low' }];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = hasMissingLead && observationLead === 'I' && source === 'visual';
+  if (rejected !== expectedReject) missingLeadObservationMismatches.push({hasMissingLead,observationLead,source,rejected});
+}
+check('generated_missing_lead_observation_matrix_8', missingLeadObservationMismatches.length === 0, missingLeadObservationMismatches);
 
 const evidenceMatrixMismatches = [];
 const sourceMethods = {
@@ -1174,6 +1304,16 @@ for (const sourceKind of ['visual_fiducial','digital_signal','machine_reported',
   }
 }
 check('generated_schema_conditional_asset_matrix_48', conditionalAssetMismatches.length === 0, conditionalAssetMismatches);
+
+const technicalQualityScaleMismatches = [];
+for (const paperSpeed of [null,-1,0,1]) for (const gain of [null,-1,0,1]) {
+  const candidate = makeFixture(); candidate.technical_quality.paper_speed_mm_s = paperSpeed; candidate.technical_quality.gain_mm_mV = gain;
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = (paperSpeed !== null && paperSpeed <= 0) || (gain !== null && gain <= 0);
+  if (rejected !== expectedReject) technicalQualityScaleMismatches.push({paperSpeed,gain,rejected});
+}
+check('generated_technical_quality_scale_matrix_16', technicalQualityScaleMismatches.length === 0, technicalQualityScaleMismatches);
+
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
@@ -1189,16 +1329,22 @@ const fuzzMutators = [
   (x) => { x.urgency.level = 'bad_' + randomIndex(1000); },
   (x) => { delete x.technical_quality.grade; },
   (x) => { x.interpretation.primary_pattern.confidence = 'high'; },
-  (x) => { x.measurements.push({ name: 'other', value: Infinity, unit: null, source: 'user', confidence: 'low' }); }
+  (x) => { x.measurements.push({ name: 'other', value: Infinity, unit: null, source: 'user', confidence: 'low' }); },
+  (x) => { x.technical_quality.paper_speed_mm_s = 0; },
+  (x) => { x.technical_quality.gain_mm_mV = -1; },
+  (x) => { x.geometry_calibrations = [makeCalibration({ geometry_state: 'uniformly_scaled', exact_time_measurement_allowed: true, local_calibration: false })]; },
+  (x) => { x.acquisition_integrity = { status: 'possible_inconsistency', source_kind: 'unknown', findings: [] }; },
+  (x) => { x.technical_quality.lead_set_complete = true; x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] }; },
+  (x) => { x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] }; x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }]; }
 ];
 
 const fuzzMisses = [];
-for (let i = 0; i < 64; i += 1) {
+for (let i = 0; i < 128; i += 1) {
   const candidate = makeFixture();
   fuzzMutators[randomIndex(fuzzMutators.length)](candidate);
   if (deepErrors(candidate).length === 0) fuzzMisses.push(i);
 }
-check('seeded_fuzz_64_cases_rejected', fuzzMisses.length === 0, fuzzMisses);
+check('seeded_fuzz_128_cases_rejected', fuzzMisses.length === 0, fuzzMisses);
 
 const extreme = makeFixture();
 extreme.measurements.push({ name: 'other', value: Number.MAX_VALUE, unit: null, source: 'user', confidence: 'low' });
@@ -1233,7 +1379,7 @@ const result = {
   failed,
   findings,
   seed: '0x6c06f00d',
-  seeded_cases: 64,
+  seeded_cases: 128,
   pattern_count: patterns.length,
   failure_mode_count: failures.length,
   source_count: sources.length,

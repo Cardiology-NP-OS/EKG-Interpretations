@@ -300,6 +300,18 @@ test("committed-HEAD-only gitattributes tamper is rejected", () => {
   );
 });
 
+test("highest-precedence git info attributes override is rejected in all Git views", () => {
+  const { repo, importedDir } = repoFixture();
+  const rel = path.join(CONTROL_REL, verifier.TARGET_FILES[0]).replace(/\\/g, "/");
+  const infoDir = path.join(repo, ".git", "info");
+  fs.mkdirSync(infoDir, { recursive: true });
+  fs.appendFileSync(path.join(infoDir, "attributes"), "\n" + rel + " text\n");
+  assert.throws(
+    () => verifier.verifyGitBytePolicyAt(repo, importedDir, verifier.loadProvenanceManifest()),
+    /GIT_WORKTREE_TEXT_POLICY_NOT_UNSET|GIT_INDEX_TEXT_POLICY_NOT_UNSET|GIT_HEAD_TEXT_POLICY_NOT_UNSET/
+  );
+});
+
 test("require-source mode fails closed when no source path is supplied", () => {
   const tool = path.join(__dirname, "..", "tools", "verify_v12_1_controls.js");
   const env = { ...process.env };
@@ -579,6 +591,73 @@ test("nested staged source subtree entry is rejected before inventory comparison
     () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
     /GIT_INDEX_NESTED_PATH/
   );
+});
+
+test("unmerged Git index stages are rejected before source byte validation", () => {
+  const { repo } = repoFixture();
+  const rel = path.join(CONTROL_REL, verifier.TARGET_FILES[0]).replace(/\\/g, "/");
+  const oid = runGit(repo, ["rev-parse", ":" + rel]);
+  const zero = "0".repeat(oid.length);
+  runGit(repo, ["update-index", "--index-info"], {
+    input:
+      "0 " + zero + "\t" + rel + "\n" +
+      "100644 " + oid + " 1\t" + rel + "\n" +
+      "100644 " + oid + " 2\t" + rel + "\n",
+  });
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_UNMERGED/
+  );
+});
+
+test("source subtree replaced by a staged regular file is rejected as malformed shape", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  runGit(repo, ["rm", "-r", "--cached", "--", prefix]);
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "not a source directory" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + prefix]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_INDEX_PATH_OUTSIDE_SUBTREE|GIT_INDEX_INVENTORY_MISMATCH/
+  );
+});
+
+test("source subtree replaced by a committed regular file is rejected after index restoration", () => {
+  const { repo } = repoFixture();
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  runGit(repo, ["rm", "-r", "--cached", "--", prefix]);
+  const blob = runGit(repo, ["hash-object", "-w", "--stdin"], { input: "committed non-directory subtree" });
+  runGit(repo, ["update-index", "--add", "--cacheinfo", "100644," + blob + "," + prefix]);
+  runGit(repo, [
+    "-c", "user.name=EKG Provenance Test",
+    "-c", "user.email=provenance@example.invalid",
+    "commit", "-m", "subtree blob fixture",
+  ]);
+  runGit(repo, ["restore", "--source=HEAD^", "--staged", "--", prefix]);
+  assert.throws(
+    () => verifier.verifyGitSubtreeInventoryAt(repo, verifier.loadProvenanceManifest()),
+    /GIT_HEAD_PATH_OUTSIDE_SUBTREE|GIT_HEAD_INVENTORY_MISMATCH/
+  );
+});
+
+test("NUL-delimited Git record parsing preserves newline and tab bearing paths without ambiguity", () => {
+  const prefix = CONTROL_REL.replace(/\\/g, "/");
+  const oid = "a".repeat(40);
+  for (const suffix of ["EXTRA\nNAME.md", "EXTRA\tNAME.md"]) {
+    const gitPath = prefix + "/" + suffix;
+    const indexRecord = "100644 " + oid + " 0\t" + gitPath;
+    const headRecord = "100644 blob " + oid + "\t" + gitPath;
+    assert.deepEqual(
+      verifier.parseNullGitRecords(Buffer.from(indexRecord + "\0", "utf8")),
+      [indexRecord]
+    );
+    assert.equal(verifier.parseGitIndexRecord(indexRecord).gitPath, gitPath);
+    assert.deepEqual(
+      verifier.parseNullGitRecords(Buffer.from(headRecord + "\0", "utf8")),
+      [headRecord]
+    );
+    assert.equal(verifier.parseGitHeadRecord(headRecord).gitPath, gitPath);
+  }
 });
 
 test("staged index tamper is rejected even when working tree and HEAD remain exact", () => {

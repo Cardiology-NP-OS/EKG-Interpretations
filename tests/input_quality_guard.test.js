@@ -847,6 +847,79 @@ test("oversized hostile text dominates mixed failures with global fail-closed ou
   }
 });
 
+test("non-string lead labels are malformed structured input", () => {
+  const input = baseInput();
+  input.lead_labels[0] = 123;
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.includes("LEAD_LABEL_ITEM"));
+  assert.equal(result.safePartialAnalysisAllowed, false);
+  assert.equal(result.specificLeadClaimsAllowed, false);
+  assert.equal(result.twelveLeadClaimsAllowed, false);
+});
+
+test("oversized structured scalar strings fail closed", () => {
+  const input = baseInput();
+  input.metadata_claims = [
+    {
+      field: "x".repeat(STRUCTURE_LIMITS.maxStringChars + 1),
+      value: "y",
+      source: "test",
+    },
+  ];
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.some(reason =>
+    reason.startsWith("STRUCTURE_STRING_LENGTH:")
+  ));
+  assert.equal(result.sourceTextAuthoritative, false);
+});
+
+test("configured per-item string boundaries are inclusive", () => {
+  const structured = baseInput();
+  structured.metadata_claims = [
+    {
+      field: "x".repeat(STRUCTURE_LIMITS.maxStringChars),
+      value: "y",
+      source: "test",
+    },
+  ];
+  const structuredResult = preflightInput(structured);
+  assert.equal(structuredResult.pass, true);
+  assert.equal(
+    structuredResult.malformedReasons.some(reason =>
+      reason.startsWith("STRUCTURE_STRING_LENGTH:")
+    ),
+    false
+  );
+
+  const textInput = baseInput();
+  textInput.ocr_text = ["x".repeat(TEXT_LIMITS.maxItemChars)];
+  const textResult = preflightInput(textInput);
+  assert.equal(textResult.pass, true);
+  assert.equal(
+    textResult.malformedReasons.includes("TEXT_ITEM_LENGTH_LIMIT:ocr_text"),
+    false
+  );
+});
+
+test("aggregate structured string budget fails closed", () => {
+  const input = baseInput();
+  const chunk = "x".repeat(120000);
+  input.metadata_claims = Array.from({ length: 9 }, (_, index) => ({
+    field: `field_${index}`,
+    value: chunk,
+    source: "test",
+  }));
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.some(reason =>
+    reason.startsWith("STRUCTURE_STRING_BUDGET:")
+  ));
+  assert.equal(result.safePartialAnalysisAllowed, false);
+  assert.equal(result.candidateActive, false);
+});
+
 test("deterministic malformed-structure combinations always fail closed", () => {
   for (let mask = 1; mask < 32; mask += 1) {
     const input = baseInput();
