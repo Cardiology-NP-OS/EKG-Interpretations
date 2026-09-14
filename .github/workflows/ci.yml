@@ -43,3 +43,5 @@ jobs:
         run: python clinical_control/v12_1_candidate/tests/run_candidate_gate.py
       - name: Run PKT-EP1-07 measurement evidence gate
         run: python clinical_control/v12_1_candidate/tests/run_pkt07_gate.py
+      - name: Run PKT-EP1-09 evaluation gate
+        run: python tools/pkt09_evaluation_gate.py
