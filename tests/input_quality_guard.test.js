@@ -2,6 +2,7 @@ const assert = require("assert");
 const {
   STANDARD_LEADS,
   STRUCTURE_LIMITS,
+  TEXT_LIMITS,
   preflightInput,
 } = require("../lib/input_quality_guard");
 
@@ -685,6 +686,47 @@ test("zero-width and compatibility Unicode cannot hide source instructions", () 
     assert.equal(result.machineInterpretationAuthoritative, false);
     assert.equal(result.candidateActive, false);
   }
+});
+
+test("untrusted text channel item count is bounded", () => {
+  const input = baseInput();
+  input.ocr_text = new Array(TEXT_LIMITS.maxItemsPerChannel + 1).fill("x");
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.includes("TEXT_CHANNEL_ITEM_LIMIT:ocr_text"));
+  assert.equal(result.sourceTextAuthoritative, false);
+});
+
+test("individual untrusted text items are length bounded", () => {
+  const input = baseInput();
+  input.qr_text = ["x".repeat(TEXT_LIMITS.maxItemChars + 1)];
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.includes("TEXT_ITEM_LENGTH_LIMIT:qr_text"));
+  assert.equal(result.externalLinksAndQrCodesInert, true);
+});
+
+test("aggregate untrusted text payload is length bounded", () => {
+  const input = baseInput();
+  const chunk = "x".repeat(Math.floor(TEXT_LIMITS.maxTotalChars / 5) + 1);
+  input.embedded_text = [chunk];
+  input.ocr_text = [chunk];
+  input.qr_text = [chunk];
+  input.metadata_text = [chunk];
+  input.machine_interpretation_text = [chunk];
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.includes("TEXT_TOTAL_LENGTH_LIMIT"));
+  assert.equal(result.machineInterpretationAuthoritative, false);
+});
+
+test("filename length is bounded before path inspection", () => {
+  const input = baseInput();
+  input.filename = "x".repeat(TEXT_LIMITS.maxFilenameChars + 1);
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert(result.malformedReasons.includes("FILENAME_LENGTH_LIMIT"));
+  assert.equal(result.sourceTextAuthoritative, false);
 });
 
 test("deterministic malformed-structure combinations always fail closed", () => {
