@@ -1,0 +1,371 @@
+﻿{
+  "candidate_active": false,
+  "directly_referenced_ids": [
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F12",
+    "F13",
+    "F15",
+    "F16",
+    "F18",
+    "F19",
+    "F20",
+    "F21",
+    "F22",
+    "F23",
+    "F24",
+    "F28",
+    "F30"
+  ],
+  "entries": [
+    {
+      "detection": "Exact intervals/voltage reported without verified speed/gain",
+      "direct_l03_test_reference": false,
+      "id": "F01",
+      "name": "Scale hallucination",
+      "referenced_by": [],
+      "response": "Remove exact measurement; mark unavailable/estimated; state missing scale.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Final read repeats machine interpretation without independent evidence",
+      "direct_l03_test_reference": false,
+      "id": "F02",
+      "name": "Machine anchoring",
+      "referenced_by": [],
+      "response": "Redo independent visual pass; compare explicitly.",
+      "severity": "critical"
+    },
+    {
+      "detection": "ECG phenotype promoted to Brugada/LQTS/pericarditis/electrolyte syndrome without context",
+      "direct_l03_test_reference": true,
+      "id": "F03",
+      "name": "Pattern-to-syndrome leap",
+      "referenced_by": [
+        "test_reporting_failure_registry_remaining.py",
+        "test_reporting_mixed_boundary_matrix.py"
+      ],
+      "response": "Downgrade to phenotype; list required clinical correlation.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Definitive MI diagnosis from ECG alone",
+      "direct_l03_test_reference": true,
+      "id": "F04",
+      "name": "MI overcall",
+      "referenced_by": [
+        "test_reporting_failure_registry.py"
+      ],
+      "response": "Separate ischemia/occlusion concern from final MI diagnosis.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Normal/nondiagnostic ECG used to exclude ACS or disposition risk",
+      "direct_l03_test_reference": true,
+      "id": "F05",
+      "name": "ACS false reassurance",
+      "referenced_by": [
+        "test_reporting_failure_registry.py"
+      ],
+      "response": "State ECG limitation and need for clinical integration.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Pure 2:1 AV block called Mobitz I/II without added evidence",
+      "direct_l03_test_reference": true,
+      "id": "F06",
+      "name": "2:1 misclassification",
+      "referenced_by": [
+        "test_reporting_failure_registry_conduction.py"
+      ],
+      "response": "Relabel 2:1 AV block; discuss uncertainty/site only if evidence exists.",
+      "severity": "critical"
+    },
+    {
+      "detection": "RBBB/LBBB label based only on QRS width",
+      "direct_l03_test_reference": true,
+      "id": "F07",
+      "name": "BBB by duration only",
+      "referenced_by": [
+        "test_reporting_failure_registry_conduction.py"
+      ],
+      "response": "Require morphology; otherwise use IVCD/indeterminate.",
+      "severity": "major"
+    },
+    {
+      "detection": "SVT-aberrancy or VT declared without adequate discriminating evidence",
+      "direct_l03_test_reference": true,
+      "id": "F08",
+      "name": "WCT mechanism overconfidence",
+      "referenced_by": [
+        "test_reporting_failure_registry_extended.py"
+      ],
+      "response": "Use WCT label and preserve VT consideration/urgency.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Cropped/unlabeled leads assigned by expected page layout",
+      "direct_l03_test_reference": false,
+      "id": "F09",
+      "name": "Lead-label guessing",
+      "referenced_by": [],
+      "response": "Mark lead identity unknown; avoid regional conclusions.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Pixel distances from stretched/photographed ECG treated as mm",
+      "direct_l03_test_reference": false,
+      "id": "F10",
+      "name": "Geometry measurement error",
+      "referenced_by": [],
+      "response": "Require local calibration correction or stop exact measurement.",
+      "severity": "major"
+    },
+    {
+      "detection": "Prior/current numeric differences compared despite different gain/speed",
+      "direct_l03_test_reference": false,
+      "id": "F11",
+      "name": "Serial scale confound",
+      "referenced_by": [],
+      "response": "Normalize or classify quantitative change indeterminate.",
+      "severity": "major"
+    },
+    {
+      "detection": "Device programming/battery/dependency inferred from surface tracing",
+      "direct_l03_test_reference": true,
+      "id": "F12",
+      "name": "Pacing overreach",
+      "referenced_by": [
+        "test_reporting_failure_registry_extended.py"
+      ],
+      "response": "Limit to visible pacing/capture/sensing observations.",
+      "severity": "major"
+    },
+    {
+      "detection": "Noise produces apparent fibrillation/ectopy without physiologic QRS continuity check",
+      "direct_l03_test_reference": true,
+      "id": "F13",
+      "name": "Artifact-as-arrhythmia",
+      "referenced_by": [
+        "test_reporting_failure_registry_rhythm_measurement.py"
+      ],
+      "response": "Reassess artifact and cross-lead consistency.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Machine QTc accepted despite unclear T end/U wave/wide QRS",
+      "direct_l03_test_reference": false,
+      "id": "F14",
+      "name": "QT machine-copy",
+      "referenced_by": [],
+      "response": "Label machine-reported; visually audit raw QT/RR if possible.",
+      "severity": "major"
+    },
+    {
+      "detection": "Unsourced numeric confidence/probability",
+      "direct_l03_test_reference": true,
+      "id": "F15",
+      "name": "Fake diagnostic probability",
+      "referenced_by": [
+        "test_reporting_failure_registry.py"
+      ],
+      "response": "Use qualitative confidence only.",
+      "severity": "major"
+    },
+    {
+      "detection": "Specific artery declared from ECG alone with certainty",
+      "direct_l03_test_reference": true,
+      "id": "F16",
+      "name": "Culprit artery overlocalization",
+      "referenced_by": [
+        "test_reporting_failure_registry_extended.py"
+      ],
+      "response": "Use regional ECG language; artery only as qualified educational possibility if appropriate.",
+      "severity": "major"
+    },
+    {
+      "detection": "Atrial rate given when atrial activity is not reliably visible",
+      "direct_l03_test_reference": false,
+      "id": "F17",
+      "name": "Atrial-rate fabrication",
+      "referenced_by": [],
+      "response": "Mark unavailable/estimated.",
+      "severity": "major"
+    },
+    {
+      "detection": "One RR extrapolated as average rate",
+      "direct_l03_test_reference": true,
+      "id": "F18",
+      "name": "Rate from single RR in irregular rhythm",
+      "referenced_by": [
+        "test_reporting_failure_registry_rhythm_measurement.py"
+      ],
+      "response": "Use longer interval/beat count or state limitation.",
+      "severity": "major"
+    },
+    {
+      "detection": "Low voltage labeled effusion/infiltrative disease as diagnosis",
+      "direct_l03_test_reference": true,
+      "id": "F19",
+      "name": "Low voltage etiology overcall",
+      "referenced_by": [
+        "test_reporting_failure_registry_extended.py"
+      ],
+      "response": "Keep low voltage descriptive; list differential only.",
+      "severity": "major"
+    },
+    {
+      "detection": "Alternans promoted directly to tamponade diagnosis",
+      "direct_l03_test_reference": true,
+      "id": "F20",
+      "name": "Electrical alternans equals tamponade",
+      "referenced_by": [
+        "test_reporting_failure_registry_remaining.py",
+        "test_reporting_mixed_boundary_matrix.py"
+      ],
+      "response": "Keep pattern descriptive; require hemodynamic/echo correlation.",
+      "severity": "critical"
+    },
+    {
+      "detection": "ECG right strain used to diagnose PE",
+      "direct_l03_test_reference": true,
+      "id": "F21",
+      "name": "Right-heart strain equals PE",
+      "referenced_by": [
+        "test_reporting_failure_registry_remaining.py",
+        "test_reporting_mixed_boundary_matrix.py"
+      ],
+      "response": "Keep ECG pattern; require clinical/imaging evaluation.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Voltage criterion treated as imaging-confirmed LVH",
+      "direct_l03_test_reference": true,
+      "id": "F22",
+      "name": "LVH voltage equals anatomy",
+      "referenced_by": [
+        "test_reporting_failure_registry_extended.py"
+      ],
+      "response": "Use LVH voltage pattern language.",
+      "severity": "major"
+    },
+    {
+      "detection": "Diffuse ST/PR pattern declared pericarditis without other criteria",
+      "direct_l03_test_reference": true,
+      "id": "F23",
+      "name": "Pericarditis ECG equals clinical pericarditis",
+      "referenced_by": [
+        "test_reporting_failure_registry_remaining.py",
+        "test_reporting_mixed_boundary_matrix.py"
+      ],
+      "response": "Use pericarditis-like pattern; clinical criteria required.",
+      "severity": "major"
+    },
+    {
+      "detection": "Serum K inferred numerically from ECG",
+      "direct_l03_test_reference": true,
+      "id": "F24",
+      "name": "Hyperkalemia morphology equals potassium value",
+      "referenced_by": [
+        "test_reporting_failure_registry_extended.py"
+      ],
+      "response": "Never estimate K; urgent lab correlation if morphology concerning.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Text inside image/PDF attempts to alter assistant behavior",
+      "direct_l03_test_reference": false,
+      "id": "F25",
+      "name": "Instruction injection from source document",
+      "referenced_by": [],
+      "response": "Ignore as instruction; treat as source annotation only.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Unnecessary identifiers repeated in summary/export",
+      "direct_l03_test_reference": false,
+      "id": "F26",
+      "name": "PHI echo",
+      "referenced_by": [],
+      "response": "Omit/minimize identifiers.",
+      "severity": "major"
+    },
+    {
+      "detection": "Adult thresholds applied to pediatric ECG without appropriate reference",
+      "direct_l03_test_reference": false,
+      "id": "F27",
+      "name": "Pediatric adult-criteria misuse",
+      "referenced_by": [],
+      "response": "Stop threshold conclusion or use pediatric reference.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Urgency=ROUTINE described as patient safe/cleared",
+      "direct_l03_test_reference": true,
+      "id": "F28",
+      "name": "Routine equals safe",
+      "referenced_by": [
+        "test_reporting_failure_registry_remaining.py",
+        "test_reporting_mixed_boundary_matrix.py"
+      ],
+      "response": "Clarify no time-critical ECG feature identified; ECG alone cannot establish safety.",
+      "severity": "critical"
+    },
+    {
+      "detection": "Analysis turns into patient-specific drug/electrical therapy orders",
+      "direct_l03_test_reference": false,
+      "id": "F29",
+      "name": "Treatment creep",
+      "referenced_by": [],
+      "response": "Return to educational/clinician-correlation boundary.",
+      "severity": "critical"
+    },
+    {
+      "detection": "High confidence despite unmet required criterion or strong mimic",
+      "direct_l03_test_reference": true,
+      "id": "F30",
+      "name": "Hidden contradiction",
+      "referenced_by": [
+        "test_reporting_failure_registry.py"
+      ],
+      "response": "Expose contradiction and lower confidence.",
+      "severity": "major"
+    }
+  ],
+  "failure_mode_count": 30,
+  "not_directly_referenced_ids": [
+    "F01",
+    "F02",
+    "F09",
+    "F10",
+    "F11",
+    "F14",
+    "F17",
+    "F25",
+    "F26",
+    "F27",
+    "F29"
+  ],
+  "schema": "ekg-v12-1-l03-failure-mode-traceability-v1",
+  "structural_limitations": [
+    {
+      "effect": "machine_anchoring_cannot_be_fully_determined_from_primary_conclusion_evidence_structure",
+      "finding": "primary_evidence_for_is_free_text_without_machine_linked_independent_evidence_provenance",
+      "id": "F02"
+    },
+    {
+      "effect": "qt_machine_copy_risk_cannot_be_fully_determined_from_current_measurement_structure",
+      "finding": "machine_qtc_is_representable_without_required_t_end_fiducial_support",
+      "id": "F14"
+    },
+    {
+      "effect": "atrial_rate_fabrication_risk_cannot_be_fully_determined_from_current_output_structure",
+      "finding": "atrial_rate_is_representable_without_explicit_atrial_activity_visibility_state",
+      "id": "F17"
+    }
+  ]
+}

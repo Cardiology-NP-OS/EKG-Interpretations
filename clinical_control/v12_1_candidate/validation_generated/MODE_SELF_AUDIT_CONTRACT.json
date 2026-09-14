@@ -1,0 +1,126 @@
+{
+  "schema": "ekg-v12-1-mode-self-audit-contract-v1",
+  "candidate_active": false,
+  "source_authority": {
+    "31_MODE_ROUTER.md": "bb56095c78bb5e324502ce978d7bfddaa0e0bf580fa73717936d8116decf7b72",
+    "18_SELF_AUDIT_RUBRIC.md": "b1951e29de6f092d526ab0914b2e016bd9d0febb8fa9b604270c99e6b356d760",
+    "29_IMAGE_QUALITY_PROTOCOL.md": "4720e1b2b22dd3c5100c24cebba0ebfec262a1f4f5956f298a63b9505568d459",
+    "32_REPORTING_LANGUAGE.md": "5af12b60931bf5a4bc860a3e406c69ef1c6b787e4bdce6b11510737aa03e6c03",
+    "68_STRUCTURED_OUTPUT_GUIDE.md": "2c4efb9d84e6c5a76df8b646d51572a6e0da681f52749f5a89bc410a12097364",
+    "07_OUTPUT_SCHEMA.json": "11ecf971bfe707ec620501ccf7631da20db6be358393d893c3983facba7a8d1f",
+    "23_PATTERN_REGISTRY.json": "05764e9437862f6c4f1948c6f0385abb320764c4cb0f2007ce7c426df7d31fdb",
+    "36_FAILURE_MODE_REGISTRY.json": "2d24e87df7296a9f18220f6cba96b2d26c0ad52b7adde22889439dc15d4abae2"
+  },
+  "schema_mode_enum": [
+    "general", "comparison", "qt_audit", "ischemia_audit",
+    "wct_audit", "machine_vs_human", "perioperative", "learning"
+  ],
+  "declared_modes": {
+    "analyze": "general",
+    "fast_rhythm_strip": null,
+    "qt_audit": "qt_audit",
+    "ischemia_occlusion_audit": "ischemia_audit",
+    "wide_complex_tachycardia_audit": "wct_audit",
+    "machine_vs_human": "machine_vs_human",
+    "compare": "comparison",
+    "anesthesia_lens": "perioperative",
+    "learn_blind_test": "learning"
+  },
+  "aliases": {
+    "general": "analyze",
+    "analysis": "analyze",
+    "fast rhythm strip": "fast_rhythm_strip",
+    "rhythm strip": "fast_rhythm_strip",
+    "qt audit": "qt_audit",
+    "ischemia audit": "ischemia_occlusion_audit",
+    "ischemia / occlusion audit": "ischemia_occlusion_audit",
+    "occlusion audit": "ischemia_occlusion_audit",
+    "wct audit": "wide_complex_tachycardia_audit",
+    "wide-complex tachycardia audit": "wide_complex_tachycardia_audit",
+    "machine-vs-human": "machine_vs_human",
+    "machine vs human": "machine_vs_human",
+    "comparison": "compare",
+    "anesthesia lens": "anesthesia_lens",
+    "perioperative": "anesthesia_lens",
+    "learn / blind test": "learn_blind_test",
+    "learning": "learn_blind_test"
+  },
+  "required_audit_context": [
+    "self_audit_completed",
+    "source_authority_resolved",
+    "image_quality_prerequisite_resolved",
+    "security_prerequisite_resolved"
+  ],
+  "mode_specific_context": {
+    "comparison": ["independent_ecgs_analyzed", "scale_and_quality_normalized"],
+    "machine_vs_human": ["independent_visual_pass_complete"],
+    "perioperative": ["base_analysis_complete"],
+    "learning": ["learner_committed"]
+  },
+  "unsupported_schema_states": {
+    "fast_rhythm_strip": "Router-declared mode has no distinct schema v3.1 analysis_mode value.",
+    "learning_precommit": "Router requires interpretation withholding before learner commitment, while schema v3.1 requires interpretation."
+  },
+  "quality_rules": {
+    "limited_grades_require_limitations": ["limited", "poor", "cannot_interpret"],
+    "crop_or_occlusion_requires_limitation": true,
+    "perspective_distortion_requires_limitation": true,
+    "cannot_interpret_blocks_high_confidence_pattern": true,
+    "cannot_interpret_blocks_model_exact_measurements": true
+  },
+  "measurement_rules": {
+    "numeric_measurements_require_source": true,
+    "qtc_requires_formula": true,
+    "calculated_or_estimated_qtc_requires_reliable_qt_rr": true,
+    "estimated_time_measurements_require_speed": ["rr", "pr", "qrs", "qt"],
+    "estimated_interval_measurements_require_discernible_boundaries": ["pr", "qrs", "qt"],
+    "st_deviation_requires_gain_and_undistorted_geometry": true,
+    "st_deviation_requires_identified_j_point_and_baseline": true,
+    "model_derived_axis_requires_adequate_limb_leads_and_fidelity": true
+  },
+  "evidence_rules": {
+    "rhythm_requires_evidence": true,
+    "primary_pattern_requires_evidence_for": true,
+    "high_confidence_forbidden_with_unresolved_contradiction": true,
+    "registered_pattern_id_must_resolve": true
+  },
+  "support_rules": {
+    "hidden_lead_labels_block_named_visual_lead_without_reliable_identity": true,
+    "non_null_pattern_ids_must_resolve_to_registry": true,
+    "cannot_interpret_blocks_emitted_exact_numeric_claims": true
+  },
+  "failure_registry_rules": {
+    "detected_failure_ids_must_resolve": true,
+    "detected_registered_failure_prevents_pass": true
+  },
+  "reporting_rules": {
+    "definitive_brugada_syndrome_from_ecg_alone_forbidden": true,
+    "definitive_hyperkalemia_from_ecg_alone_forbidden": true,
+    "fake_numeric_diagnostic_probability_forbidden": true
+  },
+  "mandatory_fail_flags": [
+    "invented_measurement",
+    "invented_patient_context",
+    "definitive_mi_from_ecg_alone",
+    "dangerous_pattern_buried",
+    "unsupported_exact_axis_interval_st",
+    "routine_interpreted_as_safe",
+    "definitive_brugada_syndrome_from_ecg_alone",
+    "definitive_hyperkalemia_from_ecg_alone",
+    "fake_numeric_diagnostic_probability"
+  ],
+  "failure_control_flags": {
+    "lead_label_guessing": "F09",
+    "geometry_measurement_error": "F10",
+    "source_instruction_injection": "F25",
+    "unnecessary_phi_echo": "F26",
+    "patient_specific_treatment_order": "F29",
+    "hidden_contradiction": "F30"
+  },
+  "pass_semantics": {
+    "verdicts": ["PASS", "REVISE", "BLOCKED"],
+    "pass_requires_zero_violations": true,
+    "unsupported_or_unrepresentable_mode": "BLOCKED",
+    "missing_or_false_required_audit_context": "REVISE"
+  }
+}
