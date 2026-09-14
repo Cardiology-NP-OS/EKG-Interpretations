@@ -23,18 +23,30 @@ def check(name, condition, detail=None):
 
 data = trace.build_traceability()
 expected_direct = [
-    "F03", "F04", "F05", "F06", "F07", "F08", "F12", "F15", "F16", "F19",
-    "F20", "F21", "F22", "F23", "F24", "F28", "F30",
+    "F03", "F04", "F05", "F06", "F07", "F08", "F12", "F13", "F15", "F16",
+    "F18", "F19", "F20", "F21", "F22", "F23", "F24", "F28", "F30",
 ]
 expected_unreferenced = [
-    "F01", "F02", "F09", "F10", "F11", "F13",
-    "F14", "F17", "F18", "F25", "F26", "F27", "F29",
+    "F01", "F02", "F09", "F10", "F11", "F14",
+    "F17", "F25", "F26", "F27", "F29",
 ]
-expected_structural_limitations = [{
-    "id": "F02",
-    "finding": "primary_evidence_for_is_free_text_without_machine_linked_independent_evidence_provenance",
-    "effect": "machine_anchoring_cannot_be_fully_determined_from_primary_conclusion_evidence_structure",
-}]
+expected_structural_limitations = [
+    {
+        "id": "F02",
+        "finding": "primary_evidence_for_is_free_text_without_machine_linked_independent_evidence_provenance",
+        "effect": "machine_anchoring_cannot_be_fully_determined_from_primary_conclusion_evidence_structure",
+    },
+    {
+        "id": "F14",
+        "finding": "machine_qtc_is_representable_without_required_t_end_fiducial_support",
+        "effect": "qt_machine_copy_risk_cannot_be_fully_determined_from_current_measurement_structure",
+    },
+    {
+        "id": "F17",
+        "finding": "atrial_rate_is_representable_without_explicit_atrial_activity_visibility_state",
+        "effect": "atrial_rate_fabrication_risk_cannot_be_fully_determined_from_current_output_structure",
+    },
+]
 
 check("registry_traceability_has_30_entries", data["failure_mode_count"] == 30, data["failure_mode_count"])
 check(

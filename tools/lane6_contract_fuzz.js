@@ -297,6 +297,14 @@ function deepErrors(output) {
       const value = output.technical_quality[key];
       if (value !== null && value !== undefined && !finitePositive(value)) errors.push('invalid technical quality scale: ' + key);
     }
+    const hasDeclaredScale = output.technical_quality.paper_speed_mm_s !== null && output.technical_quality.paper_speed_mm_s !== undefined ||
+      output.technical_quality.gain_mm_mV !== null && output.technical_quality.gain_mm_mV !== undefined;
+    if (hasDeclaredScale && !['visible','user','machine'].includes(output.technical_quality.calibration_source)) {
+      errors.push('technical quality scale lacks declared provenance');
+    }
+    if (Array.isArray(output.technical_quality.limitations) && !nonEmptyStringArray(output.technical_quality.limitations)) {
+      errors.push('blank technical quality limitation');
+    }
   }
   if (output.input && output.input.tracing_type === 'rhythm_strip' && output.axis !== undefined && output.axis !== null) {
     errors.push('rhythm strip contains unsupported axis assessment');
@@ -401,6 +409,7 @@ function deepErrors(output) {
     if (c.exact_voltage_measurement_allowed && (!finitePositive(c.y_pixels_per_mm) || !finitePositive(c.gain_mm_per_mV))) errors.push('voltage calibration scale incomplete');
     if (DISTORTED_GEOMETRY_STATES.has(c.geometry_state) && (c.exact_time_measurement_allowed || c.exact_voltage_measurement_allowed) && c.local_calibration !== true) errors.push('distorted geometry lacks local calibration');
     if (c.source === 'derived_homography' && c.homography_applied !== true) errors.push('derived homography source without applied homography');
+    if (output.technical_quality?.perspective_distortion === false && c.geometry_state === 'perspective_uncorrected') errors.push('technical quality denies perspective distortion while calibration is perspective_uncorrected');
   }
   for (const e of evidence) {
     const assetIdPresent = typeof e.evidence_source?.asset_id === 'string' && e.evidence_source.asset_id.length > 0;
@@ -460,6 +469,7 @@ function deepErrors(output) {
   }
 
   if (!Array.isArray(output.limitations) || output.limitations.length === 0) errors.push('limitations must be explicit');
+  if (Array.isArray(output.limitations) && !nonEmptyStringArray(output.limitations)) errors.push('blank top-level limitation');
   if (output.technical_quality && output.technical_quality.grade !== 'adequate' &&
       output.technical_quality.limitations && output.technical_quality.limitations.length === 0) {
     errors.push('non-adequate quality missing technical limitation');
@@ -500,6 +510,9 @@ function deepErrors(output) {
        (Array.isArray(acquisition.flatline_leads) && acquisition.flatline_leads.length > 0))) {
     errors.push('acquisition marked consistent despite explicit signal-integrity defects');
   }
+  if (acquisition && acquisition.status === 'consistent' && output.technical_quality?.possible_lead_reversal_or_misplacement === true) {
+    errors.push('acquisition marked consistent despite possible lead reversal or misplacement');
+  }
 
   const layout = output.lead_layout;
   if (layout) {
@@ -517,6 +530,7 @@ function deepErrors(output) {
       errors.push('lead set marked complete despite missing standard leads');
     }
     if (layout.status === 'verified' && !layout.labels_verified) errors.push('verified layout without verified labels');
+    if (layout.status === 'verified' && layout.layout_type === 'unknown') errors.push('verified layout has unknown layout type');
     if (layout.status === 'verified' && Array.isArray(layout.duplicate_primary_labels) && layout.duplicate_primary_labels.length > 0) {
       errors.push('verified layout contains duplicate primary labels');
     }
@@ -533,13 +547,33 @@ function deepErrors(output) {
   }
 
   const binding = output.serial_binding;
+  const serialInput = output.input && output.input.serial_comparison;
+  const hasSerialRows = Array.isArray(output.serial_comparison) && output.serial_comparison.length > 0;
+  if (md.analysis_mode === 'comparison' && serialInput !== true) {
+    errors.push('comparison mode not declared as serial comparison input');
+  }
   if (md.analysis_mode === 'comparison' && !binding) {
     errors.push('comparison mode missing serial binding state');
   }
-  if (Array.isArray(output.serial_comparison) && output.serial_comparison.length > 0 && !binding) {
+  if (serialInput === true && !binding) {
+    errors.push('serial comparison input missing serial binding state');
+  }
+  if (hasSerialRows && serialInput !== true) {
+    errors.push('serial comparison rows present while input serial comparison is not true');
+  }
+  if (hasSerialRows && !binding) {
     errors.push('serial comparison present without serial binding');
   }
   if (binding) {
+    if (binding.state === 'same_family_verified' && !['pseudonymous_family_token','source_metadata'].includes(binding.evidence_source)) {
+      errors.push('verified serial identity lacks verification-grade evidence source');
+    }
+    if (binding.state === 'same_family_user_asserted' && binding.evidence_source !== 'user_assertion') {
+      errors.push('user-asserted serial identity lacks user assertion evidence source');
+    }
+    if ((binding.state === 'different_family' || binding.state === 'identity_unknown') && binding.temporal_change_language_allowed) {
+      errors.push('temporal change language allowed without same-family identity');
+    }
     if (binding.comparison_scope === 'not_allowed' && binding.temporal_change_language_allowed) {
       errors.push('temporal change allowed while comparison not allowed');
     }
@@ -611,6 +645,10 @@ expectOutputReject('technical_quality_zero_paper_speed', (x) => { x.technical_qu
 expectOutputReject('technical_quality_negative_paper_speed', (x) => { x.technical_quality.paper_speed_mm_s = -1; }, true);
 expectOutputReject('technical_quality_zero_gain', (x) => { x.technical_quality.gain_mm_mV = 0; }, true);
 expectOutputReject('technical_quality_negative_gain', (x) => { x.technical_quality.gain_mm_mV = -1; }, true);
+expectOutputReject('technical_quality_scale_without_calibration_source', (x) => { x.technical_quality.paper_speed_mm_s = 1; delete x.technical_quality.calibration_source; }, true);
+expectOutputReject('technical_quality_scale_with_unknown_calibration_source', (x) => { x.technical_quality.gain_mm_mV = 1; x.technical_quality.calibration_source = 'unknown'; }, true);
+expectOutputReject('blank_top_level_limitation', (x) => { x.limitations = ['   ']; }, true);
+expectOutputReject('blank_technical_quality_limitation', (x) => { x.technical_quality.limitations = ['']; }, true);
 expectOutputReject('missing_limitations', (x) => delete x.limitations);
 expectOutputReject('absent_contradiction_summary', (x) => delete x.interpretation.contradiction_summary);
 expectOutputReject('nan_measurement', (x) => {
@@ -632,6 +670,9 @@ expectOutputReject('high_confidence_with_contradiction', (x) => {
 expectOutputReject('lead_layout_impossible_state', (x) => {
   x.lead_layout = { layout_type: 'unknown', labels_verified: false, status: 'verified', specific_lead_claims_allowed: true };
 }, true);
+expectOutputReject('verified_layout_with_unknown_layout_type', (x) => {
+  x.lead_layout = { layout_type: 'unknown', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true };
+}, true);
 expectOutputReject('lead_label_guessing', (x) => {
   x.lead_layout = { layout_type: 'unknown', labels_verified: false, status: 'ambiguous', specific_lead_claims_allowed: false };
   x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }];
@@ -641,6 +682,15 @@ expectOutputReject('serial_identity_impossible_state', (x) => {
     state: 'identity_unknown', comparison_scope: 'patient_serial', evidence_source: 'none',
     temporal_change_language_allowed: true, reason: 'synthetic'
   };
+}, true);
+expectOutputReject('verified_serial_identity_without_verification_evidence', (x) => {
+  x.serial_binding = { state: 'same_family_verified', comparison_scope: 'trace_only', evidence_source: 'none', temporal_change_language_allowed: false, reason: 'synthetic' };
+}, true);
+expectOutputReject('user_asserted_serial_identity_with_wrong_evidence', (x) => {
+  x.serial_binding = { state: 'same_family_user_asserted', comparison_scope: 'trace_only', evidence_source: 'source_metadata', temporal_change_language_allowed: false, reason: 'synthetic' };
+}, true);
+expectOutputReject('different_family_temporal_change_language', (x) => {
+  x.serial_binding = { state: 'different_family', comparison_scope: 'trace_only', evidence_source: 'none', temporal_change_language_allowed: true, reason: 'synthetic' };
 }, true);
 expectOutputReject('missing_measurement_evidence_ref', (x) => {
   x.measurements.push({
@@ -708,9 +758,19 @@ expectOutputReject('lead_observation_evidence_source_mismatch', (x) => {
   x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'user', confidence: 'low', measurement_evidence_ref: 'obs-1' }];
 }, true);
 expectOutputReject('serial_comparison_without_binding', (x) => {
+  x.input.serial_comparison = true;
   x.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
 }, true);
-expectOutputReject('comparison_mode_without_binding', (x) => { x.analysis_metadata.analysis_mode = 'comparison'; }, true);
+expectOutputReject('serial_rows_without_input_serial_flag', (x) => {
+  x.serial_binding = { state: 'same_family_verified', comparison_scope: 'patient_serial', evidence_source: 'source_metadata', temporal_change_language_allowed: true, reason: 'synthetic' };
+  x.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
+}, true);
+expectOutputReject('serial_input_without_binding', (x) => { x.input.serial_comparison = true; }, true);
+expectOutputReject('comparison_mode_without_binding', (x) => { x.analysis_metadata.analysis_mode = 'comparison'; x.input.serial_comparison = true; }, true);
+expectOutputReject('comparison_mode_without_serial_input_flag', (x) => {
+  x.analysis_metadata.analysis_mode = 'comparison';
+  x.serial_binding = { state: 'same_family_verified', comparison_scope: 'patient_serial', evidence_source: 'source_metadata', temporal_change_language_allowed: true, reason: 'synthetic' };
+}, true);
 expectOutputReject('perioperative_mode_without_lens', (x) => { x.analysis_metadata.analysis_mode = 'perioperative'; }, true);
 expectOutputReject('rhythm_strip_with_axis', (x) => {
   x.input.tracing_type = 'rhythm_strip';
@@ -740,6 +800,7 @@ expectOutputReject('calibration_time_speed_incomplete', (x) => { x.geometry_cali
 expectOutputReject('calibration_voltage_scale_incomplete', (x) => { x.geometry_calibrations = [makeCalibration({ exact_voltage_measurement_allowed: true, y_pixels_per_mm: null })]; }, true);
 expectOutputReject('calibration_voltage_gain_incomplete', (x) => { x.geometry_calibrations = [makeCalibration({ exact_voltage_measurement_allowed: true, gain_mm_per_mV: null })]; }, true);
 expectOutputReject('calibration_transformed_without_local', (x) => { x.geometry_calibrations = [makeCalibration({ geometry_state: 'uniformly_scaled', exact_time_measurement_allowed: true, local_calibration: false })]; }, true);
+expectOutputReject('technical_quality_denies_uncorrected_perspective', (x) => { x.technical_quality.perspective_distortion = false; x.geometry_calibrations = [makeCalibration({ geometry_state: 'perspective_uncorrected' })]; }, true);
 expectOutputReject('visual_exact_missing_fiducials', (x) => {
   x.technical_quality.grade = 'adequate';
   const ev = makeMeasurementEvidence('m1', 'c1');
@@ -760,6 +821,7 @@ expectOutputReject('evidence_source_asset_id_without_hash', (x) => { const ev = 
 expectOutputReject('evidence_source_hash_without_asset_id', (x) => { const ev = makeMeasurementEvidence('m1'); ev.evidence_source = { asset_id: null, asset_sha256: '0'.repeat(64) }; x.measurement_evidence = [ev]; }, true);
 expectOutputReject('acquisition_consistent_with_duplicate_signal', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], duplicate_signal_pairs: ['I-II'] }; }, true);
 expectOutputReject('acquisition_consistent_with_flatline', (x) => { x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [], flatline_leads: ['I'] }; }, true);
+expectOutputReject('acquisition_consistent_with_possible_lead_reversal', (x) => { x.technical_quality.possible_lead_reversal_or_misplacement = true; x.acquisition_integrity = { status: 'consistent', source_kind: 'digital_signal', findings: [] }; }, true);
 expectOutputReject('acquisition_possible_without_evidence', (x) => { x.acquisition_integrity = { status: 'possible_inconsistency', source_kind: 'visual_reconstruction', findings: [] }; }, true);
 expectOutputReject('acquisition_blank_finding', (x) => { x.acquisition_integrity = { status: 'insufficient_data', source_kind: 'unknown', findings: [''] }; }, true);
 expectOutputReject('acquisition_invalid_flatline_label', (x) => { x.acquisition_integrity = { status: 'possible_inconsistency', source_kind: 'digital_signal', findings: [], flatline_leads: ['NOT_A_LEAD'] }; }, true);
@@ -899,7 +961,7 @@ for (const labelsVerified of [false, true]) {
           candidate.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }];
         }
         const rejected = deepErrors(candidate).length > 0;
-        const expectedReject = (status === 'verified' && !labelsVerified) ||
+        const expectedReject = status === 'verified' ||
           (specificAllowed && (status !== 'verified' || !labelsVerified)) ||
           (hasNamedObservation && (!labelsVerified || status === 'ambiguous' || !specificAllowed));
         if (rejected !== expectedReject) layoutMatrixMismatches.push({ labelsVerified, status, specificAllowed, hasNamedObservation, rejected });
@@ -908,6 +970,21 @@ for (const labelsVerified of [false, true]) {
   }
 }
 check('generated_lead_layout_matrix_16', layoutMatrixMismatches.length === 0, layoutMatrixMismatches);
+
+const layoutTypeStatusMismatches = [];
+for (const layoutType of ['unknown','standard_3x4_rhythm','custom']) for (const status of ['verified','ambiguous']) for (const labelsVerified of [false,true]) {
+  const candidate = makeFixture();
+  candidate.lead_layout = {
+    layout_type: layoutType,
+    labels_verified: labelsVerified,
+    status,
+    specific_lead_claims_allowed: status === 'verified' && labelsVerified
+  };
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = status === 'verified' && (!labelsVerified || layoutType === 'unknown');
+  if (rejected !== expectedReject) layoutTypeStatusMismatches.push({layoutType,status,labelsVerified,rejected});
+}
+check('generated_layout_type_status_matrix_12', layoutTypeStatusMismatches.length === 0, layoutTypeStatusMismatches);
 
 const serialMatrixMismatches = [];
 const serialStates = ['same_family_verified', 'same_family_user_asserted', 'different_family', 'identity_unknown'];
@@ -925,10 +1002,12 @@ for (const state of serialStates) {
           reason: 'synthetic'
         };
         if (hasComparison) {
+          candidate.input.serial_comparison = true;
           candidate.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
         }
         const rejected = deepErrors(candidate).length > 0;
-        const expectedReject = (scope === 'not_allowed' && temporalAllowed) ||
+        const expectedReject = ((state === 'different_family' || state === 'identity_unknown') && temporalAllowed) ||
+          (scope === 'not_allowed' && temporalAllowed) ||
           ((state === 'different_family' || state === 'identity_unknown') && scope === 'patient_serial') ||
           (!temporalAllowed && hasComparison);
         if (rejected !== expectedReject) serialMatrixMismatches.push({ state, scope, temporalAllowed, hasComparison, rejected });
@@ -937,6 +1016,35 @@ for (const state of serialStates) {
   }
 }
 check('generated_serial_binding_matrix_48', serialMatrixMismatches.length === 0, serialMatrixMismatches);
+
+const serialEvidenceMismatches = [];
+for (const state of serialStates) for (const evidenceSource of ['pseudonymous_family_token','source_metadata','user_assertion','none']) {
+  const candidate = makeFixture();
+  candidate.serial_binding = { state, comparison_scope: 'trace_only', evidence_source: evidenceSource, temporal_change_language_allowed: false, reason: 'synthetic' };
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = (state === 'same_family_verified' && !['pseudonymous_family_token','source_metadata'].includes(evidenceSource)) ||
+    (state === 'same_family_user_asserted' && evidenceSource !== 'user_assertion');
+  if (rejected !== expectedReject) serialEvidenceMismatches.push({state,evidenceSource,rejected});
+}
+check('generated_serial_identity_evidence_matrix_16', serialEvidenceMismatches.length === 0, serialEvidenceMismatches);
+
+const serialDeclarationMismatches = [];
+for (const mode of ['general','comparison']) for (const serialState of ['missing',false,true]) for (const hasRows of [false,true]) for (const hasBinding of [false,true]) {
+  const candidate = makeFixture();
+  candidate.analysis_metadata.analysis_mode = mode;
+  if (serialState !== 'missing') candidate.input.serial_comparison = serialState;
+  if (hasRows) candidate.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }];
+  if (hasBinding) candidate.serial_binding = { state: 'same_family_verified', comparison_scope: 'patient_serial', evidence_source: 'source_metadata', temporal_change_language_allowed: true, reason: 'synthetic' };
+  const rejected = deepErrors(candidate).length > 0;
+  const serialTrue = serialState === true;
+  const expectedReject = (mode === 'comparison' && !serialTrue) ||
+    (mode === 'comparison' && !hasBinding) ||
+    (serialTrue && !hasBinding) ||
+    (hasRows && !serialTrue) ||
+    (hasRows && !hasBinding);
+  if (rejected !== expectedReject) serialDeclarationMismatches.push({mode,serialState,hasRows,hasBinding,rejected});
+}
+check('generated_serial_declaration_matrix_24', serialDeclarationMismatches.length === 0, serialDeclarationMismatches);
 
 const geometryMatrixMismatches = [];
 for (const geometryState of [null, 'native', 'perspective_uncorrected', 'unknown']) {
@@ -1026,6 +1134,15 @@ for (const geometryState of ['native','uniformly_scaled','anisotropically_scaled
 }
 check('generated_local_calibration_geometry_matrix_20', localCalibrationMismatches.length === 0, localCalibrationMismatches);
 
+const perspectiveQualityMismatches = [];
+for (const perspectiveDistortion of [false,true]) for (const geometryState of ['native','perspective_corrected','perspective_uncorrected']) {
+  const candidate = makeFixture(); candidate.technical_quality.perspective_distortion = perspectiveDistortion; candidate.geometry_calibrations = [makeCalibration({ geometry_state: geometryState })];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = !perspectiveDistortion && geometryState === 'perspective_uncorrected';
+  if (rejected !== expectedReject) perspectiveQualityMismatches.push({perspectiveDistortion,geometryState,rejected});
+}
+check('generated_perspective_quality_geometry_matrix_6', perspectiveQualityMismatches.length === 0, perspectiveQualityMismatches);
+
 expectOutputReject('acquisition_not_assessed_with_findings', (x) => {
   x.acquisition_integrity = { status: 'not_assessed', source_kind: 'unknown', findings: ['synthetic assessment evidence'] };
 }, true);
@@ -1079,6 +1196,16 @@ for (const evidenceKind of ['none','finding','rmse','duplicate','flatline']) {
   if (rejected !== expectedReject) acquisitionSupportMismatches.push({evidenceKind,rejected});
 }
 check('generated_acquisition_support_matrix_5', acquisitionSupportMismatches.length === 0, acquisitionSupportMismatches);
+
+const acquisitionQualityMismatches = [];
+for (const status of ['consistent','possible_inconsistency','not_assessed']) for (const possibleLeadIssue of [false,true,null]) {
+  const candidate = makeFixture(); candidate.technical_quality.possible_lead_reversal_or_misplacement = possibleLeadIssue;
+  candidate.acquisition_integrity = { status, source_kind: status === 'not_assessed' ? 'unknown' : 'digital_signal', findings: status === 'possible_inconsistency' ? ['synthetic'] : [] };
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = status === 'consistent' && possibleLeadIssue === true;
+  if (rejected !== expectedReject) acquisitionQualityMismatches.push({status,possibleLeadIssue,rejected});
+}
+check('generated_acquisition_technical_quality_matrix_9', acquisitionQualityMismatches.length === 0, acquisitionQualityMismatches);
 
 const layoutConflictMismatches = [];
 for (const status of ['verified', 'ambiguous']) {
@@ -1307,12 +1434,35 @@ check('generated_schema_conditional_asset_matrix_48', conditionalAssetMismatches
 
 const technicalQualityScaleMismatches = [];
 for (const paperSpeed of [null,-1,0,1]) for (const gain of [null,-1,0,1]) {
-  const candidate = makeFixture(); candidate.technical_quality.paper_speed_mm_s = paperSpeed; candidate.technical_quality.gain_mm_mV = gain;
+  const candidate = makeFixture(); candidate.technical_quality.calibration_source = 'visible'; candidate.technical_quality.paper_speed_mm_s = paperSpeed; candidate.technical_quality.gain_mm_mV = gain;
   const rejected = deepErrors(candidate).length > 0;
   const expectedReject = (paperSpeed !== null && paperSpeed <= 0) || (gain !== null && gain <= 0);
   if (rejected !== expectedReject) technicalQualityScaleMismatches.push({paperSpeed,gain,rejected});
 }
 check('generated_technical_quality_scale_matrix_16', technicalQualityScaleMismatches.length === 0, technicalQualityScaleMismatches);
+
+const technicalQualityProvenanceMismatches = [];
+for (const sourceState of ['missing','unknown','visible','user','machine']) for (const scaleState of ['none','speed','gain','both']) {
+  const candidate = makeFixture();
+  if (sourceState === 'missing') delete candidate.technical_quality.calibration_source; else candidate.technical_quality.calibration_source = sourceState;
+  candidate.technical_quality.paper_speed_mm_s = scaleState === 'speed' || scaleState === 'both' ? 1 : null;
+  candidate.technical_quality.gain_mm_mV = scaleState === 'gain' || scaleState === 'both' ? 1 : null;
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = scaleState !== 'none' && (sourceState === 'missing' || sourceState === 'unknown');
+  if (rejected !== expectedReject) technicalQualityProvenanceMismatches.push({sourceState,scaleState,rejected});
+}
+check('generated_technical_quality_scale_provenance_matrix_20', technicalQualityProvenanceMismatches.length === 0, technicalQualityProvenanceMismatches);
+
+const limitationContentMismatches = [];
+for (const topLevelBlank of [false,true]) for (const technicalBlank of [false,true]) {
+  const candidate = makeFixture();
+  candidate.limitations = [topLevelBlank ? '   ' : 'synthetic limitation'];
+  candidate.technical_quality.limitations = [technicalBlank ? '' : 'synthetic technical limitation'];
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = topLevelBlank || technicalBlank;
+  if (rejected !== expectedReject) limitationContentMismatches.push({topLevelBlank,technicalBlank,rejected});
+}
+check('generated_limitation_content_matrix_4', limitationContentMismatches.length === 0, limitationContentMismatches);
 
 let seed = 0x6c06f00d;
 function randomIndex(max) {
@@ -1335,16 +1485,23 @@ const fuzzMutators = [
   (x) => { x.geometry_calibrations = [makeCalibration({ geometry_state: 'uniformly_scaled', exact_time_measurement_allowed: true, local_calibration: false })]; },
   (x) => { x.acquisition_integrity = { status: 'possible_inconsistency', source_kind: 'unknown', findings: [] }; },
   (x) => { x.technical_quality.lead_set_complete = true; x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] }; },
-  (x) => { x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] }; x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }]; }
+  (x) => { x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, missing_standard_leads: ['I'] }; x.lead_observations = [{ lead: 'I', observations: ['synthetic'], source: 'visual', confidence: 'low' }]; },
+  (x) => { x.lead_layout = { layout_type: 'unknown', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true }; },
+  (x) => { x.analysis_metadata.analysis_mode = 'comparison'; x.serial_binding = { state: 'same_family_verified', comparison_scope: 'patient_serial', evidence_source: 'source_metadata', temporal_change_language_allowed: true, reason: 'synthetic' }; },
+  (x) => { x.serial_binding = { state: 'same_family_verified', comparison_scope: 'patient_serial', evidence_source: 'source_metadata', temporal_change_language_allowed: true, reason: 'synthetic' }; x.serial_comparison = [{ domain: 'synthetic', prior: 'a', current: 'b', change: 'different', confidence: 'low' }]; },
+  (x) => { x.serial_binding = { state: 'same_family_verified', comparison_scope: 'trace_only', evidence_source: 'none', temporal_change_language_allowed: false, reason: 'synthetic' }; },
+  (x) => { x.serial_binding = { state: 'different_family', comparison_scope: 'trace_only', evidence_source: 'none', temporal_change_language_allowed: true, reason: 'synthetic' }; },
+  (x) => { x.technical_quality.paper_speed_mm_s = 1; x.technical_quality.calibration_source = 'unknown'; },
+  (x) => { x.limitations = ['   ']; }
 ];
 
 const fuzzMisses = [];
-for (let i = 0; i < 128; i += 1) {
+for (let i = 0; i < 224; i += 1) {
   const candidate = makeFixture();
   fuzzMutators[randomIndex(fuzzMutators.length)](candidate);
   if (deepErrors(candidate).length === 0) fuzzMisses.push(i);
 }
-check('seeded_fuzz_128_cases_rejected', fuzzMisses.length === 0, fuzzMisses);
+check('seeded_fuzz_224_cases_rejected', fuzzMisses.length === 0, fuzzMisses);
 
 const extreme = makeFixture();
 extreme.measurements.push({ name: 'other', value: Number.MAX_VALUE, unit: null, source: 'user', confidence: 'low' });
@@ -1379,7 +1536,7 @@ const result = {
   failed,
   findings,
   seed: '0x6c06f00d',
-  seeded_cases: 128,
+  seeded_cases: 224,
   pattern_count: patterns.length,
   failure_mode_count: failures.length,
   source_count: sources.length,

@@ -358,6 +358,34 @@ test("resampled source with trustworthy local scale preserves bounded measuremen
   assert.equal(result.exactVoltageMeasurementAllowed, true);
 });
 
+test("cropped transformed source requires trustworthy local scale for exact measurements", () => {
+  const input = baseInput();
+  input.source_kind = "phone_photo";
+  input.format = "jpg";
+  input.quality_flags = ["cropped"];
+  input.calibration.local_scale_trustworthy = false;
+  const result = preflightInput(input);
+  assert(result.warningStates.includes("CROPPED_SOURCE"));
+  assert(result.warningStates.includes("SCALE_UNKNOWN"));
+  assert.equal(result.exactTimeMeasurementAllowed, false);
+  assert.equal(result.exactVoltageMeasurementAllowed, false);
+  assert(result.blockedConclusions.includes("exact_time_measurements"));
+  assert(result.blockedConclusions.includes("exact_voltage_measurements"));
+});
+
+test("cropped source with trustworthy local scale preserves bounded measurements", () => {
+  const input = baseInput();
+  input.source_kind = "phone_photo";
+  input.format = "jpg";
+  input.quality_flags = ["cropped"];
+  input.calibration.local_scale_trustworthy = true;
+  const result = preflightInput(input);
+  assert(result.warningStates.includes("CROPPED_SOURCE"));
+  assert.equal(result.exactTimeMeasurementAllowed, true);
+  assert.equal(result.exactVoltageMeasurementAllowed, true);
+  assert.equal(result.sourceTextAuthoritative, false);
+});
+
 test("QR OCR metadata and machine text remain inert untrusted data", () => {
   const input = baseInput();
   input.qr_text = ["https://example.invalid"];
@@ -587,17 +615,43 @@ test("metadata field casing cannot bypass calibration conflict detection", () =>
   assert.equal(result.exactVoltageMeasurementAllowed, true);
 });
 
-test("hostile proxy ownKeys trap fails closed instead of escaping preflight", () => {
+test("nested proxy is rejected before hostile traps can execute", () => {
   const input = baseInput();
+  let trapExecuted = false;
   const hostile = new Proxy({}, {
-    ownKeys() { throw new Error("ownKeys trap"); },
+    ownKeys() {
+      trapExecuted = true;
+      throw new Error("ownKeys trap");
+    },
   });
   input.metadata_claims = [
     { field: "hostile", value: hostile, source: "test" },
   ];
   const result = preflightInput(input);
   assert.equal(result.pass, false);
-  assert.deepEqual(result.malformedReasons, ["STRUCTURE_ACCESS_ERROR"]);
+  assert.equal(trapExecuted, false);
+  assert(result.malformedReasons.some(reason =>
+    reason.startsWith("UNSUPPORTED_PROXY_OBJECT:")
+  ));
+  assert.equal(result.safePartialAnalysisAllowed, false);
+});
+
+test("top-level proxy late-read trap fails closed without escaping preflight", () => {
+  const input = baseInput();
+  let trapExecuted = false;
+  const hostile = new Proxy(input, {
+    get(target, key, receiver) {
+      if (key === "source_kind") {
+        trapExecuted = true;
+        throw new Error("late get trap");
+      }
+      return Reflect.get(target, key, receiver);
+    },
+  });
+  const result = preflightInput(hostile);
+  assert.equal(result.pass, false);
+  assert.equal(trapExecuted, false);
+  assert.deepEqual(result.malformedReasons, ["UNSUPPORTED_PROXY_OBJECT:"]);
   assert.equal(result.safePartialAnalysisAllowed, false);
 });
 
@@ -918,6 +972,55 @@ test("aggregate structured string budget fails closed", () => {
   ));
   assert.equal(result.safePartialAnalysisAllowed, false);
   assert.equal(result.candidateActive, false);
+});
+
+test("Unicode-equivalent metadata keys cannot bypass calibration conflict detection", () => {
+  const variants = [
+    "ｐａｐｅｒ＿ｓｐｅｅｄ＿ｍｍ＿ｓ",
+    "paper_\u200bspeed_mm_s",
+  ];
+  for (const field of variants) {
+    const input = baseInput();
+    input.metadata_claims = [
+      { field, value: 50, source: "ocr" },
+    ];
+    const result = preflightInput(input);
+    assert(result.warningStates.includes("CONFLICTING_METADATA"));
+    assert.equal(result.exactTimeMeasurementAllowed, false);
+    assert.equal(result.sourceTextAuthoritative, false);
+  }
+});
+
+test("Unicode-equivalent measurement identifiers cannot split contradiction groups", () => {
+  const input = baseInput();
+  input.measurements = [
+    { name: "interval", value: 1, unit: "ms" },
+    { name: "ｉｎｔｅｒｖａｌ", value: 2, unit: "ｍｓ" },
+  ];
+  const result = preflightInput(input);
+  assert(result.warningStates.includes("CONTRADICTORY_MEASUREMENTS"));
+  assert.equal(result.measurementsReliable, false);
+  assert(result.blockedConclusions.includes("measurement_dependent_conclusions"));
+});
+
+test("identifiers that normalize to empty fail closed", () => {
+  const metadata = baseInput();
+  metadata.metadata_claims = [
+    { field: "\u200b\u2060", value: "x", source: "test" },
+  ];
+  const metadataResult = preflightInput(metadata);
+  assert.equal(metadataResult.pass, false);
+  assert(metadataResult.malformedReasons.includes("METADATA_CLAIM"));
+
+  for (const field of ["name", "unit"]) {
+    const measurement = baseInput();
+    const item = { name: "x", value: 1, unit: "u" };
+    item[field] = "\u200b\u2060";
+    measurement.measurements = [item];
+    const result = preflightInput(measurement);
+    assert.equal(result.pass, false);
+    assert(result.malformedReasons.includes("MEASUREMENT"));
+  }
 });
 
 test("deterministic malformed-structure combinations always fail closed", () => {

@@ -8,8 +8,10 @@
     "F07",
     "F08",
     "F12",
+    "F13",
     "F15",
     "F16",
+    "F18",
     "F19",
     "F20",
     "F21",
@@ -145,10 +147,12 @@
     },
     {
       "detection": "Noise produces apparent fibrillation/ectopy without physiologic QRS continuity check",
-      "direct_l03_test_reference": false,
+      "direct_l03_test_reference": true,
       "id": "F13",
       "name": "Artifact-as-arrhythmia",
-      "referenced_by": [],
+      "referenced_by": [
+        "test_reporting_failure_registry_rhythm_measurement.py"
+      ],
       "response": "Reassess artifact and cross-lead consistency.",
       "severity": "critical"
     },
@@ -194,10 +198,12 @@
     },
     {
       "detection": "One RR extrapolated as average rate",
-      "direct_l03_test_reference": false,
+      "direct_l03_test_reference": true,
       "id": "F18",
       "name": "Rate from single RR in irregular rhythm",
-      "referenced_by": [],
+      "referenced_by": [
+        "test_reporting_failure_registry_rhythm_measurement.py"
+      ],
       "response": "Use longer interval/beat count or state limitation.",
       "severity": "major"
     },
@@ -337,10 +343,8 @@
     "F09",
     "F10",
     "F11",
-    "F13",
     "F14",
     "F17",
-    "F18",
     "F25",
     "F26",
     "F27",
@@ -352,6 +356,16 @@
       "effect": "machine_anchoring_cannot_be_fully_determined_from_primary_conclusion_evidence_structure",
       "finding": "primary_evidence_for_is_free_text_without_machine_linked_independent_evidence_provenance",
       "id": "F02"
+    },
+    {
+      "effect": "qt_machine_copy_risk_cannot_be_fully_determined_from_current_measurement_structure",
+      "finding": "machine_qtc_is_representable_without_required_t_end_fiducial_support",
+      "id": "F14"
+    },
+    {
+      "effect": "atrial_rate_fabrication_risk_cannot_be_fully_determined_from_current_output_structure",
+      "finding": "atrial_rate_is_representable_without_explicit_atrial_activity_visibility_state",
+      "id": "F17"
     }
   ]
 }

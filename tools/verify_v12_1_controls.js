@@ -11,7 +11,7 @@ const IMPORTED_DIR = path.join(
 const ORIGINAL_NAME = "EKG_CHATGPT_PROJECT_V12_1_HARDENED.zip";
 const ORIGINAL_SHA256 = "c8d911ec42dc09ece708f8bafe4956a9f90853129ead04a8851383ebdb845ef5";
 const DERIVATIVE_SHA256 = "61aa14599f66df4067b0e3e8671a6860e6d324c97b891e4b18a391a61c89e396";
-const IMPORT_MANIFEST_SHA256 = "385fff74105a87ddcde2f1932b23f72b41d5a4907942ab2253173b7e9dea230f";
+const IMPORT_MANIFEST_SHA256 = "c20926be758775a53a257fe98d12686b9906b9c8359eae61c632c402a12d4c43";
 const TARGET_FILES = [
   "13_ANESTHESIA_PERIOP_OVERLAY.md",
   "18_SELF_AUDIT_RUBRIC.md",
@@ -412,7 +412,34 @@ function verifyGitBytePolicyAt(repoRoot, importedDir, p) {
     index[exp.name] = indexedHash;
     committed[exp.name] = committedHash;
   }
-  return { working_tree: workingTree, index, committed, attributes, subtree_inventory: subtreeInventory };
+  const manifestRel = String(p.pinned_import_manifest.path).split("\\").join("/");
+  const manifestFile = resolveContainedPath(repoRoot, manifestRel, "IMPORT_MANIFEST");
+  const manifestAttributes = {};
+  for (const [layer, args, prefix] of [
+    ["working_tree", ["check-attr", "text", "--", manifestRel], "GIT_WORKTREE"],
+    ["index", ["check-attr", "--cached", "text", "--", manifestRel], "GIT_INDEX"],
+    ["committed", ["check-attr", "--source=HEAD", "text", "--", manifestRel], "GIT_HEAD"],
+  ]) {
+    const attr = spawnSync("git", args, { cwd: repoRoot, encoding: "utf8" });
+    requireCondition(attr.status === 0, prefix + "_IMPORT_MANIFEST_ATTR_CHECK_FAILED");
+    requireCondition(/: text: unset\s*$/.test(attr.stdout), prefix + "_IMPORT_MANIFEST_TEXT_POLICY_NOT_UNSET");
+    manifestAttributes[layer] = "unset";
+  }
+  const manifestIndex = spawnSync("git", ["show", ":" + manifestRel], { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 });
+  const manifestHead = spawnSync("git", ["show", "HEAD:" + manifestRel], { cwd: repoRoot, encoding: null, maxBuffer: 2 * 1024 * 1024 });
+  requireCondition(manifestIndex.status === 0, "GIT_INDEX_IMPORT_MANIFEST_MISSING");
+  requireCondition(manifestHead.status === 0, "GIT_HEAD_IMPORT_MANIFEST_MISSING");
+  const manifestHashes = {
+    working_tree: sha256File(manifestFile),
+    index: sha256Buffer(manifestIndex.stdout),
+    committed: sha256Buffer(manifestHead.stdout),
+  };
+  for (const [layer, hash] of Object.entries(manifestHashes)) {
+    requireCondition(hash === p.pinned_import_manifest.sha256, "GIT_" + layer.toUpperCase() + "_IMPORT_MANIFEST_SHA256_MISMATCH");
+  }
+  requireCondition(new Set(Object.values(manifestHashes)).size === 1, "GIT_IMPORT_MANIFEST_THREE_WAY_MISMATCH");
+  return { working_tree: workingTree, index, committed, attributes, subtree_inventory: subtreeInventory,
+    import_manifest: { hashes: manifestHashes, attributes: manifestAttributes } };
 }
 
 function verifyGitBytePolicy(p) {

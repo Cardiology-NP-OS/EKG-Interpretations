@@ -51,6 +51,18 @@ def base_record():
         "verification": ["Manual review required."],
     }
 
+registry = json.loads((CORE / "36_FAILURE_MODE_REGISTRY.json").read_text(encoding="utf-8"))
+by_id = {item["id"]: item for item in registry["failure_modes"]}
+required = {
+    "F13": "Artifact-as-arrhythmia",
+    "F18": "Rate from single RR in irregular rhythm",
+}
+check(
+    "rhythm_measurement_failure_contracts_present",
+    all(by_id.get(fid, {}).get("name") == name for fid, name in required.items()),
+    {fid: by_id.get(fid) for fid in required},
+)
+
 def set_surface(record, surface, value):
     interp = record["interpretation"]
     primary = interp["primary_pattern"]
@@ -96,84 +108,62 @@ surfaces = (
     "urgency_recommended_verification", "limitations", "verification",
     "lead_observations",
 )
-registry = json.loads((CORE / "36_FAILURE_MODE_REGISTRY.json").read_text(encoding="utf-8"))
-by_id = {item["id"]: item for item in registry["failure_modes"]}
-required = {
-    "F06": "2:1 misclassification",
-    "F07": "BBB by duration only",
-}
-check(
-    "conduction_failure_contracts_present",
-    all(by_id.get(fid, {}).get("name") == name for fid, name in required.items()),
-    {fid: by_id.get(fid) for fid in required},
-)
 
-attacks = {
-    "F06": ("This 2:1 AV block is Mobitz II.", "unsupported_2to1_mobitz_subtype_declaration"),
-    "F07_RBBB": ("QRS duration alone establishes complete RBBB.", "unsupported_bbb_duration_only_declaration"),
-    "F07_LBBB": ("QRS duration alone establishes complete LBBB.", "unsupported_bbb_duration_only_declaration"),
-}
-
-attack_failures = []
+cases = [
+    (
+        "f13_irregularly_irregular_to_af",
+        "Irregularly irregular rhythm is atrial fibrillation despite unresolved artifact.",
+        "unsupported_arrhythmia_from_artifact_ambiguous_rhythm",
+    ),
+    (
+        "f18_single_rr_average_rate",
+        "Average rate is 96 bpm from a single RR interval in this irregular rhythm.",
+        "unsupported_average_rate_from_single_rr",
+    ),
+]
+case_failures = []
 attack_cases = 0
 for surface in surfaces:
-    for name, (phrase, expected) in attacks.items():
+    for name, phrase, expected in cases:
         record = base_record()
         set_surface(record, surface, phrase)
         got = set(validator.validate_record(record))
         attack_cases += 1
         if expected not in got:
-            attack_failures.append({
-                "surface": surface,
-                "attack": name,
-                "expected": expected,
-                "got": sorted(got),
-            })
-
+            case_failures.append((surface, name, phrase, expected, sorted(got)))
 check(
-    "f06_f07_detected_across_45_surface_cases",
-    attack_cases == 45 and not attack_failures,
-    attack_failures[:12],
+    "f13_f18_source_grounded_overcalls_detected_across_30_surface_cases",
+    attack_cases == 30 and not case_failures,
+    case_failures[:10],
 )
 
-safe_controls = [
-    "2:1 AV block; Mobitz subtype requires additional conduction evidence.",
-    "Bundle-branch block labeling requires compatible morphology in addition to duration.",
+controls = [
+    (
+        "Irregularly irregular rhythm; atrial fibrillation remains a consideration, "
+        "but atrial activity and artifact require assessment."
+    ),
+    (
+        "Rhythm is irregular; average rate requires a longer interval or beat count "
+        "rather than a single RR interval."
+    ),
 ]
-safe_failures = []
-for phrase in safe_controls:
+forbidden = {
+    "unsupported_arrhythmia_from_artifact_ambiguous_rhythm",
+    "unsupported_average_rate_from_single_rr",
+}
+control_failures = []
+for phrase in controls:
     record = base_record()
     record["urgency"]["reason"] = phrase
     got = set(validator.validate_record(record))
-    unexpected = sorted(got & {
-        "unsupported_2to1_mobitz_subtype_declaration",
-        "unsupported_bbb_duration_only_declaration",
-    })
+    unexpected = sorted(got & forbidden)
     if unexpected:
-        safe_failures.append((phrase, unexpected))
-
-check("conduction_boundary_controls_clean", not safe_failures, safe_failures)
-
-variant_cases = [
-    ("f06_case", "THIS 2:1 AV BLOCK IS MOBITZ II.", "unsupported_2to1_mobitz_subtype_declaration"),
-    ("f06_colon", "2:1 AV block:diagnosis:is:Mobitz I.", "unsupported_2to1_mobitz_subtype_declaration"),
-    ("f06_hyphen", "2:1-AV-block-is-Mobitz-II.", "unsupported_2to1_mobitz_subtype_declaration"),
-    ("f07_case", "QRS DURATION ALONE ESTABLISHES COMPLETE RBBB.", "unsupported_bbb_duration_only_declaration"),
-    ("f07_colon", "QRS:duration:alone:confirms:LBBB.", "unsupported_bbb_duration_only_declaration"),
-    ("f07_hyphen", "QRS-duration-alone-means-complete-LBBB.", "unsupported_bbb_duration_only_declaration"),
-]
-variant_failures = []
-for name, phrase, expected in variant_cases:
-    record = base_record()
-    record["urgency"]["reason"] = phrase
-    got = set(validator.validate_record(record))
-    if expected not in got:
-        variant_failures.append((name, phrase, expected, sorted(got)))
-check("conduction_case_separator_variants_detected", not variant_failures, variant_failures)
+        control_failures.append((phrase, unexpected))
+check("rhythm_measurement_controls_clean", not control_failures, control_failures)
 
 if failed:
     print({
-        "schema": "ekg-v12-1-reporting-failure-registry-conduction-v1",
+        "schema": "ekg-v12-1-reporting-failure-registry-rhythm-measurement-v1",
         "pass": False,
         "passed": passed,
         "failed": failed,
@@ -183,7 +173,7 @@ if failed:
     raise SystemExit(1)
 
 print({
-    "schema": "ekg-v12-1-reporting-failure-registry-conduction-v1",
+    "schema": "ekg-v12-1-reporting-failure-registry-rhythm-measurement-v1",
     "pass": True,
     "passed": passed,
     "total": passed,

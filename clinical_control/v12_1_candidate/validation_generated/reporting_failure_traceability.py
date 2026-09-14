@@ -28,6 +28,34 @@ def structural_limitations():
             "effect": "machine_anchoring_cannot_be_fully_determined_from_primary_conclusion_evidence_structure",
         })
 
+    measurements = schema["properties"]["measurements"]["items"]["properties"]
+    measurement_evidence = schema["properties"]["measurement_evidence"]["items"]["properties"]
+    if (
+        "qtc" in measurements["name"]["enum"]
+        and "machine" in measurements["source"]["enum"]
+        and "machine_reported" in measurement_evidence["source_kind"]["enum"]
+        and "minItems" not in measurement_evidence["fiducials"]
+    ):
+        limitations.append({
+            "id": "F14",
+            "finding": "machine_qtc_is_representable_without_required_t_end_fiducial_support",
+            "effect": "qt_machine_copy_risk_cannot_be_fully_determined_from_current_measurement_structure",
+        })
+
+    lead_props = schema["properties"]["lead_observations"]["items"]["properties"]
+    if (
+        "atrial_rate" in measurements["name"]["enum"]
+        and not any(
+            key in lead_props
+            for key in ("atrial_activity_visible", "atrial_activity_visibility", "p_wave_visibility")
+        )
+    ):
+        limitations.append({
+            "id": "F17",
+            "finding": "atrial_rate_is_representable_without_explicit_atrial_activity_visibility_state",
+            "effect": "atrial_rate_fabrication_risk_cannot_be_fully_determined_from_current_output_structure",
+        })
+
     return limitations
 
 def build_traceability():

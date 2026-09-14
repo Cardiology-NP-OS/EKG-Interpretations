@@ -83,11 +83,24 @@ UNSUPPORTED_NUMERIC_POTASSIUM_RE = re.compile(
     re.IGNORECASE,
 )
 UNSUPPORTED_2TO1_MOBITZ_RE = re.compile(
-    r"\b2:1\s+av\s+block\b.{0,40}\b(?:is|equals|diagnosis is)\s+mobitz\s+(?:i|ii)\b",
+    rf"\b2:1{WORD_SEP}av{WORD_SEP}block\b.{{0,40}}\b"
+    rf"(?:is|equals|diagnosis{WORD_SEP}is){WORD_SEP}mobitz{WORD_SEP}(?:i|ii)\b",
     re.IGNORECASE,
 )
 UNSUPPORTED_BBB_DURATION_ONLY_RE = re.compile(
-    r"\bqrs\s+duration\s+alone\b.{0,50}\b(?:establishes|proves|confirms|means|diagnosis is)\s+(?:complete\s+)?(?:rbbb|lbbb)\b",
+    rf"\bqrs{WORD_SEP}duration{WORD_SEP}alone\b.{{0,50}}\b"
+    rf"(?:establishes|proves|confirms|means|diagnosis{WORD_SEP}is){WORD_SEP}"
+    rf"(?:complete{WORD_SEP})?(?:rbbb|lbbb)\b",
+    re.IGNORECASE,
+)
+UNSUPPORTED_AF_FROM_IRREGULAR_RHYTHM_RE = re.compile(
+    r"\birregularly irregular rhythm\b.{0,40}\b(?:is|equals|diagnosis is)\s+atrial fibrillation\b",
+    re.IGNORECASE,
+)
+UNSUPPORTED_SINGLE_RR_AVERAGE_RATE_RE = re.compile(
+    r"\baverage rate\s+(?:is|=|equals)\s*\d+(?:\.\d+)?\s*bpm\b"
+    r".{0,50}\bfrom\s+(?:a\s+)?single rr interval\b"
+    r".{0,50}\birregular rhythm\b",
     re.IGNORECASE,
 )
 
@@ -202,7 +215,7 @@ def render_remediation_proposal():
     lines = [
         "# L03 Reporting-Boundary Remediation Proposal",
         "",
-        "**Status: PROPOSAL ONLY — INACTIVE**",
+        "**Status: PROPOSAL ONLY â€” INACTIVE**",
         "",
         "This generated artifact records deterministic structural findings only. "
         "It does not modify source authority, establish clinical validity, or authorize activation.",
@@ -411,6 +424,10 @@ def validate_record(record):
         violations.add("unsupported_2to1_mobitz_subtype_declaration")
     if UNSUPPORTED_BBB_DURATION_ONLY_RE.search(surface):
         violations.add("unsupported_bbb_duration_only_declaration")
+    if UNSUPPORTED_AF_FROM_IRREGULAR_RHYTHM_RE.search(surface):
+        violations.add("unsupported_arrhythmia_from_artifact_ambiguous_rhythm")
+    if UNSUPPORTED_SINGLE_RR_AVERAGE_RATE_RE.search(surface):
+        violations.add("unsupported_average_rate_from_single_rr")
     if any(term in label for term in DIAGNOSIS_LABEL_TERMS):
         violations.add("phenotype_promoted_to_diagnosis")
     secondary_text = [_normal(item) for item in interp.get("secondary_findings", [])]
