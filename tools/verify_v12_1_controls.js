@@ -39,6 +39,24 @@ function sha256File(file) {
 function sameArray(a, b) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
+
+function filenameIdentityKey(name) {
+  return String(name).normalize("NFKC").replace(/[ .]+$/g, "").toLowerCase();
+}
+
+function requireDistinctFilenameIdentities(names, label) {
+  const seen = new Map();
+  for (const name of names) {
+    const key = filenameIdentityKey(name);
+    requireCondition(Boolean(key), label + "_EMPTY_FILENAME_IDENTITY:" + name);
+    if (seen.has(key) && seen.get(key) !== name) {
+      throw new Error(label + "_FILENAME_IDENTITY_COLLISION:" + seen.get(key) + "|" + name);
+    }
+    seen.set(key, name);
+  }
+  return seen;
+}
+
 function validateProvenanceManifest(p) {
   requireCondition(p.schema === "ekg-v12-1-remaining-controls-provenance-v1", "PROVENANCE_SCHEMA");
   requireCondition(p.generated_validation_material === true, "PROVENANCE_GENERATED_MARKER");
@@ -51,7 +69,9 @@ function validateProvenanceManifest(p) {
   requireCondition(p.pinned_import_manifest.sha256 === IMPORT_MANIFEST_SHA256, "PINNED_IMPORT_MANIFEST_SHA256");
   requireCondition(p.source_set.exact_file_count === 9, "SOURCE_SET_COUNT");
   requireCondition(p.source_set.files.length === 9, "SOURCE_SET_FILE_COUNT");
-  const names = p.source_set.files.map(x => x.name).sort();
+  const rawNames = p.source_set.files.map(x => x.name);
+  requireDistinctFilenameIdentities(rawNames, "SOURCE_SET");
+  const names = [...rawNames].sort();
   requireCondition(sameArray(names, [...TARGET_FILES].sort()), "SOURCE_SET_INVENTORY");
   requireCondition(new Set(names).size === 9, "SOURCE_SET_DUPLICATE_NAME");
   for (const entry of p.source_set.files) {
@@ -81,7 +101,9 @@ function verifyDirectory(dir, p, label) {
   requireCondition(fs.existsSync(dir), label + "_DIR_MISSING");
   const expected = expectedMap(p);
   const entries = fs.readdirSync(dir, { withFileTypes: true });
-  const names = entries.map(x => x.name).sort();
+  const rawNames = entries.map(x => x.name);
+  requireDistinctFilenameIdentities(rawNames, label);
+  const names = [...rawNames].sort();
   requireCondition(sameArray(names, [...TARGET_FILES].sort()), label + "_INVENTORY_MISMATCH");
   const hashes = {};
   for (const entry of entries) {
@@ -318,6 +340,8 @@ module.exports = {
   loadProvenanceManifest,
   verifyDirectory,
   verifyImportManifest,
+  filenameIdentityKey,
+  requireDistinctFilenameIdentities,
   verifyGitBytePolicyAt,
   verifyGitBytePolicy,
   classifyArtifactHash,

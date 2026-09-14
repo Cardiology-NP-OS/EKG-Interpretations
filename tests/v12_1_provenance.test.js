@@ -264,6 +264,19 @@ test("directory substituted for expected file fails closed", () => {
   );
 });
 
+test("filesystem junction reparse substitution for expected source file fails closed", () => {
+  const dir = fixture();
+  const target = path.join(dir, verifier.TARGET_FILES[0]);
+  const backing = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-v12-junction-target-"));
+  fs.unlinkSync(target);
+  fs.symlinkSync(backing, target, "junction");
+  assert.equal(fs.lstatSync(target).isSymbolicLink(), true);
+  assert.throws(
+    () => verifier.verifyDirectory(dir, verifier.loadProvenanceManifest(), "TEST_SOURCE"),
+    /NOT_REGULAR_FILE/
+  );
+});
+
 test("zero-length source file fails byte-count validation", () => {
   const dir = fixture();
   fs.writeFileSync(path.join(dir, verifier.TARGET_FILES[1]), Buffer.alloc(0));
@@ -280,6 +293,39 @@ test("truncated source file fails byte-count validation", () => {
   assert.throws(
     () => verifier.verifyDirectory(dir, verifier.loadProvenanceManifest(), "TEST_SOURCE"),
     /BYTE_COUNT_MISMATCH/
+  );
+});
+
+test("filename identity rejects case aliases independent of filesystem behavior", () => {
+  assert.equal(verifier.filenameIdentityKey("Example.md"), verifier.filenameIdentityKey("example.MD"));
+  assert.throws(
+    () => verifier.requireDistinctFilenameIdentities(["Example.md", "example.MD"], "TEST"),
+    /TEST_FILENAME_IDENTITY_COLLISION/
+  );
+});
+
+test("filename identity rejects Unicode compatibility aliases deterministically", () => {
+  assert.equal(verifier.filenameIdentityKey("Ａ.md"), verifier.filenameIdentityKey("A.md"));
+  assert.throws(
+    () => verifier.requireDistinctFilenameIdentities(["Ａ.md", "A.md"], "TEST"),
+    /TEST_FILENAME_IDENTITY_COLLISION/
+  );
+});
+
+test("filename identity rejects trailing dot and space aliases deterministically", () => {
+  assert.equal(verifier.filenameIdentityKey("Control.md. "), verifier.filenameIdentityKey("control.md"));
+  assert.throws(
+    () => verifier.requireDistinctFilenameIdentities(["Control.md. ", "control.md"], "TEST"),
+    /TEST_FILENAME_IDENTITY_COLLISION/
+  );
+});
+
+test("manifest filename identity collision is rejected before inventory matching", () => {
+  const p = manifestClone();
+  p.source_set.files[1].name = p.source_set.files[0].name.toLowerCase();
+  assert.throws(
+    () => verifier.validateProvenanceManifest(p),
+    /SOURCE_SET_FILENAME_IDENTITY_COLLISION/
   );
 });
 
