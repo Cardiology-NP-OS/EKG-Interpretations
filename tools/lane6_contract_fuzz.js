@@ -336,9 +336,24 @@ function deepErrors(output) {
     errors.push('certainty despite failed technical prerequisite');
   }
 
+  const acquisition = output.acquisition_integrity;
+  if (acquisition && acquisition.status === 'not_assessed') {
+    const hasAssessmentEvidence = (Array.isArray(acquisition.findings) && acquisition.findings.length > 0) ||
+      (typeof acquisition.limb_relation_max_normalized_rmse === 'number' && Number.isFinite(acquisition.limb_relation_max_normalized_rmse)) ||
+      (Array.isArray(acquisition.duplicate_signal_pairs) && acquisition.duplicate_signal_pairs.length > 0) ||
+      (Array.isArray(acquisition.flatline_leads) && acquisition.flatline_leads.length > 0);
+    if (hasAssessmentEvidence) errors.push('acquisition marked not_assessed despite assessment evidence');
+  }
+
   const layout = output.lead_layout;
   if (layout) {
     if (layout.status === 'verified' && !layout.labels_verified) errors.push('verified layout without verified labels');
+    if (layout.status === 'verified' && Array.isArray(layout.duplicate_primary_labels) && layout.duplicate_primary_labels.length > 0) {
+      errors.push('verified layout contains duplicate primary labels');
+    }
+    if (layout.status === 'verified' && Array.isArray(layout.position_mismatches) && layout.position_mismatches.length > 0) {
+      errors.push('verified layout contains position mismatches');
+    }
     if (layout.specific_lead_claims_allowed && (layout.status !== 'verified' || !layout.labels_verified)) {
       errors.push('specific lead claims allowed despite ambiguous labels');
     }
@@ -628,6 +643,85 @@ for (const geometryState of [null, 'native', 'perspective_uncorrected', 'unknown
   }
 }
 check('generated_visual_geometry_exactness_matrix_8', geometryMatrixMismatches.length === 0, geometryMatrixMismatches);
+
+expectOutputReject('acquisition_not_assessed_with_findings', (x) => {
+  x.acquisition_integrity = { status: 'not_assessed', source_kind: 'unknown', findings: ['synthetic assessment evidence'] };
+}, true);
+expectOutputReject('verified_layout_with_duplicate_primary_labels', (x) => {
+  x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, duplicate_primary_labels: ['I'] };
+}, true);
+expectOutputReject('verified_layout_with_position_mismatch', (x) => {
+  x.lead_layout = { layout_type: 'standard_3x4_rhythm', labels_verified: true, status: 'verified', specific_lead_claims_allowed: true, position_mismatches: ['synthetic mismatch'] };
+}, true);
+
+const acquisitionMatrixMismatches = [];
+for (let mask = 0; mask < 16; mask += 1) {
+  const candidate = makeFixture();
+  const acquisition = { status: 'not_assessed', source_kind: 'unknown', findings: [] };
+  if (mask & 1) acquisition.findings = ['synthetic'];
+  if (mask & 2) acquisition.limb_relation_max_normalized_rmse = 0;
+  if (mask & 4) acquisition.duplicate_signal_pairs = ['I-II'];
+  if (mask & 8) acquisition.flatline_leads = ['I'];
+  candidate.acquisition_integrity = acquisition;
+  const rejected = deepErrors(candidate).length > 0;
+  const expectedReject = mask !== 0;
+  if (rejected !== expectedReject) acquisitionMatrixMismatches.push({ mask, rejected });
+}
+check('generated_acquisition_not_assessed_matrix_16', acquisitionMatrixMismatches.length === 0, acquisitionMatrixMismatches);
+
+const layoutConflictMismatches = [];
+for (const status of ['verified', 'ambiguous']) {
+  for (const hasDuplicateLabels of [false, true]) {
+    for (const hasPositionMismatch of [false, true]) {
+      const candidate = makeFixture();
+      candidate.lead_layout = {
+        layout_type: 'standard_3x4_rhythm', labels_verified: true, status,
+        specific_lead_claims_allowed: status === 'verified',
+        duplicate_primary_labels: hasDuplicateLabels ? ['I'] : [],
+        position_mismatches: hasPositionMismatch ? ['synthetic mismatch'] : []
+      };
+      const rejected = deepErrors(candidate).length > 0;
+      const expectedReject = status === 'verified' && (hasDuplicateLabels || hasPositionMismatch);
+      if (rejected !== expectedReject) layoutConflictMismatches.push({ status, hasDuplicateLabels, hasPositionMismatch, rejected });
+    }
+  }
+}
+check('generated_layout_conflict_matrix_8', layoutConflictMismatches.length === 0, layoutConflictMismatches);
+
+const evidenceMatrixMismatches = [];
+const sourceMethods = {
+  visual_fiducial: 'manual_fiducial', digital_signal: 'digital_sample',
+  machine_reported: 'machine_printout', user_provided: 'user_input'
+};
+for (const sourceKind of Object.keys(sourceMethods)) {
+  for (const geometryState of [null, 'native', 'perspective_uncorrected']) {
+    for (const exactAllowed of [false, true]) {
+      for (const hasFiducial of [false, true]) {
+        const candidate = makeFixture();
+        candidate.technical_quality.grade = 'adequate';
+        const ev = makeMeasurementEvidence('mx', geometryState ? 'cx' : null);
+        ev.source_kind = sourceKind;
+        ev.method = sourceMethods[sourceKind];
+        ev.exact_numeric_claim_allowed = exactAllowed;
+        ev.fiducials = hasFiducial ? [{ fiducial_id: 'fx', kind: 'other', x_px: 1, y_px: 1, point_uncertainty_px: 0 }] : [];
+        ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) };
+        candidate.measurement_evidence = [ev];
+        if (geometryState) candidate.geometry_calibrations = [{
+          version: '1.0', calibration_id: 'cx', source: 'visible_grid_manual', geometry_state: geometryState,
+          x_pixels_per_mm: 1, y_pixels_per_mm: 1, paper_speed_mm_s: 1, gain_mm_per_mV: 1,
+          x_scale_uncertainty_fraction: 0, y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0,
+          exact_time_measurement_allowed: true, exact_voltage_measurement_allowed: true,
+          supporting_evidence: ['synthetic fixture']
+        }];
+        const rejected = deepErrors(candidate).length > 0;
+        const expectedReject = sourceKind === 'visual_fiducial' && exactAllowed &&
+          (!hasFiducial || geometryState === null || geometryState === 'perspective_uncorrected');
+        if (rejected !== expectedReject) evidenceMatrixMismatches.push({ sourceKind, geometryState, exactAllowed, hasFiducial, rejected });
+      }
+    }
+  }
+}
+check('generated_evidence_source_geometry_matrix_48', evidenceMatrixMismatches.length === 0, evidenceMatrixMismatches);
 
 let seed = 0x6c06f00d;
 function randomIndex(max) {
