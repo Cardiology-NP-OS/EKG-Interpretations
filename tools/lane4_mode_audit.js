@@ -94,6 +94,33 @@ function nonEmptyArray(value) {
   return Array.isArray(value) && value.length > 0;
 }
 
+function missingRequiredFields(schema, value, at = "$", gaps = []) {
+  if (!schema || typeof schema !== "object") return gaps;
+  if (schema.type === "object") {
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+      gaps.push(at);
+      return gaps;
+    }
+    for (const key of schema.required || []) {
+      if (!Object.prototype.hasOwnProperty.call(value, key)) gaps.push(at + "." + key);
+    }
+    for (const [key, childSchema] of Object.entries(schema.properties || {})) {
+      if (Object.prototype.hasOwnProperty.call(value, key)) {
+        missingRequiredFields(childSchema, value[key], at + "." + key, gaps);
+      }
+    }
+  } else if (schema.type === "array") {
+    if (!Array.isArray(value)) {
+      gaps.push(at);
+      return gaps;
+    }
+    if (schema.items) {
+      value.forEach((item, index) => missingRequiredFields(schema.items, item, at + "[" + index + "]", gaps));
+    }
+  }
+  return gaps;
+}
+
 function auditFinalization(payload = {}) {
   const violations = [];
   const blockers = [];
@@ -111,6 +138,10 @@ function auditFinalization(payload = {}) {
   }
   if (payload.output_complete !== true) {
     add(violations, "incomplete_output", "output_complete must be boolean true");
+  }
+  if (payload.structured_output_emitted === true) {
+    const gaps = missingRequiredFields(OUTPUT_SCHEMA, payload.structured_output);
+    for (const gap of gaps) add(violations, "structured_output_required_field_missing", gap);
   }
 
   if (!route.blocked) {
@@ -255,4 +286,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { CONTRACT, resolveMode, auditFinalization };
+module.exports = { CONTRACT, resolveMode, auditFinalization, missingRequiredFields };
