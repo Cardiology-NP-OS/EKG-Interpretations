@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-signal-quality-report-v1",
+  "title": "EKG Signal Quality Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "evidenceTier",
+    "clinicalAccuracyClaimed",
+    "diagnosticInterpretationIncluded",
+    "sourceFilesVerified",
+    "sourceHashes",
+    "records",
+    "usableForEngineeringInspection",
+    "unusableLeadCount"
+  ],
+  "properties": {
+    "schema": {"const": "ekg-signal-quality-report-v1"},
+    "evidenceTier": {"const": "engineering-signal-quality-only"},
+    "clinicalAccuracyClaimed": {"const": false},
+    "diagnosticInterpretationIncluded": {"const": false},
+    "sourceFilesVerified": {"type": "integer", "minimum": 1},
+    "sourceHashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "records": {
+      "type": "object",
+      "required": ["lowRate", "highRate"],
+      "properties": {
+        "lowRate": {"$ref": "#/$defs/record"},
+        "highRate": {"$ref": "#/$defs/record"}
+      }
+    },
+    "usableForEngineeringInspection": {"type": "boolean"},
+    "unusableLeadCount": {"type": "integer", "minimum": 0}
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "required": [
+        "schema",
+        "record",
+        "leadCount",
+        "sampleRate",
+        "sampleCount",
+        "durationSeconds",
+        "diagnosticInterpretationIncluded",
+        "clinicalAccuracyClaimed",
+        "leads",
+        "unusableLeadCount",
+        "usableForEngineeringInspection"
+      ],
+      "properties": {
+        "schema": {"const": "ekg-signal-quality-v1"},
+        "record": {"type": "string"},
+        "leadCount": {"const": 12},
+        "sampleRate": {"type": "number"},
+        "sampleCount": {"type": "integer"},
+        "durationSeconds": {"type": "number"},
+        "diagnosticInterpretationIncluded": {"const": false},
+        "clinicalAccuracyClaimed": {"const": false},
+        "leads": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12
+        },
+        "unusableLeadCount": {"type": "integer", "minimum": 0},
+        "usableForEngineeringInspection": {"type": "boolean"}
+      }
+    }
+  }
+}
