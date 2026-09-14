@@ -459,6 +459,75 @@ test("hidden OCR text is explicitly surfaced and remains non-authoritative", () 
   assert.equal(result.sourceTextAuthoritative, false);
 });
 
+test("nested non-JSON scalar types fail closed instead of throwing", () => {
+  for (const value of [1n, Symbol("x"), () => "x"]) {
+    const input = baseInput();
+    input.metadata_claims = [
+      { field: "hostile", value: { nested: value }, source: "test" },
+    ];
+    const result = preflightInput(input);
+    assert.equal(result.pass, false);
+    assert(result.malformedReasons.some(reason =>
+      reason.startsWith("UNSUPPORTED_VALUE_TYPE:")
+    ));
+  }
+});
+
+test("throwing nested accessor fails closed instead of escaping preflight", () => {
+  const input = baseInput();
+  const hostile = {};
+  Object.defineProperty(hostile, "nested", {
+    enumerable: true,
+    get() { throw new Error("hostile getter"); },
+  });
+  input.metadata_claims = [
+    { field: "hostile", value: hostile, source: "test" },
+  ];
+  const result = preflightInput(input);
+  assert.equal(result.pass, false);
+  assert.deepEqual(result.malformedReasons, ["STRUCTURE_ACCESS_ERROR"]);
+  assert.equal(result.safePartialAnalysisAllowed, false);
+});
+
+test("shared nested object is not falsely classified as cyclic", () => {
+  const input = baseInput();
+  const shared = { token: "same" };
+  input.metadata_claims = [
+    { field: "left", value: shared, source: "test" },
+    { field: "right", value: shared, source: "test" },
+  ];
+  const result = preflightInput(input);
+  assert.equal(result.pass, true);
+  assert.equal(
+    result.malformedReasons.some(reason => reason.startsWith("CYCLIC_STRUCTURE:")),
+    false
+  );
+});
+
+test("deterministic malformed-structure combinations always fail closed", () => {
+  for (let mask = 1; mask < 32; mask += 1) {
+    const input = baseInput();
+    if (mask & 1) input.qr_text = ["ok", { nested: "not text" }];
+    if (mask & 2) input.metadata_claims = [
+      { field: "", value: "x", source: "test" },
+    ];
+    if (mask & 4) input.measurements = [
+      { name: "x", value: "not-number", unit: "u" },
+    ];
+    if (mask & 8) input.image.width_px = 0;
+    if (mask & 16) input.calibration.calibration_source = "untrusted";
+    const one = preflightInput(input);
+    const two = preflightInput(input);
+    assert.deepEqual(one, two);
+    assert.equal(one.pass, false);
+    assert.equal(one.safePartialAnalysisAllowed, false);
+    assert.equal(one.sourceTextAuthoritative, false);
+    assert.equal(one.machineInterpretationAuthoritative, false);
+    assert.equal(one.candidateActive, false);
+    fuzzCases += 1;
+  }
+});
+
 if (process.exitCode) process.exit(process.exitCode);
 
 console.log(JSON.stringify({
