@@ -10,6 +10,22 @@ const CONTRACT_PATH = path.join(
   "MODE_SELF_AUDIT_CONTRACT.json"
 );
 const CONTRACT = JSON.parse(fs.readFileSync(CONTRACT_PATH, "utf8"));
+const FAILURE_REGISTRY = JSON.parse(fs.readFileSync(path.join(
+  ROOT,
+  "clinical_control",
+  "v12_1_candidate",
+  "source_core",
+  "36_FAILURE_MODE_REGISTRY.json"
+), "utf8"));
+const FAILURE_IDS = new Set(FAILURE_REGISTRY.failure_modes.map((item) => item.id));
+const PATTERN_REGISTRY = JSON.parse(fs.readFileSync(path.join(
+  ROOT,
+  "clinical_control",
+  "v12_1_candidate",
+  "source_core",
+  "23_PATTERN_REGISTRY.json"
+), "utf8"));
+const PATTERN_IDS = new Set(PATTERN_REGISTRY.patterns.map((item) => item.id));
 const OUTPUT_SCHEMA = JSON.parse(fs.readFileSync(path.join(
   ROOT,
   "clinical_control",
@@ -229,6 +245,12 @@ function auditFinalization(payload = {}) {
     const emittedRhythm = payload.structured_output?.rhythm || {};
     const emittedMeasurements = Array.isArray(payload.structured_output?.measurements) ?
       payload.structured_output.measurements : [];
+    const emittedMeasurementEvidence = Array.isArray(payload.structured_output?.measurement_evidence) ?
+      payload.structured_output.measurement_evidence : [];
+    const emittedLeadObservations = Array.isArray(payload.structured_output?.lead_observations) ?
+      payload.structured_output.lead_observations : [];
+    const emittedDifferential = Array.isArray(payload.structured_output?.interpretation?.differential) ?
+      payload.structured_output.interpretation.differential : [];
     if (["limited", "poor", "cannot_interpret"].includes(emittedQuality.grade) &&
         !nonEmptyArray(emittedQuality.limitations)) {
       add(violations, "structured_output_quality_limitations_missing", emittedQuality.grade);
@@ -245,6 +267,36 @@ function auditFinalization(payload = {}) {
     if (emittedPrimary.label && !nonEmptyArray(emittedPrimary.evidence_for)) {
       add(violations, "structured_output_primary_pattern_evidence_missing", emittedPrimary.label);
     }
+    if (emittedPrimary.pattern_id !== null && emittedPrimary.pattern_id !== undefined &&
+        !PATTERN_IDS.has(emittedPrimary.pattern_id)) {
+      add(violations, "structured_output_pattern_id_unresolved", emittedPrimary.pattern_id);
+    }
+    for (const differential of emittedDifferential) {
+      if (differential && differential.pattern_id !== null && differential.pattern_id !== undefined &&
+          !PATTERN_IDS.has(differential.pattern_id)) {
+        add(violations, "structured_output_pattern_id_unresolved", differential.pattern_id);
+      }
+    }
+    if (emittedQuality.lead_labels_visible === false &&
+        !exactTrue(auditContext, "lead_identity_established_by_reliable_source")) {
+      for (const observation of emittedLeadObservations) {
+        if (observation && observation.source === "visual" && observation.lead && observation.lead !== "other") {
+          add(violations, "structured_output_named_visual_lead_without_identity", observation.lead);
+        }
+      }
+    }
+    for (const observation of emittedLeadObservations) {
+      const numericSt = observation && typeof observation.st_deviation_mm === "number" &&
+        Number.isFinite(observation.st_deviation_mm);
+      if (numericSt && ["visual", "calculated", "mixed"].includes(observation.source)) {
+        if (!exactTrue(auditContext, "st_gain_grid_geometry_trustworthy")) {
+          add(violations, "structured_output_st_geometry_prerequisite_unresolved", observation.lead || null);
+        }
+        if (!exactTrue(auditContext, "st_j_point_and_baseline_identified")) {
+          add(violations, "structured_output_st_landmarks_unresolved", observation.lead || null);
+        }
+      }
+    }
     for (const measurement of emittedMeasurements) {
       if (!measurement || typeof measurement !== "object") continue;
       const numeric = typeof measurement.value === "number" && Number.isFinite(measurement.value);
@@ -255,14 +307,31 @@ function auditFinalization(payload = {}) {
           !(typeof measurement.formula === "string" && measurement.formula.trim())) {
         add(violations, "structured_output_qtc_formula_missing", measurement.name);
       }
+      if (numeric && measurement.name === "qtc" && ["estimated", "calculated"].includes(measurement.source) &&
+          !exactTrue(auditContext, "qt_rr_inputs_reliable")) {
+        add(violations, "structured_output_qtc_inputs_unreliable", measurement.name);
+      }
       if (numeric && ["rr", "pr", "qrs", "qt"].includes(measurement.name) &&
           measurement.source === "estimated" &&
           !(typeof emittedQuality.paper_speed_mm_s === "number" && Number.isFinite(emittedQuality.paper_speed_mm_s) && emittedQuality.paper_speed_mm_s > 0)) {
         add(violations, "structured_output_estimated_time_without_verified_speed", measurement.name);
       }
+      if (numeric && ["pr", "qrs", "qt"].includes(measurement.name) &&
+          measurement.source === "estimated" &&
+          !exactTrue(auditContext, "waveform_boundaries_discernible")) {
+        add(violations, "structured_output_interval_boundaries_unresolved", measurement.name);
+      }
+      if (numeric && measurement.name === "axis" && ["estimated", "calculated"].includes(measurement.source) &&
+          !exactTrue(auditContext, "axis_limb_leads_and_fidelity_adequate")) {
+        add(violations, "structured_output_axis_prerequisite_unresolved", measurement.name);
+      }
     }
     if (emittedQuality.grade === "cannot_interpret" && emittedPrimary.confidence === "high") {
       add(violations, "structured_output_high_confidence_forbidden_by_quality", emittedQuality.grade);
+    }
+    if (emittedQuality.grade === "cannot_interpret" &&
+        emittedMeasurementEvidence.some((item) => item && item.exact_numeric_claim_allowed === true)) {
+      add(violations, "structured_output_exact_measurement_forbidden_by_quality", emittedQuality.grade);
     }
     if (payload.technical_quality?.grade !== undefined &&
         emittedQuality.grade !== undefined &&
@@ -308,6 +377,19 @@ function auditFinalization(payload = {}) {
   }
   for (const [flag, failureId] of Object.entries(CONTRACT.failure_control_flags || {})) {
     if (payload[flag] === true) add(violations, "failure_control", failureId + ":" + flag);
+  }
+  if (payload.detected_failure_ids !== undefined) {
+    if (!Array.isArray(payload.detected_failure_ids)) {
+      add(violations, "invalid_detected_failure_ids_shape", typeof payload.detected_failure_ids);
+    } else {
+      for (const failureId of payload.detected_failure_ids) {
+        if (!FAILURE_IDS.has(failureId)) {
+          add(violations, "invalid_failure_id", failureId);
+        } else {
+          add(violations, "failure_control", failureId + ":detected_failure_ids");
+        }
+      }
+    }
   }
 
   if (route.blocked && payload.normal_output_emitted === true) {
@@ -366,13 +448,30 @@ function auditFinalization(payload = {}) {
           !(typeof measurement.formula === "string" && measurement.formula.trim())) {
         add(violations, "qtc_formula_missing", measurement.name);
       }
+      if (finiteNumeric && measurement.name === "qtc" && ["estimated", "calculated"].includes(measurement.source) &&
+          !exactTrue(auditContext, "qt_rr_inputs_reliable")) {
+        add(violations, "qtc_inputs_unreliable", measurement.name);
+      }
       if (finiteNumeric && ["rr", "pr", "qrs", "qt"].includes(measurement.name) &&
           measurement.source === "estimated" && payload.paper_speed_verified !== true) {
         add(violations, "estimated_time_without_verified_speed", measurement.name);
       }
+      if (finiteNumeric && ["pr", "qrs", "qt"].includes(measurement.name) &&
+          measurement.source === "estimated" &&
+          !exactTrue(auditContext, "waveform_boundaries_discernible")) {
+        add(violations, "interval_boundaries_unresolved", measurement.name);
+      }
       if (finiteNumeric && measurement.name === "st_deviation" &&
           (payload.gain_verified !== true || payload.geometry_undistorted !== true)) {
         add(violations, "st_deviation_without_verified_geometry", measurement.name);
+      }
+      if (finiteNumeric && measurement.name === "st_deviation" &&
+          !exactTrue(auditContext, "st_j_point_and_baseline_identified")) {
+        add(violations, "st_landmarks_unresolved", measurement.name);
+      }
+      if (finiteNumeric && measurement.name === "axis" && ["estimated", "calculated"].includes(measurement.source) &&
+          !exactTrue(auditContext, "axis_limb_leads_and_fidelity_adequate")) {
+        add(violations, "axis_prerequisite_unresolved", measurement.name);
       }
     }
   }
@@ -383,7 +482,8 @@ function auditFinalization(payload = {}) {
   if (payload.primary_pattern_label && !nonEmptyArray(payload.primary_pattern_evidence_for)) {
     add(violations, "primary_pattern_evidence_missing", payload.primary_pattern_label);
   }
-  if (payload.pattern_id && payload.pattern_id_resolved !== true) {
+  if (payload.pattern_id &&
+      (!PATTERN_IDS.has(payload.pattern_id) || payload.pattern_id_resolved !== true)) {
     add(violations, "pattern_id_unresolved", payload.pattern_id);
   }
   if (payload.unresolved_contradiction === true && payload.primary_pattern_confidence === "high") {

@@ -7,12 +7,18 @@ const PRIMARY_NAMES = Object.freeze([
   "31_MODE_ROUTER.md",
   "18_SELF_AUDIT_RUBRIC.md",
 ]);
+const SUPPORT_NAMES = Object.freeze([
+  "29_IMAGE_QUALITY_PROTOCOL.md",
+  "32_REPORTING_LANGUAGE.md",
+  "68_STRUCTURED_OUTPUT_GUIDE.md",
+]);
+const AUTHORITY_NAMES = Object.freeze([...PRIMARY_NAMES, ...SUPPORT_NAMES]);
 const IMPORT_MANIFEST = JSON.parse(fs.readFileSync(path.join(
   ROOT, "clinical_control", "v12_1_candidate", "IMPORT_MANIFEST.json"
 ), "utf8"));
 const EXPECTED_HASHES = Object.freeze(Object.fromEntries(
   IMPORT_MANIFEST.inventory
-    .filter((item) => PRIMARY_NAMES.includes(item.name))
+    .filter((item) => AUTHORITY_NAMES.includes(item.name))
     .map((item) => [item.name, item.sha256])
 ));
 const IGNORED_DIRS = new Set([".git", "node_modules"]);
@@ -38,7 +44,7 @@ function portableRelative(root, absolute) {
 }
 
 function inspectAt(root = ROOT, expectedHashes = EXPECTED_HASHES) {
-  const sources = PRIMARY_NAMES.map((name) => {
+  const sources = AUTHORITY_NAMES.map((name) => {
     const expectedSha256 = expectedHashes[name] || null;
     const matches = collectExactBasename(root, name).map((absolute) => {
       const actualSha256 = sha256(absolute);
@@ -69,7 +75,9 @@ function inspectAt(root = ROOT, expectedHashes = EXPECTED_HASHES) {
     schema: "ekg-l04-source-authority-gate-v1",
     pass: missingSources.length === 0 && ambiguousSources.length === 0 &&
       unboundSources.length === 0 && hashMismatches.length === 0,
-    required_sources: [...PRIMARY_NAMES],
+    primary_sources: [...PRIMARY_NAMES],
+    support_sources: [...SUPPORT_NAMES],
+    required_sources: [...AUTHORITY_NAMES],
     sources,
     missing_sources: missingSources,
     ambiguous_sources: ambiguousSources,
@@ -95,4 +103,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { PRIMARY_NAMES, EXPECTED_HASHES, inspectAt };
+module.exports = { PRIMARY_NAMES, SUPPORT_NAMES, AUTHORITY_NAMES, EXPECTED_HASHES, inspectAt };

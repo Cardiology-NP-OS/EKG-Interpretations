@@ -1,5 +1,13 @@
 const assert = require("assert");
+const fs = require("fs");
+const path = require("path");
 const { CONTRACT, resolveMode, auditFinalization } = require("../tools/lane4_mode_audit");
+const FAILURE_REGISTRY = JSON.parse(fs.readFileSync(path.join(
+  __dirname, "..", "clinical_control", "v12_1_candidate", "source_core", "36_FAILURE_MODE_REGISTRY.json"
+), "utf8"));
+const PATTERN_REGISTRY = JSON.parse(fs.readFileSync(path.join(
+  __dirname, "..", "clinical_control", "v12_1_candidate", "source_core", "23_PATTERN_REGISTRY.json"
+), "utf8"));
 
 let passed = 0;
 let assertions = 0;
@@ -138,12 +146,89 @@ test("measurement provenance and prerequisites fail closed", () => {
   ok(codes(result).includes("st_deviation_without_verified_geometry"));
 });
 
-test("ST deviation requires both gain and undistorted geometry", () => {
+test("ST deviation requires gain geometry and identified landmarks", () => {
   const payload = base();
   payload.gain_verified = true;
   payload.geometry_undistorted = true;
+  payload.audit_context.st_j_point_and_baseline_identified = true;
   payload.measurements = [{ name: "st_deviation", value: 2, source: "estimated" }];
   eq(auditFinalization(payload).verdict, "PASS");
+});
+
+test("measurement-specific image-quality prerequisites fail closed", () => {
+  let payload = base();
+  payload.measurements = [{ name: "qtc", value: 450, source: "calculated", formula: "named formula" }];
+  let result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("qtc_inputs_unreliable"));
+  payload.audit_context.qt_rr_inputs_reliable = true;
+  eq(auditFinalization(payload).verdict, "PASS");
+
+  payload = base();
+  payload.paper_speed_verified = true;
+  payload.measurements = [{ name: "pr", value: 160, source: "estimated" }];
+  result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("interval_boundaries_unresolved"));
+  payload.audit_context.waveform_boundaries_discernible = true;
+  eq(auditFinalization(payload).verdict, "PASS");
+
+  payload = base();
+  payload.gain_verified = true;
+  payload.geometry_undistorted = true;
+  payload.measurements = [{ name: "st_deviation", value: 1, source: "estimated" }];
+  result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("st_landmarks_unresolved"));
+  payload.audit_context.st_j_point_and_baseline_identified = true;
+  eq(auditFinalization(payload).verdict, "PASS");
+
+  payload = base();
+  payload.measurements = [{ name: "axis", value: 30, source: "estimated" }];
+  result = auditFinalization(payload);
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("axis_prerequisite_unresolved"));
+  payload.audit_context.axis_limb_leads_and_fidelity_adequate = true;
+  eq(auditFinalization(payload).verdict, "PASS");
+});
+
+test("measurement prerequisite combinations fail closed unless all are resolved", () => {
+  const flags = [
+    "qt_rr_inputs_reliable",
+    "waveform_boundaries_discernible",
+    "st_j_point_and_baseline_identified",
+    "axis_limb_leads_and_fidelity_adequate",
+  ];
+  for (let mask = 0; mask < 16; mask += 1) {
+    const payload = base();
+    payload.paper_speed_verified = true;
+    payload.gain_verified = true;
+    payload.geometry_undistorted = true;
+    payload.measurements = [
+      { name: "qtc", value: 450, source: "calculated", formula: "named formula" },
+      { name: "pr", value: 160, source: "estimated" },
+      { name: "st_deviation", value: 1, source: "estimated" },
+      { name: "axis", value: 30, source: "estimated" },
+    ];
+    flags.forEach((flag, index) => {
+      if ((mask & (1 << index)) !== 0) payload.audit_context[flag] = true;
+    });
+    const result = auditFinalization(payload);
+    eq(result.verdict, mask === 15 ? "PASS" : "REVISE");
+  }
+});
+
+test("calibrated reporting boundaries are mandatory fail controls", () => {
+  for (const flag of [
+    "definitive_brugada_syndrome_from_ecg_alone",
+    "definitive_hyperkalemia_from_ecg_alone",
+    "fake_numeric_diagnostic_probability",
+  ]) {
+    ok(CONTRACT.mandatory_fail_flags.includes(flag));
+    const result = auditFinalization({ ...base(), [flag]: true });
+    eq(result.verdict, "REVISE");
+    ok(codes(result).includes("mandatory_fail"));
+  }
 });
 
 test("evidence and contradiction safeguards prevent superficial PASS", () => {
@@ -350,6 +435,35 @@ test("failure-registry controls cannot be acknowledged and still PASS", () => {
     ok(codes(result).includes("failure_control"));
     ok(result.violations.some((item) => item.detail === failureId + ":" + flag));
   }
+});
+
+test("every registered detected failure id prevents PASS", () => {
+  for (const failure of FAILURE_REGISTRY.failure_modes) {
+    const result = auditFinalization({ ...base(), detected_failure_ids: [failure.id] });
+    eq(result.verdict, "REVISE");
+    ok(codes(result).includes("failure_control"));
+    ok(result.violations.some((item) => item.detail === failure.id + ":detected_failure_ids"));
+  }
+});
+
+test("detected failure id input fails closed on malformed or unknown values", () => {
+  let result = auditFinalization({ ...base(), detected_failure_ids: "F01" });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("invalid_detected_failure_ids_shape"));
+
+  result = auditFinalization({ ...base(), detected_failure_ids: ["F99"] });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("invalid_failure_id"));
+});
+
+test("parallel pattern ids require actual registry resolution", () => {
+  const knownId = PATTERN_REGISTRY.patterns[0].id;
+  let result = auditFinalization({ ...base(), pattern_id: knownId, pattern_id_resolved: true });
+  eq(result.verdict, "PASS");
+
+  result = auditFinalization({ ...base(), pattern_id: "totally_fake", pattern_id_resolved: true });
+  eq(result.verdict, "REVISE");
+  ok(codes(result).includes("pattern_id_unresolved"));
 });
 
 if (process.exitCode) process.exit(process.exitCode);

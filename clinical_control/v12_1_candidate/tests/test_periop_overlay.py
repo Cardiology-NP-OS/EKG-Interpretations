@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TEXT = ROOT / "source_text"
+TEXT = ROOT / "source_text" / "remaining_controls"
 MANIFEST = ROOT / "IMPORT_MANIFEST.json"
 
 EXPECTED_HASHES = {

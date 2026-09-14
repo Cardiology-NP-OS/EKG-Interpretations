@@ -6,6 +6,9 @@ const { auditFinalization } = require("../tools/lane4_mode_audit");
 const schema = JSON.parse(fs.readFileSync(path.join(
   __dirname, "..", "clinical_control", "v12_1_candidate", "source_core", "07_OUTPUT_SCHEMA.json"
 ), "utf8"));
+const patternRegistry = JSON.parse(fs.readFileSync(path.join(
+  __dirname, "..", "clinical_control", "v12_1_candidate", "source_core", "23_PATTERN_REGISTRY.json"
+), "utf8"));
 
 function base() {
   return {
@@ -296,6 +299,110 @@ test("emitted numeric measurements obey provenance formula and speed rules", () 
   assert.ok(codes(result).includes("structured_output_estimated_time_without_verified_speed"));
 });
 
+test("emitted measurement-specific image-quality prerequisites fail closed", () => {
+  let output = validValue(schema);
+  let measurement = validValue(schema.properties.measurements.items);
+  measurement.name = "qtc";
+  measurement.value = 450;
+  measurement.source = "calculated";
+  measurement.formula = "named formula";
+  output.measurements = [measurement];
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_qtc_inputs_unreliable"));
+  let payload = base();
+  payload.audit_context.qt_rr_inputs_reliable = true;
+  result = auditFinalization({ ...payload, structured_output: output });
+  assert.equal(result.verdict, "PASS");
+
+  output = validValue(schema);
+  measurement = validValue(schema.properties.measurements.items);
+  measurement.name = "pr";
+  measurement.value = 160;
+  measurement.source = "estimated";
+  output.technical_quality.paper_speed_mm_s = 25;
+  output.measurements = [measurement];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_interval_boundaries_unresolved"));
+  payload = base();
+  payload.audit_context.waveform_boundaries_discernible = true;
+  result = auditFinalization({ ...payload, structured_output: output });
+  assert.equal(result.verdict, "PASS");
+
+  output = validValue(schema);
+  measurement = validValue(schema.properties.measurements.items);
+  measurement.name = "axis";
+  measurement.value = 30;
+  measurement.source = "estimated";
+  output.measurements = [measurement];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_axis_prerequisite_unresolved"));
+  payload = base();
+  payload.audit_context.axis_limb_leads_and_fidelity_adequate = true;
+  result = auditFinalization({ ...payload, structured_output: output });
+  assert.equal(result.verdict, "PASS");
+
+  output = validValue(schema);
+  const observation = validValue(schema.properties.lead_observations.items);
+  observation.lead = "II";
+  observation.source = "visual";
+  observation.st_deviation_mm = 1;
+  output.lead_observations = [observation];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_st_geometry_prerequisite_unresolved"));
+  assert.ok(codes(result).includes("structured_output_st_landmarks_unresolved"));
+  payload = base();
+  payload.audit_context.st_gain_grid_geometry_trustworthy = true;
+  payload.audit_context.st_j_point_and_baseline_identified = true;
+  result = auditFinalization({ ...payload, structured_output: output });
+  assert.equal(result.verdict, "PASS");
+});
+
+test("structured measurement prerequisite combinations require every resolved condition", () => {
+  const flags = [
+    "qt_rr_inputs_reliable",
+    "waveform_boundaries_discernible",
+    "axis_limb_leads_and_fidelity_adequate",
+    "st_gain_grid_geometry_trustworthy",
+    "st_j_point_and_baseline_identified",
+  ];
+  for (let mask = 0; mask < 32; mask += 1) {
+    const output = validValue(schema);
+    output.technical_quality.paper_speed_mm_s = 25;
+
+    const qtc = validValue(schema.properties.measurements.items);
+    qtc.name = "qtc";
+    qtc.value = 450;
+    qtc.source = "calculated";
+    qtc.formula = "named formula";
+    const pr = validValue(schema.properties.measurements.items);
+    pr.name = "pr";
+    pr.value = 160;
+    pr.source = "estimated";
+    const axis = validValue(schema.properties.measurements.items);
+    axis.name = "axis";
+    axis.value = 30;
+    axis.source = "estimated";
+    output.measurements = [qtc, pr, axis];
+
+    const observation = validValue(schema.properties.lead_observations.items);
+    observation.lead = "II";
+    observation.source = "visual";
+    observation.st_deviation_mm = 1;
+    output.lead_observations = [observation];
+
+    const payload = base();
+    flags.forEach((flag, index) => {
+      if ((mask & (1 << index)) !== 0) payload.audit_context[flag] = true;
+    });
+    const result = auditFinalization({ ...payload, structured_output: output });
+    assert.equal(result.verdict, mask === 31 ? "PASS" : "REVISE");
+  }
+});
+
 test("cross-representation acquisition and interpretation contradictions cannot pass", () => {
   let output = validValue(schema);
   output.technical_quality.crop_or_occlusion = true;
@@ -342,6 +449,75 @@ test("cross-representation acquisition and interpretation contradictions cannot 
     primary_pattern_label: output.interpretation.primary_pattern.label,
     structured_output: output,
   });
+  assert.equal(result.verdict, "PASS");
+});
+
+test("cannot-interpret quality blocks emitted exact numeric claims", () => {
+  function outputWithExactClaim(grade) {
+    const output = validValue(schema);
+    output.technical_quality.grade = grade;
+    output.technical_quality.limitations = [grade + " quality"];
+    output.interpretation.primary_pattern.confidence = "low";
+    const evidence = validValue(schema.properties.measurement_evidence.items);
+    evidence.measurement_id = "m_exact";
+    evidence.source_kind = "machine_reported";
+    evidence.exact_numeric_claim_allowed = true;
+    output.measurement_evidence = [evidence];
+    return output;
+  }
+
+  let result = auditFinalization({ ...base(), structured_output: outputWithExactClaim("cannot_interpret") });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_exact_measurement_forbidden_by_quality"));
+
+  for (const grade of ["limited", "poor"]) {
+    result = auditFinalization({ ...base(), structured_output: outputWithExactClaim(grade) });
+    assert.equal(result.verdict, "PASS");
+  }
+});
+
+test("structured pattern ids must resolve to the pattern registry", () => {
+  const knownId = patternRegistry.patterns[0].id;
+  let output = validValue(schema);
+  output.interpretation.primary_pattern.label = "known pattern";
+  output.interpretation.primary_pattern.evidence_for = ["evidence"];
+  output.interpretation.primary_pattern.pattern_id = knownId;
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "PASS");
+
+  output = validValue(schema);
+  output.interpretation.primary_pattern.label = "invented pattern";
+  output.interpretation.primary_pattern.evidence_for = ["evidence"];
+  output.interpretation.primary_pattern.pattern_id = "totally_fake";
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_pattern_id_unresolved"));
+
+  output = validValue(schema);
+  const differential = validValue(schema.properties.interpretation.properties.differential.items);
+  differential.pattern_id = "totally_fake";
+  output.interpretation.differential = [differential];
+  result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_pattern_id_unresolved"));
+});
+
+test("hidden lead labels block named visual lead assignment without reliable identity", () => {
+  let output = validValue(schema);
+  output.technical_quality.lead_labels_visible = false;
+  const observation = validValue(schema.properties.lead_observations.items);
+  observation.lead = "V1";
+  observation.observations = ["visual morphology"];
+  observation.source = "visual";
+  observation.confidence = "high";
+  output.lead_observations = [observation];
+  let result = auditFinalization({ ...base(), structured_output: output });
+  assert.equal(result.verdict, "REVISE");
+  assert.ok(codes(result).includes("structured_output_named_visual_lead_without_identity"));
+
+  const payload = base();
+  payload.audit_context.lead_identity_established_by_reliable_source = true;
+  result = auditFinalization({ ...payload, structured_output: output });
   assert.equal(result.verdict, "PASS");
 });
 
