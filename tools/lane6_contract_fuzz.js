@@ -567,6 +567,34 @@ for (const state of serialStates) {
 }
 check('generated_serial_binding_matrix_48', serialMatrixMismatches.length === 0, serialMatrixMismatches);
 
+const geometryMatrixMismatches = [];
+for (const geometryState of [null, 'native', 'perspective_uncorrected', 'unknown']) {
+  for (const exactAllowed of [false, true]) {
+    const candidate = makeFixture();
+    candidate.technical_quality.grade = 'adequate';
+    const ev = makeMeasurementEvidence('visual-1', geometryState ? 'cal-1' : null);
+    ev.source_kind = 'visual_fiducial';
+    ev.method = 'manual_fiducial';
+    ev.exact_numeric_claim_allowed = exactAllowed;
+    ev.evidence_source = { asset_id: 'synthetic-asset', asset_sha256: '0'.repeat(64) };
+    candidate.measurement_evidence = [ev];
+    if (geometryState) {
+      candidate.geometry_calibrations = [{
+        version: '1.0', calibration_id: 'cal-1', source: 'visible_grid_manual',
+        geometry_state: geometryState, x_pixels_per_mm: 1, y_pixels_per_mm: 1,
+        paper_speed_mm_s: 1, gain_mm_per_mV: 1, x_scale_uncertainty_fraction: 0,
+        y_scale_uncertainty_fraction: 0, residual_error_fraction_small_box: 0,
+        exact_time_measurement_allowed: true, exact_voltage_measurement_allowed: true,
+        supporting_evidence: ['synthetic fixture']
+      }];
+    }
+    const rejected = deepErrors(candidate).length > 0;
+    const expectedReject = exactAllowed && (geometryState === null || geometryState === 'perspective_uncorrected' || geometryState === 'unknown');
+    if (rejected !== expectedReject) geometryMatrixMismatches.push({ geometryState, exactAllowed, rejected });
+  }
+}
+check('generated_visual_geometry_exactness_matrix_8', geometryMatrixMismatches.length === 0, geometryMatrixMismatches);
+
 let seed = 0x6c06f00d;
 function randomIndex(max) {
   seed ^= seed << 13;
