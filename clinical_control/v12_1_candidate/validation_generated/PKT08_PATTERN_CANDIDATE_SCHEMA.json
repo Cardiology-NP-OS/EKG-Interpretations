@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PKT-EP1-08 Pattern Candidate Evidence",
+  "type": "object",
+  "required": [
+    "schema","candidate_id","pattern_id","label","domain","status","required_evidence",
+    "supportive_evidence","missing_required_evidence","major_confounders_or_mimics",
+    "diagnostic_boundary","urgency","certainty","candidate_active",
+    "clinical_accuracy_claimed","diagnosis","automatic_selection_allowed"
+  ],
+  "properties": {
+    "schema": {"const":"ekg-pkt08-pattern-candidate-v1"},
+    "candidate_id": {"type":"string","pattern":"^pc_[0-9a-f]{24}$"},
+    "pattern_id": {"type":"string"},
+    "status": {"enum":["PRESENT_CANDIDATE","ABSENT_BY_RULE","INDETERMINATE","INELIGIBLE","NOT_EXECUTABLE"]},
+    "diagnosis": {"type":"null"},
+    "candidate_active": {"const":false},
+    "clinical_accuracy_claimed": {"const":false},
+    "automatic_selection_allowed": {"const":false},
+    "supporting_leads": {"type":"array","items":{"type":"string"}},
+    "contradictions": {"type":"array"},
+    "active_confounders": {"type":"array"}
+  },
+  "additionalProperties": true
+}

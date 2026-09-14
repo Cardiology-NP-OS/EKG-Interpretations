@@ -1,0 +1,31 @@
+{
+  "schema": "ekg-pkt08-task-evidence-v1",
+  "packet_id": "PKT-EP1-08",
+  "packet_sha256": "8c2c0ec07d81d15d4e25cea4e45895cd364d14ab8c2c67cb4771dd8ad6cb4e82",
+  "candidate_active": false,
+  "clinical_accuracy_claimed": false,
+  "task_evidence": [
+    {"task_id":"T0113","status":"COMPLETE","evidence":["pattern_candidate_engine.py::load_registry","59 unique pattern IDs","registry SHA-256 pinned and mutation rejected"]},
+    {"task_id":"T0114","status":"COMPLETE","evidence":["PKT08_PATTERN_CANDIDATE_SCHEMA.json","candidate evidence distinct from diagnosis"]},
+    {"task_id":"T0115","status":"COMPLETE","evidence":["required_evidence/supportive_evidence/satisfied_required_evidence/missing_required_evidence are distinct fields"]},
+    {"task_id":"T0116","status":"COMPLETE","evidence":["major_confounders_or_mimics always surfaced","active confounders and contradictions force INDETERMINATE"]},
+    {"task_id":"T0117","status":"COMPLETE","evidence":["ST rule requires calibrated lead-labelled measurements","missing prerequisites fail closed"]},
+    {"task_id":"T0118","status":"COMPLETE","evidence":["adult registry population enforced","unsupported population returns INELIGIBLE"]},
+    {"task_id":"T0119","status":"COMPLETE","evidence":["regional ST candidate names supporting leads","leadless regional evidence cannot become PRESENT_CANDIDATE"]},
+    {"task_id":"T0120","status":"COMPLETE","evidence":["diagnostic_boundary copied from registry into every candidate result"]},
+    {"task_id":"T0121","status":"COMPLETE","evidence":["urgency remains registry metadata independent of certainty","urgency never activates diagnosis"]},
+    {"task_id":"T0122","status":"COMPLETE","evidence":["PKT08_EXECUTABLE_RULES.json","default NOT_EXECUTABLE","exactly three full-pattern rules"]},
+    {"task_id":"T0123","status":"COMPLETE","evidence":["source-backed axis and conventional ST rules","component helper evidence for rate/QRS/Sgarbossa without completing morphology-dependent patterns"]},
+    {"task_id":"T0124","status":"COMPLETE","evidence":["PKT08_SYNTHETIC_PATTERN_FIXTURES.json","positive/negative/indeterminate/confounded cases"]},
+    {"task_id":"T0125","status":"COMPLETE","evidence":["56/59 patterns explicitly NOT_EXECUTABLE","AF/LBBB/sinus tachy examples fail closed"]},
+    {"task_id":"T0126","status":"COMPLETE","evidence":["aggregate_candidates preserves contradictions","automatic_winner=null","automatic_selection_allowed=false"]},
+    {"task_id":"T0127","status":"COMPLETE","evidence":["candidate_active=false","clinical_accuracy_claimed=false","diagnosis=null in candidate schema"]},
+    {"task_id":"T0128","status":"AWAITING_INDEPENDENT_VERIFICATION","evidence":[]}
+  ],
+  "local_gate_summary": {
+    "pkt08_pattern_candidate_tests": "51/51 PASS",
+    "registry_patterns": 59,
+    "executable_patterns": 3,
+    "unsupported_patterns": 56
+  }
+}

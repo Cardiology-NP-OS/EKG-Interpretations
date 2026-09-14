@@ -1,0 +1,17 @@
+{
+  "schema": "ekg-pkt08-synthetic-pattern-fixtures-v1",
+  "clinical_gold": false,
+  "fixtures": [
+    {"id":"left_axis_present","pattern_id":"left_axis","axis_deg":-45,"expected":"PRESENT_CANDIDATE"},
+    {"id":"left_axis_absent","pattern_id":"left_axis","axis_deg":40,"expected":"ABSENT_BY_RULE"},
+    {"id":"right_axis_present","pattern_id":"right_axis","axis_deg":120,"expected":"PRESENT_CANDIDATE"},
+    {"id":"right_axis_absent","pattern_id":"right_axis","axis_deg":0,"expected":"ABSENT_BY_RULE"},
+    {"id":"axis_confounded","pattern_id":"left_axis","axis_deg":-45,"confounders":["lead reversal not excluded"],"expected":"INDETERMINATE"},
+    {"id":"stemi_inferior_present","pattern_id":"stemi_threshold","st_mm":{"II":1.2,"III":1.4},"expected":"PRESENT_CANDIDATE"},
+    {"id":"stemi_inferior_absent","pattern_id":"stemi_threshold","st_mm":{"II":0.2,"III":0.4},"expected":"ABSENT_BY_RULE"},
+    {"id":"stemi_v2v3_demographics_missing","pattern_id":"stemi_threshold","st_mm":{"V2":2.2,"V3":2.2},"expected":"INDETERMINATE"},
+    {"id":"stemi_bbb_lvh_confounded","pattern_id":"stemi_threshold","st_mm":{"II":2.0,"III":2.0},"bbb_or_lvh_confounded":true,"expected":"INDETERMINATE"},
+    {"id":"unsupported_af","pattern_id":"af","expected":"NOT_EXECUTABLE"},
+    {"id":"unsupported_complete_lbbb","pattern_id":"complete_lbbb","expected":"NOT_EXECUTABLE"}
+  ]
+}
