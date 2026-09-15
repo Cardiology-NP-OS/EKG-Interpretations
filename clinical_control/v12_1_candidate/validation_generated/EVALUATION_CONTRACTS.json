@@ -1,0 +1,49 @@
+{
+  "schema": "ekg-pkt09-evaluation-contracts-v1",
+  "candidate_active": false,
+  "clinical_accuracy_claimed": false,
+  "native_dataset_annotations_are_project_gold": false,
+  "gold_case": {
+    "schema": "ekg-pkt09-gold-case-v1",
+    "required_states": {
+      "usage_status": "APPROVED",
+      "privacy_review_status": "CLEARED_NON_SENSITIVE",
+      "rights_status": "APPROVED_FOR_EVALUATION",
+      "consent_usage_status": "AUTHORIZED",
+      "adjudication_status": "FINAL"
+    },
+    "pattern_label_states": ["POSITIVE", "NEGATIVE", "INDETERMINATE"],
+    "minimum_independent_annotations": 2,
+    "case_id_binding": "sha256(tracing_identity + registry_binding)",
+    "measurement_truth_separate_from_pattern_labels": true
+  },
+  "prediction": {
+    "schema": "ekg-pkt09-prediction-v1",
+    "required_engine_binding": ["engine_id", "commit", "tree", "configuration_sha256"],
+    "states": ["POSITIVE", "NEGATIVE", "INDETERMINATE", "UNSUPPORTED"],
+    "case_version_binding_required": true
+  },  "evaluation": {
+    "confusion_counts": ["tp", "tn", "fp", "fn"],
+    "metrics": ["sensitivity", "specificity", "ppv", "npv"],
+    "zero_denominator": "UNDEFINED",
+    "indeterminate_handling": "EXCLUDE_TRANSPARENTLY",
+    "report_requires": [
+      "sample_count_evaluated",
+      "sample_count_total",
+      "prevalence",
+      "exclusions",
+      "indeterminate_or_unsupported_rate",
+      "engine_binding",
+      "gold_version"
+    ]
+  },
+  "no_gold_gate": {
+    "diagnostic_performance_reporting_allowed_when_gold_count_zero": false,
+    "clinical_accuracy_promotion_allowed": false,
+    "synthetic_fixtures_count_as_clinical_gold": false
+  },
+  "partition_controls": {
+    "splits": ["TRAIN", "VALIDATION", "TEST", "HELD_OUT"],
+    "subject_or_serial_family_cross_split": "REJECT"
+  }
+}

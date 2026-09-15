@@ -1,0 +1,23 @@
+{
+  "schema": "ekg-pkt09-synthetic-evaluator-fixtures-v1",
+  "synthetic_engineering_evidence_only": true,
+  "clinical_gold": false,
+  "may_satisfy_no_gold_gate": false,
+  "pairs": [
+    {"gold": "POSITIVE", "prediction": "POSITIVE", "expected": "TP"},
+    {"gold": "POSITIVE", "prediction": "NEGATIVE", "expected": "FN"},
+    {"gold": "NEGATIVE", "prediction": "POSITIVE", "expected": "FP"},
+    {"gold": "NEGATIVE", "prediction": "NEGATIVE", "expected": "TN"},
+    {"gold": "INDETERMINATE", "prediction": "POSITIVE", "expected": "EXCLUDED"},
+    {"gold": "POSITIVE", "prediction": "UNSUPPORTED", "expected": "EXCLUDED"}
+  ],
+  "expected_counts": {
+    "tp": 1,
+    "tn": 1,
+    "fp": 1,
+    "fn": 1,
+    "excluded": 2,
+    "evaluated": 4,
+    "total": 6
+  }
+}

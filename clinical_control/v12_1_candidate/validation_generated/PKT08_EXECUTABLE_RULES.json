@@ -1,0 +1,41 @@
+{
+  "schema": "ekg-pkt08-executable-rule-registry-v1",
+  "default_behavior": "NOT_EXECUTABLE",
+  "source_hashes": {
+    "pattern_registry": "05764e9437862f6c4f1948c6f0385abb320764c4cb0f2007ce7c426df7d31fdb",
+    "calculation_engine": "872d7df0df0a6d50604583fe6ff8f6fdce0d50e14da4669f408f8a4c9235d82d",
+    "criteria_registry": "7c771f498304ebdaaf3cfd98c0ea7d14e08e8d35c01180c7b91c76f7a35c6f1e"
+  },
+  "executable_patterns": {
+    "left_axis": {
+      "rule_id": "axis_left_v1",
+      "function": "axis_category",
+      "full_pattern_rule": true
+    },
+    "right_axis": {
+      "rule_id": "axis_right_v1",
+      "function": "axis_category",
+      "full_pattern_rule": true
+    },
+    "stemi_threshold": {
+      "rule_id": "conventional_st_threshold_v1",
+      "function": "conventional_st_elevation_met",
+      "full_pattern_rule": true,
+      "diagnostic_limit": "Conventional ECG threshold pattern only; never myocardial infarction diagnosis"
+    }
+  },
+  "component_helpers": {
+    "rate_from_rr_seconds": {"pattern_completed": false},
+    "qrs_duration_category": {"pattern_completed": false},
+    "classic_sgarbossa_components": {"pattern_completed": false},
+    "conventional_st_elevation_met": {"pattern_completed": false}
+  },
+  "forbidden_implicit_engines": [
+    "free_text_reasoning",
+    "morphology_inference",
+    "diagnostic_llm",
+    "etiology_inference"
+  ],
+  "candidate_active": false,
+  "clinical_accuracy_claimed": false
+}

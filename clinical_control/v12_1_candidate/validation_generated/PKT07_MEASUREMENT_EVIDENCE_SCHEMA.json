@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ekg-interpretations:pkt07:measurement-evidence:1",
+  "title": "PKT-EP1-07 Measurement Evidence Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "quality_state",
+    "confidence",
+    "reason",
+    "measurement_evidence",
+    "derived",
+    "candidate_active",
+    "clinical_accuracy_claimed"
+  ],
+  "properties": {
+    "schema": {"const": "ekg-pkt07-measurement-evidence-v1"},
+    "status": {"enum": ["AVAILABLE", "INDETERMINATE", "NOT_IMPLEMENTED"]},
+    "quality_state": {"enum": ["resolved", "indeterminate", "unsupported"]},
+    "confidence": {"enum": ["high", "moderate", "low"]},
+    "reason": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "MISSING_REQUIRED_INPUT",
+        "MALFORMED_INPUT",
+        "NONFINITE_INPUT",
+        "UNIT_MISMATCH",
+        "MISSING_LEAD_IDENTITY",
+        "MISSING_CALIBRATION",
+        "CONFLICTING_EVIDENCE",
+        "UNSUPPORTED_MEASUREMENT",
+        "AUTOMATIC_FIDUCIAL_EXTRACTION_NOT_IMPLEMENTED"
+      ]
+    },
+    "measurement_evidence": {
+      "type": "object",
+      "required": [
+        "version", "measurement_id", "metric", "lead", "value", "unit",
+        "source_kind", "method", "calibration_id", "fiducials",
+        "uncertainty", "exact_numeric_claim_allowed", "evidence_source"
+      ]
+    },
+    "derived": {"type": "object"},
+    "candidate_active": {"const": false},
+    "clinical_accuracy_claimed": {"const": false}
+  }
+}

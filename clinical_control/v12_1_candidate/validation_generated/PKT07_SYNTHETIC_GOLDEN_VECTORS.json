@@ -1,0 +1,15 @@
+{
+  "schema": "ekg-pkt07-synthetic-measurement-vectors-v1",
+  "clinical_gold": false,
+  "candidate_active": false,
+  "vectors": [
+    {"id":"rate_rr_1s","kind":"rate_rr","input":{"rr_seconds":1.0},"expected":{"bpm":60.0}},
+    {"id":"rate_100hz","kind":"sample_rate","input":{"sample_delta":100,"sample_rate_hz":100},"expected":{"duration_ms":1000.0,"bpm":60.0}},
+    {"id":"rate_500hz","kind":"sample_rate","input":{"sample_delta":500,"sample_rate_hz":500},"expected":{"duration_ms":1000.0,"bpm":60.0}},
+    {"id":"qtc_identity","kind":"qtc","input":{"qt_ms":400.0,"rr_seconds":1.0},"expected":{"bazett":400.0,"fridericia":400.0,"framingham":400.0,"hodges":400.0}},
+    {"id":"qrs_110","kind":"interval","input":{"metric":"qrs","value_ms":110.0},"expected":{"duration_category":"prolonged_110_119_ms"}},
+    {"id":"axis_minus31","kind":"axis","input":{"degrees":-31.0},"expected":{"category":"left_axis_deviation"}},
+    {"id":"st_v2_gain5_female","kind":"st","input":{"lead":"V2","measured_mm":0.75,"gain_mm_per_mv":5.0,"sex":"female","age_years":50},"expected":{"standardized_mm":1.5,"threshold_mm":1.5,"threshold_met":true}},
+    {"id":"waveform_auto_unimplemented","kind":"waveform_request","input":{"metric":"qt"},"expected":{"status":"NOT_IMPLEMENTED"}}
+  ]
+}
