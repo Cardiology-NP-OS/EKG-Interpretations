@@ -47,3 +47,5 @@ jobs:
         run: python tools/pkt09_evaluation_gate.py
       - name: Run EP3 packet 1 system status gate
         run: python tools/ep3_pkt01_status_gate.py
+      - name: Run EP3 packet 2 source-evidence bridge gate
+        run: python tools/ep3_pkt02_evidence_gate.py

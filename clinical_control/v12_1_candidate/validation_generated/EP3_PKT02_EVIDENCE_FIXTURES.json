@@ -1,0 +1,17 @@
+{
+  "schema": "ekg-ep3-pkt02-evidence-fixtures-v1",
+  "phi": false,
+  "raw_clinical_source_bytes_included": false,
+  "candidate_active": false,
+  "clinical_accuracy_claimed": false,
+  "approved_adjudicated_gold_count": 0,
+  "diagnostic_runtime_activation_allowed": false,
+  "native_dataset_annotations_are_project_gold": false,
+  "synthetic_fixtures_are_clinical_gold": false,
+  "scenarios": [
+    {"id":"complete","ref_state":"AVAILABLE","expected_state":"COMPLETE"},
+    {"id":"degraded","ref_state":"DEGRADED","expected_state":"DEGRADED"},
+    {"id":"unavailable","ref_state":"UNAVAILABLE","expected_state":"UNAVAILABLE"},
+    {"id":"unknown","ref_state":"UNKNOWN","expected_state":"UNKNOWN"}
+  ]
+}
