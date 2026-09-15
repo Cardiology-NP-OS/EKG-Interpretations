@@ -51,3 +51,5 @@ jobs:
         run: python tools/ep3_pkt02_evidence_gate.py
       - name: Run EP3 packet 3 signal/QC exposure gate
         run: python tools/ep3_pkt03_signal_qc_gate.py
+      - name: Run EP3 packet 4 blinded-review gate
+        run: python tools/ep3_pkt04_blinded_review_gate.py

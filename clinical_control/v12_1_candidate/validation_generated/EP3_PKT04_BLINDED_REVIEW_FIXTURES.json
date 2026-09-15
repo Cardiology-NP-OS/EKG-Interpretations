@@ -1,0 +1,25 @@
+{
+  "schema": "ekg-ep3-pkt04-blinded-review-fixtures-v1",
+  "phi": false,
+  "raw_clinical_waveform_or_image_bytes_included": false,
+  "candidate_active": false,
+  "approved_adjudicated_gold_count": 0,
+  "diagnostic_runtime_activation_allowed": false,
+  "diagnostic_performance_reporting_allowed": false,
+  "clinical_accuracy_claimed": false,
+  "reviewer_submissions_are_clinical_gold": false,
+  "final_adjudication_performed": false,
+  "clinical_gold_admission_performed": false,
+  "native_dataset_annotations_are_project_gold": false,
+  "synthetic_fixtures_are_clinical_gold": false,
+  "scenarios": [
+    {"id":"concordant","expected":"CONCORDANT"},
+    {"id":"disagreeing","expected":"DISAGREEING"},
+    {"id":"indeterminate","expected":"UNADJUDICATED"},
+    {"id":"abstained","expected":"UNADJUDICATED"},
+    {"id":"incomplete","expected":"BLOCKED"},
+    {"id":"stale","expected":"BLOCKED"},
+    {"id":"contaminated","expected":"BLOCKED"},
+    {"id":"governed-inactive","expected":"GOVERNED_INACTIVE"}
+  ]
+}
