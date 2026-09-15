@@ -1,0 +1,22 @@
+{
+  "schema": "ekg-ep3-pkt03-signal-qc-fixtures-v1",
+  "phi": false,
+  "raw_clinical_waveform_or_image_bytes_included": false,
+  "candidate_active": false,
+  "approved_adjudicated_gold_count": 0,
+  "diagnostic_runtime_activation_allowed": false,
+  "diagnostic_performance_reporting_allowed": false,
+  "clinical_accuracy_claimed": false,
+  "native_dataset_annotations_are_project_gold": false,
+  "synthetic_fixtures_are_clinical_gold": false,
+  "scenarios": [
+    {"id":"usable","expected_engineering_state":"USABLE"},
+    {"id":"degraded-qc","expected_engineering_state":"DEGRADED"},
+    {"id":"unavailable-source","expected_engineering_state":"UNAVAILABLE"},
+    {"id":"unknown-inspection","expected_engineering_state":"UNKNOWN"},
+    {"id":"stale-bridge","expected":"REJECTED"},
+    {"id":"conflicting-evidence","expected":"REJECTED"},
+    {"id":"transformed","expected_engineering_state":"DEGRADED"},
+    {"id":"governed-inactive","expected_diagnostic_state":"GOVERNED_INACTIVE"}
+  ]
+}
