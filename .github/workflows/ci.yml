@@ -61,3 +61,5 @@ jobs:
         run: python tools/ep3_pkt07_metric_reporting_gate.py
       - name: Run EP3 packet 8 diagnostic activation gate
         run: python tools/ep3_pkt08_diagnostic_activation_gate.py
+      - name: Run EP3 packet 9 integration freeze gate
+        run: python tools/ep3_pkt09_integration_freeze_gate.py
