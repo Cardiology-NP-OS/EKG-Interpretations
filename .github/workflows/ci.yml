@@ -45,3 +45,5 @@ jobs:
         run: python clinical_control/v12_1_candidate/tests/run_pkt07_gate.py
       - name: Run PKT-EP1-09 evaluation gate
         run: python tools/pkt09_evaluation_gate.py
+      - name: Run EP3 packet 1 system status gate
+        run: python tools/ep3_pkt01_status_gate.py
