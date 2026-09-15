@@ -1,0 +1,27 @@
+{
+  "schema": "ekg-ep3-pkt05-candidate-control-fixtures-v1",
+  "phi": false,
+  "raw_clinical_waveform_or_image_bytes_included": false,
+  "candidate_active": false,
+  "approved_adjudicated_gold_count": 0,
+  "diagnostic_runtime": "GOVERNED_INACTIVE",
+  "diagnostic_runtime_activation_allowed": false,
+  "diagnostic_performance_reporting_allowed": false,
+  "clinical_accuracy_claimed": false,
+  "reviewer_submissions_are_clinical_gold": false,
+  "final_adjudication_performed": false,
+  "clinical_gold_admission_performed": false,
+  "native_dataset_annotations_are_project_gold": false,
+  "synthetic_fixtures_are_clinical_gold": false,
+  "scenarios": [
+    {"id":"clean-inactive","expected":"GOVERNED_INACTIVE"},
+    {"id":"evaluation-only","expected":"EVALUATION_ONLY"},
+    {"id":"stale-registry","expected":"STALE"},
+    {"id":"stale-configuration","expected":"REJECTED"},
+    {"id":"degraded-qc","expected":"BLOCKED"},
+    {"id":"contaminated-review","expected":"BLOCKED"},
+    {"id":"conflicting-evidence","expected":"BLOCKED"},
+    {"id":"untrusted-label","expected":"UNTRUSTED_INERT"},
+    {"id":"governed-inactive","expected":"GOVERNED_INACTIVE"}
+  ]
+}
