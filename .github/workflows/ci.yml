@@ -65,3 +65,5 @@ jobs:
         run: python tools/ep3_pkt09_integration_freeze_gate.py
       - name: Run EP5 packet 1 Stage-3 baseline gate
         run: python tools/ep5_pkt01_stage3_baseline_gate.py
+      - name: Run EP5 packet 2 compatibility attestation gate
+        run: python tools/ep5_pkt02_compatibility_attestation_gate.py
