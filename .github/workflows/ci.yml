@@ -57,3 +57,5 @@ jobs:
         run: python tools/ep3_pkt05_candidate_control_gate.py
       - name: Run EP3 packet 6 adjudication-dataset gate
         run: python tools/ep3_pkt06_adjudication_dataset_gate.py
+      - name: Run EP3 packet 7 metric-reporting eligibility gate
+        run: python tools/ep3_pkt07_metric_reporting_gate.py
