@@ -1,56 +1,80 @@
 {
-  "schema": "ekg-ep3-pkt01-status-fixtures-v1",
-  "phi": false,
-  "synthetic_engineering_evidence_only": true,
-  "raw_clinical_source_bytes_included": false,
-  "candidate_active": false,
-  "clinical_accuracy_claimed": false,
-  "approved_adjudicated_gold_count": 0,
-  "diagnostic_execution_allowed": false,
-  "diagnostic_runtime_activation_allowed": false,
-  "native_dataset_annotations_are_project_gold": false,
-  "synthetic_fixtures_are_clinical_gold": false,
-  "scenarios": [
-    {
-      "id": "available-governed-inactive",
-      "overrides": {},
-      "expected_state": "GOVERNED_INACTIVE"
-    },
-    {
-      "id": "missing-source",
-      "overrides": {
-        "source.state": "UNAVAILABLE",
-        "source.raw_source_available": false,
-        "source.source_verified": false,
-        "inspection.state": "UNAVAILABLE",
-        "inspection.verified": false,
-        "waveform_qc.state": "UNAVAILABLE",
-        "waveform_qc.verified": false
-      },
-      "expected_state": "UNAVAILABLE"
-    },
-    {
-      "id": "degraded-qc",
-      "overrides": {
-        "waveform_qc.state": "DEGRADED",
-        "waveform_qc.limitations": ["SYNTHETIC_QC_DEGRADED"]
-      },
-      "expected_state": "DEGRADED"
-    },
-    {
-      "id": "stale-binding",
-      "overrides": {
-        "repository_binding.commit": "0000000000000000000000000000000000000000"
-      },
-      "expected_state": "UNKNOWN"
-    },
-    {
-      "id": "governed-inactive",
-      "overrides": {
-        "candidate_control.runtime_status": "GOVERNED_INACTIVE",
-        "candidate_control.candidate_active": false
-      },
-      "expected_state": "GOVERNED_INACTIVE"
-    }
-  ]
+    "schema":  "ekg-ep3-pkt01-status-fixtures-v2",
+    "phi":  false,
+    "synthetic_engineering_evidence_only":  true,
+    "raw_clinical_source_bytes_included":  false,
+    "candidate_active":  false,
+    "clinical_accuracy_claimed":  false,
+    "approved_adjudicated_gold_count":  0,
+    "diagnostic_execution_allowed":  false,
+    "scenarios":  [
+                      {
+                          "id":  "available",
+                          "source":  "AVAILABLE",
+                          "inspection":  "AVAILABLE",
+                          "qc":  "AVAILABLE",
+                          "expected":  "GOVERNED_INACTIVE",
+                          "expected_state":  "GOVERNED_INACTIVE",
+                          "overrides":  {
+
+                                        }
+                      },
+                      {
+                          "id":  "source-unavailable",
+                          "source":  "UNAVAILABLE",
+                          "inspection":  "UNAVAILABLE",
+                          "qc":  "UNAVAILABLE",
+                          "expected":  "UNAVAILABLE",
+                          "expected_state":  "UNAVAILABLE",
+                          "overrides":  {
+                                            "source.state":  "UNAVAILABLE",
+                                            "source.raw_source_available":  false,
+                                            "source.source_verified":  false,
+                                            "inspection.state":  "UNAVAILABLE",
+                                            "inspection.verified":  false,
+                                            "waveform_qc.state":  "UNAVAILABLE",
+                                            "waveform_qc.verified":  false
+                                        }
+                      },
+                      {
+                          "id":  "source-unknown",
+                          "source":  "UNKNOWN",
+                          "inspection":  "AVAILABLE",
+                          "qc":  "AVAILABLE",
+                          "expected":  "UNKNOWN",
+                          "expected_state":  "UNKNOWN",
+                          "overrides":  {
+                                            "source.state":  "UNKNOWN",
+                                            "source.source_verified":  false
+                                        }
+                      },
+                      {
+                          "id":  "qc-degraded",
+                          "source":  "AVAILABLE",
+                          "inspection":  "AVAILABLE",
+                          "qc":  "DEGRADED",
+                          "expected":  "DEGRADED",
+                          "expected_state":  "DEGRADED",
+                          "overrides":  {
+                                            "waveform_qc.state":  "DEGRADED",
+                                            "waveform_qc.limitations":  [
+                                                                            "SYNTHETIC_QC_DEGRADED"
+                                                                        ]
+                                        }
+                      },
+                      {
+                          "id":  "stale-authority",
+                          "source":  "AVAILABLE",
+                          "inspection":  "AVAILABLE",
+                          "qc":  "AVAILABLE",
+                          "expected":  "UNKNOWN",
+                          "expected_state":  "UNKNOWN",
+                          "overrides":  {
+                                            "repository_binding.commit":  "0000000000000000000000000000000000000000"
+                                        }
+                      }
+                  ],
+    "diagnostic_runtime_activation_allowed":  false,
+    "native_dataset_annotations_are_project_gold":  false,
+    "synthetic_fixtures_are_clinical_gold":  false
 }
