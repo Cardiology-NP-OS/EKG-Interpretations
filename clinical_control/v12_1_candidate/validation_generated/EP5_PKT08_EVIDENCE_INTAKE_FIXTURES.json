@@ -1,0 +1,88 @@
+{
+  "schema": "ekg-ep5-pkt08-intake-fixtures-v1",
+  "packet_id": "PKT-EP5-08",
+  "synthetic_only": true,
+  "phi_included": false,
+  "raw_clinical_payloads_included": false,
+  "credentials_included": false,
+  "clinical_gold": false,
+  "base_metadata": {
+    "candidate_identity": "fa3edf289afcf304b110dfb1ed3eb3098d9e028b65b7b40973d00c9da4a33932",
+    "source_provenance_identity": "055390f91ffd7b434dae4305f2f2f8534d6011c708ce9030d31a2a5d92bd0952",
+    "license_usage_authority_identity": "a36c69c43a4999b9d2d242faf279ae1fbed8bc7cbf9a6c9da7195c4847c8fb77",
+    "deidentification_attestation_identity": "ae07cb7e757ae6e2afd2d3b47a8914550879bef17621d6d1c500c833657cb4cf",
+    "label_schema_identity": "532aaa2d45630e2e10a6d9b644df678e97b6cb5c9d023f6d05b9abc0622f94f4",
+    "adjudication_process_identity": "a216718addc5843834ccb49139cca64d5098d972f10657cababdf9d5d4dd54cd",
+    "conflict_resolution_policy_identity": "e665ce23707c24328da536c14d5255f77b6b58d02adb00279b243b50e68604d8",
+    "quality_control_identity": "f727fbaaf5c64356b85b198f1dd0adb5754d301ac455019c8b1078cf24505809",
+    "verification_identity": "31b85a6147976c84596d58ee6a143f0088da3c334f552efdd6aaf0530ffe8775",
+    "content_hashes_identity": "3c0e36f2cddc59bf768b364267b0ebe710aa7e3c75f55abfcfc38608cbae5c64",
+    "provenance_valid": true,
+    "license_supported": true,
+    "deidentification_attested": true,
+    "label_schema_valid": true,
+    "adjudication_process_valid": true,
+    "label_conflicts_resolved": true,
+    "quality_control_pass": true,
+    "verification_pass": true,
+    "content_hash_match": true,
+    "source_substitution_attempt": false,
+    "fabricated_metric_claim": false,
+    "synthetic_or_test_evidence": false,
+    "contains_phi": false,
+    "raw_clinical_payloads_included": false,
+    "patient_identifiers_included": false,
+    "raw_patient_level_labels_included": false
+  },
+  "scenarios": {
+    "eligible": {},
+    "missing_provenance": {
+      "provenance_valid": false
+    },
+    "unsupported_license": {
+      "license_supported": false
+    },
+    "missing_deidentification": {
+      "deidentification_attested": false
+    },
+    "schema_drift": {
+      "label_schema_valid": false
+    },
+    "adjudication_conflict": {
+      "adjudication_process_valid": false
+    },
+    "unresolved_labels": {
+      "label_conflicts_resolved": false
+    },
+    "qc_failure": {
+      "quality_control_pass": false
+    },
+    "verification_failure": {
+      "verification_pass": false
+    },
+    "hash_drift": {
+      "content_hash_match": false
+    },
+    "source_substitution": {
+      "source_substitution_attempt": true
+    },
+    "synthetic_evidence": {
+      "synthetic_or_test_evidence": true
+    },
+    "fabricated_metric": {
+      "fabricated_metric_claim": true
+    },
+    "phi_attempt": {
+      "contains_phi": true
+    },
+    "raw_payload_attempt": {
+      "raw_clinical_payloads_included": true
+    },
+    "malformed_identity": {
+      "source_provenance_identity": "bad"
+    },
+    "duplicate_replay": {},
+    "withdrawal": {},
+    "revocation": {}
+  }
+}

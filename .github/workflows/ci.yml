@@ -77,3 +77,5 @@ jobs:
         run: python tools/ep5_pkt06_evidence_admission_readiness_gate.py
       - name: Run EP5 packet 7 engineering-ready inactive release candidate gate
         run: python tools/ep5_pkt07_engineering_release_candidate_gate.py
+      - name: Run EP5 packet 8 evidence intake quarantine gate
+        run: python tools/ep5_pkt08_evidence_intake_quarantine_gate.py
