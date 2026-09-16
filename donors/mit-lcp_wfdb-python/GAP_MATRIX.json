@@ -1,0 +1,329 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-001",
+  "repository": "MIT-LCP/wfdb-python",
+  "donor_commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+  "target_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+  "rows": [
+    {
+      "id": "WFDB-001",
+      "capability": "WFDB dat format breadth",
+      "donor_component": "wfdb/io/_signal.py",
+      "donor_detail": "Formats 8,16,32,61,80,160,212,310,311,24 plus compressed 508/516/524",
+      "target_state": "Native decoder intentionally supports format 16 only",
+      "classification": "DONOR_STRONGER",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Do not widen native decoder before formal WFDB-spec audit and format-specific adversarial fixtures."
+    },
+    {
+      "id": "WFDB-002",
+      "capability": "Multi-frequency signals / samples-per-frame",
+      "donor_component": "wfdb/io/_signal.py; wfdb/io/record.py",
+      "donor_detail": "Expanded signals, samps_per_frame, smoothing",
+      "target_state": "No canonical expanded multi-frequency decoder",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Material capability; requires explicit calibration/shape contracts before integration."
+    },
+    {
+      "id": "WFDB-003",
+      "capability": "Signal skew and byte offsets",
+      "donor_component": "wfdb/io/_signal.py; wfdb/io/_header.py",
+      "donor_detail": "Skew, frame and byte-offset handling",
+      "target_state": "No native skew/byte-offset support",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Add to compatibility boundary and future differential tests; no silent support."
+    },
+    {
+      "id": "WFDB-004",
+      "capability": "Multi-segment WFDB records",
+      "donor_component": "wfdb/io/record.py MultiRecord",
+      "donor_detail": "Fixed/variable layout segments, multi_to_single, range queries",
+      "target_state": "No canonical multi-segment ingestion",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Useful for long/complex physiologic records, but target must define source identity per segment first."
+    },
+    {
+      "id": "WFDB-005",
+      "capability": "FLAC-compressed WFDB signals",
+      "donor_component": "wfdb/io/_signal.py",
+      "donor_detail": "Compressed formats 508/516/524 through soundfile",
+      "target_state": "Unsupported",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Adds native-library dependency and compressed-input attack surface."
+    },
+    {
+      "id": "WFDB-006",
+      "capability": "WFDB annotations",
+      "donor_component": "wfdb/io/annotation.py",
+      "donor_detail": "Read/write standard and custom labels, aux notes, annotation metadata",
+      "target_state": "No general WFDB annotation parser",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "High value for benchmark/adjudication tooling; annotations remain source labels, never project gold automatically."
+    },
+    {
+      "id": "WFDB-007",
+      "capability": "Remote PhysioNet/HTTP random-access I/O",
+      "donor_component": "wfdb/io/_url.py; wfdb/io/download.py",
+      "donor_detail": "Range requests, streaming, database index",
+      "target_state": "Target favors explicit verified local source identity",
+      "classification": "UNSAFE",
+      "disposition": "REJECTED",
+      "reason": "Remote mutable source resolution conflicts with current exact-source and substitution controls for governed execution."
+    },
+    {
+      "id": "WFDB-008",
+      "capability": "Cloud object-store I/O",
+      "donor_component": "wfdb/io/_coreio.py",
+      "donor_detail": "fsspec S3/GCS/Azure/AzureML",
+      "target_state": "No cloud runtime ingestion",
+      "classification": "UNSAFE",
+      "disposition": "REJECTED",
+      "reason": "Credential discovery, mutable paths and provider semantics expand attack/supply-chain surface; not justified for canonical engine."
+    },
+    {
+      "id": "WFDB-009",
+      "capability": "Local/HTTP datasource abstraction",
+      "donor_component": "wfdb/io/datasource.py",
+      "donor_detail": "Named local and HTTP data sources",
+      "target_state": "Source path verification is bespoke and stricter",
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "disposition": "SUPERSEDED",
+      "reason": "Target source identity/hashing is stronger for governed use."
+    },
+    {
+      "id": "WFDB-010",
+      "capability": "CSV/TSV to WFDB conversion",
+      "donor_component": "wfdb/io/convert/csv.py",
+      "donor_detail": "Signal and annotation CSV converters",
+      "target_state": "No generic CSV waveform ingestion",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Useful import adapter but requires explicit units, sampling rate, lead identity and calibration provenance."
+    },
+    {
+      "id": "WFDB-011",
+      "capability": "EDF/EDF+ conversion and annotation extraction",
+      "donor_component": "wfdb/io/convert/edf.py",
+      "donor_detail": "Read EDF into Record, write EDF, extract EDF annotations",
+      "target_state": "No EDF ingestion",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Potential ambulatory/PSG interoperability; not promoted without EDF-specific source/lead/calibration validation."
+    },
+    {
+      "id": "WFDB-012",
+      "capability": "WAV conversion",
+      "donor_component": "wfdb/io/convert/wav.py",
+      "donor_detail": "WFDB↔WAV",
+      "target_state": "No WAV ingestion",
+      "classification": "LOW_VALUE",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Not a priority ECG interchange format for governed specialist."
+    },
+    {
+      "id": "WFDB-013",
+      "capability": "MATLAB MAT export",
+      "donor_component": "wfdb/io/convert/matlab.py",
+      "donor_detail": "WFDB to MAT",
+      "target_state": "No MAT export",
+      "classification": "USEFUL_TEST_ONLY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline analyst interoperability, not runtime capability."
+    },
+    {
+      "id": "WFDB-014",
+      "capability": "TFF reader",
+      "donor_component": "wfdb/io/convert/tff.py",
+      "donor_detail": "Read TFF physiological files",
+      "target_state": "Unsupported",
+      "classification": "LOW_VALUE",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Niche format; defer until actual target evidence need exists."
+    },
+    {
+      "id": "WFDB-015",
+      "capability": "Resampling with annotation relocation",
+      "donor_component": "wfdb/processing/basic.py",
+      "donor_detail": "Single/multichannel resampling and annotation index scaling",
+      "target_state": "No canonical resampler",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Useful, but cross-donor deduplication required; donor uses generic scipy resample and historical annotation edge cases exist."
+    },
+    {
+      "id": "WFDB-016",
+      "capability": "Bound normalization and smoothing",
+      "donor_component": "wfdb/processing/basic.py",
+      "donor_detail": "normalize_bound, normalize, smooth",
+      "target_state": "No canonical normalization layer",
+      "classification": "USEFUL_CHALLENGER",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Potential ML preprocessing only; inappropriate as automatic clinical signal transformation without provenance."
+    },
+    {
+      "id": "WFDB-017",
+      "capability": "Filter gain utility",
+      "donor_component": "wfdb/processing/basic.py",
+      "donor_detail": "Frequency response gain at target frequency",
+      "target_state": "No equivalent utility",
+      "classification": "USEFUL_TEST_ONLY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Useful to verify future preprocessing filters quantitatively."
+    },
+    {
+      "id": "WFDB-018",
+      "capability": "Heart-rate and RR utilities",
+      "donor_component": "wfdb/processing/hr.py",
+      "donor_detail": "compute_hr, calc_rr, calc_mean_hr, ann2rr, rr2ann",
+      "target_state": "No general annotation-driven HR toolkit",
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Useful measurement challenger; depends on trusted QRS/annotation inputs."
+    },
+    {
+      "id": "WFDB-019",
+      "capability": "Peak finding and peak correction",
+      "donor_component": "wfdb/processing/peaks.py",
+      "donor_detail": "find_peaks, local peaks, correct_peaks, shift_peaks",
+      "target_state": "No canonical beat detector",
+      "classification": "USEFUL_CHALLENGER",
+      "disposition": "CHALLENGER",
+      "reason": "Retain for future beat-localization comparison only; known TODO for flat-mountain cases."
+    },
+    {
+      "id": "WFDB-020",
+      "capability": "XQRS QRS detector",
+      "donor_component": "wfdb/processing/qrs.py",
+      "donor_detail": "Adaptive thresholding, T-wave discrimination, backsearch",
+      "target_state": "No canonical QRS detector",
+      "classification": "USEFUL_CHALLENGER",
+      "disposition": "CHALLENGER",
+      "reason": "Model/algorithm output cannot become clinical truth; upstream improvement issue remains open."
+    },
+    {
+      "id": "WFDB-021",
+      "capability": "GQRS QRS detector",
+      "donor_component": "wfdb/processing/qrs.py",
+      "donor_detail": "GQRS implementation with physical/digital inputs",
+      "target_state": "No canonical QRS detector",
+      "classification": "USEFUL_CHALLENGER",
+      "disposition": "CHALLENGER",
+      "reason": "Independent algorithmic challenger for future beat-detection evaluation."
+    },
+    {
+      "id": "WFDB-022",
+      "capability": "Signal averaging around annotations",
+      "donor_component": "wfdb/processing/filter.py sigavg",
+      "donor_detail": "Beat/event aligned averaging",
+      "target_state": "No equivalent",
+      "classification": "USEFUL_TEST_ONLY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Useful morphology/evaluation visualization, not diagnostic authority."
+    },
+    {
+      "id": "WFDB-023",
+      "capability": "Annotation comparison metrics",
+      "donor_component": "wfdb/processing/evaluate.py Comparitor",
+      "donor_detail": "TP/FP/FN, sensitivity, positive predictivity with timing window",
+      "target_state": "Governed metrics currently NOT_REPORTABLE",
+      "classification": "USEFUL_TEST_ONLY",
+      "disposition": "EVALUATION_ONLY",
+      "reason": "Good algorithm-evaluation primitive; metrics remain non-reportable until governed gold exists."
+    },
+    {
+      "id": "WFDB-024",
+      "capability": "MIT-BIH detector benchmarking helper",
+      "donor_component": "wfdb/processing/evaluate.py benchmark_mitdb",
+      "donor_detail": "Record-level QRS benchmark workflow",
+      "target_state": "No admitted benchmark authority",
+      "classification": "USEFUL_DATA_ONLY",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Dataset labels may be external source truth, not project gold; benchmark protocol can inform later evaluation."
+    },
+    {
+      "id": "WFDB-025",
+      "capability": "ECG plotting with calibrated grids",
+      "donor_component": "wfdb/plot/plot.py",
+      "donor_detail": "Physical/digital plotting, annotation overlay, ECG grids",
+      "target_state": "Blind renderer exists with stricter review boundaries",
+      "classification": "TARGET_EQUIVALENT",
+      "disposition": "SUPERSEDED",
+      "reason": "Target rendering path is more governance-specific; donor plotting can remain analyst reference."
+    },
+    {
+      "id": "WFDB-026",
+      "capability": "Record/header field validation and cohesion checks",
+      "donor_component": "wfdb/io/_header.py; wfdb/io/record.py",
+      "donor_detail": "Field type/range/cohesion checks before read/write",
+      "target_state": "Narrow parser has fewer WFDB-field invariants but stronger bounded scope",
+      "classification": "DONOR_STRONGER",
+      "disposition": "ADAPTER",
+      "reason": "Harvest validation concepts into explicit support-boundary and adversarial tests without importing parser wholesale."
+    },
+    {
+      "id": "WFDB-027",
+      "capability": "Round-trip and golden-output test strategy",
+      "donor_component": "tests/test_record.py; tests/target-output",
+      "donor_detail": "Read/write round trips, golden outputs produced by original WFDB tools",
+      "target_state": "Synthetic contract tests exist but narrower format corpus",
+      "classification": "DONOR_STRONGER",
+      "disposition": "INTEGRATED",
+      "reason": "Adopt test methodology using target-owned synthetic fixtures; do not copy donor data."
+    },
+    {
+      "id": "WFDB-028",
+      "capability": "Cross-platform CI matrix",
+      "donor_component": ".github/workflows/test.yml",
+      "donor_detail": "Python 3.9–3.13 across Windows/macOS/Linux plus Debian i386",
+      "target_state": "Target CI currently Ubuntu-only",
+      "classification": "DONOR_STRONGER",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Portability value is real but widening target CI is cross-cutting; evaluate after donor program architecture stabilizes."
+    },
+    {
+      "id": "WFDB-029",
+      "capability": "Local HTTP range-request test server",
+      "donor_component": "tests/test_url.py",
+      "donor_detail": "Dummy HTTP server exercises partial/whole remote reads",
+      "target_state": "No remote runtime ingestion",
+      "classification": "USEFUL_TEST_ONLY",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "Useful only if remote sources are ever authorized; currently rejected for governed runtime."
+    },
+    {
+      "id": "WFDB-030",
+      "capability": "Source/data provenance and fail-closed governance",
+      "donor_component": "repository-wide",
+      "donor_detail": "General library validation, but not target-specific clinical governance",
+      "target_state": "Hash-bound source identity, quarantine, correction lineage, activation locks",
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "disposition": "SUPERSEDED",
+      "reason": "Do not weaken target governance to match a general-purpose library."
+    },
+    {
+      "id": "WFDB-031",
+      "capability": "Dependency reproducibility",
+      "donor_component": "pyproject.toml",
+      "donor_detail": "Lower-bound dependency ranges; no committed lockfile",
+      "target_state": "Governed project emphasizes exact release identity",
+      "classification": "UNSAFE",
+      "disposition": "REJECTED",
+      "reason": "Whole-package direct runtime adoption is blocked until transitive dependencies are pinned/hashes verified."
+    },
+    {
+      "id": "WFDB-032",
+      "capability": "Bundled sample waveform fixtures",
+      "donor_component": "sample-data/",
+      "donor_detail": "186 fixture/data files spanning many WFDB cases",
+      "target_state": "Target uses synthetic tests and external verified PTB-XL source",
+      "classification": "LICENSE_BLOCKED",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "Do not copy physiological/test data until per-asset provenance and reuse rights are established."
+    }
+  ]
+}
