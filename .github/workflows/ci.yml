@@ -81,3 +81,5 @@ jobs:
         run: python tools/ep5_pkt08_evidence_intake_quarantine_gate.py
       - name: Run EP5 packet 9 terminal specialist completion gate
         run: python tools/ep5_pkt09_terminal_specialist_completion_gate.py
+      - name: Run EP5 packet 9 terminal specialist completion gate
+        run: python tools/ep5_pkt09_terminal_specialist_completion_gate.py
