@@ -73,3 +73,5 @@ jobs:
         run: python tools/ep5_pkt04_repin_authorization_gate.py
       - name: Run EP5 packet 5 reconciliation acknowledgement gate
         run: python tools/ep5_pkt05_reconciliation_acknowledgement_gate.py
+      - name: Run EP5 packet 6 evidence admission readiness gate
+        run: python tools/ep5_pkt06_evidence_admission_readiness_gate.py
