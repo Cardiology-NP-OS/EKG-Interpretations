@@ -67,3 +67,5 @@ jobs:
         run: python tools/ep5_pkt01_stage3_baseline_gate.py
       - name: Run EP5 packet 2 compatibility attestation gate
         run: python tools/ep5_pkt02_compatibility_attestation_gate.py
+      - name: Run EP5 packet 3 fresh-host recovery reproduction gate
+        run: python tools/ep5_pkt03_recovery_reproduction_gate.py
