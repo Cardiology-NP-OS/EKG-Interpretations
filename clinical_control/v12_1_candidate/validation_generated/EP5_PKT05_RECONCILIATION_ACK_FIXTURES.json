@@ -1,0 +1,80 @@
+{
+  "schema": "ekg-ep5-pkt05-reconciliation-acknowledgement-fixtures-v1",
+  "packet_id": "PKT-EP5-05",
+  "synthetic_only": true,
+  "phi_included": false,
+  "raw_clinical_payloads_included": false,
+  "credentials_included": false,
+  "clinical_gold": false,
+  "scenarios": {
+    "accepted": {},
+    "consumption_mismatch": {
+      "bindings": {
+        "consumption_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "overlay_drift": {
+      "bindings": {
+        "overlay_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    "continuity_mismatch": {
+      "bindings": {
+        "successor_continuity_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    "descriptor_mismatch": {
+      "bindings": {
+        "reconciliation_descriptor_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "replay_proof_mismatch": {
+      "bindings": {
+        "replay_attempt_sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+      }
+    },
+    "revocation_proof_mismatch": {
+      "bindings": {
+        "revocation_sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+      }
+    },
+    "portability_hash_mismatch": {
+      "bindings": {
+        "portability_sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+      }
+    },
+    "historical_pin_rewrite": {
+      "historical_stage2_pin_rewritten": true
+    },
+    "continuity_mutation": {
+      "continuity_mutated": true
+    },
+    "replay_accepted": {
+      "replay_accepted": true
+    },
+    "portability_failure": {
+      "portability_pass": false
+    },
+    "reconciliation_revoked": {
+      "reconciliation_revoked": true
+    },
+    "fabricated_gold": {
+      "fabricated_clinical_gold_attempt": true
+    },
+    "activation_attempt": {
+      "runtime_activation_attempt": true
+    },
+    "source_substitution": {
+      "source_substitution_attempt": true
+    },
+    "authority_escalation": {
+      "clinical_authority_escalation_attempt": true
+    },
+    "clinical_validity_escalation": {
+      "clinical_validity_escalation_attempt": true
+    },
+    "stale_freshness": {
+      "platform_freshness": "STALE_PIN"
+    }
+  }
+}
