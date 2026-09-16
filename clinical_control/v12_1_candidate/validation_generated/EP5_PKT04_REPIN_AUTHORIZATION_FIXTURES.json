@@ -1,0 +1,61 @@
+{
+  "schema": "ekg-ep5-pkt04-repin-authorization-fixtures-v1",
+  "packet_id": "PKT-EP5-04",
+  "synthetic_only": true,
+  "phi_included": false,
+  "raw_clinical_payloads_included": false,
+  "credentials_included": false,
+  "clinical_gold": false,
+  "scenarios": {
+    "eligible": {},
+    "platform_drift": {
+      "platform_commit": "0000000000000000000000000000000000000000"
+    },
+    "ekg_drift": {
+      "destination": {
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "1111111111111111111111111111111111111111",
+        "tree": "6f5f1c261816f8cf33001802fdfb4237b80f387b",
+        "runtime_status": "GOVERNED_INACTIVE"
+      }
+    },
+    "historical_pin_mismatch": {
+      "historical_pin": {
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "2222222222222222222222222222222222222222",
+        "tree": "01442274b34bf40ae600ee1ee21de8f15ae3b4de",
+        "runtime_status": "GOVERNED_INACTIVE"
+      }
+    },
+    "stale_recovery_proof": {
+      "recovery_proof_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "handshake_mismatch": {
+      "handshake_challenge_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "continuity_mismatch": {
+      "continuity_contract_file_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "missing_independent_verification": {
+      "independent_verification_pass": false
+    },
+    "missing_candidate_ci": {
+      "candidate_ci_pass": false
+    },
+    "missing_main_ci": {
+      "main_ci_pass": false
+    },
+    "source_substitution": {
+      "source_substitution_attempt": true
+    },
+    "runtime_activation_attempt": {
+      "runtime_activation_attempt": true
+    },
+    "authority_escalation": {
+      "authority_escalation_attempt": true
+    },
+    "clinical_validity_escalation": {
+      "clinical_validity_escalation_attempt": true
+    }
+  }
+}
