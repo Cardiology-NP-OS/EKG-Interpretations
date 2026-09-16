@@ -75,3 +75,5 @@ jobs:
         run: python tools/ep5_pkt05_reconciliation_acknowledgement_gate.py
       - name: Run EP5 packet 6 evidence admission readiness gate
         run: python tools/ep5_pkt06_evidence_admission_readiness_gate.py
+      - name: Run EP5 packet 7 engineering-ready inactive release candidate gate
+        run: python tools/ep5_pkt07_engineering_release_candidate_gate.py

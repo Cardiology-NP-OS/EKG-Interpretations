@@ -1,0 +1,46 @@
+{
+  "schema": "ekg-ep5-pkt07-release-candidate-fixtures-v1",
+  "packet_id": "PKT-EP5-07",
+  "synthetic_only": true,
+  "phi_included": false,
+  "raw_clinical_payloads_included": false,
+  "credentials_included": false,
+  "clinical_gold": false,
+  "scenarios": {
+    "nominal": {},
+    "receipt_drift": {
+      "receipt_drift": true
+    },
+    "evidence_state_drift": {
+      "evidence_state_drift": true
+    },
+    "gold_count_drift": {
+      "gold_count_drift": true
+    },
+    "metric_maturity_drift": {
+      "metric_maturity_drift": true
+    },
+    "activation_authority_drift": {
+      "activation_authority_drift": true
+    },
+    "runtime_activation_attempt": {
+      "runtime_activation_attempt": true
+    },
+    "source_substitution_attempt": {
+      "source_substitution_attempt": true
+    },
+    "clinical_validity_escalation_attempt": {
+      "clinical_validity_escalation_attempt": true
+    },
+    "provenance_tamper": {
+      "provenance_tamper": true
+    },
+    "manifest_tamper": {
+      "manifest_tamper": true
+    },
+    "revocation": {
+      "trigger": "MANIFEST_TAMPER",
+      "reason": "Synthetic governed revocation fixture."
+    }
+  }
+}
