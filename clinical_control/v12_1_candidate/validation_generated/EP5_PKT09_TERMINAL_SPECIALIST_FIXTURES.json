@@ -1,0 +1,52 @@
+{
+  "schema": "ekg-ep5-pkt09-terminal-specialist-fixtures-v1",
+  "packet_id": "PKT-EP5-09",
+  "synthetic_only": true,
+  "phi_included": false,
+  "raw_clinical_payloads_included": false,
+  "credentials_included": false,
+  "clinical_gold": false,
+  "scenarios": {
+    "nominal": {},
+    "receipt_drift": {
+      "receipt_drift": true
+    },
+    "correction_omission": {
+      "correction_omission": true
+    },
+    "corrected_output_drift": {
+      "corrected_output_drift": true
+    },
+    "source_identity_drift": {
+      "source_identity_drift": true
+    },
+    "lineage_tamper": {
+      "lineage_tamper": true
+    },
+    "handoff_tamper": {
+      "handoff_tamper": true
+    },
+    "blocker_drift": {
+      "blocker_drift": true
+    },
+    "fabricated_gold_metric": {
+      "fabricated_gold_metric": true
+    },
+    "source_substitution_attempt": {
+      "source_substitution_attempt": true
+    },
+    "phi_raw_payload_attempt": {
+      "phi_raw_payload_attempt": true
+    },
+    "clinical_validity_escalation": {
+      "clinical_validity_escalation": true
+    },
+    "runtime_activation_attempt": {
+      "runtime_activation_attempt": true
+    },
+    "revocation": {
+      "trigger": "LINEAGE_TAMPER",
+      "reason": "Synthetic terminal revocation fixture."
+    }
+  }
+}
