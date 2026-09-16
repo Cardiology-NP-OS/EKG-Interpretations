@@ -1,0 +1,99 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-001",
+  "repository": "MIT-LCP/wfdb-python",
+  "canonical_upstream_url": "https://github.com/MIT-LCP/wfdb-python",
+  "audited_head": {
+    "branch": "main",
+    "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+    "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+    "commit_signature_verified": true,
+    "commit_date": "2026-06-30T18:30:39Z",
+    "package_version_file": "4.3.1"
+  },
+  "stable_release": {
+    "tag": "v4.3.1",
+    "commit": "7c9cd426242fed7f6a66a1db6cb22f7194345d5b",
+    "tree": "8f1ac206c0aeaf21078607e57165dd72e5522fa0",
+    "release_date": "2026-02-03",
+    "commit_signature_verified": true,
+    "pypi_sdist_sha256": "d33e9b4674da6cf87bcfcdac640eea4fbe4f95e82a8b209bb6db05c345cd68df",
+    "pypi_wheel_sha256": "aa1801cf835797b9051ab7955fb900ce6c5f1e1b6cd9cc9979e6c7304e157063"
+  },
+  "head_vs_release": {
+    "commits_ahead": 9,
+    "changed_paths": [
+      "README.md",
+      "docs/io.rst",
+      "wfdb/io/_header.py"
+    ],
+    "material_code_delta": "one import removed from wfdb/io/_header.py: dateutil.parser",
+    "recommendation": "Use v4.3.1 as any package dependency pin unless a later exact commit is separately packaged and locked."
+  },
+  "retrieval_date": "2026-09-16",
+  "archived": false,
+  "software_license": {
+    "spdx": "MIT",
+    "license_file": "LICENSE",
+    "license_blob_sha": "8d3513fef628f57c03c597676c351cca1aabb811",
+    "copyright": "Copyright (c) 2016 MIT Laboratory for Computational Physiology",
+    "compatible_for_use": true,
+    "attribution_required": true
+  },
+  "model_license": {
+    "status": "NOT_APPLICABLE",
+    "models_or_weights_found": false
+  },
+  "dataset_and_fixture_license": {
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "scope": "sample-data/ and any remotely referenced PhysioNet datasets",
+    "rationale": "Code MIT license does not by itself establish redistribution rights for bundled or remotely referenced physiological data.",
+    "imported_into_target": false
+  },
+  "dependencies_from_pyproject": [
+    "numpy>=1.26.4",
+    "scipy>=1.13.0",
+    "pandas>=2.2.3",
+    "soundfile>=0.10.0",
+    "matplotlib>=3.2.2",
+    "requests>=2.8.1",
+    "fsspec>=2023.10.0",
+    "aiohttp>=3.10.11"
+  ],
+  "dependency_lock_present": false,
+  "python_requirement": ">=3.9",
+  "associated_publication_or_citation": [
+    {
+      "type": "software_resource",
+      "doi": "10.13026/jt5e-gq15",
+      "title": "WFDB Python software resource on PhysioNet"
+    }
+  ],
+  "associated_repositories_discovered": [
+    {
+      "repository": "wfdb/wfdb-spec",
+      "relationship": "official WFDB file specification referenced by donor",
+      "material": true,
+      "donor_registry_status": "QUEUED_ASSOCIATED_DONOR",
+      "license": "MIT"
+    },
+    {
+      "repository": "bemoody/wfdb",
+      "relationship": "original WFDB software implementation referenced conceptually by donor",
+      "material": true,
+      "donor_registry_status": "QUEUED_ASSOCIATED_DONOR",
+      "license_note": "mixed GPL/LGPL family; must be audited independently before reuse"
+    }
+  ],
+  "upstream_ci_at_audited_head": {
+    "test_workflow": "success",
+    "os_python_jobs_passed": 17,
+    "style_workflow": "success",
+    "docs_build": "success"
+  },
+  "target_baseline": {
+    "accepted_engine_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "accepted_engine_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "current_main_documentation_commit": "28522bd3f970f0ee19d15f81fe40df78be89a1af"
+  }
+}
