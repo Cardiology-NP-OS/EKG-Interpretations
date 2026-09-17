@@ -45,11 +45,15 @@
     "target_diagnostic_metrics_created": false
   },
   "verification": {
-    "candidate_commit": null,
-    "candidate_tree": null,
-    "exact_sha_ci_run_id": null,
-    "exact_sha_ci_conclusion": null,
-    "independent_verification": "PENDING"
+    "candidate_commit": "1923d2645b85f070c4bc037074abaf1f5f7ff755",
+    "candidate_tree": "96d5713ccd443958cc9a7cefb116a8239639091a",
+    "exact_sha_ci_run_id": 35260304830,
+    "exact_sha_ci_conclusion": "success",
+    "independent_verification": "PASS",
+    "independent_focused_closure": "16/16 PASS",
+    "independent_normalization_closure": "13/13 PASS",
+    "independent_full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
   },
   "governed_state": {
     "completion_state": "SPECIALIST_COMPLETE_INACTIVE",

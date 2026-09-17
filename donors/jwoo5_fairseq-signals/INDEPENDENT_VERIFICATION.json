@@ -1,0 +1,28 @@
+{
+  "schema": "ecg-donor-independent-verification-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "candidate_commit": "1923d2645b85f070c4bc037074abaf1f5f7ff755",
+  "candidate_tree": "96d5713ccd443958cc9a7cefb116a8239639091a",
+  "origin_main_commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+  "verification_date": "2026-09-17",
+  "method": "Fresh shallow private GitHub clone on independent authorized Windows machine",
+  "result": "PASS",
+  "clean_worktree_before_tests": true,
+  "full_candidate_diff_check": "PASS",
+  "focused_closure": "16/16 PASS",
+  "normalization_closure": "13/13 PASS",
+  "full_target_suite": "PASS",
+  "clinical_data_used": false,
+  "clinical_accuracy_claimed": false,
+  "governed_state": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "candidate_ci_run_id": 35260304830,
+  "candidate_ci_conclusion": "success"
+}
