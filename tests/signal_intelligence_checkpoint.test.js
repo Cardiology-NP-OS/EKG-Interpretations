@@ -60,6 +60,18 @@ check("CLI and tests are wired into package scripts",()=>{
   assert.ok(pkg.scripts["test:ci"].includes("tests/signal_intelligence_workflow.test.js"));
   assert.ok(pkg.scripts["test:ci"].includes("tests/signal_intelligence_checkpoint.test.js"));
 });
+check("implementation verification is exact and successful",()=>{
+  const v=checkpoint.verification;
+  assert.strictEqual(v.implementationCandidateCommit,"f058b332f59b7550b4a22243d2fdcee985949401");
+  assert.strictEqual(v.implementationCandidateTree,"474e1a3a6d229e3be2b817efb2649486cf118032");
+  assert.strictEqual(v.candidateCiRunId,35270180054);
+  assert.strictEqual(v.candidateCiConclusion,"success");
+  assert.strictEqual(v.independentVerification,"PASS");
+  assert.strictEqual(v.independentRhythmFeatures,"14/14 PASS");
+  assert.strictEqual(v.independentWorkflow,"9/9 PASS");
+  assert.strictEqual(v.independentCheckpoint,"9/9 PASS");
+  assert.strictEqual(v.independentFullTargetSuite,"PASS");
+});
 check("checkpoint status is stage-safe",()=>{
   assert.ok(new Set(["IMPLEMENTATION_CANDIDATE_UNVERIFIED","VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND","ACCEPTED_ON_MAIN"]).has(checkpoint.status));
 });
