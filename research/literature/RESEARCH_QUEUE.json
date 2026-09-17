@@ -1,0 +1,23 @@
+{
+  "schema": "ekg-research-literature-queue-v1",
+  "updated_date": "2026-09-17",
+  "policy": "Prefer final peer-reviewed article over preprint; pin DOI/PMID/PMCID; extract atomic claims; published metrics remain nonreportable target evidence.",
+  "items": [
+    {
+      "priority": "CURRENT_DONOR",
+      "article_id": "EKG-ART-ECG-FM-OOAF122",
+      "status": "RECORDED",
+      "reason": "Primary Donor 010 publication."
+    },
+    {
+      "priority": "PER_DONOR",
+      "query": "primary paper/data descriptor for each dataset/model introduced by each future donor",
+      "status": "DISCOVER_PER_DONOR"
+    },
+    {
+      "priority": "BEFORE_MODEL_EVALUATION",
+      "query": "external validation, calibration, subgroup, failure-mode, and reproducibility literature for admitted challengers",
+      "status": "DISCOVER_AS_REQUIRED"
+    }
+  ]
+}

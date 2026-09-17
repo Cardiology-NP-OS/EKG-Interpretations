@@ -1,0 +1,36 @@
+{
+  "schema": "ekg-research-article-evidence-v1",
+  "article_id": "EKG-ART-EXAMPLE",
+  "identity": {
+    "title": "",
+    "authors": [
+      ""
+    ],
+    "venue": "",
+    "publication_date": "",
+    "doi": null,
+    "pmid": null,
+    "pmcid": null,
+    "canonical_url": "",
+    "publication_status": "OTHER"
+  },
+  "license": {
+    "access": "UNKNOWN",
+    "license": null,
+    "status": "REVIEW_REQUIRED"
+  },
+  "retrieval": {
+    "retrieved_date": "YYYY-MM-DD",
+    "sources": [
+      "AUTHORITATIVE_SOURCE_URL"
+    ],
+    "limitations": []
+  },
+  "claims": [],
+  "authority": {
+    "research_only": true,
+    "project_gold": false,
+    "runtime_authority": false,
+    "clinical_validity_inferred": false
+  }
+}

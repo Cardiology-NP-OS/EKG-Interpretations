@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EKG Research Article Evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "article_id",
+    "identity",
+    "license",
+    "retrieval",
+    "claims",
+    "authority"
+  ],
+  "properties": {
+    "schema": {
+      "const": "ekg-research-article-evidence-v1"
+    },
+    "article_id": {
+      "type": "string"
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "title",
+        "authors",
+        "venue",
+        "publication_date",
+        "doi",
+        "pmid",
+        "pmcid",
+        "canonical_url",
+        "publication_status"
+      ]
+    },
+    "license": {
+      "type": "object",
+      "required": [
+        "access",
+        "license",
+        "status"
+      ]
+    },
+    "retrieval": {
+      "type": "object",
+      "required": [
+        "retrieved_date",
+        "sources"
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim_id",
+          "claim_type",
+          "statement",
+          "locator",
+          "target_reproduced",
+          "project_gold",
+          "runtime_authority",
+          "clinical_validity_inferred"
+        ]
+      }
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "research_only",
+        "project_gold",
+        "runtime_authority",
+        "clinical_validity_inferred"
+      ],
+      "properties": {
+        "research_only": {
+          "const": true
+        },
+        "project_gold": {
+          "const": false
+        },
+        "runtime_authority": {
+          "const": false
+        },
+        "clinical_validity_inferred": {
+          "const": false
+        }
+      }
+    }
+  }
+}

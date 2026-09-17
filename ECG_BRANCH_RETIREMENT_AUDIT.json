@@ -1,0 +1,472 @@
+{
+  "schema": "ekg-branch-retirement-audit-v1",
+  "status": "PRE_CLEANUP_VERIFIED",
+  "generated_date": "2026-09-17",
+  "basis_main_commit": "3670a6d854b8b74ffa4e4abb577987d73736517f",
+  "basis_main_tree": "58f795d9ea7eba01c68547c9fa9e060859ed6d05",
+  "remote_branch_count_before": 64,
+  "open_pull_requests_observed": 0,
+  "stranded_work_conclusion": "NO_UNACCOUNTED_ACCEPTED_WORK_FOUND; every non-main ref is classified by immutable head SHA before retirement.",
+  "proof": {
+    "basis_main_exact_sha_ci": "35284358761 SUCCESS",
+    "baseline_fresh_clone": "PASS",
+    "accepted_donors": "DONOR-001 through DONOR-010",
+    "next_frontier": "DONOR-011"
+  },
+  "retirement_policy": [
+    "Never delete an unclassified branch.",
+    "Record every head SHA before deletion.",
+    "Verification/before-state refs are preserved by recorded SHA rather than kept as live branches.",
+    "Accepted donor receipts and main ancestry remain authoritative."
+  ],
+  "branches": [
+    {
+      "branch": "origin",
+      "sha": "3670a6d854b8b74ffa4e4abb577987d73736517f",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/donor-002-vitaldb-openecg",
+      "sha": "1b6b590d1b4ec011d38706b6844a2f8605fdd829",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/donor-003-neurokit",
+      "sha": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/donor-004-torch-ecg",
+      "sha": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/ep3-pkt03-alt-1911ded-20260915",
+      "sha": "1911dedba0766f87af709d4e40c265b0dcff892c",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 1,
+      "disposition": "RETIRE_SUPERSEDED_PRE_DONOR_PACKET_CANDIDATE"
+    },
+    {
+      "branch": "candidate/stage2-ep3-pkt07-20260915",
+      "sha": "3e8d2bd417e962b526d97a0330bcbe5c3d3ab8bd",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage2-ep3-pkt08-20260915",
+      "sha": "6fbf1814258813bfb6ff78407e013cf23ff9e07d",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage2-ep3-pkt09-singlechat",
+      "sha": "509fdf0aab1c3768584c3159bb03a31202a8a103",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage2-ep3-through-pkt06-20260915",
+      "sha": "f6fdb0ed70c5d349fe40773df638165e79172fd3",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt01-singlechat",
+      "sha": "4a9c196bc384117cb8ce39c3363c1b152d6de2d7",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt02-singlechat",
+      "sha": "13cf8ae61b7a75f10ea6d1ced86a0e5338e321f9",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt03-hermes-20260915",
+      "sha": "09ec7010191ecca0336abb9fccf369ce182c89e1",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt04-singlechat",
+      "sha": "732eb96b0ee4c3890fe56f0bbd9021af3922d814",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt05-singlechat",
+      "sha": "db71c98539d7894ea1a3d40d7aa2c9a7b0b24dd4",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt06-singlechat",
+      "sha": "5a111da7a116327b717f85fa153a71f1606564da",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt07-singlechat",
+      "sha": "738b683d0526588eb7993985d013d5964c201601",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt08-singlechat",
+      "sha": "ff527ae72fc93931ae316f321b3a4ea86fb9ce42",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "candidate/stage3-ep5-pkt09-singlechat",
+      "sha": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/executable-preprocessing-integration-5bcc8a4e",
+      "sha": "bdfccac68283639ff451205ab5ecf967041aafd3",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/executable-signal-intelligence-20260917",
+      "sha": "1b36f7909a1b59451fc52b47866c4efecd9f0abd",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/execution-hardening-v2-374b3a1a",
+      "sha": "13dcd53be5aa3ddfd70ed4cb637d57d78b66d8f9",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/execution-readiness-62e3f80e",
+      "sha": "16aa2d7812809f3b614eeedeb36c9bfb2501e625",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 1,
+      "disposition": "RETIRE_SUPERSEDED_BY_ACCEPTED_MAIN_CHECKPOINT"
+    },
+    {
+      "branch": "checkpoint/execution-realization-25c28d6f",
+      "sha": "dfc9071d29d01f8c609e7880d191de9dcba80044",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/execution-realization-current-395fe56",
+      "sha": "f522e4d6205b19edecc4d832dd594012cc84f3ca",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 2,
+      "disposition": "RETIRE_SUPERSEDED_BY_ACCEPTED_MAIN_CHECKPOINT"
+    },
+    {
+      "branch": "checkpoint/execution-realization-e6ad7da5",
+      "sha": "79f58bd827ceef30c595d91d4870a8efbddb639d",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 5,
+      "disposition": "RETIRE_SUPERSEDED_BY_ACCEPTED_MAIN_CHECKPOINT"
+    },
+    {
+      "branch": "checkpoint/fiducial-delineation-baseline-20260917",
+      "sha": "c7f45ae397885c064357e7f24bc33eaed33d8103",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/multilead-hardening-20260917",
+      "sha": "7d94d9318d6bad0de2030efaa640b5cf39574a90",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/rhythm-feature-workflow-20260917",
+      "sha": "c56547ff9127a9f01d27681da5757c019cbebb95",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "checkpoint/world-class-execution-realization-e771f2be",
+      "sha": "ce9645203e7caef1c6e3e92e8dfb2f7ac5063086",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "docs/readme-current-state-20260916",
+      "sha": "28522bd3f970f0ee19d15f81fe40df78be89a1af",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor-010-ecg-fm-audit",
+      "sha": "e2fca33045b4c864c5bae85a4faadb5c34d696a5",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor-audit/phase0-baseline-20260916",
+      "sha": "cdcdee93fb56bd8a6eb7254d27c880108fceed17",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 1,
+      "disposition": "RETIRE_BASELINE_BRANCH_IDENTITY_RETAINED_BY_IMMUTABLE_COMMIT_TREE"
+    },
+    {
+      "branch": "donor-program/phase0-baseline-20260916",
+      "sha": "20f8f7934aec1d19b058512453498d6ca740c82c",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 1,
+      "disposition": "RETIRE_BASELINE_BRANCH_IDENTITY_RETAINED_BY_IMMUTABLE_COMMIT_TREE"
+    },
+    {
+      "branch": "donor/001-wfdb-python-20260916",
+      "sha": "14efb51e10233f79d56d41028061e8f912d737c9",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/002-openecg-20260916",
+      "sha": "165ed89c7795ea77ee6c6c21e1a81497096723f0",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 14,
+      "disposition": "RETIRE_DONOR_BRANCH_AFTER_ACCEPTED_RECEIPT_OR_SUPERSEDED_AUDIT"
+    },
+    {
+      "branch": "donor/002-vitaldb-openecg",
+      "sha": "8461a413f2a2c36d1748ed97dde3f14c18f6cc82",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 9,
+      "disposition": "RETIRE_DONOR_BRANCH_AFTER_ACCEPTED_RECEIPT_OR_SUPERSEDED_AUDIT"
+    },
+    {
+      "branch": "donor/002-vitaldb-openecg-20260916",
+      "sha": "6504693b4b0db4966c669928d0099f069b78ab02",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/003-neurokit-audit-20260916",
+      "sha": "91988eaa87914f410952a8d19378c8de94d8896b",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 7,
+      "disposition": "RETIRE_DONOR_BRANCH_AFTER_ACCEPTED_RECEIPT_OR_SUPERSEDED_AUDIT"
+    },
+    {
+      "branch": "donor/004-torch-ecg-20260917",
+      "sha": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/005-ecg-image-kit-20260917",
+      "sha": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/006-ptbxl-feature-benchmark-20260917",
+      "sha": "321fcd2448f8fda8b3599793e40b5803aba7fd92",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/007-ecgbench-20260917",
+      "sha": "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/008-ecg-preprocess-20260917",
+      "sha": "e8ac2824adf017e023cbe02b104f6ef37ac264a5",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/008-ecg-preprocess-work-20260917",
+      "sha": "548da6e8a1b75588003e65e15d95cf11a5891c1c",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 8,
+      "disposition": "RETIRE_DONOR_BRANCH_AFTER_ACCEPTED_RECEIPT_OR_SUPERSEDED_AUDIT"
+    },
+    {
+      "branch": "donor/008-unified-20260917",
+      "sha": "25df0391c1f698d65a3efecb6c80750959cf69d0",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/009-fairseq-signals-20260917",
+      "sha": "01bc0187e86dbde80b06befaec2a089eb17330a8",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "donor/01-mit-lcp-wfdb-python-f627b5f",
+      "sha": "96f5923e3ea1ffdfcb48dcc5d9c2d44a7184f76f",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 7,
+      "disposition": "RETIRE_DONOR_BRANCH_AFTER_ACCEPTED_RECEIPT_OR_SUPERSEDED_AUDIT"
+    },
+    {
+      "branch": "main",
+      "sha": "3670a6d854b8b74ffa4e4abb577987d73736517f",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "KEEP_MAIN"
+    },
+    {
+      "branch": "normalization/cross-donor-acceptance-20260917",
+      "sha": "0616f4d6f23cd223cb4fb7b516029b4c3940ab9c",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "normalization/cross-donor-v1-20260917",
+      "sha": "78e4e2c0a26e79efc2499d9fcb285ac031d58b2b",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/donor-001-wfdb-before-20260916",
+      "sha": "7d9b6e63a9b35229197be84343ba0d519469dc37",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 2,
+      "disposition": "RETIRE_HISTORICAL_VERIFICATION_REF_SHA_RECORDED"
+    },
+    {
+      "branch": "verification/pkt-ep1-07-20260914",
+      "sha": "b3c9e896234f2ac1e7d214e3becead11202acb92",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 3,
+      "disposition": "RETIRE_HISTORICAL_VERIFICATION_REF_SHA_RECORDED"
+    },
+    {
+      "branch": "verification/pkt-ep1-09-20260914",
+      "sha": "3aad1e1e750afb0567fb2824db841971a86b9b83",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-01-20260914",
+      "sha": "664e587f3a227541588abdfeff684c47768e36a8",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 1,
+      "disposition": "RETIRE_HISTORICAL_VERIFICATION_REF_SHA_RECORDED"
+    },
+    {
+      "branch": "verification/pkt-ep3-01-status-r1c1-20260914",
+      "sha": "b73d62847746986a18671cd2da1608540f46aa7b",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-02-20260915",
+      "sha": "e18739ea03bf1db800d27d5f9ae40d55efb66ad7",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-03-20260915",
+      "sha": "60e216234eb80b293e335fe97a42547cc360cd9c",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-04-20260915",
+      "sha": "439ce89beb485bc4fd458885bfe970d580efecd2",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-05-20260915",
+      "sha": "047adf472ab76430ed683d6ae0b41154fbd13885",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-06-20260915",
+      "sha": "f6fdb0ed70c5d349fe40773df638165e79172fd3",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-07-20260915",
+      "sha": "3e8d2bd417e962b526d97a0330bcbe5c3d3ab8bd",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verification/pkt-ep3-08-20260915",
+      "sha": "6fbf1814258813bfb6ff78407e013cf23ff9e07d",
+      "merged_into_basis_main": true,
+      "unique_commits_vs_basis_main": 0,
+      "disposition": "RETIRE_MERGED_INTO_MAIN"
+    },
+    {
+      "branch": "verify/pkt-ep1-07-20260914",
+      "sha": "b3c9e896234f2ac1e7d214e3becead11202acb92",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 3,
+      "disposition": "RETIRE_HISTORICAL_VERIFICATION_REF_SHA_RECORDED"
+    },
+    {
+      "branch": "verify/pkt-ep1-07-release-20260914",
+      "sha": "6132611536f00a66ebc1c3c87edc7e6147c9398d",
+      "merged_into_basis_main": false,
+      "unique_commits_vs_basis_main": 3,
+      "disposition": "RETIRE_HISTORICAL_VERIFICATION_REF_SHA_RECORDED"
+    }
+  ]
+}

@@ -1,229 +1,103 @@
 # EKG Interpretations
 
-Governed ECG signal-processing, interpretation-support, validation, and release-control subsystem for the Cardiology NP OS.
+Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for Cardiology NP OS.
 
-This repository is the dedicated EKG specialist. It owns ECG ingestion/verification, waveform quality controls, bounded signal inspection, measurement and pattern-candidate contracts, review/adjudication workflows, evidence admission controls, diagnostic-activation gates, and the provenance needed to reproduce or revoke an accepted engineering release.
+## Live operating state
 
-## Current status
+The immutable pre-donor engineering baseline remains:
+- commit `7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82`
+- tree `dc9d10b741d486319da01b7ef68e7afc80d6e3c6`
 
-**Engineering state:** `SPECIALIST_COMPLETE_INACTIVE`  
-**Integration state:** ready for governed integration  
-**Diagnostic runtime:** `GOVERNED_INACTIVE`  
-**Evidence admission:** `NOT_ADMITTED`  
-**Approved adjudicated clinical gold:** `0`  
-**Diagnostic metrics:** `NOT_REPORTABLE`  
-**Activation eligibility:** `NOT_ELIGIBLE`
+That baseline is a comparison anchor, **not current main**. Always read live GitHub `main` before acting.
 
-The accepted engineering release is pinned to:
+Current governed state:
+- `SPECIALIST_COMPLETE_INACTIVE`
+- `diagnostic_runtime = GOVERNED_INACTIVE`
+- `evidence_admission = NOT_ADMITTED`
+- `approved_adjudicated_gold_count = 0`
+- `metrics = NOT_REPORTABLE`
+- `activation = NOT_ELIGIBLE`
+- `clinical_validity = NOT_INFERRED`
 
-- Commit: `7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82`
-- Tree: `dc9d10b741d486319da01b7ef68e7afc80d6e3c6`
+The donor program is active. At this handoff checkpoint **10 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-011, `PKUDigitalHealth/ECGFounder`**. Verify the live registry before starting because another lane may have advanced it.
 
-All nine terminal EKG engineering packets are complete, independently verified, and included in the accepted Stage-3 Cardiac OS release. The current engineering program has no open EKG packet or engineering blocker.
+This is software/research/evaluation infrastructure. It does not authorize patient-specific ECG diagnosis, treatment, project clinical-gold creation, fabricated diagnostic performance, runtime activation, or transfer of clinical authority.
 
-**Important:** engineering completion is not clinical validation. This repository does not currently claim diagnostic accuracy and is not authorized to act as a live diagnostic engine.
+## Start here for a new AI
 
-## What it does
+Read, in order:
+1. [`docs/AI_HANDOFF.md`](docs/AI_HANDOFF.md) — execution contract, source-of-truth order, continuation semantics.
+2. [`docs/REPOSITORY_ARCHITECTURE.md`](docs/REPOSITORY_ARCHITECTURE.md) — canonical ownership and filesystem map.
+3. [`ECG_DONOR_REGISTRY.json`](ECG_DONOR_REGISTRY.json) — live donor frontier.
+4. [`ECG_CAPABILITY_REGISTRY.json`](ECG_CAPABILITY_REGISTRY.json) and [`ECG_DONOR_CAPABILITY_REGISTRY.json`](ECG_DONOR_CAPABILITY_REGISTRY.json) — brand-neutral capabilities and donor provenance.
+5. [`ECG_DATASET_REGISTRY.json`](ECG_DATASET_REGISTRY.json), [`ECG_MODEL_CHALLENGER_REGISTRY.json`](ECG_MODEL_CHALLENGER_REGISTRY.json), [`ECG_LICENSE_LEDGER.json`](ECG_LICENSE_LEDGER.json).
+6. [`docs/NEON_AND_CROSS_REPO_OPERATIONS.md`](docs/NEON_AND_CROSS_REPO_OPERATIONS.md) — System-Control, Platform, Build-Ledger, and research-holding-area boundaries.
+7. [`docs/RESEARCH_EVIDENCE_FORMAT.md`](docs/RESEARCH_EVIDENCE_FORMAT.md) — exact article/source evidence format.
+8. [`ECG_EDGE_CASE_COVERAGE.json`](ECG_EDGE_CASE_COVERAGE.json) — adversarial/edge-case coverage contract.
+9. [`ECG_BRANCH_RETIREMENT_AUDIT.json`](ECG_BRANCH_RETIREMENT_AUDIT.json) — branch cleanup evidence.
 
-### ECG source and signal handling
+## Architecture rule
 
-- Verifies expected source identity and fails closed on missing, substituted, malformed, or tampered inputs.
-- Reads supported WFDB waveform data and preserves lead/sample structure.
-- Converts stored samples using declared gain/baseline metadata.
-- Checks source shape, calibration, lead identity, duration, and paired-sampling consistency.
-- Produces deterministic, bounded signal-inspection output.
-- Produces engineering waveform-quality output without converting quality checks into diagnoses.
+**Donor identity is provenance. Capability identity belongs to EKG.**
 
-### Input-quality and safety controls
+`donors/` is immutable audit history. Canonical target behavior lives in brand-neutral target-owned code, tests, evaluation contracts, research cards, and registries. Never install donor projects as parallel runtime architectures.
 
-The input guard explicitly handles conditions such as:
+Repository surfaces:
+- `lib/` — target-owned executable signal/preprocessing/measurement/evaluation engineering.
+- `tests/` — deterministic unit, integration, acceptance, adversarial, donor-closure, and governance proof.
+- `evaluation/` — benchmark, dataset, split/leakage, fixture, robustness, and reproducibility contracts.
+- `research/` — non-runtime dataset/model/literature knowledge and limitations.
+- `donors/` — exact upstream manifests, inventories, gap matrices, boundaries, verification, receipts.
+- `clinical_control/` — governed inactive clinical-control boundary.
+- `manifests/` — source/provenance manifests.
+- root `ECG_*` JSON/ledgers — machine-readable governed state.
 
-- missing, duplicate, mislabeled, or unverified leads
-- cropped or incomplete tracings
-- unknown or conflicting paper speed/gain
-- distorted or resampled geometry
-- contradictory measurements or metadata
-- malformed structured input
-- hidden/untrusted text and source instructions
-- path, filename, Unicode, symlink/junction, and source-substitution attacks
-- oversized/deep/wide structured inputs
-- insufficient signal/image quality
+## Donor workflow
 
-Unsafe or ambiguous conditions fail closed or constrain downstream claims rather than silently producing certainty.
+One donor at a time:
 
-### Measurement and interpretation support
+`ACQUIRE -> INVENTORY -> EXTRACT -> GAP -> DECIDE -> IMPLEMENT -> TEST -> COMPARE -> RECEIPT -> VERIFY -> PROMOTE -> ACCEPT`
 
-The governed candidate layer includes:
+Before mutation: fetch current main, inspect ancestry, active donor branches/worktrees, receipts/registries, and exact-SHA CI. If another lane advanced the donor, adopt valid newer work rather than replaying it.
 
-- measurement-evidence contracts
-- deterministic measurement/calculation support
-- structured pattern-candidate generation
-- clinical-criteria and pattern registries
-- phenotype/diagnosis boundary controls
-- reporting-language and structured-output contracts
-- failure-mode traceability
-- explicit uncertainty and evidence references
+Every material capability ends as one of:
+`INTEGRATED`, `DEPENDENCY`, `ADAPTER`, `CHALLENGER`, `EVALUATION_ONLY`, `DATA_ONLY`, `RESEARCH_ONLY`, `SUPERSEDED`, `REJECTED`, `LICENSE_REVIEW_REQUIRED`.
 
-These capabilities are designed to support a governed interpretation workflow. They do not independently authorize diagnostic runtime use.
+Models remain inactive challengers unless separately governed. Dataset/source labels never become project gold. Code/model/data licensing is tracked separately.
 
-### Review, adjudication, and evaluation
+## Proof commands
 
-The repository includes infrastructure for:
-
-- blinded review
-- adjudication-dataset contracts
-- candidate-control reconciliation
-- evidence/source traceability
-- evaluation contracts
-- metric-reporting eligibility
-- source-evidence bridging
-- deterministic synthetic fixtures
-- independent reproducibility checks
-
-### Release and governance controls
-
-The EKG specialist includes gates for:
-
-- system status
-- signal/QC exposure
-- evidence admission readiness
-- compatibility
-- recovery reproduction
-- repin authorization
-- reconciliation acknowledgement
-- engineering release candidacy
-- evidence intake quarantine
-- diagnostic activation
-- integration freeze
-- terminal specialist completion
-
-Release state is content-addressed and bound to Git commits/trees, packet receipts, verification receipts, correction receipts, semantic-output identities, and independent-machine verification.
-
-The terminal state is intentionally fail-closed: source substitution, fabricated gold/metric claims, unauthorized evidence admission, clinical-authority escalation, or runtime activation attempts are rejected.
-
-## What is still required
-
-The engineering subsystem itself is complete for the current Cardiac OS program. What remains is **clinical validation and activation work**, not another unfinished engineering packet.
-
-Before diagnostic runtime can be enabled, the system still requires:
-
-1. **Governed adjudicated clinical gold**
-   - Admit an approved ECG reference corpus through the evidence-admission process.
-   - Preserve provenance, reviewer/adjudication identity, dataset version, and exact source hashes.
-
-2. **Reportable clinical-performance evaluation**
-   - Evaluate the frozen EKG release against the admitted gold corpus.
-   - Produce governed metrics with predefined endpoints, exclusions, subgroup handling, and uncertainty.
-   - Keep research labels, source metadata, and project gold labels distinct.
-
-3. **Independent clinical review**
-   - Review error modes, disagreements, unsafe edge cases, and clinically important misses/false positives.
-   - Resolve or explicitly accept material limitations before activation.
-
-4. **Separate governed activation authority**
-   - Clinical validation alone must not silently activate the engine.
-   - A distinct approval step must authorize a specific validated release for a defined runtime use.
-
-Until those conditions are met, the correct state remains `GOVERNED_INACTIVE`.
-
-### Future enhancements that are not current completion blockers
-
-Potential future upgrades may include additional waveform adapters, larger benchmark/evaluation corpora, external signal-processing or model challengers, image-to-waveform digitization, ambulatory/Holter support, and other donor integrations. These should enter through the same evidence, licensing, testing, and governance gates rather than being added directly to runtime authority.
-
-## Repository layout
-
-```text
-EKG-Interpretations/
-├── lib/                  # WFDB signal handling, quality logic, input guard
-├── tools/                # verification, inspection, reporting, and release gates
-├── tests/                # deterministic contract and signal tests
-├── manifests/            # source/quality schemas and source manifests
-├── clinical_control/     # governed candidate, evaluation, and release-control layer
-├── docs/                 # evidence and signal-boundary documentation
-└── .github/workflows/    # CI gates
-```
-
-## Common commands
-
-### Self-contained engineering tests
+Run before accepting repository changes:
 
 ```bash
 npm test
-```
-
-Runs the deterministic synthetic/contract suite without requiring clinical data.
-
-### CI engineering gate
-
-```bash
 npm run gate:ci
-```
-
-Verifies the repository's engineering and evidence-boundary contracts.
-
-### Verify an external waveform source
-
-```bash
-npm run verify:source
-```
-
-The expected external source is intentionally kept outside Git.
-
-### Inspect a verified source
-
-```bash
-npm run inspect:source
-npm run quality:source
-```
-
-These commands emit bounded engineering inspection/QC output; they do not establish a clinical diagnosis.
-
-### Full external-source engineering gate
-
-```bash
-npm run gate:source
-```
-
-Requires the configured external source and fails closed if the source is absent or does not match its registered identity.
-
-### Terminal specialist conformance gate
-
-```bash
 python tools/ep5_pkt09_terminal_specialist_completion_gate.py
+git diff --check
 ```
 
-Confirms the frozen specialist-completion state and its non-activation boundaries.
+Also run donor-focused tests and exact-SHA GitHub CI. Fresh-clone verification is required when available. Skipped/unavailable evidence is not PASS.
 
-## Data and privacy boundary
+## Research
 
-Raw clinical waveform data is not committed to this repository. External data is referenced and verified by governed identity rather than silently copied into Git.
+Research claims are source-grounded, non-runtime evidence. Use `research/literature/ARTICLE_EVIDENCE_SCHEMA.json` and the rules in `docs/RESEARCH_EVIDENCE_FORMAT.md`.
 
-The accepted engineering release contains no PHI, raw clinical payloads, or credentials. Adding production clinical data handling is a separate deployment/compliance concern and must not weaken the repository's source, evidence, or activation controls.
+Keep `PUBLISHED_PERFORMANCE_CLAIM` distinct from target-controlled reproduction. Published metrics do not make target metrics reportable. Prefer final peer-reviewed publications over preprints when available; preserve predecessor links.
 
-## Integration contract
+The separate private `sethburkhardt21-dev/EKG-RESEARCH-HOLDING-AREA` is a NON_RUNTIME extraction/evidence warehouse. Nothing moves from it into canonical EKG merely because it was collected there.
 
-Cardiology NP Platform may consume the EKG specialist's governed status, structured outputs, and integration metadata.
+## Cross-repository / Neon boundary
 
-It must not treat:
+Neon Cardiology-NP-System-Control is coordination/metadata authority, not a patient ECG database. Preserve the immutable accepted engineering baseline separately from the latest observed GitHub main. Append system events only through the governed idempotent event function documented in `docs/NEON_AND_CROSS_REPO_OPERATIONS.md`.
 
-- an engineering PASS as proof of clinical accuracy
-- source metadata as adjudicated clinical truth
-- an unadmitted evidence candidate as runtime authority
-- an inactive release as permission to diagnose
-- a newer Git commit as automatically replacing the pinned governed release
+`Cardiology-NP-OS/Cardiology-NP-Platform` is a downstream consumer. Do not silently repin or mutate it during donor work.
 
-A new clinical/runtime authority requires explicit governed admission, validation, and activation.
+## Data / authority boundary
 
-## Verification snapshot
+Do not commit PHI, restricted raw datasets, credentials, or unlicensed weights. Do not infer model-weight or dataset rights from source-code licenses. Missing checkpoint identity, preprocessing, license, or source version fails closed for reuse.
 
-The accepted terminal EKG release has:
+`SOURCE LABELS != PROJECT GOLD` and `MODEL PREDICTIONS != PROJECT GOLD`.
 
-- all 9 final-stage EKG packets complete
-- no remaining EKG engineering packets
-- no recorded EKG engineering blockers
-- independent-machine verification for every final-stage packet
-- successful GitHub CI on the accepted terminal commit
-- deterministic terminal-completion, recovery, evidence-intake, and release-candidate gates
-- preserved fail-closed diagnostic and evidence boundaries
+## Continuation
 
-The next meaningful milestone is therefore **clinical evidence admission and validation**, not additional unscoped EKG feature work.
+When told **Continue**, first do live repository/tool work. Reading state or writing another plan is not completion. Resume the first unfinished permitted gate and execute it. A valid blocker must identify the exact gate, reason, tool evidence, last verified commit/tree, and safe next action.

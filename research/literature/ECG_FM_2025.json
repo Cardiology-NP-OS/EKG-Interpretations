@@ -1,0 +1,85 @@
+{
+  "schema": "ekg-research-article-evidence-v1",
+  "article_id": "EKG-ART-ECG-FM-OOAF122",
+  "identity": {
+    "title": "ECG-FM: an open electrocardiogram foundation model",
+    "authors": [
+      "Kaden McKeen",
+      "Sameer Masood",
+      "Augustin Toma",
+      "Barry Rubin",
+      "Bo Wang"
+    ],
+    "venue": "JAMIA Open",
+    "publication_date": "2025-10-16",
+    "doi": "10.1093/jamiaopen/ooaf122",
+    "pmid": "41113504",
+    "pmcid": "PMC12530324",
+    "canonical_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12530324/",
+    "publication_status": "FINAL_PUBLISHED"
+  },
+  "license": {
+    "access": "OPEN",
+    "license": "CC BY 4.0",
+    "status": "VERIFIED"
+  },
+  "retrieval": {
+    "retrieved_date": "2026-09-17",
+    "sources": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC12530324/",
+      "https://pubmed.ncbi.nlm.nih.gov/41113504/",
+      "https://github.com/bowang-lab/ecg-fm"
+    ],
+    "limitations": [
+      "Published performance is source-reported evidence, never target diagnostic performance."
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "ECGFM-001",
+      "claim_type": "MODEL_FACT",
+      "statement": "The paper describes a 90.9M-parameter wav2vec 2.0-based ECG foundation model using W2V+CMSC+RLM pretraining.",
+      "locator": "final article Methods/model description",
+      "target_reproduced": false,
+      "project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false
+    },
+    {
+      "claim_id": "ECGFM-002",
+      "claim_type": "METHOD_DESCRIPTION",
+      "statement": "The final paper reports linear interpolation to 500 Hz, z-score normalization, non-overlapping 5-second segmentation, and removal of records with null/constant leads during cohort curation.",
+      "locator": "final article Methods: ECG preprocessing and cohort curation",
+      "target_reproduced": false,
+      "project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false
+    },
+    {
+      "claim_id": "ECGFM-003",
+      "claim_type": "PUBLISHED_PERFORMANCE_CLAIM",
+      "statement": "The abstract reports AUROC 0.996 for atrial fibrillation and 0.929 for LVEF <=40% in the authors evaluation.",
+      "locator": "final article Abstract: Results",
+      "target_reproduced": false,
+      "project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false
+    },
+    {
+      "claim_id": "ECGFM-004",
+      "claim_type": "LIMITATION",
+      "statement": "Private UHN-ECG data is not an importable project dataset or project gold.",
+      "locator": "final article data availability/methods context",
+      "target_reproduced": false,
+      "project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false
+    }
+  ],
+  "authority": {
+    "research_only": true,
+    "project_gold": false,
+    "runtime_authority": false,
+    "clinical_validity_inferred": false
+  }
+}

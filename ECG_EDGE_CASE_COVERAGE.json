@@ -1,0 +1,130 @@
+{
+  "schema": "ekg-edge-case-coverage-v1",
+  "updated_date": "2026-09-17",
+  "status": "REQUIRED_COVERAGE_ACTIVE",
+  "authority": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "project_gold": false,
+    "metrics": "NOT_REPORTABLE"
+  },
+  "categories": [
+    {
+      "id": "SOURCE-PROVENANCE",
+      "tests": [
+        "tests/ci_contract.test.js",
+        "tests/v12_1_provenance.test.js"
+      ],
+      "scope": "checksum drift, path aliases, Git/index/worktree divergence, symlink/junction and source substitution"
+    },
+    {
+      "id": "STRUCTURED-INPUT-ADVERSARIAL",
+      "tests": [
+        "tests/input_quality_guard.test.js"
+      ],
+      "scope": "cycles, getters/proxies, sparse arrays, Unicode-equivalent keys, depth/width/node/string budgets"
+    },
+    {
+      "id": "WFDB-FORMAT",
+      "tests": [
+        "tests/wfdb_donor_boundary.test.js",
+        "tests/signal_core.test.js"
+      ],
+      "scope": "unsupported encodings, multi-segment, traversal, truncation/oversize, duplicate leads, hostile metadata"
+    },
+    {
+      "id": "SIGNAL-QUALITY",
+      "tests": [
+        "tests/signal_quality.test.js",
+        "tests/quality_report.test.js"
+      ],
+      "scope": "flatline, clipping, high variation, missing/duplicate leads, calibration conflicts"
+    },
+    {
+      "id": "PREPROCESSING",
+      "tests": [
+        "tests/signal_preprocessing_contract.test.js",
+        "tests/signal_preprocessing_pipeline.test.js"
+      ],
+      "scope": "lead reorder, unknown/duplicate leads, resampling, padding, partial-lead explicitness, categorized failures"
+    },
+    {
+      "id": "MEASUREMENT-DELINEATION",
+      "tests": [
+        "tests/signal_measurement_contract.test.js",
+        "tests/signal_delineation_contract.test.js"
+      ],
+      "scope": "missing waves, threshold boundaries, invalid ordering, nonfinite values, missing provenance, abstention"
+    },
+    {
+      "id": "RHYTHM-CANDIDATE",
+      "tests": [
+        "tests/rhythm_feature_contract.test.js",
+        "tests/signal_intelligence_workflow.test.js"
+      ],
+      "scope": "regular/irregular timing, pauses, descriptive thresholds, insufficient data, duplicate metrics"
+    },
+    {
+      "id": "RENDERING-IMAGE",
+      "tests": [
+        "tests/waveform_rendering.test.js",
+        "tests/image_robustness.test.js"
+      ],
+      "scope": "escaping hostile labels, nonfinite samples, bounded dimensions/sample budget, malformed transforms"
+    },
+    {
+      "id": "DATASET-SPLITS",
+      "tests": [
+        "tests/local_dataset_loader.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/evaluation_runtime.test.js"
+      ],
+      "scope": "patient leakage, duplicates, hash drift, traversal, non-gold enforcement, cohort overlap"
+    },
+    {
+      "id": "MODEL-ASSETS",
+      "tests": [
+        "tests/model_asset_safety.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
+      ],
+      "scope": "immutable bytes/hash, mutable remote rejection, unsafe deserialization, unknown weight license, preprocessing/input contract"
+    },
+    {
+      "id": "EVALUATION",
+      "tests": [
+        "tests/evaluation_runtime.test.js",
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "scope": "annotation bounds/types, unmapped labels, nonreportable metrics, robustness/reproducibility drift"
+    },
+    {
+      "id": "GOVERNANCE",
+      "tests": [
+        "tests/governance_runtime.test.js",
+        "tests/research/research_authority.test.js"
+      ],
+      "scope": "authority drift, license closure, dependency fingerprints, source-code licensing"
+    },
+    {
+      "id": "DONOR-CLOSURE",
+      "tests": [
+        "tests/ecg_preprocess_donor_closure.test.js",
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
+      ],
+      "scope": "exact source identity, terminal dispositions, receipt/registry consistency, no silent imports"
+    },
+    {
+      "id": "HANDOFF-CONTINUITY",
+      "tests": [
+        "tests/handoff_integrity.test.js",
+        "tests/edge_case_coverage.test.js"
+      ],
+      "scope": "source-of-truth docs, Neon boundary, research format, branch retirement classification"
+    }
+  ],
+  "policy": [
+    "New externally reachable behavior must map to an edge-case category.",
+    "Malformed/ambiguous input fails closed; no silent fallback/source substitution.",
+    "Passing engineering/evaluation tests never change clinical authority."
+  ]
+}
