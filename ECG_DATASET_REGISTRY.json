@@ -1,0 +1,25 @@
+{
+  "schema": "ecg-dataset-registry-v1",
+  "updated_date": "2026-09-16",
+  "policy": {
+    "source_labels_are_project_gold": false,
+    "model_predictions_are_project_gold": false,
+    "raw_restricted_data_in_git": false,
+    "dataset_terms_review_required_before_new_use": true
+  },
+  "datasets": [
+    {"name":"PTB-XL","introduced_by":"target baseline / DONOR-002","status":"SOURCE_DATA_NON_GOLD","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"LUDB","introduced_by":"DONOR-002","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"QT Database (QTDB)","introduced_by":"DONOR-002","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"MIT-BIH Arrhythmia Database","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"MIT-BIH Atrial Fibrillation Database (AFDB)","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"MIT-BIH Malignant Ventricular Ectopy Database (VFDB)","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"MIT-BIH Normal Sinus Rhythm Database (NSRDB)","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"BUT PDB","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"ISP","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"Lydus hospital rhythm dataset","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"CODE-test","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"VitalDB arrhythmia-derived beat data","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"}
+  ],
+  "approved_adjudicated_project_gold_count": 0
+}

@@ -1,0 +1,183 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-002",
+  "donor_repository": "vitaldb/openecg",
+  "donor_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+  "donor_tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+  "donor_release": {
+    "tag": "v0.11.0",
+    "tag_object": "04c9c56d5e60d4397f27be8f6e967a14c4e286db",
+    "release_commit": "60ac8887ab0d640fbab6ef094d023b72a9f630c5"
+  },
+  "donor_license": {
+    "source_code_spdx": "Apache-2.0",
+    "license_file": "LICENSE",
+    "license_blob_sha": "4ec4b63eb48dead8c9a54c033d9440bc0b8c1b11",
+    "model_weight_status": "LICENSE_REVIEW_REQUIRED",
+    "dataset_status": "LICENSE_REVIEW_REQUIRED_PER_DATASET"
+  },
+  "target_baseline": {
+    "accepted_engine_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "accepted_engine_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_002_rollback_commit": "6504693b4b0db4966c669928d0099f069b78ab02",
+    "donor_002_rollback_tree": "0625788df2ee6782a686abd55c65589cd188dd70"
+  },
+  "target_resulting_implementation": {
+    "commit": "597b64b1442c49f0a5f1c832dbb46fe335b20242",
+    "tree": "e2286f901da430179d015b6c172d1536d4f2db9b",
+    "branch": "candidate/donor-002-vitaldb-openecg",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false
+  },
+  "files_examined": {
+    "complete_recursive_tree": true,
+    "recursive_tree_truncated": false,
+    "inventory_file": "donors/vitaldb_openecg/INVENTORY.json",
+    "material_files_read_in_depth": [
+      "LICENSE",
+      "README.md",
+      "pyproject.toml",
+      "openecg/models/codec_v6_MODEL_CARD.md",
+      "openecg/qrs.py",
+      "openecg/pacer.py",
+      "openecg/afib.py",
+      "openecg/report.py",
+      "openecg/layered.py",
+      "openecg/deploy.py",
+      "openecg/eval.py",
+      "openecg/delineate.py",
+      "openecg/stage2/augment.py",
+      "openecg/stage2/evaluate.py",
+      "tests/test_layered_codec.py",
+      "tests/test_report.py",
+      "third_party/ST-MEM/README.md",
+      "scripts/build_real_multilayer_cache.py (via audited-head commit diff)"
+    ],
+    "fresh_clone_attempted": true,
+    "fresh_clone_result": "BLOCKED_BY_EXECUTION_ENVIRONMENT_DNS",
+    "fresh_clone_or_upstream_test_run_claimed": false
+  },
+  "capabilities_identified": [
+    "layered frame/beat/rhythm challenger representation",
+    "explicit window edge-context masking and stream stitching",
+    "independent-source disagreement/fallback telemetry",
+    "boundary sensitivity/PPV/F1 and timing error evaluation",
+    "record-level held-out splits and layer-specific masked supervision",
+    "physiology-aware ECG augmentations",
+    "QRS detection/width heuristics",
+    "rule-based pacemaker-spike challengers",
+    "rule-based short-window AF irregularity challenger",
+    "single-lead boundary and multi-head neural models",
+    "ONNX/TFLite deployment and quantization",
+    "foundation-model adapter wrappers",
+    "synthetic ECG/arrhythmia fixtures",
+    "model-card limitation and cross-cohort audit patterns"
+  ],
+  "capabilities_integrated": [
+    {
+      "capability": "governed challenger output envelope",
+      "target_file": "lib/challenger_contract.js",
+      "method": "CLEAN_REIMPLEMENTATION",
+      "runtime_authority": false
+    },
+    {
+      "capability": "explicit context-valid evaluation band",
+      "target_file": "lib/challenger_contract.js",
+      "method": "CLEAN_REIMPLEMENTATION",
+      "runtime_authority": false
+    },
+    {
+      "capability": "tamper-evident disagreement/abstention telemetry",
+      "target_file": "lib/challenger_contract.js",
+      "method": "CLEAN_REIMPLEMENTATION",
+      "runtime_authority": false
+    }
+  ],
+  "capabilities_rejected_or_deferred": [
+    {
+      "component": "bundled .pt/.onnx/.tflite weights",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "separate trained-artifact license and dataset compatibility not established"
+    },
+    {
+      "component": "openecg/report.py diagnostic/rhythm report behavior",
+      "disposition": "REJECTED",
+      "reason": "would emit clinical conclusions incompatible with governed inactive runtime"
+    },
+    {
+      "component": "openecg/qrs.py implementation",
+      "disposition": "SUPERSEDED_FOR_PROVENANCE_REVIEW",
+      "reason": "algorithm provenance points to NeuroKit2/Makowski; canonical audit deferred to DONOR-003"
+    },
+    {
+      "component": "openecg/delineate.py",
+      "disposition": "SUPERSEDED_FOR_PROVENANCE_REVIEW",
+      "reason": "wrapper delegates to NeuroKit2; original dependency scheduled as DONOR-003"
+    },
+    {
+      "component": "AF and pacing rule thresholds",
+      "disposition": "CHALLENGER_ONLY",
+      "reason": "source/cohort-specific tuning and transportability risk"
+    },
+    {
+      "component": "SSL wrappers for ECG-FM/ECGFounder/HuBERT/ST-MEM",
+      "disposition": "RESEARCH_ONLY",
+      "reason": "audit original upstream projects rather than wrapper layer"
+    }
+  ],
+  "associated_donors_queued": [
+    {
+      "repository": "vitaldb/opendsp",
+      "reason": "material core dependency/extracted DSP implementation"
+    },
+    {
+      "repository": "vuno/ST-MEM",
+      "reason": "material model upstream referenced through historical bakqui/ST-MEM path"
+    }
+  ],
+  "tests": {
+    "new_test_file": "tests/challenger_contract.test.js",
+    "new_assertion_floor": 64,
+    "normal_boundary_malformed_and_governance_cases": true,
+    "source_substitution_tested": true,
+    "provenance_hash_mismatch_tested": true,
+    "context_boundary_tested": true,
+    "abstention_tested": true,
+    "deterministic_repeatability_tested": true,
+    "clinical_authority_escalation_rejected": true
+  },
+  "comparative_proof": "donors/vitaldb_openecg/COMPARATIVE_PROOF.json",
+  "verification": {
+    "github_actions_run_id": 35176800031,
+    "head_sha": "597b64b1442c49f0a5f1c832dbb46fe335b20242",
+    "workflow_conclusion": "success",
+    "synthetic_contract_ci": "success",
+    "quarantined_v12_1_candidate_validation": "success",
+    "ep5_packet_9_terminal_gate": "success",
+    "hidden_source_or_data_substitution_detected": false,
+    "clinical_authority_escalation_detected": false
+  },
+  "outstanding_limitations": [
+    "Upstream donor tests were not independently rerun locally because execution-environment DNS blocked a fresh public clone.",
+    "OpenECG trained-weight licensing remains unresolved and fail-closed.",
+    "No donor clinical-performance metric is promoted to target evidence.",
+    "No governed adjudicated clinical gold exists in the target."
+  ],
+  "attribution_requirements": {
+    "software": "Apache-2.0 attribution for OpenECG engineering ideas/source review",
+    "neurokit_provenance": "QRS/delineation lineage must preserve NeuroKit/Makowski provenance when later audited",
+    "artifact_weights": "not redistributed"
+  },
+  "final_disposition": "INTEGRATED_EVALUATION_INFRASTRUCTURE_PLUS_CHALLENGER_RESEARCH",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

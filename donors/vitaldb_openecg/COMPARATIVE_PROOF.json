@@ -1,0 +1,89 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-002",
+  "donor_repository": "vitaldb/openecg",
+  "before": {
+    "target_commit": "6504693b4b0db4966c669928d0099f069b78ab02",
+    "target_tree": "0625788df2ee6782a686abd55c65589cd188dd70",
+    "generic_challenger_envelope_contract": false,
+    "explicit_challenger_context_band_contract": false,
+    "tamper_evident_challenger_disagreement_record": false,
+    "test_files_in_npm_test_ci": 8,
+    "governed_state": {
+      "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+      "diagnostic_runtime": "GOVERNED_INACTIVE",
+      "evidence_admission": "NOT_ADMITTED",
+      "approved_adjudicated_gold_count": 0,
+      "metrics": "NOT_REPORTABLE",
+      "activation": "NOT_ELIGIBLE",
+      "clinical_validity": "NOT_INFERRED"
+    }
+  },
+  "after": {
+    "implementation_commit": "597b64b1442c49f0a5f1c832dbb46fe335b20242",
+    "implementation_tree": "e2286f901da430179d015b6c172d1536d4f2db9b",
+    "generic_challenger_envelope_contract": true,
+    "explicit_challenger_context_band_contract": true,
+    "tamper_evident_challenger_disagreement_record": true,
+    "test_files_in_npm_test_ci": 9,
+    "donor_specific_assertion_floor": 64,
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_model_weights_imported": false,
+    "donor_dataset_bytes_imported": false,
+    "governed_state": {
+      "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+      "diagnostic_runtime": "GOVERNED_INACTIVE",
+      "evidence_admission": "NOT_ADMITTED",
+      "approved_adjudicated_gold_count": 0,
+      "metrics": "NOT_REPORTABLE",
+      "activation": "NOT_ELIGIBLE",
+      "clinical_validity": "NOT_INFERRED"
+    }
+  },
+  "github_compare": {
+    "base": "6504693b4b0db4966c669928d0099f069b78ab02",
+    "head": "597b64b1442c49f0a5f1c832dbb46fe335b20242",
+    "ahead_by": 2,
+    "behind_by": 0,
+    "changed_runtime_files": ["lib/challenger_contract.js"],
+    "changed_test_files": ["tests/challenger_contract.test.js", "package.json"],
+    "audit_files_added": 5
+  },
+  "verification": {
+    "github_actions_run_id": 35176800031,
+    "head_sha": "597b64b1442c49f0a5f1c832dbb46fe335b20242",
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "Synthetic contract CI (non-clinical)",
+        "conclusion": "success",
+        "new_challenger_test_included": true,
+        "ci_evidence_boundary_gate": "success",
+        "external_source_preflight": "success"
+      },
+      {
+        "name": "Quarantined V12.1 candidate validation",
+        "conclusion": "success",
+        "ep5_terminal_specialist_completion_gate": "success"
+      }
+    ]
+  },
+  "improvement_claim": {
+    "type": "CAPABILITY_EXPANSION_AND_GOVERNANCE_HARDENING",
+    "demonstrated": true,
+    "description": "Target can now register and compare future model/algorithm challenger outputs under a deterministic, tamper-evident, context-bounded, abstention-aware, explicitly non-authoritative contract without changing clinical runtime authority."
+  },
+  "non_claims": [
+    "No diagnostic accuracy improvement is claimed.",
+    "No OpenECG model performance was reproduced in the target environment.",
+    "No donor benchmark label became project gold.",
+    "No clinical activation eligibility changed."
+  ],
+  "rollback": {
+    "rollback_commit": "6504693b4b0db4966c669928d0099f069b78ab02",
+    "isolated_files": ["lib/challenger_contract.js", "tests/challenger_contract.test.js"],
+    "package_change": "remove challenger_contract.test.js from test:ci"
+  }
+}
