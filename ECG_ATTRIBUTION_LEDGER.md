@@ -64,3 +64,26 @@ OpenECG is credited for the layered representation, context-margin, disagreement
 - Provenance files: `donors/neuropsychology_neurokit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
 
 NeuroKit is credited for the multi-method agreement and adversarial/golden-regression engineering patterns that informed the target-owned challenger-evaluation hardening. No NeuroKit detector, delineator, data asset, or clinical conclusion was imported as target authority.
+
+## DONOR-004 -- DeepPSP/torch_ecg
+
+- Repository: `DeepPSP/torch_ecg`
+- Audited branch: `master`
+- Audited commit: `11967474e46023dc7a82acf264e426c1ce4eacfa`
+- Audited tree: `307435b2cb11819f2dc8946866ecc54aab6bff1a`
+- Latest release reference: `v0.0.31` (audited HEAD is newer than the release tag).
+- Software license: MIT
+- Upstream license blob: `40d9a25369b4fd1f3315f16f932eebf297dbd549`
+- Copyright notice: Copyright (c) 2021 WEN Hao and KANG Jingsu
+- Integration: governance-only audit of architecture, checkpoint, data, training, metric, and provenance boundaries; no runtime algorithm is integrated.
+- Donor source code copied: **no**.
+- `torch_ecg` / PyTorch runtime dependency added: **no**.
+- Donor checkpoint/model weights copied or executed: **no**.
+- Donor physiological/sample/benchmark data copied: **no**.
+- Checkpoint status: **LICENSE_REVIEW_REQUIRED_PER_ARTIFACT** before any future execution.
+- Physiological asset/data-use status: **LICENSE_REVIEW_REQUIRED_PER_DATASET**.
+- Donor benchmark scores promoted to target metrics: **no**.
+- Project clinical gold created from donor labels: **no**.
+- Provenance files: `donors/deeppsp_torch_ecg/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, and `HARVEST_PLAN.md`.
+
+torch_ecg is credited for its ECG architecture catalog, database/dataset abstractions, augmentation and benchmark patterns, and safer checkpoint-loading concepts. No donor checkpoint, data asset, diagnostic output, or benchmark result is admitted as target clinical evidence or runtime authority.

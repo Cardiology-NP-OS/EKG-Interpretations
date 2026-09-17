@@ -1,0 +1,73 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-004",
+  "donor_repository": "DeepPSP/torch_ecg",
+  "before": {
+    "target_commit": "295cb2434b06ea4d125b806a93288cd231f463ea",
+    "target_tree": "01fa509025f126ce8371241e18eb2ce115767acf",
+    "donor_004_capabilities_registered": 0,
+    "donor_004_runtime_dependency": false,
+    "approved_adjudicated_gold_count": 0,
+    "diagnostic_runtime": "GOVERNED_INACTIVE"
+  },
+  "after": {
+    "verified_candidate_commit": "958126bcc17b0c5cf63c6958194c86976a221002",
+    "verified_candidate_tree": "afca013f82247c36860ab1fe898871ba50fd62f2",
+    "donor_004_capabilities_registered": 34,
+    "disposition_summary": {
+      "RESEARCH_ONLY": 9,
+      "SUPERSEDED": 8,
+      "EVALUATION_ONLY": 8,
+      "REJECTED": 4,
+      "CHALLENGER": 4,
+      "LICENSE_REVIEW_REQUIRED": 1,
+      "total": 34
+    },
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_model_weights_imported": false,
+    "donor_dataset_bytes_imported": false,
+    "executable_donor_004_models_registered": 0,
+    "approved_adjudicated_gold_count": 0,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "verification": {
+    "github_actions_run_id": 35186265624,
+    "head_sha": "958126bcc17b0c5cf63c6958194c86976a221002",
+    "head_tree": "afca013f82247c36860ab1fe898871ba50fd62f2",
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success",
+    "machine_a_focused": "10/10 PASS",
+    "machine_a_full_target_suite": "PASS",
+    "independent_fresh_clone": {
+      "result": "PASS",
+      "head_sha": "958126bcc17b0c5cf63c6958194c86976a221002",
+      "head_tree": "afca013f82247c36860ab1fe898871ba50fd62f2",
+      "origin_main": "295cb2434b06ea4d125b806a93288cd231f463ea",
+      "full_candidate_diff_check": "PASS",
+      "focused": "10/10 PASS",
+      "full_target_suite": "PASS"
+    }
+  },
+  "improvement_claim": {
+    "type": "GOVERNANCE_COMPLETENESS",
+    "demonstrated": true,
+    "description": "Target now records a complete governed disposition of torch_ecg architecture, checkpoint, data, training, evaluation, and provenance surfaces without adding runtime dependencies, model execution, donor data, project gold, or clinical authority."
+  },
+  "non_claims": [
+    "No diagnostic accuracy improvement is claimed.",
+    "No torch_ecg checkpoint was executed or imported.",
+    "No donor benchmark metric is target performance evidence.",
+    "No donor source label became project gold.",
+    "No clinical activation eligibility changed."
+  ],
+  "rollback": {
+    "commit": "295cb2434b06ea4d125b806a93288cd231f463ea",
+    "tree": "01fa509025f126ce8371241e18eb2ce115767acf",
+    "method": "revert Donor-004 governance commits; never force-reset shared main"
+  }
+}

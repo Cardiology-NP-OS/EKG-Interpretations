@@ -1,0 +1,17 @@
+{
+  "schema": "ecg-donor-associated-repository-dispositions-v1",
+  "donor_id": "DONOR-004",
+  "repository": "DeepPSP/torch_ecg",
+  "audited_commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+  "repositories": [
+    {"repository":"DeepPSP/database_reader","disposition":"SUPERSEDED","queued_as_associated_donor":false,"reason":"Current torch_ecg database layer is audited directly; no associated repository code is imported."},
+    {"repository":"DeepPSP/cinc2020","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"First-party challenge/research reference only; no code, weights, or data are imported."},
+    {"repository":"DeepPSP/cinc2021","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"First-party challenge/research reference only; no code, weights, or data are imported."},
+    {"repository":"DeepPSP/cinc2022","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"First-party challenge/research reference only; no code, weights, or data are imported."},
+    {"repository":"DeepPSP/cpsc2020","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"First-party challenge/research reference only; no code, weights, or data are imported."},
+    {"repository":"DeepPSP/cpsc2021","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"First-party challenge/research reference only; no code, weights, or data are imported."},
+    {"repository":"awni/ecg","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"External architecture/research reference only; no code, weights, or data are imported."},
+    {"repository":"antonior92/automatic-ecg-diagnosis","disposition":"RESEARCH_ONLY","queued_as_associated_donor":false,"reason":"External architecture/research reference only; no code, weights, or data are imported."}
+  ],
+  "clinical_authority_added": false
+}
