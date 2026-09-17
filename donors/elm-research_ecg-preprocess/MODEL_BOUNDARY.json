@@ -1,0 +1,48 @@
+{
+  "schema": "ecg-donor-model-boundary-v1",
+  "donor_id": "DONOR-008",
+  "tracked_model_weights": [],
+  "tracked_derived_model_like_assets": [
+    {
+      "path": "src/ecg_tokenizer/ecg_byte_tokenizer_5000.pkl",
+      "kind": "TRAINED_BPE_TOKENIZER",
+      "status": "LICENSE_REVIEW_REQUIRED",
+      "imported": false
+    },
+    {
+      "path": "src/ecg_tokenizer/ecg_byte_tokenizer_8000.pkl",
+      "kind": "TRAINED_BPE_TOKENIZER",
+      "status": "LICENSE_REVIEW_REQUIRED",
+      "imported": false
+    },
+    {
+      "path": "src/ecg_tokenizer/ecg_byte_tokenizer_10000.pkl",
+      "kind": "TRAINED_BPE_TOKENIZER",
+      "status": "LICENSE_REVIEW_REQUIRED",
+      "imported": false
+    }
+  ],
+  "external_model_dependencies": [
+    {
+      "identifier": "google/translategemma-12b-it",
+      "use": "PTB-XL report translation",
+      "exact_checkpoint_hash": null,
+      "weight_license_verified_for_target": false,
+      "preprocessing_or_prompt_contract_frozen": false,
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "runtime_eligible": false
+    }
+  ],
+  "ecg_byte_training": {
+    "training_source_declared_by_code": "MIMIC-IV preprocessed_2500 files under DATA_DIR",
+    "algorithm": "26-symbol quantization plus byte-pair encoding",
+    "artifact_serialization": "Python pickle",
+    "training_data_license_provenance_complete": false,
+    "checkpoint_identity_complete": false,
+    "target_disposition": "CHALLENGER",
+    "execution_eligible": false
+  },
+  "weights_or_tokenizers_imported": false,
+  "diagnostic_runtime": "GOVERNED_INACTIVE",
+  "clinical_validity": "NOT_INFERRED"
+}
