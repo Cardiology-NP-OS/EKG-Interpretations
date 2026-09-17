@@ -68,6 +68,14 @@ test("clinical control is unchanged from the hardening parent", () => {
   const changed=cp.execFileSync("git",["-C",root,"diff","--name-only",checkpoint.parentMainCommit,"--","clinical_control"],{encoding:"utf8"}).trim();
   assert.strictEqual(changed,"");
 });
+test("implementation candidate verification is exact and successful", () => {
+  assert.strictEqual(checkpoint.verification.implementationCandidateCommit,"4ccd37a401b960d0e2ba280457cca8488a616fe0");
+  assert.strictEqual(checkpoint.verification.implementationCandidateTree,"89041fe5612a32ae61484cf808d982c317b3e0f9");
+  assert.strictEqual(checkpoint.verification.candidateCiRunId,35276933722);
+  assert.strictEqual(checkpoint.verification.candidateCiConclusion,"success");
+  assert.strictEqual(checkpoint.verification.independentVerification,"PASS_FULL_CLONE");
+  assert.strictEqual(checkpoint.verification.independentFullTargetSuite,"PASS");
+});
 test("checkpoint status and verification are stage safe", () => {
   assert.ok(["IMPLEMENTED_UNVERIFIED","VERIFIED_UNPROMOTED","ACCEPTED_ON_MAIN"].includes(checkpoint.status));
   if (checkpoint.status === "IMPLEMENTED_UNVERIFIED") {
