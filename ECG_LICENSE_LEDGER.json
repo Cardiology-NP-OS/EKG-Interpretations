@@ -229,6 +229,53 @@
       ]
     },
     {
+      "donor_id": "DONOR-007",
+      "repository": "vlbthambawita/ECGBench",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION",
+        "license_file": "LICENSE",
+        "license_blob_sha": "3b97c4cdca87936b7512d1656347e22e16656e58",
+        "audited_head_commit": "31b5050002622a72a8f3558f731929c3e3a6c68e"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "NO_TRACKED_MODEL_WEIGHTS_OR_TRAINED_MODEL_ARTIFACTS",
+        "tracked_weights_found": false,
+        "weights_imported": false,
+        "execution_eligible": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_SPLIT_ARTIFACT",
+        "catalogue_entry_count": 64,
+        "raw_data_imported": false,
+        "huggingface_split_assets_imported": false,
+        "source_labels_promoted_to_project_gold": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      },
+      "associated_provenance": [
+        {
+          "repository": "MIT-LCP/wfdb-python",
+          "status": "SUPERSEDED_ALREADY_AUDITED_DONOR_001"
+        },
+        {
+          "repository": "pytorch/pytorch",
+          "status": "SUPERSEDED_FRAMEWORK_ALREADY_AUDITED_DONOR_004"
+        },
+        {
+          "repository": "huggingface/huggingface_hub",
+          "status": "RESEARCH_ONLY_NO_EXTERNAL_SPLIT_BYTES_IMPORTED"
+        }
+      ]
+    },
+    {
       "donor_id": "DONOR-A002",
       "repository": "bemoody/wfdb",
       "status": "LICENSE_REVIEW_REQUIRED",

@@ -1,0 +1,409 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-007",
+  "repository": "vlbthambawita/ECGBench",
+  "target_rollback_commit": "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+  "rows": [
+    {
+      "capability_id": "ECGB-001",
+      "capability": "Whole-package Python ECGBench runtime dependency",
+      "donor_components": [
+        "pyproject.toml",
+        "ecgbench/"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "The Node-governed target does not need a parallel Python runtime with numpy/pandas/scikit-learn plus optional torch/WFDB/data-format dependencies."
+    },
+    {
+      "capability_id": "ECGB-002",
+      "capability": "Curated 64-dataset ECG catalogue",
+      "donor_components": [
+        "docs/_datasets/*.md",
+        "ecgbench/catalogue.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful source/discovery metadata only. Every underlying dataset retains separate data-use terms and source labels remain non-gold."
+    },
+    {
+      "capability_id": "ECGB-003",
+      "capability": "Dataset source URL access license and provenance front matter",
+      "donor_components": [
+        "docs/_datasets/*.md"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful provenance metadata, but donor-reported dataset terms are not independent legal verification and must be checked per dataset before use."
+    },
+    {
+      "capability_id": "ECGB-004",
+      "capability": "Config-driven dataset schema",
+      "donor_components": [
+        "ecgbench/config.py",
+        "ecgbench/data/configs/*.yaml"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful for offline dataset normalization and reproducibility design; no config becomes runtime authority."
+    },
+    {
+      "capability_id": "ECGB-005",
+      "capability": "Concrete dataset configurations for 51 supported datasets plus template",
+      "donor_components": [
+        "ecgbench/data/configs/*.yaml"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Configuration metadata may inform future dataset adapters, but each referenced dataset remains separately licensed and non-gold."
+    },
+    {
+      "capability_id": "ECGB-006",
+      "capability": "Deterministic stratified 10-fold splitting",
+      "donor_components": [
+        "ecgbench/splitting/engine.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful evaluation methodology with fixed random seed; not clinical evidence or runtime behavior."
+    },
+    {
+      "capability_id": "ECGB-007",
+      "capability": "Patient-grouped StratifiedGroupKFold splitting",
+      "donor_components": [
+        "ecgbench/splitting/engine.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Strong leakage-control pattern for offline evaluation; patient grouping does not establish label validity."
+    },
+    {
+      "capability_id": "ECGB-008",
+      "capability": "Ungrouped StratifiedKFold fallback",
+      "donor_components": [
+        "ecgbench/splitting/engine.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful only when grouping identifiers are unavailable and must not be mistaken for stronger patient-isolated evaluation."
+    },
+    {
+      "capability_id": "ECGB-009",
+      "capability": "Preservation of predefined source fold assignments",
+      "donor_components": [
+        "ecgbench/splitting/engine.py",
+        "ecgbench/config.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful protocol-preservation concept when the source defines folds; remains source-evaluation metadata."
+    },
+    {
+      "capability_id": "ECGB-010",
+      "capability": "Custom fold rotation without concatenated dataset wrappers",
+      "donor_components": [
+        "ecgbench/splitting/base.py",
+        "ecgbench/dataset.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Supports controlled cross-validation experiments while preserving fold identity."
+    },
+    {
+      "capability_id": "ECGB-011",
+      "capability": "Identification-only split CSV export with labels kept at source",
+      "donor_components": [
+        "ecgbench/splitting/export.py",
+        "README.md"
+      ],
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
+      "reason": "The target already enforces SOURCE LABELS distinct from PROJECT GOLD and preserves provenance; donor split discipline reinforces but does not replace it."
+    },
+    {
+      "capability_id": "ECGB-012",
+      "capability": "Published fold artifacts on Hugging Face Hub",
+      "donor_components": [
+        "README.md",
+        "ecgbench/dataset.py"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "External split artifacts are separate bytes with separate provenance/terms; none are imported or treated as immutable target evidence."
+    },
+    {
+      "capability_id": "ECGB-013",
+      "capability": "Unified optional PyTorch ECGDataset loader and collator",
+      "donor_components": [
+        "ecgbench/dataset.py"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Broad dataset loading is useful research infrastructure but would expand runtime dependencies and data-format attack surface."
+    },
+    {
+      "capability_id": "ECGB-014",
+      "capability": "WFDB CSV OpenSignals NPY HDF5 EDF and MAT signal loaders",
+      "donor_components": [
+        "ecgbench/dataset.py",
+        "ecgbench/validation/engine.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Prior donor audits already cover WFDB and broad data-access concerns; target keeps narrower explicit source contracts."
+    },
+    {
+      "capability_id": "ECGB-015",
+      "capability": "Lead selection alternate-layout and per-record lead-name handling",
+      "donor_components": [
+        "ecgbench/dataset.py",
+        "README.md"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Dataset-specific lead caveats are valuable for evaluation but cannot grant lead identity authority to inferred metadata."
+    },
+    {
+      "capability_id": "ECGB-016",
+      "capability": "Windowed signal access and unit conversion",
+      "donor_components": [
+        "ecgbench/dataset.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already has explicit bounded signal windows and calibration provenance; donor behavior is not adopted as canonical."
+    },
+    {
+      "capability_id": "ECGB-017",
+      "capability": "Dataset-specific label loader suite",
+      "donor_components": [
+        "ecgbench/labels/"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful source-label extraction knowledge; all outputs remain SOURCE LABELS and never become PROJECT GOLD automatically."
+    },
+    {
+      "capability_id": "ECGB-018",
+      "capability": "QTDB beat-level delineation annotation loader",
+      "donor_components": [
+        "ecgbench/labels/qtdb.py"
+      ],
+      "classification": "USEFUL_DATA_ONLY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Potential future delineation-evaluation source labels only; no annotation bytes are imported."
+    },
+    {
+      "capability_id": "ECGB-019",
+      "capability": "European ST-T episode inventory loader",
+      "donor_components": [
+        "ecgbench/labels/edb.py"
+      ],
+      "classification": "USEFUL_DATA_ONLY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Episode annotations may inform future evaluation but remain external source labels and non-gold."
+    },
+    {
+      "capability_id": "ECGB-020",
+      "capability": "Challenge 2020/2021 diagnosis mapping CSVs",
+      "donor_components": [
+        "ecgbench/data/challenge2020_dx_mapping.csv",
+        "ecgbench/data/challenge2021_dx_mapping.csv"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "Tracked mapping content derives from external challenge vocabularies; software MIT terms are not assumed to establish independent data/vocabulary rights."
+    },
+    {
+      "capability_id": "ECGB-021",
+      "capability": "Missing-lead validation",
+      "donor_components": [
+        "ecgbench/validation/checks.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target input-quality guard already fails closed on missing or unverified leads with stronger authority boundaries."
+    },
+    {
+      "capability_id": "ECGB-022",
+      "capability": "Flat-line validation",
+      "donor_components": [
+        "ecgbench/validation/checks.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target signal-quality tests already detect flatline/constant-run failures deterministically."
+    },
+    {
+      "capability_id": "ECGB-023",
+      "capability": "Expected sample-count and duration validation",
+      "donor_components": [
+        "ecgbench/validation/checks.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful dataset-QA methodology; exact expected lengths depend on dataset-specific contracts."
+    },
+    {
+      "capability_id": "ECGB-024",
+      "capability": "Amplitude-outlier validation in millivolts",
+      "donor_components": [
+        "ecgbench/validation/checks.py",
+        "ecgbench/validation/engine.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline QC only when units are trustworthy; donor itself skips this check for non-mV sources."
+    },
+    {
+      "capability_id": "ECGB-025",
+      "capability": "Validation issue aggregation and JSON quality report",
+      "donor_components": [
+        "ecgbench/validation/engine.py",
+        "ecgbench/validation/report.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Record-level issue accounting is useful QA infrastructure, not diagnostic performance evidence."
+    },
+    {
+      "capability_id": "ECGB-026",
+      "capability": "Croissant metadata generation and validation",
+      "donor_components": [
+        "ecgbench/croissant.py"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Useful interoperability metadata for datasets; not required by governed runtime."
+    },
+    {
+      "capability_id": "ECGB-027",
+      "capability": "Remote dataset download and archive extraction",
+      "donor_components": [
+        "ecgbench/download.py"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "Mutable remote retrieval and archive extraction are incompatible with target exact-source controls without explicit hash and license admission gates."
+    },
+    {
+      "capability_id": "ECGB-028",
+      "capability": "Dataset manifest and checksum concepts",
+      "donor_components": [
+        "ecgbench/manifest.py",
+        "ecgbench/data/manifests/*.json"
+      ],
+      "classification": "TARGET_EQUIVALENT",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target provenance manifests and exact hash controls are already stronger for governed evidence."
+    },
+    {
+      "capability_id": "ECGB-029",
+      "capability": "CLI for catalogue split Croissant upload and export workflows",
+      "donor_components": [
+        "ecgbench/cli/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Convenient research tooling but not a target runtime requirement."
+    },
+    {
+      "capability_id": "ECGB-030",
+      "capability": "Extensive config label split dataset and validation test suite",
+      "donor_components": [
+        "tests/"
+      ],
+      "classification": "DONOR_STRONGER",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Broad regression methodology is useful reference; target closure uses its own non-clinical fixtures and governance assertions."
+    },
+    {
+      "capability_id": "ECGB-031",
+      "capability": "Dataset-specific caveat documentation for lead identity labels and source quirks",
+      "donor_components": [
+        "README.md",
+        "docs/_datasets/*.md"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "High-value research provenance/caveat material, but assertions must be independently verified before target operational use."
+    },
+    {
+      "capability_id": "ECGB-032",
+      "capability": "Dataset catalogue record/patient counts and published-result context",
+      "donor_components": [
+        "docs/_datasets/*.md"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Counts and narrative are research context only; they are not target clinical metrics and may vary by dataset release."
+    },
+    {
+      "capability_id": "ECGB-033",
+      "capability": "Optional WFDB dependency for waveform loading",
+      "donor_components": [
+        "pyproject.toml",
+        "ecgbench/dataset.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Canonical WFDB provenance is already DONOR-001; do not reattribute the dependency through ECGBench."
+    },
+    {
+      "capability_id": "ECGB-034",
+      "capability": "Optional PyTorch dependency for Dataset abstraction",
+      "donor_components": [
+        "pyproject.toml",
+        "ecgbench/dataset.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "PyTorch architecture/runtime surfaces were already audited under DONOR-004; no runtime dependency is added."
+    },
+    {
+      "capability_id": "ECGB-035",
+      "capability": "Repository publishing/deployment workflows",
+      "donor_components": [
+        ".github/workflows/"
+      ],
+      "classification": "LOW_VALUE",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Package/docs publishing is unrelated to governed ECG runtime behavior."
+    },
+    {
+      "capability_id": "ECGB-036",
+      "capability": "Clinical/source provenance authority separation and fail-closed governance",
+      "donor_components": [
+        "repository-wide"
+      ],
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
+      "reason": "ECGBench is research dataset infrastructure; target governance remains authoritative and must not be weakened."
+    }
+  ],
+  "disposition_summary": {
+    "REJECTED": 2,
+    "DATA_ONLY": 6,
+    "EVALUATION_ONLY": 11,
+    "SUPERSEDED": 9,
+    "LICENSE_REVIEW_REQUIRED": 2,
+    "RESEARCH_ONLY": 6,
+    "total": 36
+  },
+  "cross_donor_deduplication": [
+    {
+      "prior_donor": "DONOR-001",
+      "relationship": "WFDB loading remains canonically attributed to MIT-LCP/wfdb-python."
+    },
+    {
+      "prior_donor": "DONOR-004",
+      "relationship": "PyTorch runtime/dependency provenance remains canonically audited under DeepPSP/torch_ecg."
+    },
+    {
+      "prior_donor": "DONOR-006",
+      "relationship": "PTB-XL/PTB-XL+ evaluation metadata overlaps prior benchmark audit; no duplicate dataset authority is created."
+    }
+  ],
+  "implementation_decision": "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION",
+  "clinical_authority_added": false
+}

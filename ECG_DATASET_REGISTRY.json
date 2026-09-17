@@ -23,7 +23,8 @@
     {"name":"NeuroKit bundled physiological example/test assets","introduced_by":"DONOR-003","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/neuropsychology_neurokit/DONOR_MANIFEST.json"},
     {"name":"torch_ecg bundled sample/benchmark physiological assets","introduced_by":"DONOR-004","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"},
     {"name":"ECG-Image-Kit bundled ECG/image/ROI/sample assets","introduced_by":"DONOR-005","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET","details":"donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"},
-    {"name":"PTB-XL+ external engineered feature/statement assets","introduced_by":"DONOR-006","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET","details":"donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json"}
+    {"name":"PTB-XL+ external engineered feature/statement assets","introduced_by":"DONOR-006","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET","details":"donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json"},
+    {"name":"ECGBench catalogue of 64 external ECG datasets","introduced_by":"DONOR-007","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"}
   ],
   "approved_adjudicated_project_gold_count": 0
 }

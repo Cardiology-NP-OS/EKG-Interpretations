@@ -1,0 +1,14 @@
+﻿{
+    "schema":  "ecg-donor-model-boundary-v1",
+    "donor_id":  "DONOR-007",
+    "repository":  "vlbthambawita/ECGBench",
+    "audited_commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
+    "audited_tree":  "9f52c3f551b443ff660f7b112bca84684f4f1239",
+    "tracked_model_weight_count":  0,
+    "tracked_checkpoint_count":  0,
+    "model_training_architecture_code_found":  false,
+    "optional_torch_use":  "DATASET_LOADING_AND_COLLATION_ONLY",
+    "weights_imported":  false,
+    "clinical_validity":  "NOT_INFERRED",
+    "registry_action":  "NO_EXECUTABLE_MODEL_CHALLENGER_TO_REGISTER"
+}

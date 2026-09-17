@@ -128,3 +128,22 @@ ECG-Image-Kit is credited for image-synthesis, image-distortion, grid-estimation
 - Provenance files: `donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, `INDEPENDENT_VERIFICATION.json`, and `DONOR_RECEIPT.json`.
 
 The donor is credited for engineered-feature benchmark methodology, fold-based evaluation design, feature harmonization, and bootstrap evaluation concepts. No donor source, external dataset asset, model artifact, benchmark score, or diagnostic conclusion is admitted as target runtime authority or clinical evidence.
+
+## DONOR-007 -- vlbthambawita/ECGBench
+
+- Repository: `vlbthambawita/ECGBench`
+- Audited branch: `main`
+- Audited commit: `31b5050002622a72a8f3558f731929c3e3a6c68e`
+- Audited tree: `9f52c3f551b443ff660f7b112bca84684f4f1239`
+- Software license: MIT; upstream license blob `3b97c4cdca87936b7512d1656347e22e16656e58`.
+- Integration: governance-only audit of dataset catalogue, split-generation, validation, label-loader, external-data, and provenance boundaries.
+- Donor source code copied: **no**.
+- Python/numpy/pandas/scikit-learn/PyTorch/WFDB runtime dependency added: **no**.
+- Donor model/checkpoint weights copied or executed: **no**.
+- External waveform, source-label, or Hugging Face fold-split bytes copied: **no**.
+- Source labels promoted to project clinical gold: **no**.
+- Donor validation, dataset statistics, or benchmark claims promoted to target metrics: **no**.
+- 64 catalogue entries are retained only as external data references requiring per-dataset rights/provenance review.
+- Provenance files: `donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
+
+ECGBench is credited for dataset-catalogue structure, deterministic fold methodology, patient-grouped leakage controls, source-label separation, dataset validation patterns, and dataset-specific caveat documentation. None of these transfers clinical authority or makes external labels project gold.
