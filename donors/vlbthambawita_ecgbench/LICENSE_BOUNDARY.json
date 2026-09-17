@@ -1,0 +1,24 @@
+﻿{
+    "schema":  "ecg-donor-license-boundary-v1",
+    "donor_id":  "DONOR-007",
+    "repository":  "vlbthambawita/ECGBench",
+    "audited_commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
+    "audited_tree":  "9f52c3f551b443ff660f7b112bca84684f4f1239",
+    "source_code":  {
+                        "spdx":  "MIT",
+                        "license_file":  "LICENSE",
+                        "license_blob_sha":  "3b97c4cdca87936b7512d1656347e22e16656e58",
+                        "pyproject_declared_license":  "MIT",
+                        "reuse_status":  "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+                    },
+    "dataset_and_split_assets":  {
+                                     "status":  "LICENSE_REVIEW_REQUIRED_PER_DATASET_OR_EXTERNAL_ASSET",
+                                     "repository_license_not_dataset_permission":  true,
+                                     "raw_dataset_bytes_imported":  false,
+                                     "huggingface_split_assets_imported":  false,
+                                     "source_labels_project_gold":  false
+                                 },
+    "source_code_copied":  false,
+    "runtime_dependency_added":  false,
+    "fail_closed_on_external_data_rights":  true
+}

@@ -1,0 +1,60 @@
+﻿{
+    "schema":  "ecg-donor-manifest-v1",
+    "donor_id":  "DONOR-007",
+    "repository":  "vlbthambawita/ECGBench",
+    "canonical_upstream_url":  "https://github.com/vlbthambawita/ECGBench",
+    "retrieval_date":  "2026-09-17",
+    "archived":  false,
+    "audited_head":  {
+                         "branch":  "main",
+                         "commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
+                         "tree":  "9f52c3f551b443ff660f7b112bca84684f4f1239",
+                         "commit_date":  "2026-08-19T17:47:49+02:00",
+                         "latest_release_tag":  "v1.0.0",
+                         "latest_release_commit":  "86140fbb39f3b382d1b30676d1533d346f8f88eb",
+                         "latest_release_tree":  "72e63f91a655c5a6cd2800d1fb7d007745ca157d",
+                         "head_is_latest_release_tag_commit":  false
+                     },
+    "software_license":  {
+                             "spdx":  "MIT",
+                             "license_file":  "LICENSE",
+                             "license_blob_sha":  "3b97c4cdca87936b7512d1656347e22e16656e58",
+                             "pyproject_declared_license":  "MIT",
+                             "source_code_copied_into_target":  false
+                         },
+    "model_license":  {
+                          "status":  "NO_TRACKED_MODEL_WEIGHTS_OR_TRAINED_MODEL_ARTIFACTS",
+                          "tracked_model_artifact_file_count":  0,
+                          "weights_imported_into_target":  false,
+                          "execution_eligible":  false
+                      },
+    "dataset_license":  {
+                            "status":  "SEPARATE_DATASET_TERMS_REQUIRED_PER_CATALOGUE_ENTRY",
+                            "catalogue_entry_count":  64,
+                            "tracked_ecg_waveform_file_count":  0,
+                            "tracked_mapping_csv_count":  2,
+                            "raw_data_imported_into_target":  false,
+                            "source_labels_promoted_to_project_gold":  false,
+                            "note":  "Repository MIT licensing is not treated as permission for the 64 external datasets, their labels, or Hugging Face split artifacts."
+                        },
+    "primary_capability_families":  [
+                                        "ECG dataset catalogue metadata",
+                                        "config-driven dataset definitions",
+                                        "reproducible fold splitting",
+                                        "split validation and reporting",
+                                        "unified optional PyTorch dataset loader",
+                                        "dataset-specific label loaders",
+                                        "Croissant metadata export",
+                                        "download/export tooling",
+                                        "dataset provenance and caveat documentation"
+                                    ],
+    "target_rollback_point":  {
+                                  "commit":  "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+                                  "tree":  "2dc5b6209a61a65ad9a218ac5ef59cb48723831d"
+                              },
+    "accepted_engine_immutable_identity":  {
+                                               "commit":  "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+                                               "tree":  "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+                                           },
+    "clinical_authority_change_allowed":  false
+}

@@ -1,0 +1,2518 @@
+﻿{
+    "schema":  "ecg-donor-inventory-v1",
+    "donor_id":  "DONOR-007",
+    "repository":  "vlbthambawita/ECGBench",
+    "audited_commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
+    "audited_tree":  "9f52c3f551b443ff660f7b112bca84684f4f1239",
+    "recursive_tree_audit":  {
+                                 "complete":  true,
+                                 "fresh_clone_attempted":  true,
+                                 "fresh_clone_result":  "SUCCESS",
+                                 "exact_commit_reproduced":  true,
+                                 "exact_tree_reproduced":  true,
+                                 "tracked_file_count":  385
+                             },
+    "package_summary":  {
+                            "python_file_count":  199,
+                            "dataset_catalogue_markdown_count":  64,
+                            "dataset_config_yaml_count":  52,
+                            "tracked_mapping_csv_count":  2,
+                            "workflow_file_count":  4,
+                            "test_file_count":  14
+                        },
+    "implementation_surfaces":  {
+                                    "catalogue":  [
+                                                      "ecgbench/catalogue.py",
+                                                      "docs/_datasets/*.md"
+                                                  ],
+                                    "configuration":  [
+                                                          "ecgbench/config.py",
+                                                          "ecgbench/data/configs/*.yaml"
+                                                      ],
+                                    "splitting":  [
+                                                      "ecgbench/splitting/"
+                                                  ],
+                                    "validation":  [
+                                                       "ecgbench/validation/"
+                                                   ],
+                                    "dataset_loader":  [
+                                                           "ecgbench/dataset.py"
+                                                       ],
+                                    "labels":  [
+                                                   "ecgbench/labels/"
+                                               ],
+                                    "cli":  [
+                                                "ecgbench/cli/"
+                                            ],
+                                    "croissant":  [
+                                                      "ecgbench/croissant.py"
+                                                  ],
+                                    "download_export":  [
+                                                            "ecgbench/download.py",
+                                                            "ecgbench/export.py"
+                                                        ]
+                                },
+    "data_assets":  {
+                        "tracked_ecg_waveform_files":  0,
+                        "tracked_mapping_csv_files":  [
+                                                          "ecgbench/data/challenge2020_dx_mapping.csv",
+                                                          "ecgbench/data/challenge2021_dx_mapping.csv"
+                                                      ],
+                        "external_dataset_catalogue_count":  64,
+                        "external_dataset_bytes_required_for_loading":  true,
+                        "fold_splits_advertised_via_huggingface_hub":  true,
+                        "target_import_allowed":  false,
+                        "source_labels_project_gold":  false
+                    },
+    "model_assets":  {
+                         "tracked_weight_files":  0,
+                         "tracked_checkpoint_files":  0,
+                         "model_training_architecture_code_found":  false,
+                         "optional_torch_dataset_dependency":  true,
+                         "runtime_authority":  false
+                     },
+    "reproducibility":  {
+                            "pyproject_present":  true,
+                            "pytest_test_files":  14,
+                            "github_workflows":  [
+                                                     ".github/workflows/cancel-stuck-pages-deployment.yml",
+                                                     ".github/workflows/deploy-hf-space.yml",
+                                                     ".github/workflows/deploy-pages.yml",
+                                                     ".github/workflows/publish-pypi.yml"
+                                                 ],
+                            "fully_hermetic":  false,
+                            "external_dataset_and_hub_assets_required_for_end_to_end_dataset_use":  true
+                        },
+    "dataset_catalogue_files":  [
+                                    "docs/_datasets/apnea-ecg-database.md",
+                                    "docs/_datasets/bidmc-congestive-heart-failure-database.md",
+                                    "docs/_datasets/brno-university-of-technology-ecg-quality-database-but-qdb.md",
+                                    "docs/_datasets/brugada-huca.md",
+                                    "docs/_datasets/chapman-shaoxing-arrhythmia.md",
+                                    "docs/_datasets/chapman-shaoxing-ecg-database-10-646-patients.md",
+                                    "docs/_datasets/cipa-ecg-validation-study.md",
+                                    "docs/_datasets/code-15-pct-telehealth-network-of-minas-gerais-15-pct-subset.md",
+                                    "docs/_datasets/code-full-dataset-2-3m-records.md",
+                                    "docs/_datasets/code-test-827-record-hold-out-test-set.md",
+                                    "docs/_datasets/cpsc-2018-china-physiological-signal-challenge-2018.md",
+                                    "docs/_datasets/ecg-capable-smartwatches-dataset.md",
+                                    "docs/_datasets/ecg-effects-of-dofetilide-moxifloxacin-and-combinations-ecgdmmld.md",
+                                    "docs/_datasets/ecg-effects-of-ranolazine-dofetilide-verapamil-quinidine-ecgrdvq.md",
+                                    "docs/_datasets/ecg-id-database.md",
+                                    "docs/_datasets/echonext.md",
+                                    "docs/_datasets/edgar-experimental-data-and-geometric-analysis-repository.md",
+                                    "docs/_datasets/european-st-t-database-edb.md",
+                                    "docs/_datasets/eye-tracking-dataset-for-12-lead-ecg-interpretation.md",
+                                    "docs/_datasets/gu-ecg-gazi-university-ptca-induced-ischaemia.md",
+                                    "docs/_datasets/harvard-emory-ecg-database-heedb.md",
+                                    "docs/_datasets/icentia11k-single-lead-continuous-ecg.md",
+                                    "docs/_datasets/ikem-dataset-institute-for-clinical-and-experimental-medicine-prague.md",
+                                    "docs/_datasets/kurias-ecg.md",
+                                    "docs/_datasets/leipzig-heart-center-ecg-database.md",
+                                    "docs/_datasets/lobachevsky-university-ecg-database-ludb.md",
+                                    "docs/_datasets/long-term-af-database-ltafdb.md",
+                                    "docs/_datasets/long-term-st-database-ltstdb.md",
+                                    "docs/_datasets/medalcare-xl-synthetic-12-lead-ecgs-from-simulations.md",
+                                    "docs/_datasets/mhd-effect-on-12-lead-ecgs-in-mri-scanners.md",
+                                    "docs/_datasets/mimic-iii-waveform-database-matched-subset.md",
+                                    "docs/_datasets/mimic-iv-ecg-demo.md",
+                                    "docs/_datasets/mimic-iv-ecg-ext-icd.md",
+                                    "docs/_datasets/mimic-iv-ecg.md",
+                                    "docs/_datasets/mit-bih-arrhythmia-database.md",
+                                    "docs/_datasets/mit-bih-atrial-fibrillation-database.md",
+                                    "docs/_datasets/mit-bih-normal-sinus-rhythm-database.md",
+                                    "docs/_datasets/mit-bih-st-change-database.md",
+                                    "docs/_datasets/mit-bih-supraventricular-arrhythmia-database.md",
+                                    "docs/_datasets/nightingale-bwh-emergency-dept-ecg-dataset.md",
+                                    "docs/_datasets/nightingale-ntuh-cardiac-arrest-ecg-dataset.md",
+                                    "docs/_datasets/ningbo-first-hospital-ecg-database-idiopathic-ventricular-arrhythmia.md",
+                                    "docs/_datasets/norwegian-endurance-athlete-ecg-database.md",
+                                    "docs/_datasets/physionet-cinc-challenge-2017-af-classification.md",
+                                    "docs/_datasets/physionet-cinc-challenge-2020.md",
+                                    "docs/_datasets/physionet-cinc-challenge-2021.md",
+                                    "docs/_datasets/post-ictal-heart-rate-oscillations-in-partial-epilepsy.md",
+                                    "docs/_datasets/preterm-infant-cardio-respiratory-signals-database-picsdb.md",
+                                    "docs/_datasets/ptb-diagnostic-ecg-database.md",
+                                    "docs/_datasets/ptb-xl-plus.md",
+                                    "docs/_datasets/ptb-xl.md",
+                                    "docs/_datasets/qt-database-qtdb.md",
+                                    "docs/_datasets/sami-trop-chagas-cardiomyopathy-cohort.md",
+                                    "docs/_datasets/shandong-provincial-hospital-ecg-database-sphdb.md",
+                                    "docs/_datasets/shdb-af-saitama-holter-database-atrial-fibrillation.md",
+                                    "docs/_datasets/st-petersburg-incart-12-lead-arrhythmia-database.md",
+                                    "docs/_datasets/st-vincent-s-ucd-sleep-apnea-database-ucddb.md",
+                                    "docs/_datasets/staff-iii-database.md",
+                                    "docs/_datasets/sudden-cardiac-death-holter-database.md",
+                                    "docs/_datasets/symile-mimic.md",
+                                    "docs/_datasets/toliet-thigh-based-ecg-toilet-seat.md",
+                                    "docs/_datasets/vitaldb-arrhythmia-database.md",
+                                    "docs/_datasets/wilson-central-terminal-ecg-database.md",
+                                    "docs/_datasets/zzu-pecg-zhengzhou-university-pediatric-ecg-database.md"
+                                ],
+    "dataset_config_files":  [
+                                 "ecgbench/data/configs/_template.yaml",
+                                 "ecgbench/data/configs/afdb.yaml",
+                                 "ecgbench/data/configs/apnea_ecg.yaml",
+                                 "ecgbench/data/configs/brugada_huca.yaml",
+                                 "ecgbench/data/configs/butqdb.yaml",
+                                 "ecgbench/data/configs/challenge2017.yaml",
+                                 "ecgbench/data/configs/challenge2020.yaml",
+                                 "ecgbench/data/configs/challenge2021.yaml",
+                                 "ecgbench/data/configs/chapman_shaoxing.yaml",
+                                 "ecgbench/data/configs/chfdb.yaml",
+                                 "ecgbench/data/configs/code15.yaml",
+                                 "ecgbench/data/configs/code_test.yaml",
+                                 "ecgbench/data/configs/cpsc_2018.yaml",
+                                 "ecgbench/data/configs/ecg_arrhythmia.yaml",
+                                 "ecgbench/data/configs/ecg_capable_smartwatches.yaml",
+                                 "ecgbench/data/configs/ecgcipa.yaml",
+                                 "ecgbench/data/configs/ecgdmmld.yaml",
+                                 "ecgbench/data/configs/ecgiddb.yaml",
+                                 "ecgbench/data/configs/ecgrdvq.yaml",
+                                 "ecgbench/data/configs/echonext.yaml",
+                                 "ecgbench/data/configs/edb.yaml",
+                                 "ecgbench/data/configs/edgar.yaml",
+                                 "ecgbench/data/configs/ikem.yaml",
+                                 "ecgbench/data/configs/incartdb.yaml",
+                                 "ecgbench/data/configs/leipzig_heart_center_ecg.yaml",
+                                 "ecgbench/data/configs/ltafdb.yaml",
+                                 "ecgbench/data/configs/ltstdb.yaml",
+                                 "ecgbench/data/configs/ludb.yaml",
+                                 "ecgbench/data/configs/medalcare_xl.yaml",
+                                 "ecgbench/data/configs/mhd_effect_ecg_mri.yaml",
+                                 "ecgbench/data/configs/mimic_iv_ecg.yaml",
+                                 "ecgbench/data/configs/mimic_iv_ecg_demo.yaml",
+                                 "ecgbench/data/configs/mitdb.yaml",
+                                 "ecgbench/data/configs/ningbo_iva.yaml",
+                                 "ecgbench/data/configs/norwegian_athlete_ecg.yaml",
+                                 "ecgbench/data/configs/nsrdb.yaml",
+                                 "ecgbench/data/configs/picsdb.yaml",
+                                 "ecgbench/data/configs/ptbdb.yaml",
+                                 "ecgbench/data/configs/ptbxl.yaml",
+                                 "ecgbench/data/configs/qtdb.yaml",
+                                 "ecgbench/data/configs/sami_trop.yaml",
+                                 "ecgbench/data/configs/sddb.yaml",
+                                 "ecgbench/data/configs/shdb_af.yaml",
+                                 "ecgbench/data/configs/sph.yaml",
+                                 "ecgbench/data/configs/staffiii.yaml",
+                                 "ecgbench/data/configs/stdb.yaml",
+                                 "ecgbench/data/configs/svdb.yaml",
+                                 "ecgbench/data/configs/szdb.yaml",
+                                 "ecgbench/data/configs/tollet.yaml",
+                                 "ecgbench/data/configs/ucddb.yaml",
+                                 "ecgbench/data/configs/wctecgdb.yaml",
+                                 "ecgbench/data/configs/zzu_pecg.yaml"
+                             ],
+    "tracked_files":  [
+                          {
+                              "path":  ".codex",
+                              "mode":  "100644",
+                              "blob":  "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+                              "bytes":  0
+                          },
+                          {
+                              "path":  ".env.example",
+                              "mode":  "100644",
+                              "blob":  "0fbaebe7809f038a1bfa154d4562bcf1f05bc936",
+                              "bytes":  262
+                          },
+                          {
+                              "path":  ".github/workflows/cancel-stuck-pages-deployment.yml",
+                              "mode":  "100644",
+                              "blob":  "6c31ef1c7e986d639898824d1e19935d268e4c6e",
+                              "bytes":  1489
+                          },
+                          {
+                              "path":  ".github/workflows/deploy-hf-space.yml",
+                              "mode":  "100644",
+                              "blob":  "435d82fdcecd20488173957f5ca29d226ff33958",
+                              "bytes":  6417
+                          },
+                          {
+                              "path":  ".github/workflows/deploy-pages.yml",
+                              "mode":  "100644",
+                              "blob":  "21faeb782089a63c8f2309c9412c0c107d04062d",
+                              "bytes":  4969
+                          },
+                          {
+                              "path":  ".github/workflows/publish-pypi.yml",
+                              "mode":  "100644",
+                              "blob":  "789eefca15aabab36c3f5960a49688582af0f371",
+                              "bytes":  2535
+                          },
+                          {
+                              "path":  ".gitignore",
+                              "mode":  "100644",
+                              "blob":  "d4724ae4d1f57c4f8e74e491a4c8fadd5535b372",
+                              "bytes":  4749
+                          },
+                          {
+                              "path":  "ADD_DATASET_TODO.md",
+                              "mode":  "100644",
+                              "blob":  "9d0b0349d4aa2b2b0e1e09b08b50a8182e647e55",
+                              "bytes":  57245
+                          },
+                          {
+                              "path":  "BUG_55_VALIDATION_REPORT_COUNTS.md",
+                              "mode":  "100644",
+                              "blob":  "3b8d6b0322da18fe96cf9d0249ccadf0951d4ceb",
+                              "bytes":  24359
+                          },
+                          {
+                              "path":  "Backups/DATASET_ANALYSIS_PLAN.md",
+                              "mode":  "100644",
+                              "blob":  "cd86c4526b66ccb3a53fb9bdd959f5921f5c0945",
+                              "bytes":  25505
+                          },
+                          {
+                              "path":  "Backups/ecgbench_expenctation.txt",
+                              "mode":  "100644",
+                              "blob":  "02bc7630baa2e6c34e0da228062857b76be12112",
+                              "bytes":  1117
+                          },
+                          {
+                              "path":  "CLAUDE.md",
+                              "mode":  "100644",
+                              "blob":  "2ff56dd52d8b37e417bfc6c1d4f0bda002db1bd7",
+                              "bytes":  31789
+                          },
+                          {
+                              "path":  "CLI_PLAN.md",
+                              "mode":  "100644",
+                              "blob":  "270262d7eb7a62648370ee264acb398b03fd4442",
+                              "bytes":  8750
+                          },
+                          {
+                              "path":  "ECGBench_architecture/ARCHITECTURE.md",
+                              "mode":  "100644",
+                              "blob":  "5429db1f6d37974b4f3f2e81bed06b0b93577077",
+                              "bytes":  23783
+                          },
+                          {
+                              "path":  "LICENSE",
+                              "mode":  "100644",
+                              "blob":  "3b97c4cdca87936b7512d1656347e22e16656e58",
+                              "bytes":  1074
+                          },
+                          {
+                              "path":  "README.md",
+                              "mode":  "100644",
+                              "blob":  "4bacd1a1f15687868098a7e3ea8ebf9db8a54fb7",
+                              "bytes":  108362
+                          },
+                          {
+                              "path":  "docs-src/architecture.md",
+                              "mode":  "100644",
+                              "blob":  "d59b1cdaa9683c185fddea2955b20a845e529f57",
+                              "bytes":  47
+                          },
+                          {
+                              "path":  "docs-src/guides/adding-a-dataset.md",
+                              "mode":  "100644",
+                              "blob":  "2610e6a5fba214969e229d9243f6429bdd53aa87",
+                              "bytes":  29
+                          },
+                          {
+                              "path":  "docs-src/guides/distribution-policy.md",
+                              "mode":  "100644",
+                              "blob":  "2c23f25cf4057ea8ddd8f31b52cbacf42918286d",
+                              "bytes":  848
+                          },
+                          {
+                              "path":  "docs-src/index.md",
+                              "mode":  "100644",
+                              "blob":  "0a08a22e9aff5d84f147c73f7020cbbc56017384",
+                              "bytes":  2987
+                          },
+                          {
+                              "path":  "docs-src/reference/api/catalogue.md",
+                              "mode":  "100644",
+                              "blob":  "a1d364fc0976c45f39bf9f9319315873df811610",
+                              "bytes":  404
+                          },
+                          {
+                              "path":  "docs-src/reference/api/config.md",
+                              "mode":  "100644",
+                              "blob":  "e696ee3e3d91f68409e3ae8efbe6fba521ee8c36",
+                              "bytes":  166
+                          },
+                          {
+                              "path":  "docs-src/reference/api/croissant.md",
+                              "mode":  "100644",
+                              "blob":  "d009c2cc11556bd8b3b12e598f870ecd2be34517",
+                              "bytes":  198
+                          },
+                          {
+                              "path":  "docs-src/reference/api/dataset.md",
+                              "mode":  "100644",
+                              "blob":  "9ffc58e502a64332c5efc612c414a8f2136bf292",
+                              "bytes":  828
+                          },
+                          {
+                              "path":  "docs-src/reference/api/download.md",
+                              "mode":  "100644",
+                              "blob":  "44137605bde53be37ebe82b8debd44088b9d669f",
+                              "bytes":  209
+                          },
+                          {
+                              "path":  "docs-src/reference/api/index.md",
+                              "mode":  "100644",
+                              "blob":  "a30058d9bca730fa695c0185119391b296a48972",
+                              "bytes":  1944
+                          },
+                          {
+                              "path":  "docs-src/reference/api/labels.md",
+                              "mode":  "100644",
+                              "blob":  "89783dfaad1dd689141a50f671d47dd60c55e1c6",
+                              "bytes":  850
+                          },
+                          {
+                              "path":  "docs-src/reference/api/manifest.md",
+                              "mode":  "100644",
+                              "blob":  "ff569ef886041b7534df4f326c012c9d75197c17",
+                              "bytes":  624
+                          },
+                          {
+                              "path":  "docs-src/reference/api/pipelines.md",
+                              "mode":  "100644",
+                              "blob":  "038900886b12e96f9011f5ee2c9cb423ed7f889f",
+                              "bytes":  697
+                          },
+                          {
+                              "path":  "docs-src/reference/api/splitting.md",
+                              "mode":  "100644",
+                              "blob":  "4fdf055d1cbd71b200618fc6214476b56f519ecd",
+                              "bytes":  826
+                          },
+                          {
+                              "path":  "docs-src/reference/api/validation.md",
+                              "mode":  "100644",
+                              "blob":  "b07af9006a9d1eb21d92dd2184d51167ed4421ab",
+                              "bytes":  520
+                          },
+                          {
+                              "path":  "docs-src/reference/cli.md",
+                              "mode":  "100644",
+                              "blob":  "d9ee130cb76baa0703fd99669daf4f5a602ae551",
+                              "bytes":  366
+                          },
+                          {
+                              "path":  "docs/_config.yml",
+                              "mode":  "100644",
+                              "blob":  "d0493bd451f7ba64db2e50159328231bcb4cfff2",
+                              "bytes":  344
+                          },
+                          {
+                              "path":  "docs/_data/columns.yml",
+                              "mode":  "100644",
+                              "blob":  "b6186133cf92a807e81de39bf45dffe5041ff12d",
+                              "bytes":  299
+                          },
+                          {
+                              "path":  "docs/_data/statuses.yml",
+                              "mode":  "100644",
+                              "blob":  "4b021f06afffa4c12d16e3b1c61b61ad6a07ddc9",
+                              "bytes":  857
+                          },
+                          {
+                              "path":  "docs/_data/tables.yml",
+                              "mode":  "100644",
+                              "blob":  "678a74558f19ac173c88696d08cd259ede8800ce",
+                              "bytes":  875
+                          },
+                          {
+                              "path":  "docs/_datasets/apnea-ecg-database.md",
+                              "mode":  "100644",
+                              "blob":  "15e84473f8203ca0cda285f671f8192161c62b50",
+                              "bytes":  24544
+                          },
+                          {
+                              "path":  "docs/_datasets/bidmc-congestive-heart-failure-database.md",
+                              "mode":  "100644",
+                              "blob":  "3f17c9c774989a0621bae5119df5386706f63f82",
+                              "bytes":  24639
+                          },
+                          {
+                              "path":  "docs/_datasets/brno-university-of-technology-ecg-quality-database-but-qdb.md",
+                              "mode":  "100644",
+                              "blob":  "75c829bc828491b072ac31b38ff964536a0ab827",
+                              "bytes":  23943
+                          },
+                          {
+                              "path":  "docs/_datasets/brugada-huca.md",
+                              "mode":  "100644",
+                              "blob":  "60694b5669f543c67aa0912d4e29310108fdb5f5",
+                              "bytes":  7162
+                          },
+                          {
+                              "path":  "docs/_datasets/chapman-shaoxing-arrhythmia.md",
+                              "mode":  "100644",
+                              "blob":  "9f56e680cc2133ca05296b9e6269f92ad45d83cf",
+                              "bytes":  6248
+                          },
+                          {
+                              "path":  "docs/_datasets/chapman-shaoxing-ecg-database-10-646-patients.md",
+                              "mode":  "100644",
+                              "blob":  "774e625837dac396d718bdaf9a7d30fc12dc1f8f",
+                              "bytes":  5274
+                          },
+                          {
+                              "path":  "docs/_datasets/cipa-ecg-validation-study.md",
+                              "mode":  "100644",
+                              "blob":  "4b6af389ca7c4afad754388e786f964d2cd8467a",
+                              "bytes":  29153
+                          },
+                          {
+                              "path":  "docs/_datasets/code-15-pct-telehealth-network-of-minas-gerais-15-pct-subset.md",
+                              "mode":  "100644",
+                              "blob":  "f6b853a6bb1f929b75fa7c2d0228e66e6b760f2f",
+                              "bytes":  15258
+                          },
+                          {
+                              "path":  "docs/_datasets/code-full-dataset-2-3m-records.md",
+                              "mode":  "100644",
+                              "blob":  "cea35c9435a91f11ffd19a32472e86b01ed1536c",
+                              "bytes":  1289
+                          },
+                          {
+                              "path":  "docs/_datasets/code-test-827-record-hold-out-test-set.md",
+                              "mode":  "100644",
+                              "blob":  "8b3f7256ec0416f42d9f7492220157d7a51373e4",
+                              "bytes":  13729
+                          },
+                          {
+                              "path":  "docs/_datasets/cpsc-2018-china-physiological-signal-challenge-2018.md",
+                              "mode":  "100644",
+                              "blob":  "1517b3b8bc03bbd7f62d34ff9520baf233a3b65e",
+                              "bytes":  11558
+                          },
+                          {
+                              "path":  "docs/_datasets/ecg-capable-smartwatches-dataset.md",
+                              "mode":  "100644",
+                              "blob":  "14997ac4852fddb2d346faa4f69721caec330767",
+                              "bytes":  19828
+                          },
+                          {
+                              "path":  "docs/_datasets/ecg-effects-of-dofetilide-moxifloxacin-and-combinations-ecgdmmld.md",
+                              "mode":  "100644",
+                              "blob":  "71b0dab8dcf05f4a211f39791f3f93d46d9be671",
+                              "bytes":  29883
+                          },
+                          {
+                              "path":  "docs/_datasets/ecg-effects-of-ranolazine-dofetilide-verapamil-quinidine-ecgrdvq.md",
+                              "mode":  "100644",
+                              "blob":  "ee964524a0e1900cde7de29aa811a07396b28798",
+                              "bytes":  34599
+                          },
+                          {
+                              "path":  "docs/_datasets/ecg-id-database.md",
+                              "mode":  "100644",
+                              "blob":  "7cf5924d199e7404b68e217d9e8f3b9e50961b2c",
+                              "bytes":  21718
+                          },
+                          {
+                              "path":  "docs/_datasets/echonext.md",
+                              "mode":  "100644",
+                              "blob":  "5b9e2778f46acd396e13714172aea1ad28e3da96",
+                              "bytes":  12182
+                          },
+                          {
+                              "path":  "docs/_datasets/edgar-experimental-data-and-geometric-analysis-repository.md",
+                              "mode":  "100644",
+                              "blob":  "e866f622712dff41ad4309e65075c4772f6d2936",
+                              "bytes":  22031
+                          },
+                          {
+                              "path":  "docs/_datasets/european-st-t-database-edb.md",
+                              "mode":  "100644",
+                              "blob":  "ce1fa33033a2fee76b3011c8b5fbb235b172f949",
+                              "bytes":  30334
+                          },
+                          {
+                              "path":  "docs/_datasets/eye-tracking-dataset-for-12-lead-ecg-interpretation.md",
+                              "mode":  "100644",
+                              "blob":  "6be22f80414bf36a21a7f6a2f89896a949656e30",
+                              "bytes":  12418
+                          },
+                          {
+                              "path":  "docs/_datasets/gu-ecg-gazi-university-ptca-induced-ischaemia.md",
+                              "mode":  "100644",
+                              "blob":  "8c3b847da919a48a2782aa4c0510c0ffcf495054",
+                              "bytes":  690
+                          },
+                          {
+                              "path":  "docs/_datasets/harvard-emory-ecg-database-heedb.md",
+                              "mode":  "100644",
+                              "blob":  "2ff3dca7a6424247217d55206d65529d939364c0",
+                              "bytes":  717
+                          },
+                          {
+                              "path":  "docs/_datasets/icentia11k-single-lead-continuous-ecg.md",
+                              "mode":  "100644",
+                              "blob":  "2e91111abe5afbc783f942e50404788f626d7a5b",
+                              "bytes":  669
+                          },
+                          {
+                              "path":  "docs/_datasets/ikem-dataset-institute-for-clinical-and-experimental-medicine-prague.md",
+                              "mode":  "100644",
+                              "blob":  "b08a3ce5388c551b84558f2e22bdee11af783b36",
+                              "bytes":  11671
+                          },
+                          {
+                              "path":  "docs/_datasets/kurias-ecg.md",
+                              "mode":  "100644",
+                              "blob":  "5df089b1f61ea5ad36a839b1d9f15c8c38a6562e",
+                              "bytes":  2011
+                          },
+                          {
+                              "path":  "docs/_datasets/leipzig-heart-center-ecg-database.md",
+                              "mode":  "100644",
+                              "blob":  "3ce3a71596a1b81948e83fc76b6338d32d25f13e",
+                              "bytes":  16983
+                          },
+                          {
+                              "path":  "docs/_datasets/lobachevsky-university-ecg-database-ludb.md",
+                              "mode":  "100644",
+                              "blob":  "0c4acc5713f724626e29c809c5e3f83e387cb76d",
+                              "bytes":  5544
+                          },
+                          {
+                              "path":  "docs/_datasets/long-term-af-database-ltafdb.md",
+                              "mode":  "100644",
+                              "blob":  "9ad1987e6f9b3361329dbb3729a7f3e55e594d69",
+                              "bytes":  18629
+                          },
+                          {
+                              "path":  "docs/_datasets/long-term-st-database-ltstdb.md",
+                              "mode":  "100644",
+                              "blob":  "02b3ce999d3d3f63ef815140a3c58bc7f3d5e0d9",
+                              "bytes":  27172
+                          },
+                          {
+                              "path":  "docs/_datasets/medalcare-xl-synthetic-12-lead-ecgs-from-simulations.md",
+                              "mode":  "100644",
+                              "blob":  "6b96d7a41492187cb513432879124fb39432a048",
+                              "bytes":  20312
+                          },
+                          {
+                              "path":  "docs/_datasets/mhd-effect-on-12-lead-ecgs-in-mri-scanners.md",
+                              "mode":  "100644",
+                              "blob":  "386199ad70845c1406a459bf7e0e2dfbfa970bd9",
+                              "bytes":  16197
+                          },
+                          {
+                              "path":  "docs/_datasets/mimic-iii-waveform-database-matched-subset.md",
+                              "mode":  "100644",
+                              "blob":  "a4da9d301a54a63c62bd036d6d0b02e141ea1f9e",
+                              "bytes":  753
+                          },
+                          {
+                              "path":  "docs/_datasets/mimic-iv-ecg-demo.md",
+                              "mode":  "100644",
+                              "blob":  "983f0fb24c44a68764474cb39f728d3485026f23",
+                              "bytes":  4057
+                          },
+                          {
+                              "path":  "docs/_datasets/mimic-iv-ecg-ext-icd.md",
+                              "mode":  "100644",
+                              "blob":  "6c5cb7cf9557cb1ce43ca5a366e6c40307c86eb7",
+                              "bytes":  14360
+                          },
+                          {
+                              "path":  "docs/_datasets/mimic-iv-ecg.md",
+                              "mode":  "100644",
+                              "blob":  "f7cf9f4394f2bf4a55a7984f5156ad624724e6f7",
+                              "bytes":  16064
+                          },
+                          {
+                              "path":  "docs/_datasets/mit-bih-arrhythmia-database.md",
+                              "mode":  "100644",
+                              "blob":  "f4c6697842dd7b22d2d8d86524ca3f411ceec9dd",
+                              "bytes":  14858
+                          },
+                          {
+                              "path":  "docs/_datasets/mit-bih-atrial-fibrillation-database.md",
+                              "mode":  "100644",
+                              "blob":  "f67de76a65d4966076cd990a23a27b41105d158b",
+                              "bytes":  15367
+                          },
+                          {
+                              "path":  "docs/_datasets/mit-bih-normal-sinus-rhythm-database.md",
+                              "mode":  "100644",
+                              "blob":  "fa84e476e004505398dc08132bdaadb8544396d1",
+                              "bytes":  19453
+                          },
+                          {
+                              "path":  "docs/_datasets/mit-bih-st-change-database.md",
+                              "mode":  "100644",
+                              "blob":  "f6e402c960fe7b6da4e74f06ec89b404f5f3601f",
+                              "bytes":  14868
+                          },
+                          {
+                              "path":  "docs/_datasets/mit-bih-supraventricular-arrhythmia-database.md",
+                              "mode":  "100644",
+                              "blob":  "13b4295132e967129916f3525934dd38c6dcdd76",
+                              "bytes":  18588
+                          },
+                          {
+                              "path":  "docs/_datasets/nightingale-bwh-emergency-dept-ecg-dataset.md",
+                              "mode":  "100644",
+                              "blob":  "bf714d7992fbb65bc881d0a448334120bd76e88b",
+                              "bytes":  700
+                          },
+                          {
+                              "path":  "docs/_datasets/nightingale-ntuh-cardiac-arrest-ecg-dataset.md",
+                              "mode":  "100644",
+                              "blob":  "2de1cd379aac9396b8d109a91d8fce26a5a14f56",
+                              "bytes":  721
+                          },
+                          {
+                              "path":  "docs/_datasets/ningbo-first-hospital-ecg-database-idiopathic-ventricular-arrhythmia.md",
+                              "mode":  "100644",
+                              "blob":  "aedbf91aefeb833b1c1047f42ac0a2896ad9df07",
+                              "bytes":  14392
+                          },
+                          {
+                              "path":  "docs/_datasets/norwegian-endurance-athlete-ecg-database.md",
+                              "mode":  "100644",
+                              "blob":  "eea2d4fe37f787dfc8687d6e1de9252f24381bca",
+                              "bytes":  13930
+                          },
+                          {
+                              "path":  "docs/_datasets/physionet-cinc-challenge-2017-af-classification.md",
+                              "mode":  "100644",
+                              "blob":  "90521b06af76a199218747d921ff59f1ffc57d70",
+                              "bytes":  14915
+                          },
+                          {
+                              "path":  "docs/_datasets/physionet-cinc-challenge-2020.md",
+                              "mode":  "100644",
+                              "blob":  "f4ac52df2320d94574629a87d6648af36fa8f159",
+                              "bytes":  18325
+                          },
+                          {
+                              "path":  "docs/_datasets/physionet-cinc-challenge-2021.md",
+                              "mode":  "100644",
+                              "blob":  "460c9baebe038a0785e4438dab0188b0da54bac2",
+                              "bytes":  17129
+                          },
+                          {
+                              "path":  "docs/_datasets/post-ictal-heart-rate-oscillations-in-partial-epilepsy.md",
+                              "mode":  "100644",
+                              "blob":  "38069fc16a578d9e47ee9677a8018b79e6199d32",
+                              "bytes":  16316
+                          },
+                          {
+                              "path":  "docs/_datasets/preterm-infant-cardio-respiratory-signals-database-picsdb.md",
+                              "mode":  "100644",
+                              "blob":  "bddcc9093ebd01c300069049a395b839b7e20d00",
+                              "bytes":  17046
+                          },
+                          {
+                              "path":  "docs/_datasets/ptb-diagnostic-ecg-database.md",
+                              "mode":  "100644",
+                              "blob":  "edffd330fc3bc09302f826c94e2dd1530f3fb317",
+                              "bytes":  6346
+                          },
+                          {
+                              "path":  "docs/_datasets/ptb-xl-plus.md",
+                              "mode":  "100644",
+                              "blob":  "3243a69e9c3137e4e0a7a5a7182abf7c722d6104",
+                              "bytes":  9211
+                          },
+                          {
+                              "path":  "docs/_datasets/ptb-xl.md",
+                              "mode":  "100644",
+                              "blob":  "693039a40d21f2595ecb7b91d02eedd81e6a7482",
+                              "bytes":  7754
+                          },
+                          {
+                              "path":  "docs/_datasets/qt-database-qtdb.md",
+                              "mode":  "100644",
+                              "blob":  "18522d03329ddd2e83efb9176680abe881f57994",
+                              "bytes":  34819
+                          },
+                          {
+                              "path":  "docs/_datasets/sami-trop-chagas-cardiomyopathy-cohort.md",
+                              "mode":  "100644",
+                              "blob":  "211e8ef38a6b25bbfeb3acebcc8fc5aade3dbc28",
+                              "bytes":  9073
+                          },
+                          {
+                              "path":  "docs/_datasets/shandong-provincial-hospital-ecg-database-sphdb.md",
+                              "mode":  "100644",
+                              "blob":  "6782cb13fab2e78665189c2a9726f7a201ade44d",
+                              "bytes":  12765
+                          },
+                          {
+                              "path":  "docs/_datasets/shdb-af-saitama-holter-database-atrial-fibrillation.md",
+                              "mode":  "100644",
+                              "blob":  "22a734a1afafb25f7933178e475ca0c40daa0337",
+                              "bytes":  21182
+                          },
+                          {
+                              "path":  "docs/_datasets/st-petersburg-incart-12-lead-arrhythmia-database.md",
+                              "mode":  "100644",
+                              "blob":  "87daad3a63162445b9e04bda596c60ddd5bb0fb1",
+                              "bytes":  11667
+                          },
+                          {
+                              "path":  "docs/_datasets/st-vincent-s-ucd-sleep-apnea-database-ucddb.md",
+                              "mode":  "100644",
+                              "blob":  "6f8305b99edc63515dbe30740ddf8b7ea0008897",
+                              "bytes":  23376
+                          },
+                          {
+                              "path":  "docs/_datasets/staff-iii-database.md",
+                              "mode":  "100644",
+                              "blob":  "868931547d7b89a8a9a92418e4ef99d7a5fe75e9",
+                              "bytes":  13156
+                          },
+                          {
+                              "path":  "docs/_datasets/sudden-cardiac-death-holter-database.md",
+                              "mode":  "100644",
+                              "blob":  "52fd3cea99a75e692a0bc0d52c21c745f20387b6",
+                              "bytes":  36919
+                          },
+                          {
+                              "path":  "docs/_datasets/symile-mimic.md",
+                              "mode":  "100644",
+                              "blob":  "b820d8d75274bf6ad6b6d601f46d5fc14a85d6c8",
+                              "bytes":  19442
+                          },
+                          {
+                              "path":  "docs/_datasets/toliet-thigh-based-ecg-toilet-seat.md",
+                              "mode":  "100644",
+                              "blob":  "4819bcc7a01fba4b52517ff11c0b5be12866127a",
+                              "bytes":  20049
+                          },
+                          {
+                              "path":  "docs/_datasets/vitaldb-arrhythmia-database.md",
+                              "mode":  "100644",
+                              "blob":  "37df607416530a70ecb574b74c78f0d5aef97210",
+                              "bytes":  13823
+                          },
+                          {
+                              "path":  "docs/_datasets/wilson-central-terminal-ecg-database.md",
+                              "mode":  "100644",
+                              "blob":  "4e83178d230be11f6260d83ee5469fad0c2e654d",
+                              "bytes":  18042
+                          },
+                          {
+                              "path":  "docs/_datasets/zzu-pecg-zhengzhou-university-pediatric-ecg-database.md",
+                              "mode":  "100644",
+                              "blob":  "8a29eb37f65fae744661654ac9b07a303e14090b",
+                              "bytes":  10193
+                          },
+                          {
+                              "path":  "docs/_includes/cells/access.html",
+                              "mode":  "100644",
+                              "blob":  "36ed2979b894ea854477b0586f4227c6c1018a6b",
+                              "bytes":  406
+                          },
+                          {
+                              "path":  "docs/_includes/cells/dataset.html",
+                              "mode":  "100644",
+                              "blob":  "513fb684e843da5003133ae11283e69e961bae08",
+                              "bytes":  390
+                          },
+                          {
+                              "path":  "docs/_includes/cells/format.html",
+                              "mode":  "100644",
+                              "blob":  "a24b5170d7b19533f4946b65df0b3a1e21fe8185",
+                              "bytes":  34
+                          },
+                          {
+                              "path":  "docs/_includes/cells/num.html",
+                              "mode":  "100644",
+                              "blob":  "61055cb38e7d963a0f733ef0f1ede1edeffe2273",
+                              "bytes":  44
+                          },
+                          {
+                              "path":  "docs/_includes/cells/origin.html",
+                              "mode":  "100644",
+                              "blob":  "32e6f71c14093481feaf3c9df898f405e43e4e95",
+                              "bytes":  254
+                          },
+                          {
+                              "path":  "docs/_includes/cells/paper.html",
+                              "mode":  "100644",
+                              "blob":  "9cdc0f2a3143e69b68c2cdbb396fe8fe5dae26ac",
+                              "bytes":  477
+                          },
+                          {
+                              "path":  "docs/_includes/cells/patients.html",
+                              "mode":  "100644",
+                              "blob":  "29e0d62f678e331a81f759aeac58b0a806983727",
+                              "bytes":  96
+                          },
+                          {
+                              "path":  "docs/_includes/cells/records.html",
+                              "mode":  "100644",
+                              "blob":  "c8d1a21814379a1d00d17a11176c2eb0d9fd491a",
+                              "bytes":  94
+                          },
+                          {
+                              "path":  "docs/_includes/cells/related.html",
+                              "mode":  "100644",
+                              "blob":  "a5f8ea9722870d52a6a691b6286dcbfd1ca15264",
+                              "bytes":  629
+                          },
+                          {
+                              "path":  "docs/_includes/cells/status.html",
+                              "mode":  "100644",
+                              "blob":  "1134c0341ed353ad2e137dad19459e95292626b8",
+                              "bytes":  330
+                          },
+                          {
+                              "path":  "docs/_includes/related-edges.html",
+                              "mode":  "100644",
+                              "blob":  "06071546fae4046488e28ee68a5d55392e97e56b",
+                              "bytes":  1402
+                          },
+                          {
+                              "path":  "docs/_includes/sections/code.html",
+                              "mode":  "100644",
+                              "blob":  "957d2b1cc1370eb4c5ec5b966155fbbe9b3197b5",
+                              "bytes":  292
+                          },
+                          {
+                              "path":  "docs/_includes/sections/description.html",
+                              "mode":  "100644",
+                              "blob":  "9bbdd522f58017860dcb2c04e3609785f48d98c6",
+                              "bytes":  235
+                          },
+                          {
+                              "path":  "docs/_includes/sections/links.html",
+                              "mode":  "100644",
+                              "blob":  "1ca9b12db422aee4b2461ca9c6267647592730c8",
+                              "bytes":  322
+                          },
+                          {
+                              "path":  "docs/_includes/sections/notebook.html",
+                              "mode":  "100644",
+                              "blob":  "7e6d4c2545356cffcee058bdb598903b800f37a9",
+                              "bytes":  301
+                          },
+                          {
+                              "path":  "docs/_includes/sections/plot.html",
+                              "mode":  "100644",
+                              "blob":  "9782d4b3fb1321408e008be981cfbde550748a5a",
+                              "bytes":  403
+                          },
+                          {
+                              "path":  "docs/_includes/sections/related.html",
+                              "mode":  "100644",
+                              "blob":  "da7da6cbe45dc4af7969268c052c9841737c5282",
+                              "bytes":  2711
+                          },
+                          {
+                              "path":  "docs/_includes/sections/table.html",
+                              "mode":  "100644",
+                              "blob":  "b48b18ea09cdb2af0c481f2aac63a2720c9607a5",
+                              "bytes":  528
+                          },
+                          {
+                              "path":  "docs/_layouts/dataset.html",
+                              "mode":  "100644",
+                              "blob":  "42bf575ef3f6877503cef77e3df557a54661d2d1",
+                              "bytes":  3678
+                          },
+                          {
+                              "path":  "docs/_version.json",
+                              "mode":  "100644",
+                              "blob":  "188c274ebb35b47bd6598526a47ea34729f7a2c0",
+                              "bytes":  81
+                          },
+                          {
+                              "path":  "docs/assets/dataset.css",
+                              "mode":  "100644",
+                              "blob":  "a91d5d8793230efdee6198ba301b91a40ee771be",
+                              "bytes":  5523
+                          },
+                          {
+                              "path":  "docs/index.html",
+                              "mode":  "100644",
+                              "blob":  "49b1e94e3dec05ef4528112b8321dbc7194ca8d9",
+                              "bytes":  38917
+                          },
+                          {
+                              "path":  "ecgbench/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "410a448a6e3a17a446944bb9a75fc617e0b3e996",
+                              "bytes":  2539
+                          },
+                          {
+                              "path":  "ecgbench/catalogue.py",
+                              "mode":  "100644",
+                              "blob":  "1d0f6d2c7fe41610669fa229e12e6b38d1810823",
+                              "bytes":  12513
+                          },
+                          {
+                              "path":  "ecgbench/cli/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "7344a857bdab00abda7169ccec8a035ae123e361",
+                              "bytes":  569
+                          },
+                          {
+                              "path":  "ecgbench/cli/_main.py",
+                              "mode":  "100644",
+                              "blob":  "f1a6a804fc18a2f8c752ffa27e71284f41982547",
+                              "bytes":  1288
+                          },
+                          {
+                              "path":  "ecgbench/cli/croissant.py",
+                              "mode":  "100644",
+                              "blob":  "d7d7349810c5bcaf80a559bad4e223b4b45660f8",
+                              "bytes":  2863
+                          },
+                          {
+                              "path":  "ecgbench/cli/splits.py",
+                              "mode":  "100644",
+                              "blob":  "8c1a9a552210c5644f511dddc6b0e89bb530178e",
+                              "bytes":  8458
+                          },
+                          {
+                              "path":  "ecgbench/cli/upload.py",
+                              "mode":  "100644",
+                              "blob":  "b7ff0962e23d55c89d9b3b937668c8e9183ae7f2",
+                              "bytes":  6066
+                          },
+                          {
+                              "path":  "ecgbench/config.py",
+                              "mode":  "100644",
+                              "blob":  "4d019bf155fcdce617b18a42160b4ca1e2dff049",
+                              "bytes":  16877
+                          },
+                          {
+                              "path":  "ecgbench/croissant.py",
+                              "mode":  "100644",
+                              "blob":  "fbe89ae984c1315f1516465992d18761dc414c30",
+                              "bytes":  8562
+                          },
+                          {
+                              "path":  "ecgbench/data/challenge2020_dx_mapping.csv",
+                              "mode":  "100644",
+                              "blob":  "9b75c9631020d04d086c7773950da860e0b44957",
+                              "bytes":  4523
+                          },
+                          {
+                              "path":  "ecgbench/data/challenge2021_dx_mapping.csv",
+                              "mode":  "100644",
+                              "blob":  "f3958666f14831829441cca7a93435ee6fb88618",
+                              "bytes":  5479
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/_template.yaml",
+                              "mode":  "100644",
+                              "blob":  "922dd810f00155b9f384189d072d2b865abfe4df",
+                              "bytes":  10073
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/afdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "1a72ce27cfaeda7eb4cdff374ca2996426b2c5fc",
+                              "bytes":  13632
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/apnea_ecg.yaml",
+                              "mode":  "100644",
+                              "blob":  "f5d5dbc0d71871ab71946919db4d2f32e0b6eaf8",
+                              "bytes":  16521
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/brugada_huca.yaml",
+                              "mode":  "100644",
+                              "blob":  "08e32c3dcd0b32e9bcf5da3e02b586d423b6e727",
+                              "bytes":  6485
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/butqdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "be2b277a8a0e32f1650ee5c73d9971bcf31f11e5",
+                              "bytes":  20218
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/challenge2017.yaml",
+                              "mode":  "100644",
+                              "blob":  "9aa5929a8853be27f83f2d7fa917eb1be6f72c6a",
+                              "bytes":  11162
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/challenge2020.yaml",
+                              "mode":  "100644",
+                              "blob":  "a1e83f45db29c9c175dddb29577c0c7058819545",
+                              "bytes":  9511
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/challenge2021.yaml",
+                              "mode":  "100644",
+                              "blob":  "14f59ad51821738e5a9c21785c14c382187a0f75",
+                              "bytes":  9328
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/chapman_shaoxing.yaml",
+                              "mode":  "100644",
+                              "blob":  "7e995f8200bf109aef55102d74344bc4b75c3488",
+                              "bytes":  4933
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/chfdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "dacab2d1c6db7ba6a4f1d303f3c9161d05295dd7",
+                              "bytes":  17068
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/code15.yaml",
+                              "mode":  "100644",
+                              "blob":  "b450b70a93758b53a02e46b7351f08befadb2872",
+                              "bytes":  11901
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/code_test.yaml",
+                              "mode":  "100644",
+                              "blob":  "f310b4057a4b059cf0152c033b92482a59d77c50",
+                              "bytes":  11292
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/cpsc_2018.yaml",
+                              "mode":  "100644",
+                              "blob":  "0165909cbbf70548414f83a8baf7466daee3911c",
+                              "bytes":  9692
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ecg_arrhythmia.yaml",
+                              "mode":  "100644",
+                              "blob":  "fa2bde63863b1fb6abbfb5c33ff17fa92a7ee9e5",
+                              "bytes":  4946
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ecg_capable_smartwatches.yaml",
+                              "mode":  "100644",
+                              "blob":  "a26db2d5a038b832582656b323da96100dac7ecb",
+                              "bytes":  25647
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ecgcipa.yaml",
+                              "mode":  "100644",
+                              "blob":  "1616618121261ee1c377f9c75bd909b337bf2780",
+                              "bytes":  16146
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ecgdmmld.yaml",
+                              "mode":  "100644",
+                              "blob":  "62551b22fe4ad8cc16b462109ff2cc079a120fad",
+                              "bytes":  20158
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ecgiddb.yaml",
+                              "mode":  "100644",
+                              "blob":  "42d7b1eb269dfa3c9e34aaf43625530477e6f2b1",
+                              "bytes":  17721
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ecgrdvq.yaml",
+                              "mode":  "100644",
+                              "blob":  "20f526b3bf8401d95f94a112dabbdb61d69aa270",
+                              "bytes":  22225
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/echonext.yaml",
+                              "mode":  "100644",
+                              "blob":  "43ffeea383ef67b30d218fbe01f8db0388b012e6",
+                              "bytes":  7368
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/edb.yaml",
+                              "mode":  "100644",
+                              "blob":  "f7d4b0fe246acc887f48f706a4bc63219ac19511",
+                              "bytes":  13701
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/edgar.yaml",
+                              "mode":  "100644",
+                              "blob":  "16eaba6eb2a62594dbcea960f70254c67a9acbdd",
+                              "bytes":  22739
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ikem.yaml",
+                              "mode":  "100644",
+                              "blob":  "4b6693e5b24b1c518e3d003183b767f65338fe49",
+                              "bytes":  14589
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/incartdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "f99201470d5486a916a831c570ac1d48e53cb2d0",
+                              "bytes":  7746
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/leipzig_heart_center_ecg.yaml",
+                              "mode":  "100644",
+                              "blob":  "9c0357d293fd2023c746b01dc66340e433ad3e2a",
+                              "bytes":  10538
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ltafdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "3e9900d8b75f9838f0d5836fbc1fef6391c990c8",
+                              "bytes":  16188
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ltstdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "154a1354c45ed38709917123c4614ab38b85f488",
+                              "bytes":  17281
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ludb.yaml",
+                              "mode":  "100644",
+                              "blob":  "9a254f68cca59a0ed7491fb56d944f7be29b8b40",
+                              "bytes":  4308
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/medalcare_xl.yaml",
+                              "mode":  "100644",
+                              "blob":  "5ec2011f213c5508feed776901917c78aad206d5",
+                              "bytes":  13523
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/mhd_effect_ecg_mri.yaml",
+                              "mode":  "100644",
+                              "blob":  "5390cd791043b8d7d2861bba69b9ea89184abb25",
+                              "bytes":  14103
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/mimic_iv_ecg.yaml",
+                              "mode":  "100644",
+                              "blob":  "79a8b201fea3b72e692e3aa0546dc8a66ac4dc3b",
+                              "bytes":  8206
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/mimic_iv_ecg_demo.yaml",
+                              "mode":  "100644",
+                              "blob":  "0a4c749f126eb92c46d67865dc4fcf03a1ed6ab5",
+                              "bytes":  4833
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/mitdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "9e106889ecedc52067fae1b463b809f90ffebe28",
+                              "bytes":  9626
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ningbo_iva.yaml",
+                              "mode":  "100644",
+                              "blob":  "a03a7a2036331e3964db72b0d2070192018750d8",
+                              "bytes":  11532
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/norwegian_athlete_ecg.yaml",
+                              "mode":  "100644",
+                              "blob":  "320f042bc6a95bf33f88a08355d9bd2b1278ab0a",
+                              "bytes":  9246
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/nsrdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "629a0a24c388160509d28e9dfb19c29b0dd21663",
+                              "bytes":  13567
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/picsdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "98a1a9f4957c9633e2ef4370b6a8b4cd10302d7c",
+                              "bytes":  19871
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ptbdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "bd77f2cd47ebb213d16d299a1d8571cdf90b4455",
+                              "bytes":  5244
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ptbxl.yaml",
+                              "mode":  "100644",
+                              "blob":  "ccae50142f43d18267896ed03ce5d2b5dd199919",
+                              "bytes":  3430
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/qtdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "12273800edcf743943052ffd18811a77decb3ed9",
+                              "bytes":  25840
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/sami_trop.yaml",
+                              "mode":  "100644",
+                              "blob":  "6659b5149b9f00d0be2c4d6e41472215c1ac7176",
+                              "bytes":  10032
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/sddb.yaml",
+                              "mode":  "100644",
+                              "blob":  "0e6299316d164401784942915fea5a13769fd706",
+                              "bytes":  22532
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/shdb_af.yaml",
+                              "mode":  "100644",
+                              "blob":  "b3d321729d7fe15258f6b844113f94af52718f69",
+                              "bytes":  22421
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/sph.yaml",
+                              "mode":  "100644",
+                              "blob":  "15eb2da8060349335f70f49f0218cc448c8e02f9",
+                              "bytes":  10403
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/staffiii.yaml",
+                              "mode":  "100644",
+                              "blob":  "f23aee7b94c2c0fc4fde1d293446d8161030dc9a",
+                              "bytes":  9568
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/stdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "1e1b626c20f8bb0a93335d4a3acece998dccaefe",
+                              "bytes":  22610
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/svdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "0ede605cf99acfb3d895dd32cfd3f864b9e97fb3",
+                              "bytes":  13584
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/szdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "ac3fc56a94202f4f03f0d931e5dfb0a76f0e585a",
+                              "bytes":  19896
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/tollet.yaml",
+                              "mode":  "100644",
+                              "blob":  "d3c201eb07c37edbc5a6f2d7acdfbbbf2f079d1d",
+                              "bytes":  20091
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/ucddb.yaml",
+                              "mode":  "100644",
+                              "blob":  "2725205fe52d170771245ccb9a12211470ba7235",
+                              "bytes":  17581
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/vajira.code-workspace",
+                              "mode":  "100644",
+                              "blob":  "e9d9212666aa28c00e30facdaa63f8cc177f686f",
+                              "bytes":  144
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/wctecgdb.yaml",
+                              "mode":  "100644",
+                              "blob":  "171a2a5cf284f218350bd451be188df9b643d548",
+                              "bytes":  12493
+                          },
+                          {
+                              "path":  "ecgbench/data/configs/zzu_pecg.yaml",
+                              "mode":  "100644",
+                              "blob":  "8bce867fa595de274793ecb8961b98504cbe1ec3",
+                              "bytes":  12835
+                          },
+                          {
+                              "path":  "ecgbench/data/manifests/ecg_capable_smartwatches.json",
+                              "mode":  "100644",
+                              "blob":  "b4f0a214c9a809511dbbc5418a4be2263a42d2d4",
+                              "bytes":  891
+                          },
+                          {
+                              "path":  "ecgbench/data/manifests/echonext.json",
+                              "mode":  "100644",
+                              "blob":  "33dee1112f1688ae150296d850fba77dcbb6b82b",
+                              "bytes":  1048
+                          },
+                          {
+                              "path":  "ecgbench/data/manifests/ikem.json",
+                              "mode":  "100644",
+                              "blob":  "f36aa88cb41321f363fa4e17f69839d264a3634e",
+                              "bytes":  837
+                          },
+                          {
+                              "path":  "ecgbench/data/manifests/mimic_iv_ecg.json",
+                              "mode":  "100644",
+                              "blob":  "ea41998485bce3187a0fa44b203c1476c3fe2be3",
+                              "bytes":  1052
+                          },
+                          {
+                              "path":  "ecgbench/dataset.py",
+                              "mode":  "100644",
+                              "blob":  "8af73cd718ce71211a2bea42c682c0b0904af05b",
+                              "bytes":  73419
+                          },
+                          {
+                              "path":  "ecgbench/download.py",
+                              "mode":  "100644",
+                              "blob":  "0d6baffbfbd16700b748b3a81a92db56e330fc05",
+                              "bytes":  8331
+                          },
+                          {
+                              "path":  "ecgbench/labels/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "6f77124a7e9d0c4a04fb9a0eaa7b5c1f185d2db7",
+                              "bytes":  8789
+                          },
+                          {
+                              "path":  "ecgbench/labels/_challenge_headers.py",
+                              "mode":  "100644",
+                              "blob":  "43303a9b5c28b9c2f5d0875f566e062644f7d59b",
+                              "bytes":  4161
+                          },
+                          {
+                              "path":  "ecgbench/labels/afdb.py",
+                              "mode":  "100644",
+                              "blob":  "c4dd8f8b28f28c7d167964f3079b8ec8e020680c",
+                              "bytes":  20040
+                          },
+                          {
+                              "path":  "ecgbench/labels/apnea_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "947a48454d8c6facb0f092416d36c3895fb08bab",
+                              "bytes":  31574
+                          },
+                          {
+                              "path":  "ecgbench/labels/butqdb.py",
+                              "mode":  "100644",
+                              "blob":  "104068971d83e4a5398682900347a7e2fc420e89",
+                              "bytes":  34603
+                          },
+                          {
+                              "path":  "ecgbench/labels/challenge2017.py",
+                              "mode":  "100644",
+                              "blob":  "ac50f713a727826a3fe59a5f1df0f1cdf2686828",
+                              "bytes":  14605
+                          },
+                          {
+                              "path":  "ecgbench/labels/challenge2020.py",
+                              "mode":  "100644",
+                              "blob":  "c89f8d4dc2bc2c1b3539f150187da767bb585a0a",
+                              "bytes":  11824
+                          },
+                          {
+                              "path":  "ecgbench/labels/challenge2021.py",
+                              "mode":  "100644",
+                              "blob":  "3a96bf738f11aa65aeef020159b6fcf44de34d11",
+                              "bytes":  8263
+                          },
+                          {
+                              "path":  "ecgbench/labels/chfdb.py",
+                              "mode":  "100644",
+                              "blob":  "f5d769569f737ceae4ab8dc99091b325b9b7d21d",
+                              "bytes":  24836
+                          },
+                          {
+                              "path":  "ecgbench/labels/code15.py",
+                              "mode":  "100644",
+                              "blob":  "c203986e8eedc7d33fbee503299c436853bc9594",
+                              "bytes":  9769
+                          },
+                          {
+                              "path":  "ecgbench/labels/code_test.py",
+                              "mode":  "100644",
+                              "blob":  "c5fc77eb1018387de999f7c3209e57a92f74f75b",
+                              "bytes":  10685
+                          },
+                          {
+                              "path":  "ecgbench/labels/cpsc_2018.py",
+                              "mode":  "100644",
+                              "blob":  "d060d8ac6ac9f7173452a5fe78172ba3a59f2d0b",
+                              "bytes":  11437
+                          },
+                          {
+                              "path":  "ecgbench/labels/ecg_capable_smartwatches.py",
+                              "mode":  "100644",
+                              "blob":  "d7dd1623fbec24b8daf1a018114d1d4d253d34d1",
+                              "bytes":  23622
+                          },
+                          {
+                              "path":  "ecgbench/labels/ecgcipa.py",
+                              "mode":  "100644",
+                              "blob":  "193afebf0a1301fcccb5151e25ce512e85425e16",
+                              "bytes":  26674
+                          },
+                          {
+                              "path":  "ecgbench/labels/ecgdmmld.py",
+                              "mode":  "100644",
+                              "blob":  "dc793c8863ce73fa99d0838033168325385971cb",
+                              "bytes":  25806
+                          },
+                          {
+                              "path":  "ecgbench/labels/ecgiddb.py",
+                              "mode":  "100644",
+                              "blob":  "d736e25272d1e5742beb6c675bfd3693393c5886",
+                              "bytes":  27041
+                          },
+                          {
+                              "path":  "ecgbench/labels/ecgrdvq.py",
+                              "mode":  "100644",
+                              "blob":  "d92a4951f351393c6ec424974dc0a64f35ddc888",
+                              "bytes":  31444
+                          },
+                          {
+                              "path":  "ecgbench/labels/echonext.py",
+                              "mode":  "100644",
+                              "blob":  "8fd898305362a33449b25100ce5a897e9a874848",
+                              "bytes":  11567
+                          },
+                          {
+                              "path":  "ecgbench/labels/edb.py",
+                              "mode":  "100644",
+                              "blob":  "8f9f4c6728f7365c58202b239915d51822cb9d11",
+                              "bytes":  40063
+                          },
+                          {
+                              "path":  "ecgbench/labels/edgar.py",
+                              "mode":  "100644",
+                              "blob":  "0e65bf2d46ba4370d15fe6af7c8326bc56a286f4",
+                              "bytes":  47345
+                          },
+                          {
+                              "path":  "ecgbench/labels/eye_tracking_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "15d0499db129057c47d53cd87cdbdf5f7382a108",
+                              "bytes":  17795
+                          },
+                          {
+                              "path":  "ecgbench/labels/ikem.py",
+                              "mode":  "100644",
+                              "blob":  "41b771b9114b9e13ffd909f36fdbc4e1de819ae5",
+                              "bytes":  13114
+                          },
+                          {
+                              "path":  "ecgbench/labels/incartdb.py",
+                              "mode":  "100644",
+                              "blob":  "d4795e57d47802dc9aa2cc19f493df05e0ae7fbc",
+                              "bytes":  10740
+                          },
+                          {
+                              "path":  "ecgbench/labels/leipzig_heart_center_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "83864a4774a39b215c90db84f85566cf3ca32c40",
+                              "bytes":  21519
+                          },
+                          {
+                              "path":  "ecgbench/labels/ltafdb.py",
+                              "mode":  "100644",
+                              "blob":  "79941001e562a28515afa6e2639e3d8600115c59",
+                              "bytes":  25809
+                          },
+                          {
+                              "path":  "ecgbench/labels/ltstdb.py",
+                              "mode":  "100644",
+                              "blob":  "55f1964fa7ba4b0fdc7a71ee0181e3ed3e04909b",
+                              "bytes":  38130
+                          },
+                          {
+                              "path":  "ecgbench/labels/ludb.py",
+                              "mode":  "100644",
+                              "blob":  "458ce7ba4cb65ea89f3b2504055aa4b03c68d772",
+                              "bytes":  5454
+                          },
+                          {
+                              "path":  "ecgbench/labels/medalcare_xl.py",
+                              "mode":  "100644",
+                              "blob":  "5cf0609c9efb5b40d302bb468000c1ba733c0ce5",
+                              "bytes":  11119
+                          },
+                          {
+                              "path":  "ecgbench/labels/mhd_effect_ecg_mri.py",
+                              "mode":  "100644",
+                              "blob":  "189cab0c168e8244076938bf85916e1d420de000",
+                              "bytes":  18553
+                          },
+                          {
+                              "path":  "ecgbench/labels/mimic_iv_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "cb7046863665f445a654b5735328d6395b66dbac",
+                              "bytes":  10481
+                          },
+                          {
+                              "path":  "ecgbench/labels/mimic_iv_ecg_ext_icd.py",
+                              "mode":  "100644",
+                              "blob":  "3de41003ed485f1a051a56da9571fcc3e4bdc519",
+                              "bytes":  18932
+                          },
+                          {
+                              "path":  "ecgbench/labels/mitdb.py",
+                              "mode":  "100644",
+                              "blob":  "ed9122067de01d23a2fb0afb2a4dddafb69a7879",
+                              "bytes":  18307
+                          },
+                          {
+                              "path":  "ecgbench/labels/ningbo_iva.py",
+                              "mode":  "100644",
+                              "blob":  "8d0741eda7bb698986cf2da9d4cca43203dfb868",
+                              "bytes":  8064
+                          },
+                          {
+                              "path":  "ecgbench/labels/norwegian_athlete_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "9aad11b79925c07580e45af710509aa74e2170a9",
+                              "bytes":  14492
+                          },
+                          {
+                              "path":  "ecgbench/labels/nsrdb.py",
+                              "mode":  "100644",
+                              "blob":  "192e9a3277ed222e742c7ee62559c0f209069f27",
+                              "bytes":  18940
+                          },
+                          {
+                              "path":  "ecgbench/labels/picsdb.py",
+                              "mode":  "100644",
+                              "blob":  "5f3a6e5ded0ccbbbc16f1464c20eb64cf5f18fd9",
+                              "bytes":  30539
+                          },
+                          {
+                              "path":  "ecgbench/labels/ptbdb.py",
+                              "mode":  "100644",
+                              "blob":  "0af23fe5c3cda5e9e546976ee90b5c52605664ba",
+                              "bytes":  6000
+                          },
+                          {
+                              "path":  "ecgbench/labels/ptbxl.py",
+                              "mode":  "100644",
+                              "blob":  "fd7c6351b53c7eda4e95364b8de3e4ad06cbe0f4",
+                              "bytes":  7403
+                          },
+                          {
+                              "path":  "ecgbench/labels/ptbxl_plus.py",
+                              "mode":  "100644",
+                              "blob":  "e42c727dbda58da8318bea71bac377340d2decad",
+                              "bytes":  12344
+                          },
+                          {
+                              "path":  "ecgbench/labels/qtdb.py",
+                              "mode":  "100644",
+                              "blob":  "16563a0f213b05c05999932e06f5a4b849387c67",
+                              "bytes":  56734
+                          },
+                          {
+                              "path":  "ecgbench/labels/sami_trop.py",
+                              "mode":  "100644",
+                              "blob":  "0bdfd56db89e6a7995bfed2496188b8df887468c",
+                              "bytes":  8322
+                          },
+                          {
+                              "path":  "ecgbench/labels/sddb.py",
+                              "mode":  "100644",
+                              "blob":  "edb30aab6f6cf511844417da57b75f4913ffeec5",
+                              "bytes":  45408
+                          },
+                          {
+                              "path":  "ecgbench/labels/shdb_af.py",
+                              "mode":  "100644",
+                              "blob":  "c3be7755d4f53490c4daf08d76758fced291fb97",
+                              "bytes":  37253
+                          },
+                          {
+                              "path":  "ecgbench/labels/sph.py",
+                              "mode":  "100644",
+                              "blob":  "bb458b33438f383b520eaf4f01081c8a04c29431",
+                              "bytes":  13766
+                          },
+                          {
+                              "path":  "ecgbench/labels/staffiii.py",
+                              "mode":  "100644",
+                              "blob":  "e1417bffeae530373dcbb326a5fce6309ec17fa4",
+                              "bytes":  23551
+                          },
+                          {
+                              "path":  "ecgbench/labels/stdb.py",
+                              "mode":  "100644",
+                              "blob":  "6a3eafe32fc4c797e9934b0f9ee5ffdb693573d0",
+                              "bytes":  24863
+                          },
+                          {
+                              "path":  "ecgbench/labels/svdb.py",
+                              "mode":  "100644",
+                              "blob":  "16a395f6cac0df853e522544e33769fc45e27b6a",
+                              "bytes":  22626
+                          },
+                          {
+                              "path":  "ecgbench/labels/symile_mimic.py",
+                              "mode":  "100644",
+                              "blob":  "218f2d00addcacef4bd3e9be897474def2a77c4a",
+                              "bytes":  36186
+                          },
+                          {
+                              "path":  "ecgbench/labels/szdb.py",
+                              "mode":  "100644",
+                              "blob":  "e544a85d70c12626a6acc68d23e85710a8dd3cb6",
+                              "bytes":  38849
+                          },
+                          {
+                              "path":  "ecgbench/labels/tollet.py",
+                              "mode":  "100644",
+                              "blob":  "cc7fe63bfdbcda3684f93097fb0064fddaddfc74",
+                              "bytes":  19758
+                          },
+                          {
+                              "path":  "ecgbench/labels/ucddb.py",
+                              "mode":  "100644",
+                              "blob":  "54e4e13ebc1c1c7aa5f9bf02d969624c1258bfe5",
+                              "bytes":  40856
+                          },
+                          {
+                              "path":  "ecgbench/labels/vitaldb_arrhythmia.py",
+                              "mode":  "100644",
+                              "blob":  "a25b205f7ea6cd59d1c1733511af58f17df2222f",
+                              "bytes":  23348
+                          },
+                          {
+                              "path":  "ecgbench/labels/wctecgdb.py",
+                              "mode":  "100644",
+                              "blob":  "2b4c72007b197906a1826213167d4ccfcef0e838",
+                              "bytes":  16677
+                          },
+                          {
+                              "path":  "ecgbench/labels/zzu_pecg.py",
+                              "mode":  "100644",
+                              "blob":  "ad73602bc64c6847cce4f3f6670563c522d55db2",
+                              "bytes":  18099
+                          },
+                          {
+                              "path":  "ecgbench/manifest.py",
+                              "mode":  "100644",
+                              "blob":  "47e37f6ce7f76839272d0961be8154e25e8e4b93",
+                              "bytes":  9601
+                          },
+                          {
+                              "path":  "ecgbench/splitting/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "fe46b69ad64907ea484a763195d46de2bd6738fd",
+                              "bytes":  406
+                          },
+                          {
+                              "path":  "ecgbench/splitting/base.py",
+                              "mode":  "100644",
+                              "blob":  "808c537011d1156961cf789456e60e7ba0c81b81",
+                              "bytes":  3667
+                          },
+                          {
+                              "path":  "ecgbench/splitting/engine.py",
+                              "mode":  "100644",
+                              "blob":  "dd928278d5ca9f6127b8940567ad2a0ab65365d7",
+                              "bytes":  5474
+                          },
+                          {
+                              "path":  "ecgbench/splitting/export.py",
+                              "mode":  "100644",
+                              "blob":  "6d3995411afc60e92e59f7854774cb9c344c5211",
+                              "bytes":  9398
+                          },
+                          {
+                              "path":  "ecgbench/splitting/registry.py",
+                              "mode":  "100644",
+                              "blob":  "b3d78e1a35e6abe7a98741afc6b9511b84e87d65",
+                              "bytes":  691
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "2d4c9c2057588e372099d98e0adf261669b985af",
+                              "bytes":  854
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/afdb.py",
+                              "mode":  "100644",
+                              "blob":  "2bbb815c31c028f4245a0e424a4056ed4526bab9",
+                              "bytes":  5435
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/apnea_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "fab1940d089f08404dd0cc4e37d70fb192ef0c2b",
+                              "bytes":  6021
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/brugada_huca.py",
+                              "mode":  "100644",
+                              "blob":  "2bbe9807f9f7f3804e6e473e7c5284ff2db70418",
+                              "bytes":  6662
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/butqdb.py",
+                              "mode":  "100644",
+                              "blob":  "59db3c249cae7d445c9708bea747c14d0797d743",
+                              "bytes":  7101
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/challenge2017.py",
+                              "mode":  "100644",
+                              "blob":  "a83db811edc08c4407513f8dbfa36781956b1462",
+                              "bytes":  4689
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/challenge2020.py",
+                              "mode":  "100644",
+                              "blob":  "1c0c98964b47495135570ff899ab65a9d4e2c6d1",
+                              "bytes":  5223
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/challenge2021.py",
+                              "mode":  "100644",
+                              "blob":  "19adc81903bc9c03d036f27a392fcdee30c67b41",
+                              "bytes":  5223
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/chapman.py",
+                              "mode":  "100644",
+                              "blob":  "8675610f27730276de74b693e7cf9dfa9fd7394a",
+                              "bytes":  5453
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/chfdb.py",
+                              "mode":  "100644",
+                              "blob":  "d80b8668db6fe432cb17067c4d2d5fadf1e52981",
+                              "bytes":  5227
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/code15.py",
+                              "mode":  "100644",
+                              "blob":  "bbe5369ea7bd4be769acfc49e780391221aa3761",
+                              "bytes":  9464
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/code_test.py",
+                              "mode":  "100644",
+                              "blob":  "306b62d59e5b9fdc169ccecb896a2304c07dc9ef",
+                              "bytes":  6787
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/cpsc_2018.py",
+                              "mode":  "100644",
+                              "blob":  "2fe0bf489434e5b6279813ebddb7784e3bb912ea",
+                              "bytes":  3831
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ecg_arrhythmia.py",
+                              "mode":  "100644",
+                              "blob":  "bb29f71ae3d626cf02a0060b8ad8b5cc62ff4855",
+                              "bytes":  8422
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ecg_capable_smartwatches.py",
+                              "mode":  "100644",
+                              "blob":  "67ca964107bc0ec00d97d3bad226b52541cc149c",
+                              "bytes":  8651
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ecgcipa.py",
+                              "mode":  "100644",
+                              "blob":  "9da2994e6b5462a2331529de44f52405853245f6",
+                              "bytes":  6567
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ecgdmmld.py",
+                              "mode":  "100644",
+                              "blob":  "32aeacfaf269e39a31405218a77e4833f0c63881",
+                              "bytes":  6835
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ecgiddb.py",
+                              "mode":  "100644",
+                              "blob":  "848a51e8a8b869297982f89fe1e83ef9dd2af522",
+                              "bytes":  6294
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ecgrdvq.py",
+                              "mode":  "100644",
+                              "blob":  "c2e11581fed52f6c7da66e28832248b14794ba1d",
+                              "bytes":  6804
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/echonext.py",
+                              "mode":  "100644",
+                              "blob":  "ca82037f4b4c35ef9739a9c7d01da6e11629569b",
+                              "bytes":  5431
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/edb.py",
+                              "mode":  "100644",
+                              "blob":  "e3adde162ef5689019465dff76fa14ea93ff07b1",
+                              "bytes":  6140
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/edgar.py",
+                              "mode":  "100644",
+                              "blob":  "175733929b91c65330ecb5c4e5ec870936ccc53e",
+                              "bytes":  6009
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/generic.py",
+                              "mode":  "100644",
+                              "blob":  "8a2f3fd398e264352fa66b95f2057d9aef5982dc",
+                              "bytes":  1414
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ikem.py",
+                              "mode":  "100644",
+                              "blob":  "c750096537b90f16a9ee95cd703818bfd8ebd623",
+                              "bytes":  9904
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/incartdb.py",
+                              "mode":  "100644",
+                              "blob":  "76646c259d4fb906fbc47a9789f94c40d288093f",
+                              "bytes":  4186
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/leipzig_heart_center_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "f10190d25efe9b2a455ee943bbf6c7ed9725c2a9",
+                              "bytes":  4335
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ltafdb.py",
+                              "mode":  "100644",
+                              "blob":  "7ba6e8cc1be2eb7e7d193b0fd65f133ad54bdbb7",
+                              "bytes":  5114
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ltstdb.py",
+                              "mode":  "100644",
+                              "blob":  "71f7236163eb11753f994ad1f566b5a502fdb176",
+                              "bytes":  6481
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ludb.py",
+                              "mode":  "100644",
+                              "blob":  "84bb9d83123d641f6210a65b40c0b1559c8a36e4",
+                              "bytes":  3349
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/medalcare_xl.py",
+                              "mode":  "100644",
+                              "blob":  "28656733cac7fa075f87393843ec820a03953ba1",
+                              "bytes":  12015
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/mhd_effect_ecg_mri.py",
+                              "mode":  "100644",
+                              "blob":  "dbb6f194211b46f70a833d9de6d18390c5027a28",
+                              "bytes":  5680
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/mimic_iv_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "367bfa8dbe02be11ab5512f766ab71d222401adf",
+                              "bytes":  5678
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/mimic_iv_ecg_demo.py",
+                              "mode":  "100644",
+                              "blob":  "9d5b8a00fe1c27a358cee6c17864b6abcd161494",
+                              "bytes":  3396
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/mitdb.py",
+                              "mode":  "100644",
+                              "blob":  "2e9dc02c415d570bb66f9282b908c22919de8934",
+                              "bytes":  4742
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ningbo_iva.py",
+                              "mode":  "100644",
+                              "blob":  "6e6a8998856167b400f7f9c46157a088dc3371c4",
+                              "bytes":  4543
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/norwegian_athlete_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "7f75f57f903180522ba0e0ef354122421f0b8ac8",
+                              "bytes":  5267
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/nsrdb.py",
+                              "mode":  "100644",
+                              "blob":  "ff0ff46f11975187facc511032d340281c4499c2",
+                              "bytes":  4839
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/picsdb.py",
+                              "mode":  "100644",
+                              "blob":  "dd593735a4ab3e86dda2cb7f3e61ab6657808ba0",
+                              "bytes":  6695
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ptbdb.py",
+                              "mode":  "100644",
+                              "blob":  "61b22d8ddbbeb7f6cf24bb1852933343aa8d4dc9",
+                              "bytes":  2510
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ptbxl.py",
+                              "mode":  "100644",
+                              "blob":  "cbb92f5ec8b6d16cdc374137709c0d48cec27298",
+                              "bytes":  3270
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/qtdb.py",
+                              "mode":  "100644",
+                              "blob":  "7d850f9685db7f1b3cc6801273b64532f75fd7cc",
+                              "bytes":  7914
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/sami_trop.py",
+                              "mode":  "100644",
+                              "blob":  "75415eb6bd33107719a36d2409b042c8957a486a",
+                              "bytes":  7428
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/sddb.py",
+                              "mode":  "100644",
+                              "blob":  "16f3017c810ab73a483e498501de43d6dc18663c",
+                              "bytes":  5881
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/shdb_af.py",
+                              "mode":  "100644",
+                              "blob":  "78504e05e05a3993686e35cf3913f81b501b8d8b",
+                              "bytes":  5741
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/sph.py",
+                              "mode":  "100644",
+                              "blob":  "cff5621eb8e6e3b90336e3cdb19ee57467ee8a81",
+                              "bytes":  5207
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/staffiii.py",
+                              "mode":  "100644",
+                              "blob":  "ce118605e41668dbb77e51afdc00080b0e7be8c2",
+                              "bytes":  5568
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/stdb.py",
+                              "mode":  "100644",
+                              "blob":  "d881d5b4c835b43d683eca06d09d763784b2ca0e",
+                              "bytes":  5129
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/svdb.py",
+                              "mode":  "100644",
+                              "blob":  "9c9973cc6ab39335150be3d13a8632e7a835aa6a",
+                              "bytes":  4904
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/szdb.py",
+                              "mode":  "100644",
+                              "blob":  "58733b97b8e401c1463fe5bd08b6a92a68551b58",
+                              "bytes":  6469
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/tollet.py",
+                              "mode":  "100644",
+                              "blob":  "f61c2fecd8f3bd4d654fa968f6406f7ab95677b8",
+                              "bytes":  6740
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/ucddb.py",
+                              "mode":  "100644",
+                              "blob":  "74e7c14951c1e1d18d88d2099fbccb6dc2e59ed1",
+                              "bytes":  5809
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/wctecgdb.py",
+                              "mode":  "100644",
+                              "blob":  "d23ec85d301f11880a589ab85e1d81b05fd5e362",
+                              "bytes":  6556
+                          },
+                          {
+                              "path":  "ecgbench/splitting/strategies/zzu_pecg.py",
+                              "mode":  "100644",
+                              "blob":  "76862bc513e05f751883a1ed54f05c0f455abf99",
+                              "bytes":  6941
+                          },
+                          {
+                              "path":  "ecgbench/validation/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "a7f6b51ac1c14cb9ac064f673eeaba1f77c5572d",
+                              "bytes":  461
+                          },
+                          {
+                              "path":  "ecgbench/validation/checks.py",
+                              "mode":  "100644",
+                              "blob":  "b8d52a8e1e2306437410bc59a8814c18d1a25bdc",
+                              "bytes":  4432
+                          },
+                          {
+                              "path":  "ecgbench/validation/engine.py",
+                              "mode":  "100644",
+                              "blob":  "ccb5451210348c8d7adea326130a2501a2088d40",
+                              "bytes":  16407
+                          },
+                          {
+                              "path":  "ecgbench/validation/report.py",
+                              "mode":  "100644",
+                              "blob":  "5aa17dcc2ceba148c57e8bf853457ef8bba24e01",
+                              "bytes":  4040
+                          },
+                          {
+                              "path":  "examples/download_chapman_figshare.py",
+                              "mode":  "100644",
+                              "blob":  "7a1b6ca7820c25a47355adb13116f9258903e3ec",
+                              "bytes":  8864
+                          },
+                          {
+                              "path":  "examples/load_afdb.py",
+                              "mode":  "100644",
+                              "blob":  "18caa893b5e9c5af09adf426e806b9b07b24f347",
+                              "bytes":  11623
+                          },
+                          {
+                              "path":  "examples/load_apnea_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "a6ce734066422ee9c70f6dfe5ab1d9acb7e4ea47",
+                              "bytes":  14263
+                          },
+                          {
+                              "path":  "examples/load_brugada_huca.py",
+                              "mode":  "100644",
+                              "blob":  "3bf63759b57fa47969532e5344c55ecc967b7d04",
+                              "bytes":  5405
+                          },
+                          {
+                              "path":  "examples/load_butqdb.py",
+                              "mode":  "100644",
+                              "blob":  "173168a3e8a15a2b077df3894f33b82bbf35c360",
+                              "bytes":  17048
+                          },
+                          {
+                              "path":  "examples/load_challenge2017.py",
+                              "mode":  "100644",
+                              "blob":  "6867c9ae7511347435ede065df44e6369764f237",
+                              "bytes":  8340
+                          },
+                          {
+                              "path":  "examples/load_challenge2020.py",
+                              "mode":  "100644",
+                              "blob":  "aa3071a05b81e10c3b85313dda2eac3eb6e87751",
+                              "bytes":  8162
+                          },
+                          {
+                              "path":  "examples/load_challenge2021.py",
+                              "mode":  "100644",
+                              "blob":  "2b51213e2e459d93d3c9aeed6ab534a24f93182f",
+                              "bytes":  7202
+                          },
+                          {
+                              "path":  "examples/load_chapman_shaoxing.py",
+                              "mode":  "100644",
+                              "blob":  "1fc16d7f27b65325b71417d4daf4aea097122541",
+                              "bytes":  4391
+                          },
+                          {
+                              "path":  "examples/load_chfdb.py",
+                              "mode":  "100644",
+                              "blob":  "ef7da408d35370295c2ef2eb86a7d51f6d7e1e19",
+                              "bytes":  14443
+                          },
+                          {
+                              "path":  "examples/load_code15.py",
+                              "mode":  "100644",
+                              "blob":  "c151febbe0cf0fcdac328b8dda31cdfbc057f00a",
+                              "bytes":  8959
+                          },
+                          {
+                              "path":  "examples/load_code_test.py",
+                              "mode":  "100644",
+                              "blob":  "c80f323433edc246873643cbc8fc392adf6a1295",
+                              "bytes":  8712
+                          },
+                          {
+                              "path":  "examples/load_cpsc_2018.py",
+                              "mode":  "100644",
+                              "blob":  "e32f56124743e530279beab8676e87c306e8301d",
+                              "bytes":  7682
+                          },
+                          {
+                              "path":  "examples/load_ecg_arrhythmia.py",
+                              "mode":  "100644",
+                              "blob":  "75b7d24d7741bc4e7723132af6c47e7e69efc424",
+                              "bytes":  4163
+                          },
+                          {
+                              "path":  "examples/load_ecg_capable_smartwatches.py",
+                              "mode":  "100644",
+                              "blob":  "91bfad27e56b62b0486bc611247c926153248d1a",
+                              "bytes":  11418
+                          },
+                          {
+                              "path":  "examples/load_ecgcipa.py",
+                              "mode":  "100644",
+                              "blob":  "69e3442dbcebd0fe58dc881990c9cc7430e339d1",
+                              "bytes":  13518
+                          },
+                          {
+                              "path":  "examples/load_ecgdmmld.py",
+                              "mode":  "100644",
+                              "blob":  "16663ba5af6f42f0ac92a84982ed887188827eea",
+                              "bytes":  14090
+                          },
+                          {
+                              "path":  "examples/load_ecgiddb.py",
+                              "mode":  "100644",
+                              "blob":  "3c3fb40b3ce6e08b563ec49fb65caa491c16f31a",
+                              "bytes":  14346
+                          },
+                          {
+                              "path":  "examples/load_ecgrdvq.py",
+                              "mode":  "100644",
+                              "blob":  "978205ddb04b04a4e2133b34989fe4f1be69cacd",
+                              "bytes":  17388
+                          },
+                          {
+                              "path":  "examples/load_echonext.py",
+                              "mode":  "100644",
+                              "blob":  "59f3415e24945f2f7a3688743ebf04e8b5c33228",
+                              "bytes":  6808
+                          },
+                          {
+                              "path":  "examples/load_edb.py",
+                              "mode":  "100644",
+                              "blob":  "092a14b7fb11a3eae6782261edd8f1efad8ddbaa",
+                              "bytes":  19715
+                          },
+                          {
+                              "path":  "examples/load_edgar.py",
+                              "mode":  "100644",
+                              "blob":  "b6f4851bf1a8f85d26ab8caf025647e1063eeca5",
+                              "bytes":  14768
+                          },
+                          {
+                              "path":  "examples/load_eye_tracking_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "2670bed7556adc17545b60f8827618e03c382db0",
+                              "bytes":  7096
+                          },
+                          {
+                              "path":  "examples/load_ikem.py",
+                              "mode":  "100644",
+                              "blob":  "54136d59057acbceb5ef6dc9ac207ac28bca8e9b",
+                              "bytes":  11189
+                          },
+                          {
+                              "path":  "examples/load_incartdb.py",
+                              "mode":  "100644",
+                              "blob":  "210dffc0632696a5752118109248ae03fa974fcf",
+                              "bytes":  6074
+                          },
+                          {
+                              "path":  "examples/load_leipzig_heart_center_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "ead1da7d2d5380671dc1b51f5333b20d2a516f7c",
+                              "bytes":  10687
+                          },
+                          {
+                              "path":  "examples/load_ltafdb.py",
+                              "mode":  "100644",
+                              "blob":  "e7c2d12078b36606cccbc31790a9b1806848e474",
+                              "bytes":  11684
+                          },
+                          {
+                              "path":  "examples/load_ltstdb.py",
+                              "mode":  "100644",
+                              "blob":  "5df002823e8ce99212097944c04057acb0b7ddba",
+                              "bytes":  20214
+                          },
+                          {
+                              "path":  "examples/load_ludb.py",
+                              "mode":  "100644",
+                              "blob":  "13395808149c83e592174d9581e3094e24cbf3a2",
+                              "bytes":  4345
+                          },
+                          {
+                              "path":  "examples/load_medalcare_xl.py",
+                              "mode":  "100644",
+                              "blob":  "80a268ee9f5b5e1c87f8ed1254c79021ce9e0bfc",
+                              "bytes":  9912
+                          },
+                          {
+                              "path":  "examples/load_mhd_effect_ecg_mri.py",
+                              "mode":  "100644",
+                              "blob":  "10903741cd6af8e8f018f4f6e85f8d5b5871a23e",
+                              "bytes":  8900
+                          },
+                          {
+                              "path":  "examples/load_mimic_iv_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "f38a3aca17b8807ddeb08587995dd91ad86efa62",
+                              "bytes":  7623
+                          },
+                          {
+                              "path":  "examples/load_mimic_iv_ecg_demo.py",
+                              "mode":  "100644",
+                              "blob":  "fa76982d99649c70be0b3e886fbef55ab69fb6a3",
+                              "bytes":  3969
+                          },
+                          {
+                              "path":  "examples/load_mimic_iv_ecg_ext_icd.py",
+                              "mode":  "100644",
+                              "blob":  "2a8bdbbd0de3f00a5caa20586e52783143160b80",
+                              "bytes":  7427
+                          },
+                          {
+                              "path":  "examples/load_mitdb.py",
+                              "mode":  "100644",
+                              "blob":  "03653531401856a9b30b4e6bf3a668f494f3ae89",
+                              "bytes":  8810
+                          },
+                          {
+                              "path":  "examples/load_ningbo_iva.py",
+                              "mode":  "100644",
+                              "blob":  "16053f7d78a5339612996991aee4ec70304a60fd",
+                              "bytes":  8823
+                          },
+                          {
+                              "path":  "examples/load_norwegian_athlete_ecg.py",
+                              "mode":  "100644",
+                              "blob":  "390a90decdd7dd309c052f5a3fa40d49a1623551",
+                              "bytes":  8386
+                          },
+                          {
+                              "path":  "examples/load_nsrdb.py",
+                              "mode":  "100644",
+                              "blob":  "6692b83a500b3582f6b3e48ce149f57803839542",
+                              "bytes":  11603
+                          },
+                          {
+                              "path":  "examples/load_picsdb.py",
+                              "mode":  "100644",
+                              "blob":  "2f1aeff406bc04917a3b5af43b8afdfab5841bdc",
+                              "bytes":  15714
+                          },
+                          {
+                              "path":  "examples/load_ptbdb.py",
+                              "mode":  "100644",
+                              "blob":  "d2e70fad43595b14de77683cdfc72cf9b5f60222",
+                              "bytes":  4351
+                          },
+                          {
+                              "path":  "examples/load_ptbxl.py",
+                              "mode":  "100644",
+                              "blob":  "76c29584e8da8d5be15a9d36fa875258fc427e5c",
+                              "bytes":  4836
+                          },
+                          {
+                              "path":  "examples/load_ptbxl_plus.py",
+                              "mode":  "100644",
+                              "blob":  "68d7206adcf0be71b77aace248dc1cec2bafc49e",
+                              "bytes":  5967
+                          },
+                          {
+                              "path":  "examples/load_qtdb.py",
+                              "mode":  "100644",
+                              "blob":  "0d6b42bbbe38e6a6e05eb764e4308d1a519d8218",
+                              "bytes":  18487
+                          },
+                          {
+                              "path":  "examples/load_sami_trop.py",
+                              "mode":  "100644",
+                              "blob":  "c0d00baf9d75a0e995ac2236bf5c087f0afceae3",
+                              "bytes":  8850
+                          },
+                          {
+                              "path":  "examples/load_sddb.py",
+                              "mode":  "100644",
+                              "blob":  "631484bca538c907d4d17fa4bac8a8dd1ec7122b",
+                              "bytes":  19141
+                          },
+                          {
+                              "path":  "examples/load_shdb_af.py",
+                              "mode":  "100644",
+                              "blob":  "cb88ea153135fd4b415138c0543a33987a15b0ae",
+                              "bytes":  13957
+                          },
+                          {
+                              "path":  "examples/load_sph.py",
+                              "mode":  "100644",
+                              "blob":  "3b56191e9bb7eed7de8bceef70127176dc734792",
+                              "bytes":  8942
+                          },
+                          {
+                              "path":  "examples/load_staffiii.py",
+                              "mode":  "100644",
+                              "blob":  "fb2ccb22ccc1a724703ea4006607d4c9f88319fc",
+                              "bytes":  9835
+                          },
+                          {
+                              "path":  "examples/load_stdb.py",
+                              "mode":  "100644",
+                              "blob":  "b6ae132927a938ef720b3e0a78b8e8c2a5653b7d",
+                              "bytes":  12772
+                          },
+                          {
+                              "path":  "examples/load_svdb.py",
+                              "mode":  "100644",
+                              "blob":  "4e9ae1471853e5ca61248937ae097ce30570574b",
+                              "bytes":  14079
+                          },
+                          {
+                              "path":  "examples/load_symile_mimic.py",
+                              "mode":  "100644",
+                              "blob":  "418cddc584ac449e7d694b7b88bc95d1f28b0efc",
+                              "bytes":  10959
+                          },
+                          {
+                              "path":  "examples/load_szdb.py",
+                              "mode":  "100644",
+                              "blob":  "be41f293af2d0a3ab19021e347606144e7bd8a14",
+                              "bytes":  16929
+                          },
+                          {
+                              "path":  "examples/load_tollet.py",
+                              "mode":  "100644",
+                              "blob":  "9c8143954b87a8c68ab4fb8210ddb359ecafde29",
+                              "bytes":  9422
+                          },
+                          {
+                              "path":  "examples/load_ucddb.py",
+                              "mode":  "100644",
+                              "blob":  "ed16a968bb101e391658fc77b2eebcef07b49e25",
+                              "bytes":  16425
+                          },
+                          {
+                              "path":  "examples/load_vitaldb_arrhythmia.py",
+                              "mode":  "100644",
+                              "blob":  "ff3e0e2d1be26efe1bdcec1c1ed0f3c1bde2e381",
+                              "bytes":  9452
+                          },
+                          {
+                              "path":  "examples/load_wctecgdb.py",
+                              "mode":  "100644",
+                              "blob":  "84a6bd5c3cd3b53dc5754cdcabf64d2fdfb7fe08",
+                              "bytes":  9440
+                          },
+                          {
+                              "path":  "examples/load_zzu_pecg.py",
+                              "mode":  "100644",
+                              "blob":  "af5e2f62d60722c700ffa0062b70af67adeef4ab",
+                              "bytes":  11560
+                          },
+                          {
+                              "path":  "mkdocs.yml",
+                              "mode":  "100644",
+                              "blob":  "8a01e4adc62aba21a3a7d41fa33cdcb0044aeab9",
+                              "bytes":  5854
+                          },
+                          {
+                              "path":  "overrides/main.html",
+                              "mode":  "100644",
+                              "blob":  "a883fe0dea978ce8b665a3f818db3a99e0859e1a",
+                              "bytes":  831
+                          },
+                          {
+                              "path":  "pyproject.toml",
+                              "mode":  "100644",
+                              "blob":  "669e7a20bace70c95ba312ff9701b9f23a553bd3",
+                              "bytes":  2840
+                          },
+                          {
+                              "path":  "requirements-docs.txt",
+                              "mode":  "100644",
+                              "blob":  "59644c44aef0949d9f247966337c2404b105bd9e",
+                              "bytes":  672
+                          },
+                          {
+                              "path":  "tests/__init__.py",
+                              "mode":  "100644",
+                              "blob":  "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+                              "bytes":  0
+                          },
+                          {
+                              "path":  "tests/conftest.py",
+                              "mode":  "100644",
+                              "blob":  "6ec28b67b21ed4c20aba4101a919822b5a99cf90",
+                              "bytes":  29663
+                          },
+                          {
+                              "path":  "tests/test_catalogue.py",
+                              "mode":  "100644",
+                              "blob":  "d80b5ece9afccee9e89a9e00a5bcfe949bc39a0a",
+                              "bytes":  13259
+                          },
+                          {
+                              "path":  "tests/test_cli.py",
+                              "mode":  "100644",
+                              "blob":  "2e28c0d5c8fe6e695ad07805deafe3b39b0828f1",
+                              "bytes":  4531
+                          },
+                          {
+                              "path":  "tests/test_config.py",
+                              "mode":  "100644",
+                              "blob":  "f46d9b0f6388451f0977a0430babbbeeaf93ff63",
+                              "bytes":  171588
+                          },
+                          {
+                              "path":  "tests/test_croissant.py",
+                              "mode":  "100644",
+                              "blob":  "f8a5986ad68cd1adc8a54b49e404cc2b519cfb41",
+                              "bytes":  2632
+                          },
+                          {
+                              "path":  "tests/test_dataset.py",
+                              "mode":  "100644",
+                              "blob":  "376b11df3a3447d3bbdacf90c1ea3b33eee7e64c",
+                              "bytes":  127003
+                          },
+                          {
+                              "path":  "tests/test_download.py",
+                              "mode":  "100644",
+                              "blob":  "4bcd2f15f03beaaa03684684edba991c2cdadb08",
+                              "bytes":  2324
+                          },
+                          {
+                              "path":  "tests/test_export.py",
+                              "mode":  "100644",
+                              "blob":  "21cb8f387fb64eeadbd714dc3a7ed71143ab4873",
+                              "bytes":  7025
+                          },
+                          {
+                              "path":  "tests/test_labels.py",
+                              "mode":  "100644",
+                              "blob":  "a61ac46df8aa486f2970af5edc28f48c0b836aca",
+                              "bytes":  591283
+                          },
+                          {
+                              "path":  "tests/test_manifest.py",
+                              "mode":  "100644",
+                              "blob":  "1a9d09e00c9ac68dd1cd4e13166ab2cb350d8f77",
+                              "bytes":  7310
+                          },
+                          {
+                              "path":  "tests/test_report.py",
+                              "mode":  "100644",
+                              "blob":  "9c3dcfe88b1e83d88d8db918d805829cd3b35cd8",
+                              "bytes":  6390
+                          },
+                          {
+                              "path":  "tests/test_splitting.py",
+                              "mode":  "100644",
+                              "blob":  "7aed9cfed0b7ae98fdf44b34c212786ef41e1b2e",
+                              "bytes":  310596
+                          },
+                          {
+                              "path":  "tests/test_validation.py",
+                              "mode":  "100644",
+                              "blob":  "fb771bd5119a0200d410a499aea71559d29a64dd",
+                              "bytes":  8068
+                          },
+                          {
+                              "path":  "webiste_paln_todo.md",
+                              "mode":  "100644",
+                              "blob":  "ebde1628cedebb7cba0f405dda8bb0f396ef4173",
+                              "bytes":  17670
+                          }
+                      ]
+}
