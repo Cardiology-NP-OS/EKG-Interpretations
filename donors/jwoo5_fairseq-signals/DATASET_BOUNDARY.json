@@ -1,0 +1,70 @@
+{
+  "schema": "ecg-donor-dataset-boundary-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "policy": {
+    "source_labels_are_project_gold": false,
+    "raw_or_restricted_data_allowed_in_target_git": false,
+    "donor_metrics_reportable_as_target_metrics": false
+  },
+  "referenced_sources": [
+    {
+      "name": "PhysioNet/CinC Challenge 2021",
+      "status": "EXTERNAL_LICENSE_TERMS_REQUIRED",
+      "bytes_imported": false
+    },
+    {
+      "name": "PTB-XL",
+      "status": "EXTERNAL_SOURCE_ALREADY_CATALOGED_NON_GOLD",
+      "bytes_imported": false
+    },
+    {
+      "name": "MIMIC-IV-ECG",
+      "status": "EXTERNAL_CREDENTIALED_SOURCE_TERMS_REQUIRED",
+      "bytes_imported": false
+    },
+    {
+      "name": "MIMIC-IV",
+      "status": "OPTIONAL_EXTERNAL_CREDENTIALED_SOURCE_TERMS_REQUIRED",
+      "bytes_imported": false
+    },
+    {
+      "name": "ECG-QA",
+      "status": "EXTERNAL_RESEARCH_DATASET_TERMS_REQUIRED",
+      "bytes_imported": false
+    },
+    {
+      "name": "CODE-15%",
+      "status": "EXTERNAL_SOURCE_TERMS_REQUIRED",
+      "bytes_imported": false
+    },
+    {
+      "name": "LUDB",
+      "status": "EXTERNAL_SOURCE_ALREADY_CATALOGED_NON_GOLD",
+      "bytes_imported": false
+    },
+    {
+      "name": "ECG-ID Database",
+      "status": "EXTERNAL_SOURCE_TERMS_REQUIRED",
+      "bytes_imported": false
+    },
+    {
+      "name": "MUSE XML ECG exports",
+      "status": "LOCAL_EXTERNAL_SOURCE_NOT_DISTRIBUTED_BY_DONOR",
+      "bytes_imported": false
+    }
+  ],
+  "tracked_data_derived_assets": [
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/ptbxl_database_translated.csv",
+      "blob": "88e9356b1fcda27d699ae6c41c0a531b5354b1e5",
+      "bytes": 6354265,
+      "status": "LICENSE_REVIEW_REQUIRED",
+      "target_copy_allowed": false,
+      "project_gold_created": false
+    }
+  ],
+  "raw_dataset_bytes_imported": false,
+  "source_labels_promoted_to_project_gold": false,
+  "approved_adjudicated_project_gold_added": 0
+}

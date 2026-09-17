@@ -1,0 +1,43 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "canonical_upstream_url": "https://github.com/Jwoo5/fairseq-signals",
+  "retrieval_date": "2026-09-17",
+  "archive_status": "NOT_INFERRED_FROM_GIT",
+  "audited_head": {
+    "branch": "master",
+    "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+    "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+    "commit_date": "2026-03-27T10:04:34+09:00",
+    "commit_message": "Merge pull request #55 from Jwoo5/dev"
+  },
+  "release_tags_found": [],
+  "software_license": {
+    "spdx": "MIT",
+    "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST",
+    "license_file": "LICENSE",
+    "license_blob_sha": "872cb6afe478b6a06ac9c985a09524896eff64c6",
+    "copyright": "Copyright (c) 2023 Jungwoo Oh; derived fairseq notice retained",
+    "source_code_copied_into_target": false
+  },
+  "model_weight_license": {
+    "status": "NO_TRACKED_CHECKPOINTS_WEIGHT_RIGHTS_NOT_ESTABLISHED_FOR_EXTERNAL_OR_USER_SUPPLIED_CHECKPOINTS",
+    "tracked_weight_count": 0,
+    "weights_imported": false
+  },
+  "dataset_license": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_TRACKED_DATA_DERIVATIVE",
+    "raw_data_imported": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "target_rollback_point": {
+    "commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+    "tree": "b631d179d829a1e2568a90050ce21e693f495e0b"
+  },
+  "accepted_engine_immutable_identity": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "clinical_authority_change_allowed": false
+}

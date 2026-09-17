@@ -165,3 +165,21 @@ ECGBench is credited for dataset-catalogue structure, deterministic fold methodo
 - Provenance files: `donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, and `COMPARATIVE_PROOF.json`.
 
 The donor is credited for heterogeneous preprocessing orchestration, lead-order normalization, sample-rate/segmentation provenance, waveform tokenization research, and multimodal dataset-mapping context. Clinical authority remains unchanged and inactive.
+
+## DONOR-009 -- Jwoo5/fairseq-signals
+
+- Repository: `Jwoo5/fairseq-signals`
+- Audited branch: `master`
+- Audited commit: `f8f0ff1c788a82c2059cb452cd5462898867489e`
+- Audited tree: `59535a7b9bf1d321831caa81558dfaa884664d7a`
+- Root source-code license: MIT; upstream license blob `872cb6afe478b6a06ac9c985a09524896eff64c6`; fairseq-derived MIT notice retained.
+- Integration: governance and architecture-challenger metadata only; no donor runtime or model execution.
+- Donor source code/runtime dependency copied: **no**.
+- Model checkpoint/weights copied or executed: **no**; no common checkpoint artifact is tracked in the audited tree.
+- External ECG waveform/report/label/QA bytes copied: **no**.
+- Tracked translated PTB-XL report table copied: **no**; remains **LICENSE_REVIEW_REQUIRED** as a data-derived asset.
+- Source labels promoted to project clinical gold: **no**.
+- Donor/paper benchmark claims promoted to target metrics: **no**.
+- Provenance files: `donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, and `COMPARATIVE_PROOF.json`.
+
+fairseq-signals is credited for ECG model architecture, self-supervised/multimodal research, grouped/temporal split, and signal-perturbation methodology. All model families remain non-executed challengers and all donor/external data remain non-gold research or license-reviewed assets.

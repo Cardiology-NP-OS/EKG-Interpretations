@@ -326,6 +326,53 @@
         "status": "NO_RUNTIME_DEPENDENCY_ADDED",
         "transitive_dependency_import": false
       }
+    },
+    {
+      "donor_id": "DONOR-009",
+      "repository": "Jwoo5/fairseq-signals",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST",
+        "license_file": "LICENSE",
+        "license_blob_sha": "872cb6afe478b6a06ac9c985a09524896eff64c6",
+        "audited_head_commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+        "derived_fairseq_mit_notice_retained": true
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "GOVERNANCE_AND_CHALLENGER_METADATA_ONLY_NO_MODEL_EXECUTION"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "NO_TRACKED_CHECKPOINTS_EXTERNAL_OR_USER_CHECKPOINT_RIGHTS_NOT_ESTABLISHED",
+        "tracked_weights_found": false,
+        "weights_imported": false,
+        "execution_eligible": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_TRACKED_DATA_DERIVATIVE",
+        "raw_data_imported": false,
+        "translated_ptbxl_table_imported": false,
+        "source_labels_promoted_to_project_gold": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      },
+      "associated_provenance": [
+        {
+          "repository": "pytorch/fairseq",
+          "status": "RESEARCH_ONLY_NO_RUNTIME_DEPENDENCY"
+        },
+        {
+          "repository": "Jwoo5/ecg-qa",
+          "status": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_NO_IMPORT"
+        },
+        {
+          "repository": "physionetchallenges/evaluation-2021",
+          "status": "EVALUATION_ONLY_EXTERNAL_ASSETS_NOT_IMPORTED"
+        }
+      ]
     }
   ],
   "fail_closed_on_unknown_license": true

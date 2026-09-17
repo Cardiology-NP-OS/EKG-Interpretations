@@ -1,0 +1,44 @@
+{
+  "schema": "ecg-associated-repository-dispositions-v1",
+  "donor_id": "DONOR-009",
+  "queue_expanded": false,
+  "repositories": [
+    {
+      "repository": "pytorch/fairseq",
+      "relationship": "declared software base",
+      "disposition": "RESEARCH_ONLY_NO_RUNTIME_DEPENDENCY",
+      "queued_as_associated_donor": false
+    },
+    {
+      "repository": "pytorch/pytorch",
+      "relationship": "runtime/training framework",
+      "disposition": "SUPERSEDED_FRAMEWORK_ALREADY_REPRESENTED_BY_PRIOR_MODEL_DONORS",
+      "queued_as_associated_donor": false
+    },
+    {
+      "repository": "Jwoo5/ecg-qa",
+      "relationship": "external ECG-QA dataset/repository",
+      "disposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_NO_IMPORT",
+      "queued_as_associated_donor": false
+    },
+    {
+      "repository": "physionetchallenges/evaluation-2021",
+      "relationship": "external challenge label/weight support",
+      "disposition": "EVALUATION_ONLY_EXTERNAL_ASSETS_NOT_IMPORTED",
+      "queued_as_associated_donor": false
+    },
+    {
+      "repository": "zhjohnchan/M3AE",
+      "relationship": "research method lineage referenced by donor",
+      "disposition": "RESEARCH_ONLY_NO_CODE_IMPORT",
+      "queued_as_associated_donor": false
+    },
+    {
+      "repository": "NVIDIA/nccl",
+      "relationship": "optional training infrastructure",
+      "disposition": "REJECTED_TARGET_RUNTIME_DEPENDENCY",
+      "queued_as_associated_donor": false
+    }
+  ],
+  "new_associated_donors_queued": 0
+}
