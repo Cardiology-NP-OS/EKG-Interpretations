@@ -38,4 +38,3 @@ test("adapter output contains no diagnostic surface",()=>{
 });
 if(process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({schema:"ekg-signal-adapter-tests-v1",pass:true,passed,total:passed,diagnosticRuntime:"GOVERNED_INACTIVE",clinicalAuthorityAdded:false}));
-
