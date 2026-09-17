@@ -74,7 +74,9 @@
     "sample ECG image/time-series assets"
   ],
   "associated_repositories_discovered": [
-    "WongKinYiu/yolov7"
+    "WongKinYiu/yolov7",
+    "Grzego/handwriting-generation",
+    "allenai/scispacy"
   ],
   "target_rollback_point": {
     "commit": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
@@ -84,5 +86,16 @@
     "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
-  "clinical_authority_change_allowed": false
+  "clinical_authority_change_allowed": false,
+  "cross_donor_provenance": [
+    {
+      "prior_donor": "MIT-LCP/wfdb-python",
+      "relationship": "Generator depends on wfdb==4.1.2; canonical WFDB library review remains DONOR-001 and is not reattributed here."
+    },
+    {
+      "prior_donor": "DeepPSP/torch_ecg",
+      "component": "torch_ecg/utils/_ecg_plot.py",
+      "relationship": "DONOR-004 identified ecg-image-kit lineage and deferred canonical ECG image rendering review to DONOR-005."
+    }
+  ]
 }
