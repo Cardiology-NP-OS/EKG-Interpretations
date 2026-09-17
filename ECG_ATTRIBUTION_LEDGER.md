@@ -107,3 +107,24 @@ torch_ecg is credited for its ECG architecture catalog, database/dataset abstrac
 - Provenance files: `donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, `INDEPENDENT_VERIFICATION.json`, and `DONOR_RECEIPT.json`.
 
 ECG-Image-Kit is credited for image-synthesis, image-distortion, grid-estimation, waveform-extraction, and ROI-localization engineering ideas. All such capabilities remain evaluation/challenger/research references or license-blocked assets; none gains clinical authority.
+
+## DONOR-006 -- tmehari/ptbxl_feature_benchmark
+
+- Repository: `tmehari/ptbxl_feature_benchmark`
+- Audited branch: `main`
+- Audited commit: `4c37b775e56d23e2c844fcd0aec52d2cd05cb35e`
+- Audited tree: `b9be6b9546e2b437493b286532ffbbba00e01a8c`
+- Audited-head software license: **LICENSE_REVIEW_REQUIRED** because the current head contains no license file.
+- Historical release `v1.0.0` contained MIT `LICENSE.txt` blob `520db0363d5543a04a129574e4c06f0a9622c6a5`; that historical grant is recorded but not assumed to license the audited head.
+- Integration: governance-only audit of PTB-XL/PTB-XL+ feature-benchmark, dataset, model, metric, checkpoint-loader, and provenance boundaries.
+- Donor source code copied: **no**.
+- Python/Conda/PyTorch/scikit-learn runtime dependency added: **no**.
+- Donor checkpoint/model weights copied or executed: **no**.
+- PTB-XL/PTB-XL+ waveform, feature, statement, label, or notebook-output bytes copied: **no**.
+- Source labels promoted to project clinical gold: **no**.
+- Donor ROC-AUC/bootstrap/published benchmark results promoted to target metrics: **no**.
+- XResNet1D retained only as a non-executable challenger architecture reference; no checkpoint is tracked or admitted.
+- `data_preprocessing.ipynb` embedded outputs remain quarantined and are not copied into target evidence.
+- Provenance files: `donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
+
+The donor is credited for engineered-feature benchmark methodology, fold-based evaluation design, feature harmonization, and bootstrap evaluation concepts. No donor source, external dataset asset, model artifact, benchmark score, or diagnostic conclusion is admitted as target runtime authority or clinical evidence.

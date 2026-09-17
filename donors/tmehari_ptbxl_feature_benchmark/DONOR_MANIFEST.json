@@ -1,0 +1,79 @@
+{
+    "schema":  "ecg-donor-manifest-v1",
+    "donor_id":  "DONOR-006",
+    "repository":  "tmehari/ptbxl_feature_benchmark",
+    "canonical_upstream_url":  "https://github.com/tmehari/ptbxl_feature_benchmark",
+    "retrieval_date":  "2026-09-17",
+    "archived":  false,
+    "audited_head":  {
+                         "branch":  "main",
+                         "commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+                         "tree":  "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+                         "commit_date":  "2023-04-11T16:02:45+02:00",
+                         "latest_release_tag":  "v1.0.0",
+                         "latest_release_commit":  "e79c58e4fe962bb0e67be8ef878aa629a3177e56",
+                         "latest_release_tree":  "083d8f1e3a5f1e0264983276da1ecbb89f7cc7a0",
+                         "head_is_latest_release_tag_commit":  false
+                     },
+    "software_license":  {
+                             "status":  "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE",
+                             "current_head_license_file_present":  false,
+                             "historical_release":  {
+                                                        "tag":  "v1.0.0",
+                                                        "spdx":  "MIT",
+                                                        "license_file":  "LICENSE.txt",
+                                                        "license_blob_sha":  "520db0363d5543a04a129574e4c06f0a9622c6a5",
+                                                        "copyright":  "Copyright (c) [2022] [Temesgen Mehari, Nils Strodthoff]"
+                                                    },
+                             "historical_license_not_inherited_to_audited_head":  true,
+                             "head_license_removal_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+                             "source_code_copied_into_target":  false
+                         },
+    "model_license":  {
+                          "status":  "NO_TRACKED_MODEL_WEIGHTS; CHECKPOINT_EXECUTION_REQUIRES_FUTURE_ARTIFACT_LICENSE_AND_PROVENANCE_REVIEW",
+                          "tracked_model_artifact_file_count":  0,
+                          "checkpoint_loading_code_present":  true,
+                          "weights_imported_into_target":  false,
+                          "execution_eligible":  false
+                      },
+    "dataset_license":  {
+                            "status":  "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_FEATURE_ASSET",
+                            "tracked_dataset_file_count":  0,
+                            "raw_data_imported_into_target":  false,
+                            "source_labels_promoted_to_project_gold":  false,
+                            "external_datasets":  [
+                                                      "PTB-XL",
+                                                      "PTB-XL+ feature files",
+                                                      "PTB-XL+ statement/label files"
+                                                  ],
+                            "note":  "README requires external PTB-XL/PTB-XL+ assets. Repository code licensing is not treated as dataset/data-use permission."
+                        },
+    "notebook_boundary":  {
+                              "path":  "data_preprocessing.ipynb",
+                              "git_blob":  "5501a6293deaa3fd2946069a18f5c9ba4c3842a3",
+                              "bytes":  15393145,
+                              "cell_count":  15,
+                              "embedded_output_count":  116,
+                              "embedded_output_character_count":  13847889,
+                              "status":  "QUARANTINED_POTENTIALLY_DATA_DERIVED_OUTPUTS_NOT_COPIED"
+                          },
+    "primary_capability_families":  [
+                                        "PTB-XL+ engineered-feature benchmarking",
+                                        "RandomForest/Ridge/MLP feature classifiers",
+                                        "feature-set harmonization across Uni-G/ECGdeli/12SL",
+                                        "PTB-XL fold-based train/validation/test partitioning",
+                                        "raw-waveform XResNet1D benchmark training",
+                                        "time-series preprocessing and memmap preparation",
+                                        "bootstrap ROC/PR evaluation utilities",
+                                        "checkpointed PyTorch Lightning benchmark workflow"
+                                    ],
+    "target_rollback_point":  {
+                                  "commit":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                                  "tree":  "245a8bec4d46c9c33702d2def58df0180d59a4f9"
+                              },
+    "accepted_engine_immutable_identity":  {
+                                               "commit":  "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+                                               "tree":  "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+                                           },
+    "clinical_authority_change_allowed":  false
+}

@@ -1,0 +1,26 @@
+{
+    "schema":  "ecg-donor-license-boundary-v1",
+    "donor_id":  "DONOR-006",
+    "repository":  "tmehari/ptbxl_feature_benchmark",
+    "audited_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+    "audited_tree":  "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+    "audited_head":  {
+                         "license_file_present":  false,
+                         "reuse_status":  "LICENSE_REVIEW_REQUIRED",
+                         "license_removed_by_audited_commit":  true
+                     },
+    "historical_release":  {
+                               "tag":  "v1.0.0",
+                               "commit":  "e79c58e4fe962bb0e67be8ef878aa629a3177e56",
+                               "tree":  "083d8f1e3a5f1e0264983276da1ecbb89f7cc7a0",
+                               "license_file":  "LICENSE.txt",
+                               "spdx":  "MIT",
+                               "license_blob_sha":  "520db0363d5543a04a129574e4c06f0a9622c6a5",
+                               "historical_license_not_inherited_to_audited_head":  true
+                           },
+    "source_code_copied":  false,
+    "runtime_dependency_added":  false,
+    "model_weights_imported":  false,
+    "dataset_bytes_imported":  false,
+    "fail_closed":  true
+}

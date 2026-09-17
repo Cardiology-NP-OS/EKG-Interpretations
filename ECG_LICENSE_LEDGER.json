@@ -12,11 +12,24 @@
         "license_blob_sha": "8d3513fef628f57c03c597676c351cca1aabb811"
       },
       "copied_source_code": false,
-      "integration_method": ["CLEAN_REIMPLEMENTATION_ADAPTER", "TARGET_OWNED_SYNTHETIC_TEST_METHODOLOGY"],
+      "integration_method": [
+        "CLEAN_REIMPLEMENTATION_ADAPTER",
+        "TARGET_OWNED_SYNTHETIC_TEST_METHODOLOGY"
+      ],
       "attribution_required": true,
-      "dataset_fixture_license": {"status":"LICENSE_REVIEW_REQUIRED","imported":false,"scope":"sample-data/ and remotely referenced PhysioNet datasets"},
-      "model_weight_license": {"status":"NOT_APPLICABLE","weights_imported":false},
-      "dependency_license_action": {"status":"NO_RUNTIME_DEPENDENCY_ADDED","transitive_dependency_import":false}
+      "dataset_fixture_license": {
+        "status": "LICENSE_REVIEW_REQUIRED",
+        "imported": false,
+        "scope": "sample-data/ and remotely referenced PhysioNet datasets"
+      },
+      "model_weight_license": {
+        "status": "NOT_APPLICABLE",
+        "weights_imported": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
     },
     {
       "donor_id": "DONOR-002",
@@ -29,7 +42,9 @@
         "copyright": "Copyright 2026 Hyung-Chul Lee and OpenECG contributors"
       },
       "copied_source_code": false,
-      "integration_method": ["CLEAN_REIMPLEMENTATION_EVALUATION_CONTRACT"],
+      "integration_method": [
+        "CLEAN_REIMPLEMENTATION_EVALUATION_CONTRACT"
+      ],
       "attribution_required": true,
       "model_weight_license": {
         "status": "LICENSE_REVIEW_REQUIRED",
@@ -82,31 +97,31 @@
       "donor_id": "DONOR-004",
       "repository": "DeepPSP/torch_ecg",
       "source_code_license": {
-            "spdx": "MIT",
-            "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST",
-            "license_file": "LICENSE",
-            "license_blob_sha": "40d9a25369b4fd1f3315f16f932eebf297dbd549",
-            "copyright": "Copyright (c) 2021 WEN Hao and KANG Jingsu"
+        "spdx": "MIT",
+        "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST",
+        "license_file": "LICENSE",
+        "license_blob_sha": "40d9a25369b4fd1f3315f16f932eebf297dbd549",
+        "copyright": "Copyright (c) 2021 WEN Hao and KANG Jingsu"
       },
       "copied_source_code": false,
       "integration_method": [
-            "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION"
+        "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION"
       ],
       "attribution_required": true,
       "model_weight_license": {
-            "status": "LICENSE_REVIEW_REQUIRED_PER_ARTIFACT",
-            "tracked_weights_found": false,
-            "weights_imported": false,
-            "execution_eligible": false
+        "status": "LICENSE_REVIEW_REQUIRED_PER_ARTIFACT",
+        "tracked_weights_found": false,
+        "weights_imported": false,
+        "execution_eligible": false
       },
       "dataset_license": {
-            "status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
-            "raw_data_imported": false,
-            "source_labels_promoted_to_project_gold": false
+        "status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false
       },
       "dependency_license_action": {
-            "status": "NO_RUNTIME_DEPENDENCY_ADDED",
-            "transitive_dependency_import": false
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
       }
     },
     {
@@ -166,6 +181,50 @@
         {
           "repository": "allenai/scispacy",
           "status": "RESEARCH_ONLY_NO_RUNTIME_DEPENDENCY"
+        }
+      ]
+    },
+    {
+      "donor_id": "DONOR-006",
+      "repository": "tmehari/ptbxl_feature_benchmark",
+      "source_code_license": {
+        "spdx": null,
+        "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE",
+        "license_file": null,
+        "audited_head_commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+        "historical_release": {
+          "tag": "v1.0.0",
+          "spdx": "MIT",
+          "license_file": "LICENSE.txt",
+          "license_blob_sha": "520db0363d5543a04a129574e4c06f0a9622c6a5",
+          "historical_license_not_inherited_to_audited_head": true
+        }
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "NO_TRACKED_MODEL_WEIGHTS_EXECUTION_INELIGIBLE",
+        "tracked_weights_found": false,
+        "weights_imported": false,
+        "execution_eligible": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_FEATURE_ASSET",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false,
+        "notebook_outputs_imported": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      },
+      "associated_provenance": [
+        {
+          "source": "https://vict0rs.ch/2018/05/24/sample-multilabel-dataset/",
+          "status": "LICENSE_REVIEW_REQUIRED_NO_REUSE"
         }
       ]
     },

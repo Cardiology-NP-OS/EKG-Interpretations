@@ -1,0 +1,46 @@
+{
+    "schema":  "ecg-donor-model-boundary-v1",
+    "donor_id":  "DONOR-006",
+    "repository":  "tmehari/ptbxl_feature_benchmark",
+    "audited_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+    "artifact_families":  [
+                              {
+                                  "family":  "XResNet1D raw-waveform classifier architecture",
+                                  "components":  [
+                                                     "code/dl_models/xresnet1d.py",
+                                                     "code/dl_models/ecg_resnet.py",
+                                                     "code/run_raw_benchmark.py"
+                                                 ],
+                                  "tracked_checkpoint_count":  0,
+                                  "exact_checkpoint_identity":  "NONE_TRACKED",
+                                  "code_license":  "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE",
+                                  "weight_license":  "NOT_APPLICABLE_NO_TRACKED_WEIGHT",
+                                  "input":  "Externally preprocessed ECG time-series; exact lead/sample contract depends on external dataset artifacts",
+                                  "training_population":  "README workflow targets PTB-XL; no target training reproduction performed",
+                                  "training_labels":  "PTB-XL/PTB-XL+ source label sets; NOT_PROJECT_GOLD",
+                                  "preprocessing":  "External preprocessing workflow; not target-admitted",
+                                  "validation_evidence":  "DONOR_BENCHMARK_WORKFLOW_NOT_TARGET_REPRODUCED",
+                                  "calibration_threshold_assumptions":  "UNRESOLVED",
+                                  "compute_burden":  "PYTORCH_LIGHTNING_DEPENDENT",
+                                  "unsupported_populations":  "UNRESOLVED",
+                                  "execution_status":  "NOT_EXECUTABLE_NO_APPROVED_CHECKPOINT_AND_SOURCE_LICENSE_REVIEW_REQUIRED",
+                                  "runtime_authority":  false
+                              },
+                              {
+                                  "family":  "Classical engineered-feature benchmark models",
+                                  "components":  [
+                                                     "code/feature_utils/methods.py",
+                                                     "code/run_feature_benchmark.py"
+                                                 ],
+                                  "tracked_checkpoint_count":  0,
+                                  "artifact_format":  "Generated pickle model.sav if run",
+                                  "artifact_loading":  "pickle.load supported by donor and REJECTED for governed execution",
+                                  "source_assets":  "External Uni-G/ECGdeli/12SL feature tables",
+                                  "execution_status":  "NOT_EXECUTED_IN_TARGET",
+                                  "runtime_authority":  false
+                              }
+                          ],
+    "weights_imported":  false,
+    "clinical_validity":  "NOT_INFERRED",
+    "registry_action":  "DO_NOT_REGISTER_EXECUTABLE_MODEL_CHALLENGER; NO APPROVED CHECKPOINT EXISTS AND AUDITED-HEAD SOURCE LICENSE IS UNRESOLVED"
+}

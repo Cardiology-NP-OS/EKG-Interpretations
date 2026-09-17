@@ -1,0 +1,214 @@
+{
+    "schema":  "ecg-donor-inventory-v1",
+    "donor_id":  "DONOR-006",
+    "repository":  "tmehari/ptbxl_feature_benchmark",
+    "audited_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+    "audited_tree":  "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+    "recursive_tree_audit":  {
+                                 "complete":  true,
+                                 "fresh_clone_attempted":  true,
+                                 "fresh_clone_result":  "SUCCESS",
+                                 "exact_commit_reproduced":  true,
+                                 "exact_tree_reproduced":  true,
+                                 "tracked_file_count":  20
+                             },
+    "root_file_counts":  {
+                             ".gitignore":  1,
+                             "README.md":  1,
+                             "code":  16,
+                             "data_preprocessing.ipynb":  1,
+                             "environment.yml":  1
+                         },
+    "implementation_surfaces":  {
+                                    "feature_benchmark":  [
+                                                              "RandomForestClassifier",
+                                                              "RidgeClassifier",
+                                                              "MLPClassifier",
+                                                              "feature normalization/expansion",
+                                                              "feature overlap mapping"
+                                                          ],
+                                    "raw_benchmark":  [
+                                                          "ECGResNet xresnet1d50",
+                                                          "PyTorch Lightning training",
+                                                          "checkpoint load/save",
+                                                          "macro ROC-AUC evaluation"
+                                                      ],
+                                    "dataset_pipeline":  [
+                                                             "PTB-XL preprocessing notebook",
+                                                             "fold-based split handling",
+                                                             "memmap generation",
+                                                             "label mapping/modifiers"
+                                                         ],
+                                    "evaluation":  [
+                                                       "ROC-AUC",
+                                                       "precision-recall",
+                                                       "bootstrap score utilities",
+                                                       "CAFA-style evaluation helpers"
+                                                   ]
+                                },
+    "data_assets":  {
+                        "tracked_dataset_files":  0,
+                        "external_dataset_download_required":  true,
+                        "external_sources":  [
+                                                 "PTB-XL",
+                                                 "PTB-XL+ engineered feature tables",
+                                                 "PTB-XL+ statement tables"
+                                             ],
+                        "notebook_embedded_outputs_present":  true,
+                        "notebook_embedded_output_count":  116,
+                        "notebook_embedded_output_character_count":  13847889,
+                        "target_import_allowed":  false
+                    },
+    "model_assets":  {
+                         "tracked_weight_files":  0,
+                         "checkpoint_loading_code_present":  true,
+                         "checkpoint_generation_code_present":  true,
+                         "tracked_model_weight_import_allowed":  false
+                     },
+    "license_boundary":  {
+                             "license_file_at_audited_head":  false,
+                             "historical_v1_0_0_license":  "MIT",
+                             "historical_license_blob":  "520db0363d5543a04a129574e4c06f0a9622c6a5",
+                             "audited_head_source_reuse":  "LICENSE_REVIEW_REQUIRED",
+                             "historical_license_not_assumed_to_cover_head":  true
+                         },
+    "release_delta":  {
+                          "latest_release":  "v1.0.0",
+                          "release_commit":  "e79c58e4fe962bb0e67be8ef878aa629a3177e56",
+                          "head_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+                          "changed_paths":  [
+                                                "LICENSE.txt deleted",
+                                                "code/feature_utils/utils.py feature-map source changed from XLSX to CSV"
+                                            ]
+                      },
+    "reproducibility":  {
+                            "conda_environment_present":  true,
+                            "environment_file":  "environment.yml",
+                            "broad_anaconda_environment":  true,
+                            "github_workflows_present":  false,
+                            "test_directory_present":  false,
+                            "fully_hermetic":  false
+                        },
+    "tracked_files":  [
+                          {
+                              "path":  ".gitignore",
+                              "mode":  "100644",
+                              "blob":  "ab88b7d96f7167da49600ce73d23ccd7e1b0fbe6",
+                              "bytes":  21
+                          },
+                          {
+                              "path":  "README.md",
+                              "mode":  "100644",
+                              "blob":  "856d47ed2036861a6ae282645c63df6e43bb79b6",
+                              "bytes":  2980
+                          },
+                          {
+                              "path":  "code/clinical_ts/create_logger.py",
+                              "mode":  "100644",
+                              "blob":  "befd2b6fdb2e9edae0b30dd954d8df76a6317b71",
+                              "bytes":  461
+                          },
+                          {
+                              "path":  "code/clinical_ts/data_modifiers.py",
+                              "mode":  "100644",
+                              "blob":  "ef08385d0ef5851f9d542c5046bbdcfb0026db59",
+                              "bytes":  14175
+                          },
+                          {
+                              "path":  "code/clinical_ts/dataset_wrapper.py",
+                              "mode":  "100644",
+                              "blob":  "c1d38692c55a34591204673a15ffc2f8347d0654",
+                              "bytes":  8328
+                          },
+                          {
+                              "path":  "code/clinical_ts/ecg_datamodule.py",
+                              "mode":  "100644",
+                              "blob":  "9769c601d93e784f3b5ef156d697bd7f5ae053b1",
+                              "bytes":  2828
+                          },
+                          {
+                              "path":  "code/clinical_ts/ecg_utils.py",
+                              "mode":  "100644",
+                              "blob":  "021af5c6a1c316f008d7e1ca3ba432bcec4227f1",
+                              "bytes":  48669
+                          },
+                          {
+                              "path":  "code/clinical_ts/eval_utils_cafa.py",
+                              "mode":  "100644",
+                              "blob":  "402dc70c87b959ba4fcbeef7682688f031f44108",
+                              "bytes":  13275
+                          },
+                          {
+                              "path":  "code/clinical_ts/stratify.py",
+                              "mode":  "100644",
+                              "blob":  "2a6df556ec3e0dde2e0e794b0ee89759f7d2989e",
+                              "bytes":  5562
+                          },
+                          {
+                              "path":  "code/clinical_ts/timeseries_utils.py",
+                              "mode":  "100644",
+                              "blob":  "75283d33fff3da67e89a8dab5799a0be9b000235",
+                              "bytes":  35566
+                          },
+                          {
+                              "path":  "code/dl_models/basic_conv1d.py",
+                              "mode":  "100644",
+                              "blob":  "fbebaa0e7eee625885e8f1c7d45fa3102f9cec95",
+                              "bytes":  10547
+                          },
+                          {
+                              "path":  "code/dl_models/ecg_resnet.py",
+                              "mode":  "100644",
+                              "blob":  "fca191e769aec0b0e2572701b8a93695c27e0e90",
+                              "bytes":  1413
+                          },
+                          {
+                              "path":  "code/dl_models/xresnet1d.py",
+                              "mode":  "100644",
+                              "blob":  "b65b11bec3d41cbedd570b5cdfcd34e7aca44262",
+                              "bytes":  9797
+                          },
+                          {
+                              "path":  "code/feature_utils/methods.py",
+                              "mode":  "100644",
+                              "blob":  "60f87d242529180d702682ff93d22e373416b0e4",
+                              "bytes":  2385
+                          },
+                          {
+                              "path":  "code/feature_utils/utils.py",
+                              "mode":  "100644",
+                              "blob":  "13519873382b306eda231350f1f2e4929ffa46fa",
+                              "bytes":  5612
+                          },
+                          {
+                              "path":  "code/run_feature_benchmark.py",
+                              "mode":  "100644",
+                              "blob":  "15893b77ddcf0cc9caf570b5d95df3ccad07096b",
+                              "bytes":  1719
+                          },
+                          {
+                              "path":  "code/run_raw_benchmark.py",
+                              "mode":  "100644",
+                              "blob":  "e3cb2f5ff6d7023d8087681a8b45f6e340fb553e",
+                              "bytes":  9010
+                          },
+                          {
+                              "path":  "code/utils/utils.py",
+                              "mode":  "100644",
+                              "blob":  "bbe7e5b389d21834bd710528665083cf49939a14",
+                              "bytes":  3634
+                          },
+                          {
+                              "path":  "data_preprocessing.ipynb",
+                              "mode":  "100644",
+                              "blob":  "5501a6293deaa3fd2946069a18f5c9ba4c3842a3",
+                              "bytes":  15393145
+                          },
+                          {
+                              "path":  "environment.yml",
+                              "mode":  "100644",
+                              "blob":  "4c857c2aadc1a277f7861f7a3663c00feb7aa10c",
+                              "bytes":  9472
+                          }
+                      ]
+}
