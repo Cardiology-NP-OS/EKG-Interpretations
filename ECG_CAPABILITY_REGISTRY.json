@@ -1,8 +1,8 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 213,
-  "capability_count": 52,
+  "generated_from_donor_capability_registry_count": 224,
+  "capability_count": 56,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
   "approved_adjudicated_gold_count": 0,
@@ -1261,6 +1261,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1272,7 +1278,8 @@
         "PTBXLFB-033",
         "TECG-001",
         "WFDB-028",
-        "WFDB-031"
+        "WFDB-031",
+        "ECP-010"
       ],
       "licenses": [
         {
@@ -1304,6 +1311,11 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
@@ -1900,17 +1912,29 @@
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
           "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "TECG-022",
-        "TECG-033"
+        "TECG-033",
+        "ECP-007"
       ],
       "licenses": [
         {
           "source": "DeepPSP/torch_ecg",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
@@ -2323,8 +2347,8 @@
       "capability_id": "ECG-CAP-PREPROCESS-RESAMPLING",
       "capability_family": "Preprocessing",
       "name": "Resampling contracts",
-      "canonical_target_path": "research/preprocessing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "canonical_target_path": "lib/signal_preprocessing_contract.js",
+      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
       "authority_class": "RESEARCH_NONRUNTIME",
       "source_provenance": [
         {
@@ -2338,11 +2362,18 @@
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
           "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "NK-003",
-        "WFDB-015"
+        "WFDB-015",
+        "ECP-003"
       ],
       "licenses": [
         {
@@ -2354,10 +2385,16 @@
           "source": "neuropsychology/NeuroKit",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_preprocessing_contract.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2377,8 +2414,8 @@
       "capability_id": "ECG-CAP-PREPROCESS-WINDOWING-SEGMENTATION",
       "capability_family": "Preprocessing",
       "name": "Windowing and segmentation contracts",
-      "canonical_target_path": "research/preprocessing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "canonical_target_path": "lib/signal_preprocessing_contract.js",
+      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
       "authority_class": "RESEARCH_NONRUNTIME",
       "source_provenance": [
         {
@@ -2392,11 +2429,18 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "ECGB-016",
-        "NK-012"
+        "NK-012",
+        "ECP-004"
       ],
       "licenses": [
         {
@@ -2408,10 +2452,16 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_preprocessing_contract.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2683,6 +2733,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2690,7 +2746,8 @@
         "ECGB-029",
         "PTBXLFB-030",
         "PTBXLFB-032",
-        "TECG-007"
+        "TECG-007",
+        "ECP-005"
       ],
       "licenses": [
         {
@@ -2707,6 +2764,11 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
@@ -2817,17 +2879,29 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "ECGB-026",
-        "ECGB-035"
+        "ECGB-035",
+        "ECP-009"
       ],
       "licenses": [
         {
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
@@ -3064,6 +3138,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -3076,7 +3156,8 @@
         "WFDB-003",
         "WFDB-004",
         "WFDB-005",
-        "WFDB-026"
+        "WFDB-026",
+        "ECP-001"
       ],
       "licenses": [
         {
@@ -3103,6 +3184,11 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
         }
       ],
       "test_paths": [
@@ -3129,6 +3215,170 @@
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
       "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-LEAD-ORDER",
+      "capability_family": "Preprocessing",
+      "name": "Lead-order normalization and deterministic reorder mapping",
+      "canonical_target_path": "lib/signal_preprocessing_contract.js",
+      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
+      "authority_class": "ENGINEERING_NONDIAGNOSTIC",
+      "source_provenance": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECP-002"
+      ],
+      "licenses": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/signal_preprocessing_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
+      ],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Lead identity must be explicit; inferred labels do not gain authority."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "GOVERNED_INACTIVE"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-FAILURE-ACCOUNTING",
+      "capability_family": "Preprocessing",
+      "name": "Auditable preprocessing attempt/skip accounting",
+      "canonical_target_path": "lib/signal_preprocessing_contract.js",
+      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
+      "authority_class": "ENGINEERING_NONDIAGNOSTIC",
+      "source_provenance": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECP-011"
+      ],
+      "licenses": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/signal_preprocessing_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Accounting records engineering failures only and cannot establish clinical correctness."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "GOVERNED_INACTIVE"
+    },
+    {
+      "capability_id": "ECG-CAP-RESEARCH-MULTIMODAL-MAPPING",
+      "capability_family": "Research",
+      "name": "ECG waveform-to-text/QA research mapping provenance",
+      "canonical_target_path": "research/multimodal/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECP-006"
+      ],
+      "licenses": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "SEPARATE_DATASET_TERMS_REQUIRED"
+        }
+      ],
+      "test_paths": [
+        "tests/research/research_authority.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/datasets/ECG_DATASET_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/multimodal/README.md"
+      ],
+      "limitations": [
+        "Source text and QA labels remain source evidence and never project gold."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_RESEARCH_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-WAVEFORM-TOKENIZATION",
+      "capability_family": "Representations / Models",
+      "name": "Waveform tokenization challenger methodology",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "CHALLENGER_METADATA_ONLY",
+      "authority_class": "CHALLENGER_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "commit": "01d23451660675553468806480b2646eccb92479",
+          "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+          "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECP-008"
+      ],
+      "licenses": [
+        {
+          "source": "ELM-Research/ECG-Preprocess",
+          "spdx": "MIT",
+          "status": "LICENSE_REVIEW_REQUIRED_DERIVED_ARTIFACTS"
+        }
+      ],
+      "test_paths": [
+        "tests/signal_preprocessing_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "ECG_MODEL_CHALLENGER_REGISTRY.json"
+      ],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Serialized tokenizers are not imported; artifact rights and training-data provenance are unresolved."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER"
     }
   ]
 }

@@ -1,0 +1,71 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-008",
+  "repository": "ELM-Research/ECG-Preprocess",
+  "comparison_parent": {
+    "commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86"
+  },
+  "upstream": {
+    "commit": "01d23451660675553468806480b2646eccb92479",
+    "tree": "c113fe473e1358896ae92d970a3064b156b48603"
+  },
+  "before": {
+    "canonical_preprocessing_lead_reorder_contract": false,
+    "auditable_preprocessing_failure_accounting": false,
+    "donor_capability_count": 213,
+    "canonical_capability_count": 52,
+    "model_challenger_count": 2
+  },
+  "after": {
+    "canonical_preprocessing_lead_reorder_contract": true,
+    "auditable_preprocessing_failure_accounting": true,
+    "donor_capability_count": 224,
+    "canonical_capability_count": 56,
+    "model_challenger_count": 3
+  },
+  "gains": [
+    "deterministic source-to-canonical lead reorder indices",
+    "explicit source/target sample-rate and resampling-method provenance",
+    "fixed-sample segmentation provenance",
+    "exact preprocessing implementation provenance",
+    "categorized attempted/processed/skipped failure accounting"
+  ],
+  "non_harvest": [
+    "donor Python runtime and dependencies",
+    "cubic interpolation implementation",
+    "raw/restricted dataset bytes and source labels",
+    "ECG-QA vendored content",
+    "TranslateGemma weights or outputs",
+    "trained ECG Byte pickle artifacts",
+    "Hugging Face publishing runtime"
+  ],
+  "metrics": {
+    "state": "NOT_REPORTABLE",
+    "donor_metrics_promoted": false,
+    "target_diagnostic_metrics_created": false
+  },
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "verification": {
+    "github_actions_run_id": 35256182190,
+    "head_sha": "481fdc25cb1f77f0fbb68c97146baff4a5e37a28",
+    "head_tree": "42799ee95d3eb03eabc9b4a8a03eb4889ce63ea5",
+    "conclusion": "success",
+    "local_preprocessing_contract": "14/14 PASS",
+    "local_focused_closure": "13/13 PASS",
+    "local_full_target_suite": "PASS",
+    "independent_fresh_clone": "PASS",
+    "independent_normalization": "13/13 PASS",
+    "independent_full_target_suite": "PASS",
+    "shallow_clone_baseline_fetch": "PASS"
+  },
+  "clinical_authority_added": false
+}

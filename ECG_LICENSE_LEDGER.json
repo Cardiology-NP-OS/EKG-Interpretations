@@ -292,6 +292,40 @@
       "repository": "vuno/ST-MEM",
       "status": "LICENSE_REVIEW_REQUIRED_PENDING_ASSOCIATED_DONOR_AUDIT",
       "note": "Model/software licenses and checkpoint terms must be independently audited before use."
+    },
+    {
+      "donor_id": "DONOR-008",
+      "repository": "ELM-Research/ECG-Preprocess",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION",
+        "license_file": "LICENSE",
+        "license_blob_sha": "4460fd230ae7414287b621392f7c37fe5d2ae3e6"
+      },
+      "embedded_scope": {
+        "path": "src/ecg_datasets/map/ecg_qa/LICENSE",
+        "license": "CC-BY-4.0",
+        "license_blob_sha": "52bd1459bd805f5a715e4975287d84c44201a79e",
+        "status": "SEPARATE_SCOPE_NO_COPY"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "CLEAN_REIMPLEMENTATION_PREPROCESSING_CONTRACT"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_TOKENIZER_OR_EXTERNAL_MODEL",
+        "weights_imported": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_SOURCE",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
     }
   ],
   "fail_closed_on_unknown_license": true

@@ -1,0 +1,45 @@
+{
+  "schema": "ecg-donor-license-boundary-v1",
+  "donor_id": "DONOR-008",
+  "repository": "ELM-Research/ECG-Preprocess",
+  "upstream_commit": "01d23451660675553468806480b2646eccb92479",
+  "source_code": {
+    "spdx": "MIT",
+    "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION",
+    "license_file": "LICENSE",
+    "license_blob_sha": "4460fd230ae7414287b621392f7c37fe5d2ae3e6",
+    "copied_into_target": false,
+    "attribution_required": true
+  },
+  "embedded_ecg_qa_scope": {
+    "license": "CC-BY-4.0",
+    "license_file": "src/ecg_datasets/map/ecg_qa/LICENSE",
+    "license_blob_sha": "52bd1459bd805f5a715e4975287d84c44201a79e",
+    "status": "SEPARATE_SCOPE",
+    "copied_into_target": false,
+    "note": "The embedded subtree license is not collapsed into the repository root MIT disposition."
+  },
+  "dataset_and_label_assets": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_SOURCE",
+    "raw_data_imported": false,
+    "vendored_json_csv_tsv_imported": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "trained_tokenizer_assets": {
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "tracked_count": 3,
+    "imported": false,
+    "reason": "Source-code MIT licensing alone does not establish training-data provenance or permission for target redistribution/activation of derived trained tokenizer artifacts."
+  },
+  "external_translation_model": {
+    "identifier": "google/translategemma-12b-it",
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "exact_checkpoint_pinned": false,
+    "weights_imported": false,
+    "executed_in_target": false
+  },
+  "dependency_action": {
+    "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+    "python_dependency_stack_imported": false
+  }
+}

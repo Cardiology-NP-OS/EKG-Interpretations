@@ -147,3 +147,21 @@ The donor is credited for engineered-feature benchmark methodology, fold-based e
 - Provenance files: `donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
 
 ECGBench is credited for dataset-catalogue structure, deterministic fold methodology, patient-grouped leakage controls, source-label separation, dataset validation patterns, and dataset-specific caveat documentation. None of these transfers clinical authority or makes external labels project gold.
+
+## DONOR-008 -- ELM-Research/ECG-Preprocess
+
+- Repository: `ELM-Research/ECG-Preprocess`
+- Audited branch: `main`
+- Audited commit: `01d23451660675553468806480b2646eccb92479`
+- Audited tree: `c113fe473e1358896ae92d970a3064b156b48603`
+- Root source-code license: MIT; license blob `4460fd230ae7414287b621392f7c37fe5d2ae3e6`.
+- Embedded ECG-QA scope carries separate CC-BY-4.0 text and is not treated as root-MIT content.
+- Integration: target-owned brand-neutral lead-order, sampling-rate, segmentation, exact-provenance, and preprocessing failure-accounting contracts only.
+- Donor source code/runtime dependency copied: **no**.
+- Raw/restricted dataset, source-label, ECG-QA, or report bytes copied: **no**.
+- Serialized ECG Byte tokenizer pickles or TranslateGemma weights copied/executed: **no**.
+- Source labels promoted to project clinical gold: **no**.
+- Donor performance claims promoted to target metrics: **no**.
+- Provenance files: `donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, and `COMPARATIVE_PROOF.json`.
+
+The donor is credited for heterogeneous preprocessing orchestration, lead-order normalization, sample-rate/segmentation provenance, waveform tokenization research, and multimodal dataset-mapping context. Clinical authority remains unchanged and inactive.

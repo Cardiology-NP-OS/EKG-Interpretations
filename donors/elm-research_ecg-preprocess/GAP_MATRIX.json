@@ -1,0 +1,108 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-008",
+  "comparison_parent": {
+    "commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86"
+  },
+  "governing_principle": "DONOR IDENTITY IS PROVENANCE. CAPABILITY IDENTITY BELONGS TO EKG.",
+  "rows": [
+    {
+      "capability": "WFDB signal loading",
+      "donor_evidence": "BaseDataset.open_wfdb uses wfdb.rdsamp and preserves fields.fs.",
+      "target_state": "Target already has lib/wfdb_signal.js and DONOR-001 governed WFDB boundary.",
+      "gap": "NONE",
+      "decision": "SUPERSEDED"
+    },
+    {
+      "capability": "Explicit source-to-canonical lead-order mapping",
+      "donor_evidence": "Dataset adapters declare source lead order and compute reorder indices; upstream HEAD specifically fixes HEED/PTB-XL lead ordering.",
+      "target_state": "Input quality guard normalizes/validates lead identities but target lacks a reusable preprocessing contract that emits deterministic reorder indices and provenance.",
+      "gap": "MATERIAL",
+      "decision": "INTEGRATE_TARGET_OWNED_CONTRACT"
+    },
+    {
+      "capability": "Sampling-rate transformation metadata",
+      "donor_evidence": "BaseDataset changes sample rate when source sf differs from target_sf using cubic interpolation.",
+      "target_state": "Target has quality/provenance controls but no brand-neutral preprocessing contract that records source rate, target rate, whether resampling is required, and the declared method.",
+      "gap": "MATERIAL_METADATA_GAP",
+      "decision": "INTEGRATE_CONTRACT_ONLY",
+      "constraint": "Do not adopt cubic interpolation as clinical truth or runtime signal authority."
+    },
+    {
+      "capability": "Fixed-sample segmentation provenance",
+      "donor_evidence": "BaseDataset segments into non-overlapping segment_len samples and persists source/target sf and segment_len.",
+      "target_state": "No canonical reusable preprocessing metadata contract records segment sample count and derived duration.",
+      "gap": "MATERIAL_METADATA_GAP",
+      "decision": "INTEGRATE_CONTRACT_ONLY"
+    },
+    {
+      "capability": "Dataset-specific base adapters",
+      "donor_evidence": "Seven base dataset modules normalize heterogeneous paths/reports/lead arrangements.",
+      "target_state": "Target normalized dataset catalogue/provenance concepts under prior donors; direct dataset ingestion is not required for governed runtime.",
+      "gap": "RESEARCH_ONLY",
+      "decision": "DATA_ONLY"
+    },
+    {
+      "capability": "Research text/QA mapping",
+      "donor_evidence": "MapDataset aligns research text objects to preprocessed ECG segment paths and contains a large vendored ECG-QA subtree.",
+      "target_state": "Target maintains strict source-label/project-gold separation and future primary donors cover ECG-QA/PULSE directly.",
+      "gap": "NO_RUNTIME_GAP",
+      "decision": "RESEARCH_ONLY"
+    },
+    {
+      "capability": "PTB-XL report translation",
+      "donor_evidence": "PTB_XL.translate invokes google/translategemma-12b-it on GPU.",
+      "target_state": "No need for unpinned generative translation in governed signal preprocessing.",
+      "gap": "NONE_FOR_CURRENT_SCOPE",
+      "decision": "LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "capability": "ECG Byte BPE tokenizer",
+      "donor_evidence": "Tokenizer code quantizes normalized waveform values and trains BPE; three tokenizer pickle artifacts are tracked.",
+      "target_state": "No target runtime need and no separately established artifact/training-data license or benchmark evidence.",
+      "gap": "CHALLENGER_ONLY",
+      "decision": "CHALLENGER"
+    },
+    {
+      "capability": "Hugging Face upload and dataset publication",
+      "donor_evidence": "Repository includes upload tooling and scripts.",
+      "target_state": "Canonical target is not a dataset publishing pipeline.",
+      "gap": "NONE",
+      "decision": "REJECTED"
+    },
+    {
+      "capability": "Committed caches/generated Python bytecode",
+      "donor_evidence": "Forty __pycache__/pyc paths are tracked.",
+      "target_state": "No target need.",
+      "gap": "NONE",
+      "decision": "REJECTED"
+    },
+    {
+      "capability": "Auditable preprocessing failure accounting",
+      "donor_evidence": "Donor preprocessing paths tolerate per-record failures and aggregate progress; concurrent audit identified the need to make skipped-record reasons explicit.",
+      "target_state": "Target preprocessing contract did not yet reconcile attempted/processed/skipped records with categorized reasons.",
+      "gap": "MATERIAL_GOVERNANCE_GAP",
+      "decision": "INTEGRATE_TARGET_OWNED_CONTRACT",
+      "constraint": "Reject silent or aggregate-only exception policy; no clinical interpretation is performed."
+    }
+  ],
+  "selected_harvest": [
+    "brand-neutral twelve-lead source-order validation and deterministic reorder-index derivation",
+    "sampling-rate provenance contract with explicit resampling requirement/method declaration",
+    "fixed-sample segmentation provenance with derived duration",
+    "fail-closed duplicate/unknown/missing-lead checks",
+    "synthetic/adversarial tests proving no donor code/data/model artifact is required",
+    "auditable attempted/processed/skipped preprocessing accounting with categorized failure reasons"
+  ],
+  "explicit_non_harvest": [
+    "donor Python runtime or dependency stack",
+    "cubic interpolation implementation",
+    "dataset waveforms, reports, source labels, QA JSON/CSV/TSV data",
+    "TranslateGemma weights or generated translations",
+    "trained ECG Byte pickle artifacts",
+    "Hugging Face upload pipeline",
+    "committed pycache/pyc files"
+  ],
+  "clinical_authority_change": false
+}
