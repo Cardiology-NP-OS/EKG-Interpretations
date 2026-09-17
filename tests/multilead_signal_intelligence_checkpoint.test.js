@@ -15,6 +15,12 @@ function test(name, fn) {
   catch (error) { console.error(`FAIL ${name}: ${error.stack || error}`); process.exitCode = 1; }
 }
 
+function ensureCommit(commit) {
+  const probe=cp.spawnSync("git",["-C",root,"cat-file","-e",`${commit}^{commit}`],{encoding:"utf8"});
+  if (probe.status===0) return;
+  cp.execFileSync("git",["-C",root,"fetch","--no-tags","--depth=1","origin",commit],{stdio:"ignore"});
+}
+
 test("checkpoint is pinned to accepted executable preprocessing main", () => {
   assert.strictEqual(checkpoint.parentMainCommit,"13819fc70c8458d7f1c56a04367c7dee1308ca5a");
   assert.strictEqual(checkpoint.parentMainTree,"6a55696977baf8a98dc7049e6fbb193a2d8ea2ec");
@@ -51,6 +57,7 @@ test("donor program remains paused without changing donor completion", () => {
 });
 
 test("clinical control boundary is unchanged from the parent main", () => {
+  ensureCommit(checkpoint.parentMainCommit);
   const changed = cp.execFileSync("git",["-C",root,"diff","--name-only",checkpoint.parentMainCommit,"--","clinical_control"],{encoding:"utf8"}).trim();
   assert.strictEqual(changed,"");
 });
