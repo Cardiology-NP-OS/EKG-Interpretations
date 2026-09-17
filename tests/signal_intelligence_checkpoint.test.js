@@ -72,6 +72,20 @@ check("implementation verification is exact and successful",()=>{
   assert.strictEqual(v.independentCheckpoint,"9/9 PASS");
   assert.strictEqual(v.independentFullTargetSuite,"PASS");
 });
+check("accepted checkpoint binds promotion and target-main CI",()=>{
+  if(checkpoint.status!=="ACCEPTED_ON_MAIN") return;
+  const v=checkpoint.verification,p=checkpoint.promotion;
+  assert.strictEqual(v.promotionCandidateCommit,"c56547ff9127a9f01d27681da5757c019cbebb95");
+  assert.strictEqual(v.promotionCandidateTree,"759097960d3c0e05036ec820d43676d33144169a");
+  assert.strictEqual(v.promotionCandidateCiRunId,35270550674);
+  assert.strictEqual(v.promotionCandidateCiConclusion,"success");
+  assert.strictEqual(v.promotionCandidateIndependentVerification,"PASS");
+  assert.strictEqual(p.mergeCommit,"e620790a2a0e90c495051d3a616828480f0a1d9b");
+  assert.strictEqual(p.mergeTree,"759097960d3c0e05036ec820d43676d33144169a");
+  assert.deepStrictEqual(p.parents,["5450bc23bfcab536a77f88ee28d4488a22c29204","c56547ff9127a9f01d27681da5757c019cbebb95"]);
+  assert.strictEqual(p.targetMainCiRunId,35270846939);
+  assert.strictEqual(p.targetMainCiConclusion,"success");
+});
 check("checkpoint status is stage-safe",()=>{
   assert.ok(new Set(["IMPLEMENTATION_CANDIDATE_UNVERIFIED","VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND","ACCEPTED_ON_MAIN"]).has(checkpoint.status));
 });

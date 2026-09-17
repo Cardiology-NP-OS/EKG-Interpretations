@@ -2,7 +2,7 @@
   "schema": "ecg-signal-intelligence-workflow-checkpoint-v1",
   "parentMainCommit": "5450bc23bfcab536a77f88ee28d4488a22c29204",
   "parentMainTree": "3dfea69a0f824fdfd3f589d42ad6a6e520a706dd",
-  "status": "VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND",
+  "status": "ACCEPTED_ON_MAIN",
   "donorProgram": {
     "completedPrimaryDonors": 9,
     "requiredPrimaryDonors": 21,
@@ -40,6 +40,21 @@
     "independentWorkflow": "9/9 PASS",
     "independentCheckpoint": "9/9 PASS",
     "independentFullTargetSuite": "PASS",
-    "candidateDiffCheck": "PASS"
+    "candidateDiffCheck": "PASS",
+    "promotionCandidateCommit": "c56547ff9127a9f01d27681da5757c019cbebb95",
+    "promotionCandidateTree": "759097960d3c0e05036ec820d43676d33144169a",
+    "promotionCandidateCiRunId": 35270550674,
+    "promotionCandidateCiConclusion": "success",
+    "promotionCandidateIndependentVerification": "PASS"
+  },
+  "promotion": {
+    "mergeCommit": "e620790a2a0e90c495051d3a616828480f0a1d9b",
+    "mergeTree": "759097960d3c0e05036ec820d43676d33144169a",
+    "parents": [
+      "5450bc23bfcab536a77f88ee28d4488a22c29204",
+      "c56547ff9127a9f01d27681da5757c019cbebb95"
+    ],
+    "targetMainCiRunId": 35270846939,
+    "targetMainCiConclusion": "success"
   }
 }
