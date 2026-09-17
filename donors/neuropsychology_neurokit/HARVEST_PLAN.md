@@ -1,6 +1,6 @@
 # DONOR-003 HARVEST PLAN — neuropsychology/NeuroKit
 
-Pinned upstream: `v0.2.13` / `ff419d983568ef492eb8d229af643c0ef0100b32` / tree `2a735eae4761375a0a322aac0dc05c468a88041c`  
+Pinned upstream: `v0.2.13` / `ff419d983568ef492eb8d229af643c0ef0100b32` / tree `2a735eae4761375a0a322aac0dc05c468a88041c`
 Target rollback point: `62841e1ab7380d2ce634d720d94fedd50f0486b4` / tree `530d4691745df2aaaae0d39648dd9f00783ca70a`
 
 ## Governance fence
