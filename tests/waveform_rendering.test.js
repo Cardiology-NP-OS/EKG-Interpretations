@@ -46,5 +46,9 @@ test("render governance remains nonclinical engineering only", () => {
 test("escape helper rejects empty labels", () => {
   assert.throws(()=>escapeXml(""),/RENDER_LABEL_INVALID/);
 });
+test("aggregate rendering sample budget fails closed", () => {
+  const huge=Array(700001).fill(0);
+  assert.throws(()=>renderWaveformSvg({leads:[{leadName:"I",samples:huge},{leadName:"II",samples:huge},{leadName:"III",samples:huge}]}),/RENDER_TOTAL_SAMPLE_LIMIT/);
+});
 if(process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({schema:"ekg-waveform-rendering-tests-v1",pass:true,passed,total:passed,diagnosticRuntime:"GOVERNED_INACTIVE",clinicalAuthorityAdded:false}));

@@ -14,12 +14,18 @@
     "deterministic SVG generation from finite waveform arrays",
     "bounded SVG dimensions and lead counts",
     "escaped lead labels",
-    "display normalization is not calibrated paper reconstruction"
+    "display normalization is not calibrated paper reconstruction",
+    "bounded aggregate waveform sample count"
   ],
   "exclusions": [
     "image-to-waveform digitization",
     "paper-grid calibration",
     "diagnostic interpretation",
     "clinical validity"
-  ]
+  ],
+  "resourceBounds": {
+    "maxLeads": 64,
+    "maxSamplesPerLead": 1000000,
+    "maxTotalSamples": 2000000
+  }
 }

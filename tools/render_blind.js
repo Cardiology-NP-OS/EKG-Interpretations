@@ -1,11 +1,11 @@
 const fs = require("fs");
 const path = require("path");
-const crypto = require("crypto");
 const {
   verifyAt,
   DATA,
   SOURCE_MANIFEST,
 } = require("./verify_source");
+const { renderWaveformSvg, waveformPath } = require("../lib/waveform_rendering");
 
 const ROOT = path.resolve(__dirname, "..");
 
@@ -23,54 +23,26 @@ function loadLeadSamples(file, leadCount, samplesPerLead) {
   }
   return leads;
 }
-
-function waveformPath(values, x, y, width, height) {
-  let maxAbs = 1;
-  for (const value of values) maxAbs = Math.max(maxAbs, Math.abs(value));
-  const mid = y + height / 2;
-  return values.map((value, index) => {
-    const px = x + (index / Math.max(1, values.length - 1)) * width;
-    const py = mid - (value / maxAbs) * (height * 0.42);
-    return `${index === 0 ? "M" : "L"}${px.toFixed(2)},${py.toFixed(2)}`;
-  }).join(" ");
-}
-
 function renderBlindAt(dataRoot, outputFile, sourceManifest = SOURCE_MANIFEST) {
   const source = verifyAt(dataRoot, sourceManifest);
   const lr = source.records.lr;
-  const leads = loadLeadSamples(
+  const samples = loadLeadSamples(
     path.join(dataRoot, "00001_lr.dat"), lr.leads, lr.samples
   );
-  const width = 1200;
-  const rowHeight = 110;
-  const height = rowHeight * lr.leads;
-  const names = lr.leadNames;
-
-  const rows = leads.map((values, index) => {
-    const y = index * rowHeight;
-    const d = waveformPath(values, 70, y + 8, width - 90, rowHeight - 16);
-    return [
-      `<text x="8" y="${y + 24}" font-size="14">${names[index]}</text>`,
-      `<path d="${d}" fill="none" stroke="black" stroke-width="1"/>`,
-    ].join("");
-  }).join("");
-
-  const svg = [
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"`,
-    ` viewBox="0 0 ${width} ${height}">`,
-    `<rect width="100%" height="100%" fill="white"/>`,
-    rows,
-    `</svg>\n`,
-  ].join("");
+  const rendering = renderWaveformSvg({
+    leads: samples.map((values,index) => ({label:lr.leadNames[index],samples:values})),
+    width: 1200,
+    rowHeight: 110,
+  });
   fs.mkdirSync(path.dirname(outputFile), { recursive: true });
-  fs.writeFileSync(outputFile, svg, "utf8");
+  fs.writeFileSync(outputFile, rendering.svg, "utf8");
   return {
     schema: "ekg-blinded-render-v1",
     pass: true,
     diagnostic_interpretation_included: false,
     record_identifier_included: false,
     source_sha256: source.hashes["00001_lr.dat"],
-    svg_sha256: crypto.createHash("sha256").update(svg).digest("hex"),
+    svg_sha256: rendering.svgSha256,
     output: outputFile,
   };
 }
@@ -78,10 +50,8 @@ function renderBlindAt(dataRoot, outputFile, sourceManifest = SOURCE_MANIFEST) {
 function renderBlind(outputFile) {
   return renderBlindAt(DATA, outputFile, SOURCE_MANIFEST);
 }
-
 if (require.main === module) {
-  const output = process.argv[2] ||
-    path.join(ROOT, "runtime", "blind", "record.svg");
+  const output = process.argv[2] || path.join(ROOT, "runtime", "blind", "record.svg");
   try {
     console.log(JSON.stringify(renderBlind(output), null, 2));
   } catch (error) {

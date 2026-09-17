@@ -49,7 +49,7 @@ function run(effectiveConfig = config, rPeaks = fx.rPeaks) {
 }
 test("twelve-lead executable stack composes every accepted stage", () => {
   const out = run();
-  assert.strictEqual(out.schema, "ekg-executable-signal-pipeline-v1");
+  assert.strictEqual(out.schema, "ekg-executable-signal-pipeline-v2");
   assert.deepStrictEqual(out.preprocessing.canonicalLeadOrder, leads);
   assert.strictEqual(out.measurement.schema, "ekg-waveform-measurement-pipeline-v1");
   assert.strictEqual(out.features.schema, "ekg-rhythm-feature-set-v1");

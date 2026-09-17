@@ -31,7 +31,7 @@ test("operator CLI writes path-minimized analysis and exact rendering",()=>{
   assert.strictEqual(result.status,0,result.stderr);
   const artifact=JSON.parse(fs.readFileSync(path.join(out,"analysis.json"),"utf8"));
   const svg=fs.readFileSync(path.join(out,"waveform.svg"));
-  assert.strictEqual(artifact.schema,"ekg-executable-signal-pipeline-v1");
+  assert.strictEqual(artifact.schema,"ekg-executable-signal-pipeline-v2");
   assert.strictEqual(artifact.provenanceChain.locator,"fixture:exec-cli");
   assert.strictEqual(artifact.rendering.svgSha256,sha256(svg));
   assert.strictEqual(artifact.rendering.svgFile,"waveform.svg");
