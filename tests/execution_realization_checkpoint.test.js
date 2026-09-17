@@ -69,6 +69,17 @@ test("implementation verification is exact and successful", () => {
   assert.strictEqual(checkpoint.verification.candidateCiConclusion, "success");
   assert.strictEqual(checkpoint.verification.independentVerification, "PASS_FULL_CLONE");
   assert.strictEqual(checkpoint.verification.independentFullTargetSuite, "PASS");
+});test("accepted checkpoint binds promotion and target-main CI", () => {
+  if (checkpoint.status !== "ACCEPTED_ON_MAIN") return;
+  assert.strictEqual(checkpoint.verification.promotionCandidateCommit, "dfc9071d29d01f8c609e7880d191de9dcba80044");
+  assert.strictEqual(checkpoint.verification.promotionCandidateTree, "d56c8c7a84889d47c0d648461e513f0092b20de2");
+  assert.strictEqual(checkpoint.verification.promotionCandidateCiRunId, 35275688417);
+  assert.strictEqual(checkpoint.verification.promotionCandidateCiConclusion, "success");
+  assert.strictEqual(checkpoint.promotion.mergeCommit, "29e70d9970b683176ed360cf639d8f7d35a98615");
+  assert.strictEqual(checkpoint.promotion.mergeTree, checkpoint.verification.promotionCandidateTree);
+  assert.deepStrictEqual(checkpoint.promotion.parents, [checkpoint.parentMainCommit, checkpoint.verification.promotionCandidateCommit]);
+  assert.strictEqual(checkpoint.promotion.targetMainCiRunId, 35275900483);
+  assert.strictEqual(checkpoint.promotion.targetMainCiConclusion, "success");
 });test("checkpoint status is stage safe", () => {
   assert.ok(["IMPLEMENTED_UNVERIFIED","VERIFIED_UNPROMOTED","ACCEPTED_ON_MAIN"].includes(checkpoint.status));
 });

@@ -2,7 +2,7 @@
   "schema": "ecg-execution-realization-checkpoint-v1",
   "parentMainCommit": "395fe56f6b5f7ae05d0c303fc7948ec8bae416a5",
   "parentMainTree": "5e2d23a5b1338465db83061a6b10ce2d26419de1",
-  "status": "VERIFIED_UNPROMOTED",
+  "status": "ACCEPTED_ON_MAIN",
   "canonicalCapabilityCount": 57,
   "readinessCounts": {
     "EXECUTABLE_TARGET_OWNED": 18,
@@ -67,6 +67,22 @@
     "independentVerification": "PASS_FULL_CLONE",
     "independentFocused": "29/29 PASS",
     "independentFullTargetSuite": "PASS",
-    "candidateDiffCheck": "PASS"
+    "candidateDiffCheck": "PASS",
+    "promotionCandidateCommit": "dfc9071d29d01f8c609e7880d191de9dcba80044",
+    "promotionCandidateTree": "d56c8c7a84889d47c0d648461e513f0092b20de2",
+    "promotionCandidateCiRunId": 35275688417,
+    "promotionCandidateCiConclusion": "success",
+    "promotionCandidateIndependentVerification": "PASS_FULL_CLONE",
+    "promotionCandidateIndependentFullTargetSuite": "PASS"
+  },
+  "promotion": {
+    "mergeCommit": "29e70d9970b683176ed360cf639d8f7d35a98615",
+    "mergeTree": "d56c8c7a84889d47c0d648461e513f0092b20de2",
+    "parents": [
+      "395fe56f6b5f7ae05d0c303fc7948ec8bae416a5",
+      "dfc9071d29d01f8c609e7880d191de9dcba80044"
+    ],
+    "targetMainCiRunId": 35275900483,
+    "targetMainCiConclusion": "success"
   }
 }
