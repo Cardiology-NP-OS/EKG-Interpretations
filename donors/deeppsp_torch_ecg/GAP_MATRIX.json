@@ -1,0 +1,390 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-004",
+  "repository": "DeepPSP/torch_ecg",
+  "target_rollback_commit": "295cb2434b06ea4d125b806a93288cd231f463ea",
+  "rows": [
+    {
+      "capability_id": "TECG-001",
+      "capability": "Whole-package torch_ecg runtime dependency",
+      "donor_components": [
+        "pyproject.toml",
+        "torch_ecg/"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "The donor would add a broad PyTorch/scientific/data-download dependency graph that is unnecessary for the governed target. No whole-package runtime dependency is approved."
+    },
+    {
+      "capability_id": "TECG-002",
+      "capability": "Config-driven preprocessing manager and registry",
+      "donor_components": [
+        "torch_ecg/preprocessors/preproc_manager.py",
+        "torch_ecg/preprocessors/registry.py"
+      ],
+      "classification": "TARGET_EQUIVALENT",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target requires explicit provenance-bound transformations. Donor manager can randomize order and silently ignores unknown config items; do not use it as canonical preprocessing authority."
+    },
+    {
+      "capability_id": "TECG-003",
+      "capability": "Bandpass, baseline removal, normalization and resampling preprocessors",
+      "donor_components": [
+        "torch_ecg/preprocessors/"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "WFDB and NeuroKit donors already cover these transformation families. Target keeps native calibrated source evidence and does not need another canonical preprocessing implementation."
+    },
+    {
+      "capability_id": "TECG-004",
+      "capability": "Baseline-wander and noise robustness augmentation",
+      "donor_components": [
+        "torch_ecg/augmenters/baseline_wander.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful robustness-fixture ideas, but synthetic distortions are engineering evidence only and OpenECG/NeuroKit already provide comparable augmentation concepts."
+    },
+    {
+      "capability_id": "TECG-005",
+      "capability": "CutMix, MixUp, masking, renormalization and stretch/compress augmentation",
+      "donor_components": [
+        "torch_ecg/augmenters/"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Potential offline challenger-training robustness techniques only. They must not modify governed source evidence or imply diagnostic validity."
+    },
+    {
+      "capability_id": "TECG-006",
+      "capability": "Label smoothing augmentation",
+      "donor_components": [
+        "torch_ecg/augmenters/label_smooth.py"
+      ],
+      "classification": "LOW_VALUE",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Training-only regularization with no current governed target need and no runtime role."
+    },
+    {
+      "capability_id": "TECG-007",
+      "capability": "Local ECG database reader and dataset adapter abstractions",
+      "donor_components": [
+        "torch_ecg/databases/"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Broad format/dataset access is useful future adapter knowledge, but each database has separate source, licensing and provenance requirements and no current target source requirement justifies adoption."
+    },
+    {
+      "capability_id": "TECG-008",
+      "capability": "Remote PhysioNet/HTTP/S3/Google Drive data acquisition",
+      "donor_components": [
+        "torch_ecg/databases/base.py",
+        "torch_ecg/utils/download.py"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "Mutable remote resolution, network credentials/provider semantics and automatic download/extraction conflict with the target exact-source and substitution controls for governed execution."
+    },
+    {
+      "capability_id": "TECG-009",
+      "capability": "Bundled physiological sample-data and annotations",
+      "donor_components": [
+        "sample-data/",
+        "benchmarks/train_hybrid_cpsc2020/sample_data/"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "266 sample-data files are tracked, but no dataset-specific LICENSE/COPYING/TERMS file was found under sample-data. Software MIT terms are not treated as data-use or redistribution rights. No bytes are imported."
+    },
+    {
+      "capability_id": "TECG-010",
+      "capability": "ECG CRNN/FCN classification architecture family",
+      "donor_components": [
+        "torch_ecg/models/ecg_crnn.py",
+        "torch_ecg/models/ecg_fcn.py"
+      ],
+      "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Architecture family may support future isolated model challengers, but no tracked checkpoint exists and upstream architecture provenance includes other repositories. No execution or authority is granted."
+    },
+    {
+      "capability_id": "TECG-011",
+      "capability": "ECG sequence-labeling architecture family",
+      "donor_components": [
+        "torch_ecg/models/ecg_seq_lab_net.py"
+      ],
+      "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Sequence labeling could challenge event localization, but no exact licensed checkpoint is present and the implementation has CPSC2019 lineage. Retain only as future challenger architecture knowledge."
+    },
+    {
+      "capability_id": "TECG-012",
+      "capability": "ECG U-Net and subtract-U-Net wave delineation architectures",
+      "donor_components": [
+        "torch_ecg/models/unets/"
+      ],
+      "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Potential future delineation challengers only. No exact checkpoint identity, weight license or target validation is available."
+    },
+    {
+      "capability_id": "TECG-013",
+      "capability": "RR-LSTM interval-model architecture",
+      "donor_components": [
+        "torch_ecg/models/rr_lstm.py"
+      ],
+      "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Could support future interval-based challenger research, but no checkpoint or validation evidence is admitted and no runtime authority is added."
+    },
+    {
+      "capability_id": "TECG-014",
+      "capability": "Generic CNN backbone library including ResNet, MultiScopicNet, DenseNet and Xception",
+      "donor_components": [
+        "torch_ecg/models/cnn/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Large architecture catalog has mixed upstream provenance and no exact donor checkpoint identity. Audit original upstreams before any model-specific reuse."
+    },
+    {
+      "capability_id": "TECG-015",
+      "capability": "Transformer architecture utilities",
+      "donor_components": [
+        "torch_ecg/models/transformers/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Generic model-building capability with no current target need, exact checkpoint or ECG-specific governed evidence."
+    },
+    {
+      "capability_id": "TECG-016",
+      "capability": "Model/backbone/attention registries and model configuration catalog",
+      "donor_components": [
+        "torch_ecg/models/registry.py",
+        "torch_ecg/model_configs/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Useful design pattern for experimentation, but target already uses explicit machine-readable challenger registries and should not introduce dynamic Python model registration into governed runtime."
+    },
+    {
+      "capability_id": "TECG-017",
+      "capability": "Task output containers for classification, sequence tagging, delineation and R-peaks",
+      "donor_components": [
+        "torch_ecg/components/outputs.py"
+      ],
+      "classification": "TARGET_EQUIVALENT",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target challenger envelopes already provide stricter provenance hashes, input identity, valid-window guards, abstention and explicit non-authority fields. Donor containers allow arbitrary custom fields and are weaker for governed evidence."
+    },
+    {
+      "capability_id": "TECG-018",
+      "capability": "Classification metric suite",
+      "donor_components": [
+        "torch_ecg/components/metrics.py",
+        "torch_ecg/utils/utils_metrics.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Metric implementations may inform offline evaluation, but zero adjudicated project gold means target diagnostic metrics remain NOT_REPORTABLE and donor labels/results cannot establish clinical performance."
+    },
+    {
+      "capability_id": "TECG-019",
+      "capability": "R-peak challenge scoring with temporal tolerance",
+      "donor_components": [
+        "torch_ecg/components/metrics.py",
+        "torch_ecg/utils/utils_metrics.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Tolerance-based event scoring is useful evaluation methodology but overlaps prior WFDB/NeuroKit event comparison work and cannot become a reportable clinical metric without governed gold."
+    },
+    {
+      "capability_id": "TECG-020",
+      "capability": "Wave delineation sensitivity/precision/F1 and timing-error metrics",
+      "donor_components": [
+        "torch_ecg/components/metrics.py",
+        "torch_ecg/utils/utils_metrics.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline delineation evaluation, overlapping OpenECG boundary metrics. Donor benchmark labels are source labels only and target metrics remain NOT_REPORTABLE."
+    },
+    {
+      "capability_id": "TECG-021",
+      "capability": "Generic training loop, logging, model selection and checkpoint management",
+      "donor_components": [
+        "torch_ecg/components/trainer.py"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Training infrastructure is not part of the governed ECG runtime. Model selection on donor/benchmark metrics cannot transfer clinical authority."
+    },
+    {
+      "capability_id": "TECG-022",
+      "capability": "Safetensors-first checkpoint serialization and safe-load pattern",
+      "donor_components": [
+        "torch_ecg/utils/utils_nn.py",
+        "torch_ecg/components/trainer.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "The safer serialization/loading pattern is useful for future isolated challenger execution, but the current JavaScript target does not load PyTorch checkpoints. Preserve as a security requirement, not a runtime dependency."
+    },
+    {
+      "capability_id": "TECG-023",
+      "capability": "Pickle-compatible torch.load fallback including weights_only=False",
+      "donor_components": [
+        "torch_ecg/utils/utils_nn.py"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "Untrusted pickle-capable checkpoint deserialization is incompatible with fail-closed governed execution. Any future loader must require exact artifact identity and a non-executable safe format or equivalent isolated controls."
+    },
+    {
+      "capability_id": "TECG-024",
+      "capability": "Remote model download and immediate checkpoint loading",
+      "donor_components": [
+        "torch_ecg/utils/utils_nn.py"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "Mutable remote model retrieval without a target-owned exact hash/license/provenance admission gate violates source-substitution controls."
+    },
+    {
+      "capability_id": "TECG-025",
+      "capability": "WFDB XQRS/GQRS detector wrappers",
+      "donor_components": [
+        "torch_ecg/utils/rpeaks.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Canonical upstream was already audited under DONOR-001. Do not reattribute or duplicate those algorithms through torch_ecg."
+    },
+    {
+      "capability_id": "TECG-026",
+      "capability": "BioSPPy-derived traditional R-peak detector wrappers",
+      "donor_components": [
+        "torch_ecg/utils/rpeaks.py",
+        "torch_ecg/_preproc.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "The donor documents BioSPPy lineage. Any future reuse must audit the original upstream rather than treating torch_ecg as canonical algorithm provenance."
+    },
+    {
+      "capability_id": "TECG-027",
+      "capability": "ECG plotting implementation modified from ecg-image-kit",
+      "donor_components": [
+        "torch_ecg/utils/_ecg_plot.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Canonical upstream is the already-scheduled DONOR-005 alphanumericslab/ecg-image-kit. Defer image-rendering assessment to that donor."
+    },
+    {
+      "capability_id": "TECG-028",
+      "capability": "WFDB header/data utilities modified from wfdb-python",
+      "donor_components": [
+        "torch_ecg/utils/utils_data.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Canonical upstream was audited as DONOR-001; target already has a bounded native WFDB substrate."
+    },
+    {
+      "capability_id": "TECG-029",
+      "capability": "Challenge benchmark training pipelines and task datasets",
+      "donor_components": [
+        "benchmarks/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Pipelines are valuable research references but several are migrated from separate repositories and the donor warns some are outdated or incompletely tested. They are not target runtime or gold evidence."
+    },
+    {
+      "capability_id": "TECG-030",
+      "capability": "Bundled benchmark logs, result CSVs and reported scores",
+      "donor_components": [
+        "benchmarks/*/results/"
+      ],
+      "classification": "LOW_VALUE",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Historical donor results are not reproduced target evidence, are not comparable across datasets as clinical truth and cannot be promoted to project metrics."
+    },
+    {
+      "capability_id": "TECG-031",
+      "capability": "Python CI/test matrix, coverage and model/database test workflows",
+      "donor_components": [
+        ".github/workflows/",
+        "test/",
+        "pyproject.toml"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful QA patterns, but upstream tests include external database/download behavior and are not hermetic. Target retains its own exact-source CI and may selectively adopt test ideas only."
+    },
+    {
+      "capability_id": "TECG-032",
+      "capability": "Incomplete or explicitly excluded SSL, NAS, Grad-CAM and model surfaces",
+      "donor_components": [
+        "torch_ecg/ssl/",
+        "torch_ecg/components/nas.py",
+        "torch_ecg/models/grad_cam.py",
+        "torch_ecg/models/cnn/darknet.py",
+        "torch_ecg/models/cnn/efficientnet.py",
+        "torch_ecg/models/cnn/ho_resnet.py"
+      ],
+      "classification": "LOW_VALUE",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Upstream coverage configuration marks these as incomplete or omitted. Do not promote unfinished donor surfaces."
+    },
+    {
+      "capability_id": "TECG-033",
+      "capability": "Checkpoint metadata conventions for model/train configuration",
+      "donor_components": [
+        "torch_ecg/utils/utils_nn.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Explicit model/train config metadata alongside weights is a useful future provenance requirement, but it does not establish checkpoint identity, licensing, training population or clinical validity by itself."
+    },
+    {
+      "capability_id": "TECG-034",
+      "capability": "Clinical/source provenance, authority separation and fail-closed governance",
+      "donor_components": [
+        "repository-wide"
+      ],
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
+      "reason": "torch_ecg is a research framework, not the target governed authority system. Existing target governance is stronger and must not be weakened."
+    }
+  ],
+  "disposition_summary": {
+    "CHALLENGER": 4,
+    "EVALUATION_ONLY": 8,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "REJECTED": 4,
+    "RESEARCH_ONLY": 9,
+    "SUPERSEDED": 8,
+    "total": 34
+  },
+  "cross_donor_deduplication": {
+    "wfdb_lineage": "XQRS/GQRS and WFDB-derived utilities are superseded by canonical DONOR-001 review.",
+    "neurokit_overlap": "Preprocessing, detector diversity, event agreement and synthetic robustness concepts overlap DONOR-003; do not add another canonical implementation.",
+    "openecg_overlap": "Boundary metrics, challenger output representation and robustness augmentation concepts overlap DONOR-002.",
+    "ecg_image_kit": "torch_ecg plotting code identifies alphanumericslab/ecg-image-kit lineage; canonical assessment is deferred to scheduled DONOR-005.",
+    "biosppy_and_architecture_upstreams": "BioSPPy and architecture-source repositories are provenance references only in this donor. Audit original upstream separately before any future source reuse."
+  },
+  "implementation_decision": {
+    "runtime_code_change_approved": false,
+    "runtime_dependency_addition_approved": false,
+    "model_execution_approved": false,
+    "data_import_approved": false,
+    "governance_registry_and_test_integration_only": true
+  },
+  "clinical_authority_added": false
+}
