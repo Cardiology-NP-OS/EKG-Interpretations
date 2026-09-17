@@ -30,6 +30,14 @@ check("operator contract remains non-diagnostic and non-gold", () => {
   assert.strictEqual(protocol.metrics,"NOT_REPORTABLE");
   assert.strictEqual(protocol.activation,"NOT_ELIGIBLE");
 });
+check("implementation candidate evidence is exact and successful", () => {
+  assert.strictEqual(checkpoint.verification.implementationCandidateCommit,"c6a201a1e52e30a42dbcb7e374cf76f815acb333");
+  assert.strictEqual(checkpoint.verification.implementationCandidateTree,"74e0a451c00d154d92b3c621e1412d9511fdc6c4");
+  assert.strictEqual(checkpoint.verification.candidateCiRunId,35270514524);
+  assert.strictEqual(checkpoint.verification.candidateCiConclusion,"success");
+  assert.strictEqual(checkpoint.verification.independentVerification,"PASS_FULL_CLONE");
+  assert.strictEqual(checkpoint.verification.independentFullTargetSuite,"PASS");
+});
 check("donor frontier remains paused at Donor 010", () => {
   assert.strictEqual(donors.completed_donors,9);
   assert.strictEqual(donors.next_donor_id,"DONOR-010");
@@ -41,5 +49,7 @@ check("governed state remains inactive", () => {
   assert.strictEqual(checkpoint.approvedAdjudicatedGoldCount,0);
   assert.strictEqual(checkpoint.clinicalValidity,"NOT_INFERRED");
 });
-assert.ok(["IMPLEMENTATION_CANDIDATE_UNVERIFIED","VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND","ACCEPTED_ON_MAIN_POST_PROMOTION_CI"].includes(checkpoint.status)); passed += 1; console.log("PASS checkpoint status is stage-safe");
+assert.ok(["IMPLEMENTATION_CANDIDATE_UNVERIFIED","VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND","ACCEPTED_ON_MAIN_POST_PROMOTION_CI"].includes(checkpoint.status));
+passed += 1;
+console.log("PASS checkpoint status is stage-safe");
 console.log(JSON.stringify({schema:"ekg-executable-preprocessing-checkpoint-tests-v1",pass:true,passed,total:passed,diagnosticRuntime:"GOVERNED_INACTIVE",clinicalAuthorityAdded:false}));
