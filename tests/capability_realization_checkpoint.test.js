@@ -78,6 +78,15 @@ test("proof boundary forbids unsupported superiority and clinical claims", () =>
   assert.strictEqual(checkpoint.metrics, "NOT_REPORTABLE");
   assert.strictEqual(checkpoint.clinicalValidity, "NOT_INFERRED");
 });
+test("implementation candidate evidence is exact and successful", () => {
+  assert.strictEqual(checkpoint.verification.implementationCandidateCommit,"278a3f12e06ee51d9e38a5e164c5ea37304293db");
+  assert.strictEqual(checkpoint.verification.implementationCandidateTree,"e42d6c8b3aaec0e4f894e8a2e4419d70d32142a1");
+  assert.strictEqual(checkpoint.verification.candidateCiRunId,35281532869);
+  assert.strictEqual(checkpoint.verification.candidateCiConclusion,"success");
+  assert.strictEqual(checkpoint.verification.independentVerification,"PASS_FULL_CLONE");
+  assert.strictEqual(checkpoint.verification.independentFocused,"87/87 PASS");
+  assert.strictEqual(checkpoint.verification.independentFullTargetSuite,"PASS");
+});
 test("checkpoint status and verification remain stage safe", () => {
   assert.ok(["IMPLEMENTED_UNVERIFIED","VERIFIED_UNPROMOTED","ACCEPTED_ON_MAIN"].includes(checkpoint.status));
   if (checkpoint.status === "IMPLEMENTED_UNVERIFIED") {

@@ -2,7 +2,7 @@
   "schema": "ecg-capability-realization-checkpoint-v1",
   "parentMainCommit": "c6bf317fe3805a2e08fde40daa14049105071933",
   "parentMainTree": "7d837905b219b19cf63a051a75eb16b085427b97",
-  "status": "IMPLEMENTED_UNVERIFIED",
+  "status": "VERIFIED_UNPROMOTED",
   "scope": "Realize every currently deterministic, license-safe, target-owned engineering/evaluation/governance capability as executable code while explicitly retaining only capabilities that lack validated implementation specifications or admitted model assets.",
   "readinessBefore": {
     "EXECUTABLE_TARGET_OWNED": 18,
@@ -219,13 +219,13 @@
     "resumeCondition": "Capability realization checkpoint accepted on main with exact-SHA CI and independent full-clone verification."
   },
   "verification": {
-    "implementationCandidateCommit": null,
-    "implementationCandidateTree": null,
-    "candidateCiRunId": null,
-    "candidateCiConclusion": "PENDING",
-    "independentVerification": "PENDING",
-    "independentFocused": "PENDING",
-    "independentFullTargetSuite": "PENDING",
+    "implementationCandidateCommit": "278a3f12e06ee51d9e38a5e164c5ea37304293db",
+    "implementationCandidateTree": "e42d6c8b3aaec0e4f894e8a2e4419d70d32142a1",
+    "candidateCiRunId": 35281532869,
+    "candidateCiConclusion": "success",
+    "independentVerification": "PASS_FULL_CLONE",
+    "independentFocused": "87/87 PASS",
+    "independentFullTargetSuite": "PASS",
     "candidateDiffCheck": "PASS"
   },
   "clinicalControlChanged": false,
