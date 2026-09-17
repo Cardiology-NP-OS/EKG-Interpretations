@@ -1,0 +1,121 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-008",
+  "donor_repository": "ELM-Research/ECG-Preprocess",
+  "donor_commit": "01d23451660675553468806480b2646eccb92479",
+  "donor_tree": "c113fe473e1358896ae92d970a3064b156b48603",
+  "donor_release": null,
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_blob_sha": "4460fd230ae7414287b621392f7c37fe5d2ae3e6",
+    "embedded_ecg_qa_scope": "CC-BY-4.0_SEPARATE_SCOPE",
+    "dataset_asset_status": "LICENSE_REVIEW_REQUIRED_PER_SOURCE",
+    "model_weight_status": "LICENSE_REVIEW_REQUIRED_TRAINED_TOKENIZER_AND_EXTERNAL_MODEL"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_008_rollback_commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "donor_008_rollback_tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86"
+  },
+  "target_resulting_implementation": {
+    "type": "TARGET_OWNED_BRAND_NEUTRAL_PREPROCESSING_CONTRACT",
+    "verified_candidate_commit": "25df0391c1f698d65a3efecb6c80750959cf69d0",
+    "verified_candidate_tree": "822d15451b5c84a60ae9072a2c12674d13a60d0a",
+    "canonical_path": "lib/signal_preprocessing_contract.js",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_or_tokenizers_copied": false,
+    "donor_dataset_bytes_copied": false
+  },
+  "verification": {
+    "candidate_ci_run_id": 35256663324,
+    "candidate_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "preprocessing_contract": "14/14 PASS",
+    "focused_closure": "14/14 PASS",
+    "normalization_contract": "13/13 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "promotion": {
+    "merge_commit": "00255e75aea8a028240ac4f78fd6e3329bbc90c2",
+    "merge_tree": "822d15451b5c84a60ae9072a2c12674d13a60d0a",
+    "parents": [
+      "6f6eb97db059332e65585e73d4e3c9da34382944",
+      "25df0391c1f698d65a3efecb6c80750959cf69d0"
+    ],
+    "target_main_ci_run_id": 35256892647,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "SUPERSEDED": 1,
+    "INTEGRATED": 4,
+    "DATA_ONLY": 1,
+    "RESEARCH_ONLY": 1,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "CHALLENGER": 1,
+    "REJECTED": 2,
+    "total": 11
+  },
+  "associated_repositories": {
+    "count": 7,
+    "dispositions_file": "donors/elm-research_ecg-preprocess/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "new_associated_donors_queued": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "donor_models_executed": false,
+    "trained_tokenizer_artifacts_imported": false,
+    "external_translation_model_executed": false,
+    "external_dataset_bytes_imported": false,
+    "vendored_ecg_qa_content_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_metrics_promoted_to_target_metrics": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json": "f986e5a2cbdf1e94c91a24a4d44bcb03d6b32dbe8703301d6110a50800fe0256",
+    "donors/elm-research_ecg-preprocess/INVENTORY.json": "c6f200aea22abf1de749c8a2c3f43c33445bd80a1700a2492efe6adc63bcd39c",
+    "donors/elm-research_ecg-preprocess/GAP_MATRIX.json": "11719d1b43c1b56f0dea1c7c054c46961324eb53163cd3af41637b37671467e7",
+    "donors/elm-research_ecg-preprocess/HARVEST_PLAN.md": "bc70795301546396e40b2cc189a12584d69cdd945b5f89ec0c9d9cec76ac5afc",
+    "donors/elm-research_ecg-preprocess/LICENSE_BOUNDARY.json": "4d5de910230ff0280e03600244f0cbb4a9e00aac93ea0381a39ce9a5b09564aa",
+    "donors/elm-research_ecg-preprocess/DATASET_BOUNDARY.json": "e4aa64f1f122e2d0c4fc6c1e55028afc6870d86598dfd3b8a44f4fc9535cc667",
+    "donors/elm-research_ecg-preprocess/MODEL_BOUNDARY.json": "6c8a3c99a09887edb3b38711b1a230e43668ed355fe3a2c5a5f4e2a21083f93a",
+    "donors/elm-research_ecg-preprocess/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "3cf751abb5bc9cfa959c6329b80537892780233a2bbd9cdf8575e3eee969dbae",
+    "donors/elm-research_ecg-preprocess/COMPARATIVE_PROOF.json": "8e116550e88d8755196ce971c58decf3df8130190d250697c7eac152edde3ebb",
+    "donors/elm-research_ecg-preprocess/INDEPENDENT_VERIFICATION.json": "9e250de223864a4a5083f5c5faedef656e3d4c11cca2d94cf5e28a83a631e705",
+    "lib/signal_preprocessing_contract.js": "4e0702f3763d21de18bad2839ce213fbb538147952766b473cb19c5ffdca1e3d",
+    "tests/signal_preprocessing_contract.test.js": "eb8d78890fe3f2ef1730895dea827e6be912ef470907cd263c2a7fff50636fb2",
+    "tests/ecg_preprocess_donor_closure.test.js": "a7bf707e8b893babd0510740a8b4b1251b4c5dfdccce2939c9a2fecf4248e7ef",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "860630529e29425843a8be5e54ce8ea7f348168e91e16ed5ba3d466bdf5bcec6",
+    "ECG_CAPABILITY_REGISTRY.json": "62339bc4fc851c993a7c75e60065fec0f26868f71241ccbdb48710e1b09f1953",
+    "ECG_LICENSE_LEDGER.json": "87bc432f9bc76cafcc194a5f799c4a6a5c0064f11765a3b1288f0719b3149a8b",
+    "ECG_DATASET_REGISTRY.json": "02a412aa41e4f09db0554d843a87eecc789b33ea8dca68cafe0401f666cfbc1a",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "1f3ec47c69d6a749eed60fb0d4ce05889fe6a7db37817e1b9c33d5a9b30ea151"
+  },
+  "outstanding_limitations": [
+    "Referenced datasets and labels retain source-specific licensing and access requirements; no dataset bytes or source labels are admitted as project gold.",
+    "Vendored ECG-QA content is a separately licensed CC-BY-4.0 scope and was not copied into the target.",
+    "Three trained ECG Byte tokenizer pickle artifacts and the external TranslateGemma dependency remain non-authoritative and license-review-required; none were imported or executed.",
+    "The target preprocessing contract captures deterministic engineering provenance and failure accounting, not diagnostic validity or clinical performance.",
+    "No governed adjudicated project clinical gold exists, so diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "final_disposition": "TARGET_OWNED_PREPROCESSING_CONTRACT_WITH_GOVERNANCE_BOUNDARIES",
+  "rollback": {
+    "commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86",
+    "method": "revert Donor-008 promotion/finalization commits; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

@@ -2,15 +2,15 @@
   "schema": "ecg-donor-independent-verification-v1",
   "donor_id": "DONOR-008",
   "repository": "ELM-Research/ECG-Preprocess",
-  "candidate_commit": "481fdc25cb1f77f0fbb68c97146baff4a5e37a28",
-  "candidate_tree": "42799ee95d3eb03eabc9b4a8a03eb4889ce63ea5",
+  "candidate_commit": "25df0391c1f698d65a3efecb6c80750959cf69d0",
+  "candidate_tree": "822d15451b5c84a60ae9072a2c12674d13a60d0a",
   "origin_main_commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
   "verification_date": "2026-09-17",
   "method": "Shallow fresh private GitHub clone on independent authorized Windows machine",
   "result": "PASS",
   "clean_worktree_before_tests": true,
   "preprocessing_contract": "14/14 PASS",
-  "focused_closure": "13/13 PASS",
+  "focused_closure": "14/14 PASS",
   "normalization_contract": "13/13 PASS",
   "full_target_suite": "PASS",
   "shallow_history_fallback": "PASS",
@@ -24,6 +24,7 @@
     "activation": "NOT_ELIGIBLE",
     "clinical_validity": "NOT_INFERRED"
   },
-  "candidate_ci_run_id": 35256182190,
-  "candidate_ci_conclusion": "success"
+  "candidate_ci_run_id": 35256663324,
+  "candidate_ci_conclusion": "success",
+  "full_candidate_diff_check": "PASS"
 }

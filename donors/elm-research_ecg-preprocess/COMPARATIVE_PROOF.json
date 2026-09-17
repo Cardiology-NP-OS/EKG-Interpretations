@@ -55,17 +55,22 @@
     "clinical_validity": "NOT_INFERRED"
   },
   "verification": {
-    "github_actions_run_id": 35256182190,
-    "head_sha": "481fdc25cb1f77f0fbb68c97146baff4a5e37a28",
-    "head_tree": "42799ee95d3eb03eabc9b4a8a03eb4889ce63ea5",
+    "github_actions_run_id": 35256663324,
+    "head_sha": "25df0391c1f698d65a3efecb6c80750959cf69d0",
+    "head_tree": "822d15451b5c84a60ae9072a2c12674d13a60d0a",
     "conclusion": "success",
     "local_preprocessing_contract": "14/14 PASS",
-    "local_focused_closure": "13/13 PASS",
+    "local_focused_closure": "14/14 PASS",
     "local_full_target_suite": "PASS",
     "independent_fresh_clone": "PASS",
     "independent_normalization": "13/13 PASS",
     "independent_full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS",
     "shallow_clone_baseline_fetch": "PASS"
   },
-  "clinical_authority_added": false
+  "clinical_authority_added": false,
+  "rollback": {
+    "commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86"
+  }
 }
