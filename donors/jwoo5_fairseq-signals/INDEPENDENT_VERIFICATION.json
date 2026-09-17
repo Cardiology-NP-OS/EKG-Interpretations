@@ -2,8 +2,8 @@
   "schema": "ecg-donor-independent-verification-v1",
   "donor_id": "DONOR-009",
   "repository": "Jwoo5/fairseq-signals",
-  "candidate_commit": "1923d2645b85f070c4bc037074abaf1f5f7ff755",
-  "candidate_tree": "96d5713ccd443958cc9a7cefb116a8239639091a",
+  "candidate_commit": "01bc0187e86dbde80b06befaec2a089eb17330a8",
+  "candidate_tree": "c5be6a129930c1008a09e2b8a952b139b4c4540e",
   "origin_main_commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
   "verification_date": "2026-09-17",
   "method": "Fresh shallow private GitHub clone on independent authorized Windows machine",
@@ -23,6 +23,6 @@
     "activation": "NOT_ELIGIBLE",
     "clinical_validity": "NOT_INFERRED"
   },
-  "candidate_ci_run_id": 35260304830,
+  "candidate_ci_run_id": 35260613573,
   "candidate_ci_conclusion": "success"
 }

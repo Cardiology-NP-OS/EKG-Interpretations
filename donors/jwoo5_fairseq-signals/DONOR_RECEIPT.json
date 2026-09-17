@@ -1,0 +1,129 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-009",
+  "donor_repository": "Jwoo5/fairseq-signals",
+  "donor_commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+  "donor_tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+  "donor_release": {
+    "tag": null,
+    "release_commit": null,
+    "head_is_release_tag_commit": false
+  },
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_blob_sha": "872cb6afe478b6a06ac9c985a09524896eff64c6",
+    "dataset_asset_status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_TRACKED_DATA_DERIVATIVE",
+    "model_weight_status": "NO_TRACKED_CHECKPOINTS_EXTERNAL_OR_USER_SUPPLIED_RIGHTS_NOT_ESTABLISHED"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_009_rollback_commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+    "donor_009_rollback_tree": "b631d179d829a1e2568a90050ce21e693f495e0b"
+  },
+  "target_resulting_implementation": {
+    "type": "GOVERNANCE_ONLY_CHALLENGER_METADATA",
+    "verified_candidate_commit": "01bc0187e86dbde80b06befaec2a089eb17330a8",
+    "verified_candidate_tree": "c5be6a129930c1008a09e2b8a952b139b4c4540e",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false
+  },
+  "verification": {
+    "candidate_ci_run_id": 35260613573,
+    "candidate_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "16/16 PASS",
+    "normalization_closure": "13/13 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "promotion": {
+    "merge_commit": "7cde54d7ce7ffb0c4cbb44252b4b82507da3a1b6",
+    "merge_tree": "c5be6a129930c1008a09e2b8a952b139b4c4540e",
+    "parents": [
+      "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+      "01bc0187e86dbde80b06befaec2a089eb17330a8"
+    ],
+    "target_main_ci_run_id": 35260843113,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "post_promotion_repair": {
+    "commit": "9d72ded93fdf82467a66eeedf0ff161c21677c0d",
+    "tree": "42c718ac920115c796cb6b3c6ef50a7af540f796",
+    "ci_run_id": 35260928248,
+    "ci_conclusion": "success",
+    "scope": "HARVEST_PLAN_WHITESPACE_ONLY"
+  },
+  "capability_disposition_summary": {
+    "REJECTED": 2,
+    "RESEARCH_ONLY": 6,
+    "SUPERSEDED": 3,
+    "DATA_ONLY": 3,
+    "EVALUATION_ONLY": 5,
+    "LICENSE_REVIEW_REQUIRED": 2,
+    "CHALLENGER": 10,
+    "total": 31
+  },
+  "associated_repositories": {
+    "count": 6,
+    "dispositions_file": "donors/jwoo5_fairseq-signals/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "new_associated_donors_queued": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "donor_models_executed": false,
+    "donor_checkpoints_imported": false,
+    "external_dataset_bytes_imported": false,
+    "translated_ptbxl_table_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_results_promoted_to_target_metrics": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json": "e712de73e61dc12267930cd9579494ff5837a4a042449f70e6dedfe22c59b286",
+    "donors/jwoo5_fairseq-signals/INVENTORY.json": "bad4c7762c38b33ab1fe8ac212f36ccf7245af0ae62a9372689e1d1cfdee1a91",
+    "donors/jwoo5_fairseq-signals/GAP_MATRIX.json": "3cff7fb8e8c226a5bc8599aeed2804e3369375e4f1120d4c04466bc4498aab90",
+    "donors/jwoo5_fairseq-signals/HARVEST_PLAN.md": "cc76ec40d7e92a6b13b35f4906db8f3e696cb64151a78f4ef45d47edbab1e627",
+    "donors/jwoo5_fairseq-signals/LICENSE_BOUNDARY.json": "18830c5b888b75b4fcbdd611273860be8d4a1ddf0cb2960fc393645d28c7c7ce",
+    "donors/jwoo5_fairseq-signals/DATASET_BOUNDARY.json": "4a9cefa3ab217cf41915e59add4b8c706f5a0b7e447b5e549424fde2b8a835e5",
+    "donors/jwoo5_fairseq-signals/MODEL_BOUNDARY.json": "eca2438b7a5aca694aa7b3d554b9475a8c3fa24ea6483b5809accdff9d362b1e",
+    "donors/jwoo5_fairseq-signals/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "49bb0430c5fc087f58e71a487e78b4b20137ea517c381d39774a81fa316105a0",
+    "donors/jwoo5_fairseq-signals/COMPARATIVE_PROOF.json": "185021138dbcc60acaf90553b7d4eca295d882253db60ba1c149592db6536575",
+    "donors/jwoo5_fairseq-signals/INDEPENDENT_VERIFICATION.json": "3a0faae0688352bcd2296a5e27f519719fcced457faa786e707618ef69223d23",
+    "tests/fairseq_signals_donor_closure.test.js": "31fcf574727cc5c4500dcf36e627a66981204dc0f7d43228412da93174ea9aa2",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "f00e7f798e3f69fa75c4e1bf2c4b6a968c59a62d9aa8cde9490bd9759e88d32d",
+    "ECG_CAPABILITY_REGISTRY.json": "bb1a299cd8a3b63c6bca4047edbb25e391b158d0fa1957dc6a7f8379045d8c7e",
+    "ECG_LICENSE_LEDGER.json": "538a44f35fd6a00251d5ceca0487859c0432ebb6aae36263a7279679e68a76f2",
+    "ECG_DATASET_REGISTRY.json": "02a412aa41e4f09db0554d843a87eecc789b33ea8dca68cafe0401f666cfbc1a",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "ec6df8e41c3ebe08b34f8a83f32b33d33af93a8fc34e4ee3eba4ae10e6aef57b",
+    "ECG_ATTRIBUTION_LEDGER.md": "b5e04ca68174b8b6c4cc4a15ce99160f17d3634dfa7e08bd0fce3d8d996a1506",
+    "research/models/CHALLENGER_CATALOG.md": "b572177e578aad12f86a116de0ddfd5ed6b2e33479717e2967d918010e31fff8",
+    "package.json": "1f0f6fcdeeb157fa4ccf0a727c59b3d36a752578db210c5f114ddab9d12fb952"
+  },
+  "outstanding_limitations": [
+    "No tracked model checkpoints or weights are present; all ten architecture families remain non-executed challengers.",
+    "External or user-supplied checkpoint identity, preprocessing, licensing, training populations, calibration, thresholds and reproducibility remain unresolved before any execution.",
+    "The translated PTB-XL table remains a license-review-required data derivative and is not copied into the target.",
+    "Referenced external datasets retain source-specific access and license requirements; source labels are not project gold.",
+    "No governed adjudicated project clinical gold exists, so diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "final_disposition": "GOVERNANCE_ONLY_MODEL_CHALLENGER_EVALUATION_PROVENANCE",
+  "rollback": {
+    "commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+    "tree": "b631d179d829a1e2568a90050ce21e693f495e0b",
+    "method": "revert Donor-009 promotion/repair/finalization commits; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}
