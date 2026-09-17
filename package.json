@@ -14,7 +14,7 @@
     "verify:clinical": "npm run verify:source",
     "verify:v12-controls": "node tools/verify_v12_1_controls.js",
     "verify:v12-controls:source": "node tools/verify_v12_1_controls.js --require-source",
-    "source:preflight": "node tools/source_preflight.js --require",
+    "source:preflight": "node tools/source_preflight.js",
     "source:require": "node tools/source_preflight.js --require",
     "render:blind": "node tools/render_blind.js",
     "gate:ci": "node tools/ci_gate.js",
