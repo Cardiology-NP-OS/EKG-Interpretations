@@ -1,0 +1,464 @@
+{
+  "schema": "ecg-dataset-card-index-v1",
+  "cardCount": 74,
+  "canonicalDatasetCardCount": 68,
+  "sourceAssetCompatibilityCardCount": 6,
+  "machineReadableGovernanceAuthority": "ECG_DATASET_REGISTRY.json",
+  "normalizedCatalog": "evaluation/datasets/ECG_DATASET_CATALOG.json",
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "runtimeAuthority": false,
+  "clinicalValidityInferred": false,
+  "cards": [
+    {
+      "datasetId": "ECG-DATASET-AFDB",
+      "name": "MIT-BIH Atrial Fibrillation Database",
+      "path": "research/datasets/AFDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-APNEA-ECG-DATABASE",
+      "name": "Apnea-ECG Database",
+      "path": "research/datasets/APNEA_ECG_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-BIDMC-CONGESTIVE-HEART-FAILURE-DATABASE",
+      "name": "BIDMC Congestive Heart Failure Database",
+      "path": "research/datasets/BIDMC_CONGESTIVE_HEART_FAILURE_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-BRNO-UNIVERSITY-OF-TECHNOLOGY-ECG-QUALITY-DATABASE-BUT-QDB",
+      "name": "Brno University of Technology ECG Quality Database (BUT QDB)",
+      "path": "research/datasets/BRNO_UNIVERSITY_OF_TECHNOLOGY_ECG_QUALITY_DATABASE_BUT_QDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-BRUGADA-HUCA",
+      "name": "Brugada-HUCA",
+      "path": "research/datasets/BRUGADA_HUCA.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-BUT-PDB",
+      "name": "BUT PDB",
+      "path": "research/datasets/BUT_PDB.md",
+      "currentProjectDisposition": "SOURCE_DATA_ONLY_LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "datasetId": "ECG-DATASET-CHAPMAN-SHAOXING-ARRHYTHMIA",
+      "name": "Chapman-Shaoxing (Arrhythmia)",
+      "path": "research/datasets/CHAPMAN_SHAOXING_ARRHYTHMIA.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-CHAPMAN-SHAOXING-ECG-DATABASE-10-646-PATIENTS",
+      "name": "Chapman-Shaoxing ECG Database (10,646 patients)",
+      "path": "research/datasets/CHAPMAN_SHAOXING_ECG_DATABASE_10_646_PATIENTS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-CIPA-ECG-VALIDATION-STUDY",
+      "name": "CiPA ECG Validation Study",
+      "path": "research/datasets/CIPA_ECG_VALIDATION_STUDY.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-CODE-15-PCT-TELEHEALTH-NETWORK-OF-MINAS-GERAIS-15-PCT-SUBSET",
+      "name": "CODE-15% (Telehealth Network of Minas Gerais, 15% subset)",
+      "path": "research/datasets/CODE_15_PCT_TELEHEALTH_NETWORK_OF_MINAS_GERAIS_15_PCT_SUBSET.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-CODE-FULL-DATASET-2-3M-RECORDS",
+      "name": "CODE (Full Dataset, ~2.3M records)",
+      "path": "research/datasets/CODE_FULL_DATASET_2_3M_RECORDS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-CODE-TEST",
+      "name": "CODE-test (827-record hold-out test set)",
+      "path": "research/datasets/CODE_TEST.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-CPSC-2018-CHINA-PHYSIOLOGICAL-SIGNAL-CHALLENGE-2018",
+      "name": "CPSC 2018 (China Physiological Signal Challenge 2018)",
+      "path": "research/datasets/CPSC_2018_CHINA_PHYSIOLOGICAL_SIGNAL_CHALLENGE_2018.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-CAPABLE-SMARTWATCHES-DATASET",
+      "name": "ECG-Capable Smartwatches Dataset",
+      "path": "research/datasets/ECG_CAPABLE_SMARTWATCHES_DATASET.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-EFFECTS-OF-DOFETILIDE-MOXIFLOXACIN-AND-COMBINATIONS-ECGDMMLD",
+      "name": "ECG Effects of Dofetilide, Moxifloxacin and Combinations (ECGDMMLD)",
+      "path": "research/datasets/ECG_EFFECTS_OF_DOFETILIDE_MOXIFLOXACIN_AND_COMBINATIONS_ECGDMMLD.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-EFFECTS-OF-RANOLAZINE-DOFETILIDE-VERAPAMIL-QUINIDINE-ECGRDVQ",
+      "name": "ECG Effects of Ranolazine, Dofetilide, Verapamil, Quinidine (ECGRDVQ)",
+      "path": "research/datasets/ECG_EFFECTS_OF_RANOLAZINE_DOFETILIDE_VERAPAMIL_QUINIDINE_ECGRDVQ.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-ID-DATABASE",
+      "name": "ECG-ID Database",
+      "path": "research/datasets/ECG_ID_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-ASSET-BUNDLE-IMAGE-ROI-SAMPLE-ASSETS",
+      "name": "Bundled ECG image/ROI/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "path": "research/datasets/SOURCE_ASSET_BUNDLE_ECG_IMAGE_ROI_SAMPLE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET"
+    },
+    {
+      "datasetId": "ECG-SOURCE-CATALOG-EXTERNAL-ECG-DATASETS",
+      "name": "External ECG dataset catalogue aggregate",
+      "identityClass": "SOURCE_CATALOG_AGGREGATE_NOT_A_DATASET",
+      "path": "research/datasets/SOURCE_CATALOG_EXTERNAL_ECG_DATASETS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ECHONEXT",
+      "name": "EchoNext",
+      "path": "research/datasets/ECHONEXT.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-EDGAR-EXPERIMENTAL-DATA-AND-GEOMETRIC-ANALYSIS-REPOSITORY",
+      "name": "EDGAR (Experimental Data & Geometric Analysis Repository)",
+      "path": "research/datasets/EDGAR_EXPERIMENTAL_DATA_AND_GEOMETRIC_ANALYSIS_REPOSITORY.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-EUROPEAN-ST-T-DATABASE-EDB",
+      "name": "European ST-T Database (EDB)",
+      "path": "research/datasets/EUROPEAN_ST_T_DATABASE_EDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-EYE-TRACKING-DATASET-FOR-12-LEAD-ECG-INTERPRETATION",
+      "name": "Eye Tracking Dataset for 12-Lead ECG Interpretation",
+      "path": "research/datasets/EYE_TRACKING_DATASET_FOR_12_LEAD_ECG_INTERPRETATION.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-GU-ECG-GAZI-UNIVERSITY-PTCA-INDUCED-ISCHAEMIA",
+      "name": "GU-ECG (Gazi University, PTCA-induced Ischaemia)",
+      "path": "research/datasets/GU_ECG_GAZI_UNIVERSITY_PTCA_INDUCED_ISCHAEMIA.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-HARVARD-EMORY-ECG-DATABASE-HEEDB",
+      "name": "Harvard-Emory ECG Database (HEEDB)",
+      "path": "research/datasets/HARVARD_EMORY_ECG_DATABASE_HEEDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ICENTIA11K-SINGLE-LEAD-CONTINUOUS-ECG",
+      "name": "Icentia11k Single Lead Continuous ECG",
+      "path": "research/datasets/ICENTIA11K_SINGLE_LEAD_CONTINUOUS_ECG.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-IKEM-DATASET-INSTITUTE-FOR-CLINICAL-AND-EXPERIMENTAL-MEDICINE-PRAGUE",
+      "name": "IKEM Dataset (Institute for Clinical and Experimental Medicine, Prague)",
+      "path": "research/datasets/IKEM_DATASET_INSTITUTE_FOR_CLINICAL_AND_EXPERIMENTAL_MEDICINE_PRAGUE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ISP",
+      "name": "ISP",
+      "path": "research/datasets/ISP.md",
+      "currentProjectDisposition": "SOURCE_DATA_ONLY_LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "datasetId": "ECG-DATASET-KURIAS-ECG",
+      "name": "KURIAS-ECG",
+      "path": "research/datasets/KURIAS_ECG.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-LEIPZIG-HEART-CENTER-ECG-DATABASE",
+      "name": "Leipzig Heart Center ECG Database",
+      "path": "research/datasets/LEIPZIG_HEART_CENTER_ECG_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-LONG-TERM-AF-DATABASE-LTAFDB",
+      "name": "Long-Term AF Database (LTAFDB)",
+      "path": "research/datasets/LONG_TERM_AF_DATABASE_LTAFDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-LONG-TERM-ST-DATABASE-LTSTDB",
+      "name": "Long-Term ST Database (LTSTDB)",
+      "path": "research/datasets/LONG_TERM_ST_DATABASE_LTSTDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-LUDB",
+      "name": "Lobachevsky University ECG Database (LUDB)",
+      "path": "research/datasets/LUDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-LYDUS-HOSPITAL-RHYTHM-DATASET",
+      "name": "Lydus hospital rhythm dataset",
+      "path": "research/datasets/LYDUS_HOSPITAL_RHYTHM_DATASET.md",
+      "currentProjectDisposition": "RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "datasetId": "ECG-DATASET-MEDALCARE-XL-SYNTHETIC-12-LEAD-ECGS-FROM-SIMULATIONS",
+      "name": "MedalCare-XL (Synthetic 12-Lead ECGs from Simulations)",
+      "path": "research/datasets/MEDALCARE_XL_SYNTHETIC_12_LEAD_ECGS_FROM_SIMULATIONS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MHD-EFFECT-ON-12-LEAD-ECGS-IN-MRI-SCANNERS",
+      "name": "MHD Effect on 12-Lead ECGs in MRI Scanners",
+      "path": "research/datasets/MHD_EFFECT_ON_12_LEAD_ECGS_IN_MRI_SCANNERS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-III-WAVEFORM-DATABASE-MATCHED-SUBSET",
+      "name": "MIMIC-III Waveform Database Matched Subset",
+      "path": "research/datasets/MIMIC_III_WAVEFORM_DATABASE_MATCHED_SUBSET.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-IV-ECG",
+      "name": "MIMIC-IV-ECG",
+      "path": "research/datasets/MIMIC_IV_ECG.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-IV-ECG-DEMO",
+      "name": "MIMIC-IV-ECG Demo",
+      "path": "research/datasets/MIMIC_IV_ECG_DEMO.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-IV-ECG-EXT-ICD",
+      "name": "MIMIC-IV-ECG-Ext-ICD",
+      "path": "research/datasets/MIMIC_IV_ECG_EXT_ICD.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MIT-BIH-ST-CHANGE-DATABASE",
+      "name": "MIT-BIH ST Change Database",
+      "path": "research/datasets/MIT_BIH_ST_CHANGE_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MIT-BIH-SUPRAVENTRICULAR-ARRHYTHMIA-DATABASE",
+      "name": "MIT-BIH Supraventricular Arrhythmia Database",
+      "path": "research/datasets/MIT_BIH_SUPRAVENTRICULAR_ARRHYTHMIA_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-MITBIH-ARRHYTHMIA",
+      "name": "MIT-BIH Arrhythmia Database",
+      "path": "research/datasets/MITBIH_ARRHYTHMIA.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS",
+      "name": "Bundled physiological example/test assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "path": "research/datasets/SOURCE_ASSET_BUNDLE_PHYSIOLOGICAL_EXAMPLE_TEST.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-NIGHTINGALE-BWH-EMERGENCY-DEPT-ECG-DATASET",
+      "name": "Nightingale BWH Emergency Dept ECG Dataset",
+      "path": "research/datasets/NIGHTINGALE_BWH_EMERGENCY_DEPT_ECG_DATASET.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-NIGHTINGALE-NTUH-CARDIAC-ARREST-ECG-DATASET",
+      "name": "Nightingale NTUH Cardiac Arrest ECG Dataset",
+      "path": "research/datasets/NIGHTINGALE_NTUH_CARDIAC_ARREST_ECG_DATASET.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-NINGBO-FIRST-HOSPITAL-ECG-DATABASE-IDIOPATHIC-VENTRICULAR-ARRHYTHMIA",
+      "name": "Ningbo First Hospital ECG Database (Idiopathic Ventricular Arrhythmia)",
+      "path": "research/datasets/NINGBO_FIRST_HOSPITAL_ECG_DATABASE_IDIOPATHIC_VENTRICULAR_ARRHYTHMIA.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-NORWEGIAN-ENDURANCE-ATHLETE-ECG-DATABASE",
+      "name": "Norwegian Endurance Athlete ECG Database",
+      "path": "research/datasets/NORWEGIAN_ENDURANCE_ATHLETE_ECG_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-NSRDB",
+      "name": "MIT-BIH Normal Sinus Rhythm Database",
+      "path": "research/datasets/NSRDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PHYSIONET-CINC-CHALLENGE-2017-AF-CLASSIFICATION",
+      "name": "PhysioNet/CinC Challenge 2017 (AF Classification)",
+      "path": "research/datasets/PHYSIONET_CINC_CHALLENGE_2017_AF_CLASSIFICATION.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PHYSIONET-CINC-CHALLENGE-2020",
+      "name": "PhysioNet/CinC Challenge 2020",
+      "path": "research/datasets/PHYSIONET_CINC_CHALLENGE_2020.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PHYSIONET-CINC-CHALLENGE-2021",
+      "name": "PhysioNet/CinC Challenge 2021",
+      "path": "research/datasets/PHYSIONET_CINC_CHALLENGE_2021.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-POST-ICTAL-HEART-RATE-OSCILLATIONS-IN-PARTIAL-EPILEPSY",
+      "name": "Post-Ictal Heart Rate Oscillations in Partial Epilepsy",
+      "path": "research/datasets/POST_ICTAL_HEART_RATE_OSCILLATIONS_IN_PARTIAL_EPILEPSY.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PRETERM-INFANT-CARDIO-RESPIRATORY-SIGNALS-DATABASE-PICSDB",
+      "name": "Preterm Infant Cardio-Respiratory Signals Database (PICSDB)",
+      "path": "research/datasets/PRETERM_INFANT_CARDIO_RESPIRATORY_SIGNALS_DATABASE_PICSDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PTB-DIAGNOSTIC-ECG-DATABASE",
+      "name": "PTB Diagnostic ECG Database",
+      "path": "research/datasets/PTB_DIAGNOSTIC_ECG_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DERIVED-ASSET-PTBXL-PLUS-FEATURE-STATEMENT-ASSETS",
+      "name": "PTB-XL+ derived feature/statement assets",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
+      "path": "research/datasets/SOURCE_DERIVED_ASSET_PTBXL_PLUS_FEATURE_STATEMENTS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PTBXL-PLUS",
+      "name": "PTB-XL+",
+      "path": "research/datasets/PTBXL_PLUS.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-PTBXL",
+      "name": "PTB-XL",
+      "path": "research/datasets/PTBXL.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-QTDB",
+      "name": "QT Database (QTDB)",
+      "path": "research/datasets/QTDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-SAMI-TROP-CHAGAS-CARDIOMYOPATHY-COHORT",
+      "name": "SaMi-Trop (Chagas Cardiomyopathy Cohort)",
+      "path": "research/datasets/SAMI_TROP_CHAGAS_CARDIOMYOPATHY_COHORT.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-SHANDONG-PROVINCIAL-HOSPITAL-ECG-DATABASE-SPHDB",
+      "name": "Shandong Provincial Hospital ECG Database (SPHDB)",
+      "path": "research/datasets/SHANDONG_PROVINCIAL_HOSPITAL_ECG_DATABASE_SPHDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-SHDB-AF-SAITAMA-HOLTER-DATABASE-ATRIAL-FIBRILLATION",
+      "name": "SHDB-AF (Saitama Holter Database â€” Atrial Fibrillation)",
+      "path": "research/datasets/SHDB_AF_SAITAMA_HOLTER_DATABASE_ATRIAL_FIBRILLATION.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ST-PETERSBURG-INCART-12-LEAD-ARRHYTHMIA-DATABASE",
+      "name": "St Petersburg INCART 12-Lead Arrhythmia Database",
+      "path": "research/datasets/ST_PETERSBURG_INCART_12_LEAD_ARRHYTHMIA_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ST-VINCENT-S-UCD-SLEEP-APNEA-DATABASE-UCDDB",
+      "name": "St. Vincent's / UCD Sleep Apnea Database (UCDDB)",
+      "path": "research/datasets/ST_VINCENT_S_UCD_SLEEP_APNEA_DATABASE_UCDDB.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-STAFF-III-DATABASE",
+      "name": "STAFF III Database",
+      "path": "research/datasets/STAFF_III_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-SUDDEN-CARDIAC-DEATH-HOLTER-DATABASE",
+      "name": "Sudden Cardiac Death Holter Database",
+      "path": "research/datasets/SUDDEN_CARDIAC_DEATH_HOLTER_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-SYMILE-MIMIC",
+      "name": "Symile-MIMIC",
+      "path": "research/datasets/SYMILE_MIMIC.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-TOLIET-THIGH-BASED-ECG-TOILET-SEAT",
+      "name": "tOLIet (Thigh-based ECG, toilet seat)",
+      "path": "research/datasets/TOLIET_THIGH_BASED_ECG_TOILET_SEAT.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-BENCHMARK-SAMPLE-ASSETS",
+      "name": "Bundled physiological benchmark/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "path": "research/datasets/SOURCE_ASSET_BUNDLE_PHYSIOLOGICAL_BENCHMARK_SAMPLE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-VFDB",
+      "name": "MIT-BIH Malignant Ventricular Ectopy Database (VFDB)",
+      "path": "research/datasets/VFDB.md",
+      "currentProjectDisposition": "SOURCE_DATA_ONLY_LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "datasetId": "ECG-DATASET-VITALDB-ARRHYTHMIA-DATABASE",
+      "name": "VitalDB Arrhythmia Database",
+      "path": "research/datasets/VITALDB_ARRHYTHMIA_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DERIVED-ASSET-VITALDB-ARRHYTHMIA-BEAT-DATA",
+      "name": "VitalDB Arrhythmia Database derived beat-data asset",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
+      "path": "research/datasets/SOURCE_DERIVED_ASSET_VITALDB_ARRHYTHMIA_BEATS.md",
+      "currentProjectDisposition": "RESEARCH_ONLY_LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "datasetId": "ECG-DATASET-WILSON-CENTRAL-TERMINAL-ECG-DATABASE",
+      "name": "Wilson Central Terminal ECG Database",
+      "path": "research/datasets/WILSON_CENTRAL_TERMINAL_ECG_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    },
+    {
+      "datasetId": "ECG-DATASET-ZZU-PECG-ZHENGZHOU-UNIVERSITY-PEDIATRIC-ECG-DATABASE",
+      "name": "ZZU pECG (Zhengzhou University Pediatric ECG Database)",
+      "path": "research/datasets/ZZU_PECG_ZHENGZHOU_UNIVERSITY_PEDIATRIC_ECG_DATABASE.md",
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "ekg-governance-compatibility-baseline-v1",
+  "sourceMainCommit": "a182a113bfd419f7fa0c1884e1c8548e911a8514",
+  "hashDomain": "git-blob-content",
+  "files": [
+    {
+      "path": "ECG_DONOR_REGISTRY.json",
+      "sha256_git_blob_content": "cd73296217977c85d264bbb0d898a52228869593d0ab35662616dbdcebef4b8e"
+    },
+    {
+      "path": "ECG_DONOR_CAPABILITY_REGISTRY.json",
+      "sha256_git_blob_content": "defa8213f24fb242781cbf7e172d71f1680304562caf8810abc5f6884b4ea2a4"
+    },
+    {
+      "path": "ECG_DATASET_REGISTRY.json",
+      "sha256_git_blob_content": "02a412aa41e4f09db0554d843a87eecc789b33ea8dca68cafe0401f666cfbc1a"
+    },
+    {
+      "path": "ECG_MODEL_CHALLENGER_REGISTRY.json",
+      "sha256_git_blob_content": "57b7337ac41d783f3683212a63477c6c29bf1e11d65d91a7c1ab4d4f2d5f8cbc"
+    },
+    {
+      "path": "ECG_LICENSE_LEDGER.json",
+      "sha256_git_blob_content": "3d7a9441a59336d907fea30469a323583691d8fc280b3e0792c4f4a4763b4df2"
+    }
+  ]
+}

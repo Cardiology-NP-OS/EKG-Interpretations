@@ -1,0 +1,25 @@
+{
+  "schema": "ekg-evaluation-fixture-v1",
+  "fixtureId": "SYNTHETIC-PATIENT-SPLIT-LEAKAGE",
+  "provenance": {
+    "kind": "TARGET_SYNTHETIC",
+    "source": "Cardiology-NP-OS/EKG-Interpretations",
+    "locator": "evaluation/fixtures/patient_split_leakage.json"
+  },
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "runtimeAuthority": false,
+  "expectedFailure": "EVAL_SPLIT_PATIENT_LEAKAGE",
+  "records": [
+    {
+      "recordId": "r1",
+      "patientId": "p1",
+      "split": "train"
+    },
+    {
+      "recordId": "r2",
+      "patientId": "p1",
+      "split": "test"
+    }
+  ]
+}

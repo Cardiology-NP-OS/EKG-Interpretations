@@ -1,0 +1,41 @@
+{
+  "schema": "ekg-failure-mode-catalog-v1",
+  "runtimeAuthority": false,
+  "items": [
+    {
+      "id": "ECG-FAIL-REMOTE-MUTABILITY",
+      "action": "REJECT",
+      "description": "Mutable remote dataset/model/text acquisition is not an admissible governed source."
+    },
+    {
+      "id": "ECG-FAIL-UNSAFE-DESERIALIZATION",
+      "action": "REJECT",
+      "description": "Arbitrary pickle/torch state loading without exact admitted identity is unsafe."
+    },
+    {
+      "id": "ECG-FAIL-PATIENT-LEAKAGE",
+      "action": "FAIL_EVALUATION",
+      "description": "Patient/record identity crossing train/validation/test invalidates the split contract."
+    },
+    {
+      "id": "ECG-FAIL-SOURCE-LABEL-GOLD-PROMOTION",
+      "action": "REJECT",
+      "description": "Source labels never become project clinical gold automatically."
+    },
+    {
+      "id": "ECG-FAIL-VALIDATION-TEST-SWAP",
+      "action": "REJECT_RESULT",
+      "description": "Validation/test naming or binding defects invalidate benchmark interpretation."
+    },
+    {
+      "id": "ECG-FAIL-NONDETERMINISTIC-BENCHMARK",
+      "action": "REJECT_RESULT",
+      "description": "Missing reproducibility controls prevent exact benchmark reproduction."
+    },
+    {
+      "id": "ECG-FAIL-LICENSE-UNKNOWN",
+      "action": "LICENSE_REVIEW_REQUIRED",
+      "description": "Unknown code/model/data terms block reuse or asset admission."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "ekg-annotation-evaluation-contracts-v1",
+  "sourceLabelsAreProjectGold": false,
+  "projectGold": false,
+  "annotationTypes": [
+    {
+      "type": "R_PEAK_EVENT",
+      "uses": [
+        "event tolerance agreement",
+        "detector regression"
+      ]
+    },
+    {
+      "type": "WAVE_FIDUCIAL_DELINEATION",
+      "uses": [
+        "P/QRS/T onset/offset/peak timing",
+        "sensitivity/precision/F1 with declared tolerance"
+      ]
+    },
+    {
+      "type": "BEAT_ANNOTATION",
+      "uses": [
+        "beat-event agreement",
+        "failure-mode stratification"
+      ]
+    },
+    {
+      "type": "RHYTHM_EPISODE",
+      "uses": [
+        "episode/window evaluation with record-level leakage control"
+      ]
+    },
+    {
+      "type": "ST_T_EPISODE",
+      "uses": [
+        "ST/T temporal episode evaluation"
+      ]
+    }
+  ],
+  "rules": [
+    "Preserve original annotation source and locator.",
+    "Do not convert source annotations into project clinical gold.",
+    "Do not compare metrics across datasets as equivalent without matched task/ontology/split definitions."
+  ]
+}

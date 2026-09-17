@@ -1,0 +1,46 @@
+{
+  "schema": "ecg-cross-donor-normalization-verification-v1",
+  "source_main_commit": "a182a113bfd419f7fa0c1884e1c8548e911a8514",
+  "source_main_tree": "023e37b38fa0d70363757592fb1ee6db3b9447ff",
+  "candidate_commit": "3ad095abe75425c7fe72cdd9776ccfa12b1d4706",
+  "candidate_tree": "71f227be513d9bbf91460223c63cc9bc7ba6321e",
+  "exact_sha_ci": {
+    "run_id": 35249035902,
+    "conclusion": "success"
+  },
+  "independent_fresh_clone": {
+    "result": "PASS",
+    "device_class": "independent authorized Windows machine",
+    "candidate_commit": "3ad095abe75425c7fe72cdd9776ccfa12b1d4706",
+    "candidate_tree": "71f227be513d9bbf91460223c63cc9bc7ba6321e",
+    "diff_check": "PASS",
+    "evaluation_contract": "7/7 PASS",
+    "research_authority": "4/4 PASS",
+    "repository_normalization": "13/13 PASS",
+    "full_regression": "PASS"
+  },
+  "coverage": {
+    "source_capabilities": 213,
+    "canonical_capabilities": 52,
+    "dataset_cards": 74,
+    "ambiguous_capabilities": 0,
+    "canonical_datasets": 68,
+    "source_asset_compatibility_records": 6
+  },
+  "legacy_compatibility": {
+    "accepted_donor_receipts": "PASS_GIT_BLOB_BASELINE",
+    "legacy_governance_registries": "PASS_GIT_BLOB_BASELINE"
+  },
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "clinical_authority_added": false,
+  "verification_state": "VERIFIED_CANDIDATE_FOR_PROMOTION",
+  "superseded_by_pending_candidate": false
+}

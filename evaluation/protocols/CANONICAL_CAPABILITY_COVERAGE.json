@@ -1,0 +1,9 @@
+{
+  "schema": "ekg-canonical-capability-coverage-v1",
+  "canonicalCapabilityCount": 52,
+  "sourceCapabilityCount": 213,
+  "allSourceCapabilitiesMapped": true,
+  "ambiguousSourceCapabilities": [],
+  "canonicalRegistry": "ECG_CAPABILITY_REGISTRY.json",
+  "audit": "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+}

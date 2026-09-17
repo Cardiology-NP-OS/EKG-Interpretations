@@ -1,0 +1,25 @@
+{
+  "schema": "ekg-dataset-provenance-contract-v1",
+  "required": [
+    "datasetId",
+    "name",
+    "canonicalSource",
+    "provenanceSources",
+    "projectGold",
+    "sourceLabelsAreProjectGold",
+    "runtimeAuthority",
+    "clinicalValidityInferred"
+  ],
+  "provenance_required": [
+    "source",
+    "locator"
+  ],
+  "exact_git_identity_when_repository_source": [
+    "commit",
+    "tree"
+  ],
+  "project_gold": false,
+  "source_labels_are_project_gold": false,
+  "runtime_authority": false,
+  "clinical_validity_inferred": false
+}

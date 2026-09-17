@@ -1,0 +1,3134 @@
+{
+  "schema": "ecg-capability-registry-v1",
+  "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
+  "generated_from_donor_capability_registry_count": 213,
+  "capability_count": 52,
+  "diagnostic_runtime": "GOVERNED_INACTIVE",
+  "evidence_admission": "NOT_ADMITTED",
+  "approved_adjudicated_gold_count": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinical_validity": "NOT_INFERRED",
+  "capabilities": [
+    {
+      "capability_id": "ECG-CAP-DATASET-ANNOTATION-TYPES",
+      "capability_family": "Evaluation",
+      "name": "Dataset annotation-type classification",
+      "canonical_target_path": "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-017",
+        "ECGB-019"
+      ],
+      "licenses": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-DATASET-CATALOG",
+      "capability_family": "Evaluation",
+      "name": "Canonical ECG dataset identity catalog",
+      "canonical_target_path": "evaluation/datasets/ECG_DATASET_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-002",
+        "ECGB-005",
+        "ECGB-031",
+        "ECGB-032",
+        "PTBXLFB-003"
+      ],
+      "licenses": [
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/datasets/ECG_DATASET_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "tmehari/ptbxl_feature_benchmark:PTBXLFB-003"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-ANNOTATION-AGREEMENT",
+      "capability_family": "Evaluation",
+      "name": "Annotation/event agreement and timing",
+      "canonical_target_path": "lib/challenger_contract.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-005",
+        "NK-015",
+        "OECG-009",
+        "OECG-010",
+        "TECG-019",
+        "TECG-020",
+        "WFDB-022",
+        "WFDB-023",
+        "WFDB-024"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/challenger_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-DATASET-PROVENANCE",
+      "capability_family": "Evaluation",
+      "name": "Dataset identity and provenance validation",
+      "canonical_target_path": "lib/evaluation_contract.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-003",
+        "ECGB-004"
+      ],
+      "licenses": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-DATASET-VALIDATION",
+      "capability_family": "Evaluation",
+      "name": "Dataset signal/config validation",
+      "canonical_target_path": "evaluation/protocols/DATASET_PROVENANCE_CONTRACT.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-023",
+        "ECGB-025"
+      ],
+      "licenses": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/DATASET_PROVENANCE_CONTRACT.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-FAILURE-MODES",
+      "capability_family": "Evaluation",
+      "name": "Evaluation failure-mode catalog",
+      "canonical_target_path": "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-016",
+        "PTBXLFB-019"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-FEATURE-BENCHMARKS",
+      "capability_family": "Evaluation",
+      "name": "Engineered-feature benchmark contracts",
+      "canonical_target_path": "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "PTBXLFB-007",
+        "PTBXLFB-008",
+        "PTBXLFB-009",
+        "PTBXLFB-010",
+        "PTBXLFB-011",
+        "PTBXLFB-012",
+        "PTBXLFB-013",
+        "PTBXLFB-015",
+        "PTBXLFB-016",
+        "PTBXLFB-017"
+      ],
+      "licenses": [
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-LABEL-HARMONIZATION",
+      "capability_family": "Evaluation",
+      "name": "Label and feature semantic harmonization",
+      "canonical_target_path": "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "PTBXLFB-031"
+      ],
+      "licenses": [
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-LEAKAGE-CONTROL",
+      "capability_family": "Evaluation",
+      "name": "Patient and record leakage controls",
+      "canonical_target_path": "lib/evaluation_contract.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONCLINICAL",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "OECG-011",
+        "PTBXLFB-014",
+        "ECGB-007",
+        "ECGB-009"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Engineering contract only; no diagnostic authority."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-METRICS",
+      "capability_family": "Evaluation",
+      "name": "Non-reportable evaluation metric contracts",
+      "canonical_target_path": "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "PTBXLFB-018",
+        "PTBXLFB-025",
+        "PTBXLFB-026",
+        "TECG-018"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
+      "capability_family": "Evaluation",
+      "name": "Patient/record-level split contracts",
+      "canonical_target_path": "lib/evaluation_contract.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-006",
+        "ECGB-007",
+        "ECGB-008",
+        "ECGB-009",
+        "ECGB-010",
+        "ECGB-011",
+        "OECG-011",
+        "PTBXLFB-014"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "vlbthambawita/ECGBench:ECGB-011"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-REPRODUCIBILITY",
+      "capability_family": "Evaluation",
+      "name": "Reproducibility and regression contracts",
+      "canonical_target_path": "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-030",
+        "NK-020",
+        "NK-021",
+        "PTBXLFB-020",
+        "PTBXLFB-034",
+        "TECG-031",
+        "WFDB-027"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "tmehari/ptbxl_feature_benchmark:PTBXLFB-034"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-ROBUSTNESS",
+      "capability_family": "Evaluation",
+      "name": "Robustness and distortion evaluation",
+      "canonical_target_path": "evaluation/robustness/ROBUSTNESS_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-014",
+        "OECG-012",
+        "OECG-017",
+        "PTBXLFB-029",
+        "TECG-004",
+        "TECG-005",
+        "TECG-006"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/robustness/ROBUSTNESS_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "tmehari/ptbxl_feature_benchmark:PTBXLFB-029"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-WINDOW-CONTRACT",
+      "capability_family": "Evaluation",
+      "name": "Context-valid evaluation windows",
+      "canonical_target_path": "lib/challenger_contract.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "OECG-008"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/challenger_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVENT-BEAT-RHYTHM-REPRESENTATION",
+      "capability_family": "Morphology / measurement",
+      "name": "Beat, rhythm, and event representations",
+      "canonical_target_path": "lib/challenger_contract.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONCLINICAL",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "OECG-004",
+        "OECG-006",
+        "OECG-007",
+        "TECG-017",
+        "WFDB-018"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/challenger_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "DeepPSP/torch_ecg:TECG-017"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVENT-FIDUCIAL-DELINEATION",
+      "capability_family": "Morphology / measurement",
+      "name": "P/QRS/T fiducial delineation",
+      "canonical_target_path": "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-018",
+        "NK-007",
+        "NK-008",
+        "OECG-002"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "vitaldb/openecg:OECG-002"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-EVENT-PACER-DETECTION",
+      "capability_family": "Morphology / measurement",
+      "name": "Pacemaker-spike detection challengers",
+      "canonical_target_path": "research/signal_processing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "OECG-005"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/signal_processing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-EVENT-RPEAK-DETECTION",
+      "capability_family": "Morphology / measurement",
+      "name": "R-peak event detection challengers",
+      "canonical_target_path": "research/signal_processing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-004",
+        "OECG-003",
+        "TECG-025",
+        "TECG-026",
+        "WFDB-019",
+        "WFDB-020",
+        "WFDB-021"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/signal_processing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "DeepPSP/torch_ecg:TECG-025",
+        "DeepPSP/torch_ecg:TECG-026"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY",
+      "capability_family": "Governance",
+      "name": "Clinical-authority separation and inactive control",
+      "canonical_target_path": "docs/REPOSITORY_ARCHITECTURE.md",
+      "implementation_status": "TARGET_OWNED_GOVERNANCE_REPRESENTATION",
+      "authority_class": "GOVERNANCE",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-036",
+        "NK-024",
+        "OECG-018",
+        "PTBXLFB-035",
+        "TECG-034",
+        "WFDB-030"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "MIT-LCP/wfdb-python:WFDB-030",
+        "neuropsychology/NeuroKit:NK-024",
+        "DeepPSP/torch_ecg:TECG-034",
+        "tmehari/ptbxl_feature_benchmark:PTBXLFB-035",
+        "vlbthambawita/ECGBench:ECGB-036"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "GOVERNED_INACTIVE"
+    },
+    {
+      "capability_id": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
+      "capability_family": "Governance",
+      "name": "Dependency and environment reproducibility",
+      "canonical_target_path": "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "GOVERNANCE",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-001",
+        "ECGB-034",
+        "EIK-001",
+        "NK-023",
+        "PTBXLFB-001",
+        "PTBXLFB-033",
+        "TECG-001",
+        "WFDB-028",
+        "WFDB-031"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "neuropsychology/NeuroKit:NK-023",
+        "tmehari/ptbxl_feature_benchmark:PTBXLFB-033",
+        "vlbthambawita/ECGBench:ECGB-034"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-GOVERNANCE-LICENSE-PROVENANCE",
+      "capability_family": "Governance",
+      "name": "License and asset provenance boundaries",
+      "canonical_target_path": "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json",
+      "implementation_status": "TARGET_OWNED_GOVERNANCE_REPRESENTATION",
+      "authority_class": "GOVERNANCE",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-012",
+        "ECGB-020",
+        "EIK-012",
+        "EIK-015",
+        "EIK-016",
+        "EIK-017",
+        "EIK-027",
+        "EIK-028",
+        "NK-022",
+        "OECG-015",
+        "PTBXLFB-002",
+        "PTBXLFB-004",
+        "PTBXLFB-005",
+        "PTBXLFB-006",
+        "PTBXLFB-027",
+        "TECG-009",
+        "WFDB-032"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION",
+      "capability_family": "Governance",
+      "name": "Remote/mutable acquisition rejection boundary",
+      "canonical_target_path": "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "GOVERNANCE",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-027",
+        "EIK-014",
+        "TECG-008",
+        "TECG-024",
+        "WFDB-007",
+        "WFDB-008",
+        "WFDB-029"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY",
+      "capability_family": "Governance",
+      "name": "Exact-source identity and substitution resistance",
+      "canonical_target_path": "docs/REPOSITORY_ARCHITECTURE.md",
+      "implementation_status": "TARGET_OWNED_GOVERNANCE_REPRESENTATION",
+      "authority_class": "GOVERNANCE",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-028",
+        "WFDB-009"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "MIT-LCP/wfdb-python:WFDB-009",
+        "vlbthambawita/ECGBench:ECGB-028"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION",
+      "capability_family": "Governance",
+      "name": "Unsafe model/state deserialization rejection boundary",
+      "canonical_target_path": "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "GOVERNANCE",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "PTBXLFB-021",
+        "PTBXLFB-024",
+        "TECG-023"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-IMAGE-DEGRADATION",
+      "capability_family": "Image ECG",
+      "name": "Image/scan degradation and adversarial transformations",
+      "canonical_target_path": "evaluation/robustness/ROBUSTNESS_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "EIK-009",
+        "EIK-010",
+        "EIK-011",
+        "EIK-013",
+        "EIK-031"
+      ],
+      "licenses": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/robustness/ROBUSTNESS_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-IMAGE-DIGITIZATION",
+      "capability_family": "Image ECG",
+      "name": "Image-to-signal digitization challengers",
+      "canonical_target_path": "research/image_ecg/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "EIK-022",
+        "EIK-023"
+      ],
+      "licenses": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/image_ecg/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-IMAGE-GRID-CALIBRATION",
+      "capability_family": "Image ECG",
+      "name": "Paper grid and scale estimation challengers",
+      "canonical_target_path": "research/image_ecg/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "EIK-004",
+        "EIK-018",
+        "EIK-019",
+        "EIK-020",
+        "EIK-021"
+      ],
+      "licenses": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/image_ecg/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-IMAGE-RENDERING",
+      "capability_family": "Image ECG",
+      "name": "Waveform-to-paper rendering concepts",
+      "canonical_target_path": "research/image_ecg/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "EIK-002",
+        "EIK-003",
+        "EIK-006",
+        "EIK-007",
+        "EIK-008",
+        "EIK-033",
+        "TECG-027",
+        "WFDB-025"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/image_ecg/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "MIT-LCP/wfdb-python:WFDB-025",
+        "DeepPSP/torch_ecg:TECG-027",
+        "alphanumericslab/ecg-image-kit:EIK-033"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-IMAGE-ROI-LOCALIZATION",
+      "capability_family": "Image ECG",
+      "name": "Lead/ROI localization challengers",
+      "canonical_target_path": "research/image_ecg/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "EIK-005",
+        "EIK-024",
+        "EIK-025",
+        "EIK-026"
+      ],
+      "licenses": [
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/image_ecg/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-CHECKPOINT-SAFETY",
+      "capability_family": "Representations / models",
+      "name": "Checkpoint identity and safe-loading contracts",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "TECG-022",
+        "TECG-033"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "capability_family": "Representations / models",
+      "name": "Classification encoder challengers",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "PTBXLFB-022",
+        "TECG-010",
+        "TECG-014",
+        "TECG-016"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-DELINEATION-CHALLENGERS",
+      "capability_family": "Representations / models",
+      "name": "Delineation model challengers",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "TECG-012"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-LIGHTWEIGHT-DEPLOYMENT",
+      "capability_family": "Representations / models",
+      "name": "Lightweight challenger deployment concepts",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "OECG-014"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-SEQUENCE-CHALLENGERS",
+      "capability_family": "Representations / models",
+      "name": "Sequence and interval model challengers",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "TECG-011",
+        "TECG-013"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "capability_family": "Representations / models",
+      "name": "Self-supervised/foundation representation concepts",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "OECG-013",
+        "OECG-016",
+        "TECG-015"
+      ],
+      "licenses": [
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING",
+      "capability_family": "Preprocessing",
+      "name": "Artifact and missing-sample handling",
+      "canonical_target_path": "research/preprocessing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-002",
+        "NK-006",
+        "NK-011"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
+      "capability_family": "Preprocessing",
+      "name": "Filtering and baseline-handling contracts",
+      "canonical_target_path": "research/preprocessing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-001",
+        "PTBXLFB-028",
+        "TECG-002",
+        "TECG-003",
+        "WFDB-017"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "DeepPSP/torch_ecg:TECG-002",
+        "DeepPSP/torch_ecg:TECG-003",
+        "tmehari/ptbxl_feature_benchmark:PTBXLFB-028"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-NORMALIZATION",
+      "capability_family": "Preprocessing",
+      "name": "Normalization contracts",
+      "canonical_target_path": "research/preprocessing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "WFDB-016"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-RESAMPLING",
+      "capability_family": "Preprocessing",
+      "name": "Resampling contracts",
+      "canonical_target_path": "research/preprocessing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-003",
+        "WFDB-015"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "neuropsychology/NeuroKit:NK-003"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-PREPROCESS-WINDOWING-SEGMENTATION",
+      "capability_family": "Preprocessing",
+      "name": "Windowing and segmentation contracts",
+      "canonical_target_path": "research/preprocessing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-016",
+        "NK-012"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/preprocessing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "vlbthambawita/ECGBench:ECGB-016"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-QUALITY-CALIBRATION-METADATA",
+      "capability_family": "Signal quality",
+      "name": "Calibration and metadata integrity",
+      "canonical_target_path": "lib/input_quality_guard.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONCLINICAL",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "WFDB-026",
+        "EIK-004",
+        "EIK-021",
+        "ECGB-023"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Engineering contract only; no diagnostic authority."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-QUALITY-FLATLINE-CLIPPING",
+      "capability_family": "Signal quality",
+      "name": "Flatline and clipping detection",
+      "canonical_target_path": "lib/signal_quality.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONCLINICAL",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-022",
+        "NK-010"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/signal_quality.test.js",
+        "tests/input_quality_guard.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "neuropsychology/NeuroKit:NK-010",
+        "vlbthambawita/ECGBench:ECGB-022"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-QUALITY-LEAD-INTEGRITY",
+      "capability_family": "Signal quality",
+      "name": "Lead identity, completeness, and ordering",
+      "canonical_target_path": "lib/input_quality_guard.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONCLINICAL",
+      "source_provenance": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-015",
+        "ECGB-021"
+      ],
+      "licenses": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/signal_quality.test.js",
+        "tests/input_quality_guard.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "vlbthambawita/ECGBench:ECGB-021"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-QUALITY-NOISE-ROBUSTNESS",
+      "capability_family": "Signal quality",
+      "name": "Noise and amplitude robustness",
+      "canonical_target_path": "evaluation/robustness/ROBUSTNESS_CATALOG.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-024",
+        "NK-009"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_quality.test.js",
+        "tests/input_quality_guard.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/robustness/ROBUSTNESS_CATALOG.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-RESEARCH-DATA-LOADERS",
+      "capability_family": "Research",
+      "name": "Dataset loader and adapter research",
+      "canonical_target_path": "research/datasets/DATASET_CARD_INDEX.json",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-013",
+        "ECGB-029",
+        "PTBXLFB-030",
+        "PTBXLFB-032",
+        "TECG-007"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/datasets/DATASET_CARD_INDEX.json"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-RESEARCH-ECG-DERIVED-RESPIRATION",
+      "capability_family": "Research",
+      "name": "ECG-derived respiration research",
+      "canonical_target_path": "research/signal_processing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-013"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/signal_processing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-RESEARCH-HRV",
+      "capability_family": "Research",
+      "name": "Heart-rate variability research features",
+      "canonical_target_path": "research/signal_processing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "NK-017"
+      ],
+      "licenses": [
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/signal_processing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-RESEARCH-METADATA-STANDARDS",
+      "capability_family": "Research",
+      "name": "Dataset metadata and publication standards",
+      "canonical_target_path": "research/datasets/DATASET_CARD_INDEX.json",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-026",
+        "ECGB-035"
+      ],
+      "licenses": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/datasets/DATASET_CARD_INDEX.json"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT",
+      "capability_family": "Research",
+      "name": "Model/benchmark scientific context",
+      "canonical_target_path": "research/benchmarks/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "EIK-029",
+        "EIK-032",
+        "PTBXLFB-023",
+        "PTBXLFB-036",
+        "TECG-021",
+        "TECG-029",
+        "TECG-030",
+        "TECG-032"
+      ],
+      "licenses": [
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        },
+        {
+          "source": "tmehari/ptbxl_feature_benchmark",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/benchmarks/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-SIGNAL-ANNOTATION-INGESTION",
+      "capability_family": "Signal / ingestion",
+      "name": "Annotation ingestion semantics",
+      "canonical_target_path": "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
+      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "WFDB-006"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-SIGNAL-FORMAT-ADAPTERS",
+      "capability_family": "Signal / ingestion",
+      "name": "Signal format interoperability and adapters",
+      "canonical_target_path": "research/signal_processing/README.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+          "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-014",
+        "NK-018",
+        "NK-019",
+        "WFDB-010",
+        "WFDB-011",
+        "WFDB-012",
+        "WFDB-013",
+        "WFDB-014"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "neuropsychology/NeuroKit",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/signal_processing/README.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "vlbthambawita/ECGBench:ECGB-014"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-SIGNAL-WFDB-CORE",
+      "capability_family": "Signal / ingestion",
+      "name": "WFDB signal and metadata semantics",
+      "canonical_target_path": "lib/wfdb_signal.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONCLINICAL",
+      "source_provenance": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+          "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+          "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+          "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "ECGB-033",
+        "EIK-030",
+        "OECG-001",
+        "TECG-028",
+        "WFDB-001",
+        "WFDB-002",
+        "WFDB-003",
+        "WFDB-004",
+        "WFDB-005",
+        "WFDB-026"
+      ],
+      "licenses": [
+        {
+          "source": "MIT-LCP/wfdb-python",
+          "spdx": "MIT",
+          "status": "COMPATIBLE"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "spdx": "Apache-2.0",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "DeepPSP/torch_ecg",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "alphanumericslab/ecg-image-kit",
+          "spdx": "BSD-3-Clause",
+          "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES"
+        },
+        {
+          "source": "vlbthambawita/ECGBench",
+          "spdx": "MIT",
+          "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/signal_core.test.js",
+        "tests/wfdb_donor_boundary.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
+      ],
+      "research_paths": [
+        "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
+      ],
+      "limitations": [
+        "Normalization does not elevate source labels to project gold.",
+        "No donor clinical-performance claim becomes target evidence."
+      ],
+      "supersedes": [
+        "vitaldb/openecg:OECG-001",
+        "DeepPSP/torch_ecg:TECG-028",
+        "alphanumericslab/ecg-image-kit:EIK-030",
+        "vlbthambawita/ECGBench:ECGB-033"
+      ],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    }
+  ]
+}

@@ -1,0 +1,3512 @@
+{
+  "schema": "ecg-canonical-dataset-catalog-v1",
+  "authority": "EXPLANATORY_COMPANION_ECG_DATASET_REGISTRY_REMAINS_GOVERNANCE_AUTHORITY",
+  "generated_from_accepted_donors": [
+    "DONOR-002",
+    "DONOR-007"
+  ],
+  "datasetCount": 74,
+  "canonicalDatasetCount": 68,
+  "sourceAssetCompatibilityCount": 6,
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "runtimeAuthority": false,
+  "clinicalValidityInferred": false,
+  "entries": [
+    {
+      "datasetId": "ECG-DATASET-AFDB",
+      "name": "MIT-BIH Atrial Fibrillation Database",
+      "canonicalSource": "https://physionet.org/content/afdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "donor split enumerates 23 record IDs",
+      "leads": "ambulatory ECG",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "long-duration recordings",
+      "annotationType": "RHYTHM_EPISODE_ANNOTATIONS",
+      "labelOrigin": "rhythm episode annotations",
+      "adjudicationOrSourceProcess": "source benchmark labels only",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "record-level lists are explicitly defined by donor",
+      "leakageRisks": "episode/window splitting can leak patient/record identity unless record-level split is enforced",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "record/patient-held-out rhythm evaluation",
+        "annotation ingestion regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-APNEA-ECG-DATABASE",
+      "name": "Apnea-ECG Database",
+      "canonicalSource": "https://physionet.org/content/apnea-ecg/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-BIDMC-CONGESTIVE-HEART-FAILURE-DATABASE",
+      "name": "BIDMC Congestive Heart Failure Database",
+      "canonicalSource": "https://physionet.org/content/chfdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-BRNO-UNIVERSITY-OF-TECHNOLOGY-ECG-QUALITY-DATABASE-BUT-QDB",
+      "name": "Brno University of Technology ECG Quality Database (BUT QDB)",
+      "canonicalSource": "https://physionet.org/content/butqdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-BRUGADA-HUCA",
+      "name": "Brugada-HUCA",
+      "canonicalSource": "https://physionet.org/content/brugada-huca/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "CC BY-SA 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-BUT-PDB",
+      "name": "BUT PDB",
+      "canonicalSource": "SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER",
+      "version": null,
+      "access": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "licenseOrTerms": "LICENSE_REVIEW_REQUIRED",
+      "licenseVerificationStatus": "NOT_ESTABLISHED_IN_ACCEPTED_PROVENANCE",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "leads": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "source annotations/record metadata",
+      "adjudicationOrSourceProcess": "not target adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "UNKNOWN",
+      "leakageRisks": "source-specific analog low-pass characteristics materially affect pacer detection",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Identity/details are limited to accepted donor provenance; independent source audit remains required."
+      ],
+      "suitableEvaluationUses": [
+        "pacing and morphology failure analysis"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor benchmark metrics are not target-reportable metrics."
+      ],
+      "currentProjectDisposition": "SOURCE_DATA_ONLY_LICENSE_REVIEW_REQUIRED",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CHAPMAN-SHAOXING-ARRHYTHMIA",
+      "name": "Chapman-Shaoxing (Arrhythmia)",
+      "canonicalSource": "https://physionet.org/content/ecg-arrhythmia/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CHAPMAN-SHAOXING-ECG-DATABASE-10-646-PATIENTS",
+      "name": "Chapman-Shaoxing ECG Database (10,646 patients)",
+      "canonicalSource": "https://figshare.com/collections/ChapmanECG/4560497/2",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC0 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CIPA-ECG-VALIDATION-STUDY",
+      "name": "CiPA ECG Validation Study",
+      "canonicalSource": "https://physionet.org/content/ecgcipa/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CODE-15-PCT-TELEHEALTH-NETWORK-OF-MINAS-GERAIS-15-PCT-SUBSET",
+      "name": "CODE-15% (Telehealth Network of Minas Gerais, 15% subset)",
+      "canonicalSource": "https://doi.org/10.5281/zenodo.4916206",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CODE-FULL-DATASET-2-3M-RECORDS",
+      "name": "CODE (Full Dataset, ~2.3M records)",
+      "canonicalSource": "https://figshare.scilifelab.se/articles/dataset/CODE_dataset/15169716",
+      "version": null,
+      "access": "restricted",
+      "licenseOrTerms": "DUA required",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CODE-TEST",
+      "name": "CODE-test (827-record hold-out test set)",
+      "canonicalSource": "https://doi.org/10.5281/zenodo.3765780",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "donor model card reports 827 ECGs",
+      "leads": "12-lead source ECG; donor evaluates single-lead-derived model path",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "source benchmark labels",
+      "adjudicationOrSourceProcess": "external source labels only",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "external test cohort treated as held out by donor",
+      "leakageRisks": "label ontology and single-lead mapping differ from donor training sources",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-CPSC-2018-CHINA-PHYSIOLOGICAL-SIGNAL-CHALLENGE-2018",
+      "name": "CPSC 2018 (China Physiological Signal Challenge 2018)",
+      "canonicalSource": "http://2018.icbeb.org/Challenge.html",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-CAPABLE-SMARTWATCHES-DATASET",
+      "name": "ECG-Capable Smartwatches Dataset",
+      "canonicalSource": "https://physionet.org/content/ecg-capable-smartwatches/1.0.0/",
+      "version": "1.0.0",
+      "access": "restricted",
+      "licenseOrTerms": "PhysioNet Restricted Health Data License 1.5.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-EFFECTS-OF-DOFETILIDE-MOXIFLOXACIN-AND-COMBINATIONS-ECGDMMLD",
+      "name": "ECG Effects of Dofetilide, Moxifloxacin and Combinations (ECGDMMLD)",
+      "canonicalSource": "https://physionet.org/content/ecgdmmld/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-EFFECTS-OF-RANOLAZINE-DOFETILIDE-VERAPAMIL-QUINIDINE-ECGRDVQ",
+      "name": "ECG Effects of Ranolazine, Dofetilide, Verapamil, Quinidine (ECGRDVQ)",
+      "canonicalSource": "https://physionet.org/content/ecgrdvq/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ECG-ID-DATABASE",
+      "name": "ECG-ID Database",
+      "canonicalSource": "https://physionet.org/content/ecgiddb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-ASSET-BUNDLE-IMAGE-ROI-SAMPLE-ASSETS",
+      "name": "Bundled ECG image/ROI/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
+      "version": null,
+      "access": "REVIEW_REQUIRED",
+      "licenseOrTerms": "SEE_ECG_DATASET_REGISTRY_AND_REFERENCED_DONOR_BOUNDARY",
+      "licenseVerificationStatus": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_OR_ASSET_BUNDLE_LABELS_NOT_PROJECT_GOLD",
+      "adjudicationOrSourceProcess": "NOT_TARGET_ADJUDICATION",
+      "trainValidationTestStructure": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "REVIEW_REQUIRED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_IDENTITY_RESOLUTION",
+      "knownLimitations": [
+        "Global registry entry is not yet resolved to a more specific canonical source identity in accepted provenance."
+      ],
+      "suitableEvaluationUses": [
+        "provenance follow-up only until identity/terms are resolved"
+      ],
+      "prohibitedInterpretations": [
+        "Do not treat this asset bundle or source label as project clinical gold."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "DONOR-005",
+          "locator": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-SOURCE-CATALOG-EXTERNAL-ECG-DATASETS",
+      "name": "External ECG dataset catalogue aggregate",
+      "identityClass": "SOURCE_CATALOG_AGGREGATE_NOT_A_DATASET",
+      "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
+      "version": null,
+      "access": "REVIEW_REQUIRED",
+      "licenseOrTerms": "SEE_ECG_DATASET_REGISTRY_AND_REFERENCED_DONOR_BOUNDARY",
+      "licenseVerificationStatus": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_OR_ASSET_BUNDLE_LABELS_NOT_PROJECT_GOLD",
+      "adjudicationOrSourceProcess": "NOT_TARGET_ADJUDICATION",
+      "trainValidationTestStructure": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "REVIEW_REQUIRED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_IDENTITY_RESOLUTION",
+      "knownLimitations": [
+        "Global registry entry is not yet resolved to a more specific canonical source identity in accepted provenance."
+      ],
+      "suitableEvaluationUses": [
+        "provenance follow-up only until identity/terms are resolved"
+      ],
+      "prohibitedInterpretations": [
+        "Do not treat this asset bundle or source label as project clinical gold."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "DONOR-007",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ECHONEXT",
+      "name": "EchoNext",
+      "canonicalSource": "https://physionet.org/content/echonext/1.1.0/",
+      "version": "1.1.0",
+      "access": "restricted",
+      "licenseOrTerms": "PhysioNet Restricted Health Data License 1.5.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-EDGAR-EXPERIMENTAL-DATA-AND-GEOMETRIC-ANALYSIS-REPOSITORY",
+      "name": "EDGAR (Experimental Data & Geometric Analysis Repository)",
+      "canonicalSource": "https://edgar.sci.utah.edu/",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "Free registration",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-EUROPEAN-ST-T-DATABASE-EDB",
+      "name": "European ST-T Database (EDB)",
+      "canonicalSource": "https://physionet.org/content/edb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "ST_T_EPISODE_ANNOTATIONS",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "ST/T episode annotation evaluation",
+        "temporal-event regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-EYE-TRACKING-DATASET-FOR-12-LEAD-ECG-INTERPRETATION",
+      "name": "Eye Tracking Dataset for 12-Lead ECG Interpretation",
+      "canonicalSource": "https://physionet.org/content/eye-tracking-ecg/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC ODbL 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-GU-ECG-GAZI-UNIVERSITY-PTCA-INDUCED-ISCHAEMIA",
+      "name": "GU-ECG (Gazi University, PTCA-induced Ischaemia)",
+      "canonicalSource": "https://doi.org/10.17632/zhr5zsngtg.1",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-HARVARD-EMORY-ECG-DATABASE-HEEDB",
+      "name": "Harvard-Emory ECG Database (HEEDB)",
+      "canonicalSource": "https://bdsp.io/content/heedb/5.0/",
+      "version": "5.0",
+      "access": "credentialed",
+      "licenseOrTerms": "DUA (BDSP)",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ICENTIA11K-SINGLE-LEAD-CONTINUOUS-ECG",
+      "name": "Icentia11k Single Lead Continuous ECG",
+      "canonicalSource": "https://physionet.org/content/icentia11k-continuous-ecg/1.0/",
+      "version": "1.0",
+      "access": "open",
+      "licenseOrTerms": "CC BY-NC-SA 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-IKEM-DATASET-INSTITUTE-FOR-CLINICAL-AND-EXPERIMENTAL-MEDICINE-PRAGUE",
+      "name": "IKEM Dataset (Institute for Clinical and Experimental Medicine, Prague)",
+      "canonicalSource": "https://doi.org/10.5281/zenodo.8393007",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY-NC-ND 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ISP",
+      "name": "ISP",
+      "canonicalSource": "SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER",
+      "version": null,
+      "access": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "licenseOrTerms": "LICENSE_REVIEW_REQUIRED",
+      "licenseVerificationStatus": "NOT_ESTABLISHED_IN_ACCEPTED_PROVENANCE",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "leads": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "sampleRateHz": 1000,
+      "duration": "approximately 10 seconds in donor processing paths",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "wave-boundary annotations",
+      "adjudicationOrSourceProcess": "not target adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "UNKNOWN",
+      "leakageRisks": "donor contains explicit alignment/label-diagnosis scripts, indicating nontrivial label-quality risk",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Identity/details are limited to accepted donor provenance; independent source audit remains required."
+      ],
+      "suitableEvaluationUses": [
+        "wave-boundary training/evaluation",
+        "cross-domain benchmark"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor benchmark metrics are not target-reportable metrics."
+      ],
+      "currentProjectDisposition": "SOURCE_DATA_ONLY_LICENSE_REVIEW_REQUIRED",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-KURIAS-ECG",
+      "name": "KURIAS-ECG",
+      "canonicalSource": "https://physionet.org/content/kurias-ecg/1.0/",
+      "version": "1.0",
+      "access": "restricted",
+      "licenseOrTerms": "Pending audit",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-LEIPZIG-HEART-CENTER-ECG-DATABASE",
+      "name": "Leipzig Heart Center ECG Database",
+      "canonicalSource": "https://physionet.org/content/leipzig-heart-center-ecg/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-LONG-TERM-AF-DATABASE-LTAFDB",
+      "name": "Long-Term AF Database (LTAFDB)",
+      "canonicalSource": "https://physionet.org/content/ltafdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-LONG-TERM-ST-DATABASE-LTSTDB",
+      "name": "Long-Term ST Database (LTSTDB)",
+      "canonicalSource": "https://physionet.org/content/ltstdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-LUDB",
+      "name": "Lobachevsky University ECG Database (LUDB)",
+      "canonicalSource": "https://physionet.org/content/ludb/1.0.1/",
+      "version": "1.0.1",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": 200,
+      "recordCount": 200,
+      "leads": "12-lead",
+      "sampleRateHz": 500,
+      "duration": "10 seconds per record",
+      "annotationType": "PER_LEAD_WAVE_DELINEATION",
+      "labelOrigin": "expert per-lead wave delineation annotations",
+      "adjudicationOrSourceProcess": "not established as target project adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": true,
+      "leakageRisks": "record/patient overlap if split discipline is not preserved",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "delineation timing and event agreement",
+        "annotation ingestion regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-LYDUS-HOSPITAL-RHYTHM-DATASET",
+      "name": "Lydus hospital rhythm dataset",
+      "canonicalSource": "SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER",
+      "version": null,
+      "access": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "licenseOrTerms": "LICENSE_REVIEW_REQUIRED",
+      "licenseVerificationStatus": "NOT_ESTABLISHED_IN_ACCEPTED_PROVENANCE",
+      "subjectCount": "NOT_PUBLICLY_ESTABLISHED_IN_CURRENT_AUDIT",
+      "recordCount": "donor AF rule documentation references 167K-window source and a 293-window curated evaluation subset",
+      "leads": "single-lead/windowed ECG in donor paths",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "short windows, commonly about 10 seconds in donor pipeline",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "donor-described cardiologist/hospital rhythm labels",
+      "adjudicationOrSourceProcess": "not target project adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "must be independently verified",
+      "leakageRisks": "large window count can conceal patient-level leakage if patient identifiers are not held out",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Identity/details are limited to accepted donor provenance; independent source audit remains required."
+      ],
+      "suitableEvaluationUses": [
+        "hospital rhythm head",
+        "AF rule tuning/validation"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor benchmark metrics are not target-reportable metrics."
+      ],
+      "currentProjectDisposition": "RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MEDALCARE-XL-SYNTHETIC-12-LEAD-ECGS-FROM-SIMULATIONS",
+      "name": "MedalCare-XL (Synthetic 12-Lead ECGs from Simulations)",
+      "canonicalSource": "https://doi.org/10.5281/zenodo.8068944",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MHD-EFFECT-ON-12-LEAD-ECGS-IN-MRI-SCANNERS",
+      "name": "MHD Effect on 12-Lead ECGs in MRI Scanners",
+      "canonicalSource": "https://physionet.org/content/mhd-effect-ecg-mri/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-III-WAVEFORM-DATABASE-MATCHED-SUBSET",
+      "name": "MIMIC-III Waveform Database Matched Subset",
+      "canonicalSource": "https://physionet.org/content/mimic3wdb-matched/1.0/",
+      "version": "1.0",
+      "access": "open",
+      "licenseOrTerms": "ODbL",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-IV-ECG",
+      "name": "MIMIC-IV-ECG",
+      "canonicalSource": "https://physionet.org/content/mimic-iv-ecg/1.0/",
+      "version": "1.0",
+      "access": "credentialed",
+      "licenseOrTerms": "PhysioNet DUA",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-IV-ECG-DEMO",
+      "name": "MIMIC-IV-ECG Demo",
+      "canonicalSource": "https://physionet.org/content/mimic-iv-ecg-demo/0.1/",
+      "version": "0.1",
+      "access": "open",
+      "licenseOrTerms": "ODbL 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MIMIC-IV-ECG-EXT-ICD",
+      "name": "MIMIC-IV-ECG-Ext-ICD",
+      "canonicalSource": "https://physionet.org/content/mimic-iv-ecg-ext-icd-labels/1.0.1/",
+      "version": "1.0.1",
+      "access": "credentialed",
+      "licenseOrTerms": "PhysioNet Credentialed Health Data License 1.5.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MIT-BIH-ST-CHANGE-DATABASE",
+      "name": "MIT-BIH ST Change Database",
+      "canonicalSource": "https://physionet.org/content/stdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MIT-BIH-SUPRAVENTRICULAR-ARRHYTHMIA-DATABASE",
+      "name": "MIT-BIH Supraventricular Arrhythmia Database",
+      "canonicalSource": "https://physionet.org/content/svdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-MITBIH-ARRHYTHMIA",
+      "name": "MIT-BIH Arrhythmia Database",
+      "canonicalSource": "https://physionet.org/content/mitdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": 47,
+      "recordCount": 48,
+      "leads": "two-channel ambulatory ECG",
+      "sampleRateHz": 360,
+      "duration": "approximately 30 minutes per record",
+      "annotationType": "BEAT_AND_RHYTHM_ANNOTATIONS",
+      "labelOrigin": "expert beat/rhythm annotations",
+      "adjudicationOrSourceProcess": "source benchmark labels only",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": true,
+      "leakageRisks": "record-level split must preserve DS1/DS2 separation",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "record/patient-held-out rhythm evaluation",
+        "annotation ingestion regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS",
+      "name": "Bundled physiological example/test assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
+      "version": null,
+      "access": "REVIEW_REQUIRED",
+      "licenseOrTerms": "SEE_ECG_DATASET_REGISTRY_AND_REFERENCED_DONOR_BOUNDARY",
+      "licenseVerificationStatus": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_OR_ASSET_BUNDLE_LABELS_NOT_PROJECT_GOLD",
+      "adjudicationOrSourceProcess": "NOT_TARGET_ADJUDICATION",
+      "trainValidationTestStructure": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "REVIEW_REQUIRED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_IDENTITY_RESOLUTION",
+      "knownLimitations": [
+        "Global registry entry is not yet resolved to a more specific canonical source identity in accepted provenance."
+      ],
+      "suitableEvaluationUses": [
+        "provenance follow-up only until identity/terms are resolved"
+      ],
+      "prohibitedInterpretations": [
+        "Do not treat this asset bundle or source label as project clinical gold."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "DONOR-003",
+          "locator": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-NIGHTINGALE-BWH-EMERGENCY-DEPT-ECG-DATASET",
+      "name": "Nightingale BWH Emergency Dept ECG Dataset",
+      "canonicalSource": "https://docs.ngsci.org/datasets/ed-bwh-ecg/",
+      "version": null,
+      "access": "restricted",
+      "licenseOrTerms": "Institutional credentials",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-NIGHTINGALE-NTUH-CARDIAC-ARREST-ECG-DATASET",
+      "name": "Nightingale NTUH Cardiac Arrest ECG Dataset",
+      "canonicalSource": "https://docs.ngsci.org/datasets/arrest-ntuh-ecg/",
+      "version": null,
+      "access": "restricted",
+      "licenseOrTerms": "Institutional credentials",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-NINGBO-FIRST-HOSPITAL-ECG-DATABASE-IDIOPATHIC-VENTRICULAR-ARRHYTHMIA",
+      "name": "Ningbo First Hospital ECG Database (Idiopathic Ventricular Arrhythmia)",
+      "canonicalSource": "https://doi.org/10.6084/m9.figshare.c.4668086.v2",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-NORWEGIAN-ENDURANCE-ATHLETE-ECG-DATABASE",
+      "name": "Norwegian Endurance Athlete ECG Database",
+      "canonicalSource": "https://physionet.org/content/norwegian-athlete-ecg/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-NSRDB",
+      "name": "MIT-BIH Normal Sinus Rhythm Database",
+      "canonicalSource": "https://physionet.org/content/nsrdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "donor split enumerates 18 record IDs",
+      "leads": "ambulatory ECG",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "long-duration recordings",
+      "annotationType": "SOURCE_RHYTHM_ANNOTATIONS_OR_RECORD_IDENTITY",
+      "labelOrigin": "source rhythm annotations/record identity",
+      "adjudicationOrSourceProcess": "source benchmark labels only",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "record-level lists are explicitly defined by donor",
+      "leakageRisks": "window-level random split is unsafe",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "record/patient-held-out rhythm evaluation",
+        "annotation ingestion regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PHYSIONET-CINC-CHALLENGE-2017-AF-CLASSIFICATION",
+      "name": "PhysioNet/CinC Challenge 2017 (AF Classification)",
+      "canonicalSource": "https://physionet.org/content/challenge-2017/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PHYSIONET-CINC-CHALLENGE-2020",
+      "name": "PhysioNet/CinC Challenge 2020",
+      "canonicalSource": "https://physionet.org/content/challenge-2020/1.0.2/",
+      "version": "1.0.2",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PHYSIONET-CINC-CHALLENGE-2021",
+      "name": "PhysioNet/CinC Challenge 2021",
+      "canonicalSource": "https://physionet.org/content/challenge-2021/1.0.3/",
+      "version": "1.0.3",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-POST-ICTAL-HEART-RATE-OSCILLATIONS-IN-PARTIAL-EPILEPSY",
+      "name": "Post-Ictal Heart Rate Oscillations in Partial Epilepsy",
+      "canonicalSource": "https://physionet.org/content/szdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PRETERM-INFANT-CARDIO-RESPIRATORY-SIGNALS-DATABASE-PICSDB",
+      "name": "Preterm Infant Cardio-Respiratory Signals Database (PICSDB)",
+      "canonicalSource": "https://physionet.org/content/picsdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PTB-DIAGNOSTIC-ECG-DATABASE",
+      "name": "PTB Diagnostic ECG Database",
+      "canonicalSource": "https://physionet.org/content/ptbdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DERIVED-ASSET-PTBXL-PLUS-FEATURE-STATEMENT-ASSETS",
+      "name": "PTB-XL+ derived feature/statement assets",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
+      "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
+      "version": null,
+      "access": "REVIEW_REQUIRED",
+      "licenseOrTerms": "SEE_ECG_DATASET_REGISTRY_AND_REFERENCED_DONOR_BOUNDARY",
+      "licenseVerificationStatus": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_OR_ASSET_BUNDLE_LABELS_NOT_PROJECT_GOLD",
+      "adjudicationOrSourceProcess": "NOT_TARGET_ADJUDICATION",
+      "trainValidationTestStructure": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "REVIEW_REQUIRED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_IDENTITY_RESOLUTION",
+      "knownLimitations": [
+        "Global registry entry is not yet resolved to a more specific canonical source identity in accepted provenance."
+      ],
+      "suitableEvaluationUses": [
+        "provenance follow-up only until identity/terms are resolved"
+      ],
+      "prohibitedInterpretations": [
+        "Do not treat this asset bundle or source label as project clinical gold."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "DONOR-006",
+          "locator": "donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PTBXL-PLUS",
+      "name": "PTB-XL+",
+      "canonicalSource": "https://physionet.org/content/ptb-xl-plus/1.0.1/",
+      "version": "1.0.1",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": 18885,
+      "recordCount": 21799,
+      "leads": "12-lead",
+      "sampleRateHz": [
+        100,
+        500
+      ],
+      "duration": "10 seconds",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "diagnostic statements/metadata supplied by source dataset",
+      "adjudicationOrSourceProcess": "not target project adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": true,
+      "leakageRisks": "patient identity must be used for any resplit; native labels must not become project gold",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-PTBXL",
+      "name": "PTB-XL",
+      "canonicalSource": "https://physionet.org/content/ptb-xl/1.0.3/",
+      "version": "1.0.3",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": 18885,
+      "recordCount": 21799,
+      "leads": "12-lead",
+      "sampleRateHz": [
+        100,
+        500
+      ],
+      "duration": "10 seconds",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "diagnostic statements/metadata supplied by source dataset",
+      "adjudicationOrSourceProcess": "not target project adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": true,
+      "leakageRisks": "patient identity must be used for any resplit; native labels must not become project gold",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-QTDB",
+      "name": "QT Database (QTDB)",
+      "canonicalSource": "https://physionet.org/content/qtdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": 105,
+      "leads": "two-channel excerpts",
+      "sampleRateHz": 250,
+      "duration": "approximately 15 minutes per record",
+      "annotationType": "WAVE_FIDUCIAL_DELINEATION",
+      "labelOrigin": "wave boundary annotations on selected beats",
+      "adjudicationOrSourceProcess": "not target adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "must be confirmed per source record mapping",
+      "leakageRisks": "annotation sparsity and source-database overlap assumptions",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "delineation timing and event agreement",
+        "annotation ingestion regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-SAMI-TROP-CHAGAS-CARDIOMYOPATHY-COHORT",
+      "name": "SaMi-Trop (Chagas Cardiomyopathy Cohort)",
+      "canonicalSource": "https://doi.org/10.5281/zenodo.4905618",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-SHANDONG-PROVINCIAL-HOSPITAL-ECG-DATABASE-SPHDB",
+      "name": "Shandong Provincial Hospital ECG Database (SPHDB)",
+      "canonicalSource": "https://doi.org/10.6084/m9.figshare.c.5779802.v1",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-SHDB-AF-SAITAMA-HOLTER-DATABASE-ATRIAL-FIBRILLATION",
+      "name": "SHDB-AF (Saitama Holter Database â€” Atrial Fibrillation)",
+      "canonicalSource": "https://physionet.org/content/shdb-af/1.0.1/",
+      "version": "1.0.1",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "RHYTHM_EPISODE_ANNOTATIONS",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "record/patient-held-out rhythm evaluation",
+        "annotation ingestion regression"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ST-PETERSBURG-INCART-12-LEAD-ARRHYTHMIA-DATABASE",
+      "name": "St Petersburg INCART 12-Lead Arrhythmia Database",
+      "canonicalSource": "https://physionet.org/content/incartdb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC-By 1.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ST-VINCENT-S-UCD-SLEEP-APNEA-DATABASE-UCDDB",
+      "name": "St. Vincent's / UCD Sleep Apnea Database (UCDDB)",
+      "canonicalSource": "https://physionet.org/content/ucddb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-STAFF-III-DATABASE",
+      "name": "STAFF III Database",
+      "canonicalSource": "https://physionet.org/content/staffiii/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-SUDDEN-CARDIAC-DEATH-HOLTER-DATABASE",
+      "name": "Sudden Cardiac Death Holter Database",
+      "canonicalSource": "https://physionet.org/content/sddb/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-SYMILE-MIMIC",
+      "name": "Symile-MIMIC",
+      "canonicalSource": "https://physionet.org/content/symile-mimic/1.0.0/",
+      "version": "1.0.0",
+      "access": "credentialed",
+      "licenseOrTerms": "PhysioNet Credentialed Health Data License 1.5.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-TOLIET-THIGH-BASED-ECG-TOILET-SEAT",
+      "name": "tOLIet (Thigh-based ECG, toilet seat)",
+      "canonicalSource": "https://physionet.org/content/tollet/1.0.1/",
+      "version": "1.0.1",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-BENCHMARK-SAMPLE-ASSETS",
+      "name": "Bundled physiological benchmark/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
+      "version": null,
+      "access": "REVIEW_REQUIRED",
+      "licenseOrTerms": "SEE_ECG_DATASET_REGISTRY_AND_REFERENCED_DONOR_BOUNDARY",
+      "licenseVerificationStatus": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_OR_ASSET_BUNDLE_LABELS_NOT_PROJECT_GOLD",
+      "adjudicationOrSourceProcess": "NOT_TARGET_ADJUDICATION",
+      "trainValidationTestStructure": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "REVIEW_REQUIRED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_IDENTITY_RESOLUTION",
+      "knownLimitations": [
+        "Global registry entry is not yet resolved to a more specific canonical source identity in accepted provenance."
+      ],
+      "suitableEvaluationUses": [
+        "provenance follow-up only until identity/terms are resolved"
+      ],
+      "prohibitedInterpretations": [
+        "Do not treat this asset bundle or source label as project clinical gold."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "DONOR-004",
+          "locator": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-VFDB",
+      "name": "MIT-BIH Malignant Ventricular Ectopy Database (VFDB)",
+      "canonicalSource": "SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER",
+      "version": null,
+      "access": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "licenseOrTerms": "LICENSE_REVIEW_REQUIRED",
+      "licenseVerificationStatus": "NOT_ESTABLISHED_IN_ACCEPTED_PROVENANCE",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "donor split enumerates 22 record IDs",
+      "leads": "ambulatory ECG",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "long-duration recordings",
+      "annotationType": "RHYTHM_ANNOTATIONS",
+      "labelOrigin": "rhythm annotations",
+      "adjudicationOrSourceProcess": "source benchmark labels only",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "record-level lists are explicitly defined by donor",
+      "leakageRisks": "window-level random split is unsafe",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Identity/details are limited to accepted donor provenance; independent source audit remains required."
+      ],
+      "suitableEvaluationUses": [
+        "ventricular rhythm supervision/evaluation"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor benchmark metrics are not target-reportable metrics."
+      ],
+      "currentProjectDisposition": "SOURCE_DATA_ONLY_LICENSE_REVIEW_REQUIRED",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-VITALDB-ARRHYTHMIA-DATABASE",
+      "name": "VitalDB Arrhythmia Database",
+      "canonicalSource": "https://physionet.org/content/vitaldb-arrhythmia/1.0.0/",
+      "version": "1.0.0",
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DERIVED-ASSET-VITALDB-ARRHYTHMIA-BEAT-DATA",
+      "name": "VitalDB Arrhythmia Database derived beat-data asset",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
+      "canonicalSource": "SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER",
+      "version": null,
+      "access": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "licenseOrTerms": "LICENSE_REVIEW_REQUIRED",
+      "licenseVerificationStatus": "NOT_ESTABLISHED_IN_ACCEPTED_PROVENANCE",
+      "subjectCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "recordCount": "UNKNOWN_IN_CURRENT_DONOR_AUDIT",
+      "leads": "single-lead/window-derived in donor pipeline",
+      "sampleRateHz": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "duration": "windowed",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "donor-derived arrhythmia labels",
+      "adjudicationOrSourceProcess": "not target adjudication",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "must be independently verified",
+      "leakageRisks": "derived windows require patient/case-level split and exact label provenance",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Identity/details are limited to accepted donor provenance; independent source audit remains required."
+      ],
+      "suitableEvaluationUses": [
+        "beat/VPC training"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor benchmark metrics are not target-reportable metrics."
+      ],
+      "currentProjectDisposition": "RESEARCH_ONLY_LICENSE_REVIEW_REQUIRED",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vitaldb/openecg",
+          "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+          "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+          "locator": "donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-WILSON-CENTRAL-TERMINAL-ECG-DATABASE",
+      "name": "Wilson Central Terminal ECG Database",
+      "canonicalSource": "https://physionet.org/content/wctecgdb/1.0.1/",
+      "version": "1.0.1",
+      "access": "open",
+      "licenseOrTerms": "ODC Attribution",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    },
+    {
+      "datasetId": "ECG-DATASET-ZZU-PECG-ZHENGZHOU-UNIVERSITY-PEDIATRIC-ECG-DATABASE",
+      "name": "ZZU pECG (Zhengzhou University Pediatric ECG Database)",
+      "canonicalSource": "https://doi.org/10.6084/m9.figshare.27078763",
+      "version": null,
+      "access": "open",
+      "licenseOrTerms": "CC BY 4.0",
+      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
+      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
+      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
+      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
+      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "knownLimitations": [
+        "Catalogue metadata is not independent verification of the source dataset.",
+        "No dataset bytes are stored by this normalization checkpoint."
+      ],
+      "suitableEvaluationUses": [
+        "dataset identity/provenance validation",
+        "split/leakage evaluation when identifiers permit"
+      ],
+      "prohibitedInterpretations": [
+        "Source labels are not project clinical gold.",
+        "Donor or source benchmark metrics are not target-reportable metrics.",
+        "Dataset availability does not imply runtime or clinical authority."
+      ],
+      "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+      "projectGold": false,
+      "sourceLabelsAreProjectGold": false,
+      "runtimeAuthority": false,
+      "clinicalValidityInferred": false,
+      "provenanceSources": [
+        {
+          "source": "vlbthambawita/ECGBench",
+          "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+          "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+          "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        }
+      ]
+    }
+  ]
+}
