@@ -5841,9 +5841,9 @@
     "independent_tree": "71f227be513d9bbf91460223c63cc9bc7ba6321e",
     "independent_full_regression": "PASS",
     "verification_artifact": "evaluation/protocols/CROSS_DONOR_NORMALIZATION_VERIFICATION.json",
-    "promotion_commit": null,
-    "promotion_tree": null,
-    "target_main_ci_run_id": null,
+    "promotion_commit": "43d071526dca2cfd33db5cef00f44b3b1018145b",
+    "promotion_tree": "2ea7b0202c93c5ee727017467c09f89985264673",
+    "target_main_ci_run_id": 35249385580,
     "acceptance_commit": null,
     "acceptance_tree": null,
     "acceptance_ci_run_id": null,
@@ -5855,7 +5855,8 @@
       "independent_fresh_clone": "PASS"
     },
     "canonical_dataset_count": 68,
-    "source_asset_compatibility_count": 6
+    "source_asset_compatibility_count": 6,
+    "target_main_ci_conclusion": "success"
   },
-  "acceptance_state": "VERIFIED_CANDIDATE_FOR_PROMOTION"
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI"
 }
