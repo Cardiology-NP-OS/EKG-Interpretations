@@ -38,5 +38,7 @@
     "activation": "NOT_ELIGIBLE",
     "clinical_validity": "NOT_INFERRED"
   },
-  "clinical_authority_added": false
+  "clinical_authority_added": false,
+  "verification_state": "SUPERSEDED_BY_PENDING_IDENTITY_NORMALIZATION",
+  "superseded_by_pending_candidate": true
 }

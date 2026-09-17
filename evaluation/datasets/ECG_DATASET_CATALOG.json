@@ -6,6 +6,8 @@
     "DONOR-007"
   ],
   "datasetCount": 74,
+  "canonicalDatasetCount": 68,
+  "sourceAssetCompatibilityCount": 6,
   "projectGold": false,
   "sourceLabelsAreProjectGold": false,
   "runtimeAuthority": false,
@@ -820,8 +822,9 @@
       ]
     },
     {
-      "datasetId": "ECG-DATASET-ECG-IMAGE-KIT-BUNDLED-ECG-IMAGE-ROI-SAMPLE-ASSETS",
-      "name": "ECG-Image-Kit bundled ECG/image/ROI/sample assets",
+      "datasetId": "ECG-ASSET-BUNDLE-IMAGE-ROI-SAMPLE-ASSETS",
+      "name": "Bundled ECG image/ROI/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
       "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
       "version": null,
       "access": "REVIEW_REQUIRED",
@@ -861,8 +864,9 @@
       ]
     },
     {
-      "datasetId": "ECG-DATASET-ECGBENCH-CATALOGUE-OF-64-EXTERNAL-ECG-DATASETS",
-      "name": "ECGBench catalogue of 64 external ECG datasets",
+      "datasetId": "ECG-SOURCE-CATALOG-EXTERNAL-ECG-DATASETS",
+      "name": "External ECG dataset catalogue aggregate",
+      "identityClass": "SOURCE_CATALOG_AGGREGATE_NOT_A_DATASET",
       "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
       "version": null,
       "access": "REVIEW_REQUIRED",
@@ -2038,8 +2042,9 @@
       ]
     },
     {
-      "datasetId": "ECG-DATASET-NEUROKIT-BUNDLED-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS",
-      "name": "NeuroKit bundled physiological example/test assets",
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS",
+      "name": "Bundled physiological example/test assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
       "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
       "version": null,
       "access": "REVIEW_REQUIRED",
@@ -2602,8 +2607,9 @@
       ]
     },
     {
-      "datasetId": "ECG-DATASET-PTB-XL-EXTERNAL-ENGINEERED-FEATURE-STATEMENT-ASSETS",
-      "name": "PTB-XL+ external engineered feature/statement assets",
+      "datasetId": "ECG-DERIVED-ASSET-PTBXL-PLUS-FEATURE-STATEMENT-ASSETS",
+      "name": "PTB-XL+ derived feature/statement assets",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
       "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
       "version": null,
       "access": "REVIEW_REQUIRED",
@@ -3231,8 +3237,9 @@
       ]
     },
     {
-      "datasetId": "ECG-DATASET-TORCH-ECG-BUNDLED-SAMPLE-BENCHMARK-PHYSIOLOGICAL-ASSETS",
-      "name": "torch_ecg bundled sample/benchmark physiological assets",
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-BENCHMARK-SAMPLE-ASSETS",
+      "name": "Bundled physiological benchmark/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
       "canonicalSource": "UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY",
       "version": null,
       "access": "REVIEW_REQUIRED",
@@ -3363,8 +3370,9 @@
       ]
     },
     {
-      "datasetId": "ECG-DATASET-VITALDB-ARRHYTHMIA-DERIVED-BEAT-DATA",
-      "name": "VitalDB arrhythmia-derived beat data",
+      "datasetId": "ECG-DERIVED-ASSET-VITALDB-ARRHYTHMIA-BEAT-DATA",
+      "name": "VitalDB Arrhythmia Database derived beat-data asset",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
       "canonicalSource": "SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER",
       "version": null,
       "access": "SOURCE_SPECIFIC_REVIEW_REQUIRED",

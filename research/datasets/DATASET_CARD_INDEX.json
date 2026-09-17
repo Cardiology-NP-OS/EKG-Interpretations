@@ -1,6 +1,8 @@
 {
   "schema": "ecg-dataset-card-index-v1",
   "cardCount": 74,
+  "canonicalDatasetCardCount": 68,
+  "sourceAssetCompatibilityCardCount": 6,
   "machineReadableGovernanceAuthority": "ECG_DATASET_REGISTRY.json",
   "normalizedCatalog": "evaluation/datasets/ECG_DATASET_CATALOG.json",
   "projectGold": false,
@@ -111,15 +113,17 @@
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
-      "datasetId": "ECG-DATASET-ECG-IMAGE-KIT-BUNDLED-ECG-IMAGE-ROI-SAMPLE-ASSETS",
-      "name": "ECG-Image-Kit bundled ECG/image/ROI/sample assets",
-      "path": "research/datasets/ECG_IMAGE_KIT_BUNDLED_ECG_IMAGE_ROI_SAMPLE_ASSETS.md",
+      "datasetId": "ECG-ASSET-BUNDLE-IMAGE-ROI-SAMPLE-ASSETS",
+      "name": "Bundled ECG image/ROI/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "path": "research/datasets/SOURCE_ASSET_BUNDLE_ECG_IMAGE_ROI_SAMPLE.md",
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET"
     },
     {
-      "datasetId": "ECG-DATASET-ECGBENCH-CATALOGUE-OF-64-EXTERNAL-ECG-DATASETS",
-      "name": "ECGBench catalogue of 64 external ECG datasets",
-      "path": "research/datasets/ECGBENCH_CATALOGUE_OF_64_EXTERNAL_ECG_DATASETS.md",
+      "datasetId": "ECG-SOURCE-CATALOG-EXTERNAL-ECG-DATASETS",
+      "name": "External ECG dataset catalogue aggregate",
+      "identityClass": "SOURCE_CATALOG_AGGREGATE_NOT_A_DATASET",
+      "path": "research/datasets/SOURCE_CATALOG_EXTERNAL_ECG_DATASETS.md",
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
@@ -267,9 +271,10 @@
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
-      "datasetId": "ECG-DATASET-NEUROKIT-BUNDLED-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS",
-      "name": "NeuroKit bundled physiological example/test assets",
-      "path": "research/datasets/NEUROKIT_BUNDLED_PHYSIOLOGICAL_EXAMPLE_TEST_ASSETS.md",
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS",
+      "name": "Bundled physiological example/test assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "path": "research/datasets/SOURCE_ASSET_BUNDLE_PHYSIOLOGICAL_EXAMPLE_TEST.md",
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
@@ -339,9 +344,10 @@
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
-      "datasetId": "ECG-DATASET-PTB-XL-EXTERNAL-ENGINEERED-FEATURE-STATEMENT-ASSETS",
-      "name": "PTB-XL+ external engineered feature/statement assets",
-      "path": "research/datasets/PTB_XL_EXTERNAL_ENGINEERED_FEATURE_STATEMENT_ASSETS.md",
+      "datasetId": "ECG-DERIVED-ASSET-PTBXL-PLUS-FEATURE-STATEMENT-ASSETS",
+      "name": "PTB-XL+ derived feature/statement assets",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
+      "path": "research/datasets/SOURCE_DERIVED_ASSET_PTBXL_PLUS_FEATURE_STATEMENTS.md",
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET"
     },
     {
@@ -417,9 +423,10 @@
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
-      "datasetId": "ECG-DATASET-TORCH-ECG-BUNDLED-SAMPLE-BENCHMARK-PHYSIOLOGICAL-ASSETS",
-      "name": "torch_ecg bundled sample/benchmark physiological assets",
-      "path": "research/datasets/TORCH_ECG_BUNDLED_SAMPLE_BENCHMARK_PHYSIOLOGICAL_ASSETS.md",
+      "datasetId": "ECG-ASSET-BUNDLE-PHYSIOLOGICAL-BENCHMARK-SAMPLE-ASSETS",
+      "name": "Bundled physiological benchmark/sample assets",
+      "identityClass": "SOURCE_ASSET_BUNDLE_UNRESOLVED",
+      "path": "research/datasets/SOURCE_ASSET_BUNDLE_PHYSIOLOGICAL_BENCHMARK_SAMPLE.md",
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
@@ -435,9 +442,10 @@
       "currentProjectDisposition": "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET"
     },
     {
-      "datasetId": "ECG-DATASET-VITALDB-ARRHYTHMIA-DERIVED-BEAT-DATA",
-      "name": "VitalDB arrhythmia-derived beat data",
-      "path": "research/datasets/VITALDB_ARRHYTHMIA_DERIVED_BEAT_DATA.md",
+      "datasetId": "ECG-DERIVED-ASSET-VITALDB-ARRHYTHMIA-BEAT-DATA",
+      "name": "VitalDB Arrhythmia Database derived beat-data asset",
+      "identityClass": "SOURCE_DERIVED_DATA_ASSET_UNRESOLVED",
+      "path": "research/datasets/SOURCE_DERIVED_ASSET_VITALDB_ARRHYTHMIA_BEATS.md",
       "currentProjectDisposition": "RESEARCH_ONLY_LICENSE_REVIEW_REQUIRED"
     },
     {

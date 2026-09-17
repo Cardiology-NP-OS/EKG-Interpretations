@@ -17,7 +17,7 @@ This repository is one Cardiology-NP-OS ECG engineering/research/evaluation syst
 
 Start with `ECG_CAPABILITY_REGISTRY.json`, locate the functional capability ID, then follow `canonical_target_path`, `test_paths`, `evaluation_paths`, and `research_paths`. Follow `source_provenance` only when exact upstream provenance is needed.
 
-Dataset identity is canonicalized under `evaluation/datasets/ECG_DATASET_CATALOG.json` and explained by cards in `research/datasets/`; the authoritative project disposition remains `ECG_DATASET_REGISTRY.json`.
+Dataset identity is canonicalized under `evaluation/datasets/ECG_DATASET_CATALOG.json` and explained by cards in `research/datasets/`; the authoritative project disposition remains `ECG_DATASET_REGISTRY.json`. Legacy donor-bundle registry entries are represented only as brand-neutral source-asset compatibility records with explicit identity classes; they are not treated as canonical datasets.
 
 ## Governance invariants
 

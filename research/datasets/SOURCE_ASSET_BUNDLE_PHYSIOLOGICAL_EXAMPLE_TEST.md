@@ -1,11 +1,12 @@
-# PTB-XL+ external engineered feature/statement assets
+# Bundled physiological example/test assets
 
-- Canonical dataset ID: `ECG-DATASET-PTB-XL-EXTERNAL-ENGINEERED-FEATURE-STATEMENT-ASSETS`
+- Normalized source-asset ID: `ECG-ASSET-BUNDLE-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS`
+- Identity class: SOURCE_ASSET_BUNDLE_UNRESOLVED
 - Canonical source: UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY
 - Exact version/release: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
 - Access: REVIEW_REQUIRED
 - License/access terms: SEE_ECG_DATASET_REGISTRY_AND_REFERENCED_DONOR_BOUNDARY
-- License verification: DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET
+- License verification: DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET
 - Subject count: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
 - Record count: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
 - Leads: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
@@ -18,7 +19,7 @@
 - Patient-level split properties: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
 - Leakage risks: REVIEW_REQUIRED_BEFORE_EVALUATION
 - Overlap with other datasets: REQUIRES_IDENTITY_RESOLUTION
-- Current project disposition: DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_ASSET
+- Current project disposition: DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET
 
 ## Suitable evaluation uses
 - provenance follow-up only until identity/terms are resolved
@@ -36,6 +37,6 @@
 - Clinical validity inferred: **false**
 
 ## Provenance
-- DONOR-006; locator: `donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json`
+- DONOR-003; locator: `donors/neuropsychology_neurokit/DONOR_MANIFEST.json`
 
 Machine-readable normalized companion: `evaluation/datasets/ECG_DATASET_CATALOG.json`. Governance authority: `ECG_DATASET_REGISTRY.json`.

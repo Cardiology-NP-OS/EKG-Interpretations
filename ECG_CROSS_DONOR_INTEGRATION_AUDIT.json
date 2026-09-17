@@ -5828,25 +5828,32 @@
     }
   ],
   "verification": {
-    "governance_candidate_commit": "cfa612d79f622832ab21dcfeff3a7714c7223bb2",
-    "governance_candidate_tree": "af41e7ee1e409e79223d4493445c83df858d40cf",
-    "candidate_ci_run_id": 35247668707,
-    "candidate_ci_conclusion": "success",
+    "governance_candidate_commit": null,
+    "governance_candidate_tree": null,
+    "candidate_ci_run_id": null,
+    "candidate_ci_conclusion": "PENDING",
     "focused_evaluation_contract": "7/7 PASS",
     "focused_research_authority": "4/4 PASS",
     "focused_repository_normalization": "13/13 PASS",
     "full_regression": "PASS",
-    "independent_fresh_clone": "PASS",
-    "independent_commit": "cfa612d79f622832ab21dcfeff3a7714c7223bb2",
-    "independent_tree": "af41e7ee1e409e79223d4493445c83df858d40cf",
-    "independent_full_regression": "PASS",
+    "independent_fresh_clone": "PENDING",
+    "independent_commit": null,
+    "independent_tree": null,
+    "independent_full_regression": "PENDING",
     "verification_artifact": "evaluation/protocols/CROSS_DONOR_NORMALIZATION_VERIFICATION.json",
     "promotion_commit": null,
     "promotion_tree": null,
     "target_main_ci_run_id": null,
     "acceptance_commit": null,
     "acceptance_tree": null,
-    "acceptance_ci_run_id": null
+    "acceptance_ci_run_id": null,
+    "prior_verified_candidate": {
+      "commit": "cfa612d79f622832ab21dcfeff3a7714c7223bb2",
+      "tree": "af41e7ee1e409e79223d4493445c83df858d40cf",
+      "ci_run_id": 35247668707,
+      "ci_conclusion": "success",
+      "independent_fresh_clone": "PASS"
+    }
   },
-  "acceptance_state": "VERIFIED_CANDIDATE_FOR_PROMOTION"
+  "acceptance_state": "NORMALIZATION_CANDIDATE_REQUIRES_REVERIFICATION"
 }

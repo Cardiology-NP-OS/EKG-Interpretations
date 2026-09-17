@@ -71,9 +71,19 @@ check("research and dataset authority fences remain false",()=>{
 check("dataset cards agree with normalized identities and global registry coverage",()=>{
   assert.strictEqual(cards.cardCount,catalog.datasetCount);
   assert.strictEqual(cards.cards.length,catalog.entries.length);
+  assert.strictEqual(catalog.canonicalDatasetCount,68); assert.strictEqual(catalog.sourceAssetCompatibilityCount,6);
+  assert.strictEqual(cards.canonicalDatasetCardCount,68); assert.strictEqual(cards.sourceAssetCompatibilityCardCount,6);
   const byId=new Map(catalog.entries.map(x=>[x.datasetId,x]));
-  for(const card of cards.cards){const d=byId.get(card.datasetId); assert.ok(d,card.datasetId); assert.strictEqual(card.name,d.name); assert.ok(exists(card.path)); const text=fs.readFileSync(path.join(root,card.path),"utf8"); assert.ok(text.includes(`Canonical dataset ID: \`${card.datasetId}\``),card.path); assert.ok(text.includes(`Current project disposition: ${card.currentProjectDisposition}`),card.path);}
-  const aliases={"LUDB":"ECG-DATASET-LUDB","QT Database (QTDB)":"ECG-DATASET-QTDB","MIT-BIH Atrial Fibrillation Database (AFDB)":"ECG-DATASET-AFDB","MIT-BIH Malignant Ventricular Ectopy Database (VFDB)":"ECG-DATASET-VFDB","MIT-BIH Normal Sinus Rhythm Database (NSRDB)":"ECG-DATASET-NSRDB","CODE-test":"ECG-DATASET-CODE-TEST","PTB-XL":"ECG-DATASET-PTBXL"};
+  const banned=/(NEUROKIT|ECGBENCH|TORCH.ECG|IMAGE.KIT|OPENECG)/i;
+  for(const card of cards.cards){
+    const d=byId.get(card.datasetId); assert.ok(d,card.datasetId); assert.strictEqual(card.name,d.name); assert.ok(exists(card.path));
+    const cls=card.identityClass||d.identityClass||"CANONICAL_DATASET"; assert.strictEqual(cls,d.identityClass||"CANONICAL_DATASET");
+    const text=fs.readFileSync(path.join(root,card.path),"utf8");
+    if(cls==="CANONICAL_DATASET"){assert.ok(card.datasetId.startsWith("ECG-DATASET-"),card.datasetId); assert.ok(text.includes("Canonical dataset ID: `"+card.datasetId+"`"),card.path);}
+    else {assert.ok(text.includes("Normalized source-asset ID: `"+card.datasetId+"`"),card.path); assert.ok(!banned.test(card.datasetId+card.name+card.path),card.path);}
+    assert.ok(text.includes("Current project disposition: "+card.currentProjectDisposition),card.path);
+  }
+  const aliases={"LUDB":"ECG-DATASET-LUDB","QT Database (QTDB)":"ECG-DATASET-QTDB","MIT-BIH Atrial Fibrillation Database (AFDB)":"ECG-DATASET-AFDB","MIT-BIH Malignant Ventricular Ectopy Database (VFDB)":"ECG-DATASET-VFDB","MIT-BIH Normal Sinus Rhythm Database (NSRDB)":"ECG-DATASET-NSRDB","CODE-test":"ECG-DATASET-CODE-TEST","PTB-XL":"ECG-DATASET-PTBXL","ECG-Image-Kit bundled ECG/image/ROI/sample assets":"ECG-ASSET-BUNDLE-IMAGE-ROI-SAMPLE-ASSETS","ECGBench catalogue of 64 external ECG datasets":"ECG-SOURCE-CATALOG-EXTERNAL-ECG-DATASETS","NeuroKit bundled physiological example/test assets":"ECG-ASSET-BUNDLE-PHYSIOLOGICAL-EXAMPLE-TEST-ASSETS","torch_ecg bundled sample/benchmark physiological assets":"ECG-ASSET-BUNDLE-PHYSIOLOGICAL-BENCHMARK-SAMPLE-ASSETS","PTB-XL+ external engineered feature/statement assets":"ECG-DERIVED-ASSET-PTBXL-PLUS-FEATURE-STATEMENT-ASSETS","VitalDB arrhythmia-derived beat data":"ECG-DERIVED-ASSET-VITALDB-ARRHYTHMIA-BEAT-DATA"};
   for(const g of datasets.datasets){if(aliases[g.name]) assert.ok(byId.has(aliases[g.name]),g.name); else assert.ok(catalog.entries.some(x=>x.name===g.name),g.name);}
 });
 check("evaluation fixtures are synthetic and provenance-bound",()=>{

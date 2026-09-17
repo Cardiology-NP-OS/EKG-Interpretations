@@ -1,6 +1,7 @@
-# VitalDB arrhythmia-derived beat data
+# VitalDB Arrhythmia Database derived beat-data asset
 
-- Canonical dataset ID: `ECG-DATASET-VITALDB-ARRHYTHMIA-DERIVED-BEAT-DATA`
+- Normalized source-asset ID: `ECG-DERIVED-ASSET-VITALDB-ARRHYTHMIA-BEAT-DATA`
+- Identity class: SOURCE_DERIVED_DATA_ASSET_UNRESOLVED
 - Canonical source: SOURCE_URL_NOT_CAPTURED_IN_DONOR_002_REGISTER
 - Exact version/release: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
 - Access: SOURCE_SPECIFIC_REVIEW_REQUIRED

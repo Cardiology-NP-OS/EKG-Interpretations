@@ -1,6 +1,7 @@
-# ECGBench catalogue of 64 external ECG datasets
+# External ECG dataset catalogue aggregate
 
-- Canonical dataset ID: `ECG-DATASET-ECGBENCH-CATALOGUE-OF-64-EXTERNAL-ECG-DATASETS`
+- Normalized source-asset ID: `ECG-SOURCE-CATALOG-EXTERNAL-ECG-DATASETS`
+- Identity class: SOURCE_CATALOG_AGGREGATE_NOT_A_DATASET
 - Canonical source: UNRESOLVED_OR_ASSET_BUNDLE_IDENTITY
 - Exact version/release: NOT_CAPTURED_IN_ACCEPTED_PROVENANCE
 - Access: REVIEW_REQUIRED
