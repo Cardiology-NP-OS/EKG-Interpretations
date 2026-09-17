@@ -1,0 +1,38 @@
+{
+    "schema":  "ecg-executable-signal-intelligence-checkpoint-v1",
+    "parentMainCommit":  "717ade1ce6a3fa60b24e91495f577cb7a6015be6",
+    "parentMainTree":  "580b84fd261376e4b428b48011bd73cbd6bab776",
+    "status":  "VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND",
+    "donorProgram":  {
+                         "completedPrimaryDonors":  9,
+                         "requiredPrimaryDonors":  21,
+                         "pausedFrontier":  "DONOR-010",
+                         "reason":  "Prioritize target-owned executable measurement capability before additional challenger catalog growth."
+                     },
+    "implementation":  [
+                           "lib/signal_measurement_contract.js",
+                           "tests/signal_measurement_contract.test.js",
+                           "evaluation/protocols/EXECUTABLE_MEASUREMENT_CONTRACT.json",
+                           "evaluation/fixtures/SYNTHETIC_RPEAK_MEASUREMENT.json"
+                       ],
+    "scope":  "Synthetic/evaluation-only WFDB-to-measurement vertical slice",
+    "clinicalAuthorityAdded":  false,
+    "diagnosticRuntime":  "GOVERNED_INACTIVE",
+    "evidenceAdmission":  "NOT_ADMITTED",
+    "approvedAdjudicatedGoldCount":  0,
+    "metrics":  "NOT_REPORTABLE",
+    "activation":  "NOT_ELIGIBLE",
+    "clinicalValidity":  "NOT_INFERRED",
+    "clinicalControlChanged":  false,
+    "verification":  {
+                         "implementationCandidateCommit":  "daa85a6f5f829e458f2d882ac2ebb6bf19e5fcfe",
+                         "implementationCandidateTree":  "c101139817ac01b76aedcf76223b3095fa53b161",
+                         "candidateCiRunId":  35264486099,
+                         "candidateCiConclusion":  "success",
+                         "independentVerification":  "PASS",
+                         "independentFocusedMeasurement":  "14/14 PASS",
+                         "independentEvaluationContract":  "7/7 PASS",
+                         "independentFullTargetSuite":  "PASS",
+                         "candidateDiffCheck":  "PASS"
+                     }
+}

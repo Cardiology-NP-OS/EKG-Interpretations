@@ -1,0 +1,26 @@
+{
+  "schema": "ekg-executable-measurement-contract-v1",
+  "authorityClass": "EVALUATION_NONRUNTIME",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false,
+  "implemented": [
+    "WFDB format-16 calibrated lead extraction",
+    "explicit-threshold candidate R-peak event detection",
+    "RR and rate calculation from candidate/explicit R peaks",
+    "PR/QRS/QT calculation from explicit fiducials",
+    "Bazett and Fridericia QTc formula calculation",
+    "calibrated amplitude difference at an explicit fiducial"
+  ],
+  "notImplemented": [
+    "validated automatic P/QRS/T delineation",
+    "rhythm diagnosis",
+    "morphology diagnosis",
+    "clinical runtime activation",
+    "diagnostic performance reporting"
+  ]
+}

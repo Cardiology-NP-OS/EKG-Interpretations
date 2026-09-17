@@ -1,0 +1,25 @@
+{
+  "schema": "ekg-synthetic-rpeak-measurement-fixture-v1",
+  "fixtureId": "ECG-FIXTURE-SYNTHETIC-RPEAK-MEASUREMENT-V1",
+  "provenance": {
+    "source": "TARGET_SYNTHETIC_GENERATOR",
+    "locator": "tests/signal_measurement_contract.test.js#pulse-fixture"
+  },
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "clinicalData": false,
+  "sampleRateHz": 250,
+  "sampleCount": 1000,
+  "lead": "II",
+  "unit": "mV",
+  "expectedCandidateRPeaks": [100, 350, 600, 850],
+  "expectedMeasurements": {
+    "prMs": 160,
+    "qrsMs": 100,
+    "qtMs": 400,
+    "rrMs": 1000,
+    "ventricularRateBpm": 60,
+    "qtcBazettMs": 400,
+    "qtcFridericiaMs": 400
+  }
+}

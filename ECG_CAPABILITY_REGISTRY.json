@@ -1087,10 +1087,10 @@
     {
       "capability_id": "ECG-CAP-EVENT-RPEAK-DETECTION",
       "capability_family": "Morphology / measurement",
-      "name": "R-peak event detection challengers",
-      "canonical_target_path": "research/signal_processing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "name": "R-peak candidate event detection",
+      "canonical_target_path": "lib/signal_measurement_contract.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1149,22 +1149,27 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_measurement_contract.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/EXECUTABLE_MEASUREMENT_CONTRACT.json",
+        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json"
+      ],
       "research_paths": [
         "research/signal_processing/README.md"
       ],
       "limitations": [
         "Normalization does not elevate source labels to project gold.",
-        "No donor clinical-performance claim becomes target evidence."
+        "No donor clinical-performance claim becomes target evidence.",
+        "Current detector is a synthetic-tested explicit-threshold engineering baseline; clinical validity is not inferred."
       ],
       "supersedes": [
         "DeepPSP/torch_ecg:TECG-025",
         "DeepPSP/torch_ecg:TECG-026"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
     },
     {
       "capability_id": "ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY",
