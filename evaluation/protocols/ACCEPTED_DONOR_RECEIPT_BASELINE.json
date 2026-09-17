@@ -1,0 +1,36 @@
+{
+  "schema": "ekg-accepted-donor-receipt-baseline-v1",
+  "sourceMainCommit": "a182a113bfd419f7fa0c1884e1c8548e911a8514",
+  "hashDomain": "git-blob-content",
+  "receiptCount": 7,
+  "receipts": [
+    {
+      "path": "donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "e60ab8d0529f57a4861be918c869dc0d8a631f76da897ffcc3cd48fe1f97e391"
+    },
+    {
+      "path": "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "c7e7897978d859c1a9a97820c4361582937e7c4f9486d5d4baea307e5cc26fcd"
+    },
+    {
+      "path": "donors/mit-lcp_wfdb-python/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "5722fe3cd92480f92298e87de96c416bd43090db3c5128c08cfd33bd968211fb"
+    },
+    {
+      "path": "donors/neuropsychology_neurokit/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "6605ac8eed1c9c7dc264095a4a94a7cdbd3f0030ee0f05acabc9a77ca581da9d"
+    },
+    {
+      "path": "donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "f914fd55754c0f95fe687a0b3bafdf680d87a17697c3624fc2ab2ef7d4c1c1c1"
+    },
+    {
+      "path": "donors/vitaldb_openecg/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "e83a0e9d6c8dfb0eae53ea67e38c224a8d389209b4bf3d42ef801e8e1d4eed0e"
+    },
+    {
+      "path": "donors/vlbthambawita_ecgbench/DONOR_RECEIPT.json",
+      "sha256_git_blob_content": "3123e9ad82455ff7dcfe3d70538d616b657164996e5cb2f70211b4a371ad4e7d"
+    }
+  ]
+}

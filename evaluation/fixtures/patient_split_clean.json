@@ -1,0 +1,29 @@
+{
+  "schema": "ekg-evaluation-fixture-v1",
+  "fixtureId": "SYNTHETIC-PATIENT-SPLIT-CLEAN",
+  "provenance": {
+    "kind": "TARGET_SYNTHETIC",
+    "source": "Cardiology-NP-OS/EKG-Interpretations",
+    "locator": "evaluation/fixtures/patient_split_clean.json"
+  },
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "runtimeAuthority": false,
+  "records": [
+    {
+      "recordId": "r1",
+      "patientId": "p1",
+      "split": "train"
+    },
+    {
+      "recordId": "r2",
+      "patientId": "p2",
+      "split": "validation"
+    },
+    {
+      "recordId": "r3",
+      "patientId": "p3",
+      "split": "test"
+    }
+  ]
+}

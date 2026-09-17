@@ -1,0 +1,1102 @@
+{
+  "schema": "ekg-research-assertion-registry-v1",
+  "count": 52,
+  "project_gold": false,
+  "source_labels_are_project_gold": false,
+  "runtime_authority": false,
+  "clinical_validity_inferred": false,
+  "assertions": [
+    {
+      "assertion_id": "EKG-RESEARCH-001",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-DATASET-ANNOTATION-TYPES",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-DATASET-ANNOTATION-TYPES is represented at evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-002",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-DATASET-CATALOG",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-DATASET-CATALOG is represented at evaluation/datasets/ECG_DATASET_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-003",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-ANNOTATION-AGREEMENT",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-ANNOTATION-AGREEMENT is represented at lib/challenger_contract.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-004",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-DATASET-PROVENANCE",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-DATASET-PROVENANCE is represented at lib/evaluation_contract.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-005",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-DATASET-VALIDATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-DATASET-VALIDATION is represented at evaluation/protocols/DATASET_PROVENANCE_CONTRACT.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-006",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-FAILURE-MODES",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-FAILURE-MODES is represented at evaluation/failure_modes/FAILURE_MODE_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-007",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-FEATURE-BENCHMARKS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-FEATURE-BENCHMARKS is represented at evaluation/benchmarks/BENCHMARK_CONTRACTS.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-008",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-LABEL-HARMONIZATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-LABEL-HARMONIZATION is represented at evaluation/benchmarks/BENCHMARK_CONTRACTS.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-009",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-LEAKAGE-CONTROL",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-LEAKAGE-CONTROL is represented at lib/evaluation_contract.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-010",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-METRICS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-METRICS is represented at evaluation/benchmarks/BENCHMARK_CONTRACTS.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-011",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-PATIENT-SPLITS is represented at lib/evaluation_contract.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-012",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-REPRODUCIBILITY",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-REPRODUCIBILITY is represented at evaluation/protocols/REPRODUCIBILITY_CONTRACT.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-013",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-ROBUSTNESS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-ROBUSTNESS is represented at evaluation/robustness/ROBUSTNESS_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-014",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVALUATION-WINDOW-CONTRACT",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVALUATION-WINDOW-CONTRACT is represented at lib/challenger_contract.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-015",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVENT-BEAT-RHYTHM-REPRESENTATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVENT-BEAT-RHYTHM-REPRESENTATION is represented at lib/challenger_contract.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-016",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVENT-FIDUCIAL-DELINEATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVENT-FIDUCIAL-DELINEATION is represented at evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-017",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVENT-PACER-DETECTION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVENT-PACER-DETECTION is represented at research/signal_processing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-018",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-EVENT-RPEAK-DETECTION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-EVENT-RPEAK-DETECTION is represented at research/signal_processing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-019",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY is represented at docs/REPOSITORY_ARCHITECTURE.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-020",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY is represented at evaluation/protocols/REPRODUCIBILITY_CONTRACT.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-021",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-GOVERNANCE-LICENSE-PROVENANCE",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-GOVERNANCE-LICENSE-PROVENANCE is represented at ECG_CROSS_DONOR_INTEGRATION_AUDIT.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-022",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION is represented at evaluation/failure_modes/FAILURE_MODE_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-023",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY is represented at docs/REPOSITORY_ARCHITECTURE.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-024",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION is represented at evaluation/failure_modes/FAILURE_MODE_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-025",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-IMAGE-DEGRADATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-IMAGE-DEGRADATION is represented at evaluation/robustness/ROBUSTNESS_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-026",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-IMAGE-DIGITIZATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-IMAGE-DIGITIZATION is represented at research/image_ecg/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-027",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-IMAGE-GRID-CALIBRATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-IMAGE-GRID-CALIBRATION is represented at research/image_ecg/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-028",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-IMAGE-RENDERING",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-IMAGE-RENDERING is represented at research/image_ecg/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-029",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-IMAGE-ROI-LOCALIZATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-IMAGE-ROI-LOCALIZATION is represented at research/image_ecg/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-030",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-MODEL-CHECKPOINT-SAFETY",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-MODEL-CHECKPOINT-SAFETY is represented at research/models/CHALLENGER_CATALOG.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-031",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS is represented at research/models/CHALLENGER_CATALOG.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-032",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-MODEL-DELINEATION-CHALLENGERS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-MODEL-DELINEATION-CHALLENGERS is represented at research/models/CHALLENGER_CATALOG.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-033",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-MODEL-LIGHTWEIGHT-DEPLOYMENT",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-MODEL-LIGHTWEIGHT-DEPLOYMENT is represented at research/models/CHALLENGER_CATALOG.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-034",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-MODEL-SEQUENCE-CHALLENGERS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-MODEL-SEQUENCE-CHALLENGERS is represented at research/models/CHALLENGER_CATALOG.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-035",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-MODEL-SSL-REPRESENTATIONS is represented at research/models/CHALLENGER_CATALOG.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-036",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-PREPROCESS-ARTIFACT-HANDLING is represented at research/preprocessing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-037",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-PREPROCESS-FILTERING-BASELINE is represented at research/preprocessing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-038",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-PREPROCESS-NORMALIZATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-PREPROCESS-NORMALIZATION is represented at research/preprocessing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-039",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-PREPROCESS-RESAMPLING",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-PREPROCESS-RESAMPLING is represented at research/preprocessing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-040",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-PREPROCESS-WINDOWING-SEGMENTATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-PREPROCESS-WINDOWING-SEGMENTATION is represented at research/preprocessing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-041",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-QUALITY-CALIBRATION-METADATA",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-QUALITY-CALIBRATION-METADATA is represented at lib/input_quality_guard.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-042",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-QUALITY-FLATLINE-CLIPPING",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-QUALITY-FLATLINE-CLIPPING is represented at lib/signal_quality.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-043",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-QUALITY-LEAD-INTEGRITY",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-QUALITY-LEAD-INTEGRITY is represented at lib/input_quality_guard.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-044",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-QUALITY-NOISE-ROBUSTNESS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-QUALITY-NOISE-ROBUSTNESS is represented at evaluation/robustness/ROBUSTNESS_CATALOG.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-045",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-RESEARCH-DATA-LOADERS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-RESEARCH-DATA-LOADERS is represented at research/datasets/DATASET_CARD_INDEX.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-046",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-RESEARCH-ECG-DERIVED-RESPIRATION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-RESEARCH-ECG-DERIVED-RESPIRATION is represented at research/signal_processing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-047",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-RESEARCH-HRV",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-RESEARCH-HRV is represented at research/signal_processing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-048",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-RESEARCH-METADATA-STANDARDS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-RESEARCH-METADATA-STANDARDS is represented at research/datasets/DATASET_CARD_INDEX.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-049",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT is represented at research/benchmarks/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-050",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-SIGNAL-ANNOTATION-INGESTION",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-SIGNAL-ANNOTATION-INGESTION is represented at evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-051",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-SIGNAL-FORMAT-ADAPTERS",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-SIGNAL-FORMAT-ADAPTERS is represented at research/signal_processing/README.md.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    },
+    {
+      "assertion_id": "EKG-RESEARCH-052",
+      "source": {
+        "type": "canonical-capability-normalization",
+        "repository": "Cardiology-NP-OS/EKG-Interpretations",
+        "commit": "PENDING_CHECKPOINT_COMMIT",
+        "tree": "PENDING_CHECKPOINT_TREE"
+      },
+      "locator": "ECG-CAP-SIGNAL-WFDB-CORE",
+      "assertion": "Accepted-donor knowledge contributing to ECG-CAP-SIGNAL-WFDB-CORE is represented at lib/wfdb_signal.js.",
+      "evidence": [
+        "ECG_CAPABILITY_REGISTRY.json",
+        "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json"
+      ],
+      "project_gold": false,
+      "source_labels_are_project_gold": false,
+      "runtime_authority": false,
+      "clinical_validity_inferred": false,
+      "supersedes": [],
+      "conflicts": []
+    }
+  ]
+}

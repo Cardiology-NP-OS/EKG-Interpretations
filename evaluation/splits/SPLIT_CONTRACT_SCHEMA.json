@@ -1,0 +1,22 @@
+{
+  "schema": "ekg-split-contract-schema-v1",
+  "required": [
+    "records",
+    "sourceLabelsAreProjectGold",
+    "projectGold"
+  ],
+  "record_required": [
+    "recordId",
+    "split"
+  ],
+  "allowed_splits": [
+    "train",
+    "validation",
+    "test"
+  ],
+  "patient_group_rule": "A patientId, when present, MUST NOT occur in more than one split.",
+  "source_labels_are_project_gold": false,
+  "project_gold": false,
+  "runtime_authority": false,
+  "clinical_validity_inferred": false
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "ekg-research-assertion-schema-v1",
+  "model": "source -> locator -> assertion -> evidence",
+  "required": [
+    "assertion_id",
+    "source",
+    "locator",
+    "assertion",
+    "evidence",
+    "project_gold",
+    "source_labels_are_project_gold",
+    "runtime_authority",
+    "clinical_validity_inferred"
+  ],
+  "authority": {
+    "project_gold": false,
+    "source_labels_are_project_gold": false,
+    "runtime_authority": false,
+    "clinical_validity_inferred": false
+  },
+  "conflict_policy": "PRESERVE_CONFLICT_EXPLICITLY",
+  "supersession_policy": "EXPLICIT_SUPERSESSION_REFERENCE_REQUIRED"
+}

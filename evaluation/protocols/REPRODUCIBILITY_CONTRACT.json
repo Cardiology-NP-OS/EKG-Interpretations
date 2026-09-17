@@ -1,0 +1,13 @@
+{
+  "schema": "ekg-reproducibility-contract-v1",
+  "requirements": [
+    "exact source commit/tree or dataset version",
+    "deterministic split seed/assignment or preserved source fold",
+    "explicit preprocessing contract",
+    "exact artifact hashes",
+    "no mutable remote resolution in governed execution",
+    "failure/runtime capture for challengers"
+  ],
+  "runtimeAuthority": false,
+  "clinicalValidityInferred": false
+}

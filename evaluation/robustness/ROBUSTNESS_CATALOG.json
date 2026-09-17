@@ -1,0 +1,50 @@
+{
+  "schema": "ekg-robustness-catalog-v1",
+  "projectGold": false,
+  "items": [
+    {
+      "id": "ECG-ROBUST-SIGNAL-DISTORTION",
+      "class": "signal",
+      "patterns": [
+        "baseline wander",
+        "noise",
+        "masking",
+        "stretch/compress",
+        "crop",
+        "synthetic distortion"
+      ],
+      "authority": "EVALUATION_ONLY"
+    },
+    {
+      "id": "ECG-ROBUST-IMAGE-DEGRADATION",
+      "class": "image",
+      "patterns": [
+        "rotation",
+        "crop",
+        "resolution",
+        "padding",
+        "grid-color variation",
+        "monochrome",
+        "noise",
+        "color temperature",
+        "wrinkles",
+        "creases",
+        "handwritten overlays",
+        "QR/text overlays"
+      ],
+      "authority": "EVALUATION_ONLY"
+    },
+    {
+      "id": "ECG-ROBUST-METADATA",
+      "class": "metadata",
+      "patterns": [
+        "lead order",
+        "missing/duplicate leads",
+        "calibration conflict",
+        "duration/sample-count mismatch",
+        "source identity conflict"
+      ],
+      "authority": "EVALUATION_ONLY"
+    }
+  ]
+}

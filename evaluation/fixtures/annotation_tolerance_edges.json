@@ -1,0 +1,28 @@
+{
+  "schema": "ekg-evaluation-fixture-v1",
+  "fixtureId": "SYNTHETIC-ANNOTATION-TOLERANCE-EDGES",
+  "provenance": {
+    "kind": "TARGET_SYNTHETIC",
+    "source": "Cardiology-NP-OS/EKG-Interpretations",
+    "locator": "evaluation/fixtures/annotation_tolerance_edges.json"
+  },
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "runtimeAuthority": false,
+  "clinicalValidityInferred": false,
+  "description": "Synthetic event offsets for equality/inside/outside tolerance regression; no physiological or patient data.",
+  "events": [
+    {
+      "referenceSample": 100,
+      "candidateSample": 100
+    },
+    {
+      "referenceSample": 200,
+      "candidateSample": 204
+    },
+    {
+      "referenceSample": 300,
+      "candidateSample": 306
+    }
+  ]
+}
