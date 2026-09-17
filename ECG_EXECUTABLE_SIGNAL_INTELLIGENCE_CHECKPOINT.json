@@ -2,7 +2,7 @@
     "schema":  "ecg-executable-signal-intelligence-checkpoint-v1",
     "parentMainCommit":  "717ade1ce6a3fa60b24e91495f577cb7a6015be6",
     "parentMainTree":  "580b84fd261376e4b428b48011bd73cbd6bab776",
-    "status":  "VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND",
+    "status":  "ACCEPTED_ON_MAIN",
     "donorProgram":  {
                          "completedPrimaryDonors":  9,
                          "requiredPrimaryDonors":  21,
@@ -33,6 +33,21 @@
                          "independentFocusedMeasurement":  "14/14 PASS",
                          "independentEvaluationContract":  "7/7 PASS",
                          "independentFullTargetSuite":  "PASS",
-                         "candidateDiffCheck":  "PASS"
-                     }
+                         "candidateDiffCheck":  "PASS",
+                         "promotionCandidateCommit":  "1b36f7909a1b59451fc52b47866c4efecd9f0abd",
+                         "promotionCandidateTree":  "9216373977673898f74c459116de861e0b47d901",
+                         "promotionCandidateCiRunId":  35264859750,
+                         "promotionCandidateCiConclusion":  "success",
+                         "promotionCandidateIndependentVerification":  "PASS"
+                     },
+    "promotion":  {
+                      "mergeCommit":  "7f77891205bdb9d0ebddb2c7200bfa6af4bdfe9b",
+                      "mergeTree":  "9216373977673898f74c459116de861e0b47d901",
+                      "parents":  [
+                                      "717ade1ce6a3fa60b24e91495f577cb7a6015be6",
+                                      "1b36f7909a1b59451fc52b47866c4efecd9f0abd"
+                                  ],
+                      "targetMainCiRunId":  35265046014,
+                      "targetMainCiConclusion":  "success"
+                  }
 }
