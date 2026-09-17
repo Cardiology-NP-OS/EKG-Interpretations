@@ -43,7 +43,7 @@ check("canonical homes exist outside donor provenance",()=>{
 check("canonical capabilities retain exact upstream provenance and explicit license state",()=>{
   for(const c of canonical.capabilities){
     assert.ok(c.source_provenance.length>0,c.capability_id);
-    for(const p of c.source_provenance){assert.ok(/^[0-9a-f]{40}$/.test(p.commit),`${c.capability_id} commit`); assert.ok(/^[0-9a-f]{40}$/.test(p.tree),`${c.capability_id} tree`); assert.ok(exists(p.manifest),p.manifest);}
+    for(const p of c.source_provenance){assert.ok(/^[0-9a-f]{40}$/.test(p.commit),`${c.capability_id} commit`); assert.ok(/^[0-9a-f]{40}$/.test(p.tree),`${c.capability_id} tree`); assert.ok(!p.manifest.includes("\\"),`${c.capability_id} portable manifest path`); assert.ok(exists(p.manifest),p.manifest);}
     assert.ok(c.licenses.length>0,c.capability_id);
     for(const l of c.licenses) assert.ok(typeof l.status==="string"&&l.status.length>0,c.capability_id);
     assert.ok(!c.canonical_target_path.replace(/\\/g,"/").startsWith("donors/"));

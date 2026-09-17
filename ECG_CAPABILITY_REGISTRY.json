@@ -22,7 +22,7 @@
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -65,13 +65,13 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -124,25 +124,25 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -209,7 +209,7 @@
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -253,7 +253,7 @@
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -296,13 +296,13 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -350,7 +350,7 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -401,7 +401,7 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -510,13 +510,13 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -566,19 +566,19 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -640,31 +640,31 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -734,25 +734,25 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -817,7 +817,7 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -861,19 +861,19 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -933,19 +933,19 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1002,7 +1002,7 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1042,25 +1042,25 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1124,37 +1124,37 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1230,37 +1230,37 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1339,43 +1339,43 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1461,25 +1461,25 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1542,13 +1542,13 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1597,13 +1597,13 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1652,7 +1652,7 @@
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1698,7 +1698,7 @@
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1739,7 +1739,7 @@
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1783,19 +1783,19 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1856,7 +1856,7 @@
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1899,7 +1899,7 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1940,13 +1940,13 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1994,7 +1994,7 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2034,7 +2034,7 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2074,7 +2074,7 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2115,13 +2115,13 @@
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2168,7 +2168,7 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2210,25 +2210,25 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2291,7 +2291,7 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2331,13 +2331,13 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2385,13 +2385,13 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2506,13 +2506,13 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2566,7 +2566,7 @@
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2614,13 +2614,13 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2670,19 +2670,19 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2736,7 +2736,7 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2776,7 +2776,7 @@
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2816,7 +2816,7 @@
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2857,19 +2857,19 @@
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         },
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-          "manifest": "donors\\tmehari_ptbxl_feature_benchmark\\DONOR_MANIFEST.json"
+          "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2926,7 +2926,7 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2968,19 +2968,19 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "neuropsychology/NeuroKit",
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-          "manifest": "donors\\neuropsychology_neurokit\\DONOR_MANIFEST.json"
+          "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -3039,31 +3039,31 @@
           "source": "MIT-LCP/wfdb-python",
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
-          "manifest": "donors\\mit-lcp_wfdb-python\\DONOR_MANIFEST.json"
+          "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
         },
         {
           "source": "vitaldb/openecg",
           "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
           "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-          "manifest": "donors\\vitaldb_openecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/vitaldb_openecg/DONOR_MANIFEST.json"
         },
         {
           "source": "DeepPSP/torch_ecg",
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-          "manifest": "donors\\deeppsp_torch_ecg\\DONOR_MANIFEST.json"
+          "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
         },
         {
           "source": "alphanumericslab/ecg-image-kit",
           "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
           "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
-          "manifest": "donors\\alphanumericslab_ecg-image-kit\\DONOR_MANIFEST.json"
+          "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"
         },
         {
           "source": "vlbthambawita/ECGBench",
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
-          "manifest": "donors\\vlbthambawita_ecgbench\\DONOR_MANIFEST.json"
+          "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
