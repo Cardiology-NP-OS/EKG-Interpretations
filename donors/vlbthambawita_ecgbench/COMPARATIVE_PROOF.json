@@ -1,51 +1,62 @@
-﻿{
-    "schema":  "ecg-donor-comparative-proof-v1",
-    "donor_id":  "DONOR-007",
-    "repository":  "vlbthambawita/ECGBench",
-    "upstream":  {
-                     "commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
-                     "tree":  "9f52c3f551b443ff660f7b112bca84684f4f1239"
-                 },
-    "before":  {
-                   "target_main_commit":  "4befd43c048ffff36841f45e4ee800c023ef4b0d",
-                   "target_main_tree":  "2dc5b6209a61a65ad9a218ac5ef59cb48723831d",
-                   "ecgbench_catalogue_registered":  false,
-                   "donor_007_capabilities":  0
-               },
-    "after":  {
-                  "governance_candidate_commit":  "2fae233a0570b21a1c70ce5397951930e5c8619e",
-                  "governance_candidate_tree":  "bb4045cd21a31839afe307a157b1e773ac847483",
-                  "material_capabilities_dispositioned":  36,
-                  "external_dataset_catalogue_entries":  64,
-                  "dataset_config_yaml_count":  52,
-                  "runtime_dependency_added":  false,
-                  "source_code_copied":  false,
-                  "dataset_bytes_imported":  false,
-                  "external_split_bytes_imported":  false,
-                  "model_weights_imported":  false,
-                  "approved_adjudicated_gold_added":  0
-              },
-    "verification":  {
-                         "github_actions_run_id":  35243049592,
-                         "head_sha":  "2fae233a0570b21a1c70ce5397951930e5c8619e",
-                         "head_tree":  "bb4045cd21a31839afe307a157b1e773ac847483",
-                         "conclusion":  "success",
-                         "local_focused_closure":  "12/12 PASS",
-                         "local_full_target_suite":  "PASS",
-                         "independent_fresh_clone":  "PASS",
-                         "independent_full_target_suite":  "PASS",
-                         "full_candidate_diff_check":  "PASS"
-                     },
-    "improvement_claim":  "DATASET_AND_EVALUATION_PROVENANCE_COVERAGE",
-    "non_claims":  [
-                       "No diagnostic accuracy claim",
-                       "No clinical-validity claim",
-                       "No donor dataset label promoted to project gold",
-                       "No donor validation result or dataset statistic promoted to target metric",
-                       "No runtime activation or authority transfer"
-                   ],
-    "rollback":  {
-                     "commit":  "4befd43c048ffff36841f45e4ee800c023ef4b0d",
-                     "tree":  "2dc5b6209a61a65ad9a218ac5ef59cb48723831d"
-                 }
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-007",
+  "repository": "vlbthambawita/ECGBench",
+  "upstream": {
+    "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+    "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239"
+  },
+  "before": {
+    "target_main_commit": "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+    "target_main_tree": "2dc5b6209a61a65ad9a218ac5ef59cb48723831d",
+    "ecgbench_catalogue_registered": false,
+    "donor_007_capabilities": 0
+  },
+  "after": {
+    "governance_candidate_commit": "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d",
+    "governance_candidate_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+    "material_capabilities_dispositioned": 36,
+    "external_dataset_catalogue_entries": 64,
+    "dataset_config_yaml_count": 52,
+    "runtime_dependency_added": false,
+    "source_code_copied": false,
+    "dataset_bytes_imported": false,
+    "external_split_bytes_imported": false,
+    "model_weights_imported": false,
+    "approved_adjudicated_gold_added": 0
+  },
+  "verification": {
+    "github_actions_run_id": 35243347524,
+    "head_sha": "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d",
+    "head_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+    "conclusion": "success",
+    "local_focused_closure": "13/13 PASS",
+    "local_full_target_suite": "PASS",
+    "independent_fresh_clone": "PASS",
+    "independent_full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "improvement_claim": "DATASET_AND_EVALUATION_PROVENANCE_COVERAGE",
+  "non_claims": [
+    "No diagnostic accuracy claim",
+    "No clinical-validity claim",
+    "No donor dataset label promoted to project gold",
+    "No donor validation result or dataset statistic promoted to target metric",
+    "No runtime activation or authority transfer"
+  ],
+  "rollback": {
+    "commit": "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+    "tree": "2dc5b6209a61a65ad9a218ac5ef59cb48723831d"
+  },
+  "promotion": {
+    "merge_commit": "e12e781e8b9c27d0aefbe75f55c99d80dce76fe8",
+    "merge_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+    "parents": [
+      "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+      "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d"
+    ],
+    "target_main_ci_run_id": 35243673584,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  }
 }

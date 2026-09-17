@@ -1,0 +1,117 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-007",
+  "donor_repository": "vlbthambawita/ECGBench",
+  "donor_commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+  "donor_tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+  "donor_release": {
+    "tag": "v1.0.0",
+    "release_commit": "86140fbb39f3b382d1b30676d1533d346f8f88eb",
+    "head_is_release_tag_commit": false
+  },
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_blob_sha": "3b97c4cdca87936b7512d1656347e22e16656e58",
+    "dataset_asset_status": "LICENSE_REVIEW_REQUIRED_PER_DATASET_OR_EXTERNAL_SPLIT_ARTIFACT",
+    "model_weight_status": "NO_TRACKED_MODEL_WEIGHTS_OR_TRAINED_MODEL_ARTIFACTS"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_007_rollback_commit": "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+    "donor_007_rollback_tree": "2dc5b6209a61a65ad9a218ac5ef59cb48723831d"
+  },
+  "target_resulting_implementation": {
+    "type": "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION",
+    "verified_candidate_commit": "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d",
+    "verified_candidate_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false,
+    "external_split_artifacts_copied": false
+  },
+  "verification": {
+    "candidate_ci_run_id": 35243347524,
+    "candidate_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "13/13 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "promotion": {
+    "merge_commit": "e12e781e8b9c27d0aefbe75f55c99d80dce76fe8",
+    "merge_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+    "parents": [
+      "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+      "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d"
+    ],
+    "target_main_ci_run_id": 35243673584,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "REJECTED": 2,
+    "DATA_ONLY": 6,
+    "EVALUATION_ONLY": 11,
+    "SUPERSEDED": 9,
+    "LICENSE_REVIEW_REQUIRED": 2,
+    "RESEARCH_ONLY": 6,
+    "total": 36
+  },
+  "associated_repositories": {
+    "count": 6,
+    "dispositions_file": "donors/vlbthambawita_ecgbench/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "new_associated_donors_queued": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "donor_models_executed": false,
+    "donor_checkpoints_imported": false,
+    "external_dataset_bytes_imported": false,
+    "huggingface_split_artifacts_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_or_dataset_statistics_promoted_to_target_metrics": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json": "03598cf0721371b7f56541a22aa799588a4641b2a3ae1c94219d754c31b3a2ee",
+    "donors/vlbthambawita_ecgbench/INVENTORY.json": "bb50ea4f53836cf5b6f899c8c7b01f1d46a7dd57f9e008d8d4d671f409615ff9",
+    "donors/vlbthambawita_ecgbench/GAP_MATRIX.json": "504765cab98b74ee99d196b0dac7b32daa7d567a3752fd67fdd40b6c3e040df1",
+    "donors/vlbthambawita_ecgbench/HARVEST_PLAN.md": "40f28c3f93b150682a4199a39c1b5cb342788fa755c0fadddccd424368655da4",
+    "donors/vlbthambawita_ecgbench/LICENSE_BOUNDARY.json": "b7b95d442a560910ad720bce7a32ea7b8e3694e0b84630d9f2ffebda72703aad",
+    "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json": "db73e7612a2165b0ef5d651685a45fc65e11ed1a8e2144ffd119d23d4fca62d3",
+    "donors/vlbthambawita_ecgbench/MODEL_BOUNDARY.json": "7622adb8364c67dbd4b2dac56eaba7a016ea9de8eeb2eca2c49616f727863738",
+    "donors/vlbthambawita_ecgbench/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "d9c851c24f0d954e31b8ff056e93beccd52a24d096a9bd3ad68f3406d4b49c3e",
+    "donors/vlbthambawita_ecgbench/COMPARATIVE_PROOF.json": "12d1a8fc6fabc831d1a64f62e0b8bb4d58ef4f37386891762fc2300677cb8b0c",
+    "donors/vlbthambawita_ecgbench/INDEPENDENT_VERIFICATION.json": "c8d3338aecff6f8c35affbed240f89c2f1d4928b54cfbac653d1213fc167f762",
+    "tests/ecgbench_donor_closure.test.js": "7cb48237a7363cc6c4b5493675c3a8bf2052ce8f572fcae225cf0fff62f3e902",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "defa8213f24fb242781cbf7e172d71f1680304562caf8810abc5f6884b4ea2a4",
+    "ECG_LICENSE_LEDGER.json": "3d7a9441a59336d907fea30469a323583691d8fc280b3e0792c4f4a4763b4df2",
+    "ECG_DATASET_REGISTRY.json": "02a412aa41e4f09db0554d843a87eecc789b33ea8dca68cafe0401f666cfbc1a",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "57b7337ac41d783f3683212a63477c6c29bf1e11d65d91a7c1ab4d4f2d5f8cbc"
+  },
+  "outstanding_limitations": [
+    "The 64 catalogue entries reference external datasets whose current licenses, access terms, releases and provenance must be independently verified before target use.",
+    "Published Hugging Face fold/split artifacts remain external and unadmitted; no split bytes are copied into the target.",
+    "Two tracked challenge diagnosis-mapping CSVs remain license-review-required as external vocabulary/data-derived content.",
+    "Dataset-specific counts, labels, caveats and donor validation results are research provenance only, not project clinical evidence.",
+    "No governed adjudicated project clinical gold exists, so diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "final_disposition": "GOVERNANCE_ONLY_DATASET_EVALUATION_PROVENANCE",
+  "rollback": {
+    "commit": "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+    "tree": "2dc5b6209a61a65ad9a218ac5ef59cb48723831d",
+    "method": "revert Donor-007 promotion/finalization commits; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

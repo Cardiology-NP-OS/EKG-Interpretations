@@ -19,6 +19,7 @@ const modelBoundary = readJson("donors/vlbthambawita_ecgbench/MODEL_BOUNDARY.jso
 const associated = readJson("donors/vlbthambawita_ecgbench/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
 const comparative = readJson("donors/vlbthambawita_ecgbench/COMPARATIVE_PROOF.json");
 const independent = readJson("donors/vlbthambawita_ecgbench/INDEPENDENT_VERIFICATION.json");
+const receipt = readJson("donors/vlbthambawita_ecgbench/DONOR_RECEIPT.json");
 const pkg = readJson("package.json");
 const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-007");
 const caps = capabilityRegistry.capabilities.filter(item => item.donor === "vlbthambawita/ECGBench");
@@ -89,25 +90,31 @@ check("associated dependencies do not expand the donor queue", () => {
   for (const item of associated.repositories) assert.strictEqual(item.queued_as_associated_donor, false);
 });
 check("candidate CI and independent verification are bound", () => {
-  assert.strictEqual(donor.verified_candidate_commit, "2fae233a0570b21a1c70ce5397951930e5c8619e");
-  assert.strictEqual(donor.verified_candidate_tree, "bb4045cd21a31839afe307a157b1e773ac847483");
-  assert.strictEqual(donor.candidate_ci_run_id, 35243049592);
+  assert.strictEqual(donor.verified_candidate_commit, "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d");
+  assert.strictEqual(donor.verified_candidate_tree, "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a");
+  assert.strictEqual(donor.candidate_ci_run_id, 35243347524);
   assert.strictEqual(comparative.verification.head_sha, donor.verified_candidate_commit);
   assert.strictEqual(comparative.verification.conclusion, "success");
   assert.strictEqual(independent.candidate_commit, donor.verified_candidate_commit);
   assert.strictEqual(independent.result, "PASS");
   assert.strictEqual(independent.full_target_suite, "PASS");
 });
-check("donor remains pre-promotion and uncounted", () => {
-  assert.strictEqual(donorRegistry.completed_donors, 6);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-007");
-  assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
-  assert.strictEqual(fs.existsSync(path.join(root, "donors/vlbthambawita_ecgbench/DONOR_RECEIPT.json")), false);
+check("donor is accepted only after promotion and target-main CI", () => {
+  assert.ok(donorRegistry.completed_donors >= 7);
+  assert.notStrictEqual(donorRegistry.next_donor_id, "DONOR-007");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt_status, "FINALIZED");
+  assert.strictEqual(donor.receipt, "donors/vlbthambawita_ecgbench/DONOR_RECEIPT.json");
+  assert.strictEqual(donor.promotion_commit, "e12e781e8b9c27d0aefbe75f55c99d80dce76fe8");
+  assert.strictEqual(donor.target_main_ci_run_id, 35243673584);
+  assert.strictEqual(donor.target_main_ci_conclusion, "success");
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.merge_commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, donor.target_main_ci_run_id);
 });
 check("governed inactive state remains explicit", () => {
   assert.strictEqual(gap.clinical_authority_added, false);
   assert.strictEqual(capabilityRegistry.clinical_authority_added, false);
   assert.strictEqual(datasetRegistry.approved_adjudicated_project_gold_count, 0);
 });
-console.log(JSON.stringify({schema:"ekg-donor-007-prepromotion-closure-tests-v1",donor:"vlbthambawita/ECGBench",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:false,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));
+console.log(JSON.stringify({schema:"ekg-donor-007-acceptance-closure-tests-v1",donor:"vlbthambawita/ECGBench",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:true,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));

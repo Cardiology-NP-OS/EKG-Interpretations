@@ -61,7 +61,7 @@ OpenECG is credited for the layered representation, context-margin, disagreement
 - Donor physiological/example/test data copied: **no**.
 - Physiological asset/data-use status: **LICENSE_REVIEW_REQUIRED_PER_DATASET**.
 - Project clinical gold created from donor labels: **no**.
-- Provenance files: `donors/neuropsychology_neurokit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
+- Provenance files: `donors/neuropsychology_neurokit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, `INDEPENDENT_VERIFICATION.json`, and `DONOR_RECEIPT.json`.
 
 NeuroKit is credited for the multi-method agreement and adversarial/golden-regression engineering patterns that informed the target-owned challenger-evaluation hardening. No NeuroKit detector, delineator, data asset, or clinical conclusion was imported as target authority.
 

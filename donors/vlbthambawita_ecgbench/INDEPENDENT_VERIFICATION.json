@@ -1,25 +1,27 @@
-﻿{
-    "schema":  "ecg-donor-independent-verification-v1",
-    "donor_id":  "DONOR-007",
-    "repository":  "vlbthambawita/ECGBench",
-    "candidate_commit":  "2fae233a0570b21a1c70ce5397951930e5c8619e",
-    "candidate_tree":  "bb4045cd21a31839afe307a157b1e773ac847483",
-    "origin_main_commit":  "4befd43c048ffff36841f45e4ee800c023ef4b0d",
-    "verification_date":  "2026-09-17",
-    "method":  "Fresh private GitHub clone on independent authorized Windows machine",
-    "result":  "PASS",
-    "clean_worktree_before_tests":  true,
-    "full_candidate_diff_check":  "PASS",
-    "focused_closure":  "12/12 PASS",
-    "full_target_suite":  "PASS",
-    "clinical_data_used":  false,
-    "clinical_accuracy_claimed":  false,
-    "governed_state":  {
-                           "diagnostic_runtime":  "GOVERNED_INACTIVE",
-                           "evidence_admission":  "NOT_ADMITTED",
-                           "approved_adjudicated_gold_count":  0,
-                           "metrics":  "NOT_REPORTABLE",
-                           "activation":  "NOT_ELIGIBLE",
-                           "clinical_validity":  "NOT_INFERRED"
-                       }
+{
+  "schema": "ecg-donor-independent-verification-v1",
+  "donor_id": "DONOR-007",
+  "repository": "vlbthambawita/ECGBench",
+  "candidate_commit": "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d",
+  "candidate_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+  "origin_main_commit": "4befd43c048ffff36841f45e4ee800c023ef4b0d",
+  "verification_date": "2026-09-17",
+  "method": "Fresh private GitHub clone on independent authorized Windows machine",
+  "result": "PASS",
+  "clean_worktree_before_tests": true,
+  "full_candidate_diff_check": "PASS",
+  "focused_closure": "13/13 PASS",
+  "full_target_suite": "PASS",
+  "clinical_data_used": false,
+  "clinical_accuracy_claimed": false,
+  "governed_state": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "final_candidate_ci_run_id": 35243347524,
+  "final_candidate_ci_conclusion": "success"
 }

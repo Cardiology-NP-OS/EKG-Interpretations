@@ -1,269 +1,274 @@
 {
-    "schema":  "ecg-donor-registry-v1",
-    "updated_date":  "2026-09-17",
-    "target_repository":  "Cardiology-NP-OS/EKG-Interpretations",
-    "accepted_engine":  {
-                            "commit":  "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
-                            "tree":  "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
-                        },
-    "program_state":  "IN_PROGRESS",
-    "completed_donors":  6,
-    "required_donor_count":  21,
-    "next_donor_id":  "DONOR-007",
-    "donors":  [
-                   {
-                       "donor_id":  "DONOR-001",
-                       "repository":  "MIT-LCP/wfdb-python",
-                       "status":  "AUDITED_CANDIDATE_FOR_MERGE",
-                       "audited_commit":  "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
-                       "audited_tree":  "a861ed52e8c655770beef2540e0802e63e806f18",
-                       "receipt":  "donors/mit-lcp_wfdb-python/DONOR_RECEIPT.json",
-                       "implementation_commit":  "31a2d330a8ff93799bab0c067c4d142629c5c011",
-                       "clinical_authority_added":  false
-                   },
-                   {
-                       "donor_id":  "DONOR-002",
-                       "repository":  "vitaldb/openecg",
-                       "status":  "AUDITED_CANDIDATE_FOR_MERGE",
-                       "audited_commit":  "843698d5b4621b74145bce405c74e115b6daa6c6",
-                       "audited_tree":  "886095776a1f79f600a7ad269176ccc0fbd2d37d",
-                       "receipt":  "donors/vitaldb_openecg/DONOR_RECEIPT.json",
-                       "implementation_commit":  "597b64b1442c49f0a5f1c832dbb46fe335b20242",
-                       "integration":  "target-owned non-clinical challenger/evaluation contract",
-                       "model_weights_imported":  false,
-                       "clinical_authority_added":  false
-                   },
-                   {
-                       "donor_id":  "DONOR-003",
-                       "repository":  "neuropsychology/NeuroKit",
-                       "status":  "ACCEPTED_ON_MAIN",
-                       "audited_commit":  "ff419d983568ef492eb8d229af643c0ef0100b32",
-                       "audited_tree":  "2a735eae4761375a0a322aac0dc05c468a88041c",
-                       "receipt":  "donors/neuropsychology_neurokit/DONOR_RECEIPT.json",
-                       "promotion_commit":  "46d7e9a5cce8e2f958696e07cc8595b7a71f9267",
-                       "promotion_ci_run_id":  35184975755,
-                       "implementation_commit":  "9009c37a5ed4c3049477a4813b6a4a5c96dce598",
-                       "verified_candidate_commit":  "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
-                       "integration":  "target-owned tolerance-aware challenger event agreement plus synthetic regression tests",
-                       "runtime_dependency_added":  false,
-                       "model_weights_imported":  false,
-                       "dataset_bytes_imported":  false,
-                       "clinical_authority_added":  false
-                   },
-                   {
-                       "donor_id":  "DONOR-004",
-                       "repository":  "DeepPSP/torch_ecg",
-                       "status":  "ACCEPTED_ON_MAIN",
-                       "audited_commit":  "11967474e46023dc7a82acf264e426c1ce4eacfa",
-                       "audited_tree":  "307435b2cb11819f2dc8946866ecc54aab6bff1a",
-                       "manifest":  "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json",
-                       "inventory":  "donors/deeppsp_torch_ecg/INVENTORY.json",
-                       "gap_matrix":  "donors/deeppsp_torch_ecg/GAP_MATRIX.json",
-                       "harvest_plan":  "donors/deeppsp_torch_ecg/HARVEST_PLAN.md",
-                       "model_boundary":  "donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json",
-                       "associated_repository_dispositions":  "donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-                       "receipt":  "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json",
-                       "receipt_status":  "FINALIZED",
-                       "prepromotion_closure_commit":  "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
-                       "promotion_commit":  "a8d90b7485de9aecebf006d7c8228c62cf062a98",
-                       "promotion_tree":  "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
-                       "target_main_ci_run_id":  35186641689,
-                       "target_main_ci_conclusion":  "success",
-                       "verified_candidate_commit":  "958126bcc17b0c5cf63c6958194c86976a221002",
-                       "verified_candidate_tree":  "afca013f82247c36860ab1fe898871ba50fd62f2",
-                       "candidate_ci_run_id":  35186265624,
-                       "independent_verification":  "donors/deeppsp_torch_ecg/INDEPENDENT_VERIFICATION.json",
-                       "integration":  "governance-only architecture/checkpoint/data capability disposition; no runtime implementation",
-                       "runtime_dependency_added":  false,
-                       "model_weights_imported":  false,
-                       "dataset_bytes_imported":  false,
-                       "clinical_authority_added":  false
-                   },
-                   {
-                       "donor_id":  "DONOR-005",
-                       "repository":  "alphanumericslab/ecg-image-kit",
-                       "status":  "ACCEPTED_ON_MAIN",
-                       "audited_commit":  "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
-                       "audited_tree":  "529bfe2cadae767c4851cc2be0fb194a25511674",
-                       "manifest":  "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json",
-                       "inventory":  "donors/alphanumericslab_ecg-image-kit/INVENTORY.json",
-                       "gap_matrix":  "donors/alphanumericslab_ecg-image-kit/GAP_MATRIX.json",
-                       "harvest_plan":  "donors/alphanumericslab_ecg-image-kit/HARVEST_PLAN.md",
-                       "model_boundary":  "donors/alphanumericslab_ecg-image-kit/MODEL_BOUNDARY.json",
-                       "associated_repository_dispositions":  "donors/alphanumericslab_ecg-image-kit/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-                       "receipt_status":  "FINALIZED",
-                       "verified_candidate_commit":  "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
-                       "verified_candidate_tree":  "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
-                       "candidate_ci_run_id":  35187787185,
-                       "independent_verification":  "donors/alphanumericslab_ecg-image-kit/INDEPENDENT_VERIFICATION.json",
-                       "integration":  "governance-only image-generation/digitization/model/data disposition; no runtime implementation",
-                       "runtime_dependency_added":  false,
-                       "model_weights_imported":  false,
-                       "dataset_bytes_imported":  false,
-                       "clinical_authority_added":  false,
-                       "receipt":  "donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json",
-                       "promotion_commit":  "569f2a5747cff5bac38ca22ed88fac5fb2ed713e",
-                       "promotion_tree":  "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
-                       "target_main_ci_run_id":  35187896259,
-                       "target_main_ci_conclusion":  "success"
-                   },
-                   {
-                       "donor_id":  "DONOR-006",
-                       "repository":  "tmehari/ptbxl_feature_benchmark",
-                       "status":  "ACCEPTED_ON_MAIN",
-                       "audited_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
-                       "audited_tree":  "b9be6b9546e2b437493b286532ffbbba00e01a8c",
-                       "manifest":  "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json",
-                       "inventory":  "donors/tmehari_ptbxl_feature_benchmark/INVENTORY.json",
-                       "gap_matrix":  "donors/tmehari_ptbxl_feature_benchmark/GAP_MATRIX.json",
-                       "harvest_plan":  "donors/tmehari_ptbxl_feature_benchmark/HARVEST_PLAN.md",
-                       "license_boundary":  "donors/tmehari_ptbxl_feature_benchmark/LICENSE_BOUNDARY.json",
-                       "dataset_boundary":  "donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json",
-                       "model_boundary":  "donors/tmehari_ptbxl_feature_benchmark/MODEL_BOUNDARY.json",
-                       "associated_repository_dispositions":  "donors/tmehari_ptbxl_feature_benchmark/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-                       "receipt_status":  "FINALIZED",
-                       "integration":  "governance-only feature-benchmark/model/data disposition; no runtime implementation",
-                       "runtime_dependency_added":  false,
-                       "source_code_copied":  false,
-                       "model_weights_imported":  false,
-                       "dataset_bytes_imported":  false,
-                       "clinical_authority_added":  false,
-                       "verified_candidate_commit":  "321fcd2448f8fda8b3599793e40b5803aba7fd92",
-                       "verified_candidate_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
-                       "candidate_ci_run_id":  35197265071,
-                       "independent_verification":  "donors/tmehari_ptbxl_feature_benchmark/INDEPENDENT_VERIFICATION.json",
-                       "receipt":  "donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json",
-                       "promotion_commit":  "fdb1eef6dee4772b235b167de6e52e026bba34e3",
-                       "promotion_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
-                       "target_main_ci_run_id":  35197432536,
-                       "target_main_ci_conclusion":  "success"
-                   },
-                   {
-                       "donor_id":  "DONOR-007",
-                       "repository":  "vlbthambawita/ECGBench",
-                       "status":  "AUDITED_CANDIDATE_FOR_MERGE",
-                       "audited_commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
-                       "audited_tree":  "9f52c3f551b443ff660f7b112bca84684f4f1239",
-                       "manifest":  "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json",
-                       "inventory":  "donors/vlbthambawita_ecgbench/INVENTORY.json",
-                       "gap_matrix":  "donors/vlbthambawita_ecgbench/GAP_MATRIX.json",
-                       "harvest_plan":  "donors/vlbthambawita_ecgbench/HARVEST_PLAN.md",
-                       "license_boundary":  "donors/vlbthambawita_ecgbench/LICENSE_BOUNDARY.json",
-                       "dataset_boundary":  "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json",
-                       "model_boundary":  "donors/vlbthambawita_ecgbench/MODEL_BOUNDARY.json",
-                       "associated_repository_dispositions":  "donors/vlbthambawita_ecgbench/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-                       "receipt_status":  "PENDING_POST_PROMOTION_TARGET_MAIN_CI",
-                       "integration":  "governance-only dataset-catalogue/splitting/validation disposition; no runtime implementation",
-                       "runtime_dependency_added":  false,
-                       "source_code_copied":  false,
-                       "model_weights_imported":  false,
-                       "dataset_bytes_imported":  false,
-                       "verified_candidate_commit":  "2fae233a0570b21a1c70ce5397951930e5c8619e",
-                       "verified_candidate_tree":  "bb4045cd21a31839afe307a157b1e773ac847483",
-                       "candidate_ci_run_id":  35243049592,
-                       "independent_verification":  "donors/vlbthambawita_ecgbench/INDEPENDENT_VERIFICATION.json",
-                       "clinical_authority_added":  false
-                   },
-                   {
-                       "donor_id":  "DONOR-008",
-                       "repository":  "ELM-Research/ECG-Preprocess",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-009",
-                       "repository":  "Jwoo5/fairseq-signals",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-010",
-                       "repository":  "bowang-lab/ecg-fm",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-011",
-                       "repository":  "PKUDigitalHealth/ECGFounder",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-012",
-                       "repository":  "Edoardo-BS/HuBERT-ECG",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-013",
-                       "repository":  "HeartWise-AI/DeepECG_Docker",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-014",
-                       "repository":  "HeartWise-AI/ECG_tokenizer",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-015",
-                       "repository":  "HeartWise-AI/ECG_LLM_Judge",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-016",
-                       "repository":  "Jwoo5/ecg-qa",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-017",
-                       "repository":  "ELM-Research/ECG-Language-Models",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-018",
-                       "repository":  "willxxy/ECG-Byte",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-019",
-                       "repository":  "AIMedLab/PULSE",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-020",
-                       "repository":  "PKUDigitalHealth/ECG-R1",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-021",
-                       "repository":  "AshleyLab/MARCUS",
-                       "status":  "PENDING"
-                   },
-                   {
-                       "donor_id":  "DONOR-A001",
-                       "repository":  "wfdb/wfdb-spec",
-                       "status":  "QUEUED_ASSOCIATED_DONOR",
-                       "discovered_by":  "DONOR-001",
-                       "reason":  "official WFDB file specification referenced by donor",
-                       "license":  "MIT"
-                   },
-                   {
-                       "donor_id":  "DONOR-A002",
-                       "repository":  "bemoody/wfdb",
-                       "status":  "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
-                       "discovered_by":  "DONOR-001",
-                       "reason":  "original WFDB software implementation materially related to format semantics",
-                       "license_note":  "mixed GPL/LGPL family reported by donor audit; independent license audit required before reuse"
-                   },
-                   {
-                       "donor_id":  "DONOR-A003",
-                       "repository":  "vitaldb/opendsp",
-                       "status":  "QUEUED_ASSOCIATED_DONOR",
-                       "discovered_by":  "DONOR-002",
-                       "reason":  "OpenECG core dependency and extracted DSP primitive implementation; must be audited separately before direct dependency or code reuse"
-                   },
-                   {
-                       "donor_id":  "DONOR-A004",
-                       "repository":  "vuno/ST-MEM",
-                       "status":  "QUEUED_ASSOCIATED_DONOR",
-                       "discovered_by":  "DONOR-002",
-                       "reason":  "material SSL model upstream referenced by OpenECG through historical bakqui/ST-MEM clone instruction"
-                   }
-               ],
-    "completion_rule":  "No donor or associated material first-party repository may remain ambiguous before program completion."
+  "schema": "ecg-donor-registry-v1",
+  "updated_date": "2026-09-17",
+  "target_repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "accepted_engine": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "program_state": "IN_PROGRESS",
+  "completed_donors": 7,
+  "required_donor_count": 21,
+  "next_donor_id": "DONOR-008",
+  "donors": [
+    {
+      "donor_id": "DONOR-001",
+      "repository": "MIT-LCP/wfdb-python",
+      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "audited_commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+      "audited_tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+      "receipt": "donors/mit-lcp_wfdb-python/DONOR_RECEIPT.json",
+      "implementation_commit": "31a2d330a8ff93799bab0c067c4d142629c5c011",
+      "clinical_authority_added": false
+    },
+    {
+      "donor_id": "DONOR-002",
+      "repository": "vitaldb/openecg",
+      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "audited_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+      "audited_tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+      "receipt": "donors/vitaldb_openecg/DONOR_RECEIPT.json",
+      "implementation_commit": "597b64b1442c49f0a5f1c832dbb46fe335b20242",
+      "integration": "target-owned non-clinical challenger/evaluation contract",
+      "model_weights_imported": false,
+      "clinical_authority_added": false
+    },
+    {
+      "donor_id": "DONOR-003",
+      "repository": "neuropsychology/NeuroKit",
+      "status": "ACCEPTED_ON_MAIN",
+      "audited_commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+      "audited_tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+      "receipt": "donors/neuropsychology_neurokit/DONOR_RECEIPT.json",
+      "promotion_commit": "46d7e9a5cce8e2f958696e07cc8595b7a71f9267",
+      "promotion_ci_run_id": 35184975755,
+      "implementation_commit": "9009c37a5ed4c3049477a4813b6a4a5c96dce598",
+      "verified_candidate_commit": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+      "integration": "target-owned tolerance-aware challenger event agreement plus synthetic regression tests",
+      "runtime_dependency_added": false,
+      "model_weights_imported": false,
+      "dataset_bytes_imported": false,
+      "clinical_authority_added": false
+    },
+    {
+      "donor_id": "DONOR-004",
+      "repository": "DeepPSP/torch_ecg",
+      "status": "ACCEPTED_ON_MAIN",
+      "audited_commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+      "audited_tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+      "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json",
+      "inventory": "donors/deeppsp_torch_ecg/INVENTORY.json",
+      "gap_matrix": "donors/deeppsp_torch_ecg/GAP_MATRIX.json",
+      "harvest_plan": "donors/deeppsp_torch_ecg/HARVEST_PLAN.md",
+      "model_boundary": "donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json",
+      "associated_repository_dispositions": "donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+      "receipt": "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json",
+      "receipt_status": "FINALIZED",
+      "prepromotion_closure_commit": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+      "promotion_commit": "a8d90b7485de9aecebf006d7c8228c62cf062a98",
+      "promotion_tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+      "target_main_ci_run_id": 35186641689,
+      "target_main_ci_conclusion": "success",
+      "verified_candidate_commit": "958126bcc17b0c5cf63c6958194c86976a221002",
+      "verified_candidate_tree": "afca013f82247c36860ab1fe898871ba50fd62f2",
+      "candidate_ci_run_id": 35186265624,
+      "independent_verification": "donors/deeppsp_torch_ecg/INDEPENDENT_VERIFICATION.json",
+      "integration": "governance-only architecture/checkpoint/data capability disposition; no runtime implementation",
+      "runtime_dependency_added": false,
+      "model_weights_imported": false,
+      "dataset_bytes_imported": false,
+      "clinical_authority_added": false
+    },
+    {
+      "donor_id": "DONOR-005",
+      "repository": "alphanumericslab/ecg-image-kit",
+      "status": "ACCEPTED_ON_MAIN",
+      "audited_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+      "audited_tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+      "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json",
+      "inventory": "donors/alphanumericslab_ecg-image-kit/INVENTORY.json",
+      "gap_matrix": "donors/alphanumericslab_ecg-image-kit/GAP_MATRIX.json",
+      "harvest_plan": "donors/alphanumericslab_ecg-image-kit/HARVEST_PLAN.md",
+      "model_boundary": "donors/alphanumericslab_ecg-image-kit/MODEL_BOUNDARY.json",
+      "associated_repository_dispositions": "donors/alphanumericslab_ecg-image-kit/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+      "receipt_status": "FINALIZED",
+      "verified_candidate_commit": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+      "verified_candidate_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+      "candidate_ci_run_id": 35187787185,
+      "independent_verification": "donors/alphanumericslab_ecg-image-kit/INDEPENDENT_VERIFICATION.json",
+      "integration": "governance-only image-generation/digitization/model/data disposition; no runtime implementation",
+      "runtime_dependency_added": false,
+      "model_weights_imported": false,
+      "dataset_bytes_imported": false,
+      "clinical_authority_added": false,
+      "receipt": "donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json",
+      "promotion_commit": "569f2a5747cff5bac38ca22ed88fac5fb2ed713e",
+      "promotion_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+      "target_main_ci_run_id": 35187896259,
+      "target_main_ci_conclusion": "success"
+    },
+    {
+      "donor_id": "DONOR-006",
+      "repository": "tmehari/ptbxl_feature_benchmark",
+      "status": "ACCEPTED_ON_MAIN",
+      "audited_commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+      "audited_tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+      "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json",
+      "inventory": "donors/tmehari_ptbxl_feature_benchmark/INVENTORY.json",
+      "gap_matrix": "donors/tmehari_ptbxl_feature_benchmark/GAP_MATRIX.json",
+      "harvest_plan": "donors/tmehari_ptbxl_feature_benchmark/HARVEST_PLAN.md",
+      "license_boundary": "donors/tmehari_ptbxl_feature_benchmark/LICENSE_BOUNDARY.json",
+      "dataset_boundary": "donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json",
+      "model_boundary": "donors/tmehari_ptbxl_feature_benchmark/MODEL_BOUNDARY.json",
+      "associated_repository_dispositions": "donors/tmehari_ptbxl_feature_benchmark/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+      "receipt_status": "FINALIZED",
+      "integration": "governance-only feature-benchmark/model/data disposition; no runtime implementation",
+      "runtime_dependency_added": false,
+      "source_code_copied": false,
+      "model_weights_imported": false,
+      "dataset_bytes_imported": false,
+      "clinical_authority_added": false,
+      "verified_candidate_commit": "321fcd2448f8fda8b3599793e40b5803aba7fd92",
+      "verified_candidate_tree": "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
+      "candidate_ci_run_id": 35197265071,
+      "independent_verification": "donors/tmehari_ptbxl_feature_benchmark/INDEPENDENT_VERIFICATION.json",
+      "receipt": "donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json",
+      "promotion_commit": "fdb1eef6dee4772b235b167de6e52e026bba34e3",
+      "promotion_tree": "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
+      "target_main_ci_run_id": 35197432536,
+      "target_main_ci_conclusion": "success"
+    },
+    {
+      "donor_id": "DONOR-007",
+      "repository": "vlbthambawita/ECGBench",
+      "status": "ACCEPTED_ON_MAIN",
+      "audited_commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
+      "audited_tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
+      "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json",
+      "inventory": "donors/vlbthambawita_ecgbench/INVENTORY.json",
+      "gap_matrix": "donors/vlbthambawita_ecgbench/GAP_MATRIX.json",
+      "harvest_plan": "donors/vlbthambawita_ecgbench/HARVEST_PLAN.md",
+      "license_boundary": "donors/vlbthambawita_ecgbench/LICENSE_BOUNDARY.json",
+      "dataset_boundary": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json",
+      "model_boundary": "donors/vlbthambawita_ecgbench/MODEL_BOUNDARY.json",
+      "associated_repository_dispositions": "donors/vlbthambawita_ecgbench/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+      "receipt_status": "FINALIZED",
+      "integration": "governance-only dataset-catalogue/splitting/validation disposition; no runtime implementation",
+      "runtime_dependency_added": false,
+      "source_code_copied": false,
+      "model_weights_imported": false,
+      "dataset_bytes_imported": false,
+      "verified_candidate_commit": "bcb68e39a09790d6018ca58b0a63b9c420fb7c0d",
+      "verified_candidate_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+      "candidate_ci_run_id": 35243347524,
+      "independent_verification": "donors/vlbthambawita_ecgbench/INDEPENDENT_VERIFICATION.json",
+      "clinical_authority_added": false,
+      "receipt": "donors/vlbthambawita_ecgbench/DONOR_RECEIPT.json",
+      "promotion_commit": "e12e781e8b9c27d0aefbe75f55c99d80dce76fe8",
+      "promotion_tree": "aa3a13527a2fe83b0bf3e56218fdd90b4c924a9a",
+      "target_main_ci_run_id": 35243673584,
+      "target_main_ci_conclusion": "success"
+    },
+    {
+      "donor_id": "DONOR-008",
+      "repository": "ELM-Research/ECG-Preprocess",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-009",
+      "repository": "Jwoo5/fairseq-signals",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-010",
+      "repository": "bowang-lab/ecg-fm",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-011",
+      "repository": "PKUDigitalHealth/ECGFounder",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoardo-BS/HuBERT-ECG",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-015",
+      "repository": "HeartWise-AI/ECG_LLM_Judge",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-016",
+      "repository": "Jwoo5/ecg-qa",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-017",
+      "repository": "ELM-Research/ECG-Language-Models",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-018",
+      "repository": "willxxy/ECG-Byte",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-019",
+      "repository": "AIMedLab/PULSE",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-020",
+      "repository": "PKUDigitalHealth/ECG-R1",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-021",
+      "repository": "AshleyLab/MARCUS",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-A001",
+      "repository": "wfdb/wfdb-spec",
+      "status": "QUEUED_ASSOCIATED_DONOR",
+      "discovered_by": "DONOR-001",
+      "reason": "official WFDB file specification referenced by donor",
+      "license": "MIT"
+    },
+    {
+      "donor_id": "DONOR-A002",
+      "repository": "bemoody/wfdb",
+      "status": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
+      "discovered_by": "DONOR-001",
+      "reason": "original WFDB software implementation materially related to format semantics",
+      "license_note": "mixed GPL/LGPL family reported by donor audit; independent license audit required before reuse"
+    },
+    {
+      "donor_id": "DONOR-A003",
+      "repository": "vitaldb/opendsp",
+      "status": "QUEUED_ASSOCIATED_DONOR",
+      "discovered_by": "DONOR-002",
+      "reason": "OpenECG core dependency and extracted DSP primitive implementation; must be audited separately before direct dependency or code reuse"
+    },
+    {
+      "donor_id": "DONOR-A004",
+      "repository": "vuno/ST-MEM",
+      "status": "QUEUED_ASSOCIATED_DONOR",
+      "discovered_by": "DONOR-002",
+      "reason": "material SSL model upstream referenced by OpenECG through historical bakqui/ST-MEM clone instruction"
+    }
+  ],
+  "completion_rule": "No donor or associated material first-party repository may remain ambiguous before program completion."
 }
