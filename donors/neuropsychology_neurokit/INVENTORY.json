@@ -1,0 +1,224 @@
+{
+  "schema": "ecg-donor-inventory-v1",
+  "donor_id": "DONOR-003",
+  "repository": "neuropsychology/NeuroKit",
+  "audited_release": "v0.2.13",
+  "audited_commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+  "audited_tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+  "recursive_tree_audit": {
+    "complete": true,
+    "inventory_method": "Pinned recursive Git tree plus direct directory listings and full-file reads of material ECG, signal, HRV, benchmark, data-I/O, test, CI, packaging, licensing, citation and issue surfaces",
+    "fresh_clone_attempted": true,
+    "fresh_clone_result": "BLOCKED_BY_EXECUTION_ENVIRONMENT_DNS",
+    "fresh_clone_claimed": false,
+    "connector_source_audit_continued": true
+  },
+  "root_families": {
+    "governance_and_packaging": [
+      ".gitattributes", ".gitignore", ".pre-commit-config.yaml", "AUTHORS.rst", "CITATION.cff", "LICENSE", "MANIFEST.in", "NEWS.rst", "README.rst", "pyproject.toml", "uv.lock", "flake.lock", "flake.nix", "codecov.yml"
+    ],
+    "automation": [".github/", ".binder/"],
+    "implementation": ["neurokit2/"],
+    "tests": ["tests/"],
+    "documentation": ["docs/", "paper/"],
+    "research_studies": ["studies/"],
+    "bundled_or_downloadable_data": ["data/"]
+  },
+  "ecg_modules": [
+    "neurokit2/ecg/ecg_analyze.py",
+    "neurokit2/ecg/ecg_clean.py",
+    "neurokit2/ecg/ecg_delineate.py",
+    "neurokit2/ecg/ecg_eventrelated.py",
+    "neurokit2/ecg/ecg_findpeaks.py",
+    "neurokit2/ecg/ecg_intervalrelated.py",
+    "neurokit2/ecg/ecg_invert.py",
+    "neurokit2/ecg/ecg_peaks.py",
+    "neurokit2/ecg/ecg_phase.py",
+    "neurokit2/ecg/ecg_plot.py",
+    "neurokit2/ecg/ecg_process.py",
+    "neurokit2/ecg/ecg_quality.py",
+    "neurokit2/ecg/ecg_rsp.py",
+    "neurokit2/ecg/ecg_segment.py",
+    "neurokit2/ecg/ecg_simulate.py"
+  ],
+  "ecg_capabilities": {
+    "cleaning": [
+      "0.5-Hz high-pass plus power-line filtering default pipeline",
+      "BioSPPy FIR pipeline",
+      "Pan-Tompkins, Hamilton, Elgendi, Engzee and visibility-graph-specific preprocessing",
+      "automatic missing-value interpolation before some filtering paths"
+    ],
+    "r_peak_detection": [
+      "NeuroKit gradient threshold",
+      "Pan-Tompkins 1985",
+      "Hamilton 2002",
+      "Zong/WQRS 2003",
+      "Martinez 2004",
+      "Christov 2004",
+      "Gamboa 2008",
+      "Elgendi 2010",
+      "Engzee-mod 2012",
+      "Manikandan 2012",
+      "Khamis/UNSW 2016",
+      "Kalidas 2017",
+      "Nabian 2018",
+      "Rodrigues 2021",
+      "Emrich FastNVG 2023",
+      "ProMAC probabilistic multi-detector agreement"
+    ],
+    "peak_artifact_handling": [
+      "Lipponen/Tarvainen 2019 RR artifact classification",
+      "ectopic/missed/extra/long-short classes",
+      "iterative corrected-peak generation",
+      "uncorrected peak preservation when called through ecg_peaks"
+    ],
+    "delineation": [
+      "derivative/peak method",
+      "continuous wavelet transform",
+      "discrete wavelet transform",
+      "Emrich 2024 physiology-informed prominence method",
+      "P/Q/S/T peaks plus P/T and QRS onset/offset outputs where supported",
+      "optional standardized-distance sanity check"
+    ],
+    "quality": [
+      "average-QRS morphology similarity",
+      "Orphanidou-style template matching",
+      "Sabeti-style morphology dissimilarity without original DTW step",
+      "modified Zhao 2018 pSQI/kSQI/basSQI rule set",
+      "Ho 2025 inter-detector RR interval correctness index"
+    ],
+    "other": [
+      "ECG inversion detection/correction",
+      "beat segmentation",
+      "cardiac phase",
+      "ECG-derived respiration",
+      "ECG simulation",
+      "event-related and interval-related analysis",
+      "HRV feature extraction"
+    ]
+  },
+  "generic_signal_modules_material_to_ecg": [
+    "signal_filter", "signal_resample", "signal_detrend", "signal_distort",
+    "signal_fillmissing", "signal_flatline", "signal_findpeaks", "signal_fixpeaks",
+    "signal_interpolate", "signal_noise", "signal_period", "signal_rate",
+    "signal_quality", "signal_psd", "signal_power", "signal_changepoints",
+    "signal_timefrequency", "signal_sanitize", "signal_simulate", "signal_smooth"
+  ],
+  "signal_processing_inventory": {
+    "filters": ["Butterworth SOS/BA/ZI", "Bessel", "Chebyshev-II", "FIR via MNE", "Savitzky-Golay", "powerline", "IIR notch"],
+    "resampling": ["scipy interpolation/zoom", "NumPy interpolation", "Pandas", "polyphase", "FFT"],
+    "synthetic_distortions": ["Gaussian/Laplace noise", "multi-frequency noise", "50/60-Hz-style powerline", "artifact bursts", "linear drift"],
+    "flatline": "relative derivative-threshold flatline percentage",
+    "missing_data": "interpolation utilities exist; some ECG cleaning paths invoke them automatically"
+  },
+  "hrv_modules": [
+    "neurokit2/hrv/hrv.py", "neurokit2/hrv/hrv_time.py", "neurokit2/hrv/hrv_frequency.py",
+    "neurokit2/hrv/hrv_nonlinear.py", "neurokit2/hrv/hrv_rqa.py", "neurokit2/hrv/hrv_rsa.py",
+    "neurokit2/hrv/hrv_utils.py", "neurokit2/hrv/intervals_process.py", "neurokit2/hrv/intervals_to_peaks.py"
+  ],
+  "data_io": {
+    "implemented": ["AcqKnowledge", "BITalino", "XDF", "video", "CSV writer", "package/example dataset retrieval"],
+    "not_found_as_native_ecg_ingest": ["DICOM ECG", "SCP-ECG", "vendor ECG XML"],
+    "wfdb_note": "wfdb appears as a test/optional dependency and benchmark data acquisition mechanism rather than a canonical NeuroKit ECG file-format authority"
+  },
+  "benchmark_and_research": {
+    "library_benchmark": ["neurokit2/benchmark/benchmark_ecg.py", "neurokit2/benchmark/benchmark_utils.py"],
+    "studies": ["studies/ecg_benchmark/", "studies/resampling/", "studies/hrv_frequency/"],
+    "ecg_benchmark_datasets_named": ["GUDB", "MIT-BIH Arrhythmia", "MIT-BIH Normal Sinus Rhythm", "LUDB", "Fantasia"],
+    "ecg_benchmark_outputs": ["detector failure/error capture", "runtime", "recording length", "dataset/participant", "interpolated-period-series error score"],
+    "benchmark_limitations": ["study describes itself as unpublished", "benchmark_ecg_preprocessing data-preparation doc contains unfinished note", "reported score is not sensitivity/specificity or adjudicated diagnostic performance"]
+  },
+  "test_inventory": {
+    "ecg_files": ["tests/tests_ecg.py", "tests/tests_ecg_delineate.py", "tests/tests_ecg_findpeaks.py"],
+    "ecg_fixture_directory": "tests/ecg_data/",
+    "fixture_examples": ["good_4000.csv", "bad_500.csv", "good_4000_annotation.csv", "golden R-peak outputs"],
+    "useful_patterns": [
+      "fixed-seed synthetic ECG fixtures",
+      "flatline injection into synthetic ECG",
+      "multiple detector comparison",
+      "missing-column warning paths",
+      "CWT/DWT/derivative delineation regression",
+      "nonpositive-peak-height edge regression",
+      "all detector implementations invoked against all-zero input",
+      "change-aversion golden-output fixtures explicitly separated from correctness claims"
+    ],
+    "fixture_provenance_status": "DO_NOT_IMPORT_UNTIL_DATA_PROVENANCE_AND_LICENSE_SEPARATELY_RESOLVED"
+  },
+  "ci_and_reproducibility": {
+    "test_matrix": "Ubuntu with Python 3.10 through 3.14",
+    "environment_manager": "uv with committed uv.lock",
+    "coverage": "pytest coverage uploaded to Codecov",
+    "external_data_dependency": "test workflow downloads/caches MNE datasets for full tests",
+    "hermetic": false,
+    "release_automation": true
+  },
+  "deployment": {
+    "docker": false,
+    "onnx": false,
+    "tflite": false,
+    "mobile_or_edge_runtime": false,
+    "primary_distribution": "Python package"
+  },
+  "models": {
+    "trained_ecg_weights_found_in_core_repo": false,
+    "foundation_model_architecture": false,
+    "disposition_note": "No model challenger card required for core NeuroKit package unless a separately discovered model artifact is later associated."
+  },
+  "data_assets": {
+    "repository_contains_physiological_example_or_test_data": true,
+    "examples": ["data/ecg_1000hz.csv", "data/ecg_3000hz.csv", "tests/ecg_data/good_4000.csv", "tests/ecg_data/bad_500.csv"],
+    "dataset_specific_terms_found": false,
+    "target_import_allowed": false,
+    "reason": "Software MIT license is not treated as proof of independent dataset/patient-data redistribution terms."
+  },
+  "material_known_issues_and_todos": [
+    {
+      "surface": "CWT delineation",
+      "issue": 1138,
+      "status": "OPEN_WONTFIX",
+      "failure_mode": "T-wave inversion can be misidentified as a positive maximum",
+      "target_use": "ADVERSARIAL_TEST_AND_LIMITATION"
+    },
+    {
+      "surface": "ECG-derived respiration",
+      "source": "ecg_rsp.py TODO",
+      "limitation": "filtering parameters explicitly identified upstream as needing comparative study"
+    },
+    {
+      "surface": "some R-peak implementation path",
+      "source": "ecg_findpeaks.py TODO",
+      "limitation": "upstream comment states a method does not really seem to work; affected method must not be promoted without method-specific verification"
+    },
+    {
+      "surface": "benchmark dataset construction",
+      "source": "benchmark_ecg.py",
+      "limitation": "data construction documentation contains a TO COMPLETE marker"
+    }
+  ],
+  "security_and_governance_observations": [
+    "Library is general-purpose scientific signal processing and does not implement target provenance/clinical-authority gates.",
+    "Automatic interpolation and corrected-peak paths can change evidence and therefore require explicit transformation provenance in any target adapter.",
+    "Relative quality scores must not be reinterpreted as absolute ECG usability without target-controlled thresholds and evidence.",
+    "External dataset labels and annotations remain SOURCE LABELS only.",
+    "No PHI or donor raw physiological files are imported into target during audit."
+  ],
+  "material_capability_inventory": [
+    "large R-peak detector ensemble",
+    "probabilistic detector-agreement strategy",
+    "RR artifact taxonomy and peak-correction workflow",
+    "multi-method P/QRS/T delineation",
+    "multiple morphology and spectral signal-quality indices",
+    "signal inversion handling",
+    "beat segmentation and cardiac phase",
+    "ECG-derived respiration",
+    "ECG/physiological signal simulation",
+    "deterministic noise/artifact/powerline/drift synthesis",
+    "multiple filter and resampling methods",
+    "HRV time/frequency/nonlinear/RQA/RSA analysis",
+    "cross-dataset detector benchmarking with error/runtime capture",
+    "deterministic synthetic and change-aversion test strategies",
+    "AcqKnowledge/BITalino/XDF input utilities",
+    "modern Python lock/test/release workflow"
+  ],
+  "inventory_disposition": "COMPLETE_TREE_INSPECTED_MATERIAL_FILES_SAMPLED_IN_DEPTH"
+}
