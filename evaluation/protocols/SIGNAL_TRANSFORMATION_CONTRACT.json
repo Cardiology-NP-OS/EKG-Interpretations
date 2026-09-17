@@ -1,0 +1,21 @@
+{
+  "schema": "ekg-signal-transformation-contract-v1",
+  "authorityClass": "ENGINEERING_NONDIAGNOSTIC",
+  "implementation": "lib/signal_transformations.js",
+  "tests": ["tests/signal_transformations.test.js"],
+  "implementedMethods": {
+    "artifactHandling": ["detect-and-report-no-silent-repair-v1"],
+    "baseline": ["none", "subtract-mean-v1", "subtract-median-v1", "moving-average-subtraction-v1"],
+    "filter": ["none", "moving-average-v1"],
+    "normalization": ["none", "zscore-v1", "median-mad-v1"]
+  },
+  "measurementBoundary": "Calibrated physical samples remain the authoritative engineering measurement input; normalized output is a separate engineering representation.",
+  "silentRepairAllowed": false,
+  "clinicalPerformanceClaimed": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

@@ -14,8 +14,8 @@
       "capability_id": "ECG-CAP-DATASET-ANNOTATION-TYPES",
       "capability_family": "Evaluation",
       "name": "Dataset annotation-type classification",
-      "canonical_target_path": "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -37,10 +37,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json"
+        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -57,8 +59,8 @@
       "capability_id": "ECG-CAP-DATASET-CATALOG",
       "capability_family": "Evaluation",
       "name": "Canonical ECG dataset identity catalog",
-      "canonical_target_path": "evaluation/datasets/ECG_DATASET_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -94,10 +96,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/datasets/ECG_DATASET_CATALOG.json"
+        "evaluation/datasets/ECG_DATASET_CATALOG.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -245,8 +249,8 @@
       "capability_id": "ECG-CAP-EVALUATION-DATASET-VALIDATION",
       "capability_family": "Evaluation",
       "name": "Dataset signal/config validation",
-      "canonical_target_path": "evaluation/protocols/DATASET_PROVENANCE_CONTRACT.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -268,10 +272,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/DATASET_PROVENANCE_CONTRACT.json"
+        "evaluation/protocols/DATASET_PROVENANCE_CONTRACT.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -288,8 +294,8 @@
       "capability_id": "ECG-CAP-EVALUATION-FAILURE-MODES",
       "capability_family": "Evaluation",
       "name": "Evaluation failure-mode catalog",
-      "canonical_target_path": "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -322,10 +328,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -342,8 +350,8 @@
       "capability_id": "ECG-CAP-EVALUATION-FEATURE-BENCHMARKS",
       "capability_family": "Evaluation",
       "name": "Engineered-feature benchmark contracts",
-      "canonical_target_path": "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -373,10 +381,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
+        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -393,8 +403,8 @@
       "capability_id": "ECG-CAP-EVALUATION-LABEL-HARMONIZATION",
       "capability_family": "Evaluation",
       "name": "Label and feature semantic harmonization",
-      "canonical_target_path": "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -428,10 +438,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
+        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -515,8 +527,8 @@
       "capability_id": "ECG-CAP-EVALUATION-METRICS",
       "capability_family": "Evaluation",
       "name": "Non-reportable evaluation metric contracts",
-      "canonical_target_path": "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -564,10 +576,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
+        "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -672,8 +686,8 @@
       "capability_id": "ECG-CAP-EVALUATION-REPRODUCIBILITY",
       "capability_family": "Evaluation",
       "name": "Reproducibility and regression contracts",
-      "canonical_target_path": "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -744,10 +758,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
+        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -766,8 +782,8 @@
       "capability_id": "ECG-CAP-EVALUATION-ROBUSTNESS",
       "capability_family": "Evaluation",
       "name": "Robustness and distortion evaluation",
-      "canonical_target_path": "evaluation/robustness/ROBUSTNESS_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -841,10 +857,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/robustness/ROBUSTNESS_CATALOG.json"
+        "evaluation/robustness/ROBUSTNESS_CATALOG.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -1186,9 +1204,9 @@
       "capability_id": "ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY",
       "capability_family": "Governance",
       "name": "Clinical-authority separation and inactive control",
-      "canonical_target_path": "docs/REPOSITORY_ARCHITECTURE.md",
-      "implementation_status": "TARGET_OWNED_GOVERNANCE_REPRESENTATION",
-      "authority_class": "GOVERNANCE",
+      "canonical_target_path": "lib/governance_runtime.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1281,9 +1299,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/governance_runtime.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/GOVERNANCE_RUNTIME_CONTRACT.json"
+      ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
       ],
@@ -1305,9 +1326,9 @@
       "capability_id": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
       "capability_family": "Governance",
       "name": "Dependency and environment reproducibility",
-      "canonical_target_path": "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
-      "authority_class": "GOVERNANCE",
+      "canonical_target_path": "lib/governance_runtime.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1418,10 +1439,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/governance_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
+        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
+        "evaluation/protocols/GOVERNANCE_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -1436,15 +1459,15 @@
         "vlbthambawita/ECGBench:ECGB-034"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
     },
     {
       "capability_id": "ECG-CAP-GOVERNANCE-LICENSE-PROVENANCE",
       "capability_family": "Governance",
       "name": "License and asset provenance boundaries",
-      "canonical_target_path": "ECG_CROSS_DONOR_INTEGRATION_AUDIT.json",
-      "implementation_status": "TARGET_OWNED_GOVERNANCE_REPRESENTATION",
-      "authority_class": "GOVERNANCE",
+      "canonical_target_path": "lib/governance_runtime.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1560,9 +1583,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/governance_runtime.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/GOVERNANCE_RUNTIME_CONTRACT.json"
+      ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
       ],
@@ -1572,15 +1598,15 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
     },
     {
       "capability_id": "ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION",
       "capability_family": "Governance",
       "name": "Remote/mutable acquisition rejection boundary",
-      "canonical_target_path": "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
-      "authority_class": "GOVERNANCE",
+      "canonical_target_path": "lib/model_asset_safety.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1639,10 +1665,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/model_asset_safety.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+        "evaluation/protocols/MODEL_ASSET_SAFETY_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -1653,15 +1681,15 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
     },
     {
       "capability_id": "ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY",
       "capability_family": "Governance",
       "name": "Exact-source identity and substitution resistance",
-      "canonical_target_path": "docs/REPOSITORY_ARCHITECTURE.md",
-      "implementation_status": "TARGET_OWNED_GOVERNANCE_REPRESENTATION",
-      "authority_class": "GOVERNANCE",
+      "canonical_target_path": "lib/governance_runtime.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1693,9 +1721,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/governance_runtime.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/GOVERNANCE_RUNTIME_CONTRACT.json"
+      ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
       ],
@@ -1714,9 +1745,9 @@
       "capability_id": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION",
       "capability_family": "Governance",
       "name": "Unsafe model/state deserialization rejection boundary",
-      "canonical_target_path": "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
-      "authority_class": "GOVERNANCE",
+      "canonical_target_path": "lib/model_asset_safety.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "DeepPSP/torch_ecg",
@@ -1749,10 +1780,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/model_asset_safety.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+        "evaluation/protocols/MODEL_ASSET_SAFETY_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -1763,14 +1796,14 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_GOVERNANCE_ONLY"
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
     },
     {
       "capability_id": "ECG-CAP-IMAGE-DEGRADATION",
       "capability_family": "Image ECG",
       "name": "Image/scan degradation and adversarial transformations",
-      "canonical_target_path": "evaluation/robustness/ROBUSTNESS_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/image_robustness.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -1795,10 +1828,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/image_robustness.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/robustness/ROBUSTNESS_CATALOG.json"
+        "evaluation/robustness/ROBUSTNESS_CATALOG.json",
+        "evaluation/protocols/IMAGE_ROBUSTNESS_EXECUTION_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -2020,9 +2055,9 @@
       "capability_id": "ECG-CAP-MODEL-CHECKPOINT-SAFETY",
       "capability_family": "Representations / models",
       "name": "Checkpoint identity and safe-loading contracts",
-      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/model_asset_safety.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_GOVERNANCE",
       "source_provenance": [
         {
           "source": "DeepPSP/torch_ecg",
@@ -2068,9 +2103,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/model_asset_safety.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/MODEL_ASSET_SAFETY_CONTRACT.json"
+      ],
       "research_paths": [
         "research/models/CHALLENGER_CATALOG.md"
       ],
@@ -2080,7 +2118,7 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
     },
     {
       "capability_id": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
@@ -2358,9 +2396,9 @@
       "capability_id": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING",
       "capability_family": "Preprocessing",
       "name": "Artifact and missing-sample handling",
-      "canonical_target_path": "research/preprocessing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/signal_transformations.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_ENGINEERING",
       "source_provenance": [
         {
           "source": "neuropsychology/NeuroKit",
@@ -2382,9 +2420,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_transformations.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json"
+      ],
       "research_paths": [
         "research/preprocessing/README.md"
       ],
@@ -2394,15 +2435,15 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
       "capability_family": "Preprocessing",
       "name": "Filtering and baseline-handling contracts",
-      "canonical_target_path": "research/preprocessing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/signal_transformations.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_ENGINEERING",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -2459,9 +2500,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_transformations.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json"
+      ],
       "research_paths": [
         "research/preprocessing/README.md"
       ],
@@ -2475,15 +2519,15 @@
         "tmehari/ptbxl_feature_benchmark:PTBXLFB-028"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-NORMALIZATION",
       "capability_family": "Preprocessing",
       "name": "Normalization contracts",
-      "canonical_target_path": "research/preprocessing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/signal_transformations.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_ENGINEERING",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -2503,9 +2547,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_transformations.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json"
+      ],
       "research_paths": [
         "research/preprocessing/README.md"
       ],
@@ -2515,7 +2562,7 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-RESAMPLING",
@@ -2840,8 +2887,8 @@
       "capability_id": "ECG-CAP-QUALITY-NOISE-ROBUSTNESS",
       "capability_family": "Signal quality",
       "name": "Noise and amplitude robustness",
-      "canonical_target_path": "evaluation/robustness/ROBUSTNESS_CATALOG.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -2876,10 +2923,12 @@
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/signal_quality.test.js",
-        "tests/input_quality_guard.test.js"
+        "tests/input_quality_guard.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/robustness/ROBUSTNESS_CATALOG.json"
+        "evaluation/robustness/ROBUSTNESS_CATALOG.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -2896,9 +2945,9 @@
       "capability_id": "ECG-CAP-RESEARCH-DATA-LOADERS",
       "capability_family": "Research",
       "name": "Dataset loader and adapter research",
-      "canonical_target_path": "research/datasets/DATASET_CARD_INDEX.json",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/local_dataset_loader.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_ENGINEERING",
       "source_provenance": [
         {
           "source": "DeepPSP/torch_ecg",
@@ -2970,9 +3019,12 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/local_dataset_loader.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/LOCAL_DATASET_LOADER_CONTRACT.json"
+      ],
       "research_paths": [
         "research/datasets/DATASET_CARD_INDEX.json"
       ],
@@ -2982,7 +3034,7 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-RESEARCH-ECG-DERIVED-RESPIRATION",
@@ -3209,8 +3261,8 @@
       "capability_id": "ECG-CAP-SIGNAL-ANNOTATION-INGESTION",
       "capability_family": "Signal / ingestion",
       "name": "Annotation ingestion semantics",
-      "canonical_target_path": "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
-      "implementation_status": "TARGET_OWNED_EVALUATION_CONTRACT",
+      "canonical_target_path": "lib/evaluation_runtime.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
       "authority_class": "EVALUATION_NONRUNTIME",
       "source_provenance": [
         {
@@ -3231,10 +3283,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/evaluation_runtime.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json"
+        "evaluation/protocols/ANNOTATION_EVALUATION_CONTRACTS.json",
+        "evaluation/protocols/EVALUATION_RUNTIME_CONTRACT.json"
       ],
       "research_paths": [
         "research/synthesis/CROSS_DONOR_CAPABILITY_SYNTHESIS.md"
@@ -3251,9 +3305,9 @@
       "capability_id": "ECG-CAP-SIGNAL-FORMAT-ADAPTERS",
       "capability_family": "Signal / ingestion",
       "name": "Signal format interoperability and adapters",
-      "canonical_target_path": "research/signal_processing/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/signal_adapter.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "NONCLINICAL_ENGINEERING",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -3302,9 +3356,12 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/signal_adapter.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/SIGNAL_ADAPTER_CONTRACT.json"
+      ],
       "research_paths": [
         "research/signal_processing/README.md"
       ],
@@ -3316,7 +3373,7 @@
         "vlbthambawita/ECGBench:ECGB-014"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-SIGNAL-WFDB-CORE",

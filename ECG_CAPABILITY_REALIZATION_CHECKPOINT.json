@@ -1,0 +1,239 @@
+{
+  "schema": "ecg-capability-realization-checkpoint-v1",
+  "parentMainCommit": "c6bf317fe3805a2e08fde40daa14049105071933",
+  "parentMainTree": "7d837905b219b19cf63a051a75eb16b085427b97",
+  "status": "VERIFIED_UNPROMOTED",
+  "scope": "Realize every currently deterministic, license-safe, target-owned engineering/evaluation/governance capability as executable code while explicitly retaining only capabilities that lack validated implementation specifications or admitted model assets.",
+  "readinessBefore": {
+    "EXECUTABLE_TARGET_OWNED": 18,
+    "CONTRACT_ONLY_NONRUNTIME": 15,
+    "RESEARCH_REFERENCE_NONRUNTIME": 20,
+    "GOVERNANCE_ONLY": 3,
+    "CHALLENGER_METADATA_BLOCKED": 1,
+    "IMPLEMENTATION_REQUIRED_NOW": 0
+  },
+  "readinessAfter": {
+    "EXECUTABLE_TARGET_OWNED": 42,
+    "CONTRACT_ONLY_NONRUNTIME": 0,
+    "RESEARCH_REFERENCE_NONRUNTIME": 14,
+    "GOVERNANCE_ONLY": 0,
+    "CHALLENGER_METADATA_BLOCKED": 1,
+    "IMPLEMENTATION_REQUIRED_NOW": 0
+  },
+  "realizedCapabilities": [
+    {
+      "capabilityId": "ECG-CAP-DATASET-ANNOTATION-TYPES",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-DATASET-CATALOG",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-DATASET-VALIDATION",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-FAILURE-MODES",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-FEATURE-BENCHMARKS",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-LABEL-HARMONIZATION",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-METRICS",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-REPRODUCIBILITY",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-EVALUATION-ROBUSTNESS",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY",
+      "implementation": "lib/governance_runtime.js",
+      "test": "tests/governance_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
+      "implementation": "lib/governance_runtime.js",
+      "test": "tests/governance_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-GOVERNANCE-LICENSE-PROVENANCE",
+      "implementation": "lib/governance_runtime.js",
+      "test": "tests/governance_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION",
+      "implementation": "lib/model_asset_safety.js",
+      "test": "tests/model_asset_safety.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY",
+      "implementation": "lib/governance_runtime.js",
+      "test": "tests/governance_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION",
+      "implementation": "lib/model_asset_safety.js",
+      "test": "tests/model_asset_safety.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-IMAGE-DEGRADATION",
+      "implementation": "lib/image_robustness.js",
+      "test": "tests/image_robustness.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-CHECKPOINT-SAFETY",
+      "implementation": "lib/model_asset_safety.js",
+      "test": "tests/model_asset_safety.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING",
+      "implementation": "lib/signal_transformations.js",
+      "test": "tests/signal_transformations.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
+      "implementation": "lib/signal_transformations.js",
+      "test": "tests/signal_transformations.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-PREPROCESS-NORMALIZATION",
+      "implementation": "lib/signal_transformations.js",
+      "test": "tests/signal_transformations.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-QUALITY-NOISE-ROBUSTNESS",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-RESEARCH-DATA-LOADERS",
+      "implementation": "lib/local_dataset_loader.js",
+      "test": "tests/local_dataset_loader.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-SIGNAL-ANNOTATION-INGESTION",
+      "implementation": "lib/evaluation_runtime.js",
+      "test": "tests/evaluation_runtime.test.js"
+    },
+    {
+      "capabilityId": "ECG-CAP-SIGNAL-FORMAT-ADAPTERS",
+      "implementation": "lib/signal_adapter.js",
+      "test": "tests/signal_adapter.test.js"
+    }
+  ],
+  "residualNonExecutable": [
+    {
+      "capabilityId": "ECG-CAP-EVENT-PACER-DETECTION",
+      "reason": "NO_VALIDATED_TARGET_DETECTOR_OR_THRESHOLD_SPEC"
+    },
+    {
+      "capabilityId": "ECG-CAP-IMAGE-DIGITIZATION",
+      "reason": "NO_VALIDATED_IMAGE_TO_SIGNAL_IMPLEMENTATION"
+    },
+    {
+      "capabilityId": "ECG-CAP-IMAGE-GRID-CALIBRATION",
+      "reason": "NO_VALIDATED_GRID_SCALE_ESTIMATOR"
+    },
+    {
+      "capabilityId": "ECG-CAP-IMAGE-ROI-LOCALIZATION",
+      "reason": "NO_VALIDATED_LEAD_ROI_LOCALIZER"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "PINNED_EXECUTABLE_MODEL_ASSET_NOT_ADMITTED"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-DELINEATION-CHALLENGERS",
+      "reason": "PINNED_EXECUTABLE_MODEL_ASSET_NOT_ADMITTED"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-LIGHTWEIGHT-DEPLOYMENT",
+      "reason": "PINNED_EXECUTABLE_MODEL_ASSET_NOT_ADMITTED"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-SEQUENCE-CHALLENGERS",
+      "reason": "PINNED_EXECUTABLE_MODEL_ASSET_NOT_ADMITTED"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "reason": "PINNED_EXECUTABLE_MODEL_ASSET_NOT_ADMITTED"
+    },
+    {
+      "capabilityId": "ECG-CAP-RESEARCH-ECG-DERIVED-RESPIRATION",
+      "reason": "NO_VALIDATED_TARGET_FEATURE_SPEC"
+    },
+    {
+      "capabilityId": "ECG-CAP-RESEARCH-METADATA-STANDARDS",
+      "reason": "RESEARCH_STANDARD_REFERENCE_NOT_EXECUTION_SURFACE"
+    },
+    {
+      "capabilityId": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT",
+      "reason": "SCIENTIFIC_CONTEXT_REFERENCE_NOT_EXECUTION_SURFACE"
+    },
+    {
+      "capabilityId": "ECG-CAP-RESEARCH-MULTIMODAL-MAPPING",
+      "reason": "RESEARCH_PROVENANCE_MAPPING_NOT_MODEL_EXECUTION"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-WAVEFORM-TOKENIZATION",
+      "reason": "CHALLENGER_PREPROCESSING_AND_MODEL_ASSETS_NOT_ADMITTED"
+    },
+    {
+      "capabilityId": "ECG-CAP-MODEL-MULTIMODAL-CHALLENGERS",
+      "reason": "PINNED_EXECUTABLE_MODEL_ASSET_NOT_ADMITTED"
+    }
+  ],
+  "proofBoundary": {
+    "syntheticAndAdversarialEngineeringEvidence": true,
+    "externalComparativeSuperiorityEstablished": false,
+    "worldBestClaim": "NOT_ESTABLISHED",
+    "clinicalPerformanceClaimed": false,
+    "clinicalValidityInferred": false
+  },
+  "donorProgram": {
+    "completedPrimaryDonors": 9,
+    "requiredPrimaryDonors": 21,
+    "pausedFrontier": "DONOR-010",
+    "resumeEligibleAfterAcceptance": true,
+    "resumeCondition": "Capability realization checkpoint accepted on main with exact-SHA CI and independent full-clone verification."
+  },
+  "verification": {
+    "implementationCandidateCommit": "278a3f12e06ee51d9e38a5e164c5ea37304293db",
+    "implementationCandidateTree": "e42d6c8b3aaec0e4f894e8a2e4419d70d32142a1",
+    "candidateCiRunId": 35281532869,
+    "candidateCiConclusion": "success",
+    "independentVerification": "PASS_FULL_CLONE",
+    "independentFocused": "87/87 PASS",
+    "independentFullTargetSuite": "PASS",
+    "candidateDiffCheck": "PASS"
+  },
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED"
+}

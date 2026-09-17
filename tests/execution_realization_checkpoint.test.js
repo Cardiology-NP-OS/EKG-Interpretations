@@ -1,5 +1,6 @@
 "use strict";
 const assert = require("assert");
+const cp = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const { auditRegistry, currentActionableGaps } = require("../tools/execution_readiness_audit");
@@ -11,6 +12,14 @@ const registry = read("ECG_CAPABILITY_REGISTRY.json");
 const donors = read("ECG_DONOR_REGISTRY.json");
 const pkg = read("package.json");
 const audit = auditRegistry(root, registry);
+function ensureCommit(commit) {
+  const probe = cp.spawnSync("git", ["-C",root,"cat-file","-e",commit + "^{commit}"], {encoding:"utf8"});
+  if (probe.status === 0) return;
+  cp.execFileSync("git", ["-C",root,"fetch","--no-tags","--depth=1","origin",commit], {stdio:"ignore"});
+}
+ensureCommit("6a0bad3319266590293c54cabb7cf0f3b5a2b679");
+const historicalRegistry = JSON.parse(cp.execFileSync("git", ["-C",root,"show","6a0bad3319266590293c54cabb7cf0f3b5a2b679:ECG_CAPABILITY_REGISTRY.json"], {encoding:"utf8"}).replace(/^\uFEFF/,""));
+const historicalAudit = auditRegistry(root, historicalRegistry);
 let passed = 0;
 function test(name, fn) {
   try { fn(); passed += 1; console.log(`PASS ${name}`); }
@@ -21,10 +30,11 @@ test("checkpoint is anchored to accepted multilead main", () => {
   assert.strictEqual(checkpoint.parentMainCommit, "395fe56f6b5f7ae05d0c303fc7948ec8bae416a5");
   assert.strictEqual(checkpoint.parentMainTree, "5e2d23a5b1338465db83061a6b10ce2d26419de1");
 });
-test("live readiness counts exactly match checkpoint", () => {
-  assert.deepStrictEqual(checkpoint.readinessCounts, audit.counts);
-  assert.deepStrictEqual(currentActionableGaps(audit), checkpoint.implementationRequiredNow);
+test("accepted readiness counts match the accepted realization snapshot", () => {
+  assert.deepStrictEqual(checkpoint.readinessCounts, historicalAudit.counts);
+  assert.deepStrictEqual(currentActionableGaps(historicalAudit), checkpoint.implementationRequiredNow);
   assert.strictEqual(checkpoint.implementationRequiredNow.length, 0);
+  assert.ok(audit.counts.EXECUTABLE_TARGET_OWNED >= historicalAudit.counts.EXECUTABLE_TARGET_OWNED);
 });
 test("waveform rendering is code-backed and tested", () => {
   const cap = registry.capabilities.find(row => row.capability_id === "ECG-CAP-IMAGE-RENDERING");
@@ -84,4 +94,4 @@ test("implementation verification is exact and successful", () => {
   assert.ok(["IMPLEMENTED_UNVERIFIED","VERIFIED_UNPROMOTED","ACCEPTED_ON_MAIN"].includes(checkpoint.status));
 });
 if (process.exitCode) process.exit(process.exitCode);
-console.log(JSON.stringify({schema:"ekg-execution-realization-checkpoint-tests-v1",pass:true,passed,total:passed,canonicalCapabilities:registry.capability_count,executableCapabilities:audit.counts.EXECUTABLE_TARGET_OWNED,implementationRequiredNow:checkpoint.implementationRequiredNow.length,diagnosticRuntime:"GOVERNED_INACTIVE",clinicalAuthorityAdded:false}));
+console.log(JSON.stringify({schema:"ekg-execution-realization-checkpoint-tests-v1",pass:true,passed,total:passed,canonicalCapabilities:registry.capability_count,acceptedExecutableCapabilities:historicalAudit.counts.EXECUTABLE_TARGET_OWNED,currentExecutableCapabilities:audit.counts.EXECUTABLE_TARGET_OWNED,implementationRequiredNow:checkpoint.implementationRequiredNow.length,diagnosticRuntime:"GOVERNED_INACTIVE",clinicalAuthorityAdded:false}));

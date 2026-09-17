@@ -1,0 +1,21 @@
+{
+  "schema": "ekg-local-dataset-loader-contract-v1",
+  "implementation": "lib/local_dataset_loader.js",
+  "tests": ["tests/local_dataset_loader.test.js"],
+  "requirements": [
+    "explicit canonical dataset identifier",
+    "manifest-relative paths only",
+    "patient/record split leakage validation",
+    "exact file byte counts and SHA-256 hashes",
+    "regular files only and no traversal or absolute paths"
+  ],
+  "sourceBytesCommittedToGit": false,
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "runtimeAuthority": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "ekg-signal-adapter-contract-v1",
+  "implementation": "lib/signal_adapter.js",
+  "tests": ["tests/signal_adapter.test.js"],
+  "adapters": ["wfdb-format16-v1", "canonical-json-v1"],
+  "canonicalOutput": "ekg-canonical-signal-v1",
+  "failClosedOn": ["unsupported adapter", "duplicate lead", "nonfinite sample", "lead-length mismatch", "WFDB byte-size mismatch"],
+  "runtimeAuthority": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}
