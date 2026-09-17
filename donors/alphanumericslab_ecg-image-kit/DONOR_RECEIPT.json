@@ -1,0 +1,121 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-005",
+  "donor_repository": "alphanumericslab/ecg-image-kit",
+  "donor_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+  "donor_tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+  "donor_release": {
+    "tag": "v1.0.0",
+    "release_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+    "head_is_release_tag_commit": true
+  },
+  "donor_license": {
+    "root_source_code_spdx": "BSD-3-Clause",
+    "root_license_blob_sha": "2611ac54c9dd7abc9d11f1007b31f18295fb21e6",
+    "mixed_subtree_license": true,
+    "roi_subtree_license": "GPL-3.0-text",
+    "roi_license_blob_sha": "e72bfddabc15be5718a7cc061ac10e47741d8219",
+    "yolov7_license_blob_sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+    "model_weight_status": "LICENSE_REVIEW_REQUIRED_PER_ARTIFACT",
+    "dataset_asset_status": "LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_005_rollback_commit": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+    "donor_005_rollback_tree": "5555e82ed2c43fa92c0f87b3c34506c2a6deebe9"
+  },
+  "target_resulting_implementation": {
+    "type": "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION",
+    "governance_candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+    "governance_candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+    "verified_candidate_commit": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+    "verified_candidate_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_or_asset_bytes_copied": false,
+    "image_digitizer_activated": false
+  },
+  "verification": {
+    "candidate_ci_run_id": 35187787185,
+    "candidate_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "12/12 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "promotion": {
+    "merge_commit": "569f2a5747cff5bac38ca22ed88fac5fb2ed713e",
+    "merge_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+    "parents": [
+      "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+      "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6"
+    ],
+    "target_main_ci_run_id": 35187896259,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "EVALUATION_ONLY": 12,
+    "LICENSE_REVIEW_REQUIRED": 9,
+    "RESEARCH_ONLY": 4,
+    "CHALLENGER": 4,
+    "REJECTED": 2,
+    "SUPERSEDED": 2,
+    "total": 33
+  },
+  "associated_repositories": {
+    "count": 3,
+    "dispositions_file": "donors/alphanumericslab_ecg-image-kit/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "new_associated_donors_queued": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "donor_models_executed": false,
+    "donor_checkpoints_imported": false,
+    "physiological_or_image_assets_imported": false,
+    "fonts_textures_or_pickle_state_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_metrics_promoted_to_target_metrics": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json": "fd68a1b0981c30d741553b0135eb02e4350413d455ce8c95c4a85672abe81f75",
+    "donors/alphanumericslab_ecg-image-kit/INVENTORY.json": "e0e408f6a8dd85a8cd9a00a0a10a3a24a30c6643ce8ff6bba3066dcf461bfcd2",
+    "donors/alphanumericslab_ecg-image-kit/GAP_MATRIX.json": "c6e0337bcc0e1d456e78552575342a5c9b7460df2d33429accdb631093681ea6",
+    "donors/alphanumericslab_ecg-image-kit/HARVEST_PLAN.md": "55ab5707797414ce712579b16450d9653c85c90a7d0de518fa0818f7aff1ab10",
+    "donors/alphanumericslab_ecg-image-kit/MODEL_BOUNDARY.json": "ef8b643710ce37a928f0c4117ac528f3c4ba8b7b1bc634eaae85610e5364f481",
+    "donors/alphanumericslab_ecg-image-kit/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "1e6349f191712e7340e7d9ea9ffe15d83c2a28b356f11db92d7dcc5ac4bfcc67",
+    "donors/alphanumericslab_ecg-image-kit/COMPARATIVE_PROOF.json": "5404004fc9fda9c3dfda47ba95224a02ba839a54a8f2e6b1d22eb3949063205e",
+    "donors/alphanumericslab_ecg-image-kit/INDEPENDENT_VERIFICATION.json": "0ddfe27e4841074f8dcdef331ad82d6f508d547a6dd5f8599c4010249ad92ece",
+    "tests/ecg_image_kit_donor_closure.test.js": "e64537e2c5615c0bbead2b95344e0296ba013140751c181164fd05b55a110eb9",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "216238e44abe120cf71c06cef176d6b304dd663f81875787a3661bbb6e652789",
+    "ECG_LICENSE_LEDGER.json": "d86e82b9b8c11151b75f433bebe4b4a9f51338a5738058ea6721284839f82e11",
+    "ECG_DATASET_REGISTRY.json": "20295fa1ddfb6c9e6f49dc3730d25dfa1536533b818d62437c2dd88021e1c0ae",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "f47d4fd3b8e326d76df9bab9bf689a9f981612a591453d48d515f987b7cb2334"
+  },
+  "outstanding_limitations": [
+    "Bundled YOLOv7 and handwriting checkpoints remain fail-closed pending exact artifact licensing/provenance review.",
+    "Bundled ECG/image/ROI/PTB-XL-derived assets, fonts, textures and pickle state remain fail-closed pending per-asset or per-dataset rights review.",
+    "No donor digitization or benchmark performance claim is promoted to target evidence.",
+    "No governed adjudicated clinical gold exists in the target.",
+    "Grid estimators and image-to-waveform extraction remain non-authoritative challengers and are not executed in target runtime."
+  ],
+  "final_disposition": "GOVERNANCE_ONLY_IMAGE_EVALUATION_AND_CHALLENGER_REFERENCE",
+  "rollback": {
+    "commit": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+    "tree": "5555e82ed2c43fa92c0f87b3c34506c2a6deebe9",
+    "method": "revert Donor-005 promotion/finalization commits; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

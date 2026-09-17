@@ -18,6 +18,7 @@ const modelBoundary = readJson("donors/alphanumericslab_ecg-image-kit/MODEL_BOUN
 const associated = readJson("donors/alphanumericslab_ecg-image-kit/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
 const comparative = readJson("donors/alphanumericslab_ecg-image-kit/COMPARATIVE_PROOF.json");
 const independent = readJson("donors/alphanumericslab_ecg-image-kit/INDEPENDENT_VERIFICATION.json");
+const receipt = readJson("donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json");
 const attribution = readText("ECG_ATTRIBUTION_LEDGER.md");
 const pkg = readJson("package.json");
 const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-005");
@@ -93,28 +94,43 @@ check("associated provenance is explicit without queue expansion", () => {
   assert.ok(associated.repositories.some(item => item.repository === "Grzego/handwriting-generation"));
 });
 check("candidate verification evidence is exact and independent", () => {
-  assert.strictEqual(donor.verified_candidate_commit, "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304");
-  assert.strictEqual(donor.verified_candidate_tree, "790dd47ea6704c7d998954ed4527180b8662b1df");
-  assert.strictEqual(donor.candidate_ci_run_id, 35187593137);
+  assert.strictEqual(donor.verified_candidate_commit, "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6");
+  assert.strictEqual(donor.verified_candidate_tree, "baa08a42b91b06f75cf101c17dbb4b9ec13e9319");
+  assert.strictEqual(donor.candidate_ci_run_id, 35187787185);
   assert.strictEqual(comparative.verification.head_sha, donor.verified_candidate_commit);
   assert.strictEqual(comparative.verification.conclusion, "success");
   assert.strictEqual(independent.candidate_commit, donor.verified_candidate_commit);
   assert.strictEqual(independent.result, "PASS");
   assert.strictEqual(independent.full_target_suite, "PASS");
 });
-check("donor remains pre-promotion and uncounted", () => {
-  assert.strictEqual(donorRegistry.completed_donors, 4);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-005");
-  assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
-  assert.strictEqual(fs.existsSync(path.join(root, "donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json")), false);
+check("donor is accepted only after promotion and target-main CI", () => {
+  assert.strictEqual(donorRegistry.completed_donors, 5);
+  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-006");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt_status, "FINALIZED");
+  assert.strictEqual(donor.receipt, "donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json");
+  assert.strictEqual(donor.promotion_commit, "569f2a5747cff5bac38ca22ed88fac5fb2ed713e");
+  assert.strictEqual(donor.target_main_ci_run_id, 35187896259);
+  assert.strictEqual(donor.target_main_ci_conclusion, "success");
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.merge_commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, donor.target_main_ci_run_id);
 });
 check("governed inactive state and attribution remain explicit", () => {
   assert.strictEqual(gap.clinical_authority_added, false);
   assert.strictEqual(capabilityRegistry.clinical_authority_added, false);
   assert.strictEqual(datasetRegistry.approved_adjudicated_project_gold_count, 0);
+  const state = receipt.governed_state_after;
+  assert.strictEqual(state.completion_state, "SPECIALIST_COMPLETE_INACTIVE");
+  assert.strictEqual(state.diagnostic_runtime, "GOVERNED_INACTIVE");
+  assert.strictEqual(state.evidence_admission, "NOT_ADMITTED");
+  assert.strictEqual(state.approved_adjudicated_gold_count, 0);
+  assert.strictEqual(state.metrics, "NOT_REPORTABLE");
+  assert.strictEqual(state.activation, "NOT_ELIGIBLE");
+  assert.strictEqual(state.clinical_validity, "NOT_INFERRED");
   assert.ok(attribution.includes("## DONOR-005 -- alphanumericslab/ecg-image-kit"));
   assert.ok(attribution.includes("Donor checkpoint/model weights copied or executed: **no**"));
   assert.ok(attribution.includes("Source labels promoted to project clinical gold: **no**"));
+  assert.ok(attribution.includes("`DONOR_RECEIPT.json`"));
 });
-console.log(JSON.stringify({schema:"ekg-donor-005-prepromotion-closure-tests-v1",donor:"alphanumericslab/ecg-image-kit",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:false,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));
+console.log(JSON.stringify({schema:"ekg-donor-005-acceptance-closure-tests-v1",donor:"alphanumericslab/ecg-image-kit",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:true,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));

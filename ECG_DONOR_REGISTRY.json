@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 4,
+  "completed_donors": 5,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-005",
+  "next_donor_id": "DONOR-006",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -82,7 +82,7 @@
     {
       "donor_id": "DONOR-005",
       "repository": "alphanumericslab/ecg-image-kit",
-      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
       "audited_tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
       "manifest": "donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json",
@@ -91,33 +91,102 @@
       "harvest_plan": "donors/alphanumericslab_ecg-image-kit/HARVEST_PLAN.md",
       "model_boundary": "donors/alphanumericslab_ecg-image-kit/MODEL_BOUNDARY.json",
       "associated_repository_dispositions": "donors/alphanumericslab_ecg-image-kit/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-      "receipt_status": "PENDING_POST_PROMOTION_TARGET_MAIN_CI",
-      "verified_candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
-      "verified_candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
-      "candidate_ci_run_id": 35187593137,
+      "receipt_status": "FINALIZED",
+      "verified_candidate_commit": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+      "verified_candidate_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+      "candidate_ci_run_id": 35187787185,
       "independent_verification": "donors/alphanumericslab_ecg-image-kit/INDEPENDENT_VERIFICATION.json",
       "integration": "governance-only image-generation/digitization/model/data disposition; no runtime implementation",
       "runtime_dependency_added": false,
       "model_weights_imported": false,
       "dataset_bytes_imported": false,
-      "clinical_authority_added": false
+      "clinical_authority_added": false,
+      "receipt": "donors/alphanumericslab_ecg-image-kit/DONOR_RECEIPT.json",
+      "promotion_commit": "569f2a5747cff5bac38ca22ed88fac5fb2ed713e",
+      "promotion_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+      "target_main_ci_run_id": 35187896259,
+      "target_main_ci_conclusion": "success"
     },
-    {"donor_id":"DONOR-006","repository":"tmehari/ptbxl_feature_benchmark","status":"PENDING"},
-    {"donor_id":"DONOR-007","repository":"vlbthambawita/ECGBench","status":"PENDING"},
-    {"donor_id":"DONOR-008","repository":"ELM-Research/ECG-Preprocess","status":"PENDING"},
-    {"donor_id":"DONOR-009","repository":"Jwoo5/fairseq-signals","status":"PENDING"},
-    {"donor_id":"DONOR-010","repository":"bowang-lab/ecg-fm","status":"PENDING"},
-    {"donor_id":"DONOR-011","repository":"PKUDigitalHealth/ECGFounder","status":"PENDING"},
-    {"donor_id":"DONOR-012","repository":"Edoardo-BS/HuBERT-ECG","status":"PENDING"},
-    {"donor_id":"DONOR-013","repository":"HeartWise-AI/DeepECG_Docker","status":"PENDING"},
-    {"donor_id":"DONOR-014","repository":"HeartWise-AI/ECG_tokenizer","status":"PENDING"},
-    {"donor_id":"DONOR-015","repository":"HeartWise-AI/ECG_LLM_Judge","status":"PENDING"},
-    {"donor_id":"DONOR-016","repository":"Jwoo5/ecg-qa","status":"PENDING"},
-    {"donor_id":"DONOR-017","repository":"ELM-Research/ECG-Language-Models","status":"PENDING"},
-    {"donor_id":"DONOR-018","repository":"willxxy/ECG-Byte","status":"PENDING"},
-    {"donor_id":"DONOR-019","repository":"AIMedLab/PULSE","status":"PENDING"},
-    {"donor_id":"DONOR-020","repository":"PKUDigitalHealth/ECG-R1","status":"PENDING"},
-    {"donor_id":"DONOR-021","repository":"AshleyLab/MARCUS","status":"PENDING"},
+    {
+      "donor_id": "DONOR-006",
+      "repository": "tmehari/ptbxl_feature_benchmark",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-007",
+      "repository": "vlbthambawita/ECGBench",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-008",
+      "repository": "ELM-Research/ECG-Preprocess",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-009",
+      "repository": "Jwoo5/fairseq-signals",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-010",
+      "repository": "bowang-lab/ecg-fm",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-011",
+      "repository": "PKUDigitalHealth/ECGFounder",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoardo-BS/HuBERT-ECG",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-015",
+      "repository": "HeartWise-AI/ECG_LLM_Judge",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-016",
+      "repository": "Jwoo5/ecg-qa",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-017",
+      "repository": "ELM-Research/ECG-Language-Models",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-018",
+      "repository": "willxxy/ECG-Byte",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-019",
+      "repository": "AIMedLab/PULSE",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-020",
+      "repository": "PKUDigitalHealth/ECG-R1",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-021",
+      "repository": "AshleyLab/MARCUS",
+      "status": "PENDING"
+    },
     {
       "donor_id": "DONOR-A001",
       "repository": "wfdb/wfdb-spec",

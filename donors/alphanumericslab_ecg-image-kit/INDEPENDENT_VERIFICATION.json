@@ -1,8 +1,8 @@
 {
   "schema": "ecg-donor-independent-verification-v1",
   "donor_id": "DONOR-005",
-  "candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
-  "candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+  "candidate_commit": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+  "candidate_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
   "origin_main": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
   "verification_date": "2026-09-17",
   "method": "FRESH_CLONE_FROM_PRIVATE_GITHUB_REMOTE_ON_INDEPENDENT_MACHINE",
@@ -11,8 +11,8 @@
   "full_candidate_diff_check": "PASS",
   "focused_test": {
     "file": "tests/ecg_image_kit_donor_closure.test.js",
-    "passed": 11,
-    "total": 11,
+    "passed": 12,
+    "total": 12,
     "result": "PASS"
   },
   "full_target_suite": "PASS",
@@ -23,5 +23,18 @@
   "approved_adjudicated_gold_count": 0,
   "metrics": "NOT_REPORTABLE",
   "activation": "NOT_ELIGIBLE",
-  "clinical_validity": "NOT_INFERRED"
+  "clinical_validity": "NOT_INFERRED",
+  "governance_candidate_verification": {
+    "candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+    "candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+    "result": "PASS",
+    "focused_test": {
+      "file": "tests/ecg_image_kit_donor_closure.test.js",
+      "passed": 11,
+      "total": 11,
+      "result": "PASS"
+    },
+    "full_target_suite": "PASS"
+  },
+  "candidate_ci_run_id": 35187787185
 }

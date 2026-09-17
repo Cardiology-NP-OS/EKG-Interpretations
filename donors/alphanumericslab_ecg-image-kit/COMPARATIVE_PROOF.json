@@ -20,8 +20,8 @@
     }
   },
   "after": {
-    "verified_candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
-    "verified_candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+    "verified_candidate_commit": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+    "verified_candidate_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
     "registered_donor_005_capabilities": 33,
     "capability_dispositions_complete": true,
     "mixed_license_image_donor_boundary_registered": true,
@@ -40,7 +40,9 @@
       "metrics": "NOT_REPORTABLE",
       "activation": "NOT_ELIGIBLE",
       "clinical_validity": "NOT_INFERRED"
-    }
+    },
+    "governance_candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+    "governance_candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df"
   },
   "github_compare": {
     "base": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
@@ -49,21 +51,27 @@
     "governance_only": true
   },
   "verification": {
-    "github_actions_run_id": 35187593137,
-    "head_sha": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
-    "head_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+    "github_actions_run_id": 35187787185,
+    "head_sha": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+    "head_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
     "workflow": "EKG Recovery CI",
     "conclusion": "success",
-    "machine_a_focused": "11/11 PASS",
+    "machine_a_focused": "12/12 PASS",
     "machine_a_full_target_suite": "PASS",
     "independent_fresh_clone": {
       "result": "PASS",
-      "head_sha": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
-      "head_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+      "head_sha": "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6",
+      "head_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
       "origin_main": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
       "full_candidate_diff_check": "PASS",
-      "focused": "11/11 PASS",
+      "focused": "12/12 PASS",
       "full_target_suite": "PASS"
+    },
+    "governance_candidate": {
+      "github_actions_run_id": 35187593137,
+      "head_sha": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+      "head_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+      "conclusion": "success"
     }
   },
   "improvement_claim": {
@@ -84,5 +92,16 @@
     "rollback_tree": "5555e82ed2c43fa92c0f87b3c34506c2a6deebe9",
     "runtime_files_to_remove": [],
     "governance_only": true
+  },
+  "promotion_verification": {
+    "merge_commit": "569f2a5747cff5bac38ca22ed88fac5fb2ed713e",
+    "merge_tree": "baa08a42b91b06f75cf101c17dbb4b9ec13e9319",
+    "parents": [
+      "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+      "f795148bf88c31304c5b58f4fb5136a4e2a4fcd6"
+    ],
+    "target_main_ci_run_id": 35187896259,
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success"
   }
 }

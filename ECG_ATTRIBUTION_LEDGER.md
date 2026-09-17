@@ -104,6 +104,6 @@ torch_ecg is credited for its ECG architecture catalog, database/dataset abstrac
 - Source labels promoted to project clinical gold: **no**.
 - Donor digitization or benchmark results promoted to target metrics: **no**.
 - External lineage preserved: `WongKinYiu/yolov7`, `Grzego/handwriting-generation`, and optional `allenai/scispacy`.
-- Provenance files: `donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
+- Provenance files: `donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, `INDEPENDENT_VERIFICATION.json`, and `DONOR_RECEIPT.json`.
 
 ECG-Image-Kit is credited for image-synthesis, image-distortion, grid-estimation, waveform-extraction, and ROI-localization engineering ideas. All such capabilities remain evaluation/challenger/research references or license-blocked assets; none gains clinical authority.
