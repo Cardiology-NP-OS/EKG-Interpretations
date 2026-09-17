@@ -6,7 +6,14 @@ const fs=require("fs");
 const path=require("path");
 const root=path.resolve(__dirname,"../..");
 const readJson=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8").replace(/^\uFEFF/,""));
-const gitBlobShaAt=(commit,p)=>crypto.createHash("sha256").update(cp.execFileSync("git",["show",`${commit}:${p}`],{cwd:root})).digest("hex");
+const gitBlobShaAt=(commit,p)=>{
+  const read=()=>cp.execFileSync("git",["show",`${commit}:${p}`],{cwd:root});
+  try{return crypto.createHash("sha256").update(read()).digest("hex");}
+  catch(err){
+    cp.execFileSync("git",["fetch","--no-tags","--depth=1","origin",commit],{cwd:root,stdio:"ignore"});
+    return crypto.createHash("sha256").update(read()).digest("hex");
+  }
+};
 const exists=p=>fs.existsSync(path.join(root,p));
 let passed=0; const check=(name,fn)=>{fn(); passed++; console.log(`PASS ${name}`);};
 const donor=readJson("ECG_DONOR_CAPABILITY_REGISTRY.json");
