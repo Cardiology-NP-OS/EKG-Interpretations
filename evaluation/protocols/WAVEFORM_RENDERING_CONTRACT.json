@@ -1,0 +1,25 @@
+{
+  "schema": "ekg-waveform-rendering-contract-v1",
+  "authorityClass": "ENGINEERING_NONDIAGNOSTIC",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false,
+  "implementation": "lib/waveform_rendering.js",
+  "operatorSurface": "tools/render_blind.js",
+  "normalization": "per-lead-maxabs-display-only",
+  "claims": [
+    "deterministic SVG generation from finite waveform arrays",
+    "bounded SVG dimensions and lead counts",
+    "escaped lead labels",
+    "display normalization is not calibrated paper reconstruction"
+  ],
+  "exclusions": [
+    "image-to-waveform digitization",
+    "paper-grid calibration",
+    "diagnostic interpretation",
+    "clinical validity"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "ecg-execution-realization-checkpoint-v1",
+  "parentMainCommit": "395fe56f6b5f7ae05d0c303fc7948ec8bae416a5",
+  "parentMainTree": "5e2d23a5b1338465db83061a6b10ce2d26419de1",
+  "status": "IMPLEMENTED_UNVERIFIED",
+  "canonicalCapabilityCount": 57,
+  "readinessCounts": {
+    "EXECUTABLE_TARGET_OWNED": 18,
+    "IMPLEMENTATION_REQUIRED_NOW": 0,
+    "CONTRACT_ONLY_NONRUNTIME": 15,
+    "RESEARCH_REFERENCE_NONRUNTIME": 20,
+    "GOVERNANCE_ONLY": 3,
+    "CHALLENGER_METADATA_BLOCKED": 1
+  },
+  "implementationRequiredNow": [],
+  "realizedThisCheckpoint": [
+    "ECG-CAP-IMAGE-RENDERING",
+    "UNIFIED_12_LEAD_EXECUTION_PIPELINE"
+  ],
+  "operatorSurface": "tools/run_ecg_pipeline.js",
+  "operatorOutputs": ["analysis.json", "waveform.svg"],
+  "implementation": [
+    "lib/waveform_rendering.js",
+    "lib/ecg_execution_pipeline.js",
+    "tools/run_ecg_pipeline.js",
+    "tests/waveform_rendering.test.js",
+    "tests/ecg_execution_pipeline.test.js",
+    "tests/ecg_execution_cli.test.js"
+  ],  "residualNonExecutablePolicy": {
+    "contractOnly": "Must remain visibly non-executable unless a deterministic target-owned implementation is added and tested.",
+    "researchReference": "Must not be represented as executable or validated behavior.",
+    "challengerMetadata": "Execution is blocked until exact assets, weights, preprocessing and license are pinned.",
+    "worldBestClaim": "NOT_CLAIMED_WITHOUT_EXTERNAL_COMPARATIVE_EVIDENCE"
+  },
+  "donorProgram": {
+    "completedPrimaryDonors": 9,
+    "requiredPrimaryDonors": 21,
+    "pausedFrontier": "DONOR-010",
+    "resumeEligibleAfterAcceptance": true,
+    "resumeCondition": "This execution-realization checkpoint is accepted on main with exact-SHA CI and independent verification."
+  },
+  "proof": {
+    "syntheticTwelveLeadEndToEnd": true,
+    "realOperatorCliTested": true,
+    "pathMinimizedArtifacts": true,
+    "provenanceHashesBound": true,
+    "candidateEvidenceOnly": true,
+    "clinicalPerformanceClaimed": false
+  },
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED"
+}
