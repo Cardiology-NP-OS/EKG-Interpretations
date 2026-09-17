@@ -1,0 +1,44 @@
+{
+  "schema": "ekg-fiducial-delineation-contract-v1",
+  "authorityClass": "EVALUATION_NONRUNTIME",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false,
+  "implementation": "lib/signal_delineation_contract.js",
+  "inputContract": [
+    "finite calibrated waveform samples",
+    "explicit sample rate",
+    "unvalidated R-peak candidate indices",
+    "explicit baseline and wave-specific thresholds/windows",
+    "source provenance locator"
+  ],
+  "candidateOutputs": [
+    "P onset/peak/offset when detected",
+    "QRS onset/R peak/QRS offset",
+    "J-point candidate equal to candidate QRS offset",
+    "T onset/peak/offset when detected"
+  ],
+  "rules": [
+    "Candidate fiducials are engineering outputs only and remain unvalidated.",
+    "Missing P or T candidates remain absent; the implementation must not fabricate them.",
+    "Thresholds and search windows must be explicit and provenance-bound.",
+    "Candidate fiducials may feed measurement evaluation but do not create diagnosis.",
+    "Any source annotation used later for comparison remains source label, never project clinical gold."
+  ],
+  "evaluationUses": [
+    "synthetic timing regression",
+    "polarity and missing-wave adversarial tests",
+    "future QTDB/LUDB source-annotation agreement after separate data-rights review"
+  ],
+  "notEstablished": [
+    "clinical delineation accuracy",
+    "population generalizability",
+    "diagnostic interpretation validity",
+    "rhythm or morphology classification",
+    "clinical runtime authority"
+  ]
+}

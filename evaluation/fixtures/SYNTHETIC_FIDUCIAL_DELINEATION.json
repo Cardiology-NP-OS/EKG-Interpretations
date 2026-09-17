@@ -1,0 +1,50 @@
+{
+  "schema": "ekg-synthetic-fiducial-delineation-fixture-v1",
+  "fixtureId": "ECG-FIXTURE-SYNTHETIC-FIDUCIAL-DELINEATION-V1",
+  "provenance": {
+    "source": "TARGET_SYNTHETIC_GENERATOR",
+    "locator": "tests/signal_delineation_contract.test.js#synthetic-wave-fixture"
+  },
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "clinicalData": false,
+  "sampleRateHz": 250,
+  "sampleCount": 1000,
+  "lead": "II",
+  "unit": "mV",
+  "baseline": 0,
+  "rPeaks": [100, 350, 600, 850],
+  "relativeFiducials": {
+    "pOnset": -50,
+    "pPeak": -40,
+    "pOffset": -30,
+    "qrsOnset": -10,
+    "qrsOffset": 15,
+    "tOnset": 40,
+    "tPeak": 60,
+    "tOffset": 90
+  },
+  "amplitudesMv": {
+    "p": 0.2,
+    "pPeak": 0.25,
+    "qrs": 0.8,
+    "rPeak": 1.2,
+    "t": 0.3,
+    "tPeak": 0.5
+  },
+  "config": {
+    "baseline": 0,
+    "qrs": {"threshold": 0.5, "beforeMs": 80, "afterMs": 80},
+    "p": {"threshold": 0.15, "searchStartMsBeforeR": 240, "searchEndMsBeforeR": 80},
+    "t": {"threshold": 0.2, "searchStartMsAfterR": 100, "searchEndMsAfterR": 400}
+  },
+  "expectedMeasurements": {
+    "prMs": 160,
+    "qrsMs": 100,
+    "qtMs": 400,
+    "rrMs": 1000,
+    "ventricularRateBpm": 60,
+    "qtcBazettMs": 400,
+    "qtcFridericiaMs": 400
+  }
+}

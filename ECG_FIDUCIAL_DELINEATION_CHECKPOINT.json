@@ -1,0 +1,44 @@
+﻿{
+    "schema":  "ecg-fiducial-delineation-checkpoint-v1",
+    "parentMainCommit":  "a926e53e1c2104ff423f7a6ffcf7e98810d22a4c",
+    "parentMainTree":  "a083fabf5be0035a669df396513bb860578c57c7",
+    "status":  "VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND",
+    "donorProgram":  {
+                         "completedPrimaryDonors":  9,
+                         "requiredPrimaryDonors":  21,
+                         "pausedFrontier":  "DONOR-010",
+                         "reason":  "Continue target-owned executable signal intelligence before additional challenger catalog growth."
+                     },
+    "implementation":  [
+                           "lib/signal_delineation_contract.js",
+                           "tests/signal_delineation_contract.test.js",
+                           "evaluation/protocols/FIDUCIAL_DELINEATION_CONTRACT.json",
+                           "evaluation/fixtures/SYNTHETIC_FIDUCIAL_DELINEATION.json",
+                           "lib/signal_measurement_pipeline.js",
+                           "tools/measure_wfdb.js",
+                           "tests/signal_measurement_workflow.test.js",
+                           "evaluation/protocols/WFDB_MEASUREMENT_WORKFLOW_CONTRACT.json",
+                           "docs/WFDB_MEASUREMENT_WORKFLOW.md"
+                       ],
+    "scope":  "Executable local WFDB measurement workflow with target-owned P/QRS/T candidate delineation feeding non-diagnostic interval and amplitude measurement outputs",
+    "clinicalControlChanged":  false,
+    "clinicalAuthorityAdded":  false,
+    "diagnosticRuntime":  "GOVERNED_INACTIVE",
+    "evidenceAdmission":  "NOT_ADMITTED",
+    "approvedAdjudicatedGoldCount":  0,
+    "metrics":  "NOT_REPORTABLE",
+    "activation":  "NOT_ELIGIBLE",
+    "clinicalValidity":  "NOT_INFERRED",
+    "verification":  {
+                         "implementationCandidateCommit":  "54427eacf5d41b1376d0f86cf0f1d064eb89d534",
+                         "implementationCandidateTree":  "0afe4fceb1f7091d52c25d6b2183333c28ce20d8",
+                         "candidateCiRunId":  35267257412,
+                         "candidateCiConclusion":  "success",
+                         "independentVerification":  "PASS",
+                         "independentDelineation":  "12/12 PASS",
+                         "independentWorkflow":  "7/7 PASS",
+                         "independentCheckpoint":  "6/6 PASS",
+                         "independentFullTargetSuite":  "PASS",
+                         "candidateDiffCheck":  "PASS"
+                     }
+}
