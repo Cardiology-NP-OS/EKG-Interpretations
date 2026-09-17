@@ -1,0 +1,71 @@
+{
+    "schema":  "ecg-donor-comparative-proof-v1",
+    "donor_id":  "DONOR-006",
+    "donor_repository":  "tmehari/ptbxl_feature_benchmark",
+    "before":  {
+                   "target_commit":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                   "target_tree":  "245a8bec4d46c9c33702d2def58df0180d59a4f9",
+                   "registered_donor_006_capabilities":  0,
+                   "donor_006_runtime_dependency":  false,
+                   "donor_006_model_execution":  false
+               },
+    "after":  {
+                  "governance_candidate_commit":  "7a23c1e5c0987ccdfa0b2ebd704048d094256896",
+                  "governance_candidate_tree":  "128991d359664dafc8226b69f53f52df02cd451f",
+                  "registered_donor_006_capabilities":  36,
+                  "capability_dispositions_complete":  true,
+                  "audited_head_license_fail_closed":  true,
+                  "ptbxl_plus_assets_fail_closed":  true,
+                  "notebook_outputs_quarantined":  true,
+                  "donor_runtime_dependency_added":  false,
+                  "donor_source_code_copied":  false,
+                  "donor_weights_imported":  false,
+                  "donor_dataset_bytes_imported":  false,
+                  "clinical_authority_added":  false,
+                  "governed_state":  {
+                                         "completion_state":  "SPECIALIST_COMPLETE_INACTIVE",
+                                         "diagnostic_runtime":  "GOVERNED_INACTIVE",
+                                         "evidence_admission":  "NOT_ADMITTED",
+                                         "approved_adjudicated_gold_count":  0,
+                                         "metrics":  "NOT_REPORTABLE",
+                                         "activation":  "NOT_ELIGIBLE",
+                                         "clinical_validity":  "NOT_INFERRED"
+                                     }
+              },
+    "verification":  {
+                         "github_actions_run_id":  35197000606,
+                         "head_sha":  "7a23c1e5c0987ccdfa0b2ebd704048d094256896",
+                         "head_tree":  "128991d359664dafc8226b69f53f52df02cd451f",
+                         "workflow":  "EKG Recovery CI",
+                         "conclusion":  "success",
+                         "machine_a_focused":  "12/12 PASS",
+                         "machine_a_full_target_suite":  "PASS",
+                         "independent_fresh_clone":  {
+                                                         "result":  "PASS",
+                                                         "head_sha":  "7a23c1e5c0987ccdfa0b2ebd704048d094256896",
+                                                         "head_tree":  "128991d359664dafc8226b69f53f52df02cd451f",
+                                                         "origin_main":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                                                         "full_candidate_diff_check":  "PASS",
+                                                         "focused":  "12/12 PASS",
+                                                         "full_target_suite":  "PASS"
+                                                     }
+                     },
+    "improvement_claim":  {
+                              "type":  "ENGINEERING_BENCHMARK_PROVENANCE_COVERAGE",
+                              "statement":  "The target gains machine-readable PTB-XL feature-benchmark, license, data, model, defect, and evaluation-method dispositions without activating donor runtime code or admitting donor performance evidence."
+                          },
+    "non_claims":  [
+                       "No donor diagnostic accuracy or ROC-AUC value is claimed.",
+                       "No donor or external source label is project clinical gold.",
+                       "No PTB-XL/PTB-XL+ data or feature asset is imported.",
+                       "No XResNet or classical benchmark model is executed or granted authority."
+                   ],
+    "rollback":  {
+                     "rollback_commit":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                     "rollback_tree":  "245a8bec4d46c9c33702d2def58df0180d59a4f9",
+                     "runtime_files_to_remove":  [
+
+                                                 ],
+                     "governance_only":  true
+                 }
+}

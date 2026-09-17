@@ -125,6 +125,6 @@ ECG-Image-Kit is credited for image-synthesis, image-distortion, grid-estimation
 - Donor ROC-AUC/bootstrap/published benchmark results promoted to target metrics: **no**.
 - XResNet1D retained only as a non-executable challenger architecture reference; no checkpoint is tracked or admitted.
 - `data_preprocessing.ipynb` embedded outputs remain quarantined and are not copied into target evidence.
-- Provenance files: `donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, and `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`.
+- Provenance files: `donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
 
 The donor is credited for engineered-feature benchmark methodology, fold-based evaluation design, feature harmonization, and bootstrap evaluation concepts. No donor source, external dataset asset, model artifact, benchmark score, or diagnostic conclusion is admitted as target runtime authority or clinical evidence.

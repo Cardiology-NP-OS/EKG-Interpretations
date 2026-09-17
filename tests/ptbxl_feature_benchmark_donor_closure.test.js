@@ -1,4 +1,4 @@
-﻿const assert = require("assert");
+const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 const root = path.resolve(__dirname, "..");
@@ -18,6 +18,8 @@ const licenseBoundary = readJson("donors/tmehari_ptbxl_feature_benchmark/LICENSE
 const datasetBoundary = readJson("donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json");
 const modelBoundary = readJson("donors/tmehari_ptbxl_feature_benchmark/MODEL_BOUNDARY.json");
 const associated = readJson("donors/tmehari_ptbxl_feature_benchmark/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
+const comparative = readJson("donors/tmehari_ptbxl_feature_benchmark/COMPARATIVE_PROOF.json");
+const independent = readJson("donors/tmehari_ptbxl_feature_benchmark/INDEPENDENT_VERIFICATION.json");
 const attribution = readText("ECG_ATTRIBUTION_LEDGER.md");
 const pkg = readJson("package.json");
 const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-006");
@@ -92,11 +94,20 @@ check("associated provenance is explicit without queue expansion", () => {
   for (const item of associated.repositories) assert.strictEqual(item.queued_as_associated_donor, false);
   assert.strictEqual(associated.external_non_repository_lineage[0].disposition, "LICENSE_REVIEW_REQUIRED");
 });
-check("donor remains pre-promotion and uncounted", () => {
+check("candidate CI and independent verification are bound", () => {
+  assert.strictEqual(donor.verified_candidate_commit, "7a23c1e5c0987ccdfa0b2ebd704048d094256896");
+  assert.strictEqual(donor.verified_candidate_tree, "128991d359664dafc8226b69f53f52df02cd451f");
+  assert.strictEqual(donor.candidate_ci_run_id, 35197000606);
+  assert.strictEqual(comparative.verification.head_sha, donor.verified_candidate_commit);
+  assert.strictEqual(comparative.verification.conclusion, "success");
+  assert.strictEqual(independent.candidate_commit, donor.verified_candidate_commit);
+  assert.strictEqual(independent.result, "PASS");
+  assert.strictEqual(independent.full_target_suite, "PASS");
+});check("donor remains pre-promotion and uncounted", () => {
   assert.strictEqual(donorRegistry.completed_donors, 5);
   assert.strictEqual(donorRegistry.next_donor_id, "DONOR-006");
   assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_PREPROMOTION_CLOSURE");
+  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
   assert.strictEqual(fs.existsSync(path.join(root, "donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json")), false);
 });
 check("donor directory contains governance artifacts only", () => {
