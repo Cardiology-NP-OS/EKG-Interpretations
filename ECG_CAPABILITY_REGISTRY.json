@@ -1,7 +1,7 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 255,
+  "generated_from_donor_capability_registry_count": 271,
   "capability_count": 57,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
@@ -74,6 +74,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -81,7 +87,8 @@
         "ECGB-005",
         "ECGB-031",
         "ECGB-032",
-        "PTBXLFB-003"
+        "PTBXLFB-003",
+        "EFM-016"
       ],
       "licenses": [
         {
@@ -93,11 +100,17 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/evaluation_runtime.test.js"
+        "tests/evaluation_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/datasets/ECG_DATASET_CATALOG.json",
@@ -418,11 +431,18 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "PTBXLFB-031",
-        "FSS-007"
+        "FSS-007",
+        "EFM-009"
       ],
       "licenses": [
         {
@@ -434,12 +454,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/evaluation_runtime.test.js"
+        "tests/evaluation_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
@@ -548,6 +574,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -555,7 +587,8 @@
         "PTBXLFB-025",
         "PTBXLFB-026",
         "TECG-018",
-        "FSS-026"
+        "FSS-026",
+        "EFM-012"
       ],
       "licenses": [
         {
@@ -572,12 +605,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/evaluation_runtime.test.js"
+        "tests/evaluation_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/benchmarks/BENCHMARK_CONTRACTS.json",
@@ -625,6 +664,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -637,7 +682,9 @@
         "OECG-011",
         "PTBXLFB-014",
         "FSS-005",
-        "FSS-006"
+        "FSS-006",
+        "EFM-006",
+        "EFM-007"
       ],
       "licenses": [
         {
@@ -659,12 +706,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/evaluation/evaluation_contract.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
@@ -719,6 +772,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -728,7 +787,8 @@
         "PTBXLFB-020",
         "PTBXLFB-034",
         "TECG-031",
-        "WFDB-027"
+        "WFDB-027",
+        "EFM-014"
       ],
       "licenses": [
         {
@@ -755,11 +815,17 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/evaluation_runtime.test.js"
+        "tests/evaluation_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
@@ -815,6 +881,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -826,7 +898,8 @@
         "TECG-005",
         "TECG-006",
         "FSS-009",
-        "FSS-010"
+        "FSS-010",
+        "EFM-013"
       ],
       "licenses": [
         {
@@ -853,12 +926,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/evaluation_runtime.test.js"
+        "tests/evaluation_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/robustness/ROBUSTNESS_CATALOG.json",
@@ -1377,6 +1456,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1393,7 +1478,8 @@
         "FSS-001",
         "FSS-002",
         "FSS-028",
-        "FSS-029"
+        "FSS-029",
+        "EFM-001"
       ],
       "licenses": [
         {
@@ -1435,12 +1521,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/governance_runtime.test.js"
+        "tests/governance_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
@@ -1516,6 +1608,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1537,7 +1635,8 @@
         "TECG-009",
         "WFDB-032",
         "FSS-008",
-        "FSS-023"
+        "FSS-023",
+        "EFM-008"
       ],
       "licenses": [
         {
@@ -1579,12 +1678,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/governance_runtime.test.js"
+        "tests/governance_runtime.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/GOVERNANCE_RUNTIME_CONTRACT.json"
@@ -2145,6 +2250,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2154,7 +2265,8 @@
         "TECG-016",
         "FSS-011",
         "FSS-012",
-        "FSS-021"
+        "FSS-021",
+        "EFM-003"
       ],
       "licenses": [
         {
@@ -2171,11 +2283,17 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2348,6 +2466,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2357,7 +2481,9 @@
         "FSS-014",
         "FSS-015",
         "FSS-016",
-        "FSS-017"
+        "FSS-017",
+        "EFM-002",
+        "EFM-004"
       ],
       "licenses": [
         {
@@ -2374,11 +2500,17 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2661,12 +2793,19 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "ECGB-016",
         "NK-012",
-        "ECP-004"
+        "ECP-004",
+        "EFM-005"
       ],
       "licenses": [
         {
@@ -2683,6 +2822,11 @@
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -2690,7 +2834,8 @@
         "tests/signal_preprocessing_contract.test.js",
         "tests/signal_preprocessing_pipeline.test.js",
         "tests/preprocess_wfdb_cli.test.js",
-        "tests/signal_preprocessing_exports.test.js"
+        "tests/signal_preprocessing_exports.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json"
@@ -3205,6 +3350,12 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -3217,7 +3368,9 @@
         "TECG-030",
         "TECG-032",
         "FSS-027",
-        "FSS-030"
+        "FSS-030",
+        "EFM-011",
+        "EFM-015"
       ],
       "licenses": [
         {
@@ -3239,11 +3392,17 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -3599,12 +3758,19 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "ECP-006",
         "FSS-024",
-        "FSS-025"
+        "FSS-025",
+        "EFM-010"
       ],
       "licenses": [
         {
@@ -3616,11 +3782,17 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/research/research_authority.test.js",
-        "tests/fairseq_signals_donor_closure.test.js"
+        "tests/fairseq_signals_donor_closure.test.js",
+        "tests/ecg_fm_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/datasets/ECG_DATASET_CATALOG.json"

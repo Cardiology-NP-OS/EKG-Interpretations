@@ -1,0 +1,730 @@
+{
+  "schema": "ecg-donor-inventory-v1",
+  "donor_id": "DONOR-010",
+  "repository": "bowang-lab/ecg-fm",
+  "audited_commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+  "audited_tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+  "recursive_tree_audit": {
+    "complete": true,
+    "fresh_clone_attempted": true,
+    "fresh_clone_result": "SUCCESS",
+    "exact_commit_reproduced": true,
+    "exact_tree_reproduced": true,
+    "tracked_file_count": 79
+  },
+  "package_summary": {
+    "tracked_file_count": 79,
+    "total_tracked_bytes": 98090362,
+    "by_extension": {
+      "<none>": 5,
+      ".md": 2,
+      ".csv": 9,
+      ".npy": 1,
+      ".mat": 34,
+      ".json": 9,
+      ".jpg": 1,
+      ".png": 4,
+      ".py": 11,
+      ".ipynb": 3
+    },
+    "by_top_level": {
+      ".gitignore": 1,
+      "LICENSE": 1,
+      "README.md": 1,
+      "ckpts": 1,
+      "data": 52,
+      "docs": 5,
+      "labeler": 8,
+      "notebooks": 3,
+      "outputs": 1,
+      "scripts": 3,
+      "splits": 3
+    },
+    "tracked_common_model_artifact_count": 0
+  },
+  "largest_tracked_blobs": [
+    {
+      "path": "splits/meta_split_mimic_iv_ecg.csv",
+      "blob": "773e5591430d84befc0c9d249249fcd0890b64a1",
+      "bytes": 77901681
+    },
+    {
+      "path": "splits/meta_split_physionet.csv",
+      "blob": "685c478b40533dfd7b6a025155f1c53876039976",
+      "bytes": 8597727
+    },
+    {
+      "path": "docs/saliency.png",
+      "blob": "763856b371c7257386d3d3e2f7c2b8237f193ada",
+      "bytes": 744274
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_1594286.mat",
+      "blob": "40029a8048cd926d845bb9d335e099b4ff18e2f5",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_270272.mat",
+      "blob": "0a50c245f43008de831508f2c1fbba577d34c939",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_2969044.mat",
+      "blob": "7c59dbe52a920115a601d4c292c52a8e16572963",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_975093.mat",
+      "blob": "091125f43e8d274d18d910a8c16ca1893c84b1e0",
+      "bytes": 492400
+    },
+    {
+      "path": "docs/architecture.png",
+      "blob": "37e22292bfc0ef605a9b21006b6dd8810e3375ad",
+      "bytes": 480196
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_1238362.mat",
+      "blob": "7b447dae467be82048174d423b51e3941d519530",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_2657522.mat",
+      "blob": "f493489fdbcf449df76d48b811245a0f8ce87514",
+      "bytes": 352912
+    }
+  ],
+  "external_model_repository": {
+    "repository": "wanglab/ecg-fm",
+    "revision": "584219ea492cdeef2e19ffbdf9c6ecc874ba427e",
+    "checkpoint_count": 2
+  },
+  "split_metadata": {
+    "mimic_iv_ecg": {
+      "rows": 787677,
+      "train": 630178,
+      "valid": 79129,
+      "test": 78370,
+      "patient_groups": 160821,
+      "patients_spanning_multiple_splits": 0
+    },
+    "physionet_challenge_2021": {
+      "rows": 86029,
+      "train": 68823,
+      "valid": 8603,
+      "test": 8603,
+      "patient_isolation": "NOT_INDEPENDENTLY_ESTABLISHED"
+    }
+  },
+  "quickstart_input_contract": {
+    "lead_order": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ],
+    "sample_rate_hz": 500,
+    "segment_seconds": 5,
+    "samples_per_segment": 2500,
+    "missing_lead_strategy": "raise",
+    "resampling": "linear",
+    "constant_lead_handling": "zero",
+    "segmentation": "nonoverlapping"
+  },
+  "material_capabilities": [
+    {
+      "capability_id": "EFM-001",
+      "capability": "fairseq-signals research framework dependency and training stack",
+      "donor_components": [
+        "README.md"
+      ],
+      "classification": "DEPENDENCY",
+      "final_disposition": "DEPENDENCY",
+      "reason": "Existing DONOR-009 framework provenance; no duplicate runtime dependency."
+    },
+    {
+      "capability_id": "EFM-002",
+      "capability": "Exact ECG-FM pretrained checkpoint identity",
+      "donor_components": [
+        "HuggingFace wanglab/ecg-fm:mimic_iv_ecg_physionet_pretrained.pt"
+      ],
+      "classification": "CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Exact external checkpoint pinned by HF revision/LFS SHA-256; not imported or executed."
+    },
+    {
+      "capability_id": "EFM-003",
+      "capability": "Exact ECG-FM MIMIC-IV-ECG finetuned checkpoint identity",
+      "donor_components": [
+        "HuggingFace wanglab/ecg-fm:mimic_iv_ecg_finetuned.pt"
+      ],
+      "classification": "CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Exact external checkpoint pinned by HF revision/LFS SHA-256; not imported or executed."
+    },
+    {
+      "capability_id": "EFM-004",
+      "capability": "W2V+CMSC+RLM foundation-model pretraining configuration",
+      "donor_components": [
+        "README.md",
+        "HuggingFace pretrained YAML"
+      ],
+      "classification": "CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research representation methodology with exact config identity; no target model execution."
+    },
+    {
+      "capability_id": "EFM-005",
+      "capability": "Twelve-lead 500 Hz five-second inference preprocessing contract",
+      "donor_components": [
+        "notebooks/infer_quickstart.ipynb"
+      ],
+      "classification": "SUPERSEDED",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target-owned lead ordering, resampling and segmentation contracts are stronger and executable."
+    },
+    {
+      "capability_id": "EFM-006",
+      "capability": "MIMIC-IV-ECG patient-isolated donor split metadata",
+      "donor_components": [
+        "splits/meta_split_mimic_iv_ecg.csv"
+      ],
+      "classification": "EVALUATION_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "787677 split rows; local audit found 160821 patient groups and zero patients spanning splits."
+    },
+    {
+      "capability_id": "EFM-007",
+      "capability": "PhysioNet Challenge 2021 donor split metadata",
+      "donor_components": [
+        "splits/meta_split_physionet.csv"
+      ],
+      "classification": "EVALUATION_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "86029 tracked split rows; useful evaluation provenance; patient isolation not independently inferred."
+    },
+    {
+      "capability_id": "EFM-008",
+      "capability": "Tracked CODE-15 percent example waveform and derived sample assets",
+      "donor_components": [
+        "data/code_15/"
+      ],
+      "classification": "LICENSE_REVIEW_REQUIRED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "Data-derived waveform/label bytes have separate source terms and are not copied into target."
+    },
+    {
+      "capability_id": "EFM-009",
+      "capability": "MIMIC-IV-ECG free-text pattern labeler framework",
+      "donor_components": [
+        "labeler/"
+      ],
+      "classification": "RESEARCH_ONLY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Useful label extraction research; output labels are source-derived and never project gold."
+    },
+    {
+      "capability_id": "EFM-010",
+      "capability": "Tracked MIMIC-IV-ECG labeler templates and label definitions",
+      "donor_components": [
+        "data/mimic_iv_ecg/labeler/",
+        "data/mimic_iv_ecg/labels/"
+      ],
+      "classification": "DATA_ONLY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Data-derived label vocabulary/template assets remain source evidence; no target import."
+    },
+    {
+      "capability_id": "EFM-011",
+      "capability": "Inference and embedding extraction workflows",
+      "donor_components": [
+        "notebooks/infer_cli.ipynb",
+        "scripts/embs.py"
+      ],
+      "classification": "RESEARCH_ONLY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Reproducibility context only; donor runtime dependency not adopted."
+    },
+    {
+      "capability_id": "EFM-012",
+      "capability": "Linear probing and multilabel evaluation metric workflow",
+      "donor_components": [
+        "scripts/linear.py"
+      ],
+      "classification": "EVALUATION_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Experiment methodology only; donor/source performance is not reportable target performance."
+    },
+    {
+      "capability_id": "EFM-013",
+      "capability": "Gradient saliency workflow",
+      "donor_components": [
+        "scripts/saliency.py",
+        "notebooks/infer_quickstart.ipynb"
+      ],
+      "classification": "EVALUATION_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Interpretability/evaluation methodology only; no clinical validity inference."
+    },
+    {
+      "capability_id": "EFM-014",
+      "capability": "Checkpoint configuration and training reproducibility metadata",
+      "donor_components": [
+        "README.md",
+        "HuggingFace YAML files"
+      ],
+      "classification": "RESEARCH_ONLY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Exact config artifacts improve reproducibility while execution remains inactive."
+    },
+    {
+      "capability_id": "EFM-015",
+      "capability": "Published ECG-FM paper and repository performance claims",
+      "donor_components": [
+        "README.md",
+        "arXiv:2408.05178"
+      ],
+      "classification": "RESEARCH_ONLY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Published claims are research context, not target reproduction or reportable metrics."
+    },
+    {
+      "capability_id": "EFM-016",
+      "capability": "Dataset identity and licensing corrections exposed by donor provenance",
+      "donor_components": [
+        "README.md",
+        "splits/",
+        "data/code_15/"
+      ],
+      "classification": "DATA_ONLY",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Canonical dataset cards are updated independently; source labels remain non-gold."
+    }
+  ],
+  "notable_repository_risks": [
+    "Tracked CODE-15 sample waveform/label assets require dataset-specific rights review.",
+    "Tracked MIMIC labeler/template assets are data-derived and are not assumed covered by source-code MIT license.",
+    "PyTorch checkpoint loading is an unsafe-deserialization boundary; target does not load donor weights.",
+    "Published/source performance claims are not target clinical evidence."
+  ],
+  "tracked_files": [
+    {
+      "path": ".gitignore",
+      "blob": "68bc17f9ff2104a9d7b6777058bb4c343ca72609",
+      "bytes": 3078
+    },
+    {
+      "path": "LICENSE",
+      "blob": "b0854a781327bb50c42be1065cf7a479a09a26c2",
+      "bytes": 1073
+    },
+    {
+      "path": "README.md",
+      "blob": "54eecf07f5ae02dbcb41ee98e8ef0525adf0d3c2",
+      "bytes": 5946
+    },
+    {
+      "path": "ckpts/.gitkeep",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "data/code_15/labels/label_def.csv",
+      "blob": "f8b8d62610fca3d623035916df852cfa0ad58b53",
+      "bytes": 275
+    },
+    {
+      "path": "data/code_15/labels/labels.csv",
+      "blob": "e0ffcd54eb268e780659e56f2704effc675fd132",
+      "bytes": 531
+    },
+    {
+      "path": "data/code_15/labels/y.npy",
+      "blob": "098694c320d163892443474609ab161ba3aaa061",
+      "bytes": 768
+    },
+    {
+      "path": "data/code_15/meta.csv",
+      "blob": "09ae0aa62c3e47d3e85ee5a86f0660242c0d81ad",
+      "bytes": 6600
+    },
+    {
+      "path": "data/code_15/meta_split.csv",
+      "blob": "8decb9af2fd7f83cdf734a1e48d17a1d858fd345",
+      "bytes": 285
+    },
+    {
+      "path": "data/code_15/org/code_15_1238362.mat",
+      "blob": "c35cb3746676ac82723fb0e20c0ca5b008ad9dc6",
+      "bytes": 141408
+    },
+    {
+      "path": "data/code_15/org/code_15_1594286.mat",
+      "blob": "1f3cf94edd2f67929288e5a8a65fbc4e4a3636a2",
+      "bytes": 197184
+    },
+    {
+      "path": "data/code_15/org/code_15_2657522.mat",
+      "blob": "3240ac2312773819b5d76fbde9213168cb8d5f9d",
+      "bytes": 141408
+    },
+    {
+      "path": "data/code_15/org/code_15_270272.mat",
+      "blob": "275c4bf394ee47423ea4f102c757409e3d73d1b0",
+      "bytes": 197184
+    },
+    {
+      "path": "data/code_15/org/code_15_2754228.mat",
+      "blob": "424dac4264c24c7a6f9236a03b789ada6cc6e281",
+      "bytes": 141408
+    },
+    {
+      "path": "data/code_15/org/code_15_2969044.mat",
+      "blob": "dd3b10e8fb2d109e0545e35ca18ba04f1625404f",
+      "bytes": 197184
+    },
+    {
+      "path": "data/code_15/org/code_15_358121.mat",
+      "blob": "643561c427a1372fd18c3bec46dc38eb7ac61ca7",
+      "bytes": 141408
+    },
+    {
+      "path": "data/code_15/org/code_15_438277.mat",
+      "blob": "499fd5a220da61c2910e78c751191f429d3fa73a",
+      "bytes": 141408
+    },
+    {
+      "path": "data/code_15/org/code_15_795649.mat",
+      "blob": "b39e26b19444132ba6d5042b4775de09d7a8cda7",
+      "bytes": 141408
+    },
+    {
+      "path": "data/code_15/org/code_15_975093.mat",
+      "blob": "e6d639b43e46c49e74c769892fb563aadf666d32",
+      "bytes": 197184
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_1238362.mat",
+      "blob": "7b447dae467be82048174d423b51e3941d519530",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_1594286.mat",
+      "blob": "40029a8048cd926d845bb9d335e099b4ff18e2f5",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_2657522.mat",
+      "blob": "f493489fdbcf449df76d48b811245a0f8ce87514",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_270272.mat",
+      "blob": "0a50c245f43008de831508f2c1fbba577d34c939",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_2754228.mat",
+      "blob": "a405245442efe980b8e311220f3cfc9a4d5b6a7c",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_2969044.mat",
+      "blob": "7c59dbe52a920115a601d4c292c52a8e16572963",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_358121.mat",
+      "blob": "d4f932bbe7585a42dbd8a11a8e25d277886c2804",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_438277.mat",
+      "blob": "6c3c4e6dcb73538005bb93e247285664a1ba6955",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_795649.mat",
+      "blob": "f21eeb6e34f996c3f72956887b0b61c10606faa4",
+      "bytes": 352912
+    },
+    {
+      "path": "data/code_15/preprocessed/code_15_975093.mat",
+      "blob": "091125f43e8d274d18d910a8c16ca1893c84b1e0",
+      "bytes": 492400
+    },
+    {
+      "path": "data/code_15/segmented.csv",
+      "blob": "fe9adf659886ce9491e8a0c5a0a5bb504325d68d",
+      "bytes": 704
+    },
+    {
+      "path": "data/code_15/segmented/code_15_1238362_0.mat",
+      "blob": "a020936a61dd897de2a5d01ee900155fb2a7c219",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_1594286_0.mat",
+      "blob": "7a2fac2aca1c9102456845b1b26e0becfe55f3cd",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_1594286_1.mat",
+      "blob": "a2ae4b0af620e104dfc61b16b6c7ef829727341c",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_2657522_0.mat",
+      "blob": "ffa30219888630063e2aea595a9c2de3c4817939",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_270272_0.mat",
+      "blob": "25db337ddf6e7f8dddb3f578ad9d6e197e4cbbe5",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_270272_1.mat",
+      "blob": "c083f54613267bcb3617e18741b03bc0238f311d",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_2754228_0.mat",
+      "blob": "23cb4841934b4b5bb65aaa6b0c0a51098fa7a367",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_2969044_0.mat",
+      "blob": "25d327f70aad86935b1c7fbe5064cbc0390f6593",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_2969044_1.mat",
+      "blob": "5704e7e9ce757123a29743b80e75c1cdb8143930",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_358121_0.mat",
+      "blob": "98bde7e83963c5707fd90cb8df13016ee09ee982",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_438277_0.mat",
+      "blob": "de1d900030c1bb79373cc347de5d1deec25d859a",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_795649_0.mat",
+      "blob": "5648c6a8a8a64cd353a7c9748f3e8929fb789c8e",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_975093_0.mat",
+      "blob": "f0a61fa292b1913052ff1ca69793fafb82b4a2cd",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented/code_15_975093_1.mat",
+      "blob": "640cab1bf6f8f5fc7dde744cbf14e3f3fe8ac4ad",
+      "bytes": 240960
+    },
+    {
+      "path": "data/code_15/segmented_split_incomplete.csv",
+      "blob": "6a89127d3d9cb8f40f89283fb3e6983a332dd7cd",
+      "bytes": 779
+    },
+    {
+      "path": "data/manifests/code_15_subset10/.gitkeep",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/attached_desc_tem.json",
+      "blob": "10ce7b939815906e4a9e2a535408e5368b83d16d",
+      "bytes": 2645
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/compound_tem.json",
+      "blob": "90a369444e598c40b71a9b765ebe4b1b80a35e44",
+      "bytes": 1729
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/connective.json",
+      "blob": "c1337edf46316ce0de5b76064c84378370fd29f1",
+      "bytes": 1695
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/desc_pat.json",
+      "blob": "906f7cc7e0c478d2e78f3516ebe9885f050b8fc8",
+      "bytes": 20833
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/desc_tem.json",
+      "blob": "eec4ed35b9ddb8dd26a5983ccee1fe428c92b4b9",
+      "bytes": 3939
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/entity_pat.json",
+      "blob": "7a588990122f43c835343990e8729a164d988f8c",
+      "bytes": 59337
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/entity_tem.json",
+      "blob": "ea2e5a33a20f958e2f8394b141b74d734f9914fa",
+      "bytes": 48172
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/traveling_desc_tem.json",
+      "blob": "7ef3b8b95cacf2306724d4934f55e05904474595",
+      "bytes": 381
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/uncertainty_map.json",
+      "blob": "48ddb68a868ba4ad4f7666e9b492042a6f4bea6d",
+      "bytes": 77
+    },
+    {
+      "path": "data/mimic_iv_ecg/labels/label_def.csv",
+      "blob": "ab4f3e40f1e844ee008d9b028f9c5536ea123e71",
+      "bytes": 3246
+    },
+    {
+      "path": "docs/ECG-FM - Graphical Abstract.jpg",
+      "blob": "b6fd29c4ab4851e419f2117a5eb3f567efaf8a30",
+      "bytes": 318200
+    },
+    {
+      "path": "docs/architecture.png",
+      "blob": "37e22292bfc0ef605a9b21006b6dd8810e3375ad",
+      "bytes": 480196
+    },
+    {
+      "path": "docs/cohort.png",
+      "blob": "d6730a3fc46cb2b150f94cd067e13e6c06824a4d",
+      "bytes": 243678
+    },
+    {
+      "path": "docs/ecg_fm_logo.png",
+      "blob": "bdac3e3957d8321ba6ea0aa73abc9e5c2013b7e8",
+      "bytes": 317556
+    },
+    {
+      "path": "docs/saliency.png",
+      "blob": "763856b371c7257386d3d3e2f7c2b8237f193ada",
+      "bytes": 744274
+    },
+    {
+      "path": "labeler/common.py",
+      "blob": "fb04c7e9da0230cbeaa44b4b32fb4ae241946322",
+      "bytes": 7386
+    },
+    {
+      "path": "labeler/from_json.py",
+      "blob": "150109f714a4cf077930286b58ee2a2844cf025e",
+      "bytes": 4060
+    },
+    {
+      "path": "labeler/labeler_utils.py",
+      "blob": "6ad0c4e51d60878bdfb5cac49b175acac881c4d1",
+      "bytes": 2599
+    },
+    {
+      "path": "labeler/pattern_labeler.py",
+      "blob": "b90dcb505dd5afa1da5ec33d1c26e1e8d42e37d9",
+      "bytes": 62854
+    },
+    {
+      "path": "labeler/pattern_matcher.py",
+      "blob": "3591cb4d1f83242d7a3bd4043106e636897c9dbf",
+      "bytes": 15319
+    },
+    {
+      "path": "labeler/preprocess.py",
+      "blob": "b78f9a7575e3dae1375a79e1a6149226b602e74a",
+      "bytes": 55819
+    },
+    {
+      "path": "labeler/string_utils.py",
+      "blob": "6186b4e59508f63551115576a98a4a2b888c77d9",
+      "bytes": 6716
+    },
+    {
+      "path": "labeler/to_json.py",
+      "blob": "8e3d843b9acffb88c59e03397e6c3f00a4c2ca44",
+      "bytes": 7877
+    },
+    {
+      "path": "notebooks/infer_cli.ipynb",
+      "blob": "ed9621cee980ae98c5aec9c03735e6f725a95476",
+      "bytes": 7969
+    },
+    {
+      "path": "notebooks/infer_quickstart.ipynb",
+      "blob": "5d8c5b0cd08c8989b228a07886b5da7aada141df",
+      "bytes": 24063
+    },
+    {
+      "path": "notebooks/labeler.ipynb",
+      "blob": "1642f81fff9fd2fe4ea7eed816b3be90af66bef1",
+      "bytes": 13679
+    },
+    {
+      "path": "outputs/.gitkeep",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "scripts/embs.py",
+      "blob": "11d7633828d1229338a83da4bbbec77d10e66532",
+      "bytes": 1765
+    },
+    {
+      "path": "scripts/linear.py",
+      "blob": "8cd5a4c2f104088afe03aa9bf95a7b19eb8f4fad",
+      "bytes": 15341
+    },
+    {
+      "path": "scripts/saliency.py",
+      "blob": "45b42dfd04db2d197626a17e4052c72b54c722af",
+      "bytes": 1536
+    },
+    {
+      "path": "splits/README.md",
+      "blob": "d4c9e50f541aaf414e950f5fbd523fa3dd1929b5",
+      "bytes": 278
+    },
+    {
+      "path": "splits/meta_split_mimic_iv_ecg.csv",
+      "blob": "773e5591430d84befc0c9d249249fcd0890b64a1",
+      "bytes": 77901681
+    },
+    {
+      "path": "splits/meta_split_physionet.csv",
+      "blob": "685c478b40533dfd7b6a025155f1c53876039976",
+      "bytes": 8597727
+    }
+  ],
+  "clinical_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "publication": {
+    "doi": "10.1093/jamiaopen/ooaf122",
+    "arxiv": "2408.05178",
+    "status": "PEER_REVIEWED_PUBLICATION_IDENTIFIED",
+    "claims_authority": "RESEARCH_ONLY"
+  }
+}

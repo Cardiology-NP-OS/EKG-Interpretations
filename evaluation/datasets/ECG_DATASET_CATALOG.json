@@ -443,15 +443,15 @@
       "datasetId": "ECG-DATASET-CODE-15-PCT-TELEHEALTH-NETWORK-OF-MINAS-GERAIS-15-PCT-SUBSET",
       "name": "CODE-15% (Telehealth Network of Minas Gerais, 15% subset)",
       "canonicalSource": "https://doi.org/10.5281/zenodo.4916206",
-      "version": null,
+      "version": "1.0.0",
       "access": "open",
       "licenseOrTerms": "CC BY 4.0",
-      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
-      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "licenseVerificationStatus": "SOURCE_METADATA_INDEPENDENTLY_VERIFIED_2026-09-17_LICENSE_VALUE_NOT_EXPOSED_BY_RETRIEVED_ZENODO_PAGE",
+      "subjectCount": "233770 patients",
+      "recordCount": "345779 exams",
+      "leads": "12 leads: DI, DII, DIII, AVR, AVL, AVF, V1-V6",
+      "sampleRateHz": 400,
+      "duration": "source traces may be 7 or 10 seconds; stored as 4096 samples with zero padding as described by source",
       "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
       "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
       "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
@@ -483,6 +483,21 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "locator": "data/code_15/; notebooks/infer_quickstart.ipynb"
+        }
+      ],
+      "verificationSources": [
+        {
+          "authority": "Zenodo",
+          "url": "https://zenodo.org/records/4916206",
+          "doi": "10.5281/zenodo.4916206",
+          "verified_date": "2026-09-17",
+          "license_status": "NOT_INDEPENDENTLY_CONFIRMED_FROM_RETRIEVED_RECORD"
         }
       ]
     },
@@ -1758,21 +1773,21 @@
       "name": "MIMIC-IV-ECG",
       "canonicalSource": "https://physionet.org/content/mimic-iv-ecg/1.0/",
       "version": "1.0",
-      "access": "credentialed",
-      "licenseOrTerms": "PhysioNet DUA",
-      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
-      "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "sampleRateHz": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "duration": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
-      "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
-      "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
-      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
-      "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
+      "access": "open",
+      "licenseOrTerms": "Open Data Commons Open Database License v1.0",
+      "licenseVerificationStatus": "INDEPENDENTLY_VERIFIED_PHYSIONET_2026-09-17",
+      "subjectCount": "approximately 160000 unique subjects",
+      "recordCount": "approximately 800000 ECGs",
+      "leads": "12 leads: I, II, III, aVR, aVL, aVF, V1-V6",
+      "sampleRateHz": 500,
+      "duration": "10 seconds",
+      "annotationType": "DIAGNOSTIC_ECG_WAVEFORMS_WITH_OPTIONAL_LINK_TO_CARDIOLOGIST_REPORT",
+      "labelOrigin": "SOURCE_DATASET_METADATA_AND_OPTIONAL_LINKED_REPORTS_NOT_PROJECT_GOLD",
+      "adjudicationOrSourceProcess": "Source documentation states cardiologist report link is provided when available; no project adjudication inferred",
+      "trainValidationTestStructure": "Donor010 tracked split metadata: train 630178; valid 79129; test 78370",
+      "patientLevelSplitProperties": "Donor010 local aggregate audit: 160821 parsed patient groups; 0 patients spanning multiple splits",
+      "leakageRisks": "Donor010 split metadata passed patient-group non-overlap audit; linked clinical/report data remain separately governed",
+      "overlapWithOtherDatasets": "Derived from/matched to MIMIC-IV clinical database; cross-dataset identity review still required",
       "knownLimitations": [
         "Catalogue metadata is not independent verification of the source dataset.",
         "No dataset bytes are stored by this normalization checkpoint."
@@ -1797,6 +1812,20 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "locator": "splits/meta_split_mimic_iv_ecg.csv; README.md"
+        }
+      ],
+      "verificationSources": [
+        {
+          "authority": "PhysioNet",
+          "url": "https://physionet.org/content/mimic-iv-ecg/1.0/",
+          "doi": "10.13026/4nqg-sb35",
+          "verified_date": "2026-09-17"
         }
       ]
     },
@@ -2424,8 +2453,8 @@
       "canonicalSource": "https://physionet.org/content/challenge-2021/1.0.3/",
       "version": "1.0.3",
       "access": "open",
-      "licenseOrTerms": "CC BY 4.0",
-      "licenseVerificationStatus": "DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED",
+      "licenseOrTerms": "Creative Commons Attribution 4.0 International Public License",
+      "licenseVerificationStatus": "INDEPENDENTLY_VERIFIED_PHYSIONET_2026-09-17",
       "subjectCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
       "recordCount": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
       "leads": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
@@ -2434,8 +2463,8 @@
       "annotationType": "SOURCE_SPECIFIC_REVIEW_REQUIRED",
       "labelOrigin": "SOURCE_DATASET_LABELS_OR_METADATA_REVIEW_REQUIRED",
       "adjudicationOrSourceProcess": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
-      "trainValidationTestStructure": "SOURCE_OR_PROJECT_EVALUATION_CONTRACT_REQUIRED",
-      "patientLevelSplitProperties": "NOT_CAPTURED_IN_ACCEPTED_PROVENANCE",
+      "trainValidationTestStructure": "Donor010 tracked split metadata: train 68823; valid 8603; test 8603",
+      "patientLevelSplitProperties": "NOT_INDEPENDENTLY_ESTABLISHED_FROM_MULTI-SOURCE_CHALLENGE_PATHS",
       "leakageRisks": "PATIENT_OR_RECORD_OVERLAP_MUST_BE_ASSESSED_BEFORE_EVALUATION",
       "overlapWithOtherDatasets": "REQUIRES_SOURCE_LEVEL_IDENTITY_REVIEW",
       "knownLimitations": [
@@ -2462,6 +2491,20 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "locator": "donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json"
+        },
+        {
+          "source": "bowang-lab/ecg-fm",
+          "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+          "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+          "locator": "splits/meta_split_physionet.csv; README.md"
+        }
+      ],
+      "verificationSources": [
+        {
+          "authority": "PhysioNet",
+          "url": "https://physionet.org/content/challenge-2021/1.0.3/",
+          "doi": "10.13026/34va-7q14",
+          "verified_date": "2026-09-17"
         }
       ]
     },

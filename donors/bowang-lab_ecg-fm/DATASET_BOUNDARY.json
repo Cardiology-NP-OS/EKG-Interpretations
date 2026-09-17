@@ -1,0 +1,69 @@
+{
+  "schema": "ecg-donor-dataset-boundary-v1",
+  "donor_id": "DONOR-010",
+  "repository": "bowang-lab/ecg-fm",
+  "policy": {
+    "source_labels_are_project_gold": false,
+    "raw_or_restricted_data_allowed_in_target_git": false,
+    "dataset_rights_inferred_from_code_license": false
+  },
+  "referenced_sources": [
+    {
+      "dataset": "MIMIC-IV-ECG",
+      "version": "1.0",
+      "use": "pretraining/finetuning and tracked split metadata",
+      "target_bytes_imported": false
+    },
+    {
+      "dataset": "PhysioNet/CinC Challenge 2021",
+      "version": "1.0.3",
+      "use": "pretraining and tracked split metadata",
+      "target_bytes_imported": false
+    },
+    {
+      "dataset": "CODE-15%",
+      "version": "1.0.0",
+      "use": "tracked quickstart sample assets",
+      "target_bytes_imported": false
+    }
+  ],
+  "tracked_data_derived_assets": [
+    {
+      "path": "data/code_15/",
+      "classification": "DATASET_SAMPLE_AND_DERIVATIVES",
+      "target_copy_allowed": false,
+      "license_status": "LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "path": "data/mimic_iv_ecg/labeler/",
+      "classification": "SOURCE_DERIVED_LABELER_TEMPLATES",
+      "target_copy_allowed": false,
+      "license_status": "SEPARATE_DATA_RIGHTS_REVIEW_REQUIRED"
+    },
+    {
+      "path": "splits/meta_split_mimic_iv_ecg.csv",
+      "classification": "SPLIT_METADATA",
+      "rows": 787677,
+      "target_copy_allowed": false
+    },
+    {
+      "path": "splits/meta_split_physionet.csv",
+      "classification": "SPLIT_METADATA",
+      "rows": 86029,
+      "target_copy_allowed": false
+    }
+  ],
+  "split_audit": {
+    "mimic_iv_ecg": {
+      "patient_groups": 160821,
+      "patients_spanning_multiple_splits": 0,
+      "method": "subject_id parsed from tracked source_path only; aggregate result stored, not patient identifiers"
+    },
+    "physionet_challenge_2021": {
+      "patient_isolation": "NOT_INDEPENDENTLY_ESTABLISHED"
+    }
+  },
+  "raw_dataset_bytes_imported": false,
+  "source_labels_promoted_to_project_gold": false,
+  "approved_adjudicated_project_gold_added": 0
+}

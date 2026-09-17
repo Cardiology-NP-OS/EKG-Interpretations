@@ -1,0 +1,177 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-010",
+  "repository": "bowang-lab/ecg-fm",
+  "target_rollback_commit": "8ebc601d16e387745cf513f0575d92f97e54c614",
+  "rows": [
+    {
+      "capability_id": "EFM-001",
+      "capability": "fairseq-signals research framework dependency and training stack",
+      "donor_component": "README.md",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "DEPENDENCY",
+      "reason": "Existing DONOR-009 framework provenance; no duplicate runtime dependency."
+    },
+    {
+      "capability_id": "EFM-002",
+      "capability": "Exact ECG-FM pretrained checkpoint identity",
+      "donor_component": "HuggingFace wanglab/ecg-fm:mimic_iv_ecg_physionet_pretrained.pt",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "EXACT_CHECKPOINT_PROVENANCE_GAIN",
+      "decision": "CHALLENGER",
+      "reason": "Exact external checkpoint pinned by HF revision/LFS SHA-256; not imported or executed."
+    },
+    {
+      "capability_id": "EFM-003",
+      "capability": "Exact ECG-FM MIMIC-IV-ECG finetuned checkpoint identity",
+      "donor_component": "HuggingFace wanglab/ecg-fm:mimic_iv_ecg_finetuned.pt",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "EXACT_CHECKPOINT_PROVENANCE_GAIN",
+      "decision": "CHALLENGER",
+      "reason": "Exact external checkpoint pinned by HF revision/LFS SHA-256; not imported or executed."
+    },
+    {
+      "capability_id": "EFM-004",
+      "capability": "W2V+CMSC+RLM foundation-model pretraining configuration",
+      "donor_component": "README.md; HuggingFace pretrained YAML",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "EXACT_CHECKPOINT_PROVENANCE_GAIN",
+      "decision": "CHALLENGER",
+      "reason": "Research representation methodology with exact config identity; no target model execution."
+    },
+    {
+      "capability_id": "EFM-005",
+      "capability": "Twelve-lead 500 Hz five-second inference preprocessing contract",
+      "donor_component": "notebooks/infer_quickstart.ipynb",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "SUPERSEDED",
+      "reason": "Target-owned lead ordering, resampling and segmentation contracts are stronger and executable."
+    },
+    {
+      "capability_id": "EFM-006",
+      "capability": "MIMIC-IV-ECG patient-isolated donor split metadata",
+      "donor_component": "splits/meta_split_mimic_iv_ecg.csv",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "EVALUATION_ONLY",
+      "reason": "787677 split rows; local audit found 160821 patient groups and zero patients spanning splits."
+    },
+    {
+      "capability_id": "EFM-007",
+      "capability": "PhysioNet Challenge 2021 donor split metadata",
+      "donor_component": "splits/meta_split_physionet.csv",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "EVALUATION_ONLY",
+      "reason": "86029 tracked split rows; useful evaluation provenance; patient isolation not independently inferred."
+    },
+    {
+      "capability_id": "EFM-008",
+      "capability": "Tracked CODE-15 percent example waveform and derived sample assets",
+      "donor_component": "data/code_15/",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "LICENSE_REVIEW_REQUIRED",
+      "reason": "Data-derived waveform/label bytes have separate source terms and are not copied into target."
+    },
+    {
+      "capability_id": "EFM-009",
+      "capability": "MIMIC-IV-ECG free-text pattern labeler framework",
+      "donor_component": "labeler/",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "RESEARCH_ONLY",
+      "reason": "Useful label extraction research; output labels are source-derived and never project gold."
+    },
+    {
+      "capability_id": "EFM-010",
+      "capability": "Tracked MIMIC-IV-ECG labeler templates and label definitions",
+      "donor_component": "data/mimic_iv_ecg/labeler/; data/mimic_iv_ecg/labels/",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "DATA_ONLY",
+      "reason": "Data-derived label vocabulary/template assets remain source evidence; no target import."
+    },
+    {
+      "capability_id": "EFM-011",
+      "capability": "Inference and embedding extraction workflows",
+      "donor_component": "notebooks/infer_cli.ipynb; scripts/embs.py",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "RESEARCH_ONLY",
+      "reason": "Reproducibility context only; donor runtime dependency not adopted."
+    },
+    {
+      "capability_id": "EFM-012",
+      "capability": "Linear probing and multilabel evaluation metric workflow",
+      "donor_component": "scripts/linear.py",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "EVALUATION_ONLY",
+      "reason": "Experiment methodology only; donor/source performance is not reportable target performance."
+    },
+    {
+      "capability_id": "EFM-013",
+      "capability": "Gradient saliency workflow",
+      "donor_component": "scripts/saliency.py; notebooks/infer_quickstart.ipynb",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "EVALUATION_ONLY",
+      "reason": "Interpretability/evaluation methodology only; no clinical validity inference."
+    },
+    {
+      "capability_id": "EFM-014",
+      "capability": "Checkpoint configuration and training reproducibility metadata",
+      "donor_component": "README.md; HuggingFace YAML files",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "RESEARCH_ONLY",
+      "reason": "Exact config artifacts improve reproducibility while execution remains inactive."
+    },
+    {
+      "capability_id": "EFM-015",
+      "capability": "Published ECG-FM paper and repository performance claims",
+      "donor_component": "README.md; arXiv:2408.05178",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "RESEARCH_ONLY",
+      "reason": "Published claims are research context, not target reproduction or reportable metrics."
+    },
+    {
+      "capability_id": "EFM-016",
+      "capability": "Dataset identity and licensing corrections exposed by donor provenance",
+      "donor_component": "README.md; splits/; data/code_15/",
+      "target_state": "BRAND_NEUTRAL_TARGET_CAPABILITY_OR_RESEARCH_EVALUATION_SURFACE_EXISTS",
+      "gap": "NO_RUNTIME_GAP_REQUIRING_DONOR_CODE_IMPORT",
+      "decision": "DATA_ONLY",
+      "reason": "Canonical dataset cards are updated independently; source labels remain non-gold."
+    }
+  ],
+  "disposition_summary": {
+    "DEPENDENCY": 1,
+    "CHALLENGER": 3,
+    "EVALUATION_ONLY": 4,
+    "RESEARCH_ONLY": 4,
+    "DATA_ONLY": 2,
+    "SUPERSEDED": 1,
+    "LICENSE_REVIEW_REQUIRED": 1
+  },
+  "selected_harvest": [
+    "Exact source/HF checkpoint provenance and hashes",
+    "Model/config metadata as inactive challengers",
+    "MIMIC-IV-ECG split leakage evidence",
+    "Dataset metadata/license correction",
+    "Labeler/evaluation methodology as research context"
+  ],
+  "explicit_non_harvest": [
+    "Donor runtime dependency",
+    "PyTorch checkpoint bytes",
+    "CODE-15 waveform/sample bytes",
+    "MIMIC-derived label/template bytes",
+    "Published performance as target metric"
+  ],
+  "implementation_decision": "GOVERNANCE_RESEARCH_EVALUATION_METADATA_ONLY_NO_MODEL_EXECUTION",
+  "clinical_authority_change": false
+}

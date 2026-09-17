@@ -1,0 +1,20 @@
+{
+  "schema": "ecg-donor-associated-repository-dispositions-v1",
+  "donor_id": "DONOR-010",
+  "queue_expanded": false,
+  "repositories": [
+    {
+      "repository": "Jwoo5/fairseq-signals",
+      "relationship": "required research framework dependency",
+      "status": "ALREADY_ACCEPTED_AS_DONOR_009",
+      "queued_as_associated_donor": false
+    },
+    {
+      "repository": "wanglab/ecg-fm",
+      "relationship": "external model/checkpoint repository",
+      "status": "MODEL_ARTIFACT_SOURCE_AUDITED_BY_EXACT_REVISION_AND_SHA256",
+      "queued_as_associated_donor": false
+    }
+  ],
+  "new_associated_donors_queued": 0
+}

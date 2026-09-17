@@ -1,0 +1,22 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-010",
+  "repository": "bowang-lab/ecg-fm",
+  "comparison_parent": {"commit":"8ebc601d16e387745cf513f0575d92f97e54c614","tree":"1af0e7c78e0a271b5c31aa86160c4a524b5b755e"},
+  "upstream": {"commit":"9f926f1911bb9f24789b5c6407677d58ad753054","tree":"8a8fd9ff5152ab119f1ef1b0e349065740bbc691"},
+  "before": {"donor_capabilities":255,"canonical_capabilities":57,"model_challengers":13,"completed_donors":9,"next_donor_id":"DONOR-010","mimic_iv_ecg_license_verification":"DONOR_REPORTED_NOT_INDEPENDENTLY_VERIFIED"},
+  "after": {"donor_capabilities":271,"canonical_capabilities":57,"model_challengers":15,"completed_donors":9,"next_donor_id":"DONOR-010","mimic_iv_ecg_license_verification":"INDEPENDENTLY_VERIFIED_PHYSIONET_2026-09-17"},
+  "gains": [
+    "Sixteen donor capabilities receive terminal dispositions and exactly one brand-neutral canonical mapping.",
+    "Two public ECG-FM checkpoints are pinned to an exact Hugging Face revision, exact byte lengths, and exact SHA-256 identities without importing or executing weights.",
+    "MIMIC-IV-ECG donor split metadata is reconciled at patient level: 787677 records, 160821 parsed patient groups, zero groups spanning train/valid/test.",
+    "MIMIC-IV-ECG canonical metadata is corrected to the open ODbL v1.0 waveform release and enriched with source-documented scale, lead count, sample rate, and duration.",
+    "PhysioNet Challenge 2021 v1.0.3 licensing is independently verified as CC BY 4.0; CODE-15 metadata is independently enriched while its exact license remains fail-closed for target reuse.",
+    "Peer-reviewed ECG-FM publication identity is captured as research context only: DOI 10.1093/jamiaopen/ooaf122."
+  ],
+  "non_harvest": ["No donor source code copied.","No new runtime dependency.","No model weights loaded or imported.","No donor dataset/sample bytes copied.","No source labels promoted to project gold.","No published performance converted to target metrics."],
+  "metrics": {"target_diagnostic_metrics":"NOT_REPORTABLE","published_metrics_admitted":false,"clinical_validity_inferred":false},
+  "verification": {"focused_closure":"18/18 PASS","repository_normalization":"13/13 PASS","full_target_suite":"PASS","git_diff_check":"PASS","candidate_commit":"PENDING_COMMIT","candidate_ci":"PENDING"},
+  "governed_state": {"completion_state":"SPECIALIST_COMPLETE_INACTIVE","diagnostic_runtime":"GOVERNED_INACTIVE","evidence_admission":"NOT_ADMITTED","approved_adjudicated_gold_count":0,"metrics":"NOT_REPORTABLE","activation":"NOT_ELIGIBLE","clinical_validity":"NOT_INFERRED"},
+  "clinical_authority_added": false
+}
