@@ -1,0 +1,185 @@
+{
+  "schema": "ecg-donor-baseline-v1",
+  "recorded_date": "2026-09-16",
+  "repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "current_main": {
+    "commit": "28522bd3f970f0ee19d15f81fe40df78be89a1af",
+    "tree": "8355036120a0d29ca9f72d11132bd7f910392c65",
+    "relationship_to_accepted_engine": "README_ONLY_DOCUMENTATION_COMMIT",
+    "ahead_by": 1,
+    "changed_files_from_accepted_engine": [
+      "README.md"
+    ]
+  },
+  "accepted_engine": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "immutable_for_donor_program": true
+  },
+  "rollback_point": {
+    "branch_start_commit": "28522bd3f970f0ee19d15f81fe40df78be89a1af",
+    "accepted_engine_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82"
+  },
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "repository_inventory": {
+    "accepted_engine_file_count": 188,
+    "accepted_engine_directory_count": 15,
+    "accepted_engine_code_file_count_js_py": 115,
+    "accepted_engine_test_related_file_count": 57,
+    "accepted_engine_extensions": {
+      "gitattributes": 1,
+      "yml": 1,
+      "gitignore": 1,
+      "md": 27,
+      "json": 43,
+      "py": 89,
+      "js": 26
+    },
+    "top_level_file_counts": {
+      "root": 6,
+      ".github": 1,
+      "clinical_control": 125,
+      "docs": 6,
+      "lib": 3,
+      "manifests": 5,
+      "tests": 12,
+      "tools": 30
+    }
+  },
+  "verification_evidence": {
+    "github_actions_run_id": 35152436270,
+    "github_actions_head_sha": "28522bd3f970f0ee19d15f81fe40df78be89a1af",
+    "workflow": "EKG Recovery CI",
+    "workflow_conclusion": "success",
+    "jobs": [
+      {
+        "name": "Synthetic contract CI (non-clinical)",
+        "conclusion": "success",
+        "evidence_boundary": "engineering_only",
+        "core_actions": [
+          "npm test",
+          "npm run gate:ci",
+          "npm run source:preflight"
+        ],
+        "npm_test_files_from_package_json": 7
+      },
+      {
+        "name": "Quarantined V12.1 candidate validation",
+        "conclusion": "success",
+        "gate_steps_excluding_setup_teardown": 21,
+        "terminal_gate_included": "PKT-EP5-09"
+      }
+    ],
+    "documented_quarantined_candidate_gate": {
+      "source": "clinical_control/v12_1_candidate/VALIDATION_STATUS.md",
+      "assertions": 80,
+      "passed": 80,
+      "scope": "registry/schema + calculation engine + criteria/source traceability",
+      "clinical_accuracy_inference_allowed": false
+    },
+    "terminal_specialist_gate": {
+      "packet": "PKT-EP5-09",
+      "assertion_floor": 360,
+      "current_ci_step_conclusion": "success"
+    },
+    "note": "GitHub Actions metadata confirms step/job success; raw Actions log text was not used to manufacture aggregate assertion totals."
+  },
+  "schemas_and_contracts": [
+    "clinical_control/v12_1_candidate/source_core/07_OUTPUT_SCHEMA.json",
+    "clinical_control/v12_1_candidate/source_core/23_PATTERN_REGISTRY.json",
+    "clinical_control/v12_1_candidate/source_core/36_FAILURE_MODE_REGISTRY.json",
+    "clinical_control/v12_1_candidate/source_core/63_SOURCE_REGISTRY.json",
+    "clinical_control/v12_1_candidate/validation_generated/PKT07_MEASUREMENT_EVIDENCE_SCHEMA.json",
+    "clinical_control/v12_1_candidate/validation_generated/PKT08_PATTERN_CANDIDATE_SCHEMA.json",
+    "manifests/SOURCE_INSPECTION_SCHEMA.json",
+    "manifests/SIGNAL_QUALITY_SCHEMA.json",
+    "manifests/V12_RECOVERED_BASELINE.json",
+    "manifests/V12_1_REMAINING_CONTROLS.json"
+  ],
+  "supported_inputs": {
+    "native_waveform_decode": {
+      "family": "WFDB",
+      "implemented_format": 16,
+      "calibration": "gain_and_baseline_from_header",
+      "multi_lead": true,
+      "variable_sampling_rate": true,
+      "variable_duration": true,
+      "paired_shape_comparison": true
+    },
+    "input_guard_recognized_source_kinds": [
+      "original_digital_ecg_pdf",
+      "scanned_paper_ecg",
+      "phone_photo",
+      "screenshot",
+      "monitor_capture",
+      "cropped_lead_strip",
+      "structured_input"
+    ],
+    "input_guard_recognized_formats": [
+      "pdf",
+      "png",
+      "jpeg",
+      "jpg",
+      "structured_json"
+    ],
+    "boundary_note": "Guard recognition does not mean the repository natively digitizes or decodes every recognized source kind. Native waveform decoding currently centers on the governed WFDB path."
+  },
+  "known_capabilities": [
+    "source identity and hash verification",
+    "WFDB header parsing and format-16 interleaved sample decoding",
+    "gain/baseline physical calibration",
+    "lead/sample/duration shape checks",
+    "deterministic bounded signal inspection",
+    "engineering waveform-quality reporting",
+    "defensive structured-input traversal and resource limits",
+    "lead identity/completeness and calibration-confidence gating",
+    "untrusted embedded/OCR/machine-text isolation",
+    "path/filename and source-substitution defenses",
+    "quarantined deterministic calculation engine",
+    "measurement-evidence contracts",
+    "pattern-candidate contracts",
+    "clinical criteria/pattern/failure/source registries",
+    "phenotype-versus-diagnosis boundaries",
+    "reporting-language and structured-output controls",
+    "adjudication/evidence/metric/activation governance gates",
+    "append-only lineage, correction, revocation, and restart-recovery controls"
+  ],
+  "known_limitations_relevant_to_donor_harvest": [
+    "no admitted governed clinical gold",
+    "diagnostic metrics not reportable",
+    "diagnostic runtime governed inactive",
+    "clinical validity not inferred",
+    "no separate governed activation authority",
+    "native WFDB decoder is intentionally narrow and format-16 specific",
+    "no canonical DICOM-ECG ingestion demonstrated",
+    "no canonical SCP-ECG ingestion demonstrated",
+    "no canonical vendor XML ECG ingestion demonstrated",
+    "no canonical generic CSV/NumPy waveform ingestion demonstrated",
+    "no canonical streaming/Holter ingestion demonstrated",
+    "no canonical general-purpose resampling/filtering/delineation stack demonstrated",
+    "no canonical image-to-waveform digitization pipeline demonstrated",
+    "no foundation-model or multimodal model has runtime authority"
+  ],
+  "invariants": {
+    "donor_work_must_not_change": [
+      "diagnostic_runtime=GOVERNED_INACTIVE",
+      "evidence_admission=NOT_ADMITTED",
+      "approved_adjudicated_gold_count=0",
+      "metrics=NOT_REPORTABLE",
+      "activation=NOT_ELIGIBLE",
+      "clinical_validity=NOT_INFERRED"
+    ],
+    "source_labels_are_not_project_gold": true,
+    "donor_model_outputs_are_not_clinical_truth": true,
+    "no_phi_or_restricted_raw_clinical_data_in_git": true,
+    "license_uncertainty_fails_closed": true
+  }
+}

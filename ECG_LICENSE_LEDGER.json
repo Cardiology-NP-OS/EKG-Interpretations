@@ -1,0 +1,42 @@
+{
+  "schema": "ecg-license-ledger-v1",
+  "updated_date": "2026-09-16",
+  "entries": [
+    {
+      "donor_id": "DONOR-001",
+      "repository": "MIT-LCP/wfdb-python",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "COMPATIBLE",
+        "license_file": "LICENSE",
+        "license_blob_sha": "8d3513fef628f57c03c597676c351cca1aabb811"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "CLEAN_REIMPLEMENTATION_ADAPTER",
+        "TARGET_OWNED_SYNTHETIC_TEST_METHODOLOGY"
+      ],
+      "attribution_required": true,
+      "dataset_fixture_license": {
+        "status": "LICENSE_REVIEW_REQUIRED",
+        "imported": false,
+        "scope": "sample-data/ and remotely referenced PhysioNet datasets"
+      },
+      "model_weight_license": {
+        "status": "NOT_APPLICABLE",
+        "weights_imported": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
+    },
+    {
+      "donor_id": "DONOR-A002",
+      "repository": "bemoody/wfdb",
+      "status": "LICENSE_REVIEW_REQUIRED",
+      "note": "Associated upstream reported as mixed GPL/LGPL family; no code may be reused before independent file-level audit."
+    }
+  ],
+  "fail_closed_on_unknown_license": true
+}
