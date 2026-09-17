@@ -124,6 +124,12 @@ throwsCode("reject authority override key", () => {
   createChallengerEnvelope({ ...args(), runtimeAuthority: "ACTIVE" });
 }, "CHALLENGER_ENVELOPE_UNKNOWN_KEY:runtimeAuthority");
 
+throwsCode("reject unknown window provenance key", () => {
+  const a = args();
+  a.window.backendSpecificMargin = 777;
+  createChallengerEnvelope(a);
+}, "CHALLENGER_WINDOW_UNKNOWN_KEY:backendSpecificMargin");
+
 throwsCode("reject negative context", () => {
   createEvaluationWindow({ sampleRateHz: 500, windowSamples: 5000, leftContextSeconds: -1, rightContextSeconds: 0 });
 }, "CHALLENGER_WINDOW_NEGATIVE_CONTEXT");
