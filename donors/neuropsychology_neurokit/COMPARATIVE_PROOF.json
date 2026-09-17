@@ -1,0 +1,89 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-003",
+  "donor_repository": "neuropsychology/NeuroKit",
+  "donor_commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+  "donor_tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+  "before": {
+    "target_commit": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+    "target_tree": "530d4691745df2aaaae0d39648dd9f00783ca70a",
+    "tolerance_aware_event_agreement": false,
+    "multi_source_event_agreement_matrix": false,
+    "source_order_invariant_pairing": false,
+    "donor_specific_event_agreement_tests": false,
+    "governed_state": {
+      "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+      "diagnostic_runtime": "GOVERNED_INACTIVE",
+      "evidence_admission": "NOT_ADMITTED",
+      "approved_adjudicated_gold_count": 0,
+      "metrics": "NOT_REPORTABLE",
+      "activation": "NOT_ELIGIBLE",
+      "clinical_validity": "NOT_INFERRED"
+    }
+  },
+  "after": {
+    "implementation_commit": "9009c37a5ed4c3049477a4813b6a4a5c96dce598",
+    "implementation_tree": "85d8f7f74c90879acb19811965ae325e69697ff7",
+    "verified_candidate_commit": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
+    "verified_candidate_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+    "tolerance_aware_event_agreement": true,
+    "multi_source_event_agreement_matrix": true,
+    "source_order_invariant_pairing": true,
+    "donor_specific_event_agreement_tests": true,
+    "donor_specific_assertions": 25,
+    "max_outputs_per_source": 512,
+    "max_matrix_sources": 8,
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_model_weights_imported": false,
+    "donor_dataset_bytes_imported": false,
+    "governed_state": {
+      "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+      "diagnostic_runtime": "GOVERNED_INACTIVE",
+      "evidence_admission": "NOT_ADMITTED",
+      "approved_adjudicated_gold_count": 0,
+      "metrics": "NOT_REPORTABLE",
+      "activation": "NOT_ELIGIBLE",
+      "clinical_validity": "NOT_INFERRED"
+    }
+  },
+  "verification": {
+    "github_actions_run_id": 35183599961,
+    "head_sha": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
+    "head_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success",
+    "machine_a_focused": "25/25 PASS",
+    "machine_a_full_target_suite": "PASS",
+    "independent_fresh_clone": {
+      "result": "PASS",
+      "head_sha": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
+      "head_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+      "origin_main": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+      "full_candidate_diff_check": "PASS",
+      "focused": "25/25 PASS",
+      "full_target_suite": "PASS"
+    }
+  },
+  "improvement_claim": {
+    "type": "EVALUATION_CAPABILITY_EXPANSION",
+    "demonstrated": true,
+    "description": "Target challenger evaluation can now compare bounded event outputs with deterministic one-to-one tolerance-aware matching and source-order-invariant multi-source matrices while preserving non-runtime, non-clinical authority."
+  },
+  "non_claims": [
+    "No diagnostic accuracy improvement is claimed.",
+    "No NeuroKit detector or delineator was imported or executed as target authority.",
+    "No donor physiological waveform or annotation became project gold.",
+    "No donor model weights were imported.",
+    "No clinical activation or evidence admission eligibility changed."
+  ],
+  "rollback": {
+    "rollback_commit": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+    "rollback_tree": "530d4691745df2aaaae0d39648dd9f00783ca70a",
+    "implementation_files": [
+      "lib/challenger_contract.js",
+      "tests/neurokit_event_agreement.test.js",
+      "package.json"
+    ]
+  }
+}

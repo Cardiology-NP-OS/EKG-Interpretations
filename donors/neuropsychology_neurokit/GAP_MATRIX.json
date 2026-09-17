@@ -5,150 +5,202 @@
   "target_rollback_commit": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
   "rows": [
     {
+      "capability_id": "NK-001",
       "capability": "General ECG preprocessing and detector-specific filtering",
       "donor_components": ["neurokit2/ecg/ecg_clean.py", "neurokit2/signal/signal_filter.py"],
       "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
       "reason": "Target intentionally preserves native calibrated waveform evidence and lacks canonical filtering authority. NeuroKit provides mature filter choices, but automatic transformation would change source evidence and therefore belongs only in explicit provenance-bound challenger/evaluation paths."
     },
     {
+      "capability_id": "NK-002",
       "capability": "Automatic missing-sample interpolation before ECG cleaning",
       "donor_components": ["neurokit2/ecg/ecg_clean.py", "neurokit2/signal/signal_fillmissing.py"],
       "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
       "reason": "Silent or default imputation can manufacture waveform samples and weaken target fail-closed source-quality semantics. Use as an adversarial case only unless a future explicit derived-signal contract records transformation provenance."
     },
     {
+      "capability_id": "NK-003",
       "capability": "Multi-method signal resampling",
       "donor_components": ["neurokit2/signal/signal_resample.py", "studies/resampling/resampling.ipynb"],
       "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
       "reason": "DONOR-001 already registered resampling with annotation relocation as research-only. NeuroKit adds method variety but not enough governed value to justify a second canonical implementation."
     },
     {
+      "capability_id": "NK-004",
       "capability": "Large ensemble of independent R-peak detectors",
       "donor_components": ["neurokit2/ecg/ecg_findpeaks.py", "neurokit2/ecg/ecg_peaks.py"],
       "classification": "DONOR_STRONGER",
+      "final_disposition": "CHALLENGER",
       "reason": "Target currently retains a small number of QRS challengers from WFDB/OpenECG; NeuroKit exposes a materially broader algorithm family. Individual detector outputs remain challenger evidence only."
     },
     {
+      "capability_id": "NK-005",
       "capability": "ProMAC-style multi-detector method agreement",
       "donor_components": ["neurokit2/ecg/ecg_findpeaks.py"],
       "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "INTEGRATED",
+      "canonical_target_implementation": "lib/challenger_contract.js",
       "reason": "Target challenger infrastructure can compare two complete envelopes but lacks tolerance-aware multi-source beat-event agreement. A target-owned generic agreement evaluator can harvest the engineering idea without importing detector authority."
     },
     {
+      "capability_id": "NK-006",
       "capability": "RR artifact classification and corrected-peak workflow",
       "donor_components": ["neurokit2/ecg/ecg_peaks.py", "neurokit2/signal/signal_fixpeaks.py"],
       "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
       "reason": "Ectopic/missed/extra/long-short artifact classes and preservation of uncorrected peaks are useful challenger/evaluation concepts. Correction must remain derived evidence and never silently replace source or canonical measurements."
     },
     {
+      "capability_id": "NK-007",
       "capability": "P/QRS/T delineation via peak, CWT, DWT and prominence methods",
       "donor_components": ["neurokit2/ecg/ecg_delineate.py"],
       "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
       "reason": "Target has no active waveform-delineation authority. Multiple independent delineators are useful for measurement challenge and disagreement testing, but known morphology failure modes preclude canonical authority."
     },
     {
+      "capability_id": "NK-008",
       "capability": "CWT delineation on inverted T waves",
       "donor_components": ["neurokit2/ecg/ecg_delineate.py", "upstream issue #1138"],
       "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
       "reason": "Open upstream wontfix issue documents T-wave inversion misdetection. Preserve as an adversarial morphology fixture/failure mode rather than integrating CWT output as authority."
     },
     {
+      "capability_id": "NK-009",
       "capability": "Morphology/template/spectral ECG signal-quality indices",
       "donor_components": ["neurokit2/ecg/ecg_quality.py"],
       "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
       "reason": "Target quality logic is stronger for raw-byte integrity, rail hits and constant runs, while NeuroKit adds morphology/template/detector-agreement SQIs. These are complementary evaluation signals, not replacements for target fail-closed quality."
     },
     {
+      "capability_id": "NK-010",
       "capability": "Relative derivative flatline percentage",
       "donor_components": ["neurokit2/signal/signal_flatline.py"],
       "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
       "reason": "Target already measures exact longest constant run, all-identical samples, distinct-value count and ADC rail hits directly from raw int16 evidence. Do not weaken this with a relative derivative-only criterion."
     },
     {
+      "capability_id": "NK-011",
       "capability": "ECG inversion detection/correction",
       "donor_components": ["neurokit2/ecg/ecg_invert.py"],
       "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
       "reason": "Potentially useful for derived-signal robustness and morphology testing, but inversion correction alters signal polarity and must remain provenance-bound non-runtime evidence."
     },
     {
+      "capability_id": "NK-012",
       "capability": "Beat segmentation and cardiac phase",
       "donor_components": ["neurokit2/ecg/ecg_segment.py", "neurokit2/ecg/ecg_phase.py"],
       "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
       "reason": "Useful data abstractions for future morphology challenge/evaluation; they depend on upstream peak correctness and add no independent clinical authority."
     },
     {
+      "capability_id": "NK-013",
       "capability": "ECG-derived respiration",
       "donor_components": ["neurokit2/ecg/ecg_rsp.py"],
       "classification": "LOW_VALUE",
+      "final_disposition": "RESEARCH_ONLY",
       "reason": "Peripheral to current ECG specialist scope and upstream source contains an explicit TODO requesting parameter-comparison study. Retain as research knowledge only."
     },
     {
+      "capability_id": "NK-014",
       "capability": "Deterministic signal distortion generation",
       "donor_components": ["neurokit2/signal/signal_distort.py", "neurokit2/ecg/ecg_simulate.py"],
       "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
       "reason": "Noise, powerline interference, artifact bursts and drift provide valuable robustness-fixture ideas. Synthetic data remain engineering evidence only and cannot become clinical gold."
     },
     {
+      "capability_id": "NK-015",
       "capability": "Cross-dataset R-peak benchmarking with failure/runtime capture",
       "donor_components": ["neurokit2/benchmark/benchmark_ecg.py", "studies/ecg_benchmark/"],
       "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
       "reason": "Dataset/participant stratification plus explicit algorithm errors and runtime are useful evaluation patterns. Donor benchmark is unpublished/incomplete and its score is not governed diagnostic performance."
     },
     {
+      "capability_id": "NK-016",
       "capability": "Interpolated RR-period absolute-error benchmark score",
       "donor_components": ["neurokit2/benchmark/benchmark_ecg.py"],
       "classification": "LOW_VALUE",
+      "final_disposition": "REJECTED",
       "reason": "Target already retains annotation and boundary matching methodologies from prior donors. This scalar does not provide beat-level sensitivity/PPV and should not become a headline metric."
     },
     {
+      "capability_id": "NK-017",
       "capability": "HRV time/frequency/nonlinear/RQA/RSA feature suite",
       "donor_components": ["neurokit2/hrv/"],
       "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "RESEARCH_ONLY",
       "reason": "Broad beat-to-beat variability analysis is not currently canonical in target. It depends on trusted intervals and should initially remain evaluation/research-only rather than diagnostic interpretation."
     },
     {
+      "capability_id": "NK-018",
       "capability": "AcqKnowledge, BITalino and XDF physiological input readers",
       "donor_components": ["neurokit2/data/read_acqknowledge.py", "neurokit2/data/read_bitalino.py", "neurokit2/data/read_xdf.py"],
       "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "RESEARCH_ONLY",
       "reason": "These expand format compatibility but are not priority governed ECG exchange formats and would add substantial dependency/security surface. Preserve for future adapter work only if an actual source requirement appears."
     },
     {
+      "capability_id": "NK-019",
       "capability": "Native DICOM ECG, SCP-ECG and vendor ECG XML ingestion",
       "donor_components": [],
       "classification": "LOW_VALUE",
+      "final_disposition": "REJECTED",
       "reason": "No native implementation was found in the audited donor; no capability is available to harvest."
     },
     {
+      "capability_id": "NK-020",
       "capability": "Deterministic synthetic ECG tests, flatline injection and malformed/edge behavior",
       "donor_components": ["tests/tests_ecg.py", "tests/tests_ecg_findpeaks.py"],
       "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "INTEGRATED",
+      "canonical_target_implementation": "tests/neurokit_event_agreement.test.js",
       "reason": "Target can adopt the testing pattern using target-owned synthetic fixtures without copying donor physiological data."
     },
     {
+      "capability_id": "NK-021",
       "capability": "Change-aversion golden-output regression testing separated from correctness claims",
       "donor_components": ["tests/tests_ecg_findpeaks.py", "tests/ecg_data/expected_*.csv"],
       "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "INTEGRATED",
+      "canonical_target_implementation": "tests/neurokit_event_agreement.test.js",
       "reason": "The explicit distinction between stable historical behavior and clinical correctness is highly compatible with target governance. Integrate the pattern using target-owned synthetic fixtures, not donor data."
     },
     {
+      "capability_id": "NK-022",
       "capability": "Bundled ECG/example/test waveform assets and annotations",
       "donor_components": ["data/", "tests/ecg_data/"],
       "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
       "reason": "Dataset-specific provenance/data-use terms were not established from repository licensing. Software MIT terms are not treated as sufficient rights for physiological data. No donor raw waveform is imported."
     },
     {
+      "capability_id": "NK-023",
       "capability": "Dependency lock and broad Python CI matrix",
       "donor_components": ["uv.lock", "pyproject.toml", ".github/workflows/tests.yml"],
       "classification": "TARGET_EQUIVALENT",
+      "final_disposition": "SUPERSEDED",
       "reason": "Useful reproducibility pattern, but whole-package adoption would introduce a large scientific Python dependency graph and upstream CI downloads external MNE data. Target should preserve its narrower hermetic engineering gate."
     },
     {
+      "capability_id": "NK-024",
       "capability": "Clinical/source provenance, authority separation and fail-closed governance",
       "donor_components": ["repository-wide"],
       "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
       "reason": "NeuroKit is a scientific signal-processing library, not a governed clinical-authority system. Target governance must not be weakened."
     }
   ],
+  "disposition_summary": {"CHALLENGER":5,"EVALUATION_ONLY":5,"INTEGRATED":3,"LICENSE_REVIEW_REQUIRED":1,"REJECTED":3,"RESEARCH_ONLY":3,"SUPERSEDED":4,"total":24},
   "cross_donor_deduplication": {
     "wfdb_peak_challengers": "Retain NeuroKit algorithm diversity only where it adds independent method value beyond WFDB XQRS/GQRS; do not install duplicate canonical detectors.",
     "openecg_neurokit_wrappers": "Superseded by this direct canonical upstream audit.",

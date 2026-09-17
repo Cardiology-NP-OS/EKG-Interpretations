@@ -1,6 +1,6 @@
 {
   "schema": "ecg-dataset-registry-v1",
-  "updated_date": "2026-09-16",
+  "updated_date": "2026-09-17",
   "policy": {
     "source_labels_are_project_gold": false,
     "model_predictions_are_project_gold": false,
@@ -19,7 +19,8 @@
     {"name":"ISP","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
     {"name":"Lydus hospital rhythm dataset","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
     {"name":"CODE-test","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
-    {"name":"VitalDB arrhythmia-derived beat data","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"}
+    {"name":"VitalDB arrhythmia-derived beat data","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
+    {"name":"NeuroKit bundled physiological example/test assets","introduced_by":"DONOR-003","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/neuropsychology_neurokit/DONOR_MANIFEST.json"}
   ],
   "approved_adjudicated_project_gold_count": 0
 }
