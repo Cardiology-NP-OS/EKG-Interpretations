@@ -1,0 +1,65 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-008",
+  "repository": "ELM-Research/ECG-Preprocess",
+  "comparison_parent": {
+    "commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86"
+  },
+  "upstream": {
+    "commit": "01d23451660675553468806480b2646eccb92479",
+    "tree": "c113fe473e1358896ae92d970a3064b156b48603"
+  },
+  "before": {
+    "canonical_preprocessing_lead_reorder_contract": false,
+    "auditable_preprocessing_failure_accounting": false,
+    "donor_capability_count": 213,
+    "canonical_capability_count": 52,
+    "model_challenger_count": 2
+  },
+  "after": {
+    "canonical_preprocessing_lead_reorder_contract": true,
+    "auditable_preprocessing_failure_accounting": true,
+    "donor_capability_count": 224,
+    "canonical_capability_count": 56,
+    "model_challenger_count": 3
+  },
+  "gains": [
+    "deterministic source-to-canonical lead reorder indices",
+    "explicit source/target sample-rate and resampling-method provenance",
+    "fixed-sample segmentation provenance",
+    "exact preprocessing implementation provenance",
+    "categorized attempted/processed/skipped failure accounting"
+  ],
+  "non_harvest": [
+    "donor Python runtime and dependencies",
+    "cubic interpolation implementation",
+    "raw/restricted dataset bytes and source labels",
+    "ECG-QA vendored content",
+    "TranslateGemma weights or outputs",
+    "trained ECG Byte pickle artifacts",
+    "Hugging Face publishing runtime"
+  ],
+  "metrics": {
+    "state": "NOT_REPORTABLE",
+    "donor_metrics_promoted": false,
+    "target_diagnostic_metrics_created": false
+  },
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "verification": {
+    "candidate_commit": null,
+    "candidate_tree": null,
+    "exact_sha_ci_run_id": null,
+    "exact_sha_ci_conclusion": null,
+    "independent_verification": "PENDING"
+  },
+  "clinical_authority_added": false
+}

@@ -8,8 +8,10 @@ Harvest only the engineering concepts that improve canonical preprocessing prove
 2. Record source and target sampling rates, whether resampling is required, and a declared resampling method. The contract does not perform interpolation and does not endorse the donor's cubic interpolation choice.
 3. Record fixed segment length in samples and derive segment duration from the target sampling rate.
 4. Fail closed for unknown, duplicate, or missing required lead identities; non-finite or impossible sampling rates; impossible segment lengths; and undeclared resampling methods when a rate change is requested.
-5. Add synthetic/adversarial tests only. No patient payloads, source dataset rows, donor labels, donor model outputs, or donor binary artifacts are test fixtures.
-6. Preserve donor/upstream commit/tree and licensing provenance in donor artifacts and global ledgers.
+5. Require auditable attempted/processed/skipped preprocessing accounting with categorized failure reasons; reject silent or aggregate-only exception handling.
+6. Require exact implementation provenance (source, locator, commit, tree) for execution-accounting records.
+7. Add synthetic/adversarial tests only. No patient payloads, source dataset rows, donor labels, donor model outputs, or donor binary artifacts are test fixtures.
+8. Preserve donor/upstream commit/tree and licensing provenance in donor artifacts and global ledgers.
 
 ## Explicitly excluded
 
@@ -30,6 +32,7 @@ Harvest only the engineering concepts that improve canonical preprocessing prove
 | Lead-order mapping concept | INTEGRATED | `lib/signal_preprocessing_contract.js` |
 | Sampling-rate normalization concept | INTEGRATED as metadata/validation contract | `lib/signal_preprocessing_contract.js` |
 | Fixed-sample segmentation provenance | INTEGRATED as metadata/validation contract | `lib/signal_preprocessing_contract.js` |
+| Auditable failure accounting | INTEGRATED | `lib/signal_preprocessing_contract.js` |
 | Base dataset adapters | DATA_ONLY | donor audit + dataset registry boundary |
 | Research QA/text mapping | RESEARCH_ONLY | donor audit/research provenance |
 | PTB-XL TranslateGemma translation | LICENSE_REVIEW_REQUIRED | no target runtime home |

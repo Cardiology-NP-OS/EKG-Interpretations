@@ -1,6 +1,6 @@
 {
   "schema": "ecg-model-challenger-registry-v1",
-  "updated_date": "2026-09-16",
+  "updated_date": "2026-09-17",
   "policy": {
     "challenger_predictions_are_clinical_truth": false,
     "challenger_predictions_are_project_gold": false,
@@ -15,8 +15,20 @@
       "donor_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
       "model_family": "OpenECG boundary classifier",
       "architecture": "single-channel transformer-style per-frame wave classifier plus boundary regression",
-      "input": {"leads":1,"sample_rate_hz":250,"duration_seconds":10,"samples":2500,"preprocessing":"rank normalization"},
-      "outputs": ["other", "P", "QRS", "T", "wave boundaries"],
+      "input": {
+        "leads": 1,
+        "sample_rate_hz": 250,
+        "duration_seconds": 10,
+        "samples": 2500,
+        "preprocessing": "rank normalization"
+      },
+      "outputs": [
+        "other",
+        "P",
+        "QRS",
+        "T",
+        "wave boundaries"
+      ],
       "software_license": "Apache-2.0",
       "weight_license": "LICENSE_REVIEW_REQUIRED",
       "weights_imported": false,
@@ -32,11 +44,36 @@
       "donor_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
       "model_family": "OpenECG codec_v6",
       "architecture": "single-lead 500-Hz sample-resolution multi-head frame/beat/rhythm transformer-style codec",
-      "input": {"leads":1,"sample_rate_hz":500,"duration_seconds":10,"samples":5000,"preprocessing":"rank normalization"},
+      "input": {
+        "leads": 1,
+        "sample_rate_hz": 500,
+        "duration_seconds": 10,
+        "samples": 5000,
+        "preprocessing": "rank normalization"
+      },
       "outputs": {
-        "frame": ["other", "P", "QRS", "T"],
-        "beat": ["none", "sinus", "vpc", "paced", "fusion", "unknown"],
-        "rhythm": ["sinus", "avb", "paced", "afib", "bbb", "ventricular"]
+        "frame": [
+          "other",
+          "P",
+          "QRS",
+          "T"
+        ],
+        "beat": [
+          "none",
+          "sinus",
+          "vpc",
+          "paced",
+          "fusion",
+          "unknown"
+        ],
+        "rhythm": [
+          "sinus",
+          "avb",
+          "paced",
+          "afib",
+          "bbb",
+          "ventricular"
+        ]
       },
       "software_license": "Apache-2.0",
       "weight_license": "LICENSE_REVIEW_REQUIRED",
@@ -51,6 +88,25 @@
         "donor-reported metrics are not target-verified"
       ],
       "model_card": "donors/vitaldb_openecg/MODEL_CARD_DONOR.json"
+    },
+    {
+      "challenger_id": "MODEL-D008-ECG-BYTE-TOKENIZATION",
+      "donor_id": "DONOR-008",
+      "repository": "ELM-Research/ECG-Preprocess",
+      "donor_commit": "01d23451660675553468806480b2646eccb92479",
+      "model_family": "ECG Byte waveform tokenization methodology",
+      "artifact_type": "TRAINED_BPE_TOKENIZER_METHOD_AND_SERIALIZED_PICKLES",
+      "method": "26-symbol waveform quantization plus byte-pair encoding",
+      "tracked_serialized_artifacts": 3,
+      "training_source_declared_by_donor": "MIMIC-IV preprocessed waveform files",
+      "software_license": "MIT",
+      "artifact_license": "LICENSE_REVIEW_REQUIRED",
+      "training_data_provenance": "INCOMPLETE",
+      "artifacts_imported": false,
+      "execution_status": "NOT_EXECUTED_IN_TARGET",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/elm-research_ecg-preprocess/MODEL_BOUNDARY.json"
     }
   ]
 }

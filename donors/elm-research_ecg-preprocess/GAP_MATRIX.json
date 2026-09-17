@@ -77,6 +77,14 @@
       "target_state": "No target need.",
       "gap": "NONE",
       "decision": "REJECTED"
+    },
+    {
+      "capability": "Auditable preprocessing failure accounting",
+      "donor_evidence": "Donor preprocessing paths tolerate per-record failures and aggregate progress; concurrent audit identified the need to make skipped-record reasons explicit.",
+      "target_state": "Target preprocessing contract did not yet reconcile attempted/processed/skipped records with categorized reasons.",
+      "gap": "MATERIAL_GOVERNANCE_GAP",
+      "decision": "INTEGRATE_TARGET_OWNED_CONTRACT",
+      "constraint": "Reject silent or aggregate-only exception policy; no clinical interpretation is performed."
     }
   ],
   "selected_harvest": [
@@ -84,7 +92,8 @@
     "sampling-rate provenance contract with explicit resampling requirement/method declaration",
     "fixed-sample segmentation provenance with derived duration",
     "fail-closed duplicate/unknown/missing-lead checks",
-    "synthetic/adversarial tests proving no donor code/data/model artifact is required"
+    "synthetic/adversarial tests proving no donor code/data/model artifact is required",
+    "auditable attempted/processed/skipped preprocessing accounting with categorized failure reasons"
   ],
   "explicit_non_harvest": [
     "donor Python runtime or dependency stack",

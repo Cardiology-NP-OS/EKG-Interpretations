@@ -4,6 +4,7 @@ const assert = require("assert");
 const {
   CANONICAL_12_LEAD_ORDER,
   buildSignalPreprocessingContract,
+  validatePreprocessingExecutionProvenance,
 } = require("../lib/signal_preprocessing_contract");
 
 let passed = 0;
@@ -140,4 +141,31 @@ test("contract never creates project gold or clinical authority", () => {
   assert.equal(result.clinicalValidityInferred, false);
 });
 
-console.log(`signal preprocessing contract: ${passed}/9 tests passed`);
+test("execution provenance requires exact source commit and tree", () => {
+  const result = validatePreprocessingExecutionProvenance({ implementationProvenance: { source: "target-owned", locator: "lib/signal_preprocessing_contract.js", commit: "a".repeat(40), tree: "b".repeat(40) }, groupKeySemantics: "patient", failureAccounting: { attempted: 1, processed: 1, skipped: 0, exceptionPolicy: "categorized", skipReasons: {} }, projectGold: false, sourceLabelsAreProjectGold: false, runtimeAuthority: false, clinicalValidityInferred: false });
+  assert.equal(result.pass, true);
+});
+
+test("missing exact provenance fails closed", () => {
+  const result = validatePreprocessingExecutionProvenance({ implementationProvenance: { source: "target-owned", locator: "lib/signal_preprocessing_contract.js", commit: "a".repeat(40) }, groupKeySemantics: "patient", failureAccounting: { attempted: 1, processed: 1, skipped: 0, exceptionPolicy: "categorized", skipReasons: {} }, projectGold: false, sourceLabelsAreProjectGold: false, runtimeAuthority: false, clinicalValidityInferred: false });
+  assert.equal(result.pass, false); assert(result.errors.includes("PREPROCESS_PROVENANCE_TREE_REQUIRED"));
+});
+
+test("skipped records require categorized reconciliation", () => {
+  const result = validatePreprocessingExecutionProvenance({ implementationProvenance: { source: "target-owned", locator: "lib/signal_preprocessing_contract.js", commit: "a".repeat(40), tree: "b".repeat(40) }, groupKeySemantics: "record", failureAccounting: { attempted: 4, processed: 3, skipped: 1, exceptionPolicy: "categorized", skipReasons: {} }, projectGold: false, sourceLabelsAreProjectGold: false, runtimeAuthority: false, clinicalValidityInferred: false });
+  assert.equal(result.pass, false); assert(result.errors.includes("PREPROCESS_ACCOUNTING_REASON_RECONCILE"));
+});
+
+test("silent or aggregate-only preprocessing failure policy is rejected", () => {
+  for (const policy of ["silent", "aggregate-only"]) {
+    const result = validatePreprocessingExecutionProvenance({ implementationProvenance: { source: "target-owned", locator: "lib/signal_preprocessing_contract.js", commit: "a".repeat(40), tree: "b".repeat(40) }, groupKeySemantics: "patient", failureAccounting: { attempted: 1, processed: 0, skipped: 1, exceptionPolicy: policy, skipReasons: { invalid_waveform: 1 } }, projectGold: false, sourceLabelsAreProjectGold: false, runtimeAuthority: false, clinicalValidityInferred: false });
+    assert.equal(result.pass, false); assert(result.errors.includes("PREPROCESS_ACCOUNTING_EXCEPTION_POLICY"));
+  }
+});
+
+test("execution provenance cannot elevate source labels or runtime authority", () => {
+  const result = validatePreprocessingExecutionProvenance({ implementationProvenance: { source: "target-owned", locator: "lib/signal_preprocessing_contract.js", commit: "a".repeat(40), tree: "b".repeat(40) }, groupKeySemantics: "patient", failureAccounting: { attempted: 1, processed: 1, skipped: 0, exceptionPolicy: "categorized", skipReasons: {} }, projectGold: false, sourceLabelsAreProjectGold: true, runtimeAuthority: true, clinicalValidityInferred: false });
+  assert.equal(result.pass, false); assert(result.errors.includes("PREPROCESS_SOURCE_LABEL_GOLD_FORBIDDEN")); assert(result.errors.includes("PREPROCESS_RUNTIME_AUTHORITY_FORBIDDEN"));
+});
+
+console.log(`signal preprocessing contract: ${passed}/14 tests passed`);
