@@ -1,0 +1,35 @@
+{
+    "schema":  "ecg-donor-associated-repository-dispositions-v1",
+    "donor_id":  "DONOR-006",
+    "repository":  "tmehari/ptbxl_feature_benchmark",
+    "audited_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+    "repositories":  [
+                         {
+                             "repository":  "scikit-learn/scikit-learn",
+                             "disposition":  "DEPENDENCY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Standard external dependency/reference only; no target runtime dependency is added."
+                         },
+                         {
+                             "repository":  "pytorch/pytorch",
+                             "disposition":  "DEPENDENCY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "External research-framework dependency only; no target runtime dependency is added."
+                         },
+                         {
+                             "repository":  "ashleyzhou972/CAFA_assessment_tool",
+                             "disposition":  "RESEARCH_ONLY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Explicit evaluation-methodology reference in donor comments; no source is copied or made canonical."
+                         }
+                     ],
+    "external_non_repository_lineage":  [
+                                            {
+                                                "source":  "https://vict0rs.ch/2018/05/24/sample-multilabel-dataset/",
+                                                "component":  "code/clinical_ts/stratify.py",
+                                                "disposition":  "LICENSE_REVIEW_REQUIRED",
+                                                "reason":  "Donor states stratification code is modified from this external implementation; upstream reuse rights were not established."
+                                            }
+                                        ],
+    "clinical_authority_added":  false
+}

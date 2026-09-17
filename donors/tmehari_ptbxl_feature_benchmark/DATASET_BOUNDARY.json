@@ -1,0 +1,43 @@
+{
+    "schema":  "ecg-donor-dataset-boundary-v1",
+    "donor_id":  "DONOR-006",
+    "repository":  "tmehari/ptbxl_feature_benchmark",
+    "audited_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+    "datasets":  [
+                     {
+                         "name":  "PTB-XL",
+                         "relationship":  "ALREADY_REGISTERED_SOURCE_DATA_NON_GOLD",
+                         "bytes_tracked_in_donor":  false,
+                         "bytes_imported":  false,
+                         "source_labels_project_gold":  false
+                     },
+                     {
+                         "name":  "PTB-XL+ engineered feature tables (Uni-G, ECGdeli, 12SL, feature mapping)",
+                         "relationship":  "EXTERNAL_ASSETS_REQUIRED_BY_README",
+                         "license_status":  "LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET",
+                         "bytes_tracked_in_donor":  false,
+                         "bytes_imported":  false,
+                         "source_labels_project_gold":  false
+                     },
+                     {
+                         "name":  "PTB-XL+ statement/label tables",
+                         "relationship":  "EXTERNAL_ASSETS_REQUIRED_BY_README",
+                         "license_status":  "LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET",
+                         "bytes_tracked_in_donor":  false,
+                         "bytes_imported":  false,
+                         "source_labels_project_gold":  false
+                     },
+                     {
+                         "name":  "data_preprocessing.ipynb embedded outputs",
+                         "relationship":  "TRACKED_NOTEBOOK_WITH_POTENTIALLY_DATA_DERIVED_OUTPUTS",
+                         "git_blob":  "5501a6293deaa3fd2946069a18f5c9ba4c3842a3",
+                         "bytes":  15393145,
+                         "embedded_output_count":  116,
+                         "embedded_output_character_count":  13847889,
+                         "target_status":  "QUARANTINED_NOT_COPIED",
+                         "source_labels_project_gold":  false
+                     }
+                 ],
+    "approved_adjudicated_project_gold_added":  0,
+    "metrics_reportable":  false
+}

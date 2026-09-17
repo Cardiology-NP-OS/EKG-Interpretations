@@ -1,0 +1,424 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-006",
+  "repository": "tmehari/ptbxl_feature_benchmark",
+  "target_rollback_commit": "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+  "rows": [
+    {
+      "capability_id": "PTBXLFB-001",
+      "capability": "Whole-package Python/Conda benchmark runtime",
+      "donor_components": [
+        "environment.yml",
+        "code/"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "The broad Anaconda/PyTorch/scientific stack is unnecessary for the governed target and would add non-hermetic runtime/dependency surface."
+    },
+    {
+      "capability_id": "PTBXLFB-002",
+      "capability": "Audited-head donor source-code reuse",
+      "donor_components": [
+        "repository-wide"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "The audited main commit removes LICENSE.txt. Historical v1.0.0 MIT text is recorded but is not assumed to license the audited head."
+    },
+    {
+      "capability_id": "PTBXLFB-003",
+      "capability": "PTB-XL waveform dataset access",
+      "donor_components": [
+        "README.md",
+        "data_preprocessing.ipynb"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "PTB-XL is already represented in the target dataset registry. No donor data bytes or labels are imported or reattributed."
+    },
+    {
+      "capability_id": "PTBXLFB-004",
+      "capability": "PTB-XL+ engineered feature tables",
+      "donor_components": [
+        "README.md",
+        "code/feature_utils/utils.py"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "Uni-G, ECGdeli and 12SL feature tables are external assets with separate provenance/data-use requirements and are not tracked in the repository."
+    },
+    {
+      "capability_id": "PTBXLFB-005",
+      "capability": "PTB-XL+ statement and label tables",
+      "donor_components": [
+        "README.md",
+        "code/clinical_ts/data_modifiers.py"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "External statement/label files require independent dataset/data-use review; source labels never become project gold."
+    },
+    {
+      "capability_id": "PTBXLFB-006",
+      "capability": "Preprocessing notebook with embedded outputs",
+      "donor_components": [
+        "data_preprocessing.ipynb"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "The 15 MB notebook contains 116 embedded outputs and approximately 13.8M output characters that may be data-derived; none are copied into target evidence."
+    },
+    {
+      "capability_id": "PTBXLFB-007",
+      "capability": "Uni-G engineered-feature benchmark path",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "code/run_feature_benchmark.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline benchmark design for comparing engineered feature families, but external feature assets and source labels remain non-gold."
+    },
+    {
+      "capability_id": "PTBXLFB-008",
+      "capability": "ECGdeli engineered-feature benchmark path",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "code/run_feature_benchmark.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline benchmark design only; no donor metrics are target-reportable."
+    },
+    {
+      "capability_id": "PTBXLFB-009",
+      "capability": "12SL engineered-feature benchmark path",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "code/run_feature_benchmark.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline benchmark design only; commercial/proprietary feature-generation provenance must not be inferred from table names."
+    },
+    {
+      "capability_id": "PTBXLFB-010",
+      "capability": "Common ECG-id intersection across feature sets",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "get_data_from_ids"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Cohort intersection is useful for controlled same-record feature comparisons but remains an evaluation methodology, not clinical evidence."
+    },
+    {
+      "capability_id": "PTBXLFB-011",
+      "capability": "Cross-feature-set semantic mapping/harmonization",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "get_common_features"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "The common-feature mapping pattern is useful for apples-to-apples offline comparisons; exact external mapping tables require separate provenance."
+    },
+    {
+      "capability_id": "PTBXLFB-012",
+      "capability": "Per-lead expansion of generic feature identifiers",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "expand_features"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Lead-expansion logic is useful evaluation methodology but does not create validated clinical features."
+    },
+    {
+      "capability_id": "PTBXLFB-013",
+      "capability": "Median imputation for missing engineered features",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "replace_nans"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "A simple benchmark preprocessing choice; target must preserve missingness provenance and should not adopt it as canonical runtime behavior."
+    },
+    {
+      "capability_id": "PTBXLFB-014",
+      "capability": "PTB-XL fold split 1-8 train, 9 validation, 10 test",
+      "donor_components": [
+        "code/feature_utils/utils.py",
+        "get_split"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "The standard fold-based evaluation partition is useful protocol metadata only. It does not make source labels project gold or metrics reportable."
+    },
+    {
+      "capability_id": "PTBXLFB-015",
+      "capability": "Random-forest feature classifier benchmark",
+      "donor_components": [
+        "code/feature_utils/methods.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful classical baseline concept; no trained artifact is tracked and no runtime authority is granted."
+    },
+    {
+      "capability_id": "PTBXLFB-016",
+      "capability": "Ridge feature classifier benchmark",
+      "donor_components": [
+        "code/feature_utils/methods.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful classical baseline concept for offline comparison only."
+    },
+    {
+      "capability_id": "PTBXLFB-017",
+      "capability": "MLP engineered-feature classifier benchmark",
+      "donor_components": [
+        "code/feature_utils/methods.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline baseline concept; no checkpoint or clinical validation is admitted."
+    },
+    {
+      "capability_id": "PTBXLFB-018",
+      "capability": "ROC-AUC feature benchmark scoring",
+      "donor_components": [
+        "code/feature_utils/methods.py",
+        "code/run_feature_benchmark.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Metric implementation is research/evaluation-only because approved adjudicated project gold count remains zero."
+    },
+    {
+      "capability_id": "PTBXLFB-019",
+      "capability": "Feature benchmark validation/test result naming",
+      "donor_components": [
+        "code/run_feature_benchmark.py"
+      ],
+      "classification": "DEFECT",
+      "final_disposition": "REJECTED",
+      "reason": "The script assigns val_auc from X_test/y_test and test_auc from X_valid/y_valid, so its result labels are reversed relative to get_split outputs."
+    },
+    {
+      "capability_id": "PTBXLFB-020",
+      "capability": "Random-forest reproducibility without fixed random_state",
+      "donor_components": [
+        "code/feature_utils/methods.py"
+      ],
+      "classification": "DEFECT",
+      "final_disposition": "REJECTED",
+      "reason": "The RandomForestClassifier is created without a fixed random_state, so exact benchmark reproduction is not guaranteed."
+    },
+    {
+      "capability_id": "PTBXLFB-021",
+      "capability": "Pickle model load/save for classical feature models",
+      "donor_components": [
+        "code/feature_utils/methods.py",
+        "code/feature_utils/utils.py"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "Arbitrary pickle deserialization is unsafe for governed execution and generated model.sav artifacts have no admission contract."
+    },
+    {
+      "capability_id": "PTBXLFB-022",
+      "capability": "XResNet1D raw-waveform architecture family",
+      "donor_components": [
+        "code/dl_models/xresnet1d.py",
+        "code/dl_models/ecg_resnet.py"
+      ],
+      "classification": "USEFUL_CHALLENGER",
+      "final_disposition": "CHALLENGER",
+      "reason": "Architecture knowledge may support a future isolated challenger, but no tracked checkpoint exists, audited-head code licensing is unresolved, and runtime authority is false.",
+      "challengers": [
+        {
+          "repository": "tmehari/ptbxl_feature_benchmark",
+          "component": "code/dl_models/xresnet1d.py; code/dl_models/ecg_resnet.py",
+          "donor_commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+          "checkpoint_identity": "NONE_TRACKED",
+          "execution_status": "NOT_EXECUTABLE_NO_APPROVED_CHECKPOINT_AND_SOURCE_LICENSE_REVIEW_REQUIRED",
+          "runtime_authority": false
+        }
+      ]
+    },
+    {
+      "capability_id": "PTBXLFB-023",
+      "capability": "PyTorch Lightning raw-waveform training/evaluation loop",
+      "donor_components": [
+        "code/run_raw_benchmark.py",
+        "code/clinical_ts/ecg_datamodule.py"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Training orchestration is outside governed runtime and donor model selection/benchmarking cannot transfer diagnostic authority."
+    },
+    {
+      "capability_id": "PTBXLFB-024",
+      "capability": "torch.load-based arbitrary checkpoint loading",
+      "donor_components": [
+        "code/utils/utils.py",
+        "code/run_raw_benchmark.py"
+      ],
+      "classification": "UNSAFE",
+      "final_disposition": "REJECTED",
+      "reason": "The loader accepts external PyTorch checkpoints without a target-owned exact hash/license/safe-deserialization admission gate."
+    },
+    {
+      "capability_id": "PTBXLFB-025",
+      "capability": "Macro label AUC with record-level prediction aggregation",
+      "donor_components": [
+        "code/utils/utils.py",
+        "code/clinical_ts/eval_utils_cafa.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline evaluation methodology but non-reportable without governed adjudicated gold and matched task definitions."
+    },
+    {
+      "capability_id": "PTBXLFB-026",
+      "capability": "Bootstrap ROC/PR and score uncertainty utilities",
+      "donor_components": [
+        "code/clinical_ts/eval_utils_cafa.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Bootstrap methodology may inform future evaluation design; donor results are not reproduced target evidence."
+    },
+    {
+      "capability_id": "PTBXLFB-027",
+      "capability": "Multilabel stratification implementation with external lineage",
+      "donor_components": [
+        "code/clinical_ts/stratify.py"
+      ],
+      "classification": "LICENSE_BLOCKED",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "The file states it is modified from an external published implementation; current donor head is unlicensed and the upstream lineage license has not been independently established."
+    },
+    {
+      "capability_id": "PTBXLFB-028",
+      "capability": "Waveform resampling, filtering and normalization utilities",
+      "donor_components": [
+        "code/clinical_ts/ecg_utils.py",
+        "code/clinical_ts/timeseries_utils.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Prior donors and target-native contracts already cover preprocessing families with stronger provenance boundaries."
+    },
+    {
+      "capability_id": "PTBXLFB-029",
+      "capability": "Time-series crop, Gaussian-noise and rescale augmentation",
+      "donor_components": [
+        "code/clinical_ts/timeseries_utils.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Robustness augmentation concepts already exist from prior donors; no duplicate implementation is needed."
+    },
+    {
+      "capability_id": "PTBXLFB-030",
+      "capability": "Memmap dataset serialization and crop dataset wrappers",
+      "donor_components": [
+        "code/clinical_ts/timeseries_utils.py",
+        "code/clinical_ts/dataset_wrapper.py"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Potential research-scale data-loader design only; target currently needs no Python memmap runtime dependency."
+    },
+    {
+      "capability_id": "PTBXLFB-031",
+      "capability": "Statement-to-label mapping and SNOMED label-set reconciliation",
+      "donor_components": [
+        "code/clinical_ts/data_modifiers.py"
+      ],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful label-provenance evaluation concept, but external statement labels remain source labels and cannot become project gold."
+    },
+    {
+      "capability_id": "PTBXLFB-032",
+      "capability": "Adapters/preparation paths for PTB, ICBEB, THEW, CinC, Zheng and Ribeiro datasets",
+      "donor_components": [
+        "code/clinical_ts/ecg_utils.py"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Each external dataset requires separate provenance/license/data-use review; no bytes or adapters are adopted now."
+    },
+    {
+      "capability_id": "PTBXLFB-033",
+      "capability": "Broad pinned Anaconda environment",
+      "donor_components": [
+        "environment.yml"
+      ],
+      "classification": "TARGET_EQUIVALENT",
+      "final_disposition": "SUPERSEDED",
+      "reason": "The environment improves historical reproducibility but is very broad and not hermetic; target retains its narrower exact-source CI."
+    },
+    {
+      "capability_id": "PTBXLFB-034",
+      "capability": "Repository test/CI posture",
+      "donor_components": [
+        "repository-wide"
+      ],
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
+      "reason": "No tracked automated test directory or GitHub workflow is present; target governance and exact-SHA CI are substantially stronger."
+    },
+    {
+      "capability_id": "PTBXLFB-035",
+      "capability": "Clinical/source provenance, authority separation and fail-closed governance",
+      "donor_components": [
+        "repository-wide"
+      ],
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "final_disposition": "SUPERSEDED",
+      "reason": "The donor is a research benchmark repository, not a governed clinical-authority system. Target governance remains authoritative and unchanged."
+    },
+    {
+      "capability_id": "PTBXLFB-036",
+      "capability": "Published/donor benchmark result interpretation",
+      "donor_components": [
+        "README.md",
+        "benchmark outputs generated externally"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Historical or paper benchmark results may provide research context only and must not be promoted as target diagnostic performance or cross-dataset-equivalent metrics."
+    }
+  ],
+  "disposition_summary": {
+    "REJECTED": 5,
+    "LICENSE_REVIEW_REQUIRED": 5,
+    "SUPERSEDED": 6,
+    "EVALUATION_ONLY": 15,
+    "CHALLENGER": 1,
+    "RESEARCH_ONLY": 4,
+    "total": 36
+  },
+  "cross_donor_deduplication": [
+    {
+      "prior_donor": "DONOR-001",
+      "relationship": "WFDB source/library concepts remain canonically attributed to MIT-LCP/wfdb-python."
+    },
+    {
+      "prior_donor": "DONOR-004",
+      "relationship": "Preprocessing, generic ResNet-family architecture, training/checkpoint and classification-metric surfaces already have canonical donor dispositions."
+    },
+    {
+      "prior_donor": "DONOR-002 / target baseline",
+      "relationship": "PTB-XL is already registered as source data non-gold; Donor-006 does not create a second canonical dataset entry for the same waveform dataset."
+    }
+  ],
+  "implementation_decision": "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION",
+  "clinical_authority_added": false
+}
