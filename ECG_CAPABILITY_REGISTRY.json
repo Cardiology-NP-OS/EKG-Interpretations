@@ -1900,9 +1900,9 @@
       "capability_id": "ECG-CAP-IMAGE-RENDERING",
       "capability_family": "Image ECG",
       "name": "Waveform-to-paper rendering concepts",
-      "canonical_target_path": "research/image_ecg/README.md",
-      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/waveform_rendering.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONDIAGNOSTIC",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -1951,9 +1951,13 @@
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/waveform_rendering.test.js",
+        "tests/ci_contract.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/WAVEFORM_RENDERING_CONTRACT.json"
+      ],
       "research_paths": [
         "research/image_ecg/README.md"
       ],
@@ -1967,7 +1971,7 @@
         "alphanumericslab/ecg-image-kit:EIK-033"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-IMAGE-ROI-LOCALIZATION",

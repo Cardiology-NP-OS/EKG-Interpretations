@@ -1,0 +1,71 @@
+{
+  "schema": "ekg-synthetic-executable-pipeline-config-v1",
+  "fixtureId": "ECG-FIXTURE-SYNTHETIC-EXECUTABLE-PIPELINE-CONFIG-V1",
+  "provenance": {
+    "source": "TARGET_SYNTHETIC_CONFIGURATION",
+    "locator": "evaluation/fixtures/SYNTHETIC_EXECUTABLE_PIPELINE_CONFIG.json"
+  },
+  "clinicalData": false,
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "leadName": "II",
+  "segmentIndex": 0,
+  "thresholdAuthority": "SYNTHETIC_TEST_CONFIGURATION_ONLY_NOT_CLINICALLY_VALIDATED",
+  "preprocessing": {
+    "requireCompleteTwelveLead": true,
+    "targetSamplingRateHz": 250,
+    "segmentSamples": 1000,
+    "resamplingMethod": null,
+    "remainderPolicy": "drop"
+  },
+  "measurement": {
+    "detector": {
+      "minAbsoluteDeviation": 0.9,
+      "refractoryMs": 200
+    },
+    "delineation": {
+      "baseline": 0,
+      "qrs": {
+        "threshold": 0.5,
+        "beforeMs": 80,
+        "afterMs": 80
+      },
+      "p": {
+        "threshold": 0.15,
+        "searchStartMsBeforeR": 240,
+        "searchEndMsBeforeR": 80
+      },
+      "t": {
+        "threshold": 0.2,
+        "searchStartMsAfterR": 100,
+        "searchEndMsAfterR": 400
+      }
+    }
+  },
+  "phenotypes": {
+    "minBeatCount": 4,
+    "rrIrregularity": {
+      "minIntervals": 3,
+      "cvAtOrAbove": 0.1,
+      "maxSuccessiveDeltaMsAtOrAbove": 100
+    },
+    "pause": {
+      "minIntervals": 2,
+      "absoluteRrMsAtOrAbove": 1400,
+      "medianMultipleAtOrAbove": 1.5
+    },
+    "qrsDuration": {
+      "medianMsAtOrAbove": 120
+    },
+    "pWaveCoverage": {
+      "ratioAtOrBelow": 0.5
+    },
+    "prDuration": {
+      "medianMsAtOrAbove": 200
+    }
+  },
+  "rendering": {
+    "width": 1200,
+    "rowHeight": 80
+  }
+}
