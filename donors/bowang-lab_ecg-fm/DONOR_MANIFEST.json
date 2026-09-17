@@ -1,0 +1,55 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-010",
+  "repository": "bowang-lab/ecg-fm",
+  "canonical_upstream_url": "https://github.com/bowang-lab/ecg-fm",
+  "retrieval_date": "2026-09-17",
+  "archive_status": "NOT_INFERRED_FROM_GIT",
+  "audited_head": {
+    "branch": "main",
+    "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+    "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+    "commit_date": "2026-01-14T23:25:07Z",
+    "commit_message": "Clean up comments in pattern_labeler.py"
+  },
+  "release_tags_found": [],
+  "software_license": {
+    "spdx": "MIT",
+    "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST",
+    "license_file": "LICENSE",
+    "license_blob_sha": "b0854a781327bb50c42be1065cf7a479a09a26c2",
+    "copyright": "Copyright (c) 2024 WangLab @ U of T",
+    "source_code_copied_into_target": false
+  },
+  "model_weight_license": {
+    "status": "HUGGINGFACE_REPOSITORY_DECLARES_MIT_SEPARATE_DATASET_RIGHTS_APPLY",
+    "repository": "wanglab/ecg-fm",
+    "revision": "584219ea492cdeef2e19ffbdf9c6ecc874ba427e",
+    "tracked_weight_count": 2,
+    "weights_imported": false,
+    "weights_executed": false
+  },
+  "dataset_license": {
+    "status": "SEPARATE_SOURCE_TERMS_REQUIRED_PER_REFERENCED_OR_TRACKED_DATASET_ASSET",
+    "raw_data_imported": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "target_rollback_point": {
+    "commit": "8ebc601d16e387745cf513f0575d92f97e54c614",
+    "tree": "1af0e7c78e0a271b5c31aa86160c4a524b5b755e"
+  },
+  "accepted_engine_immutable_identity": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "clinical_authority_change_allowed": false,
+  "publication": {
+    "title": "ECG-FM: an open electrocardiogram foundation model",
+    "journal": "JAMIA Open",
+    "published": "2025-10-16",
+    "doi": "10.1093/jamiaopen/ooaf122",
+    "pmid": "41113504",
+    "pmcid": "PMC12530324",
+    "use": "RESEARCH_ONLY_PUBLISHED_CLAIMS_NOT_TARGET_METRICS"
+  }
+}
