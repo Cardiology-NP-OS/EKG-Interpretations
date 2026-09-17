@@ -17,6 +17,7 @@ const gap = readJson("donors/neuropsychology_neurokit/GAP_MATRIX.json");
 const manifest = readJson("donors/neuropsychology_neurokit/DONOR_MANIFEST.json");
 const comparative = readJson("donors/neuropsychology_neurokit/COMPARATIVE_PROOF.json");
 const independent = readJson("donors/neuropsychology_neurokit/INDEPENDENT_VERIFICATION.json");
+const receipt = readJson("donors/neuropsychology_neurokit/DONOR_RECEIPT.json");
 const attribution = readText("ECG_ATTRIBUTION_LEDGER.md");
 const pkg = readJson("package.json");
 
@@ -24,12 +25,16 @@ const allowed = new Set(["INTEGRATED", "DEPENDENCY", "ADAPTER", "CHALLENGER", "E
 const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-003");
 const nkCaps = capabilityRegistry.capabilities.filter(item => item.donor === "neuropsychology/NeuroKit");
 const license = licenseLedger.entries.find(item => item.donor_id === "DONOR-003");
-check("donor remains pre-promotion and uncounted", () => {
-  assert.strictEqual(donorRegistry.completed_donors, 2);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-003");
-  assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
-  assert.strictEqual(fs.existsSync(path.join(root, "donors/neuropsychology_neurokit/DONOR_RECEIPT.json")), false);
+check("donor is accepted only after promotion and target-main CI", () => {
+  assert.strictEqual(donorRegistry.completed_donors, 3);
+  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-004");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt, "donors/neuropsychology_neurokit/DONOR_RECEIPT.json");
+  assert.strictEqual(donor.promotion_commit, "46d7e9a5cce8e2f958696e07cc8595b7a71f9267");
+  assert.strictEqual(donor.promotion_ci_run_id, 35184975755);
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.main_commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.conclusion, "success");
 });
 check("all material capabilities have terminal dispositions", () => {
   assert.strictEqual(gap.rows.length, 24);
@@ -58,9 +63,9 @@ check("no NeuroKit model or runtime dependency was imported", () => {
   assert.strictEqual(Boolean(pkg.dependencies && Object.keys(pkg.dependencies).some(key => /neurokit/i.test(key))), false);
 });
 check("comparative and independent evidence bind the verified candidate", () => {
-  assert.strictEqual(comparative.after.verified_candidate_commit, "9b441fbfcb2318853ff2a661abb2068bd72a3207");
+  assert.strictEqual(comparative.after.verified_candidate_commit, "1807b4b211b721f69fff0d6df766950d4fcfe6d8");
   assert.strictEqual(comparative.verification.conclusion, "success");
-  assert.strictEqual(independent.candidate_commit, "9b441fbfcb2318853ff2a661abb2068bd72a3207");
+  assert.strictEqual(independent.candidate_commit, "1807b4b211b721f69fff0d6df766950d4fcfe6d8");
   assert.strictEqual(independent.result, "PASS");
   assert.strictEqual(independent.full_candidate_diff_check, "PASS");
   assert.strictEqual(independent.full_target_suite, "PASS");
@@ -82,4 +87,4 @@ check("attribution records bounded clean reimplementation", () => {
   assert.ok(attribution.includes("NeuroKit runtime dependency added: **no**"));
 });
 
-console.log(JSON.stringify({schema:"ekg-donor-003-prepromotion-closure-tests-v1",donor:"neuropsychology/NeuroKit",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:false,clinical_authority_added:false}));
+console.log(JSON.stringify({schema:"ekg-donor-003-acceptance-tests-v1",donor:"neuropsychology/NeuroKit",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:true,clinical_authority_added:false}));

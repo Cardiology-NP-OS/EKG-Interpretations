@@ -24,8 +24,8 @@
   "after": {
     "implementation_commit": "9009c37a5ed4c3049477a4813b6a4a5c96dce598",
     "implementation_tree": "85d8f7f74c90879acb19811965ae325e69697ff7",
-    "verified_candidate_commit": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
-    "verified_candidate_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+    "verified_candidate_commit": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+    "verified_candidate_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
     "tolerance_aware_event_agreement": true,
     "multi_source_event_agreement_matrix": true,
     "source_order_invariant_pairing": true,
@@ -48,20 +48,21 @@
     }
   },
   "verification": {
-    "github_actions_run_id": 35183599961,
-    "head_sha": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
-    "head_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+    "github_actions_run_id": 35184856792,
+    "head_sha": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+    "head_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
     "workflow": "EKG Recovery CI",
     "conclusion": "success",
     "machine_a_focused": "25/25 PASS",
     "machine_a_full_target_suite": "PASS",
     "independent_fresh_clone": {
       "result": "PASS",
-      "head_sha": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
-      "head_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+      "head_sha": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+      "head_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
       "origin_main": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
       "full_candidate_diff_check": "PASS",
-      "focused": "25/25 PASS",
+      "focused_event_agreement": "25/25 PASS",
+      "focused_closure": "8/8 PASS",
       "full_target_suite": "PASS"
     }
   },
@@ -85,5 +86,12 @@
       "tests/neurokit_event_agreement.test.js",
       "package.json"
     ]
+  },
+  "promotion": {
+    "main_commit": "46d7e9a5cce8e2f958696e07cc8595b7a71f9267",
+    "main_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
+    "github_actions_run_id": 35184975755,
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success"
   }
 }

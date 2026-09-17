@@ -1,0 +1,167 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-003",
+  "donor_repository": "neuropsychology/NeuroKit",
+  "donor_commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+  "donor_tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+  "donor_release": {
+    "tag": "v0.2.13",
+    "release_name": "0.2.13",
+    "published_at": "2026-03-02T08:02:35Z",
+    "head_is_release_tag_commit": true
+  },
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_file": "LICENSE",
+    "license_blob_sha": "d95473208e8eb18fd06c42e4f77ece6a5a720cf5",
+    "model_weight_status": "NOT_APPLICABLE_CORE_PACKAGE",
+    "dataset_status": "LICENSE_REVIEW_REQUIRED_PER_DATASET"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_003_rollback_commit": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+    "donor_003_rollback_tree": "530d4691745df2aaaae0d39648dd9f00783ca70a"
+  },
+  "target_resulting_implementation": {
+    "implementation_commit": "9009c37a5ed4c3049477a4813b6a4a5c96dce598",
+    "implementation_tree": "85d8f7f74c90879acb19811965ae325e69697ff7",
+    "verified_candidate_commit": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+    "verified_candidate_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
+    "branch": "candidate/donor-003-neurokit",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false
+  },
+  "files_examined": {
+    "complete_recursive_tree": true,
+    "inventory_file": "donors/neuropsychology_neurokit/INVENTORY.json",
+    "gap_matrix": "donors/neuropsychology_neurokit/GAP_MATRIX.json",
+    "harvest_plan": "donors/neuropsychology_neurokit/HARVEST_PLAN.md",
+    "fresh_clone_candidate_verification": "PASS"
+  },
+  "capability_disposition_summary": {
+    "INTEGRATED": 3,
+    "CHALLENGER": 5,
+    "EVALUATION_ONLY": 5,
+    "RESEARCH_ONLY": 3,
+    "SUPERSEDED": 4,
+    "REJECTED": 3,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "total": 24
+  },
+  "capabilities_integrated": [
+    {
+      "capability_id": "NK-005",
+      "capability": "tolerance-aware multi-source challenger event agreement",
+      "target_file": "lib/challenger_contract.js",
+      "method": "CLEAN_REIMPLEMENTATION",
+      "runtime_authority": false
+    },
+    {
+      "capability_id": "NK-020",
+      "capability": "target-owned synthetic malformed/degenerate event regression pattern",
+      "target_file": "tests/neurokit_event_agreement.test.js",
+      "method": "TARGET_OWNED_SYNTHETIC_TESTS",
+      "runtime_authority": false
+    },
+    {
+      "capability_id": "NK-021",
+      "capability": "change-aversion golden stability testing separated from correctness claims",
+      "target_file": "tests/neurokit_event_agreement.test.js",
+      "method": "TARGET_OWNED_SYNTHETIC_TESTS",
+      "runtime_authority": false
+    }
+  ],
+  "deferred_or_blocked_boundaries": [
+    {
+      "component": "NeuroKit detector/delineation/quality algorithms",
+      "disposition": "CHALLENGER_OR_EVALUATION_ONLY",
+      "reason": "No clinical authority or canonical preprocessing/detection adoption."
+    },
+    {
+      "component": "automatic missing-waveform interpolation",
+      "disposition": "REJECTED",
+      "reason": "Would manufacture derived samples and weaken fail-closed source semantics."
+    },
+    {
+      "component": "bundled physiological example/test assets and annotations",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "Software MIT terms do not establish asset-specific data-use/redistribution rights; no bytes imported."
+    },
+    {
+      "component": "whole-package Python runtime dependency",
+      "disposition": "REJECTED",
+      "reason": "Approved harvest required no NeuroKit runtime dependency and broad dependency surface is unjustified."
+    }
+  ],
+  "tests": {
+    "new_test_file": "tests/neurokit_event_agreement.test.js",
+    "donor_specific_assertions": 25,
+    "exact_match_within_tolerance_outside_tolerance_label_mismatch": true,
+    "one_to_one_matching": true,
+    "source_and_output_order_invariance": true,
+    "abstention_and_invalid_envelope_cases": true,
+    "source_input_window_rate_mismatch_fail_closed": true,
+    "invalid_tolerance_and_duplicate_identity_fail_closed": true,
+    "deterministic_digest": true,
+    "governance_invariants": true,
+    "phi_or_raw_payload_added": false
+  },
+  "comparative_proof": "donors/neuropsychology_neurokit/COMPARATIVE_PROOF.json",
+  "independent_verification": "donors/neuropsychology_neurokit/INDEPENDENT_VERIFICATION.json",
+  "verification": {
+    "github_actions_run_id": 35184856792,
+    "head_sha": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+    "head_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
+    "workflow_conclusion": "success",
+    "machine_a_focused": "25/25 PASS + closure 8/8 PASS",
+    "machine_a_full_target_suite": "PASS",
+    "independent_fresh_clone": "PASS",
+    "full_candidate_diff_check": "PASS",
+    "clinical_authority_escalation_detected": false
+  },
+  "outstanding_limitations": [
+    "NeuroKit bundled physiological/example/test assets remain fail-closed pending asset-specific provenance and data-use review.",
+    "No donor-reported clinical performance metric is promoted to target evidence.",
+    "No governed adjudicated clinical gold exists in the target.",
+    "No NeuroKit detector, delineator, SQI, HRV routine, reader, or preprocessing pipeline is canonical target runtime authority."
+  ],
+  "attribution_requirements": {
+    "software": "MIT attribution for NeuroKit engineering ideas/source review",
+    "dataset_assets": "not imported; separate asset terms required before any future use"
+  },
+  "final_disposition": "INTEGRATED_EVALUATION_INFRASTRUCTURE_PLUS_CHALLENGER_RESEARCH",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "promotion": {
+    "main_commit": "46d7e9a5cce8e2f958696e07cc8595b7a71f9267",
+    "main_tree": "028a2bc7b47e68aeff5ee32892652796578f4563",
+    "parent_main_commit": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+    "parent_guard": "PASS",
+    "candidate_parent": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
+    "github_actions_run_id": 35184975755,
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success"
+  },
+  "evidence_sha256": {
+    "donors/neuropsychology_neurokit/DONOR_MANIFEST.json": "3a330d2cd7e4264081da619589ca3ccbaefd29460723fdde866ed1d87c7e0973",
+    "donors/neuropsychology_neurokit/INVENTORY.json": "05cbe10e700e13ced4bbd35b86a785be65dd3e2364d4f3a9a3a53cf8cc17f1ee",
+    "donors/neuropsychology_neurokit/GAP_MATRIX.json": "3ce6d8cd83c408288aadc4d0e69db42f32cd2ab19a3c9d6423ec25aac722bb6b",
+    "donors/neuropsychology_neurokit/HARVEST_PLAN.md": "c146faeb325f0339c370a60479042379ed4c7d4ef39b2659d03e17cfa209b04b",
+    "donors/neuropsychology_neurokit/COMPARATIVE_PROOF.json": "40b07391dbf50393721691ba3d2dd608aa2bdfb8aee61b2526578fefb44242c0",
+    "donors/neuropsychology_neurokit/INDEPENDENT_VERIFICATION.json": "61504aa8148a10b12324f70ef622aca5c6701473fe2a152d7b879eb57dd65f3c",
+    "lib/challenger_contract.js": "41ae8ff2bbc4f465ab0f6e1d1518cd2b84f34c94f1b1b5514a7b9ceea1e5e896",
+    "tests/neurokit_event_agreement.test.js": "3dfc71f857ffa7cc9b3fe5d853cb093ebffc3becec59fed112c0072a8f05d1a0",
+    "tests/neurokit_donor_closure.test.js": "8226bb720521fbb4aa3f6dca2a55082d2b12619f292facb807f7254674a4f7e6"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI"
+}

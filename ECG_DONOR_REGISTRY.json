@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 2,
+  "completed_donors": 3,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-003",
+  "next_donor_id": "DONOR-004",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -36,12 +36,14 @@
     {
       "donor_id": "DONOR-003",
       "repository": "neuropsychology/NeuroKit",
-      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
       "audited_tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
-      "receipt_status": "PENDING_POST_PROMOTION_TARGET_MAIN_CI",
+      "receipt": "donors/neuropsychology_neurokit/DONOR_RECEIPT.json",
+      "promotion_commit": "46d7e9a5cce8e2f958696e07cc8595b7a71f9267",
+      "promotion_ci_run_id": 35184975755,
       "implementation_commit": "9009c37a5ed4c3049477a4813b6a4a5c96dce598",
-      "verified_candidate_commit": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
+      "verified_candidate_commit": "1807b4b211b721f69fff0d6df766950d4fcfe6d8",
       "integration": "target-owned tolerance-aware challenger event agreement plus synthetic regression tests",
       "runtime_dependency_added": false,
       "model_weights_imported": false,
