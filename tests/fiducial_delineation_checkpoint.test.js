@@ -54,6 +54,21 @@ check("governed clinical state remains unchanged", () => {
   assert.strictEqual(checkpoint.clinicalValidity, "NOT_INFERRED");
 });
 
+check("implementation verification is exact and successful", () => {
+  const v = checkpoint.verification;
+  assert.strictEqual(v.implementationCandidateCommit, "54427eacf5d41b1376d0f86cf0f1d064eb89d534");
+  assert.strictEqual(v.implementationCandidateTree, "0afe4fceb1f7091d52c25d6b2183333c28ce20d8");
+  assert.strictEqual(v.candidateCiRunId, 35267257412);
+  assert.strictEqual(v.candidateCiConclusion, "success");
+  assert.strictEqual(v.independentVerification, "PASS");
+  assert.strictEqual(v.independentDelineation, "12/12 PASS");
+  assert.strictEqual(v.independentWorkflow, "7/7 PASS");
+  assert.strictEqual(v.independentCheckpoint, "6/6 PASS");
+  assert.strictEqual(v.independentFullTargetSuite, "PASS");
+});
+check("checkpoint status is stage-safe", () => {
+  assert.ok(new Set(["VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND","ACCEPTED_ON_MAIN"]).has(checkpoint.status));
+});
 console.log(JSON.stringify({
   schema: "ekg-fiducial-delineation-checkpoint-tests-v1",
   pass: true,
