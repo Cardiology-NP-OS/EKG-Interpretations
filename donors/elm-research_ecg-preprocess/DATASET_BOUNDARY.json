@@ -1,0 +1,40 @@
+{
+  "schema": "ecg-donor-dataset-boundary-v1",
+  "donor_id": "DONOR-008",
+  "policy": {
+    "source_labels_are_project_gold": false,
+    "model_predictions_are_project_gold": false,
+    "raw_or_restricted_data_allowed_in_target_git": false,
+    "dataset_terms_inherited_from_root_code_license": false
+  },
+  "base_datasets": [
+    {"name":"PTB-XL","role":"SOURCE_DATASET","terms":"SEPARATE_DATASET_TERMS_REQUIRED","imported":false},
+    {"name":"MIMIC-IV-ECG","role":"SOURCE_DATASET","terms":"CREDENTIALED_OR_DATA_USE_TERMS_APPLY","imported":false},
+    {"name":"CODE-15","role":"SOURCE_DATASET","terms":"SEPARATE_DATASET_TERMS_REQUIRED","imported":false},
+    {"name":"CSN / Chapman-Shaoxing","role":"SOURCE_DATASET","terms":"SEPARATE_DATASET_TERMS_REQUIRED","imported":false},
+    {"name":"PhysioNet/CinC Challenge 2020 CPSC material","role":"SOURCE_DATASET","terms":"SEPARATE_DATASET_TERMS_REQUIRED","imported":false},
+    {"name":"EchoNext","role":"SOURCE_DATASET","terms":"PERMISSION_REQUIRED_BY_DONOR_DOCUMENTATION","imported":false},
+    {"name":"HEED","role":"SOURCE_DATASET","terms":"PERMISSION_REQUIRED_BY_DONOR_DOCUMENTATION","imported":false}
+  ],
+  "mapped_or_vendored_research_sources": [
+    {"name":"ECG-QA","role":"SOURCE_LABELS_AND_TEXT_MAPPING","status":"DEFER_TO_PRIMARY_DONOR_016_AND_SEPARATE_TERMS","vendored_subtree_present":true,"imported_into_target":false},
+    {"name":"ECG-Chat pretrain MIMIC","role":"RESEARCH_MAPPING_SOURCE","status":"SEPARATE_TERMS_REQUIRED","imported_into_target":false},
+    {"name":"ECG-Chat ECG Instruct 45k","role":"RESEARCH_MAPPING_SOURCE","status":"SEPARATE_TERMS_REQUIRED","imported_into_target":false},
+    {"name":"PULSE ECGInstruct","role":"RESEARCH_MAPPING_SOURCE","status":"DEFER_TO_PRIMARY_DONOR_019_AND_SEPARATE_TERMS","imported_into_target":false},
+    {"name":"PULSE ECGBench","role":"RESEARCH_MAPPING_SOURCE","status":"DEFER_TO_PRIMARY_DONOR_019_AND_SEPARATE_TERMS","imported_into_target":false},
+    {"name":"GEM ECG Grounding","role":"RESEARCH_MAPPING_SOURCE","status":"SEPARATE_TERMS_REQUIRED","imported_into_target":false},
+    {"name":"ECG protocol / comprehension / CoT mapping assets","role":"RESEARCH_MAPPING_SOURCE","status":"SOURCE_PROVENANCE_REVIEW_REQUIRED","imported_into_target":false}
+  ],
+  "vendored_ecg_qa_scope": {
+    "tracked_files": 370,
+    "json_files": 354,
+    "csv_files_within_repo_total": 4,
+    "tsv_files_within_repo_total": 6,
+    "embedded_license": "CC-BY-4.0",
+    "disposition": "DATA_ONLY",
+    "target_copy_allowed": false,
+    "project_gold_created": false
+  },
+  "target_use": "Only metadata, provenance, preprocessing-contract concepts, and synthetic tests may be harvested in this donor lane. No donor dataset rows, reports, question-answer labels, or waveform payloads are imported.",
+  "clinical_authority_added": false
+}
