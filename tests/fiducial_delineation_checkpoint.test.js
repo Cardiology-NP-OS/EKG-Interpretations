@@ -69,6 +69,17 @@ check("implementation verification is exact and successful", () => {
 check("checkpoint status is stage-safe", () => {
   assert.ok(new Set(["VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND","ACCEPTED_ON_MAIN"]).has(checkpoint.status));
 });
+check("accepted checkpoint binds verified candidate promotion and target-main CI", () => {
+  assert.strictEqual(checkpoint.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(checkpoint.verification.promotionCandidateCommit, "c7f45ae397885c064357e7f24bc33eaed33d8103");
+  assert.strictEqual(checkpoint.verification.promotionCandidateCiRunId, 35267560975);
+  assert.strictEqual(checkpoint.verification.promotionCandidateCiConclusion, "success");
+  assert.strictEqual(checkpoint.verification.promotionCandidateIndependentVerification, "PASS");
+  assert.strictEqual(checkpoint.promotion.mergeCommit, "55bae8f7f67fa9b3291b827671bfe278b0df4dd8");
+  assert.strictEqual(checkpoint.promotion.mergeTree, "885a1c52ef3a9a46834d9492d108e6e2abc14e53");
+  assert.strictEqual(checkpoint.promotion.targetMainCiRunId, 35267786841);
+  assert.strictEqual(checkpoint.promotion.targetMainCiConclusion, "success");
+});
 console.log(JSON.stringify({
   schema: "ekg-fiducial-delineation-checkpoint-tests-v1",
   pass: true,
