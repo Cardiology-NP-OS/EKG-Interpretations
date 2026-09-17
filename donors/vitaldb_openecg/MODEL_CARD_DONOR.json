@@ -1,0 +1,71 @@
+{
+  "schema": "ecg-model-card-donor-v1",
+  "donor_id": "DONOR-002",
+  "repository": "vitaldb/openecg",
+  "model_family": "OpenECG boundary classifier and layered ECG codec",
+  "policy_disposition": "CHALLENGER_ONLY_LICENSE_REVIEW_REQUIRED",
+  "architecture": {
+    "boundary_model": "single-channel transformer-style per-frame P/QRS/T classifier with boundary regression; donor reports ~0.99M parameters",
+    "codec_v6": "vit_transformer_sample_res_convtok_mh_1ch, 1,159,572 parameters, multi-head frame/beat/rhythm",
+    "representation": "sample-resolution parallel frame, beat, and rhythm label tracks"
+  },
+  "input_contracts": {
+    "boundary": {"leads": 1, "sample_rate_hz": 250, "duration_seconds": 10, "window_samples": 2500, "preprocessing": "rank normalization"},
+    "codec_v6": {"leads": 1, "sample_rate_hz": 500, "duration_seconds": 10, "window_samples": 5000, "preprocessing": "rank normalization"}
+  },
+  "output_labels": {
+    "frame": ["other", "P", "QRS", "T", "paced_QRS in some internal paths"],
+    "beat": ["none", "sinus", "vpc", "paced", "fusion", "unknown"],
+    "rhythm": ["sinus", "avb", "paced", "afib", "bbb", "ventricular"]
+  },
+  "training_populations_reported_by_donor": [
+    "LUDB", "QTDB", "ISP", "MIT-BIH DS1", "vitaldb-arrhythmia", "lydus cardiologist hospital rhythm"
+  ],
+  "external_validation_reported_by_donor": [
+    "MIT-BIH DS2 beat evaluation", "CODE-test cross-cohort rhythm audit", "LUDB held-out boundary evaluation"
+  ],
+  "published_or_donor_reported_metrics": {
+    "status": "DONOR_CLAIMS_NOT_TARGET_VERIFIED",
+    "codec_v6_frame_boundary_macro_f1": 0.855,
+    "codec_v6_frame_boundary_macro_f1_clean_subset": 0.867,
+    "codec_v6_frame_median_timing_ms": 11.1,
+    "codec_v6_vpc_f1_mit_bih_ds2": 0.929,
+    "codec_v6_lydus_rhythm_macro": 0.797,
+    "codec_v6_code_test_rhythm_macro": 0.767,
+    "notes": "Do not compare these headline values directly with target metrics or other donors without identical datasets, splits, preprocessing and label maps."
+  },
+  "software_license": "Apache-2.0",
+  "model_weight_license": "LICENSE_REVIEW_REQUIRED",
+  "model_weight_license_reason": "No separate explicit trained-weight license was established in the reviewed model cards/release metadata. Repository software license is not treated as sufficient proof for trained artifact rights.",
+  "dataset_license_status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
+  "compute_requirements": {
+    "inference_boundary": "TFLite runtime + numpy; donor reports ~1.5MB bundled int8 artifact",
+    "inference_codec": "ONNX Runtime + numpy for int8 codec, or PyTorch checkpoint path",
+    "training": "PyTorch/transformers class stack"
+  },
+  "calibration_and_thresholding": {
+    "boundary_postprocessing": "frame argmax/run decoding plus regression path",
+    "pacing": "rule thresholds are explicitly source/bandwidth dependent",
+    "afib": "multiple cohort-tuned hard-coded thresholds; not portable authority"
+  },
+  "unsupported_or_high_risk_populations_and_modes": [
+    "multi-lead morphology beyond single-lead model contract",
+    "BBB precision limited by lead-II information content",
+    "ventricular rhythm insufficiently tested on hospital data per donor model card",
+    "neural paced class unreliable per donor; visible pacer spikes may be absent with bipolar pacing",
+    "source-specific acquisition filters can invalidate pacing thresholds"
+  ],
+  "missing_information": [
+    "explicit standalone license for each distributed checkpoint/ONNX/TFLite artifact",
+    "complete independent reproduction of all reported metrics in this target audit environment",
+    "target-controlled calibration on governed adjudicated clinical gold (currently zero by policy)"
+  ],
+  "reproducibility_status": {
+    "audited_head_adds_missing_eval_scripts": true,
+    "upstream_actions_run_at_audited_head": false,
+    "fresh_clone_local_reproduction": "BLOCKED_BY_EXECUTION_ENVIRONMENT_DNS",
+    "target_model_execution_performed": false
+  },
+  "runtime_authority": "NONE",
+  "clinical_validity_inferred": false
+}

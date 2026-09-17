@@ -1,0 +1,117 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-002",
+  "repository": "vitaldb/openecg",
+  "target_rollback_commit": "6504693b4b0db4966c669928d0099f069b78ab02",
+  "rows": [
+    {
+      "capability": "WFDB source ingestion and calibrated waveform reading",
+      "donor_components": ["openecg/ludb.py", "openecg/qtdb.py", "openecg/mitdb.py", "openecg/ptbxl.py", "openecg/isp.py", "openecg/butpdb.py"],
+      "classification": "ALREADY_STRONGER_IN_TARGET",
+      "reason": "Target has governed WFDB byte/header/calibration handling hardened by DONOR-001 with strict provenance and fail-closed contracts."
+    },
+    {
+      "capability": "NeuroKit-based delineation wrapper",
+      "donor_components": ["openecg/delineate.py"],
+      "classification": "DUPLICATE",
+      "reason": "Delegates to NeuroKit2; canonical provenance belongs to DONOR-003."
+    },
+    {
+      "capability": "Gradient-threshold QRS detector",
+      "donor_components": ["openecg/qrs.py", "scripts/validate_qrs_mitdb.py"],
+      "classification": "USEFUL_TEST_ONLY",
+      "reason": "Implementation derives from NeuroKit/Makowski. Preserve OpenECG validation/test methodology, but defer algorithm authority to DONOR-003 and never silently replace target behavior."
+    },
+    {
+      "capability": "QRS width estimator with adaptive threshold relaxation",
+      "donor_components": ["openecg/qrs.py"],
+      "classification": "USEFUL_CHALLENGER",
+      "reason": "Potential morphology measurement challenger; contains imputation and heuristic thresholds that require independent validation before any measurement authority."
+    },
+    {
+      "capability": "Rule-based pacemaker-spike detection",
+      "donor_components": ["openecg/pacer.py", "scripts/validate_pacer.py"],
+      "classification": "USEFUL_CHALLENGER",
+      "reason": "Strong failure-mode awareness and multiple signal-domain approaches, but thresholds are source/bandwidth dependent and negative results cannot exclude bipolar pacing."
+    },
+    {
+      "capability": "Rule-based short-window AF irregularity detection",
+      "donor_components": ["openecg/afib.py", "scripts/afib_*"],
+      "classification": "USEFUL_CHALLENGER",
+      "reason": "Independent RR-feature challenger is useful for disagreement analysis; hard-coded thresholds were selected on donor cohorts and are not transportable clinical authority."
+    },
+    {
+      "capability": "Sample-resolution layered frame/beat/rhythm representation",
+      "donor_components": ["openecg/layered.py"],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "reason": "Target lacks a generic governed challenger-output abstraction spanning waveform boundaries, beat labels and rhythm labels while keeping them source-separated."
+    },
+    {
+      "capability": "Context-margin masking for windowed inference and evaluation",
+      "donor_components": ["openecg/layered.py"],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "reason": "Explicitly excludes context-poor window edges from emitted/evaluated challenger output and supports stitchable streams."
+    },
+    {
+      "capability": "Structured disagreement and backend-fallback reporting",
+      "donor_components": ["openecg/report.py"],
+      "classification": "DONOR_ADDS_NEW_CAPABILITY",
+      "reason": "Architecture explicitly records independent-source disagreement and degraded backend state; target can adopt the governance pattern without adopting donor clinical conclusions."
+    },
+    {
+      "capability": "Boundary matching metrics with timing-error distribution",
+      "donor_components": ["openecg/eval.py", "scripts/eval_boundary_sweep.py"],
+      "classification": "USEFUL_TEST_ONLY",
+      "reason": "Sensitivity, PPV, F1 and timing error metrics are valuable evaluation methodology; exact matching implementation should be target-owned and verified for one-to-one matching semantics."
+    },
+    {
+      "capability": "Record-level held-out multi-dataset split definitions and layer-specific masked supervision",
+      "donor_components": ["scripts/build_real_multilayer_cache.py", "openecg/stage2/multi_dataset*.py", "openecg/stage2/multitask_dataset.py"],
+      "classification": "USEFUL_TEST_ONLY",
+      "reason": "Strong leakage-control and missing-label discipline; datasets/labels remain source evidence and never project gold."
+    },
+    {
+      "capability": "ECG-specific augmentation with physiology-aware exclusions",
+      "donor_components": ["openecg/stage2/augment.py"],
+      "classification": "USEFUL_TEST_ONLY",
+      "reason": "Useful robustness/evaluation perturbations; donor explicitly avoids horizontal flip/baseline shift and constrains time stretching to reduce morphology corruption."
+    },
+    {
+      "capability": "Structural-prior loss discouraging direct P/QRS/T adjacency and fragmentation",
+      "donor_components": ["openecg/models/codec_v6_MODEL_CARD.md", "openecg/stage2/model*.py", "scripts/train_v12*.py"],
+      "classification": "RESEARCH_ONLY",
+      "reason": "Interesting representation-learning prior, but donor claim is model-specific and should not be embedded into canonical deterministic ECG interpretation without independent label/physiology validation."
+    },
+    {
+      "capability": "TFLite/ONNX lightweight deployment and backend comparison",
+      "donor_components": ["openecg/deploy.py", "scripts/export_boundary_tflite.py", "scripts/eval_boundary_tflite.py", "scripts/eval_boundary_executorch.py"],
+      "classification": "USEFUL_CHALLENGER",
+      "reason": "Strong deployment pattern for isolated future model challengers; no weight is admitted and no inference path becomes target runtime authority."
+    },
+    {
+      "capability": "Bundled boundary and layered-codec trained weights",
+      "donor_components": ["openecg/models/*.tflite", "openecg/models/*.pt", "openecg/models/*_int8.onnx"],
+      "classification": "LICENSE_BLOCKED",
+      "reason": "Separate explicit weight license not established; training-dataset terms also require per-dataset review. Status is LICENSE_REVIEW_REQUIRED, therefore no import."
+    },
+    {
+      "capability": "Foundation-model/SSL wrappers",
+      "donor_components": ["openecg/stage2/ssl/ecgfm.py", "ecgfounder.py", "hubert.py", "stmem.py"],
+      "classification": "DUPLICATE",
+      "reason": "ECG-FM, ECGFounder and HuBERT-ECG are already scheduled as first-class donors; ST-MEM is queued as an associated donor. Audit originals instead of OpenECG wrappers."
+    },
+    {
+      "capability": "Synthetic ECG and synthetic arrhythmia generation",
+      "donor_components": ["openecg/synth.py", "openecg/stage2/synth_dataset.py", "openecg/stage2/synarrdb_dataset.py"],
+      "classification": "USEFUL_TEST_ONLY",
+      "reason": "Potential adversarial/robustness fixture source only; synthetic labels cannot establish clinical validity or diagnostic accuracy."
+    },
+    {
+      "capability": "Structured ECG report intended for agent consumption",
+      "donor_components": ["openecg/report.py"],
+      "classification": "UNSAFE",
+      "reason": "As a direct runtime feature it would emit diagnostic/rhythm conclusions and could conflict with the target's GOVERNED_INACTIVE state. Only non-clinical schema/disagreement ideas may be harvested."
+    }
+  ],
+  "clinical_authority_added": false
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-002",
+  "repository": "vitaldb/openecg",
+  "canonical_upstream_url": "https://github.com/vitaldb/openecg",
+  "retrieval_date": "2026-09-16",
+  "archived": false,
+  "audited_head": {
+    "branch": "main",
+    "commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+    "tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+    "commit_date": "2026-09-08T08:08:47Z",
+    "commit_signature_verified": false,
+    "package_version": "0.11.0",
+    "upstream_ci_runs_at_head": 0,
+    "head_note": "One commit beyond v0.11.0; adds previously omitted evaluation scripts required by eval_unified_headline.py and does not claim runtime behavior change."
+  },
+  "stable_release": {
+    "tag": "v0.11.0",
+    "annotated_tag_object": "04c9c56d5e60d4397f27be8f6e967a14c4e286db",
+    "commit": "60ac8887ab0d640fbab6ef094d023b72a9f630c5",
+    "published_at": "2026-06-16T02:33:41Z",
+    "tag_signature_verified": false,
+    "release_claimed_test_count": 205
+  },
+  "software_license": {
+    "spdx": "Apache-2.0",
+    "license_file": "LICENSE",
+    "license_blob_sha": "4ec4b63eb48dead8c9a54c033d9440bc0b8c1b11",
+    "copyright": "Copyright 2026 Hyung-Chul Lee and OpenECG contributors",
+    "compatible_for_ideas_and_separable_adapter_work": true,
+    "attribution_required": true
+  },
+  "model_license": {
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "reason": "Repository Apache-2.0 licensing does not independently establish the redistribution/use terms of bundled trained weights; reviewed model cards do not state a separate explicit weight license.",
+    "weights_imported_into_target": false
+  },
+  "dataset_license": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
+    "reason": "Dataset access/use terms are distinct from source-code licensing. Donor references LUDB, QTDB, ISP, BUT PDB, PTB-XL, MIT-BIH, AFDB, VFDB, NSRDB, CODE-test, vitaldb-arrhythmia and lydus-derived data.",
+    "raw_data_imported_into_target": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "dependencies": {
+    "core": ["numpy>=1.26", "opendsp>=0.1.0"],
+    "loaders": ["wfdb>=4.1", "scipy>=1.11"],
+    "stage2": ["scipy>=1.11", "torch>=2.6", "transformers>=4.40", "huggingface-hub>=0.20"],
+    "delineate": ["neurokit2>=0.2.7", "scipy>=1.11"],
+    "deploy": ["tflite-runtime>=2.14", "onnxruntime>=1.17", "numpy>=1.26"],
+    "report": ["onnxruntime>=1.17", "numpy>=1.26"],
+    "deploy_export": ["torch>=2.6", "ai-edge-torch>=0.2"],
+    "python": ">=3.11"
+  },
+  "bundled_model_artifacts": [
+    "openecg/models/boundary_int8.tflite",
+    "openecg/models/codec_v1.pt",
+    "openecg/models/codec_v1_int8.onnx",
+    "openecg/models/codec_v3.pt",
+    "openecg/models/codec_v3_int8.onnx",
+    "openecg/models/codec_v4.pt",
+    "openecg/models/codec_v4_int8.onnx",
+    "openecg/models/codec_v5.pt",
+    "openecg/models/codec_v5_int8.onnx",
+    "openecg/models/codec_v6.pt",
+    "openecg/models/codec_v6_int8.onnx"
+  ],
+  "associated_repositories_discovered": [
+    {
+      "repository": "vitaldb/opendsp",
+      "relationship": "OpenECG core dependency and extracted DSP primitive implementation",
+      "material": true,
+      "registry_action": "QUEUE_ASSOCIATED_DONOR"
+    },
+    {
+      "repository": "vuno/ST-MEM",
+      "relationship": "ST-MEM upstream referenced by OpenECG third_party/ST-MEM/README.md; donor text names historical bakqui/ST-MEM path that now resolves to vuno/ST-MEM",
+      "material": true,
+      "registry_action": "QUEUE_ASSOCIATED_DONOR"
+    }
+  ],
+  "cross_donor_provenance": [
+    {
+      "component": "openecg/qrs.py",
+      "upstream_origin": "NeuroKit2 / Makowski gradient-threshold QRS detector",
+      "action": "DO_NOT_IMPORT_UNDER_DONOR_002; defer canonical audit to DONOR-003 neuropsychology/NeuroKit"
+    },
+    {
+      "component": "openecg/delineate.py",
+      "upstream_origin": "NeuroKit2 ecg_peaks/ecg_delineate wrapper",
+      "action": "DEPENDENCY_OR_EVALUATION_ONLY; defer direct algorithm assessment to DONOR-003"
+    }
+  ],
+  "target_rollback_point": {
+    "commit": "6504693b4b0db4966c669928d0099f069b78ab02",
+    "tree": "0625788df2ee6782a686abd55c65589cd188dd70"
+  },
+  "accepted_engine_immutable_identity": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "clinical_authority_change_allowed": false
+}

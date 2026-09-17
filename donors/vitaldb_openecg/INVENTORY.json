@@ -1,0 +1,132 @@
+{
+  "schema": "ecg-donor-inventory-v1",
+  "donor_id": "DONOR-002",
+  "repository": "vitaldb/openecg",
+  "audited_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+  "audited_tree": "886095776a1f79f600a7ad269176ccc0fbd2d37d",
+  "recursive_tree_audit": {
+    "complete": true,
+    "github_tree_truncated": false,
+    "inventory_method": "GitHub recursive Git tree plus targeted full-file reads of material implementation/test/config/model-card paths",
+    "fresh_clone_attempted": true,
+    "fresh_clone_result": "BLOCKED_BY_EXECUTION_ENVIRONMENT_DNS",
+    "fresh_clone_claimed": false
+  },
+  "root": [
+    ".gitignore", "LICENSE", "README.md", "pyproject.toml",
+    "progression_note.md", "self_improve_rhythm_note.md", "struct_frame_note.md"
+  ],
+  "data_and_split_artifacts": [
+    "data/splits/ludb_v1.json"
+  ],
+  "documentation_families": {
+    "benchmarks": ["docs/benchmarks/v56c_vs_baselines.md"],
+    "figures": [
+      "docs/figures/v56c_vs_baselines_isp.png",
+      "docs/figures/v56c_vs_baselines_ludb.png",
+      "docs/figures/v56c_vs_baselines_qtdb.png"
+    ],
+    "design_and_postmortem": [
+      "docs/superpowers/plans/2026-05-06-v12-ssl-boundary.md",
+      "docs/superpowers/specs/2026-05-06-v12-postmortem.md",
+      "docs/superpowers/specs/2026-05-06-v12-ssl-boundary-design.md"
+    ]
+  },
+  "core_modules": [
+    "openecg/__init__.py", "openecg/afib.py", "openecg/butpdb.py",
+    "openecg/delineate.py", "openecg/deploy.py", "openecg/dsp.py",
+    "openecg/eval.py", "openecg/isp.py", "openecg/labeler.py",
+    "openecg/layered.py", "openecg/ludb.py", "openecg/lydus.py",
+    "openecg/mitdb.py", "openecg/pacer.py", "openecg/ptbxl.py",
+    "openecg/qrs.py", "openecg/qtdb.py", "openecg/report.py",
+    "openecg/rhythm.py", "openecg/synth.py", "openecg/vocab.py"
+  ],
+  "model_artifact_family": {
+    "boundary": ["openecg/models/boundary_int8.tflite"],
+    "codec_versions": ["v1", "v3", "v4", "v5", "v6"],
+    "artifact_types": ["PyTorch checkpoint", "int8 ONNX", "model card"],
+    "weight_license_status": "LICENSE_REVIEW_REQUIRED"
+  },
+  "stage2_modules": [
+    "afib_mask.py", "arrhythmia_classes.py", "augment.py", "cascade.py",
+    "dataset.py", "diffusion.py", "diffusion_backbone.py", "evaluate.py",
+    "infer.py", "input_channels.py", "input_channels_dataset.py", "model.py",
+    "model_variants.py", "multi_dataset.py", "multi_dataset_500hz.py",
+    "multi_source_diffusion_dataset.py", "multitask_dataset.py",
+    "pacer_channel.py", "qrs_channel.py", "rare_arrhythmia_datasets.py",
+    "refiner.py", "reg_targets.py", "soft_labels.py", "synarrdb_dataset.py",
+    "synth_dataset.py", "train.py", "window_labels.py"
+  ],
+  "stage2_ssl_modules": [
+    "ecgfm.py", "ecgfounder.py", "head.py", "hubert.py", "stmem.py", "v16head.py"
+  ],
+  "script_families": {
+    "afib_rule_development": [
+      "afib_adaptive_veto_v7.py", "afib_combined_v6.py", "afib_deadband_sweep.py",
+      "afib_fn_review.py", "afib_high_spec_union.py", "afib_label_review.py",
+      "afib_qrs_width_v3.py", "afib_qrs_width_v4.py", "afib_rule_errors.py",
+      "afib_rule_features.py", "afib_short_window_v8.py", "afib_width_masking_v5.py"
+    ],
+    "benchmark_and_evaluation": [
+      "baseline_comparison.py", "benchmark_v56c.py", "eval_boundary_executorch.py",
+      "eval_boundary_sweep.py", "eval_boundary_tflite.py", "eval_multihead_real_500.py",
+      "eval_qtdb_t_annotated.py", "eval_refiner.py", "eval_unified_headline.py",
+      "sota_comparison.py", "v4_cross_domain.py", "validate_pacer.py",
+      "validate_qrs_mitdb.py", "validate_v4_lit_metrics.py",
+      "validate_vitaldb_arrhythmia.py", "verify_is_afib_against_v8.py",
+      "verify_qtdb_fix.py"
+    ],
+    "dataset_cache_and_label_diagnostics": [
+      "build_real_multilayer_cache.py", "check_isp_alignment.py",
+      "diagnose_isp_labels.py", "diagnose_v3.py", "smoke_v3_dataset.py"
+    ],
+    "deployment_and_export": [
+      "export_boundary_executorch.py", "export_boundary_tflite.py"
+    ],
+    "training_and_ablation": "multiple versioned train_v* scripts, ablation/sweep scripts, postprocessing tuning and architecture-capacity experiments inspected via complete recursive tree",
+    "visualization": ["viz_benchmark_v56c.py", "viz_v4_predictions.py"]
+  },
+  "pod_stage": [
+    "eval_mh.py", "eval_unified.py", "iter2_logit_bias.py", "iter4_run.sh", "kgpu_train.py"
+  ],
+  "tests": {
+    "families": [
+      "AFib and AFib mask", "DSP", "evaluation", "input channels and datasets",
+      "integration", "labeler", "layered codec", "pacer and pacer channel",
+      "QRS and QRS channel", "QTDB window", "structured report",
+      "stage2 augmentation/dataset/evaluate/infer/model/multi-input/refiner",
+      "stage2 regression targets/soft labels/train", "SSL wrappers",
+      "synthetic arrhythmia dataset", "vocabulary"
+    ],
+    "release_claimed_count_v0_11_0": 205,
+    "local_execution_status": "NOT_RUN_ENVIRONMENT_NETWORK_BLOCKED"
+  },
+  "third_party_markers": [
+    {
+      "path": "third_party/ST-MEM/README.md",
+      "content_role": "upstream clone instruction only",
+      "referenced_repository": "historical bakqui/ST-MEM, currently resolved by GitHub to vuno/ST-MEM"
+    }
+  ],
+  "material_capability_inventory": [
+    "single-lead waveform ingestion across variable source datasets",
+    "QRS/R-peak detection and width estimation",
+    "P/QRS/T delineation and boundary metrics",
+    "pacemaker-spike detection variants",
+    "short-window rule-based AF irregularity challenger",
+    "sample-resolution frame/beat/rhythm layered representation",
+    "window edge-context masking and stream stitching",
+    "structured machine-readable report abstraction",
+    "dataset-specific label harmonization and masked supervision",
+    "patient/record-level held-out split definitions",
+    "cross-cohort evaluation",
+    "ECG-specific augmentation with physiology-aware constraints",
+    "soft labels and masked multi-task supervision",
+    "SSL/foundation-model adapter wrappers",
+    "TFLite and ONNX deployment",
+    "quantization/backend comparison",
+    "ablation and post-processing sweeps",
+    "explicit model-card limitations and source-specific threshold caveats"
+  ],
+  "inventory_disposition": "COMPLETE_TREE_INSPECTED_MATERIAL_FILES_SAMPLED_IN_DEPTH"
+}
