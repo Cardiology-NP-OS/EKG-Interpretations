@@ -1,0 +1,108 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-003",
+  "repository": "neuropsychology/NeuroKit",
+  "canonical_upstream_url": "https://github.com/neuropsychology/NeuroKit",
+  "retrieval_date": "2026-09-17",
+  "archived": false,
+  "audited_head": {
+    "branch": "master",
+    "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
+    "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
+    "commit_date": "2026-03-01T11:47:10Z",
+    "commit_signature_verified": true,
+    "release_tag": "v0.2.13",
+    "release_name": "0.2.13",
+    "release_published_at": "2026-03-02T08:02:35Z",
+    "head_is_release_tag_commit": true
+  },
+  "software_license": {
+    "spdx": "MIT",
+    "license_file": "LICENSE",
+    "license_blob_sha": "d95473208e8eb18fd06c42e4f77ece6a5a720cf5",
+    "copyright": "Copyright (c) 2020, Dominique Makowski",
+    "compatible_for_ideas_clean_reimplementation_and_attributed_reuse": true,
+    "attribution_required": true
+  },
+  "model_license": {
+    "status": "NOT_APPLICABLE_CORE_PACKAGE",
+    "reason": "No trained ECG model weights were identified as part of the audited core NeuroKit package surface.",
+    "weights_imported_into_target": false
+  },
+  "dataset_license": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
+    "reason": "Repository contains test/example physiological datasets, including ECG files, but data/README.rst does not state dataset-specific license/provenance terms. Repository software MIT licensing is not treated as sufficient evidence for independent patient/data-use rights.",
+    "raw_data_imported_into_target": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "dependencies": {
+    "python": ">=3.10",
+    "core": [
+      "requests",
+      "numpy>=2.0.0",
+      "pandas<3.0.0",
+      "scipy",
+      "scikit-learn>=1.0.0",
+      "matplotlib>=3.5.0",
+      "PyWavelets>=1.4.0",
+      "setuptools<82.0.0"
+    ],
+    "ecg_relevant_optional_or_test": [
+      "wfdb",
+      "biosppy==0.6.1",
+      "cvxopt",
+      "EMD-signal",
+      "numba>=0.61.0",
+      "llvmlite>=0.44.0"
+    ],
+    "dependency_note": "Whole-package direct runtime adoption would add a broad Python scientific stack to a target whose canonical signal substrate is currently narrow and governance-specific; dependency use requires separate comparative justification."
+  },
+  "associated_paper": {
+    "title": "NeuroKit2: A Python toolbox for neurophysiological signal processing",
+    "journal": "Behavior Research Methods",
+    "year": 2021,
+    "doi": "10.3758/s13428-020-01516-y",
+    "citation_file": "CITATION.cff"
+  },
+  "primary_ecg_surfaces": [
+    "neurokit2/ecg/ecg_clean.py",
+    "neurokit2/ecg/ecg_findpeaks.py",
+    "neurokit2/ecg/ecg_peaks.py",
+    "neurokit2/ecg/ecg_delineate.py",
+    "neurokit2/ecg/ecg_quality.py",
+    "neurokit2/ecg/ecg_invert.py",
+    "neurokit2/ecg/ecg_segment.py",
+    "neurokit2/ecg/ecg_phase.py",
+    "neurokit2/ecg/ecg_rsp.py",
+    "neurokit2/ecg/ecg_simulate.py",
+    "neurokit2/ecg/ecg_process.py",
+    "neurokit2/ecg/ecg_eventrelated.py",
+    "neurokit2/ecg/ecg_intervalrelated.py",
+    "neurokit2/signal/signal_fixpeaks.py",
+    "tests/tests_ecg.py",
+    "tests/tests_ecg_delineate.py",
+    "tests/tests_ecg_findpeaks.py"
+  ],
+  "cross_donor_provenance": [
+    {
+      "prior_donor": "vitaldb/openecg",
+      "component": "openecg/qrs.py",
+      "relationship": "OpenECG identifies NeuroKit gradient-threshold QRS logic as an upstream origin; canonical algorithm assessment is performed under DONOR-003 rather than attributed to DONOR-002."
+    },
+    {
+      "prior_donor": "vitaldb/openecg",
+      "component": "openecg/delineate.py",
+      "relationship": "OpenECG wraps NeuroKit ECG peak/delineation behavior; canonical assessment is performed under DONOR-003."
+    }
+  ],
+  "associated_repositories_discovered": [],
+  "target_rollback_point": {
+    "commit": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+    "tree": "530d4691745df2aaaae0d39648dd9f00783ca70a"
+  },
+  "accepted_engine_immutable_identity": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "clinical_authority_change_allowed": false
+}
