@@ -1,7 +1,7 @@
 # Donor 009 Harvest Plan
 
-Repository: Jwoo5/fairseq-signals  
-Audited commit: f8f0ff1c788a82c2059cb452cd5462898867489e  
+Repository: Jwoo5/fairseq-signals
+Audited commit: f8f0ff1c788a82c2059cb452cd5462898867489e
 Audited tree: 59535a7b9bf1d321831caa81558dfaa884664d7a
 
 ## Decision
