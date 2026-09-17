@@ -1,0 +1,100 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-001",
+  "donor_repository": "MIT-LCP/wfdb-python",
+  "donor_commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+  "target_accepted_engine": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "comparison": {
+    "preimplementation_audit_head": "149a0a2f72077f7989376fd3a876ced08dbed676",
+    "before_verification_branch": "verification/donor-001-wfdb-before-20260916",
+    "before_test_head": "7d9b6e63a9b35229197be84343ba0d519469dc37",
+    "before_github_actions": {
+      "run_id": 35165800457,
+      "overall_conclusion": "failure",
+      "synthetic_contract_job": "failure",
+      "terminal_candidate_validation_job": "success",
+      "terminal_ep5_pkt09_step": "success",
+      "interpretation": "The donor-specific boundary tests exposed unsupported inputs that the preimplementation parser did not reject, while the governed terminal state remained intact."
+    },
+    "implementation_head": "31a2d330a8ff93799bab0c067c4d142629c5c011",
+    "implementation_tree": "68e13a5e423232922cd30901adeda279459ec4f8",
+    "after_github_actions": {
+      "run_id": 35165741827,
+      "overall_conclusion": "success",
+      "synthetic_contract_job": "success",
+      "quarantined_candidate_validation_job": "success",
+      "terminal_ep5_pkt09_step": "success"
+    },
+    "implementation_diff_from_preimplementation": {
+      "changed_files": [
+        "donors/mit-lcp_wfdb-python/HARVEST_PLAN.md",
+        "lib/wfdb_signal.js",
+        "package.json",
+        "tests/wfdb_donor_boundary.test.js"
+      ],
+      "lib_additions": 34,
+      "lib_deletions": 3,
+      "new_runtime_dependencies": 0,
+      "donor_fixture_bytes_imported": 0,
+      "model_weights_imported": 0,
+      "clinical_control_files_modified": 0
+    }
+  },
+  "demonstrated_improvements": [
+    {
+      "capability": "reject unsafe/path-traversal or absolute WFDB data-file references",
+      "before": "no data-file path/basename validation in parseHeaderDetailed/parseSignalLine",
+      "after": "WFDB_DATA_FILE fail-closed boundary"
+    },
+    {
+      "capability": "reject multi-file signal references in the narrow single-buffer decoder",
+      "before": "signal dataFile fields were parsed but not coherency-checked",
+      "after": "WFDB_DATA_FILE_MULTIPLE fail-closed boundary"
+    },
+    {
+      "capability": "bind header record identity to its expected .dat basename",
+      "before": "record and data-file identity were not coupled",
+      "after": "WFDB_DATA_FILE_RECORD_MISMATCH fail-closed boundary"
+    },
+    {
+      "capability": "reject duplicate lead labels",
+      "before": "lead names were not uniqueness-checked by the native parser",
+      "after": "WFDB_DUPLICATE_LEAD fail-closed boundary"
+    },
+    {
+      "capability": "reject multi-segment/hostile record identifiers and hostile lead tokens",
+      "before": "record and lead token shapes were not bounded",
+      "after": "WFDB_RECORD_ID and WFDB_LEAD_NAME fail-closed boundaries"
+    },
+    {
+      "capability": "strictly reject unsupported WFDB format modifiers",
+      "before": "numeric coercion could accept alternate textual forms that evaluated to 16",
+      "after": "only exact format token 16 is accepted"
+    },
+    {
+      "capability": "target-owned adversarial/golden regression corpus",
+      "before": "no donor-specific corpus for these WFDB field/cohesion invariants",
+      "after": "17 synthetic donor-boundary cases are included in npm test"
+    }
+  ],
+  "non_improvements_and_limits": [
+    "No new WFDB encoding was added.",
+    "No annotation parser was activated.",
+    "No QRS/peak algorithm became canonical.",
+    "No remote or cloud source resolution was enabled.",
+    "No diagnostic performance claim is made.",
+    "External-source PTB-XL gate was not substituted by synthetic CI."
+  ],
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}
