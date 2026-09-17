@@ -12,30 +12,59 @@
         "license_blob_sha": "8d3513fef628f57c03c597676c351cca1aabb811"
       },
       "copied_source_code": false,
-      "integration_method": [
-        "CLEAN_REIMPLEMENTATION_ADAPTER",
-        "TARGET_OWNED_SYNTHETIC_TEST_METHODOLOGY"
-      ],
+      "integration_method": ["CLEAN_REIMPLEMENTATION_ADAPTER", "TARGET_OWNED_SYNTHETIC_TEST_METHODOLOGY"],
       "attribution_required": true,
-      "dataset_fixture_license": {
-        "status": "LICENSE_REVIEW_REQUIRED",
-        "imported": false,
-        "scope": "sample-data/ and remotely referenced PhysioNet datasets"
+      "dataset_fixture_license": {"status":"LICENSE_REVIEW_REQUIRED","imported":false,"scope":"sample-data/ and remotely referenced PhysioNet datasets"},
+      "model_weight_license": {"status":"NOT_APPLICABLE","weights_imported":false},
+      "dependency_license_action": {"status":"NO_RUNTIME_DEPENDENCY_ADDED","transitive_dependency_import":false}
+    },
+    {
+      "donor_id": "DONOR-002",
+      "repository": "vitaldb/openecg",
+      "source_code_license": {
+        "spdx": "Apache-2.0",
+        "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION",
+        "license_file": "LICENSE",
+        "license_blob_sha": "4ec4b63eb48dead8c9a54c033d9440bc0b8c1b11",
+        "copyright": "Copyright 2026 Hyung-Chul Lee and OpenECG contributors"
       },
+      "copied_source_code": false,
+      "integration_method": ["CLEAN_REIMPLEMENTATION_EVALUATION_CONTRACT"],
+      "attribution_required": true,
       "model_weight_license": {
-        "status": "NOT_APPLICABLE",
-        "weights_imported": false
+        "status": "LICENSE_REVIEW_REQUIRED",
+        "weights_imported": false,
+        "reason": "No separate explicit trained-weight license was established for bundled .pt/.onnx/.tflite artifacts."
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false
       },
       "dependency_license_action": {
         "status": "NO_RUNTIME_DEPENDENCY_ADDED",
-        "transitive_dependency_import": false
-      }
+        "transitive_dependency_import": false,
+        "associated_dependency_queued": "vitaldb/opendsp"
+      },
+      "cross_donor_license_note": "openecg/qrs.py carries NeuroKit2/MIT-derived provenance; no such code was imported under DONOR-002 and canonical review is deferred to DONOR-003."
     },
     {
       "donor_id": "DONOR-A002",
       "repository": "bemoody/wfdb",
       "status": "LICENSE_REVIEW_REQUIRED",
       "note": "Associated upstream reported as mixed GPL/LGPL family; no code may be reused before independent file-level audit."
+    },
+    {
+      "donor_id": "DONOR-A003",
+      "repository": "vitaldb/opendsp",
+      "status": "LICENSE_REVIEW_REQUIRED_PENDING_ASSOCIATED_DONOR_AUDIT",
+      "note": "Direct OpenECG dependency. Do not assume OpenECG's Apache-2.0 license defines this repository's licensing."
+    },
+    {
+      "donor_id": "DONOR-A004",
+      "repository": "vuno/ST-MEM",
+      "status": "LICENSE_REVIEW_REQUIRED_PENDING_ASSOCIATED_DONOR_AUDIT",
+      "note": "Model/software licenses and checkpoint terms must be independently audited before use."
     }
   ],
   "fail_closed_on_unknown_license": true

@@ -1,0 +1,56 @@
+{
+  "schema": "ecg-model-challenger-registry-v1",
+  "updated_date": "2026-09-16",
+  "policy": {
+    "challenger_predictions_are_clinical_truth": false,
+    "challenger_predictions_are_project_gold": false,
+    "automatic_runtime_promotion_allowed": false,
+    "weight_license_must_be_explicit_before_execution_or_redistribution": true
+  },
+  "models": [
+    {
+      "challenger_id": "MODEL-D002-OPENECG-BOUNDARY",
+      "donor_id": "DONOR-002",
+      "repository": "vitaldb/openecg",
+      "donor_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+      "model_family": "OpenECG boundary classifier",
+      "architecture": "single-channel transformer-style per-frame wave classifier plus boundary regression",
+      "input": {"leads":1,"sample_rate_hz":250,"duration_seconds":10,"samples":2500,"preprocessing":"rank normalization"},
+      "outputs": ["other", "P", "QRS", "T", "wave boundaries"],
+      "software_license": "Apache-2.0",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "NOT_EXECUTED_IN_TARGET",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_card": "donors/vitaldb_openecg/MODEL_CARD_DONOR.json"
+    },
+    {
+      "challenger_id": "MODEL-D002-OPENECG-CODEC-V6",
+      "donor_id": "DONOR-002",
+      "repository": "vitaldb/openecg",
+      "donor_commit": "843698d5b4621b74145bce405c74e115b6daa6c6",
+      "model_family": "OpenECG codec_v6",
+      "architecture": "single-lead 500-Hz sample-resolution multi-head frame/beat/rhythm transformer-style codec",
+      "input": {"leads":1,"sample_rate_hz":500,"duration_seconds":10,"samples":5000,"preprocessing":"rank normalization"},
+      "outputs": {
+        "frame": ["other", "P", "QRS", "T"],
+        "beat": ["none", "sinus", "vpc", "paced", "fusion", "unknown"],
+        "rhythm": ["sinus", "avb", "paced", "afib", "bbb", "ventricular"]
+      },
+      "software_license": "Apache-2.0",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "NOT_EXECUTED_IN_TARGET",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "known_donor_limitations": [
+        "single-lead morphology limits BBB discrimination",
+        "neural paced class reported unreliable by donor",
+        "ventricular class external hospital validation incomplete",
+        "donor-reported metrics are not target-verified"
+      ],
+      "model_card": "donors/vitaldb_openecg/MODEL_CARD_DONOR.json"
+    }
+  ]
+}

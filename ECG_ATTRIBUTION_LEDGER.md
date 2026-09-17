@@ -12,15 +12,35 @@
 - Donor source code copied into target runtime: **no**.
 - Donor physiological/sample fixture bytes copied: **no**.
 - Data/fixture reuse status: **LICENSE_REVIEW_REQUIRED**.
-- Provenance files: `donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json`, `INVENTORY.json`,
-  `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, and
-  `DONOR_RECEIPT.json`.
+- Provenance files: `donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, and `DONOR_RECEIPT.json`.
 
-The donor remains credited for the engineering ideas and test strategies that informed
-the target hardening even though no upstream source file was copied.
+The donor remains credited for the engineering ideas and test strategies that informed the target hardening even though no upstream source file was copied.
 
-## Associated repository requiring separate review
+## DONOR-002 — vitaldb/openecg
 
-`bemoody/wfdb` is recorded as an associated WFDB implementation with mixed GPL/LGPL
-licensing. No code is imported from it unless a later independent audit establishes an
-allowed integration mechanism.
+- Repository: `vitaldb/openecg`
+- Audited commit: `843698d5b4621b74145bce405c74e115b6daa6c6`
+- Audited tree: `886095776a1f79f600a7ad269176ccc0fbd2d37d`
+- Stable release reference: `v0.11.0` → commit `60ac8887ab0d640fbab6ef094d023b72a9f630c5`
+- Software license: Apache-2.0
+- Upstream license blob: `4ec4b63eb48dead8c9a54c033d9440bc0b8c1b11`
+- Copyright notice: Copyright 2026 Hyung-Chul Lee and OpenECG contributors
+- Integration: clean reimplementation of non-clinical challenger/evaluation abstractions: provenance-bound challenger envelopes, explicit valid-context bands, abstention/failure state, and disagreement telemetry.
+- Donor source code copied: **no**.
+- Donor checkpoints/ONNX/TFLite artifacts copied: **no**.
+- Donor physiological data copied: **no**.
+- Trained-weight status: **LICENSE_REVIEW_REQUIRED**; repository software licensing is not treated as proof of trained-artifact rights.
+- Dataset status: **LICENSE_REVIEW_REQUIRED_PER_DATASET**; source labels remain separate from project gold.
+- Provenance files: `donors/vitaldb_openecg/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `MODEL_CARD_DONOR.json`, `HARVEST_PLAN.md`, `DATASET_BENCHMARK_REGISTER.json`, `COMPARATIVE_PROOF.json`, and `DONOR_RECEIPT.json`.
+
+OpenECG is credited for the layered representation, context-margin, disagreement/fallback, evaluation, split-discipline, robustness-testing, and deployment ideas identified during audit. The implementation in `lib/challenger_contract.js` is target-owned and was written without copying OpenECG source.
+
+### Cross-donor provenance preserved
+
+`openecg/qrs.py` identifies NeuroKit2/Makowski lineage, and `openecg/delineate.py` is a NeuroKit2 wrapper. Those algorithms are not reattributed to OpenECG or imported under DONOR-002; their canonical review is deferred to DONOR-003 (`neuropsychology/NeuroKit`).
+
+## Associated repositories requiring separate review
+
+- `bemoody/wfdb` — associated WFDB implementation with mixed GPL/LGPL-family licensing reported during DONOR-001. No code is imported until an independent file-level audit permits it.
+- `vitaldb/opendsp` — OpenECG core dependency/extracted DSP implementation. Queued as associated donor; its license and implementation must be audited independently.
+- `vuno/ST-MEM` — current repository resolved from OpenECG's historical `bakqui/ST-MEM` clone instruction. Model/software/checkpoint terms require independent audit before use.
