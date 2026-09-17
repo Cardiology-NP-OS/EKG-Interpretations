@@ -1,0 +1,20 @@
+{
+  "schema": "ekg-model-asset-safety-contract-v1",
+  "implementation": "lib/model_asset_safety.js",
+  "tests": ["tests/model_asset_safety.test.js"],
+  "requirements": [
+    "exact checkpoint identifier, SHA-256, and byte count",
+    "local content-addressed locator; mutable remote acquisition rejected",
+    "code and weight license metadata with admitted weight-license disposition",
+    "explicit preprocessing, leads, sample rate, duration, populations, labels, validation evidence, calibration assumptions, compute burden, unsupported populations, and reproducibility limits",
+    "identity-only verification with no deserialization"
+  ],
+  "deserializationPerformed": false,
+  "executionStatusAfterVerification": "IDENTITY_VERIFIED_CHALLENGER_ONLY",
+  "runtimeAuthority": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

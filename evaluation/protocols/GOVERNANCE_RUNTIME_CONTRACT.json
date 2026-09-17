@@ -1,0 +1,19 @@
+{
+  "schema": "ekg-governance-runtime-contract-v1",
+  "implementation": "lib/governance_runtime.js",
+  "tests": ["tests/governance_runtime.test.js"],
+  "implemented": [
+    "exact governed-inactive state assertion",
+    "immutable commit/tree/hash source identity validation",
+    "mutable remote source rejection",
+    "separate source-code, dataset, and model-license boundary validation",
+    "fail-closed rejection of unresolved imported assets",
+    "deterministic dependency and runtime fingerprints"
+  ],
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED"
+}

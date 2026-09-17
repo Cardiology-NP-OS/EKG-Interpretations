@@ -1,0 +1,24 @@
+{
+  "schema": "ekg-evaluation-runtime-contract-v1",
+  "implementation": "lib/evaluation_runtime.js",
+  "tests": ["tests/evaluation_runtime.test.js"],
+  "implemented": [
+    "annotation type validation and provenance-preserving ingestion",
+    "canonical dataset and compatibility-asset catalog validation",
+    "patient/record split leakage validation",
+    "explicit label harmonization with unmapped-label rejection",
+    "same-record engineered-feature comparison",
+    "binary evaluation metrics that remain non-reportable",
+    "failure-mode lookup and benchmark-plan requirement validation",
+    "exact reproducibility fingerprints",
+    "deterministic synthetic signal robustness transforms"
+  ],
+  "reportable": false,
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

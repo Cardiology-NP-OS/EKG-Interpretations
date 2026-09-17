@@ -1,0 +1,15 @@
+{
+  "schema": "ekg-image-robustness-execution-contract-v1",
+  "implementation": "lib/image_robustness.js",
+  "tests": ["tests/image_robustness.test.js"],
+  "implemented": ["crop", "90-degree rotation", "padding", "nearest-neighbor resize", "deterministic additive noise", "monochrome threshold"],
+  "input": "bounded 8-bit grayscale matrices for synthetic/evaluation perturbation",
+  "imageDigitizationClaimed": false,
+  "clinicalPerformanceClaimed": false,
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}
