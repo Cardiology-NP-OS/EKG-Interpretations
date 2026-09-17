@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 9,
+  "completed_donors": 10,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-010",
+  "next_donor_id": "DONOR-011",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -238,7 +238,7 @@
     {
       "donor_id": "DONOR-010",
       "repository": "bowang-lab/ecg-fm",
-      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
       "audited_tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
       "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json",
@@ -249,7 +249,7 @@
       "dataset_boundary": "donors/bowang-lab_ecg-fm/DATASET_BOUNDARY.json",
       "model_boundary": "donors/bowang-lab_ecg-fm/MODEL_BOUNDARY.json",
       "associated_repository_dispositions": "donors/bowang-lab_ecg-fm/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-      "receipt_status": "PENDING_VERIFICATION_AND_PROMOTION",
+      "receipt_status": "FINALIZED",
       "integration": "governance/research/evaluation metadata plus exact inactive checkpoint challengers; no runtime implementation",
       "runtime_dependency_added": false,
       "source_code_copied": false,
@@ -260,7 +260,16 @@
       "verified_candidate_tree": "e4e611e8653cf6de63d9fbb95856c206129ef97b",
       "candidate_ci_run_id": 35283248451,
       "candidate_ci_conclusion": "success",
-      "independent_verification": "donors/bowang-lab_ecg-fm/INDEPENDENT_VERIFICATION.json"
+      "independent_verification": "donors/bowang-lab_ecg-fm/INDEPENDENT_VERIFICATION.json",
+      "receipt": "donors/bowang-lab_ecg-fm/DONOR_RECEIPT.json",
+      "promotion_commit": "c40979e0a34faa975b8f3e24d7fd5dd0b7af332d",
+      "promotion_tree": "609ef203daf6bd7e3874da32fe0dc8cfe452ee2c",
+      "target_main_ci_run_id": 35283886239,
+      "target_main_ci_conclusion": "success",
+      "verification_record_commit": "e2fca33045b4c864c5bae85a4faadb5c34d696a5",
+      "verification_record_tree": "609ef203daf6bd7e3874da32fe0dc8cfe452ee2c",
+      "verification_record_ci_run_id": 35283764520,
+      "verification_record_ci_conclusion": "success"
     },
     {
       "donor_id": "DONOR-011",

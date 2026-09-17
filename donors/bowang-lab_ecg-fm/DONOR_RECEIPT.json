@@ -1,0 +1,125 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-010",
+  "donor_repository": "bowang-lab/ecg-fm",
+  "donor_commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
+  "donor_tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
+  "donor_release": {
+    "tag": null,
+    "release_commit": null,
+    "head_is_release_tag_commit": false
+  },
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_blob_sha": "b0854a781327bb50c42be1065cf7a479a09a26c2",
+    "dataset_asset_status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_OR_TRACKED_DATA_DERIVATIVE",
+    "model_weight_status": "HF_REPOSITORY_MIT_METADATA_WITH_EXACT_CHECKPOINT_HASHES_PINNED_NO_IMPORT"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_010_rollback_commit": "8ebc601d16e387745cf513f0575d92f97e54c614",
+    "donor_010_rollback_tree": "1af0e7c78e0a271b5c31aa86160c4a524b5b755e"
+  },
+  "target_resulting_implementation": {
+    "type": "GOVERNANCE_RESEARCH_EVALUATION_MODEL_CHALLENGER_METADATA",
+    "verified_candidate_commit": "e1d87d16cd4fc8ce9eb59bf1e0fcab8e67d32094",
+    "verified_candidate_tree": "e4e611e8653cf6de63d9fbb95856c206129ef97b",
+    "verification_record_commit": "e2fca33045b4c864c5bae85a4faadb5c34d696a5",
+    "verification_record_tree": "609ef203daf6bd7e3874da32fe0dc8cfe452ee2c",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false
+  },
+  "verification": {
+    "candidate_ci_run_id": 35283248451,
+    "candidate_ci_conclusion": "success",
+    "verification_record_ci_run_id": 35283764520,
+    "verification_record_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "18/18 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS",
+    "verification_record_commit": "e2fca33045b4c864c5bae85a4faadb5c34d696a5",
+    "verification_record_tree": "609ef203daf6bd7e3874da32fe0dc8cfe452ee2c"
+  },
+  "promotion": {
+    "merge_commit": "c40979e0a34faa975b8f3e24d7fd5dd0b7af332d",
+    "merge_tree": "609ef203daf6bd7e3874da32fe0dc8cfe452ee2c",
+    "parents": [
+      "8ebc601d16e387745cf513f0575d92f97e54c614",
+      "e2fca33045b4c864c5bae85a4faadb5c34d696a5"
+    ],
+    "target_main_ci_run_id": 35283886239,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "DEPENDENCY": 1,
+    "CHALLENGER": 3,
+    "SUPERSEDED": 1,
+    "EVALUATION_ONLY": 4,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "RESEARCH_ONLY": 4,
+    "DATA_ONLY": 2,
+    "total": 16
+  },
+  "associated_repositories": {
+    "dispositions_file": "donors/bowang-lab_ecg-fm/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "new_associated_donors_queued": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "donor_models_executed": false,
+    "donor_checkpoints_imported": false,
+    "external_dataset_bytes_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_results_promoted_to_target_metrics": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json": "0e3c7d632a461c87bd10bbac3724f578795afa712c18ae0eda0e564ba8bc8693",
+    "donors/bowang-lab_ecg-fm/INVENTORY.json": "4854c4817bb874f17bf528c1bd76e554a667c148fa27425115f1d11c3050930e",
+    "donors/bowang-lab_ecg-fm/GAP_MATRIX.json": "8186713ccce0a54eab56d4df4365c2b870a89fb4e148e0ecf60571ccf2d6f756",
+    "donors/bowang-lab_ecg-fm/HARVEST_PLAN.md": "6d4a938dc921d4e9ed7a1e6526ab54ec5fa4fd3585acd9c0ec7f3ebd28973555",
+    "donors/bowang-lab_ecg-fm/LICENSE_BOUNDARY.json": "9e13bffa09572baf6d9fc4c8cddea7034a1d7a54a981a428867813b8ff798213",
+    "donors/bowang-lab_ecg-fm/DATASET_BOUNDARY.json": "d74b2ec8f31f55c973d92cc771905a00e8ad2cc8ba7da010cf55bb84a0b26973",
+    "donors/bowang-lab_ecg-fm/MODEL_BOUNDARY.json": "348cda99e65473511184dc7e6d3e33024a9f14300086111b56c0d02e64592597",
+    "donors/bowang-lab_ecg-fm/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "9bad5989e40328aef3034701db9e3c181ea59ab776ba2c3a385f5ddba1e4432b",
+    "donors/bowang-lab_ecg-fm/COMPARATIVE_PROOF.json": "ecda5276b4e1abc6775fe95dee68b0586e295730f91fd889e14149a99c1642e8",
+    "donors/bowang-lab_ecg-fm/INDEPENDENT_VERIFICATION.json": "83faf4c3f569c6571d03c0a6d957b20117f5a25db25abd0bab894a22bffddc78",
+    "tests/ecg_fm_donor_closure.test.js": "1967726df3b72a941ee4924db8fa176e242e4ec1c481ebd973c322398d4d729d",
+    "ECG_DONOR_REGISTRY.json": "7ac3a7ec639a7d654526062be55ebfac5254fc323c07f498f5bbec1dd713c7f1",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "c65f25b64664341891c9aebff99f954e09687d42509fccd98d8d38bc931553d1",
+    "ECG_CAPABILITY_REGISTRY.json": "9a4bb2425e0443c6cac9613721ab0c603e32e6a30c4564cb21b11144a30b4277",
+    "ECG_LICENSE_LEDGER.json": "26b6d9bca5dcdf6e7b880b657ca6add14f8ce9067bc3833b3e5214b10ecc0434",
+    "ECG_DATASET_REGISTRY.json": "02a412aa41e4f09db0554d843a87eecc789b33ea8dca68cafe0401f666cfbc1a",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "f1eeee6018081676549f0aabb1aa77087fa76caba53f6cf1acdfb6dc0911cc49",
+    "ECG_ATTRIBUTION_LEDGER.md": "b5e04ca68174b8b6c4cc4a15ce99160f17d3634dfa7e08bd0fce3d8d996a1506",
+    "research/models/CHALLENGER_CATALOG.md": "d4a5f083358fa78e29edaf35a7ce82928a89d394bacd2edcb5f0dd682c4d0f04",
+    "package.json": "44d0b25bee3667c8399e1e87d08b7f48e6f84b018f429d5f34110c837563d594"
+  },
+  "outstanding_limitations": [
+    "ECG-FM checkpoints remain inactive challengers; exact bytes are not imported or executed.",
+    "External datasets retain source-specific access and license requirements; tracked split/sample derivatives are not copied into target.",
+    "CODE-15 exact license remains unresolved for target reuse and stays fail-closed.",
+    "No governed adjudicated project clinical gold exists, so diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "final_disposition": "GOVERNANCE_RESEARCH_EVALUATION_MODEL_CHALLENGER_PROVENANCE",
+  "rollback": {
+    "commit": "8ebc601d16e387745cf513f0575d92f97e54c614",
+    "tree": "1af0e7c78e0a271b5c31aa86160c4a524b5b755e",
+    "method": "revert Donor-010 promotion/finalization commits; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}
