@@ -1,0 +1,142 @@
+{
+  "schema": "ecg-donor-registry-v1",
+  "updated_date": "2026-09-16",
+  "target_repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "accepted_engine": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "program_state": "IN_PROGRESS",
+  "completed_donors": 1,
+  "required_donor_count": 21,
+  "next_donor_id": "DONOR-002",
+  "donors": [
+    {
+      "donor_id": "DONOR-001",
+      "repository": "MIT-LCP/wfdb-python",
+      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "audited_commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
+      "audited_tree": "a861ed52e8c655770beef2540e0802e63e806f18",
+      "receipt": "donors/mit-lcp_wfdb-python/DONOR_RECEIPT.json",
+      "implementation_commit": "31a2d330a8ff93799bab0c067c4d142629c5c011",
+      "clinical_authority_added": false
+    },
+    {
+      "donor_id": "DONOR-002",
+      "repository": "vitaldb/openecg",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-003",
+      "repository": "neuropsychology/NeuroKit",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-004",
+      "repository": "DeepPSP/torch_ecg",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-005",
+      "repository": "alphanumericslab/ecg-image-kit",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-006",
+      "repository": "tmehari/ptbxl_feature_benchmark",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-007",
+      "repository": "vlbthambawita/ECGBench",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-008",
+      "repository": "ELM-Research/ECG-Preprocess",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-009",
+      "repository": "Jwoo5/fairseq-signals",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-010",
+      "repository": "bowang-lab/ecg-fm",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-011",
+      "repository": "PKUDigitalHealth/ECGFounder",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoardo-BS/HuBERT-ECG",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-015",
+      "repository": "HeartWise-AI/ECG_LLM_Judge",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-016",
+      "repository": "Jwoo5/ecg-qa",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-017",
+      "repository": "ELM-Research/ECG-Language-Models",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-018",
+      "repository": "willxxy/ECG-Byte",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-019",
+      "repository": "AIMedLab/PULSE",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-020",
+      "repository": "PKUDigitalHealth/ECG-R1",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-021",
+      "repository": "AshleyLab/MARCUS",
+      "status": "PENDING"
+    },
+    {
+      "donor_id": "DONOR-A001",
+      "repository": "wfdb/wfdb-spec",
+      "status": "QUEUED_ASSOCIATED_DONOR",
+      "discovered_by": "DONOR-001",
+      "reason": "official WFDB file specification referenced by donor",
+      "license": "MIT"
+    },
+    {
+      "donor_id": "DONOR-A002",
+      "repository": "bemoody/wfdb",
+      "status": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
+      "discovered_by": "DONOR-001",
+      "reason": "original WFDB software implementation materially related to format semantics",
+      "license_note": "mixed GPL/LGPL family reported by donor audit; independent license audit required before reuse"
+    }
+  ],
+  "completion_rule": "No donor or associated material first-party repository may remain ambiguous before program completion."
+}
