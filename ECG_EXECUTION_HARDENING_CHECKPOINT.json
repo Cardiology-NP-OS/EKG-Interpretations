@@ -2,7 +2,7 @@
   "schema": "ecg-execution-hardening-checkpoint-v1",
   "parentMainCommit": "6a0bad3319266590293c54cabb7cf0f3b5a2b679",
   "parentMainTree": "60d371901c6650b556195b8f72ebb08449b842eb",
-  "status": "VERIFIED_UNPROMOTED",
+  "status": "ACCEPTED_ON_MAIN",
   "scope": "Hardening the accepted executable ECG engineering pipeline with one-pass preprocessing, all-usable-lead analysis, deterministic provenance, resource bounds, and adversarial invariance tests.",
   "implementation": [
     "lib/ecg_execution_pipeline.js",
@@ -60,7 +60,13 @@
     "independentVerification": "PASS_FULL_CLONE",
     "independentFocused": "40/40 PASS",
     "independentFullTargetSuite": "PASS",
-    "candidateDiffCheck": "PASS"
+    "candidateDiffCheck": "PASS",
+    "promotionCandidateCommit": "13dcd53be5aa3ddfd70ed4cb637d57d78b66d8f9",
+    "promotionCandidateTree": "7a39ebdb7b8d5a09722b09480333d1b507b45c32",
+    "promotionCandidateCiRunId": 35280553134,
+    "promotionCandidateCiConclusion": "success",
+    "promotionCandidateIndependentVerification": "PASS_FULL_CLONE",
+    "promotionCandidateIndependentFullTargetSuite": "PASS"
   },
   "clinicalControlChanged": false,
   "clinicalAuthorityAdded": false,
@@ -69,5 +75,15 @@
   "approvedAdjudicatedGoldCount": 0,
   "metrics": "NOT_REPORTABLE",
   "activation": "NOT_ELIGIBLE",
-  "clinicalValidity": "NOT_INFERRED"
+  "clinicalValidity": "NOT_INFERRED",
+  "promotion": {
+    "mergeCommit": "4f3f417e65b5b519d65cea73bb97c96458146b46",
+    "mergeTree": "7a39ebdb7b8d5a09722b09480333d1b507b45c32",
+    "parents": [
+      "6a0bad3319266590293c54cabb7cf0f3b5a2b679",
+      "13dcd53be5aa3ddfd70ed4cb637d57d78b66d8f9"
+    ],
+    "targetMainCiRunId": 35280728746,
+    "targetMainCiConclusion": "success"
+  }
 }
