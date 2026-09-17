@@ -1,0 +1,73 @@
+{
+  "schema": "ecg-execution-hardening-checkpoint-v1",
+  "parentMainCommit": "6a0bad3319266590293c54cabb7cf0f3b5a2b679",
+  "parentMainTree": "60d371901c6650b556195b8f72ebb08449b842eb",
+  "status": "VERIFIED_UNPROMOTED",
+  "scope": "Hardening the accepted executable ECG engineering pipeline with one-pass preprocessing, all-usable-lead analysis, deterministic provenance, resource bounds, and adversarial invariance tests.",
+  "implementation": [
+    "lib/ecg_execution_pipeline.js",
+    "lib/waveform_rendering.js",
+    "tools/render_blind.js",
+    "tests/ecg_execution_pipeline.test.js",
+    "tests/ecg_execution_hardening.test.js",
+    "tests/ecg_execution_cli.test.js",
+    "tests/waveform_rendering.test.js"
+  ],
+  "engineeringProof": {
+    "preprocessingOnceBeforeLeadAnalysis": true,
+    "allUsableCanonicalLeadsAnalyzed": true,
+    "crossLeadConsistencyComputed": true,
+    "perLeadFailuresCategorized": true,
+    "silentLeadDropPermitted": false,
+    "sourceLeadOrderInvarianceTested": true,
+    "samplingRateResamplingInvarianceTested": true
+  },
+  "provenanceProof": {
+    "sourceHeaderSha256Bound": true,
+    "sourceDataSha256Bound": true,
+    "executionConfigSha256Bound": true,
+    "stageConfigHashesBound": true,
+    "canonicalConfigHashing": true,
+    "cyclicOrNonfiniteConfigRejected": true,
+    "authorityClaimsInProvenanceRejected": true
+  },
+  "renderingBounds": {
+    "maxLeads": 64,
+    "maxSamplesPerLead": 1000000,
+    "maxTotalSamples": 2000000,
+    "xmlLabelsEscaped": true,
+    "duplicateBlindRendererRemoved": true
+  },
+  "proofBoundary": {
+    "syntheticAndAdversarialEngineeringEvidence": true,
+    "externalComparativeSuperiorityEstablished": false,
+    "worldBestClaim": "NOT_ESTABLISHED",
+    "clinicalPerformanceClaimed": false,
+    "clinicalValidityInferred": false
+  },
+  "donorProgram": {
+    "completedPrimaryDonors": 9,
+    "requiredPrimaryDonors": 21,
+    "pausedFrontier": "DONOR-010",
+    "resumeEligibleAfterAcceptance": true,
+    "resumeCondition": "Hardening checkpoint accepted on main with exact-SHA CI and independent full-clone verification."
+  },
+  "verification": {
+    "implementationCandidateCommit": "4ccd37a401b960d0e2ba280457cca8488a616fe0",
+    "implementationCandidateTree": "89041fe5612a32ae61484cf808d982c317b3e0f9",
+    "candidateCiRunId": 35276933722,
+    "candidateCiConclusion": "success",
+    "independentVerification": "PASS_FULL_CLONE",
+    "independentFocused": "40/40 PASS",
+    "independentFullTargetSuite": "PASS",
+    "candidateDiffCheck": "PASS"
+  },
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED"
+}
