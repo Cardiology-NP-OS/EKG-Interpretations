@@ -1,4 +1,4 @@
-﻿const assert = require("assert");
+const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 const root = path.resolve(__dirname, "..");
@@ -17,6 +17,8 @@ const licenseBoundary = readJson("donors/vlbthambawita_ecgbench/LICENSE_BOUNDARY
 const datasetBoundary = readJson("donors/vlbthambawita_ecgbench/DATASET_BOUNDARY.json");
 const modelBoundary = readJson("donors/vlbthambawita_ecgbench/MODEL_BOUNDARY.json");
 const associated = readJson("donors/vlbthambawita_ecgbench/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
+const comparative = readJson("donors/vlbthambawita_ecgbench/COMPARATIVE_PROOF.json");
+const independent = readJson("donors/vlbthambawita_ecgbench/INDEPENDENT_VERIFICATION.json");
 const pkg = readJson("package.json");
 const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-007");
 const caps = capabilityRegistry.capabilities.filter(item => item.donor === "vlbthambawita/ECGBench");
@@ -86,11 +88,21 @@ check("associated dependencies do not expand the donor queue", () => {
   assert.strictEqual(associated.repositories.length, 6);
   for (const item of associated.repositories) assert.strictEqual(item.queued_as_associated_donor, false);
 });
+check("candidate CI and independent verification are bound", () => {
+  assert.strictEqual(donor.verified_candidate_commit, "2fae233a0570b21a1c70ce5397951930e5c8619e");
+  assert.strictEqual(donor.verified_candidate_tree, "bb4045cd21a31839afe307a157b1e773ac847483");
+  assert.strictEqual(donor.candidate_ci_run_id, 35243049592);
+  assert.strictEqual(comparative.verification.head_sha, donor.verified_candidate_commit);
+  assert.strictEqual(comparative.verification.conclusion, "success");
+  assert.strictEqual(independent.candidate_commit, donor.verified_candidate_commit);
+  assert.strictEqual(independent.result, "PASS");
+  assert.strictEqual(independent.full_target_suite, "PASS");
+});
 check("donor remains pre-promotion and uncounted", () => {
   assert.strictEqual(donorRegistry.completed_donors, 6);
   assert.strictEqual(donorRegistry.next_donor_id, "DONOR-007");
   assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_PREPROMOTION_CLOSURE");
+  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
   assert.strictEqual(fs.existsSync(path.join(root, "donors/vlbthambawita_ecgbench/DONOR_RECEIPT.json")), false);
 });
 check("governed inactive state remains explicit", () => {

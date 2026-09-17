@@ -144,6 +144,6 @@ The donor is credited for engineered-feature benchmark methodology, fold-based e
 - Source labels promoted to project clinical gold: **no**.
 - Donor validation, dataset statistics, or benchmark claims promoted to target metrics: **no**.
 - 64 catalogue entries are retained only as external data references requiring per-dataset rights/provenance review.
-- Provenance files: `donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, and `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`.
+- Provenance files: `donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `COMPARATIVE_PROOF.json`, and `INDEPENDENT_VERIFICATION.json`.
 
 ECGBench is credited for dataset-catalogue structure, deterministic fold methodology, patient-grouped leakage controls, source-label separation, dataset validation patterns, and dataset-specific caveat documentation. None of these transfers clinical authority or makes external labels project gold.
