@@ -18,6 +18,8 @@ const inventory = readJson("donors/deeppsp_torch_ecg/INVENTORY.json");
 const gap = readJson("donors/deeppsp_torch_ecg/GAP_MATRIX.json");
 const modelBoundary = readJson("donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json");
 const associated = readJson("donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
+const comparative = readJson("donors/deeppsp_torch_ecg/COMPARATIVE_PROOF.json");
+const independent = readJson("donors/deeppsp_torch_ecg/INDEPENDENT_VERIFICATION.json");
 const attribution = readText("ECG_ATTRIBUTION_LEDGER.md");
 const pkg = readJson("package.json");
 
@@ -95,11 +97,19 @@ check("associated references are explicitly dispositioned without queue expansio
     assert.strictEqual(item.queued_as_associated_donor, false);
   }
 });
+check("candidate CI and independent verification are bound", () => {
+  assert.strictEqual(comparative.verification.github_actions_run_id, 35186265624);
+  assert.strictEqual(comparative.verification.conclusion, "success");
+  assert.strictEqual(independent.candidate_commit, donor.verified_candidate_commit);
+  assert.strictEqual(independent.result, "PASS");
+  assert.strictEqual(independent.full_target_suite, "PASS");
+});
 check("donor remains pre-promotion and uncounted", () => {
   assert.strictEqual(donorRegistry.completed_donors, 3);
   assert.strictEqual(donorRegistry.next_donor_id, "DONOR-004");
   assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_PREPROMOTION_CLOSURE");
+  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
+  assert.strictEqual(donor.verified_candidate_commit, "958126bcc17b0c5cf63c6958194c86976a221002");
   assert.strictEqual(fs.existsSync(path.join(root, "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json")), false);
 });
 check("governed inactive state and attribution are preserved", () => {
