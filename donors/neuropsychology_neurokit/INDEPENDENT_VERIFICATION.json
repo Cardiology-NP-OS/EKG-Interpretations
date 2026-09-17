@@ -1,0 +1,27 @@
+{
+  "schema": "ecg-donor-independent-verification-v1",
+  "donor_id": "DONOR-003",
+  "candidate_commit": "9b441fbfcb2318853ff2a661abb2068bd72a3207",
+  "candidate_tree": "967b3572e84bd428cd7e5ac5c1aad09f686e3e17",
+  "origin_main": "62841e1ab7380d2ce634d720d94fedd50f0486b4",
+  "verification_date": "2026-09-17",
+  "method": "FRESH_CLONE_FROM_PRIVATE_GITHUB_REMOTE_ON_INDEPENDENT_MACHINE",
+  "result": "PASS",
+  "worktree_clean_before_tests": true,
+  "full_candidate_diff_check": "PASS",
+  "focused_test": {
+    "file": "tests/neurokit_event_agreement.test.js",
+    "passed": 25,
+    "total": 25,
+    "result": "PASS"
+  },
+  "full_target_suite": "PASS",
+  "clinical_data_used": false,
+  "clinical_accuracy_claimed": false,
+  "diagnostic_runtime": "GOVERNED_INACTIVE",
+  "evidence_admission": "NOT_ADMITTED",
+  "approved_adjudicated_gold_count": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinical_validity": "NOT_INFERRED"
+}

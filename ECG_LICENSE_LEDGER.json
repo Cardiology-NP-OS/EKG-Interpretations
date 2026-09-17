@@ -1,6 +1,6 @@
 {
   "schema": "ecg-license-ledger-v1",
-  "updated_date": "2026-09-16",
+  "updated_date": "2026-09-17",
   "entries": [
     {
       "donor_id": "DONOR-001",
@@ -47,6 +47,36 @@
         "associated_dependency_queued": "vitaldb/opendsp"
       },
       "cross_donor_license_note": "openecg/qrs.py carries NeuroKit2/MIT-derived provenance; no such code was imported under DONOR-002 and canonical review is deferred to DONOR-003."
+    },
+    {
+      "donor_id": "DONOR-003",
+      "repository": "neuropsychology/NeuroKit",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION",
+        "license_file": "LICENSE",
+        "license_blob_sha": "d95473208e8eb18fd06c42e4f77ece6a5a720cf5",
+        "copyright": "Copyright (c) 2020, Dominique Makowski"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "CLEAN_REIMPLEMENTATION_CHALLENGER_EVENT_AGREEMENT",
+        "TARGET_OWNED_SYNTHETIC_REGRESSION_TESTS"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "NOT_APPLICABLE_CORE_PACKAGE",
+        "weights_imported": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_DATASET",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
     },
     {
       "donor_id": "DONOR-A002",
