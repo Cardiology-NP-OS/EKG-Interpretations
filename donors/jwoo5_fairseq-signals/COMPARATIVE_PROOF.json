@@ -1,0 +1,64 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "comparison_parent": {
+    "commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+    "tree": "b631d179d829a1e2568a90050ce21e693f495e0b"
+  },
+  "upstream": {
+    "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+    "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a"
+  },
+  "before": {
+    "donor_capability_count": 224,
+    "canonical_capability_count": 56,
+    "model_challenger_count": 3,
+    "multimodal_model_challenger_capability": false
+  },
+  "after": {
+    "donor_capability_count": 255,
+    "canonical_capability_count": 57,
+    "model_challenger_count": 13,
+    "multimodal_model_challenger_capability": true
+  },
+  "gains": [
+    "exact provenance-bound inventory of fairseq-signals model/training surfaces",
+    "ten architecture-only challenger entries with explicit fail-closed checkpoint contracts",
+    "grouped/temporal split methodology mapped to existing nonruntime evaluation capability",
+    "signal perturbation methods mapped to existing robustness evaluation capability",
+    "multimodal ECG-text/QA challengers represented under a brand-neutral nonruntime target capability",
+    "tracked translated PTB-XL report table separated from root software license"
+  ],
+  "non_harvest": [
+    "fairseq-signals Python runtime and dependency stack",
+    "CUDA/C++/Cython native extensions",
+    "donor model source as target runtime",
+    "all checkpoint/model-weight bytes",
+    "all raw/restricted ECG waveform report label and QA dataset bytes",
+    "tracked translated PTB-XL report table",
+    "donor/paper performance metrics"
+  ],
+  "metrics": {
+    "state": "NOT_REPORTABLE",
+    "donor_metrics_promoted": false,
+    "target_diagnostic_metrics_created": false
+  },
+  "verification": {
+    "candidate_commit": null,
+    "candidate_tree": null,
+    "exact_sha_ci_run_id": null,
+    "exact_sha_ci_conclusion": null,
+    "independent_verification": "PENDING"
+  },
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "clinical_authority_added": false
+}

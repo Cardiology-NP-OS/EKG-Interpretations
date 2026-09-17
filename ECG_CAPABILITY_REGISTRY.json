@@ -1,8 +1,8 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 224,
-  "capability_count": 56,
+  "generated_from_donor_capability_registry_count": 255,
+  "capability_count": 57,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
   "approved_adjudicated_gold_count": 0,
@@ -402,20 +402,33 @@
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
           "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
-        "PTBXLFB-031"
+        "PTBXLFB-031",
+        "FSS-007"
       ],
       "licenses": [
         {
           "source": "tmehari/ptbxl_feature_benchmark",
           "spdx": null,
           "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
@@ -517,13 +530,20 @@
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
           "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "PTBXLFB-018",
         "PTBXLFB-025",
         "PTBXLFB-026",
-        "TECG-018"
+        "TECG-018",
+        "FSS-026"
       ],
       "licenses": [
         {
@@ -535,10 +555,16 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "spdx": null,
           "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/benchmarks/BENCHMARK_CONTRACTS.json"
@@ -579,6 +605,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -589,7 +621,9 @@
         "ECGB-010",
         "ECGB-011",
         "OECG-011",
-        "PTBXLFB-014"
+        "PTBXLFB-014",
+        "FSS-005",
+        "FSS-006"
       ],
       "licenses": [
         {
@@ -606,11 +640,17 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/evaluation/evaluation_contract.test.js"
+        "tests/evaluation/evaluation_contract.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/CANONICAL_CAPABILITY_COVERAGE.json"
@@ -753,6 +793,12 @@
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
           "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -762,7 +808,9 @@
         "PTBXLFB-029",
         "TECG-004",
         "TECG-005",
-        "TECG-006"
+        "TECG-006",
+        "FSS-009",
+        "FSS-010"
       ],
       "licenses": [
         {
@@ -784,10 +832,16 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "spdx": null,
           "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/robustness/ROBUSTNESS_CATALOG.json"
@@ -1155,6 +1209,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1163,7 +1223,8 @@
         "OECG-018",
         "PTBXLFB-035",
         "TECG-034",
-        "WFDB-030"
+        "WFDB-030",
+        "FSS-031"
       ],
       "licenses": [
         {
@@ -1195,10 +1256,16 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -1267,6 +1334,12 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1279,7 +1352,11 @@
         "TECG-001",
         "WFDB-028",
         "WFDB-031",
-        "ECP-010"
+        "ECP-010",
+        "FSS-001",
+        "FSS-002",
+        "FSS-028",
+        "FSS-029"
       ],
       "licenses": [
         {
@@ -1316,10 +1393,16 @@
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
@@ -1388,6 +1471,12 @@
           "commit": "31b5050002622a72a8f3558f731929c3e3a6c68e",
           "tree": "9f52c3f551b443ff660f7b112bca84684f4f1239",
           "manifest": "donors/vlbthambawita_ecgbench/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -1407,7 +1496,9 @@
         "PTBXLFB-006",
         "PTBXLFB-027",
         "TECG-009",
-        "WFDB-032"
+        "WFDB-032",
+        "FSS-008",
+        "FSS-023"
       ],
       "licenses": [
         {
@@ -1444,10 +1535,16 @@
           "source": "vlbthambawita/ECGBench",
           "spdx": "MIT",
           "status": "LICENSE_COMPATIBLE_SUBJECT_TO_ATTRIBUTION"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -1918,12 +2015,19 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "TECG-022",
         "TECG-033",
-        "ECP-007"
+        "ECP-007",
+        "FSS-022"
       ],
       "licenses": [
         {
@@ -1935,10 +2039,16 @@
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -1971,13 +2081,22 @@
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
           "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "PTBXLFB-022",
         "TECG-010",
         "TECG-014",
-        "TECG-016"
+        "TECG-016",
+        "FSS-011",
+        "FSS-012",
+        "FSS-021"
       ],
       "licenses": [
         {
@@ -1989,10 +2108,16 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "spdx": null,
           "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2019,20 +2144,33 @@
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
           "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
-        "TECG-012"
+        "TECG-012",
+        "FSS-013"
       ],
       "licenses": [
         {
           "source": "DeepPSP/torch_ecg",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2146,12 +2284,22 @@
           "commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
           "tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
           "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "OECG-013",
         "OECG-016",
-        "TECG-015"
+        "TECG-015",
+        "FSS-014",
+        "FSS-015",
+        "FSS-016",
+        "FSS-017"
       ],
       "licenses": [
         {
@@ -2163,10 +2311,16 @@
           "source": "DeepPSP/torch_ecg",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_HARVEST"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2739,6 +2893,12 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2747,7 +2907,9 @@
         "PTBXLFB-030",
         "PTBXLFB-032",
         "TECG-007",
-        "ECP-005"
+        "ECP-005",
+        "FSS-003",
+        "FSS-004"
       ],
       "licenses": [
         {
@@ -2769,10 +2931,16 @@
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -2944,6 +3112,12 @@
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
           "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2954,7 +3128,9 @@
         "TECG-021",
         "TECG-029",
         "TECG-030",
-        "TECG-032"
+        "TECG-032",
+        "FSS-027",
+        "FSS-030"
       ],
       "licenses": [
         {
@@ -2971,10 +3147,16 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "spdx": null,
           "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [],
       "research_paths": [
@@ -3311,20 +3493,34 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
-        "ECP-006"
+        "ECP-006",
+        "FSS-024",
+        "FSS-025"
       ],
       "licenses": [
         {
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "SEPARATE_DATASET_TERMS_REQUIRED"
+        },
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
         }
       ],
       "test_paths": [
-        "tests/research/research_authority.test.js"
+        "tests/research/research_authority.test.js",
+        "tests/fairseq_signals_donor_closure.test.js"
       ],
       "evaluation_paths": [
         "evaluation/datasets/ECG_DATASET_CATALOG.json"
@@ -3379,6 +3575,48 @@
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
       "runtime_status": "INACTIVE_CHALLENGER"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-MULTIMODAL-CHALLENGERS",
+      "capability_family": "Representations / models",
+      "name": "Multimodal ECG-text and question-answering model challengers",
+      "canonical_target_path": "research/models/CHALLENGER_CATALOG.md",
+      "implementation_status": "TARGET_OWNED_RESEARCH_REPRESENTATION",
+      "authority_class": "RESEARCH_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+          "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+          "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "FSS-018",
+        "FSS-019",
+        "FSS-020"
+      ],
+      "licenses": [
+        {
+          "source": "Jwoo5/fairseq-signals",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        }
+      ],
+      "test_paths": [
+        "tests/fairseq_signals_donor_closure.test.js"
+      ],
+      "evaluation_paths": [],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Architecture references do not establish checkpoint identity, training-data rights, clinical validity, or diagnostic authority.",
+        "No multimodal output is project gold or target clinical evidence."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
     }
   ]
 }
