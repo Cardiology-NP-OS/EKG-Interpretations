@@ -43,7 +43,14 @@ check("donor frontier remains paused at Donor 010", () => {
   assert.strictEqual(donors.next_donor_id,"DONOR-010");
   assert.strictEqual(checkpoint.donorProgram.pausedFrontier,"DONOR-010");
 });
-check("governed state remains inactive", () => {
+check("accepted checkpoint binds promotion and target-main CI", () => {
+  assert.strictEqual(checkpoint.status,"ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(checkpoint.promotion.mergeCommit,"a52ba85ee5a16de89e1b73833602d9cf7a5c404a");
+  assert.strictEqual(checkpoint.promotion.mergeTree,"24d14bd227cedfa2aba613353f48b0192ad1ba70");
+  assert.deepStrictEqual(checkpoint.promotion.parents,["a258f1a9219c7031ae941c11c79fa0c6c718a301","bdfccac68283639ff451205ab5ecf967041aafd3"]);
+  assert.strictEqual(checkpoint.promotion.targetMainCiRunId,35271551451);
+  assert.strictEqual(checkpoint.promotion.targetMainCiConclusion,"success");
+});check("governed state remains inactive", () => {
   assert.strictEqual(checkpoint.clinicalControlChanged,false);
   assert.strictEqual(checkpoint.clinicalAuthorityAdded,false);
   assert.strictEqual(checkpoint.approvedAdjudicatedGoldCount,0);

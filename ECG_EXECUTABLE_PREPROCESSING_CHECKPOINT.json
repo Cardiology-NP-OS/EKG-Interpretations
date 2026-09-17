@@ -1,39 +1,49 @@
 {
-  "schema": "ecg-executable-preprocessing-checkpoint-v1",
-  "parentMainCommit": "5450bc23bfcab536a77f88ee28d4488a22c29204",
-  "parentMainTree": "3dfea69a0f824fdfd3f589d42ad6a6e520a706dd",
-  "status": "VERIFIED_IMPLEMENTATION_EVIDENCE_BOUND",
-  "donorProgram": {
-    "completedPrimaryDonors": 9,
-    "requiredPrimaryDonors": 21,
-    "pausedFrontier": "DONOR-010"
-  },
-  "implementation": [
-    "lib/signal_preprocessing_pipeline.js",
-    "tools/preprocess_wfdb.js",
-    "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json",
-    "tests/signal_preprocessing_pipeline.test.js",
-    "tests/preprocess_wfdb_cli.test.js",
-    "tests/signal_preprocessing_exports.test.js"
-  ],
-  "verification": {
-    "implementationCandidateCommit": "c6a201a1e52e30a42dbcb7e374cf76f815acb333",
-    "implementationCandidateTree": "74e0a451c00d154d92b3c621e1412d9511fdc6c4",
-    "candidateCiRunId": 35270514524,
-    "candidateCiConclusion": "success",
-    "independentVerification": "PASS_FULL_CLONE",
-    "independentFocused": "27/27 PASS",
-    "independentFullTargetSuite": "PASS",
-    "filteredCloneAttempt": "ENVIRONMENT_INCOMPATIBLE_WITH_NESTED_HISTORICAL_CLONE_TESTS",
-    "candidateDiffCheck": "PASS"
-  },
-  "scope": "Executable non-diagnostic WFDB preprocessing: calibrated decoding, lead reorder, linear resampling, segmentation, and failure accounting",
-  "clinicalControlChanged": false,
-  "clinicalAuthorityAdded": false,
-  "diagnosticRuntime": "GOVERNED_INACTIVE",
-  "evidenceAdmission": "NOT_ADMITTED",
-  "approvedAdjudicatedGoldCount": 0,
-  "metrics": "NOT_REPORTABLE",
-  "activation": "NOT_ELIGIBLE",
-  "clinicalValidity": "NOT_INFERRED"
+    "schema":  "ecg-executable-preprocessing-checkpoint-v1",
+    "parentMainCommit":  "5450bc23bfcab536a77f88ee28d4488a22c29204",
+    "parentMainTree":  "3dfea69a0f824fdfd3f589d42ad6a6e520a706dd",
+    "status":  "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+    "donorProgram":  {
+                         "completedPrimaryDonors":  9,
+                         "requiredPrimaryDonors":  21,
+                         "pausedFrontier":  "DONOR-010"
+                     },
+    "implementation":  [
+                           "lib/signal_preprocessing_pipeline.js",
+                           "tools/preprocess_wfdb.js",
+                           "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json",
+                           "tests/signal_preprocessing_pipeline.test.js",
+                           "tests/preprocess_wfdb_cli.test.js",
+                           "tests/signal_preprocessing_exports.test.js"
+                       ],
+    "verification":  {
+                         "implementationCandidateCommit":  "c6a201a1e52e30a42dbcb7e374cf76f815acb333",
+                         "implementationCandidateTree":  "74e0a451c00d154d92b3c621e1412d9511fdc6c4",
+                         "candidateCiRunId":  35270514524,
+                         "candidateCiConclusion":  "success",
+                         "independentVerification":  "PASS_FULL_CLONE",
+                         "independentFocused":  "27/27 PASS",
+                         "independentFullTargetSuite":  "PASS",
+                         "filteredCloneAttempt":  "ENVIRONMENT_INCOMPATIBLE_WITH_NESTED_HISTORICAL_CLONE_TESTS",
+                         "candidateDiffCheck":  "PASS"
+                     },
+    "scope":  "Executable non-diagnostic WFDB preprocessing: calibrated decoding, lead reorder, linear resampling, segmentation, and failure accounting",
+    "clinicalControlChanged":  false,
+    "clinicalAuthorityAdded":  false,
+    "diagnosticRuntime":  "GOVERNED_INACTIVE",
+    "evidenceAdmission":  "NOT_ADMITTED",
+    "approvedAdjudicatedGoldCount":  0,
+    "metrics":  "NOT_REPORTABLE",
+    "activation":  "NOT_ELIGIBLE",
+    "clinicalValidity":  "NOT_INFERRED",
+    "promotion":  {
+                      "mergeCommit":  "a52ba85ee5a16de89e1b73833602d9cf7a5c404a",
+                      "mergeTree":  "24d14bd227cedfa2aba613353f48b0192ad1ba70",
+                      "parents":  [
+                                      "a258f1a9219c7031ae941c11c79fa0c6c718a301",
+                                      "bdfccac68283639ff451205ab5ecf967041aafd3"
+                                  ],
+                      "targetMainCiRunId":  35271551451,
+                      "targetMainCiConclusion":  "success"
+                  }
 }
