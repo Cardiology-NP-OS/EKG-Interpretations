@@ -2,7 +2,7 @@
   "schema": "ecg-capability-realization-checkpoint-v1",
   "parentMainCommit": "c6bf317fe3805a2e08fde40daa14049105071933",
   "parentMainTree": "7d837905b219b19cf63a051a75eb16b085427b97",
-  "status": "VERIFIED_UNPROMOTED",
+  "status": "ACCEPTED_ON_MAIN",
   "scope": "Realize every currently deterministic, license-safe, target-owned engineering/evaluation/governance capability as executable code while explicitly retaining only capabilities that lack validated implementation specifications or admitted model assets.",
   "readinessBefore": {
     "EXECUTABLE_TARGET_OWNED": 18,
@@ -226,7 +226,13 @@
     "independentVerification": "PASS_FULL_CLONE",
     "independentFocused": "87/87 PASS",
     "independentFullTargetSuite": "PASS",
-    "candidateDiffCheck": "PASS"
+    "candidateDiffCheck": "PASS",
+    "promotionCandidateCommit": "ce9645203e7caef1c6e3e92e8dfb2f7ac5063086",
+    "promotionCandidateTree": "f948f4d11423e1c214f14077885832d97d6407bd",
+    "promotionCandidateCiRunId": 35281751260,
+    "promotionCandidateCiConclusion": "success",
+    "promotionCandidateIndependentVerification": "PASS_FULL_CLONE",
+    "promotionCandidateIndependentFullTargetSuite": "PASS"
   },
   "clinicalControlChanged": false,
   "clinicalAuthorityAdded": false,
@@ -235,5 +241,15 @@
   "approvedAdjudicatedGoldCount": 0,
   "metrics": "NOT_REPORTABLE",
   "activation": "NOT_ELIGIBLE",
-  "clinicalValidity": "NOT_INFERRED"
+  "clinicalValidity": "NOT_INFERRED",
+  "promotion": {
+    "mergeCommit": "058b687751501eafddb709968f6a7edd44313203",
+    "mergeTree": "f948f4d11423e1c214f14077885832d97d6407bd",
+    "parents": [
+      "c6bf317fe3805a2e08fde40daa14049105071933",
+      "ce9645203e7caef1c6e3e92e8dfb2f7ac5063086"
+    ],
+    "targetMainCiRunId": 35281939867,
+    "targetMainCiConclusion": "success"
+  }
 }
