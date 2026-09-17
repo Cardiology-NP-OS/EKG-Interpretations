@@ -30,23 +30,25 @@
                                          "metrics":  "NOT_REPORTABLE",
                                          "activation":  "NOT_ELIGIBLE",
                                          "clinical_validity":  "NOT_INFERRED"
-                                     }
+                                     },
+                  "verified_candidate_commit":  "321fcd2448f8fda8b3599793e40b5803aba7fd92",
+                  "verified_candidate_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c"
               },
     "verification":  {
-                         "github_actions_run_id":  35197000606,
-                         "head_sha":  "7a23c1e5c0987ccdfa0b2ebd704048d094256896",
-                         "head_tree":  "128991d359664dafc8226b69f53f52df02cd451f",
+                         "github_actions_run_id":  35197265071,
+                         "head_sha":  "321fcd2448f8fda8b3599793e40b5803aba7fd92",
+                         "head_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
                          "workflow":  "EKG Recovery CI",
                          "conclusion":  "success",
-                         "machine_a_focused":  "12/12 PASS",
+                         "machine_a_focused":  "13/13 PASS",
                          "machine_a_full_target_suite":  "PASS",
                          "independent_fresh_clone":  {
                                                          "result":  "PASS",
-                                                         "head_sha":  "7a23c1e5c0987ccdfa0b2ebd704048d094256896",
-                                                         "head_tree":  "128991d359664dafc8226b69f53f52df02cd451f",
+                                                         "head_sha":  "321fcd2448f8fda8b3599793e40b5803aba7fd92",
+                                                         "head_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
                                                          "origin_main":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
                                                          "full_candidate_diff_check":  "PASS",
-                                                         "focused":  "12/12 PASS",
+                                                         "focused":  "13/13 PASS",
                                                          "full_target_suite":  "PASS"
                                                      }
                      },
@@ -67,5 +69,16 @@
 
                                                  ],
                      "governance_only":  true
-                 }
+                 },
+    "promotion_verification":  {
+                                   "merge_commit":  "fdb1eef6dee4772b235b167de6e52e026bba34e3",
+                                   "merge_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
+                                   "parents":  [
+                                                   "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                                                   "321fcd2448f8fda8b3599793e40b5803aba7fd92"
+                                               ],
+                                   "target_main_ci_run_id":  35197432536,
+                                   "workflow":  "EKG Recovery CI",
+                                   "conclusion":  "success"
+                               }
 }

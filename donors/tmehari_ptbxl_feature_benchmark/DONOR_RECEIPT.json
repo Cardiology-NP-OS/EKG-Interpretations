@@ -1,0 +1,125 @@
+{
+    "schema":  "ecg-donor-receipt-v1",
+    "donor_id":  "DONOR-006",
+    "donor_repository":  "tmehari/ptbxl_feature_benchmark",
+    "donor_commit":  "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
+    "donor_tree":  "b9be6b9546e2b437493b286532ffbbba00e01a8c",
+    "donor_release":  {
+                          "latest_tag":  "v1.0.0",
+                          "release_commit":  "e79c58e4fe962bb0e67be8ef878aa629a3177e56",
+                          "audited_head_is_release_tag_commit":  false
+                      },
+    "donor_license":  {
+                          "audited_head_status":  "LICENSE_REVIEW_REQUIRED",
+                          "audited_head_license_file_present":  false,
+                          "historical_release_spdx":  "MIT",
+                          "historical_release_license_blob_sha":  "520db0363d5543a04a129574e4c06f0a9622c6a5",
+                          "historical_license_not_inherited_to_audited_head":  true
+                      },
+    "target_baseline":  {
+                            "immutable_pre_donor_baseline_commit":  "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+                            "immutable_pre_donor_baseline_tree":  "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+                            "donor_006_rollback_commit":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                            "donor_006_rollback_tree":  "245a8bec4d46c9c33702d2def58df0180d59a4f9"
+                        },
+    "target_resulting_implementation":  {
+                                            "type":  "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION",
+                                            "governance_candidate_commit":  "7a23c1e5c0987ccdfa0b2ebd704048d094256896",
+                                            "governance_candidate_tree":  "128991d359664dafc8226b69f53f52df02cd451f",
+                                            "verified_candidate_commit":  "321fcd2448f8fda8b3599793e40b5803aba7fd92",
+                                            "verified_candidate_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
+                                            "runtime_dependencies_added":  [
+
+                                                                           ],
+                                            "donor_source_code_copied":  false,
+                                            "donor_weights_copied":  false,
+                                            "donor_dataset_or_asset_bytes_copied":  false
+                                        },
+    "verification":  {
+                         "candidate_ci_run_id":  35197265071,
+                         "candidate_ci_conclusion":  "success",
+                         "independent_fresh_clone":  "PASS",
+                         "focused_closure":  "13/13 PASS",
+                         "full_target_suite":  "PASS",
+                         "full_candidate_diff_check":  "PASS"
+                     },
+    "promotion":  {
+                      "merge_commit":  "fdb1eef6dee4772b235b167de6e52e026bba34e3",
+                      "merge_tree":  "d4f326b28cf2f00f3a8ae0771793d42e7b52064c",
+                      "parents":  [
+                                      "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                                      "321fcd2448f8fda8b3599793e40b5803aba7fd92"
+                                  ],
+                      "target_main_ci_run_id":  35197432536,
+                      "target_main_ci_conclusion":  "success",
+                      "non_force_push":  true
+                  },
+    "capability_disposition_summary":  {
+                                           "REJECTED":  5,
+                                           "LICENSE_REVIEW_REQUIRED":  5,
+                                           "SUPERSEDED":  6,
+                                           "EVALUATION_ONLY":  15,
+                                           "CHALLENGER":  1,
+                                           "RESEARCH_ONLY":  4,
+                                           "total":  36
+                                       },
+    "associated_repositories":  {
+                                    "count":  3,
+                                    "dispositions_file":  "donors/tmehari_ptbxl_feature_benchmark/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+                                    "new_associated_donors_queued":  0,
+                                    "external_non_repository_lineage_count":  1
+                                },
+    "boundaries":  {
+                       "audited_head_source_license_resolved":  false,
+                       "whole_package_runtime_dependency_added":  false,
+                       "donor_source_code_copied":  false,
+                       "donor_models_executed":  false,
+                       "donor_checkpoints_imported":  false,
+                       "ptbxl_or_ptbxl_plus_assets_imported":  false,
+                       "notebook_embedded_outputs_imported":  false,
+                       "source_labels_promoted_to_project_gold":  false,
+                       "donor_metrics_promoted_to_target_metrics":  false,
+                       "clinical_authority_added":  false
+                   },
+    "evidence_sha256":  {
+                            "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json":  "bb8cc1b63f86e808f5725209473f29f237f67345a9bd17441869ddc6332076ce",
+                            "donors/tmehari_ptbxl_feature_benchmark/INVENTORY.json":  "ce6b7339d198047ad5dc5243ccd299f15538f09ea35a142695e75b9c65c5dcbd",
+                            "donors/tmehari_ptbxl_feature_benchmark/GAP_MATRIX.json":  "bf30799380e4696a5d4016a15f29910d7ddbe9c45ebc63b11a66649be2756fc0",
+                            "donors/tmehari_ptbxl_feature_benchmark/HARVEST_PLAN.md":  "ea27e8d8b2f13f7315b576e99c28d0dc9d062b3a79014a137c21bf19c5395068",
+                            "donors/tmehari_ptbxl_feature_benchmark/LICENSE_BOUNDARY.json":  "a17aa7b3612e8ef10f138f027f303683757c38e33113ce007a6287dbf9df858a",
+                            "donors/tmehari_ptbxl_feature_benchmark/DATASET_BOUNDARY.json":  "66b20f95f3d59ce5e94b9ab7816779cdc0bf9ee977612bcae25a973ebaa1b004",
+                            "donors/tmehari_ptbxl_feature_benchmark/MODEL_BOUNDARY.json":  "c5336bf45bad7a1e0af6c799119fe01b4b816b465a071ab90770d6f965233224",
+                            "donors/tmehari_ptbxl_feature_benchmark/ASSOCIATED_REPOSITORY_DISPOSITIONS.json":  "623017680e990b827fd2ec833eb90bfd26e8f8a6c59cfa837e68a584e3b7f15b",
+                            "donors/tmehari_ptbxl_feature_benchmark/COMPARATIVE_PROOF.json":  "94ce260f206306191b00784db412adcad1e3ec381fb3cef5fada238ee54545f3",
+                            "donors/tmehari_ptbxl_feature_benchmark/INDEPENDENT_VERIFICATION.json":  "193fe2f0ce5f0a03d43c413a66eca99e72f319fc368e8043d7025cea00f533d8",
+                            "tests/ptbxl_feature_benchmark_donor_closure.test.js":  "35458ea1745d4e109b59be37e021f54b8a476a5eed80694ceba599c2cae3b7f5",
+                            "ECG_DONOR_CAPABILITY_REGISTRY.json":  "a1aab4684ff52f76341e0adcb9329dd8d9991f56c00cd4c4535f7beeb491ba74",
+                            "ECG_LICENSE_LEDGER.json":  "89b7f9ee3e8bf41d4dffc02449f294b29d6d98d0d0f8633b66057a20c11cf409",
+                            "ECG_DATASET_REGISTRY.json":  "fcb78981a2eeb358e85aaea167ad5e9d7bcf966c40716a761c116b18583e8d74",
+                            "ECG_MODEL_CHALLENGER_REGISTRY.json":  "f47d4fd3b8e326d76df9bab9bf689a9f981612a591453d48d515f987b7cb2334"
+                        },
+    "outstanding_limitations":  [
+                                    "Audited HEAD has no license file; source-code reuse remains LICENSE_REVIEW_REQUIRED despite historical v1.0.0 MIT text.",
+                                    "PTB-XL/PTB-XL+ waveform, engineered-feature, statement, and label assets remain subject to their own data-use/license review and are not imported.",
+                                    "Tracked data_preprocessing.ipynb contains substantial embedded outputs and remains quarantined, not target evidence.",
+                                    "No donor benchmark ROC-AUC/bootstrap result is promoted to target diagnostic evidence or reportable metrics.",
+                                    "No governed adjudicated clinical gold exists in the target.",
+                                    "XResNet1D and classical benchmark models remain non-executable research/challenger references with no approved checkpoint."
+                                ],
+    "final_disposition":  "GOVERNANCE_ONLY_FEATURE_BENCHMARK_EVALUATION_AND_CHALLENGER_REFERENCE",
+    "rollback":  {
+                     "commit":  "8d2d03539b539f13cc8a8f4c1a14ff4b1a4110a9",
+                     "tree":  "245a8bec4d46c9c33702d2def58df0180d59a4f9",
+                     "method":  "revert Donor-006 promotion/finalization commits; never force-reset shared main"
+                 },
+    "acceptance_state":  "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+    "governed_state_after":  {
+                                 "completion_state":  "SPECIALIST_COMPLETE_INACTIVE",
+                                 "diagnostic_runtime":  "GOVERNED_INACTIVE",
+                                 "evidence_admission":  "NOT_ADMITTED",
+                                 "approved_adjudicated_gold_count":  0,
+                                 "metrics":  "NOT_REPORTABLE",
+                                 "activation":  "NOT_ELIGIBLE",
+                                 "clinical_validity":  "NOT_INFERRED"
+                             }
+}

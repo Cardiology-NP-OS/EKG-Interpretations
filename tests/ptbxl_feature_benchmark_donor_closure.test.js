@@ -20,6 +20,7 @@ const modelBoundary = readJson("donors/tmehari_ptbxl_feature_benchmark/MODEL_BOU
 const associated = readJson("donors/tmehari_ptbxl_feature_benchmark/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
 const comparative = readJson("donors/tmehari_ptbxl_feature_benchmark/COMPARATIVE_PROOF.json");
 const independent = readJson("donors/tmehari_ptbxl_feature_benchmark/INDEPENDENT_VERIFICATION.json");
+const receipt = readJson("donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json");
 const attribution = readText("ECG_ATTRIBUTION_LEDGER.md");
 const pkg = readJson("package.json");
 const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-006");
@@ -95,20 +96,27 @@ check("associated provenance is explicit without queue expansion", () => {
   assert.strictEqual(associated.external_non_repository_lineage[0].disposition, "LICENSE_REVIEW_REQUIRED");
 });
 check("candidate CI and independent verification are bound", () => {
-  assert.strictEqual(donor.verified_candidate_commit, "7a23c1e5c0987ccdfa0b2ebd704048d094256896");
-  assert.strictEqual(donor.verified_candidate_tree, "128991d359664dafc8226b69f53f52df02cd451f");
-  assert.strictEqual(donor.candidate_ci_run_id, 35197000606);
+  assert.strictEqual(donor.verified_candidate_commit, "321fcd2448f8fda8b3599793e40b5803aba7fd92");
+  assert.strictEqual(donor.verified_candidate_tree, "d4f326b28cf2f00f3a8ae0771793d42e7b52064c");
+  assert.strictEqual(donor.candidate_ci_run_id, 35197265071);
   assert.strictEqual(comparative.verification.head_sha, donor.verified_candidate_commit);
   assert.strictEqual(comparative.verification.conclusion, "success");
   assert.strictEqual(independent.candidate_commit, donor.verified_candidate_commit);
   assert.strictEqual(independent.result, "PASS");
   assert.strictEqual(independent.full_target_suite, "PASS");
-});check("donor remains pre-promotion and uncounted", () => {
-  assert.strictEqual(donorRegistry.completed_donors, 5);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-006");
-  assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
-  assert.strictEqual(fs.existsSync(path.join(root, "donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json")), false);
+});
+check("donor is accepted only after promotion and target-main CI", () => {
+  assert.strictEqual(donorRegistry.completed_donors, 6);
+  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-007");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt_status, "FINALIZED");
+  assert.strictEqual(donor.receipt, "donors/tmehari_ptbxl_feature_benchmark/DONOR_RECEIPT.json");
+  assert.strictEqual(donor.promotion_commit, "fdb1eef6dee4772b235b167de6e52e026bba34e3");
+  assert.strictEqual(donor.target_main_ci_run_id, 35197432536);
+  assert.strictEqual(donor.target_main_ci_conclusion, "success");
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.merge_commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, donor.target_main_ci_run_id);
 });
 check("donor directory contains governance artifacts only", () => {
   const names = fs.readdirSync(path.join(root, "donors/tmehari_ptbxl_feature_benchmark"));
@@ -121,5 +129,6 @@ check("governed inactive state and attribution remain explicit", () => {
   assert.ok(attribution.includes("## DONOR-006 -- tmehari/ptbxl_feature_benchmark"));
   assert.ok(attribution.includes("Audited-head software license: **LICENSE_REVIEW_REQUIRED**"));
   assert.ok(attribution.includes("Source labels promoted to project clinical gold: **no**"));
+  assert.ok(attribution.includes("`DONOR_RECEIPT.json`"));
 });
-console.log(JSON.stringify({schema:"ekg-donor-006-prepromotion-closure-tests-v1",donor:"tmehari/ptbxl_feature_benchmark",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:false,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));
+console.log(JSON.stringify({schema:"ekg-donor-006-acceptance-closure-tests-v1",donor:"tmehari/ptbxl_feature_benchmark",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:true,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));
