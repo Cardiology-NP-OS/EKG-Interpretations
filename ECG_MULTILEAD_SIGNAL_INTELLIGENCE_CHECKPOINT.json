@@ -2,7 +2,7 @@
   "schema": "ecg-multilead-signal-intelligence-checkpoint-v1",
   "parentMainCommit": "13819fc70c8458d7f1c56a04367c7dee1308ca5a",
   "parentMainTree": "6a55696977baf8a98dc7049e6fbb193a2d8ea2ec",
-  "status": "VERIFIED_UNPROMOTED",
+  "status": "ACCEPTED_ON_MAIN",
   "donorProgram": {
     "completedPrimaryDonors": 9,
     "requiredPrimaryDonors": 21,
@@ -33,12 +33,22 @@
     "independentVerification": "PASS_FRESH_DEPTH1_CLONE",
     "independentFocused": "MULTILEAD 8/8; CHECKPOINT 8/8",
     "independentFullTargetSuite": "PASS",
-    "candidateDiffCheck": "PASS"
+    "candidateDiffCheck": "PASS",
+    "promotionCandidateCommit": "7d94d9318d6bad0de2030efaa640b5cf39574a90",
+    "promotionCandidateTree": "2aadb2bc48eb0086f728d10fccf4e9bdf94705fa",
+    "promotionCandidateCiRunId": 35273632543,
+    "promotionCandidateCiConclusion": "success",
+    "promotionCandidateIndependentVerification": "PASS_FRESH_DEPTH1_CLONE",
+    "promotionCandidateIndependentFullTargetSuite": "PASS"
   },
   "promotion": {
-    "mergeCommit": null,
-    "mergeTree": null,
-    "targetMainCiRunId": null,
-    "targetMainCiConclusion": null
+    "mergeCommit": "bf3fe1ad1f1c1d0ee43ad940ff5ff2d1e63442c0",
+    "mergeTree": "2aadb2bc48eb0086f728d10fccf4e9bdf94705fa",
+    "parents": [
+      "13819fc70c8458d7f1c56a04367c7dee1308ca5a",
+      "7d94d9318d6bad0de2030efaa640b5cf39574a90"
+    ],
+    "targetMainCiRunId": 35273995388,
+    "targetMainCiConclusion": "success"
   }
 }

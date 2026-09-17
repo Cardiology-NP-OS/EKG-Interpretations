@@ -68,6 +68,14 @@ test("checkpoint status is stage safe", () => {
     assert.strictEqual(checkpoint.promotion.mergeCommit,null);
     assert.strictEqual(checkpoint.verification.independentVerification,"PENDING");
   }
+  if (checkpoint.status === "ACCEPTED_ON_MAIN") {
+    assert.strictEqual(checkpoint.verification.promotionCandidateCommit,"7d94d9318d6bad0de2030efaa640b5cf39574a90");
+    assert.strictEqual(checkpoint.verification.promotionCandidateCiConclusion,"success");
+    assert.strictEqual(checkpoint.promotion.mergeCommit,"bf3fe1ad1f1c1d0ee43ad940ff5ff2d1e63442c0");
+    assert.strictEqual(checkpoint.promotion.mergeTree,checkpoint.verification.promotionCandidateTree);
+    assert.deepStrictEqual(checkpoint.promotion.parents,[checkpoint.parentMainCommit,checkpoint.verification.promotionCandidateCommit]);
+    assert.strictEqual(checkpoint.promotion.targetMainCiConclusion,"success");
+  }
 });
 
 if (process.exitCode) process.exit(process.exitCode);
