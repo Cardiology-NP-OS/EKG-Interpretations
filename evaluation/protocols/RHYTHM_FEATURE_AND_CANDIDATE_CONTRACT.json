@@ -1,0 +1,51 @@
+{
+  "schema": "ekg-rhythm-feature-and-candidate-contract-v1",
+  "authorityClass": "EVALUATION_NONRUNTIME",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false,
+  "implementation": [
+    "lib/rhythm_feature_contract.js",
+    "lib/candidate_phenotype_engine.js",
+    "lib/signal_intelligence_workflow.js",
+    "tools/analyze_wfdb.js"
+  ],
+  "inputs": [
+    "accepted target-owned WFDB measurement workflow",
+    "explicit measurement configuration",
+    "explicit candidate-threshold configuration",
+    "non-identifying source provenance"
+  ],
+  "features": [
+    "RR summary and successive-difference features",
+    "PR/QRS/QT/QTc/rate measurement summaries",
+    "P/QRS/T candidate delineation coverage",
+    "calibrated P/R/J/T candidate amplitude summaries"
+  ],
+  "candidatePhenotypes": [
+    "RR_IRREGULARITY",
+    "RR_PAUSE",
+    "QRS_DURATION_ABOVE_CONFIGURED_THRESHOLD",
+    "PR_DURATION_ABOVE_CONFIGURED_THRESHOLD",
+    "P_WAVE_COVERAGE_LOW"
+  ],
+  "rules": [
+    "Candidate phenotypes are descriptive evaluation outputs, not diagnoses.",
+    "All thresholds must be explicit and configuration-bound.",
+    "Insufficient measurements produce INSUFFICIENT_DATA rather than inferred findings.",
+    "Configuration, waveform bytes, and header bytes are SHA-256 bound by the CLI artifact.",
+    "Input filesystem paths are not embedded in analysis artifacts.",
+    "Source labels remain source labels and never become project clinical gold."
+  ],
+  "notEstablished": [
+    "atrial fibrillation detection accuracy",
+    "conduction-disorder diagnostic accuracy",
+    "ectopy classification accuracy",
+    "clinical threshold validity",
+    "population generalizability",
+    "clinical runtime authority"
+  ]
+}

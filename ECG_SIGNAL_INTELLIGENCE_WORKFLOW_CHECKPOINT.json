@@ -1,0 +1,33 @@
+{
+  "schema": "ecg-signal-intelligence-workflow-checkpoint-v1",
+  "parentMainCommit": "5450bc23bfcab536a77f88ee28d4488a22c29204",
+  "parentMainTree": "3dfea69a0f824fdfd3f589d42ad6a6e520a706dd",
+  "status": "IMPLEMENTATION_CANDIDATE_UNVERIFIED",
+  "donorProgram": {
+    "completedPrimaryDonors": 9,
+    "requiredPrimaryDonors": 21,
+    "pausedFrontier": "DONOR-010",
+    "reason": "Prioritize executable target-owned signal intelligence workflows before additional challenger harvesting."
+  },
+  "implementation": [
+    "lib/rhythm_feature_contract.js",
+    "lib/candidate_phenotype_engine.js",
+    "lib/signal_intelligence_workflow.js",
+    "tools/analyze_wfdb.js",
+    "tests/rhythm_feature_contract.test.js",
+    "tests/signal_intelligence_workflow.test.js",
+    "evaluation/protocols/RHYTHM_FEATURE_AND_CANDIDATE_CONTRACT.json",
+    "evaluation/fixtures/SYNTHETIC_SIGNAL_INTELLIGENCE_CONFIG.json",
+    "docs/SIGNAL_INTELLIGENCE_WORKFLOW.md"
+  ],
+  "scope": "Executable WFDB-to-feature-to-candidate workflow with explicit evaluation-only thresholds and reproducibility bindings",
+  "candidatePhenotypesAreDiagnoses": false,
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED"
+}
