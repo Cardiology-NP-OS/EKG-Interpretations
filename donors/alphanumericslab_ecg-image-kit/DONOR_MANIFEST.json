@@ -1,0 +1,101 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-005",
+  "repository": "alphanumericslab/ecg-image-kit",
+  "canonical_upstream_url": "https://github.com/alphanumericslab/ecg-image-kit",
+  "retrieval_date": "2026-09-17",
+  "archived": false,
+  "audited_head": {
+    "branch": "main",
+    "commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+    "tree": "529bfe2cadae767c4851cc2be0fb194a25511674",
+    "commit_date": "2024-07-11T15:31:48Z",
+    "commit_signature_verified": false,
+    "commit_signature_reason": "unsigned",
+    "latest_release_tag": "v1.0.0",
+    "latest_release_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+    "head_is_latest_release_tag_commit": true
+  },
+  "software_license": {
+    "status": "MIXED_SUBTREE_LICENSES",
+    "root": {
+      "spdx": "BSD-3-Clause",
+      "license_file": "LICENSE",
+      "license_blob_sha": "2611ac54c9dd7abc9d11f1007b31f18295fb21e6",
+      "copyright": "Copyright (c) 2024, The Alphanumerics Lab"
+    },
+    "subtrees": [
+      {
+        "path": "codes/ecg-image-digitizer/roi",
+        "license_text": "GNU GPL Version 3",
+        "license_file": "codes/ecg-image-digitizer/roi/LICENSE.md",
+        "license_blob_sha": "e72bfddabc15be5718a7cc061ac10e47741d8219",
+        "reuse_status": "LICENSE_REVIEW_REQUIRED_SUBTREE_SCOPE"
+      },
+      {
+        "path": "codes/ecg-image-digitizer/roi/yolov7",
+        "license_text": "GNU GPL Version 3",
+        "license_file": "codes/ecg-image-digitizer/roi/yolov7/LICENSE.md",
+        "license_blob_sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+        "reuse_status": "LICENSE_REVIEW_REQUIRED_SUBTREE_SCOPE"
+      }
+    ],
+    "file_level_license_review_required_before_code_reuse": true,
+    "source_code_copied_into_target": false
+  },
+  "model_license": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_ARTIFACT",
+    "tracked_model_artifact_files": [
+      "codes/ecg-image-digitizer/roi/yolov7/yolov7_custom.pt",
+      "codes/ecg-image-generator/HandwrittenText/pretrained/model-29.data-00000-of-00001",
+      "codes/ecg-image-generator/HandwrittenText/pretrained/model-29.index",
+      "codes/ecg-image-generator/HandwrittenText/pretrained/model-29.meta"
+    ],
+    "tracked_model_artifact_file_count": 4,
+    "weights_imported_into_target": false,
+    "execution_eligible": false
+  },
+  "dataset_license": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET",
+    "tracked_sample_or_training_asset_file_count": 189,
+    "raw_data_imported_into_target": false,
+    "source_labels_promoted_to_project_gold": false,
+    "note": "Repository software licenses are not treated as sufficient rights for physiological, training, font, handwriting, texture, or checkpoint assets."
+  },
+  "primary_capability_families": [
+    "ECG waveform-to-paper image generation",
+    "ECG paper/grid and calibration rendering",
+    "image distortion and augmentation",
+    "handwritten-text/crease/wrinkle synthetic artifacts",
+    "lead extraction from generated images",
+    "ECG grid-size estimation",
+    "image-to-waveform sequence extraction",
+    "ROI localization with vendored YOLOv7",
+    "sample ECG image/time-series assets"
+  ],
+  "associated_repositories_discovered": [
+    "WongKinYiu/yolov7",
+    "Grzego/handwriting-generation",
+    "allenai/scispacy"
+  ],
+  "target_rollback_point": {
+    "commit": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+    "tree": "5555e82ed2c43fa92c0f87b3c34506c2a6deebe9"
+  },
+  "accepted_engine_immutable_identity": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "clinical_authority_change_allowed": false,
+  "cross_donor_provenance": [
+    {
+      "prior_donor": "MIT-LCP/wfdb-python",
+      "relationship": "Generator depends on wfdb==4.1.2; canonical WFDB library review remains DONOR-001 and is not reattributed here."
+    },
+    {
+      "prior_donor": "DeepPSP/torch_ecg",
+      "component": "torch_ecg/utils/_ecg_plot.py",
+      "relationship": "DONOR-004 identified ecg-image-kit lineage and deferred canonical ECG image rendering review to DONOR-005."
+    }
+  ]
+}

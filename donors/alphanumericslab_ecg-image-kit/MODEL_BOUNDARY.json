@@ -1,0 +1,71 @@
+{
+  "schema": "ecg-donor-model-boundary-v1",
+  "donor_id": "DONOR-005",
+  "repository": "alphanumericslab/ecg-image-kit",
+  "audited_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+  "artifact_families": [
+    {
+      "family": "YOLOv7 ECG lead ROI detector",
+      "artifacts": [
+        {
+          "path": "codes/ecg-image-digitizer/roi/yolov7/yolov7_custom.pt",
+          "sha256": "eba9713fae3821bd2d731e69470f0b5ff66571cd2c6a6e0bc79d7e8a3c130fd4",
+          "git_blob": "b8186631bb94595b9abeb1b9bca2b3ebfe246f2d",
+          "bytes": 74792969
+        }
+      ],
+      "code_license": "GPL-3.0 text in vendored subtree",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "input": "ECG image pixels; README examples use 640-pixel detector configuration",
+      "outputs": "lead/ROI bounding boxes, classes and confidences",
+      "training_population": "UNRESOLVED",
+      "training_labels": "ROI bounding-box source labels; dataset provenance not target-admitted",
+      "preprocessing": "YOLOv7 image preprocessing; exact target contract not established",
+      "validation_evidence": "DONOR_EXAMPLES_NOT_TARGET_VERIFIED",
+      "calibration_threshold_assumptions": "confidence/IoU thresholds configurable; not target calibrated",
+      "compute_burden": "PYTORCH_YOLOV7_DEPENDENT",
+      "unsupported_populations": "UNRESOLVED",
+      "execution_status": "NOT_EXECUTED_IN_TARGET",
+      "runtime_authority": false
+    },
+    {
+      "family": "Handwriting RNN transducer",
+      "artifacts": [
+        {
+          "path": "codes/ecg-image-generator/HandwrittenText/pretrained/model-29.data-00000-of-00001",
+          "sha256": "469b5d7f898a3d1a829fdd0c8237a100bb1091ab89d8caf4bb6cca1b1e868710",
+          "git_blob": "e365a02fcccbf287972379082d39f7a91fe153f6",
+          "bytes": 44612696
+        },
+        {
+          "path": "codes/ecg-image-generator/HandwrittenText/pretrained/model-29.index",
+          "sha256": "3e973ae02c46939567fc8821a776681a3f24327ef25405b5237c7dfc4dc5a413",
+          "git_blob": "637f3ab0371fcf775b491a0e0f16658752f41092",
+          "bytes": 3820
+        },
+        {
+          "path": "codes/ecg-image-generator/HandwrittenText/pretrained/model-29.meta",
+          "sha256": "55a8f6e64da088e4980011fd7888218da0a33f8e5abc4b230533666e7740f967",
+          "git_blob": "0999303bec6ce5bfbb989e7d58af8422b5e88a3c",
+          "bytes": 1484209
+        }
+      ],
+      "code_lineage": "generate.py explicitly cites Grzego/handwriting-generation",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "input": "text/style parameters",
+      "outputs": "synthetic handwriting stroke/image overlay",
+      "training_population": "NONCLINICAL_HANDWRITING_DATA_UNRESOLVED",
+      "training_labels": "UNRESOLVED",
+      "preprocessing": "TensorFlow checkpoint plus styles/translation pickle state",
+      "validation_evidence": "NOT_TARGET_VERIFIED",
+      "calibration_threshold_assumptions": "NOT_APPLICABLE",
+      "compute_burden": "TENSORFLOW_DEPENDENT",
+      "unsupported_populations": "NOT_APPLICABLE_TO_CLINICAL_DIAGNOSIS",
+      "execution_status": "NOT_EXECUTED_IN_TARGET",
+      "runtime_authority": false
+    }
+  ],
+  "weights_imported": false,
+  "clinical_validity": "NOT_INFERRED",
+  "registry_action": "DO_NOT_REGISTER_EXECUTABLE_MODEL_CHALLENGER; WEIGHT/LICENSE/PROVENANCE BOUNDARIES UNRESOLVED AND MODELS ARE NOT CLINICAL AUTHORITY"
+}

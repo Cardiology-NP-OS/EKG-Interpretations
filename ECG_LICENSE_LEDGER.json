@@ -110,6 +110,66 @@
       }
     },
     {
+      "donor_id": "DONOR-005",
+      "repository": "alphanumericslab/ecg-image-kit",
+      "source_code_license": {
+        "spdx": "BSD-3-Clause",
+        "status": "MIXED_SUBTREE_LICENSES_ROOT_BSD3_WITH_GPL3_SUBTREES",
+        "license_file": "LICENSE",
+        "license_blob_sha": "2611ac54c9dd7abc9d11f1007b31f18295fb21e6",
+        "copyright": "Copyright (c) 2024, The Alphanumerics Lab",
+        "subtree_licenses": [
+          {
+            "path": "codes/ecg-image-digitizer/roi",
+            "license": "GPL-3.0-text",
+            "license_blob_sha": "e72bfddabc15be5718a7cc061ac10e47741d8219",
+            "reuse_status": "LICENSE_REVIEW_REQUIRED_SUBTREE_SCOPE"
+          },
+          {
+            "path": "codes/ecg-image-digitizer/roi/yolov7",
+            "license": "GPL-3.0-text",
+            "license_blob_sha": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+            "reuse_status": "LICENSE_REVIEW_REQUIRED_SUBTREE_SCOPE"
+          }
+        ]
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "GOVERNANCE_ONLY_NO_RUNTIME_IMPLEMENTATION"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_ARTIFACT",
+        "tracked_weights_found": true,
+        "weights_imported": false,
+        "execution_eligible": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false,
+        "fonts_or_textures_imported": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      },
+      "associated_provenance": [
+        {
+          "repository": "WongKinYiu/yolov7",
+          "status": "LICENSE_REVIEW_REQUIRED_NO_REUSE"
+        },
+        {
+          "repository": "Grzego/handwriting-generation",
+          "status": "LICENSE_REVIEW_REQUIRED_NO_REUSE"
+        },
+        {
+          "repository": "allenai/scispacy",
+          "status": "RESEARCH_ONLY_NO_RUNTIME_DEPENDENCY"
+        }
+      ]
+    },
+    {
       "donor_id": "DONOR-A002",
       "repository": "bemoody/wfdb",
       "status": "LICENSE_REVIEW_REQUIRED",

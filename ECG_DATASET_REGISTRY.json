@@ -21,7 +21,8 @@
     {"name":"CODE-test","introduced_by":"DONOR-002","status":"EVALUATION_ONLY_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
     {"name":"VitalDB arrhythmia-derived beat data","introduced_by":"DONOR-002","status":"RESEARCH_ONLY_PROVENANCE_AND_LICENSE_REVIEW_REQUIRED","details":"donors/vitaldb_openecg/DATASET_BENCHMARK_REGISTER.json"},
     {"name":"NeuroKit bundled physiological example/test assets","introduced_by":"DONOR-003","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/neuropsychology_neurokit/DONOR_MANIFEST.json"},
-    {"name":"torch_ecg bundled sample/benchmark physiological assets","introduced_by":"DONOR-004","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"}
+    {"name":"torch_ecg bundled sample/benchmark physiological assets","introduced_by":"DONOR-004","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET","details":"donors/deeppsp_torch_ecg/DONOR_MANIFEST.json"},
+    {"name":"ECG-Image-Kit bundled ECG/image/ROI/sample assets","introduced_by":"DONOR-005","status":"DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_ASSET_OR_DATASET","details":"donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json"}
   ],
   "approved_adjudicated_project_gold_count": 0
 }

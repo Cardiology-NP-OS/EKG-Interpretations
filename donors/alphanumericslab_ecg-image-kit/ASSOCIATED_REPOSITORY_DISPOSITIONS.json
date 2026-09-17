@@ -1,0 +1,27 @@
+{
+  "schema": "ecg-donor-associated-repository-dispositions-v1",
+  "donor_id": "DONOR-005",
+  "repository": "alphanumericslab/ecg-image-kit",
+  "audited_commit": "27b90f56896c9fc78b05a83ca14844ea2637aa0b",
+  "repositories": [
+    {
+      "repository": "WongKinYiu/yolov7",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "queued_as_associated_donor": false,
+      "reason": "Vendored GPLv3 ROI implementation and checkpoint lineage are blocked from reuse; no target integration requires a separate donor audit now."
+    },
+    {
+      "repository": "Grzego/handwriting-generation",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "queued_as_associated_donor": false,
+      "reason": "Explicit code lineage for handwriting synthesis; no source or checkpoint is reused pending independent license/provenance review."
+    },
+    {
+      "repository": "allenai/scispacy",
+      "disposition": "RESEARCH_ONLY",
+      "queued_as_associated_donor": false,
+      "reason": "Optional NLP dependency for synthetic text selection only; no target runtime need or code reuse."
+    }
+  ],
+  "clinical_authority_added": false
+}
