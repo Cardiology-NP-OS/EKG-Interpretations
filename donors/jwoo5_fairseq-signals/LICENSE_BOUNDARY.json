@@ -1,0 +1,37 @@
+{
+  "schema": "ecg-donor-license-boundary-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "upstream_commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+  "source_code": {
+    "spdx": "MIT",
+    "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST",
+    "license_file": "LICENSE",
+    "license_blob_sha": "872cb6afe478b6a06ac9c985a09524896eff64c6",
+    "derived_from_fairseq_notice_retained": true,
+    "copied_into_target": false,
+    "attribution_required": true
+  },
+  "tracked_translated_ptbxl_table": {
+    "path": "fairseq_signals/data/ecg_text/preprocess/ptbxl_database_translated.csv",
+    "blob": "88e9356b1fcda27d699ae6c41c0a531b5354b1e5",
+    "bytes": 6354265,
+    "status": "LICENSE_REVIEW_REQUIRED_DATA_DERIVATIVE",
+    "copied_into_target": false
+  },
+  "external_datasets": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_SOURCE",
+    "raw_data_imported": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "model_checkpoints": {
+    "tracked_count": 0,
+    "status": "EXTERNAL_OR_USER_SUPPLIED_CHECKPOINT_RIGHTS_NOT_ESTABLISHED",
+    "weights_imported": false,
+    "executed_in_target": false
+  },
+  "dependency_action": {
+    "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+    "python_pytorch_cuda_stack_imported": false
+  }
+}

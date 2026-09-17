@@ -1,0 +1,375 @@
+{
+  "schema": "ecg-donor-gap-matrix-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "target_rollback_commit": "6585c1e7b1bbefa2d8b5d769ca48b40865a775a4",
+  "rows": [
+    {
+      "capability_id": "FSS-001",
+      "capability": "Whole-package Python training/runtime dependency",
+      "donor_components": [
+        "setup.py",
+        "fairseq_cli/",
+        "fairseq_signals/"
+      ],
+      "classification": "UNSAFE_RUNTIME_EXPANSION",
+      "final_disposition": "REJECTED",
+      "reason": "Parallel Python/PyTorch/Hydra/CUDA training runtime is not needed by the governed target."
+    },
+    {
+      "capability_id": "FSS-002",
+      "capability": "fairseq-derived trainer/config/distributed research stack",
+      "donor_components": [
+        "fairseq_signals/trainer.py",
+        "fairseq_signals/config/",
+        "fairseq_signals/distributed/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Useful architecture/reproducibility context; no runtime dependency is added."
+    },
+    {
+      "capability_id": "FSS-003",
+      "capability": "Raw ECG dataset loader and batching framework",
+      "donor_components": [
+        "fairseq_signals/data/ecg/raw_ecg_dataset.py",
+        "fairseq_signals/data/dataset.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already has narrower source and preprocessing contracts with stronger authority boundaries."
+    },
+    {
+      "capability_id": "FSS-004",
+      "capability": "Dataset-specific ECG preprocessing adapters",
+      "donor_components": [
+        "fairseq_signals/data/ecg/preprocess/",
+        "scripts/preprocess/ecg/"
+      ],
+      "classification": "EXTERNAL_DATA_DEPENDENT",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful source-specific preprocessing knowledge; underlying datasets remain separately governed and no data bytes are imported."
+    },
+    {
+      "capability_id": "FSS-005",
+      "capability": "Manifest generation and multi-source composition",
+      "donor_components": [
+        "fairseq_signals/data/ecg/preprocess/manifest.py",
+        "scripts/preprocess/manifests.py"
+      ],
+      "classification": "USEFUL_EVALUATION",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline provenance/evaluation organization only."
+    },
+    {
+      "capability_id": "FSS-006",
+      "capability": "Random grouped temporal and grouped-temporal split strategies",
+      "donor_components": [
+        "fairseq_signals/utils/splits.py",
+        "scripts/preprocess/splits.py"
+      ],
+      "classification": "USEFUL_EVALUATION",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Extends evaluation methodology context; target retains its own leakage validation and does not adopt donor split assignments as gold."
+    },
+    {
+      "capability_id": "FSS-007",
+      "capability": "Label extraction and split-specific positive-weight preparation",
+      "donor_components": [
+        "scripts/preprocess/ecg/*_labels.py",
+        "scripts/preprocess/prepare_clf_labels.py"
+      ],
+      "classification": "SOURCE_LABEL_PROCESSING",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Outputs are source labels/evaluation aids only, never PROJECT GOLD."
+    },
+    {
+      "capability_id": "FSS-008",
+      "capability": "External PhysioNet challenge scoring weight tables",
+      "donor_components": [
+        "examples/*/README.md",
+        "scripts/preprocess/ecg/physionet2021_labels.py"
+      ],
+      "classification": "EXTERNAL_ASSET",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "External weights.csv and vocabulary-derived artifacts have separate provenance/terms and are not imported."
+    },
+    {
+      "capability_id": "FSS-009",
+      "capability": "Powerline EMG baseline-shift and baseline-wander perturbations",
+      "donor_components": [
+        "fairseq_signals/data/ecg/augmentations.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful robustness perturbation concepts already covered by target evaluation authority only."
+    },
+    {
+      "capability_id": "FSS-010",
+      "capability": "Random lead masking augmentation",
+      "donor_components": [
+        "fairseq_signals/data/ecg/augmentations.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful missing-lead robustness concept; target input-quality guard remains authoritative for admissibility."
+    },
+    {
+      "capability_id": "FSS-011",
+      "capability": "ECG Transformer encoder/classifier",
+      "donor_components": [
+        "fairseq_signals/models/ecg_transformer.py",
+        "fairseq_signals/models/classification/ecg_transformer_classifier.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Model code may inform research; no exact trained checkpoint is tracked or admitted."
+    },
+    {
+      "capability_id": "FSS-012",
+      "capability": "ResNet SE-WRN ConvNet and LSTM classifier families",
+      "donor_components": [
+        "fairseq_signals/models/resnet.py",
+        "fairseq_signals/models/se_wrn.py",
+        "fairseq_signals/models/convnet/",
+        "fairseq_signals/models/lstm.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Architecture-only challenger family; no donor weights are imported or executed."
+    },
+    {
+      "capability_id": "FSS-013",
+      "capability": "UNet ECG segmentation/delineation models",
+      "donor_components": [
+        "fairseq_signals/models/segmentation/",
+        "fairseq_signals/models/unet.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Delineation challenger only; no diagnostic runtime or weight admission."
+    },
+    {
+      "capability_id": "FSS-014",
+      "capability": "ECG wav2vec2 self-supervised model",
+      "donor_components": [
+        "fairseq_signals/models/wav2vec2/wav2vec2.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Self-supervised representation challenger with no tracked checkpoint."
+    },
+    {
+      "capability_id": "FSS-015",
+      "capability": "CMSC and wav2vec2-CMSC lead-agnostic representation learning",
+      "donor_components": [
+        "fairseq_signals/models/wav2vec2/wav2vec2_cmsc.py",
+        "fairseq_signals/criterions/cmsc_criterion.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research challenger; donor-reported results are not target metrics."
+    },
+    {
+      "capability_id": "FSS-016",
+      "capability": "3KG physiologically inspired contrastive learning",
+      "donor_components": [
+        "fairseq_signals/criterions/3kg_criterion.py",
+        "examples/3kg/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research challenger only; augmentation assumptions are not clinical truth."
+    },
+    {
+      "capability_id": "FSS-017",
+      "capability": "SimCLR ECG contrastive learning",
+      "donor_components": [
+        "fairseq_signals/criterions/simclr_criterion.py",
+        "examples/simclr/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research challenger only; no weights or target metrics."
+    },
+    {
+      "capability_id": "FSS-018",
+      "capability": "M3AE ECG-text multimodal model",
+      "donor_components": [
+        "fairseq_signals/models/m3ae/",
+        "examples/m3ae/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Multimodal challenger only; no checkpoint or clinical authority."
+    },
+    {
+      "capability_id": "FSS-019",
+      "capability": "MedViLL ECG-text multimodal model",
+      "donor_components": [
+        "fairseq_signals/models/medvill/",
+        "examples/medvill/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Multimodal challenger only; no checkpoint or clinical authority."
+    },
+    {
+      "capability_id": "FSS-020",
+      "capability": "ECG-language question-answering model family",
+      "donor_components": [
+        "fairseq_signals/models/question_answer/",
+        "fairseq_signals/models/ecg_language_transformer.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Question-answering challenger family; outputs cannot become diagnosis or project gold."
+    },
+    {
+      "capability_id": "FSS-021",
+      "capability": "ArcFace ECG identification model/task",
+      "donor_components": [
+        "fairseq_signals/models/identification/arcface.py",
+        "fairseq_signals/tasks/ecg_identification.py"
+      ],
+      "classification": "OUT_OF_DIAGNOSTIC_SCOPE",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Patient-identification research is not a governed diagnostic capability."
+    },
+    {
+      "capability_id": "FSS-022",
+      "capability": "Checkpoint save/load/resume machinery",
+      "donor_components": [
+        "fairseq_signals/utils/checkpoint_utils.py",
+        "fairseq_signals/trainer.py"
+      ],
+      "classification": "DUPLICATE_SAFETY_BOUNDARY",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already has an explicit unsafe-deserialization/checkpoint identity boundary; donor checkpoint execution is not adopted."
+    },
+    {
+      "capability_id": "FSS-023",
+      "capability": "Tracked translated PTB-XL report table",
+      "donor_components": [
+        "fairseq_signals/data/ecg_text/preprocess/ptbxl_database_translated.csv"
+      ],
+      "classification": "DATA_DERIVED_ASSET",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "6.35 MB data-derived report table is not assumed covered for target reuse by the source-code MIT license."
+    },
+    {
+      "capability_id": "FSS-024",
+      "capability": "PTB-XL and MIMIC-IV-ECG waveform-report preprocessing",
+      "donor_components": [
+        "fairseq_signals/data/ecg_text/preprocess/preprocess_ptbxl.py",
+        "fairseq_signals/data/ecg_text/preprocess/preprocess_mimic_iv_ecg.py"
+      ],
+      "classification": "EXTERNAL_DATA_DEPENDENT",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful dataset-processing provenance only; raw waveforms/reports are not imported."
+    },
+    {
+      "capability_id": "FSS-025",
+      "capability": "ECG-QA mapping and preprocessing",
+      "donor_components": [
+        "fairseq_signals/data/ecg_text/preprocess/preprocess_ecgqa.py",
+        "fairseq_signals/data/ecg_text/ecg_qa_dataset.py"
+      ],
+      "classification": "MULTIMODAL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "External ECG-QA content remains research-only/source data and non-gold."
+    },
+    {
+      "capability_id": "FSS-026",
+      "capability": "Classification and composite loss/criterion stack",
+      "donor_components": [
+        "fairseq_signals/criterions/",
+        "fairseq_signals/tasks/ecg_classification.py"
+      ],
+      "classification": "USEFUL_EVALUATION",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Loss definitions are experiment methodology, not reportable target diagnostic metrics."
+    },
+    {
+      "capability_id": "FSS-027",
+      "capability": "Pretraining segmentation QA and text task orchestration",
+      "donor_components": [
+        "fairseq_signals/tasks/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Training task orchestration remains offline research infrastructure."
+    },
+    {
+      "capability_id": "FSS-028",
+      "capability": "FP16 distributed and fully-sharded training infrastructure",
+      "donor_components": [
+        "fairseq_signals/optim/fp16_optimizer.py",
+        "fairseq_signals/distributed/"
+      ],
+      "classification": "INFRASTRUCTURE_ONLY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "No target runtime dependency or training environment is adopted."
+    },
+    {
+      "capability_id": "FSS-029",
+      "capability": "CUDA C++ Cython acceleration extensions",
+      "donor_components": [
+        "fairseq_signals/clib/",
+        "fairseq_signals/data/data_utils_fast.pyx"
+      ],
+      "classification": "UNNEEDED_NATIVE_SURFACE",
+      "final_disposition": "REJECTED",
+      "reason": "Native build surface is unnecessary for the governed target and expands dependency/attack surface."
+    },
+    {
+      "capability_id": "FSS-030",
+      "capability": "README-listed ECG-FM implementation claim",
+      "donor_components": [
+        "README.md"
+      ],
+      "classification": "INSUFFICIENT_EXECUTABLE_MAPPING",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "README cites ECG-FM as an official implementation but the audited tree has no specific ECG-FM-named model/config/checkpoint surface; no capability is inferred beyond research provenance."
+    },
+    {
+      "capability_id": "FSS-031",
+      "capability": "Donor paper results source labels and benchmark claims",
+      "donor_components": [
+        "README.md",
+        "examples/*/README.md"
+      ],
+      "classification": "AUTHORITY_BOUNDARY",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already separates donor claims/source labels from project gold and reportable metrics."
+    }
+  ],
+  "disposition_summary": {
+    "REJECTED": 2,
+    "RESEARCH_ONLY": 6,
+    "SUPERSEDED": 3,
+    "DATA_ONLY": 3,
+    "EVALUATION_ONLY": 5,
+    "LICENSE_REVIEW_REQUIRED": 2,
+    "CHALLENGER": 10,
+    "total": 31
+  },
+  "selected_harvest": [
+    "register architecture families as non-executed challengers with exact donor provenance and no weights",
+    "preserve grouped/temporal split and ECG perturbation concepts as evaluation-only provenance mapped to existing target capabilities",
+    "record tracked translated PTB-XL table as a separate license-review-required data-derived asset",
+    "retain exact root MIT/fairseq attribution without importing donor source",
+    "add brand-neutral canonical multimodal-model challenger capability metadata if absent"
+  ],
+  "explicit_non_harvest": [
+    "whole fairseq-signals runtime and Python dependency stack",
+    "donor model source code as target runtime",
+    "all external/user checkpoints and model weights",
+    "all raw/restricted ECG datasets, reports, source labels and processed waveform derivatives",
+    "tracked translated PTB-XL report table bytes",
+    "CUDA/C++/Cython build surfaces",
+    "donor benchmark or paper metrics as target diagnostic metrics"
+  ],
+  "implementation_decision": "GOVERNANCE_AND_CHALLENGER_METADATA_ONLY_NO_MODEL_EXECUTION",
+  "clinical_authority_change": false
+}

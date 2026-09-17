@@ -1,0 +1,1858 @@
+{
+  "schema": "ecg-donor-inventory-v1",
+  "donor_id": "DONOR-009",
+  "repository": "Jwoo5/fairseq-signals",
+  "audited_commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
+  "audited_tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
+  "recursive_tree_audit": {
+    "complete": true,
+    "fresh_clone_attempted": true,
+    "fresh_clone_result": "SUCCESS",
+    "exact_commit_reproduced": true,
+    "exact_tree_reproduced": true,
+    "tracked_file_count": 240
+  },
+  "package_summary": {
+    "python_file_count": 170,
+    "yaml_file_count": 46,
+    "markdown_file_count": 11,
+    "native_cpp_cuda_count": 7,
+    "csv_file_count": 1,
+    "tracked_common_model_artifact_count": 0
+  },
+  "largest_tracked_blob": {
+    "path": "fairseq_signals/data/ecg_text/preprocess/ptbxl_database_translated.csv",
+    "blob": "88e9356b1fcda27d699ae6c41c0a531b5354b1e5",
+    "bytes": 6354265,
+    "classification": "DATA_DERIVED_ASSET_LICENSE_REVIEW_REQUIRED"
+  },
+  "declared_runtime_dependencies": [
+    "cffi",
+    "cython",
+    "hydra-core",
+    "omegaconf",
+    "numpy>=1.21.3",
+    "regex",
+    "sacrebleu>=1.4.12",
+    "torch",
+    "tqdm",
+    "scikit-learn",
+    "wfdb",
+    "transformers>=4.19.0"
+  ],
+  "registered_model_count": 20,
+  "registered_task_count": 7,
+  "augmentation_classes": [
+    "PowerlineNoise",
+    "EMGNoise",
+    "BaselineShift",
+    "BaselineWander",
+    "RandomLeadsMask"
+  ],
+  "split_strategies": [
+    "random",
+    "grouped",
+    "temporal",
+    "grouped_temporal"
+  ],
+  "material_capabilities": [
+    {
+      "capability_id": "FSS-001",
+      "capability": "Whole-package Python training/runtime dependency",
+      "donor_components": [
+        "setup.py",
+        "fairseq_cli/",
+        "fairseq_signals/"
+      ],
+      "classification": "UNSAFE_RUNTIME_EXPANSION",
+      "final_disposition": "REJECTED",
+      "reason": "Parallel Python/PyTorch/Hydra/CUDA training runtime is not needed by the governed target."
+    },
+    {
+      "capability_id": "FSS-002",
+      "capability": "fairseq-derived trainer/config/distributed research stack",
+      "donor_components": [
+        "fairseq_signals/trainer.py",
+        "fairseq_signals/config/",
+        "fairseq_signals/distributed/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Useful architecture/reproducibility context; no runtime dependency is added."
+    },
+    {
+      "capability_id": "FSS-003",
+      "capability": "Raw ECG dataset loader and batching framework",
+      "donor_components": [
+        "fairseq_signals/data/ecg/raw_ecg_dataset.py",
+        "fairseq_signals/data/dataset.py"
+      ],
+      "classification": "DUPLICATE",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already has narrower source and preprocessing contracts with stronger authority boundaries."
+    },
+    {
+      "capability_id": "FSS-004",
+      "capability": "Dataset-specific ECG preprocessing adapters",
+      "donor_components": [
+        "fairseq_signals/data/ecg/preprocess/",
+        "scripts/preprocess/ecg/"
+      ],
+      "classification": "EXTERNAL_DATA_DEPENDENT",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful source-specific preprocessing knowledge; underlying datasets remain separately governed and no data bytes are imported."
+    },
+    {
+      "capability_id": "FSS-005",
+      "capability": "Manifest generation and multi-source composition",
+      "donor_components": [
+        "fairseq_signals/data/ecg/preprocess/manifest.py",
+        "scripts/preprocess/manifests.py"
+      ],
+      "classification": "USEFUL_EVALUATION",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful offline provenance/evaluation organization only."
+    },
+    {
+      "capability_id": "FSS-006",
+      "capability": "Random grouped temporal and grouped-temporal split strategies",
+      "donor_components": [
+        "fairseq_signals/utils/splits.py",
+        "scripts/preprocess/splits.py"
+      ],
+      "classification": "USEFUL_EVALUATION",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Extends evaluation methodology context; target retains its own leakage validation and does not adopt donor split assignments as gold."
+    },
+    {
+      "capability_id": "FSS-007",
+      "capability": "Label extraction and split-specific positive-weight preparation",
+      "donor_components": [
+        "scripts/preprocess/ecg/*_labels.py",
+        "scripts/preprocess/prepare_clf_labels.py"
+      ],
+      "classification": "SOURCE_LABEL_PROCESSING",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Outputs are source labels/evaluation aids only, never PROJECT GOLD."
+    },
+    {
+      "capability_id": "FSS-008",
+      "capability": "External PhysioNet challenge scoring weight tables",
+      "donor_components": [
+        "examples/*/README.md",
+        "scripts/preprocess/ecg/physionet2021_labels.py"
+      ],
+      "classification": "EXTERNAL_ASSET",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "External weights.csv and vocabulary-derived artifacts have separate provenance/terms and are not imported."
+    },
+    {
+      "capability_id": "FSS-009",
+      "capability": "Powerline EMG baseline-shift and baseline-wander perturbations",
+      "donor_components": [
+        "fairseq_signals/data/ecg/augmentations.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful robustness perturbation concepts already covered by target evaluation authority only."
+    },
+    {
+      "capability_id": "FSS-010",
+      "capability": "Random lead masking augmentation",
+      "donor_components": [
+        "fairseq_signals/data/ecg/augmentations.py"
+      ],
+      "classification": "USEFUL_TEST_ONLY",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Useful missing-lead robustness concept; target input-quality guard remains authoritative for admissibility."
+    },
+    {
+      "capability_id": "FSS-011",
+      "capability": "ECG Transformer encoder/classifier",
+      "donor_components": [
+        "fairseq_signals/models/ecg_transformer.py",
+        "fairseq_signals/models/classification/ecg_transformer_classifier.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Model code may inform research; no exact trained checkpoint is tracked or admitted."
+    },
+    {
+      "capability_id": "FSS-012",
+      "capability": "ResNet SE-WRN ConvNet and LSTM classifier families",
+      "donor_components": [
+        "fairseq_signals/models/resnet.py",
+        "fairseq_signals/models/se_wrn.py",
+        "fairseq_signals/models/convnet/",
+        "fairseq_signals/models/lstm.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Architecture-only challenger family; no donor weights are imported or executed."
+    },
+    {
+      "capability_id": "FSS-013",
+      "capability": "UNet ECG segmentation/delineation models",
+      "donor_components": [
+        "fairseq_signals/models/segmentation/",
+        "fairseq_signals/models/unet.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Delineation challenger only; no diagnostic runtime or weight admission."
+    },
+    {
+      "capability_id": "FSS-014",
+      "capability": "ECG wav2vec2 self-supervised model",
+      "donor_components": [
+        "fairseq_signals/models/wav2vec2/wav2vec2.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Self-supervised representation challenger with no tracked checkpoint."
+    },
+    {
+      "capability_id": "FSS-015",
+      "capability": "CMSC and wav2vec2-CMSC lead-agnostic representation learning",
+      "donor_components": [
+        "fairseq_signals/models/wav2vec2/wav2vec2_cmsc.py",
+        "fairseq_signals/criterions/cmsc_criterion.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research challenger; donor-reported results are not target metrics."
+    },
+    {
+      "capability_id": "FSS-016",
+      "capability": "3KG physiologically inspired contrastive learning",
+      "donor_components": [
+        "fairseq_signals/criterions/3kg_criterion.py",
+        "examples/3kg/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research challenger only; augmentation assumptions are not clinical truth."
+    },
+    {
+      "capability_id": "FSS-017",
+      "capability": "SimCLR ECG contrastive learning",
+      "donor_components": [
+        "fairseq_signals/criterions/simclr_criterion.py",
+        "examples/simclr/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Research challenger only; no weights or target metrics."
+    },
+    {
+      "capability_id": "FSS-018",
+      "capability": "M3AE ECG-text multimodal model",
+      "donor_components": [
+        "fairseq_signals/models/m3ae/",
+        "examples/m3ae/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Multimodal challenger only; no checkpoint or clinical authority."
+    },
+    {
+      "capability_id": "FSS-019",
+      "capability": "MedViLL ECG-text multimodal model",
+      "donor_components": [
+        "fairseq_signals/models/medvill/",
+        "examples/medvill/"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Multimodal challenger only; no checkpoint or clinical authority."
+    },
+    {
+      "capability_id": "FSS-020",
+      "capability": "ECG-language question-answering model family",
+      "donor_components": [
+        "fairseq_signals/models/question_answer/",
+        "fairseq_signals/models/ecg_language_transformer.py"
+      ],
+      "classification": "MODEL_ARCHITECTURE",
+      "final_disposition": "CHALLENGER",
+      "reason": "Question-answering challenger family; outputs cannot become diagnosis or project gold."
+    },
+    {
+      "capability_id": "FSS-021",
+      "capability": "ArcFace ECG identification model/task",
+      "donor_components": [
+        "fairseq_signals/models/identification/arcface.py",
+        "fairseq_signals/tasks/ecg_identification.py"
+      ],
+      "classification": "OUT_OF_DIAGNOSTIC_SCOPE",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Patient-identification research is not a governed diagnostic capability."
+    },
+    {
+      "capability_id": "FSS-022",
+      "capability": "Checkpoint save/load/resume machinery",
+      "donor_components": [
+        "fairseq_signals/utils/checkpoint_utils.py",
+        "fairseq_signals/trainer.py"
+      ],
+      "classification": "DUPLICATE_SAFETY_BOUNDARY",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already has an explicit unsafe-deserialization/checkpoint identity boundary; donor checkpoint execution is not adopted."
+    },
+    {
+      "capability_id": "FSS-023",
+      "capability": "Tracked translated PTB-XL report table",
+      "donor_components": [
+        "fairseq_signals/data/ecg_text/preprocess/ptbxl_database_translated.csv"
+      ],
+      "classification": "DATA_DERIVED_ASSET",
+      "final_disposition": "LICENSE_REVIEW_REQUIRED",
+      "reason": "6.35 MB data-derived report table is not assumed covered for target reuse by the source-code MIT license."
+    },
+    {
+      "capability_id": "FSS-024",
+      "capability": "PTB-XL and MIMIC-IV-ECG waveform-report preprocessing",
+      "donor_components": [
+        "fairseq_signals/data/ecg_text/preprocess/preprocess_ptbxl.py",
+        "fairseq_signals/data/ecg_text/preprocess/preprocess_mimic_iv_ecg.py"
+      ],
+      "classification": "EXTERNAL_DATA_DEPENDENT",
+      "final_disposition": "DATA_ONLY",
+      "reason": "Useful dataset-processing provenance only; raw waveforms/reports are not imported."
+    },
+    {
+      "capability_id": "FSS-025",
+      "capability": "ECG-QA mapping and preprocessing",
+      "donor_components": [
+        "fairseq_signals/data/ecg_text/preprocess/preprocess_ecgqa.py",
+        "fairseq_signals/data/ecg_text/ecg_qa_dataset.py"
+      ],
+      "classification": "MULTIMODAL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "External ECG-QA content remains research-only/source data and non-gold."
+    },
+    {
+      "capability_id": "FSS-026",
+      "capability": "Classification and composite loss/criterion stack",
+      "donor_components": [
+        "fairseq_signals/criterions/",
+        "fairseq_signals/tasks/ecg_classification.py"
+      ],
+      "classification": "USEFUL_EVALUATION",
+      "final_disposition": "EVALUATION_ONLY",
+      "reason": "Loss definitions are experiment methodology, not reportable target diagnostic metrics."
+    },
+    {
+      "capability_id": "FSS-027",
+      "capability": "Pretraining segmentation QA and text task orchestration",
+      "donor_components": [
+        "fairseq_signals/tasks/"
+      ],
+      "classification": "USEFUL_RESEARCH",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "Training task orchestration remains offline research infrastructure."
+    },
+    {
+      "capability_id": "FSS-028",
+      "capability": "FP16 distributed and fully-sharded training infrastructure",
+      "donor_components": [
+        "fairseq_signals/optim/fp16_optimizer.py",
+        "fairseq_signals/distributed/"
+      ],
+      "classification": "INFRASTRUCTURE_ONLY",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "No target runtime dependency or training environment is adopted."
+    },
+    {
+      "capability_id": "FSS-029",
+      "capability": "CUDA C++ Cython acceleration extensions",
+      "donor_components": [
+        "fairseq_signals/clib/",
+        "fairseq_signals/data/data_utils_fast.pyx"
+      ],
+      "classification": "UNNEEDED_NATIVE_SURFACE",
+      "final_disposition": "REJECTED",
+      "reason": "Native build surface is unnecessary for the governed target and expands dependency/attack surface."
+    },
+    {
+      "capability_id": "FSS-030",
+      "capability": "README-listed ECG-FM implementation claim",
+      "donor_components": [
+        "README.md"
+      ],
+      "classification": "INSUFFICIENT_EXECUTABLE_MAPPING",
+      "final_disposition": "RESEARCH_ONLY",
+      "reason": "README cites ECG-FM as an official implementation but the audited tree has no specific ECG-FM-named model/config/checkpoint surface; no capability is inferred beyond research provenance."
+    },
+    {
+      "capability_id": "FSS-031",
+      "capability": "Donor paper results source labels and benchmark claims",
+      "donor_components": [
+        "README.md",
+        "examples/*/README.md"
+      ],
+      "classification": "AUTHORITY_BOUNDARY",
+      "final_disposition": "SUPERSEDED",
+      "reason": "Target already separates donor claims/source labels from project gold and reportable metrics."
+    }
+  ],
+  "notable_repository_risks": [
+    "Root MIT code license is not treated as a blanket license for external ECG datasets or the tracked translated PTB-XL report table.",
+    "No common trained checkpoint artifact is tracked in Git; all model families remain architecture-only challengers unless exact weights, hashes, preprocessing and rights are independently established.",
+    "Checkpoint loading uses Python/PyTorch serialization machinery; target safe-loading and exact-identity boundaries supersede donor behavior.",
+    "Dataset preprocessing can emit waveform/report/label derivatives; none are imported into target Git.",
+    "Training and evaluation examples contain donor/paper methodology and claims that are not target diagnostic metrics.",
+    "Native CUDA/C++/Cython and distributed training surfaces materially expand dependencies and are not needed in target runtime.",
+    "README lists ECG-FM but no specific ECG-FM-named model/config/checkpoint surface was found in the audited tree, so no executable mapping is inferred."
+  ],
+  "tracked_files": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "blob": "f09fd088f3393f70d35ede1b55aaaa77d4dabe85",
+      "bytes": 799
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "blob": "872cb6afe478b6a06ac9c985a09524896eff64c6",
+      "bytes": 2241
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "blob": "c87d5ca397cd6a005ff0332e15bd85424b55e828",
+      "bytes": 6791
+    },
+    {
+      "path": "examples/3kg/README.md",
+      "mode": "100644",
+      "blob": "0cebcbb329acd8d8ac08260e9996e86d2e46b1a6",
+      "bytes": 2236
+    },
+    {
+      "path": "examples/3kg/config/finetuning/ecg_transformer/diagnosis.yaml",
+      "mode": "100644",
+      "blob": "afda13b2145d0ed5a0393787f60705c2d38afac8",
+      "bytes": 1320
+    },
+    {
+      "path": "examples/3kg/config/finetuning/ecg_transformer/identification.yaml",
+      "mode": "100644",
+      "blob": "f5529cdc8d7486454542c1e813b37e19c61a80e7",
+      "bytes": 1295
+    },
+    {
+      "path": "examples/3kg/config/pretraining/ecg_transformer/3kg.yaml",
+      "mode": "100644",
+      "blob": "2db3f8a2402f77dd30ba32915eaa0a98e1fa0464",
+      "bytes": 966
+    },
+    {
+      "path": "examples/cmsc/README.md",
+      "mode": "100644",
+      "blob": "c8ceaf63e29f02b46c3b29cdd7e7f6c6398b27bc",
+      "bytes": 2675
+    },
+    {
+      "path": "examples/cmsc/config/finetuning/ecg_transformer/diagnosis.yaml",
+      "mode": "100644",
+      "blob": "afda13b2145d0ed5a0393787f60705c2d38afac8",
+      "bytes": 1320
+    },
+    {
+      "path": "examples/cmsc/config/finetuning/ecg_transformer/identification.yaml",
+      "mode": "100644",
+      "blob": "f5529cdc8d7486454542c1e813b37e19c61a80e7",
+      "bytes": 1295
+    },
+    {
+      "path": "examples/cmsc/config/pretraining/ecg_transformer/cmsc.yaml",
+      "mode": "100644",
+      "blob": "25dee75774c036431f18978b98b57173c70f6b90",
+      "bytes": 1008
+    },
+    {
+      "path": "examples/cmsc/config/pretraining/ecg_transformer/cmsc_rlm.yaml",
+      "mode": "100644",
+      "blob": "bb6d984d1bd112be1a777c7df7a37ac1a218adae",
+      "bytes": 1119
+    },
+    {
+      "path": "examples/m3ae/README.md",
+      "mode": "100644",
+      "blob": "26606e0f1de0d3e727193fdf3858a3cbf9db1178",
+      "bytes": 1438
+    },
+    {
+      "path": "examples/m3ae/config/finetuning/ecg_question_answering/base.yaml",
+      "mode": "100644",
+      "blob": "bf924d0d774a1ef8b686f61318a27fc0a2942169",
+      "bytes": 1205
+    },
+    {
+      "path": "examples/m3ae/config/pretraining/w2v-cmsc_bert.yaml",
+      "mode": "100644",
+      "blob": "597057a42a38a75d0bef3522c9858eb712347b66",
+      "bytes": 1094
+    },
+    {
+      "path": "examples/medvill/README.md",
+      "mode": "100644",
+      "blob": "e5bddfb41912cbcfa2d6f598617953bb6b5329c0",
+      "bytes": 1161
+    },
+    {
+      "path": "examples/medvill/config/finetuning/ecg_question_answering/base.yaml",
+      "mode": "100644",
+      "blob": "e95ac3f1b32e5791df699f0051a430a49db01fa6",
+      "bytes": 1341
+    },
+    {
+      "path": "examples/medvill/config/finetuning/ecg_question_answering/small.yaml",
+      "mode": "100644",
+      "blob": "db991f79a99546e9a760600a5e76979ea2e45c99",
+      "bytes": 1247
+    },
+    {
+      "path": "examples/medvill/config/pretraining/medvill.yaml",
+      "mode": "100644",
+      "blob": "c7215ac8ad024b4c857dda806ad047d9ec272e0a",
+      "bytes": 1000
+    },
+    {
+      "path": "examples/scratch/ecg_classification/ecg_transformer/diagnosis_physionet2021.yaml",
+      "mode": "100644",
+      "blob": "2daee4b1b93412607bf046da2f859445180ebc54",
+      "bytes": 1381
+    },
+    {
+      "path": "examples/scratch/ecg_classification/ecg_transformer/multi_head_cls_path_dataset.yaml",
+      "mode": "100644",
+      "blob": "08a0a6f2a78803f04143f5508b2220895954bbf6",
+      "bytes": 1372
+    },
+    {
+      "path": "examples/scratch/ecg_classification/ecg_transformer/multi_label_cls_path_dataset.yaml",
+      "mode": "100644",
+      "blob": "598f6e010d34f55e1950b2d7f3832561c99c5a05",
+      "bytes": 1319
+    },
+    {
+      "path": "examples/scratch/ecg_classification/infer.yaml",
+      "mode": "100644",
+      "blob": "34b7251d580c86947aea694b98aa5d27dab64361",
+      "bytes": 513
+    },
+    {
+      "path": "examples/scratch/ecg_classification/resnet/nejedly2021_total.yaml",
+      "mode": "100644",
+      "blob": "6fe86d0291e3bc945d4bb06919a836941d16cacf",
+      "bytes": 1315
+    },
+    {
+      "path": "examples/scratch/ecg_classification/resnet/se_wrn_total.yaml",
+      "mode": "100644",
+      "blob": "1192ac2f64d6d84c874cda39a3348290692bbb54",
+      "bytes": 1243
+    },
+    {
+      "path": "examples/scratch/ecg_identification/identification.yaml",
+      "mode": "100644",
+      "blob": "89d6913757287182aa41784ac332398c00cdf2e7",
+      "bytes": 1330
+    },
+    {
+      "path": "examples/scratch/ecg_question_answering/blind_transformer/base.yaml",
+      "mode": "100644",
+      "blob": "819e34444f6754d20e2e25d8b53ab6f973c2014e",
+      "bytes": 1200
+    },
+    {
+      "path": "examples/scratch/ecg_question_answering/deaf_transformer/base.yaml",
+      "mode": "100644",
+      "blob": "fa5e507f2e2cc6937489590bb81e12079e423845",
+      "bytes": 1359
+    },
+    {
+      "path": "examples/scratch/ecg_question_answering/ecg_transformer/base.yaml",
+      "mode": "100644",
+      "blob": "26b2a9cd59247084d026bc23c88d0addbf41ed43",
+      "bytes": 1343
+    },
+    {
+      "path": "examples/scratch/ecg_question_answering/ecg_transformer/small.yaml",
+      "mode": "100644",
+      "blob": "bf33c377e9a43486260c69d54786ad16b63f154a",
+      "bytes": 1360
+    },
+    {
+      "path": "examples/scratch/ecg_question_answering/infer.yaml",
+      "mode": "100644",
+      "blob": "ef2899c99f1f845fec5a8df1d89dcc129fb4fec2",
+      "bytes": 498
+    },
+    {
+      "path": "examples/scratch/ecg_question_answering/resnet_lstm/deeper.yaml",
+      "mode": "100644",
+      "blob": "d7d4591134d3e6aa0d6be56076ce0111dc0afdd7",
+      "bytes": 1223
+    },
+    {
+      "path": "examples/scratch/ecg_segmentation/unet/unet3plus_12leads_aug.yaml",
+      "mode": "100644",
+      "blob": "2b266ae12b69738f2c602ce02c86afd85d8f8e6e",
+      "bytes": 1137
+    },
+    {
+      "path": "examples/scratch/ecg_segmentation/unet/unet3plus_aug.yaml",
+      "mode": "100644",
+      "blob": "cf68460a399f71c6b2a5f6af8a798d1585466cc0",
+      "bytes": 1127
+    },
+    {
+      "path": "examples/scratch/ecg_segmentation/unet/unet3plus_aug_cgm.yaml",
+      "mode": "100644",
+      "blob": "fdc76f9ed89dbfab14bc8a75dd6e255c9d6702a7",
+      "bytes": 1388
+    },
+    {
+      "path": "examples/scratch/ecg_segmentation/unet/unet3plus_cgm.yaml",
+      "mode": "100644",
+      "blob": "6f39b448bda96988024c3eb2046d85a6ae88e5bf",
+      "bytes": 1396
+    },
+    {
+      "path": "examples/simclr/README.md",
+      "mode": "100644",
+      "blob": "af5315513770dc25efa48ffdc2a3c598865dc314",
+      "bytes": 2510
+    },
+    {
+      "path": "examples/simclr/config/finetuning/ecg_transformer/diagnosis.yaml",
+      "mode": "100644",
+      "blob": "afda13b2145d0ed5a0393787f60705c2d38afac8",
+      "bytes": 1320
+    },
+    {
+      "path": "examples/simclr/config/finetuning/ecg_transformer/identification.yaml",
+      "mode": "100644",
+      "blob": "f5529cdc8d7486454542c1e813b37e19c61a80e7",
+      "bytes": 1295
+    },
+    {
+      "path": "examples/simclr/config/pretraining/ecg_transformer/simclr_augs.yaml",
+      "mode": "100644",
+      "blob": "a11cc29b3d4f68bfbb008a9758dc55fafdcf1641",
+      "bytes": 1199
+    },
+    {
+      "path": "examples/simclr/config/pretraining/ecg_transformer/simclr_rlm.yaml",
+      "mode": "100644",
+      "blob": "03a5c8c20f058dd7271c27e83b47cb1cff049668",
+      "bytes": 1110
+    },
+    {
+      "path": "examples/w2v_cmsc/README.md",
+      "mode": "100644",
+      "blob": "ed1f2f926a383ef7b82f65d4b7749daf76dc43b5",
+      "bytes": 3363
+    },
+    {
+      "path": "examples/w2v_cmsc/config/finetuning/ecg_transformer/diagnosis.yaml",
+      "mode": "100644",
+      "blob": "be6598aadb23fd146ec8c3996ae13c92dce237dc",
+      "bytes": 1340
+    },
+    {
+      "path": "examples/w2v_cmsc/config/finetuning/ecg_transformer/grounding_classification/base_total.yaml",
+      "mode": "100644",
+      "blob": "f9ffb605851c3befe5ca5b82f0477cd6fc7fc34e",
+      "bytes": 1416
+    },
+    {
+      "path": "examples/w2v_cmsc/config/finetuning/ecg_transformer/identification.yaml",
+      "mode": "100644",
+      "blob": "e7b3a098d2ae619ac04ab2c5e1d649fa36e8e3b6",
+      "bytes": 1295
+    },
+    {
+      "path": "examples/w2v_cmsc/config/pretraining/w2v_cmsc.yaml",
+      "mode": "100644",
+      "blob": "1a6f2898be07e4f1281b208014bb6e954fc04cb6",
+      "bytes": 1188
+    },
+    {
+      "path": "examples/w2v_cmsc/config/pretraining/w2v_cmsc_augs.yaml",
+      "mode": "100644",
+      "blob": "0638f0251fdb9fd9abdf2a1cbaa311f63e9c0e97",
+      "bytes": 1314
+    },
+    {
+      "path": "examples/w2v_cmsc/config/pretraining/w2v_cmsc_rlm.yaml",
+      "mode": "100644",
+      "blob": "82234beb1732aeeb3837ac0e20ad8dd23293c18e",
+      "bytes": 1299
+    },
+    {
+      "path": "examples/w2v_cmsc/config/pretraining/w2v_cmsc_rlm_small.yaml",
+      "mode": "100644",
+      "blob": "ae9b2f5a1e7fe034d64e0489cf8d4634e9b2fa23",
+      "bytes": 1350
+    },
+    {
+      "path": "examples/wav2vec2/README.md",
+      "mode": "100644",
+      "blob": "04403006688cea01d591142181337fe2c415d0bc",
+      "bytes": 2495
+    },
+    {
+      "path": "examples/wav2vec2/config/finetuning/diagnosis.yaml",
+      "mode": "100644",
+      "blob": "afda13b2145d0ed5a0393787f60705c2d38afac8",
+      "bytes": 1320
+    },
+    {
+      "path": "examples/wav2vec2/config/finetuning/identification.yaml",
+      "mode": "100644",
+      "blob": "e7b3a098d2ae619ac04ab2c5e1d649fa36e8e3b6",
+      "bytes": 1295
+    },
+    {
+      "path": "examples/wav2vec2/config/pretraining/w2v.yaml",
+      "mode": "100644",
+      "blob": "d2b952c8b3100b7598314b59ebf55db7f89916f2",
+      "bytes": 1154
+    },
+    {
+      "path": "examples/wav2vec2/config/pretraining/w2v_augs.yaml",
+      "mode": "100644",
+      "blob": "131eb052c6f908ee146aa8cac7c27d55f01c1841",
+      "bytes": 1354
+    },
+    {
+      "path": "examples/wav2vec2/config/pretraining/w2v_rlm.yaml",
+      "mode": "100644",
+      "blob": "eb1d39e9caac02000245d1f4ca609258a7dd862d",
+      "bytes": 1265
+    },
+    {
+      "path": "fairseq_cli/__init__.py",
+      "mode": "100644",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "fairseq_cli/hydra_inference.py",
+      "mode": "100644",
+      "blob": "9255518df30f446492df92cfae7ed154d8dc73fb",
+      "bytes": 1890
+    },
+    {
+      "path": "fairseq_cli/hydra_train.py",
+      "mode": "100644",
+      "blob": "ff5e076125f4d440ac7a1a69b4f4d11f17bda1aa",
+      "bytes": 2393
+    },
+    {
+      "path": "fairseq_cli/hydra_validate.py",
+      "mode": "100644",
+      "blob": "2a28162d7ac4c3dd9ff3d8825c0f899fa616a3b8",
+      "bytes": 1888
+    },
+    {
+      "path": "fairseq_cli/inference.py",
+      "mode": "100644",
+      "blob": "786b5b70899f7ffc95c990e9f8cd2fe71de865ba",
+      "bytes": 8325
+    },
+    {
+      "path": "fairseq_cli/train.py",
+      "mode": "100644",
+      "blob": "657c72c8e89a8b94b308c138057d231713bf0f5d",
+      "bytes": 18872
+    },
+    {
+      "path": "fairseq_cli/validate.py",
+      "mode": "100644",
+      "blob": "3ad9c6ecdb46e87dcee58578af9a40a0f9dfb753",
+      "bytes": 11907
+    },
+    {
+      "path": "fairseq_signals/__init__.py",
+      "mode": "100644",
+      "blob": "5ceec89aec5c15f20045a3cb4eaacf3b4dd5a0ff",
+      "bytes": 1137
+    },
+    {
+      "path": "fairseq_signals/clib/cuda/ngram_repeat_block_cuda.cpp",
+      "mode": "100644",
+      "blob": "4199cd6ea86b019cb688b20c07e85905b2244fa0",
+      "bytes": 1496
+    },
+    {
+      "path": "fairseq_signals/clib/cuda/ngram_repeat_block_cuda_kernel.cu",
+      "mode": "100644",
+      "blob": "b458b0916a7b38d1662377ce95559e7562e4c65d",
+      "bytes": 2688
+    },
+    {
+      "path": "fairseq_signals/clib/libbase/balanced_assignment.cpp",
+      "mode": "100644",
+      "blob": "296f03b6aeb87a11db92e5342d8dab90f1fc3867",
+      "bytes": 4140
+    },
+    {
+      "path": "fairseq_signals/clib/libnat/edit_dist.cpp",
+      "mode": "100644",
+      "blob": "6bc6a937d6abde0cd49769c4def69ac0560096bc",
+      "bytes": 5958
+    },
+    {
+      "path": "fairseq_signals/clib/libnat_cuda/binding.cpp",
+      "mode": "100644",
+      "blob": "aaa6244d5c6819acfae5f408280205661a3389ae",
+      "bytes": 1772
+    },
+    {
+      "path": "fairseq_signals/clib/libnat_cuda/edit_dist.cu",
+      "mode": "100644",
+      "blob": "22de16b270851227348c43d6adfb763c8a325df6",
+      "bytes": 10695
+    },
+    {
+      "path": "fairseq_signals/clib/libnat_cuda/edit_dist.h",
+      "mode": "100644",
+      "blob": "e3506cd34ddaa35bb724fe64a459bad8046b9a34",
+      "bytes": 659
+    },
+    {
+      "path": "fairseq_signals/config/__init__.py",
+      "mode": "100644",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "fairseq_signals/config/config.yaml",
+      "mode": "100644",
+      "blob": "7a0cf1f9929ebbc2fbf2395092c0c1b8c517b876",
+      "bytes": 215
+    },
+    {
+      "path": "fairseq_signals/criterions/3kg_criterion.py",
+      "mode": "100644",
+      "blob": "92f893c57af8553c9812b5e15c7c27e85bd7e4bb",
+      "bytes": 6719
+    },
+    {
+      "path": "fairseq_signals/criterions/__init__.py",
+      "mode": "100644",
+      "blob": "461ddf15fb5b84953f7e0f99887f58b31b011806",
+      "bytes": 1021
+    },
+    {
+      "path": "fairseq_signals/criterions/arcface_criterion.py",
+      "mode": "100644",
+      "blob": "778c9b595ac743acdc08d00beb2391c04f5d3538",
+      "bytes": 5636
+    },
+    {
+      "path": "fairseq_signals/criterions/binary_cross_entropy.py",
+      "mode": "100644",
+      "blob": "58cc12c0d60da0b1480719d5da13c47ecd962177",
+      "bytes": 6669
+    },
+    {
+      "path": "fairseq_signals/criterions/binary_cross_entropy_with_logits.py",
+      "mode": "100644",
+      "blob": "5dbb616b6ffba0cca58170aa1e85553ee2063bad",
+      "bytes": 25093
+    },
+    {
+      "path": "fairseq_signals/criterions/cmsc_criterion.py",
+      "mode": "100644",
+      "blob": "78cd9753e14db325fc2101a621a15b6084539c08",
+      "bytes": 4773
+    },
+    {
+      "path": "fairseq_signals/criterions/composite_criterion.py",
+      "mode": "100644",
+      "blob": "f81f37d110555078d5d2cf54173cac59f29cb273",
+      "bytes": 8418
+    },
+    {
+      "path": "fairseq_signals/criterions/criterion.py",
+      "mode": "100644",
+      "blob": "f0f984f4efa644ca9508cb9dafe1e4eac8927a44",
+      "bytes": 6553
+    },
+    {
+      "path": "fairseq_signals/criterions/cross_entropy.py",
+      "mode": "100644",
+      "blob": "638e896ff68e3abf4a692ebbe0307338807edbfb",
+      "bytes": 4805
+    },
+    {
+      "path": "fairseq_signals/criterions/m3ae_criterion.py",
+      "mode": "100644",
+      "blob": "b2fc647c8ee3c3b911618f0c5bc0a039e16f4f10",
+      "bytes": 6548
+    },
+    {
+      "path": "fairseq_signals/criterions/medvill_criterion.py",
+      "mode": "100644",
+      "blob": "36a3d0d6069a088a0c7f28fb193819311d15ebb7",
+      "bytes": 6129
+    },
+    {
+      "path": "fairseq_signals/criterions/mse_criterion.py",
+      "mode": "100644",
+      "blob": "0b189a7a6ff71f2f3a0c22c25dacbd69a3da4ab4",
+      "bytes": 2628
+    },
+    {
+      "path": "fairseq_signals/criterions/multi_head_binary_cross_entropy.py",
+      "mode": "100644",
+      "blob": "71aeaba201d213a2837636721b15766023c70982",
+      "bytes": 13226
+    },
+    {
+      "path": "fairseq_signals/criterions/simclr_criterion.py",
+      "mode": "100644",
+      "blob": "6f0e1f6bb076ab0e4636896ccae112f076b0b804",
+      "bytes": 6120
+    },
+    {
+      "path": "fairseq_signals/criterions/wav2vec2_criterion.py",
+      "mode": "100644",
+      "blob": "b05cf886a55f0df1f42fe670baa947b3d8c325de",
+      "bytes": 16091
+    },
+    {
+      "path": "fairseq_signals/data/__init__.py",
+      "mode": "100644",
+      "blob": "f6e2925aa60b41c39ce318fd322bec28190685de",
+      "bytes": 1072
+    },
+    {
+      "path": "fairseq_signals/data/data_utils.py",
+      "mode": "100644",
+      "blob": "a95e005f4f675bd236d4606490b61fc1ad7305b4",
+      "bytes": 9760
+    },
+    {
+      "path": "fairseq_signals/data/data_utils_fast.pyx",
+      "mode": "100644",
+      "blob": "c61f31d6b2113d4c6a03d6553335997098ba0c20",
+      "bytes": 6363
+    },
+    {
+      "path": "fairseq_signals/data/dataset.py",
+      "mode": "100644",
+      "blob": "20d3c178fb5e288fb5c86267f0a6958fb0e55e4f",
+      "bytes": 5309
+    },
+    {
+      "path": "fairseq_signals/data/ecg/__init__.py",
+      "mode": "100644",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "fairseq_signals/data/ecg/augmentations.py",
+      "mode": "100644",
+      "blob": "ea3fca6720e301e78f811983a89ed4292a4681a4",
+      "bytes": 7249
+    },
+    {
+      "path": "fairseq_signals/data/ecg/cmsc_ecg_dataset.py",
+      "mode": "100644",
+      "blob": "62376dc748227bc3ac86d8ae856c8e812b83cb86",
+      "bytes": 6677
+    },
+    {
+      "path": "fairseq_signals/data/ecg/ecg_utils.py",
+      "mode": "100644",
+      "blob": "548a926ef27fb9b1bb87f9df544efe7eb6d038d4",
+      "bytes": 1938
+    },
+    {
+      "path": "fairseq_signals/data/ecg/identification_ecg_dataset.py",
+      "mode": "100644",
+      "blob": "df003dde0b354cedf03148cdd5e0780f29cd3928",
+      "bytes": 2499
+    },
+    {
+      "path": "fairseq_signals/data/ecg/perturb_ecg_dataset.py",
+      "mode": "100644",
+      "blob": "8b142c2d25e015897086cc21b381b1090a6efa31",
+      "bytes": 6813
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/README.md",
+      "mode": "100644",
+      "blob": "e439389c72c2c8d6c7f068a9fbf5e170597dffed",
+      "bytes": 3966
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/__init__.py",
+      "mode": "100644",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/combine_manifests.py",
+      "mode": "100644",
+      "blob": "be70c8b8ee56ecbc95e7e7e867bda42edeece616",
+      "bytes": 2763
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/convert_to_cmsc_manifest.py",
+      "mode": "100644",
+      "blob": "33762f2f6ff1748921ff8987805c8b2d4dead4ec",
+      "bytes": 2580
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/manifest.py",
+      "mode": "100644",
+      "blob": "100d2707a5497858158b6b032133e09bba1042bd",
+      "bytes": 4680
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/manifest_identification.py",
+      "mode": "100644",
+      "blob": "d7a0fb6ab563e1df55e8b8196f9eda6d373ac244",
+      "bytes": 3258
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/manifest_physionet2021.py",
+      "mode": "100644",
+      "blob": "3ea269210355d81dfb58cecb2a8617be5d58bafe",
+      "bytes": 8536
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/preprocess_ecgiddb.py",
+      "mode": "100644",
+      "blob": "89e4c5ed5acfedac3ad3d85718e8177817abc6f5",
+      "bytes": 2338
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/preprocess_ludb.py",
+      "mode": "100644",
+      "blob": "c424adea28c84d195520a2eb532eaa1dfb704873",
+      "bytes": 11972
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/preprocess_physionet2021.py",
+      "mode": "100644",
+      "blob": "844f4d2a37683f3c088636a7314dbd51cacd1f78",
+      "bytes": 6673
+    },
+    {
+      "path": "fairseq_signals/data/ecg/preprocess/preprocess_ptbxl.py",
+      "mode": "100644",
+      "blob": "61ba76e66043f40fcadd8b1bf87569775b2ea5a4",
+      "bytes": 3603
+    },
+    {
+      "path": "fairseq_signals/data/ecg/raw_ecg_dataset.py",
+      "mode": "100644",
+      "blob": "2a828ebab7f52e25bd9e4001807aaa86b56cb508",
+      "bytes": 20493
+    },
+    {
+      "path": "fairseq_signals/data/ecg/segmentation_ecg_dataset.py",
+      "mode": "100644",
+      "blob": "68fe3d0b44855bc79b14a75ae4e6eb3e904b24cc",
+      "bytes": 2550
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/__init__.py",
+      "mode": "100644",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/ecg_qa_dataset.py",
+      "mode": "100644",
+      "blob": "8e4a9fdc17eaf14926cc2fcc19af5ba2983da38e",
+      "bytes": 6262
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/ecg_text_dataset.py",
+      "mode": "100644",
+      "blob": "564bab9c311500f159cc20beacc40fa17327dd7c",
+      "bytes": 9011
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/README.md",
+      "mode": "100644",
+      "blob": "e643763f92f3f8e642180a5317770aa191d7ef53",
+      "bytes": 9965
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/__init__.py",
+      "mode": "100644",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/manifest.py",
+      "mode": "100644",
+      "blob": "16eff0c0fc688fb39483b7fae0221a510f06616c",
+      "bytes": 3060
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/preprocess_ecgqa.py",
+      "mode": "100644",
+      "blob": "0e592e99e9592207601d70df786d4ea3b13bb68c",
+      "bytes": 7360
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/preprocess_ecgqa_for_classification.py",
+      "mode": "100644",
+      "blob": "c1cfcebfd513fd39df347fe5a9b003716b73c3a3",
+      "bytes": 21561
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/preprocess_mimic_iv_ecg.py",
+      "mode": "100644",
+      "blob": "50304f9926258eb03e6856662384eb64fcefe719",
+      "bytes": 2763
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/preprocess_ptbxl.py",
+      "mode": "100644",
+      "blob": "138da3433a87e9078eeb153ce9ac7a4ae5771783",
+      "bytes": 3133
+    },
+    {
+      "path": "fairseq_signals/data/ecg_text/preprocess/ptbxl_database_translated.csv",
+      "mode": "100644",
+      "blob": "88e9356b1fcda27d699ae6c41c0a531b5354b1e5",
+      "bytes": 6354265
+    },
+    {
+      "path": "fairseq_signals/data/iterators.py",
+      "mode": "100644",
+      "blob": "491b93f8eaf27fa3b5935d1211a9522f036121a1",
+      "bytes": 18269
+    },
+    {
+      "path": "fairseq_signals/dataclass/__init__.py",
+      "mode": "100644",
+      "blob": "c0b08f4d8f35901def7fe32efd36bc1ef05ca783",
+      "bytes": 314
+    },
+    {
+      "path": "fairseq_signals/dataclass/configs.py",
+      "mode": "100644",
+      "blob": "319731ab63450608ea35c732cd9d58b76e6bb1ec",
+      "bytes": 18098
+    },
+    {
+      "path": "fairseq_signals/dataclass/constants.py",
+      "mode": "100644",
+      "blob": "cb3a89493d883c5ffb800273c616533d70804be9",
+      "bytes": 1088
+    },
+    {
+      "path": "fairseq_signals/dataclass/initialize.py",
+      "mode": "100644",
+      "blob": "136d39ab5c86ba9812f38e6e8da7e29470644fc2",
+      "bytes": 2204
+    },
+    {
+      "path": "fairseq_signals/dataclass/utils.py",
+      "mode": "100644",
+      "blob": "b1ae222ca552a809de2c01d84bf228f3fd4975aa",
+      "bytes": 17824
+    },
+    {
+      "path": "fairseq_signals/distributed/__init__.py",
+      "mode": "100644",
+      "blob": "332ae7a2306d415129ae340721282f729765345b",
+      "bytes": 555
+    },
+    {
+      "path": "fairseq_signals/distributed/distributed_timeout_wrapper.py",
+      "mode": "100644",
+      "blob": "147f6839bd1c6e8ac32347fa3d234c3b605a1150",
+      "bytes": 3078
+    },
+    {
+      "path": "fairseq_signals/distributed/fully_sharded_data_parallel.py",
+      "mode": "100644",
+      "blob": "6523998335b62be43166d386a66f37937f38d41d",
+      "bytes": 5017
+    },
+    {
+      "path": "fairseq_signals/distributed/legacy_distributed_data_parallel.py",
+      "mode": "100644",
+      "blob": "097116ce083f7d5cf95bec20dc879542e818674c",
+      "bytes": 6112
+    },
+    {
+      "path": "fairseq_signals/distributed/module_proxy_wrapper.py",
+      "mode": "100644",
+      "blob": "ba38da4c9791914143c24441ad3132ee0b79ee1c",
+      "bytes": 1972
+    },
+    {
+      "path": "fairseq_signals/distributed/utils.py",
+      "mode": "100644",
+      "blob": "cc92b6bce90af084e5129cba5b1bc5a6778f8d2d",
+      "bytes": 18378
+    },
+    {
+      "path": "fairseq_signals/logging/__init__.py",
+      "mode": "100644",
+      "blob": "6264236915a7269a4d920ee8213004374dd86a9a",
+      "bytes": 177
+    },
+    {
+      "path": "fairseq_signals/logging/meters.py",
+      "mode": "100644",
+      "blob": "3bb1e5156c41c56f4afbaf18ca2b5b986f802226",
+      "bytes": 11877
+    },
+    {
+      "path": "fairseq_signals/logging/metrics.py",
+      "mode": "100644",
+      "blob": "4c5633d5c6f84cf3854892e18acff78262797033",
+      "bytes": 9839
+    },
+    {
+      "path": "fairseq_signals/logging/progress_bar.py",
+      "mode": "100644",
+      "blob": "6c9f8279c1d1c18bb22b812c82837fccd9025389",
+      "bytes": 14465
+    },
+    {
+      "path": "fairseq_signals/models/__init__.py",
+      "mode": "100644",
+      "blob": "cf5cdae5ccd0ba3896028feba6ac72f4f423f3e1",
+      "bytes": 8618
+    },
+    {
+      "path": "fairseq_signals/models/classification/__init__.py",
+      "mode": "100644",
+      "blob": "6ca192f101462b4952331f9853fa05d713fdfb1c",
+      "bytes": 74
+    },
+    {
+      "path": "fairseq_signals/models/classification/ecg_transformer_classifier.py",
+      "mode": "100644",
+      "blob": "d22a35641aa56b4a47808761136a5c47bfbaa255",
+      "bytes": 1956
+    },
+    {
+      "path": "fairseq_signals/models/classification/resnet_classifier.py",
+      "mode": "100644",
+      "blob": "f16db4453a8baedbf84cdd8ee25f2d1dea32cb63",
+      "bytes": 4945
+    },
+    {
+      "path": "fairseq_signals/models/convnet/__init__.py",
+      "mode": "100644",
+      "blob": "2d862bc5db8bb291cd0d16f64b7630fca3c0bd2d",
+      "bytes": 29
+    },
+    {
+      "path": "fairseq_signals/models/convnet/convnet.py",
+      "mode": "100644",
+      "blob": "1edb762ee14f7009f7a8655cadbb15c7e2b80e98",
+      "bytes": 2772
+    },
+    {
+      "path": "fairseq_signals/models/distributed_model.py",
+      "mode": "100644",
+      "blob": "35efb34d5ca2563fb66a1ff371e84da1d4f98549",
+      "bytes": 2501
+    },
+    {
+      "path": "fairseq_signals/models/ecg_language_transformer.py",
+      "mode": "100644",
+      "blob": "38483f1cca73468445251e9bb5a5b85d1f006173",
+      "bytes": 17257
+    },
+    {
+      "path": "fairseq_signals/models/ecg_transformer.py",
+      "mode": "100644",
+      "blob": "ecccbbda6c2ac7ed09a91d136cb603eff68ddcbd",
+      "bytes": 10180
+    },
+    {
+      "path": "fairseq_signals/models/finetuning_model.py",
+      "mode": "100644",
+      "blob": "9f194cd89a9c791785bc09700799d9df889404fe",
+      "bytes": 1790
+    },
+    {
+      "path": "fairseq_signals/models/identification/__init__.py",
+      "mode": "100644",
+      "blob": "7e16405a8d1fa619b30d8483add33cedd404fa4d",
+      "bytes": 30
+    },
+    {
+      "path": "fairseq_signals/models/identification/arcface.py",
+      "mode": "100644",
+      "blob": "1bb566d64e8b5e315dea76676069c2cd446c9772",
+      "bytes": 1986
+    },
+    {
+      "path": "fairseq_signals/models/lstm.py",
+      "mode": "100644",
+      "blob": "9c83917feec8e537a267829fcc92fb6cd1c1967c",
+      "bytes": 5940
+    },
+    {
+      "path": "fairseq_signals/models/m3ae/__init__.py",
+      "mode": "100644",
+      "blob": "5c389e3d95a0b8acaa3e8a1595151cf6e3529363",
+      "bytes": 42
+    },
+    {
+      "path": "fairseq_signals/models/m3ae/bert_model.py",
+      "mode": "100644",
+      "blob": "d8b06724972e30068a38f94149bbe59dc9c7dea5",
+      "bytes": 80073
+    },
+    {
+      "path": "fairseq_signals/models/m3ae/m3ae.py",
+      "mode": "100644",
+      "blob": "cc8dfccaad8901f71e0d06fb19d21ea427507a87",
+      "bytes": 24841
+    },
+    {
+      "path": "fairseq_signals/models/m3ae/m3ae_qa.py",
+      "mode": "100644",
+      "blob": "f9c1c88c259f0dfe905d52b350f177ff7ee177ad",
+      "bytes": 2626
+    },
+    {
+      "path": "fairseq_signals/models/medvill/__init__.py",
+      "mode": "100644",
+      "blob": "2aaac87aedc70fed6c9a2d972f5d0a5eb3d3b58e",
+      "bytes": 22
+    },
+    {
+      "path": "fairseq_signals/models/medvill/medvill.py",
+      "mode": "100644",
+      "blob": "14d7d86fb64dddf242951104e9323f18d88f1a8a",
+      "bytes": 12680
+    },
+    {
+      "path": "fairseq_signals/models/model.py",
+      "mode": "100644",
+      "blob": "dd5d77b285ab89bebd920da84e1bc2e9e4ca59b5",
+      "bytes": 4470
+    },
+    {
+      "path": "fairseq_signals/models/pretraining_model.py",
+      "mode": "100644",
+      "blob": "02570b4e456584226ab145a3171ec2c5b8936a7a",
+      "bytes": 3538
+    },
+    {
+      "path": "fairseq_signals/models/question_answer/__init__.py",
+      "mode": "100644",
+      "blob": "24e8eea4c8e9fe836f69ba0c2cf1e8652e4515f3",
+      "bytes": 182
+    },
+    {
+      "path": "fairseq_signals/models/question_answer/blind_transformer.py",
+      "mode": "100644",
+      "blob": "7b4d0949dd53e96a1ca419f8757ba4c26c3098f3",
+      "bytes": 4099
+    },
+    {
+      "path": "fairseq_signals/models/question_answer/deaf_transformer.py",
+      "mode": "100644",
+      "blob": "c155166b26cad07f5fe517614b3d6f0ae449c2a6",
+      "bytes": 4703
+    },
+    {
+      "path": "fairseq_signals/models/question_answer/ecg_language_transformer_classifier.py",
+      "mode": "100644",
+      "blob": "4660aaa71953e49550512f3bb2b202619041e43a",
+      "bytes": 4823
+    },
+    {
+      "path": "fairseq_signals/models/question_answer/resnet_lstm_classifier.py",
+      "mode": "100644",
+      "blob": "cb25b29a74f29961d71a834144b51ebda90c9e79",
+      "bytes": 1620
+    },
+    {
+      "path": "fairseq_signals/models/resnet.py",
+      "mode": "100644",
+      "blob": "8e4349a4faa5f4cb389fc3fb6702a900d038a1a1",
+      "bytes": 20548
+    },
+    {
+      "path": "fairseq_signals/models/resnet_lstm.py",
+      "mode": "100644",
+      "blob": "ef5489aeb12a459bca41a97bb16f2c91f749ad39",
+      "bytes": 5863
+    },
+    {
+      "path": "fairseq_signals/models/se_wrn.py",
+      "mode": "100644",
+      "blob": "791924e0c3e3f8bb8fe30bb5a8ae6b75f18a9838",
+      "bytes": 12148
+    },
+    {
+      "path": "fairseq_signals/models/segmentation/__init__.py",
+      "mode": "100644",
+      "blob": "e4b39ec14886984f3df5a0300b32a41d7b85ef1a",
+      "bytes": 35
+    },
+    {
+      "path": "fairseq_signals/models/segmentation/unet_segmentor.py",
+      "mode": "100644",
+      "blob": "20d6042ea8f7a40baf6cb9604c2cdd772b534a4a",
+      "bytes": 8901
+    },
+    {
+      "path": "fairseq_signals/models/transformer.py",
+      "mode": "100644",
+      "blob": "ff7005e8044370c40a143c074abb9226f9ef6467",
+      "bytes": 9473
+    },
+    {
+      "path": "fairseq_signals/models/unet.py",
+      "mode": "100644",
+      "blob": "3971426b0c5ca035a8e51de9016e12c8e7e1ef61",
+      "bytes": 13128
+    },
+    {
+      "path": "fairseq_signals/models/vggnet.py",
+      "mode": "100644",
+      "blob": "d4707b09382a6e6b45d6c9c3845419e61a9bcac0",
+      "bytes": 4573
+    },
+    {
+      "path": "fairseq_signals/models/wav2vec2/__init__.py",
+      "mode": "100644",
+      "blob": "d6c7864e1cee48dbc7526d7ca9686c2ebd006bb2",
+      "bytes": 245
+    },
+    {
+      "path": "fairseq_signals/models/wav2vec2/wav2vec2.py",
+      "mode": "100644",
+      "blob": "e75205187356f07712005d2907ce1ea85b80b525",
+      "bytes": 15203
+    },
+    {
+      "path": "fairseq_signals/models/wav2vec2/wav2vec2_cmsc.py",
+      "mode": "100644",
+      "blob": "891e582fd98c20f1c9811ff6e626832c4b4194f0",
+      "bytes": 1685
+    },
+    {
+      "path": "fairseq_signals/modules/__init__.py",
+      "mode": "100644",
+      "blob": "6e668ebf59378f6be2f35d87ecbbf05fd08a5957",
+      "bytes": 1157
+    },
+    {
+      "path": "fairseq_signals/modules/conv_feature_extraction.py",
+      "mode": "100644",
+      "blob": "0c0f77ef88ecff8390bcff23354c709514e83b68",
+      "bytes": 5203
+    },
+    {
+      "path": "fairseq_signals/modules/conv_positional_encoding.py",
+      "mode": "100644",
+      "blob": "04ffa65cab7e40af52053780c9d24178cfd4d8b1",
+      "bytes": 1073
+    },
+    {
+      "path": "fairseq_signals/modules/dropout.py",
+      "mode": "100644",
+      "blob": "0635c3d6ca5c62c7b733b501f9e7dc59dd598280",
+      "bytes": 1694
+    },
+    {
+      "path": "fairseq_signals/modules/fp32_group_norm.py",
+      "mode": "100644",
+      "blob": "4358b021df8c1d9606c135703b70cbe68d9797ac",
+      "bytes": 676
+    },
+    {
+      "path": "fairseq_signals/modules/gather_layer.py",
+      "mode": "100644",
+      "blob": "b9a1a27a632609894472ea2e999c39b773db838c",
+      "bytes": 664
+    },
+    {
+      "path": "fairseq_signals/modules/grad_multiply.py",
+      "mode": "100644",
+      "blob": "b2742a7b64292cf5a56ce43830a76553502c8e98",
+      "bytes": 444
+    },
+    {
+      "path": "fairseq_signals/modules/gumbel_vector_quantizer.py",
+      "mode": "100644",
+      "blob": "e5d77638397323fdaab1b1caf02c44a31539c4b1",
+      "bytes": 7179
+    },
+    {
+      "path": "fairseq_signals/modules/layer_norm.py",
+      "mode": "100644",
+      "blob": "234609d9e213a650e0032aaa0ca0462a818bfead",
+      "bytes": 1500
+    },
+    {
+      "path": "fairseq_signals/modules/multi_head_attention.py",
+      "mode": "100644",
+      "blob": "30542d0e2f4bfd2b14c0f5e5060a6fd73d6193b4",
+      "bytes": 4890
+    },
+    {
+      "path": "fairseq_signals/modules/quant_noise.py",
+      "mode": "100644",
+      "blob": "d777dfbb6c1bf6a9b769dfdaec35d5ef084c8a8b",
+      "bytes": 4005
+    },
+    {
+      "path": "fairseq_signals/modules/same_pad.py",
+      "mode": "100644",
+      "blob": "606da86d71a601c83d6bac9f86ffaefa5ca53701",
+      "bytes": 555
+    },
+    {
+      "path": "fairseq_signals/modules/transformer_encoder.py",
+      "mode": "100644",
+      "blob": "fc99dbef95229a174d11e75f68186b1f05e4ae9a",
+      "bytes": 4254
+    },
+    {
+      "path": "fairseq_signals/modules/transformer_encoder_layer.py",
+      "mode": "100644",
+      "blob": "1a7ad7603de28b9d685563ca7ccf7df719b9f68a",
+      "bytes": 3325
+    },
+    {
+      "path": "fairseq_signals/modules/transpose_last.py",
+      "mode": "100644",
+      "blob": "d3767acbf6dafb9c0b96b01365925c3bc2a56f54",
+      "bytes": 504
+    },
+    {
+      "path": "fairseq_signals/optim/__init__.py",
+      "mode": "100644",
+      "blob": "217d66365d71a994beac05acd4f888cef95424e4",
+      "bytes": 1265
+    },
+    {
+      "path": "fairseq_signals/optim/adam.py",
+      "mode": "100644",
+      "blob": "4501fd4a3970440dcb0ec408a25b0c8d702a27b2",
+      "bytes": 8035
+    },
+    {
+      "path": "fairseq_signals/optim/dynamic_loss_scalar.py",
+      "mode": "100644",
+      "blob": "43f9be37b9067c520cd794b9a941c57adae25e97",
+      "bytes": 2637
+    },
+    {
+      "path": "fairseq_signals/optim/fp16_optimizer.py",
+      "mode": "100644",
+      "blob": "0ae4e246fbca0dcef04afe1ac7073cdf8859a457",
+      "bytes": 21294
+    },
+    {
+      "path": "fairseq_signals/optim/lr_scheduler/__init__.py",
+      "mode": "100644",
+      "blob": "45fefe61c0be641533ce10f29f2729ff60d60fdd",
+      "bytes": 1022
+    },
+    {
+      "path": "fairseq_signals/optim/lr_scheduler/fairseq_lr_scheduler.py",
+      "mode": "100644",
+      "blob": "72574d4fbf6e99c600df7a991fd0a1f25fee7a13",
+      "bytes": 1720
+    },
+    {
+      "path": "fairseq_signals/optim/lr_scheduler/fixed_schedule.py",
+      "mode": "100644",
+      "blob": "c6a25ff13f858474a76ae28e3ba6627ae0891566",
+      "bytes": 2672
+    },
+    {
+      "path": "fairseq_signals/optim/lr_scheduler/step_lr_scheduler.py",
+      "mode": "100644",
+      "blob": "422678c0c6b808de645b98211a506ad8c66585a4",
+      "bytes": 3155
+    },
+    {
+      "path": "fairseq_signals/optim/lr_scheduler/tri_stage_lr_scheduler.py",
+      "mode": "100644",
+      "blob": "bfbe224a978071cbd3cea893f90351f55dc67f5b",
+      "bytes": 5766
+    },
+    {
+      "path": "fairseq_signals/optim/optimizer.py",
+      "mode": "100644",
+      "blob": "ea08530cacd6ce06b7d96cfa2eed7af17d0cc16d",
+      "bytes": 6225
+    },
+    {
+      "path": "fairseq_signals/tasks/__init__.py",
+      "mode": "100644",
+      "blob": "67b65dacdb3e7864cf8ec0e07add60ad65c1047f",
+      "bytes": 4409
+    },
+    {
+      "path": "fairseq_signals/tasks/ecg_classification.py",
+      "mode": "100644",
+      "blob": "9bc5de2076b0cf3129944acdcd9036da764226e0",
+      "bytes": 4629
+    },
+    {
+      "path": "fairseq_signals/tasks/ecg_identification.py",
+      "mode": "100644",
+      "blob": "37c3ab40f1c684ee3827ad9f01e3821b4d7fe6c4",
+      "bytes": 8889
+    },
+    {
+      "path": "fairseq_signals/tasks/ecg_pretraining.py",
+      "mode": "100644",
+      "blob": "1c6ae9087a78faa6ccfb929304e415bbb90fadd1",
+      "bytes": 14859
+    },
+    {
+      "path": "fairseq_signals/tasks/ecg_question_answering.py",
+      "mode": "100644",
+      "blob": "6adcabfbf6f7e95a75a13921fba246e0c70d05c4",
+      "bytes": 2092
+    },
+    {
+      "path": "fairseq_signals/tasks/ecg_segmentation.py",
+      "mode": "100644",
+      "blob": "c015e31e66be2907f0158f7661a34c445371965a",
+      "bytes": 2882
+    },
+    {
+      "path": "fairseq_signals/tasks/ecg_text_pretaining.py",
+      "mode": "100644",
+      "blob": "290daae11f454a78e0ce3b1a94d7a65ce8ba9179",
+      "bytes": 4990
+    },
+    {
+      "path": "fairseq_signals/tasks/task.py",
+      "mode": "100644",
+      "blob": "29e6aa0d901b8ea98c58051e497e7fb834514b96",
+      "bytes": 15795
+    },
+    {
+      "path": "fairseq_signals/trainer.py",
+      "mode": "100644",
+      "blob": "da6514de0ca90379958c70049bb85e81ccbc2cd4",
+      "bytes": 44644
+    },
+    {
+      "path": "fairseq_signals/utils/__init__.py",
+      "mode": "100644",
+      "blob": "84f89ff9d2f8097d070b56980dd18abaae5267c1",
+      "bytes": 178
+    },
+    {
+      "path": "fairseq_signals/utils/checkpoint_utils.py",
+      "mode": "100644",
+      "blob": "6701d874adad97bb58b96c9ea18b73018860b4c6",
+      "bytes": 22880
+    },
+    {
+      "path": "fairseq_signals/utils/file.py",
+      "mode": "100644",
+      "blob": "3fae787d075852f2002454ec0a678a2463029bff",
+      "bytes": 5997
+    },
+    {
+      "path": "fairseq_signals/utils/file_io.py",
+      "mode": "100644",
+      "blob": "a56ba49c9beb00818cb4e3fff0826bd120167e8b",
+      "bytes": 5099
+    },
+    {
+      "path": "fairseq_signals/utils/nan_detector.py",
+      "mode": "100644",
+      "blob": "ed399ad2570bd2898d15bc571b40c9411d11cbd9",
+      "bytes": 3753
+    },
+    {
+      "path": "fairseq_signals/utils/options.py",
+      "mode": "100644",
+      "blob": "d8131e506237f2219cd0adf611981d26a9ed6cf1",
+      "bytes": 10566
+    },
+    {
+      "path": "fairseq_signals/utils/pandas.py",
+      "mode": "100644",
+      "blob": "4aadf3c200e0b362d1eced9fa22bab93e54bc2e1",
+      "bytes": 6149
+    },
+    {
+      "path": "fairseq_signals/utils/pdb.py",
+      "mode": "100644",
+      "blob": "4eabaccb494f9749452304a8599a304d89a6c0c6",
+      "bytes": 1108
+    },
+    {
+      "path": "fairseq_signals/utils/registry.py",
+      "mode": "100644",
+      "blob": "37f4fbe29e5b367d1714d56e851107657342bd9f",
+      "bytes": 3748
+    },
+    {
+      "path": "fairseq_signals/utils/splits.py",
+      "mode": "100644",
+      "blob": "cf3bbd4f48c0a9f4bb2f1035dc952e9031e3fd1f",
+      "bytes": 20004
+    },
+    {
+      "path": "fairseq_signals/utils/store.py",
+      "mode": "100644",
+      "blob": "b294a3d19e958c272993b8079bce4ab33f2a6a26",
+      "bytes": 13810
+    },
+    {
+      "path": "fairseq_signals/utils/utils.py",
+      "mode": "100644",
+      "blob": "53a71c85548e3c4609bc5d0a8b54ea50e85dc52d",
+      "bytes": 9192
+    },
+    {
+      "path": "fairseq_signals/version.txt",
+      "mode": "100644",
+      "blob": "e9780dc01b8cef05441b77da682325b6e7eec4e1",
+      "bytes": 7
+    },
+    {
+      "path": "pyproject.toml",
+      "mode": "100644",
+      "blob": "6d1b4c5b6fb56a63069147e3a1de922ce71a45d8",
+      "bytes": 100
+    },
+    {
+      "path": "scripts/preprocess/ecg/README.md",
+      "mode": "100644",
+      "blob": "5ef961b1847fcec25319770a513231b30f8f2763",
+      "bytes": 9035
+    },
+    {
+      "path": "scripts/preprocess/ecg/code_15_labels.py",
+      "mode": "100644",
+      "blob": "be1d17a3cd3284c5e5729445808f16be345ce1b8",
+      "bytes": 1492
+    },
+    {
+      "path": "scripts/preprocess/ecg/code_15_signals.py",
+      "mode": "100644",
+      "blob": "d95b59a263d6773375b827c38bd27442384fbefe",
+      "bytes": 3536
+    },
+    {
+      "path": "scripts/preprocess/ecg/example_records.py",
+      "mode": "100644",
+      "blob": "6e0f9321daefb82d8a4e3ee0b7f9ded2dbf18499",
+      "bytes": 1355
+    },
+    {
+      "path": "scripts/preprocess/ecg/example_signals.py",
+      "mode": "100644",
+      "blob": "ecc1e2be4809fda469920770cbf6d5e3d1947df6",
+      "bytes": 3699
+    },
+    {
+      "path": "scripts/preprocess/ecg/mimic_iv_ecg_records.py",
+      "mode": "100644",
+      "blob": "86a6188b8269e7218abc2fbb7b6558b7d91f6db5",
+      "bytes": 5230
+    },
+    {
+      "path": "scripts/preprocess/ecg/mimic_iv_ecg_signals.py",
+      "mode": "100644",
+      "blob": "c95f63e3d068b0b49ecacd733d03e7f88c8187e5",
+      "bytes": 1259
+    },
+    {
+      "path": "scripts/preprocess/ecg/muse_records.py",
+      "mode": "100644",
+      "blob": "3a9179380ee3d8f0920c87d8dc5af229e5a0abeb",
+      "bytes": 1126
+    },
+    {
+      "path": "scripts/preprocess/ecg/muse_signals.py",
+      "mode": "100644",
+      "blob": "a2829ca63897b76ea9ce741efa31d91452d406de",
+      "bytes": 9610
+    },
+    {
+      "path": "scripts/preprocess/ecg/physionet2021_labels.py",
+      "mode": "100644",
+      "blob": "ba3b20b001c5a9c8ce5560c6a6b51a06a447ceb0",
+      "bytes": 3384
+    },
+    {
+      "path": "scripts/preprocess/ecg/physionet2021_records.py",
+      "mode": "100644",
+      "blob": "a25ca91511d505cb9982eade0c13b3ad0c227895",
+      "bytes": 1469
+    },
+    {
+      "path": "scripts/preprocess/ecg/physionet2021_signals.py",
+      "mode": "100644",
+      "blob": "757f70b0d37af8c774b6873190a5c2b93b6835b2",
+      "bytes": 2473
+    },
+    {
+      "path": "scripts/preprocess/ecg/preprocess.py",
+      "mode": "100644",
+      "blob": "b72a3e9cd41d91ceada519f8d28531c82900ab30",
+      "bytes": 18581
+    },
+    {
+      "path": "scripts/preprocess/manifests.py",
+      "mode": "100644",
+      "blob": "e8c3338cfd144ef5670677bd3d2059f38d8af891",
+      "bytes": 1447
+    },
+    {
+      "path": "scripts/preprocess/prepare_clf_labels.py",
+      "mode": "100644",
+      "blob": "42fa157f3fd6a34e1a12162153a0a8e716b15eaa",
+      "bytes": 4708
+    },
+    {
+      "path": "scripts/preprocess/splits.py",
+      "mode": "100644",
+      "blob": "4dffba7b533937586366b5e643b21300ac18006b",
+      "bytes": 5622
+    },
+    {
+      "path": "scripts/preprocess/subset_manifest.py",
+      "mode": "100644",
+      "blob": "76b67a4d2d294238f8f628e99708f803ad4db342",
+      "bytes": 3529
+    },
+    {
+      "path": "setup.py",
+      "mode": "100644",
+      "blob": "41b05ed092c6507f71f88b1855115884bf8e2d15",
+      "bytes": 7925
+    }
+  ],
+  "clinical_state": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}
