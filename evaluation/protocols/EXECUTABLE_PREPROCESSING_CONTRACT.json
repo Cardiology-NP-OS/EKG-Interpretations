@@ -1,0 +1,39 @@
+{
+  "schema": "ekg-executable-preprocessing-contract-v1",
+  "authorityClass": "ENGINEERING_NONDIAGNOSTIC",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false,
+  "implementation": "lib/signal_preprocessing_pipeline.js",
+  "operatorWorkflow": "tools/preprocess_wfdb.js",
+  "implemented": [
+    "WFDB format-16 calibrated physical-sample decoding",
+    "explicit lead-label normalization and canonical lead reordering",
+    "deterministic linear interpolation resampling",
+    "identity-rate sample preservation",
+    "fixed-size segmentation with explicit drop or zero-pad remainder policy",
+    "partial-lead processing only when explicitly requested",
+    "categorized batch failure accounting without silent record loss",
+    "SHA-256-bound local WFDB preprocessing CLI artifacts"
+  ],
+  "notImplemented": [
+    "generic baseline-wander removal without a declared method and parameters",
+    "generic denoising or artifact repair without a declared method and parameters",
+    "amplitude normalization that could discard calibrated physical units",
+    "clinical interpretation or diagnostic activation"
+  ],
+  "supportedResamplingMethods": [
+    "linear-v1",
+    "linear-interpolation-v1"
+  ],
+  "segmentRemainderPolicies": [
+    "drop",
+    "zero-pad"
+  ],
+  "inputBoundary": "Local narrow-WFDB format-16 only; unsupported encodings fail closed.",
+  "outputBoundary": "Engineering/evaluation artifact only; no diagnosis, project gold, reportable clinical metric, or runtime authority."
+}

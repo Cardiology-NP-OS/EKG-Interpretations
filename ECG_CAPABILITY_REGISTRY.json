@@ -2511,9 +2511,9 @@
       "capability_id": "ECG-CAP-PREPROCESS-RESAMPLING",
       "capability_family": "Preprocessing",
       "name": "Resampling contracts",
-      "canonical_target_path": "lib/signal_preprocessing_contract.js",
-      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/signal_preprocessing_pipeline.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONDIAGNOSTIC",
       "source_provenance": [
         {
           "source": "MIT-LCP/wfdb-python",
@@ -2558,9 +2558,14 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/signal_preprocessing_contract.test.js"
+        "tests/signal_preprocessing_contract.test.js",
+        "tests/signal_preprocessing_pipeline.test.js",
+        "tests/preprocess_wfdb_cli.test.js",
+        "tests/signal_preprocessing_exports.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json"
+      ],
       "research_paths": [
         "research/preprocessing/README.md"
       ],
@@ -2572,15 +2577,15 @@
         "neuropsychology/NeuroKit:NK-003"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-WINDOWING-SEGMENTATION",
       "capability_family": "Preprocessing",
       "name": "Windowing and segmentation contracts",
-      "canonical_target_path": "lib/signal_preprocessing_contract.js",
-      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
-      "authority_class": "RESEARCH_NONRUNTIME",
+      "canonical_target_path": "lib/signal_preprocessing_pipeline.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONDIAGNOSTIC",
       "source_provenance": [
         {
           "source": "neuropsychology/NeuroKit",
@@ -2625,9 +2630,14 @@
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/signal_preprocessing_contract.test.js"
+        "tests/signal_preprocessing_contract.test.js",
+        "tests/signal_preprocessing_pipeline.test.js",
+        "tests/preprocess_wfdb_cli.test.js",
+        "tests/signal_preprocessing_exports.test.js"
       ],
-      "evaluation_paths": [],
+      "evaluation_paths": [
+        "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json"
+      ],
       "research_paths": [
         "research/preprocessing/README.md"
       ],
@@ -2639,7 +2649,7 @@
         "vlbthambawita/ECGBench:ECGB-016"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "INACTIVE_REFERENCE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-QUALITY-CALIBRATION-METADATA",
@@ -3412,8 +3422,8 @@
       "capability_id": "ECG-CAP-PREPROCESS-LEAD-ORDER",
       "capability_family": "Preprocessing",
       "name": "Lead-order normalization and deterministic reorder mapping",
-      "canonical_target_path": "lib/signal_preprocessing_contract.js",
-      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
+      "canonical_target_path": "lib/signal_preprocessing_pipeline.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
       "authority_class": "ENGINEERING_NONDIAGNOSTIC",
       "source_provenance": [
         {
@@ -3434,10 +3444,14 @@
         }
       ],
       "test_paths": [
-        "tests/signal_preprocessing_contract.test.js"
+        "tests/signal_preprocessing_contract.test.js",
+        "tests/signal_preprocessing_pipeline.test.js",
+        "tests/preprocess_wfdb_cli.test.js",
+        "tests/signal_preprocessing_exports.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json"
+        "evaluation/protocols/REPRODUCIBILITY_CONTRACT.json",
+        "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json"
       ],
       "research_paths": [
         "research/preprocessing/README.md"
@@ -3447,14 +3461,14 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "GOVERNED_INACTIVE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-FAILURE-ACCOUNTING",
       "capability_family": "Preprocessing",
       "name": "Auditable preprocessing attempt/skip accounting",
-      "canonical_target_path": "lib/signal_preprocessing_contract.js",
-      "implementation_status": "TARGET_OWNED_PREPROCESSING_CONTRACT",
+      "canonical_target_path": "lib/signal_preprocessing_pipeline.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
       "authority_class": "ENGINEERING_NONDIAGNOSTIC",
       "source_provenance": [
         {
@@ -3475,10 +3489,14 @@
         }
       ],
       "test_paths": [
-        "tests/signal_preprocessing_contract.test.js"
+        "tests/signal_preprocessing_contract.test.js",
+        "tests/signal_preprocessing_pipeline.test.js",
+        "tests/preprocess_wfdb_cli.test.js",
+        "tests/signal_preprocessing_exports.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json"
+        "evaluation/failure_modes/FAILURE_MODE_CATALOG.json",
+        "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json"
       ],
       "research_paths": [
         "research/preprocessing/README.md"
@@ -3488,7 +3506,7 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "GOVERNED_INACTIVE"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
     },
     {
       "capability_id": "ECG-CAP-RESEARCH-MULTIMODAL-MAPPING",

@@ -1,0 +1,28 @@
+{
+  "schema": "ecg-executable-preprocessing-checkpoint-v1",
+  "parentMainCommit": "5450bc23bfcab536a77f88ee28d4488a22c29204",
+  "parentMainTree": "3dfea69a0f824fdfd3f589d42ad6a6e520a706dd",
+  "status": "IMPLEMENTATION_CANDIDATE_UNVERIFIED",
+  "donorProgram": {
+    "completedPrimaryDonors": 9,
+    "requiredPrimaryDonors": 21,
+    "pausedFrontier": "DONOR-010"
+  },
+  "implementation": [
+    "lib/signal_preprocessing_pipeline.js",
+    "tools/preprocess_wfdb.js",
+    "evaluation/protocols/EXECUTABLE_PREPROCESSING_CONTRACT.json",
+    "tests/signal_preprocessing_pipeline.test.js",
+    "tests/preprocess_wfdb_cli.test.js",
+    "tests/signal_preprocessing_exports.test.js"
+  ],
+  "scope": "Executable non-diagnostic WFDB preprocessing: calibrated decoding, lead reorder, linear resampling, segmentation, and failure accounting",
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED"
+}
