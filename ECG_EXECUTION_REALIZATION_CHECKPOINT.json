@@ -2,7 +2,7 @@
   "schema": "ecg-execution-realization-checkpoint-v1",
   "parentMainCommit": "395fe56f6b5f7ae05d0c303fc7948ec8bae416a5",
   "parentMainTree": "5e2d23a5b1338465db83061a6b10ce2d26419de1",
-  "status": "IMPLEMENTED_UNVERIFIED",
+  "status": "VERIFIED_UNPROMOTED",
   "canonicalCapabilityCount": 57,
   "readinessCounts": {
     "EXECUTABLE_TARGET_OWNED": 18,
@@ -18,7 +18,10 @@
     "UNIFIED_12_LEAD_EXECUTION_PIPELINE"
   ],
   "operatorSurface": "tools/run_ecg_pipeline.js",
-  "operatorOutputs": ["analysis.json", "waveform.svg"],
+  "operatorOutputs": [
+    "analysis.json",
+    "waveform.svg"
+  ],
   "implementation": [
     "lib/waveform_rendering.js",
     "lib/ecg_execution_pipeline.js",
@@ -26,7 +29,8 @@
     "tests/waveform_rendering.test.js",
     "tests/ecg_execution_pipeline.test.js",
     "tests/ecg_execution_cli.test.js"
-  ],  "residualNonExecutablePolicy": {
+  ],
+  "residualNonExecutablePolicy": {
     "contractOnly": "Must remain visibly non-executable unless a deterministic target-owned implementation is added and tested.",
     "researchReference": "Must not be represented as executable or validated behavior.",
     "challengerMetadata": "Execution is blocked until exact assets, weights, preprocessing and license are pinned.",
@@ -54,5 +58,15 @@
   "approvedAdjudicatedGoldCount": 0,
   "metrics": "NOT_REPORTABLE",
   "activation": "NOT_ELIGIBLE",
-  "clinicalValidity": "NOT_INFERRED"
+  "clinicalValidity": "NOT_INFERRED",
+  "verification": {
+    "implementationCandidateCommit": "1019e900c720c23d9696fdf83130f9ec5dc1d2a4",
+    "implementationCandidateTree": "424213b1ef421b48867746d8fdcabc90f65b37f7",
+    "candidateCiRunId": 35275493714,
+    "candidateCiConclusion": "success",
+    "independentVerification": "PASS_FULL_CLONE",
+    "independentFocused": "29/29 PASS",
+    "independentFullTargetSuite": "PASS",
+    "candidateDiffCheck": "PASS"
+  }
 }

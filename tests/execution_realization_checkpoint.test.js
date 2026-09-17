@@ -62,7 +62,14 @@ test("no unsupported superiority or clinical claim is recorded", () => {
   assert.strictEqual(checkpoint.metrics, "NOT_REPORTABLE");
   assert.strictEqual(checkpoint.clinicalValidity, "NOT_INFERRED");
 });
-test("checkpoint status is stage safe", () => {
+test("implementation verification is exact and successful", () => {
+  assert.strictEqual(checkpoint.verification.implementationCandidateCommit, "1019e900c720c23d9696fdf83130f9ec5dc1d2a4");
+  assert.strictEqual(checkpoint.verification.implementationCandidateTree, "424213b1ef421b48867746d8fdcabc90f65b37f7");
+  assert.strictEqual(checkpoint.verification.candidateCiRunId, 35275493714);
+  assert.strictEqual(checkpoint.verification.candidateCiConclusion, "success");
+  assert.strictEqual(checkpoint.verification.independentVerification, "PASS_FULL_CLONE");
+  assert.strictEqual(checkpoint.verification.independentFullTargetSuite, "PASS");
+});test("checkpoint status is stage safe", () => {
   assert.ok(["IMPLEMENTED_UNVERIFIED","VERIFIED_UNPROMOTED","ACCEPTED_ON_MAIN"].includes(checkpoint.status));
 });
 if (process.exitCode) process.exit(process.exitCode);
