@@ -1,0 +1,56 @@
+{
+  "schema": "ecg-associated-repository-dispositions-v1",
+  "donor_id": "DONOR-008",
+  "repositories": [
+    {
+      "repository": "ELM-Research/ecg_nn",
+      "relationship": "first-party downstream consumer named by donor README",
+      "disposition": "RESEARCH_ONLY",
+      "queued_as_associated_donor": false,
+      "reason": "Not required to harvest preprocessing-contract concepts; no dependency or authority is imported."
+    },
+    {
+      "repository": "ELM-Research/ELM",
+      "relationship": "first-party downstream consumer named by donor README",
+      "disposition": "RESEARCH_ONLY",
+      "queued_as_associated_donor": false,
+      "reason": "Not required to harvest preprocessing-contract concepts; multimodal model authority is outside this donor implementation."
+    },
+    {
+      "repository": "Jwoo5/ecg-qa",
+      "relationship": "mapping source and vendored subtree lineage",
+      "disposition": "SUPERSEDED",
+      "queued_as_associated_donor": false,
+      "reason": "Canonical donor program already assigns ECG-QA as primary DONOR-016; do not duplicate that audit here."
+    },
+    {
+      "repository": "AIMedLab/PULSE",
+      "relationship": "mapped ECGInstruct/ECGBench source lineage",
+      "disposition": "SUPERSEDED",
+      "queued_as_associated_donor": false,
+      "reason": "Canonical donor program already assigns PULSE as primary DONOR-019; do not duplicate that audit here."
+    },
+    {
+      "repository": "YubaoZhao/ECG-Chat",
+      "relationship": "source of pretrain_mimic and ECG Instruct 45k mapping inputs",
+      "disposition": "RESEARCH_ONLY",
+      "queued_as_associated_donor": false,
+      "reason": "Only research data lineage is material to DONOR-008; no code/model/data is imported."
+    },
+    {
+      "repository": "lanxiang1017/GEM",
+      "relationship": "source of ECG Grounding mapping inputs",
+      "disposition": "RESEARCH_ONLY",
+      "queued_as_associated_donor": false,
+      "reason": "Only research data lineage is material to DONOR-008; no code/model/data is imported."
+    },
+    {
+      "repository": "google/translategemma-12b-it",
+      "relationship": "external model identifier used by PTB-XL report translation code",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "queued_as_associated_donor": false,
+      "reason": "Exact checkpoint identity, weight license, and reproducibility contract are not pinned by DONOR-008; execution is not needed for approved harvest."
+    }
+  ],
+  "queue_expanded": false
+}
