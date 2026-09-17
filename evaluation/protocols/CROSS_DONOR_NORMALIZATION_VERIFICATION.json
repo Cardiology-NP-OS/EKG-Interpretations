@@ -41,6 +41,12 @@
     "clinical_validity": "NOT_INFERRED"
   },
   "clinical_authority_added": false,
-  "verification_state": "VERIFIED_CANDIDATE_FOR_PROMOTION",
-  "superseded_by_pending_candidate": false
+  "verification_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "superseded_by_pending_candidate": false,
+  "promotion": {
+    "commit": "43d071526dca2cfd33db5cef00f44b3b1018145b",
+    "tree": "2ea7b0202c93c5ee727017467c09f89985264673",
+    "target_main_ci_run_id": 35249385580,
+    "target_main_ci_conclusion": "success"
+  }
 }
