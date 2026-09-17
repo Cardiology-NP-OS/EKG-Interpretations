@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 3,
+  "completed_donors": 4,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-004",
+  "next_donor_id": "DONOR-005",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -53,7 +53,7 @@
     {
       "donor_id": "DONOR-004",
       "repository": "DeepPSP/torch_ecg",
-      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
       "audited_tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
       "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json",
@@ -62,7 +62,13 @@
       "harvest_plan": "donors/deeppsp_torch_ecg/HARVEST_PLAN.md",
       "model_boundary": "donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json",
       "associated_repository_dispositions": "donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-      "receipt_status": "PENDING_POST_PROMOTION_TARGET_MAIN_CI",
+      "receipt": "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json",
+      "receipt_status": "FINALIZED",
+      "prepromotion_closure_commit": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+      "promotion_commit": "a8d90b7485de9aecebf006d7c8228c62cf062a98",
+      "promotion_tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+      "target_main_ci_run_id": 35186641689,
+      "target_main_ci_conclusion": "success",
       "verified_candidate_commit": "958126bcc17b0c5cf63c6958194c86976a221002",
       "verified_candidate_tree": "afca013f82247c36860ab1fe898871ba50fd62f2",
       "candidate_ci_run_id": 35186265624,

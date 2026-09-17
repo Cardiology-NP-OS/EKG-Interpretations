@@ -23,5 +23,15 @@
   "approved_adjudicated_gold_count": 0,
   "metrics": "NOT_REPORTABLE",
   "activation": "NOT_ELIGIBLE",
-  "clinical_validity": "NOT_INFERRED"
+  "clinical_validity": "NOT_INFERRED",
+  "prepromotion_closure_verification": {
+    "candidate_commit": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+    "candidate_tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+    "origin_main": "295cb2434b06ea4d125b806a93288cd231f463ea",
+    "method": "FRESH_CLONE_FROM_PRIVATE_GITHUB_REMOTE_ON_DISTINCT_WINDOWS_MACHINE",
+    "result": "PASS",
+    "full_candidate_diff_check": "PASS",
+    "focused_closure": "11/11 PASS",
+    "full_target_suite": "PASS"
+  }
 }

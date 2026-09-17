@@ -20,6 +20,7 @@ const modelBoundary = readJson("donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json");
 const associated = readJson("donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
 const comparative = readJson("donors/deeppsp_torch_ecg/COMPARATIVE_PROOF.json");
 const independent = readJson("donors/deeppsp_torch_ecg/INDEPENDENT_VERIFICATION.json");
+const receipt = readJson("donors/deeppsp_torch_ecg/DONOR_RECEIPT.json");
 const attribution = readText("ECG_ATTRIBUTION_LEDGER.md");
 const pkg = readJson("package.json");
 
@@ -104,13 +105,24 @@ check("candidate CI and independent verification are bound", () => {
   assert.strictEqual(independent.result, "PASS");
   assert.strictEqual(independent.full_target_suite, "PASS");
 });
-check("donor remains pre-promotion and uncounted", () => {
-  assert.strictEqual(donorRegistry.completed_donors, 3);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-004");
-  assert.strictEqual(donor.status, "AUDITED_CANDIDATE_FOR_MERGE");
-  assert.strictEqual(donor.receipt_status, "PENDING_POST_PROMOTION_TARGET_MAIN_CI");
-  assert.strictEqual(donor.verified_candidate_commit, "958126bcc17b0c5cf63c6958194c86976a221002");
-  assert.strictEqual(fs.existsSync(path.join(root, "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json")), false);
+check("donor is accepted only after promotion and target-main CI", () => {
+  assert.strictEqual(donorRegistry.completed_donors, 4);
+  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-005");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt_status, "FINALIZED");
+  assert.strictEqual(donor.receipt, "donors/deeppsp_torch_ecg/DONOR_RECEIPT.json");
+  assert.strictEqual(donor.promotion_commit, "a8d90b7485de9aecebf006d7c8228c62cf062a98");
+  assert.strictEqual(donor.target_main_ci_run_id, 35186641689);
+  assert.strictEqual(donor.target_main_ci_conclusion, "success");
+});
+check("closure and promotion verification are receipt-bound", () => {
+  assert.strictEqual(independent.prepromotion_closure_verification.candidate_commit, "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1");
+  assert.strictEqual(independent.prepromotion_closure_verification.result, "PASS");
+  assert.strictEqual(comparative.promotion_verification.merge_commit, donor.promotion_commit);
+  assert.strictEqual(comparative.promotion_verification.target_main_ci_run_id, donor.target_main_ci_run_id);
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.main_commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, donor.target_main_ci_run_id);
 });
 check("governed inactive state and attribution are preserved", () => {
   assert.strictEqual(gap.clinical_authority_added, false);
@@ -122,4 +134,4 @@ check("governed inactive state and attribution are preserved", () => {
   assert.ok(attribution.includes("Donor benchmark scores promoted to target metrics: **no**"));
 });
 
-console.log(JSON.stringify({schema:"ekg-donor-004-prepromotion-closure-tests-v1",donor:"DeepPSP/torch_ecg",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:false,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));
+console.log(JSON.stringify({schema:"ekg-donor-004-acceptance-closure-tests-v1",donor:"DeepPSP/torch_ecg",pass:true,passed,total:passed,completed_donors:donorRegistry.completed_donors,next_donor_id:donorRegistry.next_donor_id,receipt_finalized:true,diagnostic_runtime:"GOVERNED_INACTIVE",evidence_admission:"NOT_ADMITTED",approved_adjudicated_gold_count:datasetRegistry.approved_adjudicated_project_gold_count,metrics:"NOT_REPORTABLE",activation:"NOT_ELIGIBLE",clinical_validity:"NOT_INFERRED",clinical_authority_added:false}));

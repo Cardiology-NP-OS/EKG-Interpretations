@@ -1,0 +1,128 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-004",
+  "donor_repository": "DeepPSP/torch_ecg",
+  "donor_commit": "11967474e46023dc7a82acf264e426c1ce4eacfa",
+  "donor_tree": "307435b2cb11819f2dc8946866ecc54aab6bff1a",
+  "donor_release": {
+    "latest_release_tag": "v0.0.31",
+    "latest_release_commit": "f7b60bcdc7745f6d4f79bb53615bb8330d086000",
+    "audited_head_is_latest_release_tag_commit": false
+  },
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_file": "LICENSE",
+    "license_blob_sha": "40d9a25369b4fd1f3315f16f932eebf297dbd549",
+    "model_weight_status": "LICENSE_REVIEW_REQUIRED_PER_ARTIFACT",
+    "dataset_status": "LICENSE_REVIEW_REQUIRED_PER_DATASET"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_004_rollback_commit": "295cb2434b06ea4d125b806a93288cd231f463ea",
+    "donor_004_rollback_tree": "01fa509025f126ce8371241e18eb2ce115767acf"
+  },
+  "verified_candidate": {
+    "commit": "958126bcc17b0c5cf63c6958194c86976a221002",
+    "tree": "afca013f82247c36860ab1fe898871ba50fd62f2",
+    "github_actions_run_id": 35186265624,
+    "ci_conclusion": "success",
+    "independent_fresh_clone": "PASS"
+  },
+  "prepromotion_closure": {
+    "commit": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+    "tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+    "github_actions_run_id": 35186477323,
+    "ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "11/11 PASS",
+    "full_target_suite": "PASS"
+  },
+  "promotion": {
+    "main_commit": "a8d90b7485de9aecebf006d7c8228c62cf062a98",
+    "main_tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+    "parents": [
+      "295cb2434b06ea4d125b806a93288cd231f463ea",
+      "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1"
+    ],
+    "target_main_ci_run_id": 35186641689,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "RESEARCH_ONLY": 9,
+    "SUPERSEDED": 8,
+    "EVALUATION_ONLY": 8,
+    "REJECTED": 4,
+    "CHALLENGER": 4,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "total": 34
+  },
+  "integration": {
+    "method": "GOVERNANCE_ONLY",
+    "runtime_dependencies_added": [],
+    "runtime_files_modified": [],
+    "donor_source_code_copied": false,
+    "donor_model_weights_imported": false,
+    "donor_dataset_bytes_imported": false,
+    "executable_donor_models_registered": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "remote_mutable_data_acquisition_added": false,
+    "untrusted_pickle_checkpoint_loader_added": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_benchmark_metrics_promoted": false,
+    "clinical_authority_added": false
+  },
+  "tests": {
+    "focused_closure_assertions": 11,
+    "full_regression": "PASS",
+    "full_candidate_diff_check": "PASS",
+    "target_main_ci": "PASS"
+  },
+  "evidence": {
+    "manifest": "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json",
+    "inventory": "donors/deeppsp_torch_ecg/INVENTORY.json",
+    "gap_matrix": "donors/deeppsp_torch_ecg/GAP_MATRIX.json",
+    "harvest_plan": "donors/deeppsp_torch_ecg/HARVEST_PLAN.md",
+    "model_boundary": "donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json",
+    "associated_repository_dispositions": "donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "comparative_proof": "donors/deeppsp_torch_ecg/COMPARATIVE_PROOF.json",
+    "independent_verification": "donors/deeppsp_torch_ecg/INDEPENDENT_VERIFICATION.json"
+  },
+  "outstanding_limitations": [
+    "Bundled physiological sample/benchmark assets remain fail-closed pending dataset-specific provenance and data-use review.",
+    "No exact checkpoint identity and weight-specific license is approved for execution.",
+    "No donor-reported clinical performance metric is promoted to target evidence.",
+    "No governed adjudicated project gold exists."
+  ],
+  "final_disposition": "GOVERNANCE_REGISTERED_CHALLENGER_AND_RESEARCH_REFERENCE",
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "rollback": {
+    "commit": "295cb2434b06ea4d125b806a93288cd231f463ea",
+    "tree": "01fa509025f126ce8371241e18eb2ce115767acf",
+    "method": "revert Donor-004 promotion/finalization commits; never force-reset shared main"
+  },
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "evidence_sha256": {
+    "donors/deeppsp_torch_ecg/DONOR_MANIFEST.json": "5b11463e6f7f1f452b2f4fbc3747c50506cc88872d60a29561713bc11e76029e",
+    "donors/deeppsp_torch_ecg/INVENTORY.json": "9bf4a60b403f25d8f7d751906f6c54306a6c4994f35803aa3a9e9284958f7d7f",
+    "donors/deeppsp_torch_ecg/GAP_MATRIX.json": "512350e1cd8ccdd2740035584792950f5bae9873aac385e144242c1d7378029e",
+    "donors/deeppsp_torch_ecg/HARVEST_PLAN.md": "4b24116e173b7e51150caa5b499a41e08ae354bd9d67be47328329f98151cd17",
+    "donors/deeppsp_torch_ecg/MODEL_BOUNDARY.json": "2ce9e4c9602c2bb4c2658655f02d753e0fcc9d6192d5b78393b2d85b8d244165",
+    "donors/deeppsp_torch_ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "0ad13c0a4905cdbd199a0d30810db5a6673aff6586922d60217c090336a25e02",
+    "donors/deeppsp_torch_ecg/COMPARATIVE_PROOF.json": "fab581719f90fd6b6e4a9bd22a164dfe90e014643e74b9a1b8849d1fe4b94c26",
+    "donors/deeppsp_torch_ecg/INDEPENDENT_VERIFICATION.json": "f090e13a4ab322ddf78cfa18851ca0ab14d6905d12711b046f8a3a10bf0ca1fe",
+    "tests/torch_ecg_donor_closure.test.js": "49b972627ac1eb1d48ed4d4004c89d044a7a19c59dd60a0b4e07c351b2d9852b",
+    "ECG_ATTRIBUTION_LEDGER.md": "8c1a5886488b7249e1cd4f86064363cf46b0d76fa2dc17e4214c07b9678d80f7"
+  }
+}

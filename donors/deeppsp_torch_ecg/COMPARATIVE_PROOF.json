@@ -69,5 +69,25 @@
     "commit": "295cb2434b06ea4d125b806a93288cd231f463ea",
     "tree": "01fa509025f126ce8371241e18eb2ce115767acf",
     "method": "revert Donor-004 governance commits; never force-reset shared main"
+  },
+  "prepromotion_closure": {
+    "commit": "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1",
+    "tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+    "github_actions_run_id": 35186477323,
+    "ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "11/11 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "promotion_verification": {
+    "merge_commit": "a8d90b7485de9aecebf006d7c8228c62cf062a98",
+    "merge_tree": "b04a17b105ecd846a0f95e66934dbb9ed691fe87",
+    "parents": [
+      "295cb2434b06ea4d125b806a93288cd231f463ea",
+      "8e1b73ae77d0f3c0c0e9dff8a7010d63516295f1"
+    ],
+    "target_main_ci_run_id": 35186641689,
+    "target_main_ci_conclusion": "success"
   }
 }

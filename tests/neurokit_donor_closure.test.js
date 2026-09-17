@@ -26,8 +26,8 @@ const donor = donorRegistry.donors.find(item => item.donor_id === "DONOR-003");
 const nkCaps = capabilityRegistry.capabilities.filter(item => item.donor === "neuropsychology/NeuroKit");
 const license = licenseLedger.entries.find(item => item.donor_id === "DONOR-003");
 check("donor is accepted only after promotion and target-main CI", () => {
-  assert.strictEqual(donorRegistry.completed_donors, 3);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-004");
+  assert.ok(donorRegistry.completed_donors >= 3);
+  assert.notStrictEqual(donorRegistry.next_donor_id, "DONOR-003");
   assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
   assert.strictEqual(donor.receipt, "donors/neuropsychology_neurokit/DONOR_RECEIPT.json");
   assert.strictEqual(donor.promotion_commit, "46d7e9a5cce8e2f958696e07cc8595b7a71f9267");

@@ -84,6 +84,6 @@ NeuroKit is credited for the multi-method agreement and adversarial/golden-regre
 - Physiological asset/data-use status: **LICENSE_REVIEW_REQUIRED_PER_DATASET**.
 - Donor benchmark scores promoted to target metrics: **no**.
 - Project clinical gold created from donor labels: **no**.
-- Provenance files: `donors/deeppsp_torch_ecg/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, and `HARVEST_PLAN.md`.
+- Provenance files: `donors/deeppsp_torch_ecg/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, `INDEPENDENT_VERIFICATION.json`, and `DONOR_RECEIPT.json`.
 
 torch_ecg is credited for its ECG architecture catalog, database/dataset abstractions, augmentation and benchmark patterns, and safer checkpoint-loading concepts. No donor checkpoint, data asset, diagnostic output, or benchmark result is admitted as target clinical evidence or runtime authority.
