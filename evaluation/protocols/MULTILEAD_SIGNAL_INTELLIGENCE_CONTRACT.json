@@ -1,0 +1,46 @@
+{
+  "schema": "ekg-multilead-signal-intelligence-contract-v1",
+  "authorityClass": "EVALUATION_NONRUNTIME",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED",
+  "requiredInputs": [
+    "WFDB header bytes",
+    "WFDB data bytes",
+    "measurement configuration",
+    "candidate-threshold configuration",
+    "explicit threshold authority",
+    "source provenance"
+  ],
+  "execution": {
+    "perLeadWorkflow": "lib/signal_intelligence_workflow.js",
+    "aggregation": "lib/multilead_signal_intelligence.js",
+    "operatorCli": "tools/analyze_wfdb_12lead.js"
+  },
+  "requiredOutputs": [
+    "per-lead analysis artifacts",
+    "categorized per-lead failures",
+    "cross-lead consistency summaries",
+    "candidate evidence with supporting/counter-evidence leads",
+    "configuration and source hashes"
+  ],
+  "failurePolicy": {
+    "leadFailure": "FAIL_LEAD_AND_CATEGORIZE",
+    "recordFailure": "FAIL_IF_NO_USABLE_LEADS",
+    "silentDropPermitted": false
+  },
+  "interpretationBoundary": {
+    "candidateEvidenceIsDiagnosis": false,
+    "crossLeadConsistencyIsClinicalValidation": false,
+    "sourceLabelsMayBecomeProjectGold": false,
+    "clinicalAuthorityAdded": false
+  },
+  "validation": {
+    "currentEvidence": "SYNTHETIC_AND_ENGINEERING_ONLY",
+    "adjudicatedProjectGoldCount": 0,
+    "clinicalMetricsReportable": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "ecg-multilead-signal-intelligence-checkpoint-v1",
+  "parentMainCommit": "13819fc70c8458d7f1c56a04367c7dee1308ca5a",
+  "parentMainTree": "6a55696977baf8a98dc7049e6fbb193a2d8ea2ec",
+  "status": "VERIFIED_UNPROMOTED",
+  "donorProgram": {
+    "completedPrimaryDonors": 9,
+    "requiredPrimaryDonors": 21,
+    "pausedFrontier": "DONOR-010",
+    "reason": "Close executable twelve-lead aggregation and explainability gaps before additional donor harvesting."
+  },
+  "implementation": [
+    "lib/multilead_signal_intelligence.js",
+    "tools/analyze_wfdb_12lead.js",
+    "tests/multilead_signal_intelligence.test.js",
+    "evaluation/protocols/MULTILEAD_SIGNAL_INTELLIGENCE_CONTRACT.json",
+    "docs/MULTILEAD_SIGNAL_INTELLIGENCE_WORKFLOW.md"
+  ],
+  "scope": "Twelve-lead execution of the accepted measurement/rhythm/candidate workflow with per-lead failure accounting, cross-lead consistency, and structured evidence aggregation",
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED",
+  "verification": {
+    "implementationCandidateCommit": "144d3624667526b3b36a46d2605369aaafad1a4c",
+    "implementationCandidateTree": "268d835494f48f416f76bb1604696c395db10da1",
+    "candidateCiRunId": 35273451480,
+    "candidateCiConclusion": "success",
+    "independentVerification": "PASS_FRESH_DEPTH1_CLONE",
+    "independentFocused": "MULTILEAD 8/8; CHECKPOINT 8/8",
+    "independentFullTargetSuite": "PASS",
+    "candidateDiffCheck": "PASS"
+  },
+  "promotion": {
+    "mergeCommit": null,
+    "mergeTree": null,
+    "targetMainCiRunId": null,
+    "targetMainCiConclusion": null
+  }
+}
