@@ -1,0 +1,45 @@
+﻿{
+    "schema":  "ecg-donor-associated-repository-dispositions-v1",
+    "donor_id":  "DONOR-007",
+    "repository":  "vlbthambawita/ECGBench",
+    "audited_commit":  "31b5050002622a72a8f3558f731929c3e3a6c68e",
+    "repositories":  [
+                         {
+                             "repository":  "numpy/numpy",
+                             "disposition":  "DEPENDENCY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Standard scientific dependency; no target runtime dependency added."
+                         },
+                         {
+                             "repository":  "pandas-dev/pandas",
+                             "disposition":  "DEPENDENCY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Standard tabular dependency; no target runtime dependency added."
+                         },
+                         {
+                             "repository":  "scikit-learn/scikit-learn",
+                             "disposition":  "DEPENDENCY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Used for split generation only; no target runtime dependency added."
+                         },
+                         {
+                             "repository":  "MIT-LCP/wfdb-python",
+                             "disposition":  "SUPERSEDED",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Already audited as DONOR-001."
+                         },
+                         {
+                             "repository":  "pytorch/pytorch",
+                             "disposition":  "SUPERSEDED",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Runtime/model framework provenance already covered by DONOR-004; no target dependency added."
+                         },
+                         {
+                             "repository":  "huggingface/huggingface_hub",
+                             "disposition":  "RESEARCH_ONLY",
+                             "queued_as_associated_donor":  false,
+                             "reason":  "Optional distribution dependency for external split artifacts; no hub bytes imported."
+                         }
+                     ],
+    "clinical_authority_added":  false
+}

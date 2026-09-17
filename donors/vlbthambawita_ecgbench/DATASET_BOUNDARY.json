@@ -83,5 +83,647 @@
                             "docs/_datasets/vitaldb-arrhythmia-database.md",
                             "docs/_datasets/wilson-central-terminal-ecg-database.md",
                             "docs/_datasets/zzu-pecg-zhengzhou-university-pediatric-ecg-database.md"
-                        ]
+                        ],
+    "catalogue_entries":  [
+                              {
+                                  "slug":  "apnea-ecg-database",
+                                  "name":  "Apnea-ECG Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/apnea-ecg/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "bidmc-congestive-heart-failure-database",
+                                  "name":  "BIDMC Congestive Heart Failure Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/chfdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "brno-university-of-technology-ecg-quality-database-but-qdb",
+                                  "name":  "Brno University of Technology ECG Quality Database (BUT QDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/butqdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "brugada-huca",
+                                  "name":  "Brugada-HUCA",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY-SA 4.0",
+                                  "source_url":  "https://physionet.org/content/brugada-huca/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "chapman-shaoxing-arrhythmia",
+                                  "name":  "Chapman-Shaoxing (Arrhythmia)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/ecg-arrhythmia/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "chapman-shaoxing-ecg-database-10-646-patients",
+                                  "name":  "Chapman-Shaoxing ECG Database (10,646 patients)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC0 1.0",
+                                  "source_url":  "https://figshare.com/collections/ChapmanECG/4560497/2",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "cipa-ecg-validation-study",
+                                  "name":  "CiPA ECG Validation Study",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/ecgcipa/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "code-15-pct-telehealth-network-of-minas-gerais-15-pct-subset",
+                                  "name":  "CODE-15% (Telehealth Network of Minas Gerais, 15% subset)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.5281/zenodo.4916206",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "code-full-dataset-2-3m-records",
+                                  "name":  "CODE (Full Dataset, ~2.3M records)",
+                                  "access":  "restricted",
+                                  "donor_reported_license":  "DUA required",
+                                  "source_url":  "https://figshare.scilifelab.se/articles/dataset/CODE_dataset/15169716",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "code-test-827-record-hold-out-test-set",
+                                  "name":  "CODE-test (827-record hold-out test set)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.5281/zenodo.3765780",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "cpsc-2018-china-physiological-signal-challenge-2018",
+                                  "name":  "CPSC 2018 (China Physiological Signal Challenge 2018)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "http://2018.icbeb.org/Challenge.html",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ecg-capable-smartwatches-dataset",
+                                  "name":  "ECG-Capable Smartwatches Dataset",
+                                  "access":  "restricted",
+                                  "donor_reported_license":  "PhysioNet Restricted Health Data License 1.5.0",
+                                  "source_url":  "https://physionet.org/content/ecg-capable-smartwatches/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ecg-effects-of-dofetilide-moxifloxacin-and-combinations-ecgdmmld",
+                                  "name":  "ECG Effects of Dofetilide, Moxifloxacin and Combinations (ECGDMMLD)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/ecgdmmld/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ecg-effects-of-ranolazine-dofetilide-verapamil-quinidine-ecgrdvq",
+                                  "name":  "ECG Effects of Ranolazine, Dofetilide, Verapamil, Quinidine (ECGRDVQ)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/ecgrdvq/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ecg-id-database",
+                                  "name":  "ECG-ID Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/ecgiddb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "echonext",
+                                  "name":  "EchoNext",
+                                  "access":  "restricted",
+                                  "donor_reported_license":  "PhysioNet Restricted Health Data License 1.5.0",
+                                  "source_url":  "https://physionet.org/content/echonext/1.1.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "edgar-experimental-data-and-geometric-analysis-repository",
+                                  "name":  "EDGAR (Experimental Data \u0026 Geometric Analysis Repository)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "Free registration",
+                                  "source_url":  "https://edgar.sci.utah.edu/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "european-st-t-database-edb",
+                                  "name":  "European ST-T Database (EDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/edb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "eye-tracking-dataset-for-12-lead-ecg-interpretation",
+                                  "name":  "Eye Tracking Dataset for 12-Lead ECG Interpretation",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC ODbL 1.0",
+                                  "source_url":  "https://physionet.org/content/eye-tracking-ecg/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "gu-ecg-gazi-university-ptca-induced-ischaemia",
+                                  "name":  "GU-ECG (Gazi University, PTCA-induced Ischaemia)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.17632/zhr5zsngtg.1",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "harvard-emory-ecg-database-heedb",
+                                  "name":  "Harvard-Emory ECG Database (HEEDB)",
+                                  "access":  "credentialed",
+                                  "donor_reported_license":  "DUA (BDSP)",
+                                  "source_url":  "https://bdsp.io/content/heedb/5.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "icentia11k-single-lead-continuous-ecg",
+                                  "name":  "Icentia11k Single Lead Continuous ECG",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY-NC-SA 4.0",
+                                  "source_url":  "https://physionet.org/content/icentia11k-continuous-ecg/1.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ikem-dataset-institute-for-clinical-and-experimental-medicine-prague",
+                                  "name":  "IKEM Dataset (Institute for Clinical and Experimental Medicine, Prague)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY-NC-ND 4.0",
+                                  "source_url":  "https://doi.org/10.5281/zenodo.8393007",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "kurias-ecg",
+                                  "name":  "KURIAS-ECG",
+                                  "access":  "restricted",
+                                  "donor_reported_license":  "Pending audit",
+                                  "source_url":  "https://physionet.org/content/kurias-ecg/1.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "leipzig-heart-center-ecg-database",
+                                  "name":  "Leipzig Heart Center ECG Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/leipzig-heart-center-ecg/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "lobachevsky-university-ecg-database-ludb",
+                                  "name":  "Lobachevsky University ECG Database (LUDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/ludb/1.0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "long-term-af-database-ltafdb",
+                                  "name":  "Long-Term AF Database (LTAFDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/ltafdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "long-term-st-database-ltstdb",
+                                  "name":  "Long-Term ST Database (LTSTDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/ltstdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "medalcare-xl-synthetic-12-lead-ecgs-from-simulations",
+                                  "name":  "MedalCare-XL (Synthetic 12-Lead ECGs from Simulations)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.5281/zenodo.8068944",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mhd-effect-on-12-lead-ecgs-in-mri-scanners",
+                                  "name":  "MHD Effect on 12-Lead ECGs in MRI Scanners",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/mhd-effect-ecg-mri/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mimic-iii-waveform-database-matched-subset",
+                                  "name":  "MIMIC-III Waveform Database Matched Subset",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODbL",
+                                  "source_url":  "https://physionet.org/content/mimic3wdb-matched/1.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mimic-iv-ecg-demo",
+                                  "name":  "MIMIC-IV-ECG Demo",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODbL 1.0",
+                                  "source_url":  "https://physionet.org/content/mimic-iv-ecg-demo/0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mimic-iv-ecg-ext-icd",
+                                  "name":  "MIMIC-IV-ECG-Ext-ICD",
+                                  "access":  "credentialed",
+                                  "donor_reported_license":  "PhysioNet Credentialed Health Data License 1.5.0",
+                                  "source_url":  "https://physionet.org/content/mimic-iv-ecg-ext-icd-labels/1.0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mimic-iv-ecg",
+                                  "name":  "MIMIC-IV-ECG",
+                                  "access":  "credentialed",
+                                  "donor_reported_license":  "PhysioNet DUA",
+                                  "source_url":  "https://physionet.org/content/mimic-iv-ecg/1.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mit-bih-arrhythmia-database",
+                                  "name":  "MIT-BIH Arrhythmia Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/mitdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mit-bih-atrial-fibrillation-database",
+                                  "name":  "MIT-BIH Atrial Fibrillation Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/afdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mit-bih-normal-sinus-rhythm-database",
+                                  "name":  "MIT-BIH Normal Sinus Rhythm Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/nsrdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mit-bih-st-change-database",
+                                  "name":  "MIT-BIH ST Change Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/stdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "mit-bih-supraventricular-arrhythmia-database",
+                                  "name":  "MIT-BIH Supraventricular Arrhythmia Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/svdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "nightingale-bwh-emergency-dept-ecg-dataset",
+                                  "name":  "Nightingale BWH Emergency Dept ECG Dataset",
+                                  "access":  "restricted",
+                                  "donor_reported_license":  "Institutional credentials",
+                                  "source_url":  "https://docs.ngsci.org/datasets/ed-bwh-ecg/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "nightingale-ntuh-cardiac-arrest-ecg-dataset",
+                                  "name":  "Nightingale NTUH Cardiac Arrest ECG Dataset",
+                                  "access":  "restricted",
+                                  "donor_reported_license":  "Institutional credentials",
+                                  "source_url":  "https://docs.ngsci.org/datasets/arrest-ntuh-ecg/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ningbo-first-hospital-ecg-database-idiopathic-ventricular-arrhythmia",
+                                  "name":  "Ningbo First Hospital ECG Database (Idiopathic Ventricular Arrhythmia)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.6084/m9.figshare.c.4668086.v2",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "norwegian-endurance-athlete-ecg-database",
+                                  "name":  "Norwegian Endurance Athlete ECG Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/norwegian-athlete-ecg/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "physionet-cinc-challenge-2017-af-classification",
+                                  "name":  "PhysioNet/CinC Challenge 2017 (AF Classification)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/challenge-2017/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "physionet-cinc-challenge-2020",
+                                  "name":  "PhysioNet/CinC Challenge 2020",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/challenge-2020/1.0.2/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "physionet-cinc-challenge-2021",
+                                  "name":  "PhysioNet/CinC Challenge 2021",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/challenge-2021/1.0.3/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "post-ictal-heart-rate-oscillations-in-partial-epilepsy",
+                                  "name":  "Post-Ictal Heart Rate Oscillations in Partial Epilepsy",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/szdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "preterm-infant-cardio-respiratory-signals-database-picsdb",
+                                  "name":  "Preterm Infant Cardio-Respiratory Signals Database (PICSDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/picsdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ptb-diagnostic-ecg-database",
+                                  "name":  "PTB Diagnostic ECG Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/ptbdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ptb-xl-plus",
+                                  "name":  "PTB-XL+",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/ptb-xl-plus/1.0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "ptb-xl",
+                                  "name":  "PTB-XL",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/ptb-xl/1.0.3/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "qt-database-qtdb",
+                                  "name":  "QT Database (QTDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/qtdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "sami-trop-chagas-cardiomyopathy-cohort",
+                                  "name":  "SaMi-Trop (Chagas Cardiomyopathy Cohort)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.5281/zenodo.4905618",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "shandong-provincial-hospital-ecg-database-sphdb",
+                                  "name":  "Shandong Provincial Hospital ECG Database (SPHDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.6084/m9.figshare.c.5779802.v1",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "shdb-af-saitama-holter-database-atrial-fibrillation",
+                                  "name":  "SHDB-AF (Saitama Holter Database â€” Atrial Fibrillation)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/shdb-af/1.0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "st-petersburg-incart-12-lead-arrhythmia-database",
+                                  "name":  "St Petersburg INCART 12-Lead Arrhythmia Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC-By 1.0",
+                                  "source_url":  "https://physionet.org/content/incartdb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "st-vincent-s-ucd-sleep-apnea-database-ucddb",
+                                  "name":  "St. Vincent\u0027s / UCD Sleep Apnea Database (UCDDB)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/ucddb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "staff-iii-database",
+                                  "name":  "STAFF III Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/staffiii/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "sudden-cardiac-death-holter-database",
+                                  "name":  "Sudden Cardiac Death Holter Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/sddb/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "symile-mimic",
+                                  "name":  "Symile-MIMIC",
+                                  "access":  "credentialed",
+                                  "donor_reported_license":  "PhysioNet Credentialed Health Data License 1.5.0",
+                                  "source_url":  "https://physionet.org/content/symile-mimic/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "toliet-thigh-based-ecg-toilet-seat",
+                                  "name":  "tOLIet (Thigh-based ECG, toilet seat)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/tollet/1.0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "vitaldb-arrhythmia-database",
+                                  "name":  "VitalDB Arrhythmia Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://physionet.org/content/vitaldb-arrhythmia/1.0.0/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "wilson-central-terminal-ecg-database",
+                                  "name":  "Wilson Central Terminal ECG Database",
+                                  "access":  "open",
+                                  "donor_reported_license":  "ODC Attribution",
+                                  "source_url":  "https://physionet.org/content/wctecgdb/1.0.1/",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              },
+                              {
+                                  "slug":  "zzu-pecg-zhengzhou-university-pediatric-ecg-database",
+                                  "name":  "ZZU pECG (Zhengzhou University Pediatric ECG Database)",
+                                  "access":  "open",
+                                  "donor_reported_license":  "CC BY 4.0",
+                                  "source_url":  "https://doi.org/10.6084/m9.figshare.27078763",
+                                  "target_status":  "DATA_ONLY_LICENSE_REVIEW_REQUIRED_PER_DATASET",
+                                  "source_labels_project_gold":  false,
+                                  "dataset_bytes_imported":  false
+                              }
+                          ]
 }
