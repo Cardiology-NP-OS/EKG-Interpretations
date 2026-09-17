@@ -87,3 +87,23 @@ NeuroKit is credited for the multi-method agreement and adversarial/golden-regre
 - Provenance files: `donors/deeppsp_torch_ecg/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, `HARVEST_PLAN.md`, `COMPARATIVE_PROOF.json`, `INDEPENDENT_VERIFICATION.json`, and `DONOR_RECEIPT.json`.
 
 torch_ecg is credited for its ECG architecture catalog, database/dataset abstractions, augmentation and benchmark patterns, and safer checkpoint-loading concepts. No donor checkpoint, data asset, diagnostic output, or benchmark result is admitted as target clinical evidence or runtime authority.
+
+## DONOR-005 -- alphanumericslab/ecg-image-kit
+
+- Repository: `alphanumericslab/ecg-image-kit`
+- Audited branch/tag: `main` / `v1.0.0`
+- Audited commit: `27b90f56896c9fc78b05a83ca14844ea2637aa0b`
+- Audited tree: `529bfe2cadae767c4851cc2be0fb194a25511674`
+- Root software license: BSD-3-Clause; upstream license blob `2611ac54c9dd7abc9d11f1007b31f18295fb21e6`.
+- Vendored ROI/YOLOv7 subtrees contain GPLv3 license text and remain `LICENSE_REVIEW_REQUIRED` for reuse.
+- Integration: governance-only audit of ECG image synthesis, image-to-waveform digitization, ROI-model, checkpoint, font, texture, sample-data, and provenance boundaries.
+- Donor source code copied: **no**.
+- Python/MATLAB/TensorFlow/YOLO runtime dependency added: **no**.
+- Donor checkpoint/model weights copied or executed: **no**.
+- Donor ECG/image/ROI sample bytes, fonts, textures, or pickle state copied: **no**.
+- Source labels promoted to project clinical gold: **no**.
+- Donor digitization or benchmark results promoted to target metrics: **no**.
+- External lineage preserved: `WongKinYiu/yolov7`, `Grzego/handwriting-generation`, and optional `allenai/scispacy`.
+- Provenance files: `donors/alphanumericslab_ecg-image-kit/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `MODEL_BOUNDARY.json`, and `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`.
+
+ECG-Image-Kit is credited for image-synthesis, image-distortion, grid-estimation, waveform-extraction, and ROI-localization engineering ideas. All such capabilities remain evaluation/challenger/research references or license-blocked assets; none gains clinical authority.

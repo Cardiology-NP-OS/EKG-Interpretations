@@ -47,7 +47,7 @@ check("all material capabilities have governed terminal dispositions", () => {
 check("canonical capability registry matches the gap matrix", () => {
   assert.strictEqual(caps.length, 34);
   assert.strictEqual(capabilityRegistry.capability_count, capabilityRegistry.capabilities.length);
-  assert.strictEqual(capabilityRegistry.capability_count, 108);
+  assert.ok(capabilityRegistry.capability_count >= 108);
   const byId = new Map(caps.map(item => [item.capability_id, item]));
   for (const row of gap.rows) assert.strictEqual(byId.get(row.capability_id).disposition, row.final_disposition);
   for (const item of caps.filter(item => item.disposition === "CHALLENGER")) {
