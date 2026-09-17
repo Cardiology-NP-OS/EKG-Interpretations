@@ -1,0 +1,27 @@
+{
+  "schema": "ecg-donor-independent-verification-v1",
+  "donor_id": "DONOR-010",
+  "repository": "bowang-lab/ecg-fm",
+  "candidate_commit": "e1d87d16cd4fc8ce9eb59bf1e0fcab8e67d32094",
+  "candidate_tree": "e4e611e8653cf6de63d9fbb95856c206129ef97b",
+  "origin_main_commit": "8ebc601d16e387745cf513f0575d92f97e54c614",
+  "verification_date": "2026-09-17",
+  "method": "Fresh shallow private GitHub clone on independent authorized Windows machine (SethsPC)",
+  "result": "PASS",
+  "clean_worktree_before_tests": true,
+  "full_candidate_diff_check": "PASS",
+  "focused_closure": "18/18 PASS",
+  "full_target_suite": "PASS",
+  "clinical_data_used": false,
+  "clinical_accuracy_claimed": false,
+  "governed_state": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "candidate_ci_run_id": 35283248451,
+  "candidate_ci_conclusion": "success"
+}
