@@ -1,0 +1,75 @@
+{
+  "schema": "ecg-donor-manifest-v1",
+  "donor_id": "DONOR-008",
+  "repository": "ELM-Research/ECG-Preprocess",
+  "canonical_upstream_url": "https://github.com/ELM-Research/ECG-Preprocess",
+  "retrieval_date": "2026-09-17",
+  "archived": false,
+  "audited_head": {
+    "branch": "main",
+    "commit": "01d23451660675553468806480b2646eccb92479",
+    "tree": "c113fe473e1358896ae92d970a3064b156b48603",
+    "commit_date": "2026-08-11T01:31:34Z",
+    "commit_message": "Merge pull request #12 from TonyChen06/fix-public-lead-order — Fix HEED and PTB-XL lead ordering"
+  },
+  "software_license": {
+    "spdx": "MIT",
+    "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION",
+    "license_file": "LICENSE",
+    "license_blob_sha": "4460fd230ae7414287b621392f7c37fe5d2ae3e6",
+    "copyright": "Copyright (c) 2026 ELM Research",
+    "source_code_copied_into_target": false
+  },
+  "embedded_third_party_license": {
+    "path": "src/ecg_datasets/map/ecg_qa/LICENSE",
+    "license": "CC-BY-4.0",
+    "license_blob_sha": "52bd1459bd805f5a715e4975287d84c44201a79e",
+    "status": "SEPARATE_SCOPE_DO_NOT_TREAT_AS_ROOT_MIT"
+  },
+  "model_and_derived_asset_license": {
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "tracked_tokenizer_pickle_count": 3,
+    "tracked_tokenizer_paths": [
+      "src/ecg_tokenizer/ecg_byte_tokenizer_5000.pkl",
+      "src/ecg_tokenizer/ecg_byte_tokenizer_8000.pkl",
+      "src/ecg_tokenizer/ecg_byte_tokenizer_10000.pkl"
+    ],
+    "weights_or_tokenizers_imported_into_target": false,
+    "reason": "Root MIT license does not establish training-data provenance or a separate disposition for the checked-in trained tokenizer artifacts. PTB-XL preprocessing also invokes google/translategemma-12b-it without an exact checkpoint/license pin."
+  },
+  "dataset_license": {
+    "status": "SEPARATE_DATASET_TERMS_REQUIRED",
+    "raw_data_imported_into_target": false,
+    "source_labels_promoted_to_project_gold": false,
+    "note": "Referenced and vendored dataset-derived artifacts are governed separately from the repository source-code license. Restricted or credentialed datasets remain out of Git."
+  },
+  "inventory_counts": {
+    "tracked_files": 478,
+    "python_source_files": 55,
+    "compiled_or_cache_files": 40,
+    "trained_tokenizer_pickle_files": 3,
+    "vendored_ecg_qa_subtree_files": 370,
+    "vendored_ecg_qa_json_files": 354,
+    "csv_files": 4,
+    "tsv_files": 6
+  },
+  "primary_capability_families": [
+    "dataset-specific ECG ingestion",
+    "lead-order normalization",
+    "sampling-rate normalization",
+    "fixed-length segmentation",
+    "waveform/report provenance packaging",
+    "dataset mapping to shared research representations",
+    "ECG Byte tokenizer training",
+    "dataset QA/statistics and Hugging Face publication tooling"
+  ],
+  "target_rollback_point": {
+    "commit": "6f6eb97db059332e65585e73d4e3c9da34382944",
+    "tree": "c5a841e88d247dbc46b8d8560afa61d253eb7f86"
+  },
+  "accepted_engine_immutable_identity": {
+    "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
+  },
+  "clinical_authority_change_allowed": false
+}
