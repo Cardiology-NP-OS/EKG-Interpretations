@@ -1,0 +1,88 @@
+{
+  "schema": "ecg-donor-comparative-proof-v1",
+  "donor_id": "DONOR-005",
+  "donor_repository": "alphanumericslab/ecg-image-kit",
+  "before": {
+    "target_commit": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+    "target_tree": "5555e82ed2c43fa92c0f87b3c34506c2a6deebe9",
+    "registered_donor_005_capabilities": 0,
+    "mixed_license_image_donor_boundary_registered": false,
+    "tracked_image_model_artifacts_bound": false,
+    "donor_005_closure_test_in_ci": false,
+    "governed_state": {
+      "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+      "diagnostic_runtime": "GOVERNED_INACTIVE",
+      "evidence_admission": "NOT_ADMITTED",
+      "approved_adjudicated_gold_count": 0,
+      "metrics": "NOT_REPORTABLE",
+      "activation": "NOT_ELIGIBLE",
+      "clinical_validity": "NOT_INFERRED"
+    }
+  },
+  "after": {
+    "verified_candidate_commit": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+    "verified_candidate_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+    "registered_donor_005_capabilities": 33,
+    "capability_dispositions_complete": true,
+    "mixed_license_image_donor_boundary_registered": true,
+    "tracked_image_model_artifacts_bound": true,
+    "donor_005_closure_test_in_ci": true,
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_model_weights_imported": false,
+    "donor_dataset_or_asset_bytes_imported": false,
+    "image_digitizer_activated": false,
+    "governed_state": {
+      "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+      "diagnostic_runtime": "GOVERNED_INACTIVE",
+      "evidence_admission": "NOT_ADMITTED",
+      "approved_adjudicated_gold_count": 0,
+      "metrics": "NOT_REPORTABLE",
+      "activation": "NOT_ELIGIBLE",
+      "clinical_validity": "NOT_INFERRED"
+    }
+  },
+  "github_compare": {
+    "base": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+    "head": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+    "changed_runtime_files": [],
+    "governance_only": true
+  },
+  "verification": {
+    "github_actions_run_id": 35187593137,
+    "head_sha": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+    "head_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+    "workflow": "EKG Recovery CI",
+    "conclusion": "success",
+    "machine_a_focused": "11/11 PASS",
+    "machine_a_full_target_suite": "PASS",
+    "independent_fresh_clone": {
+      "result": "PASS",
+      "head_sha": "f8a9a0ad776a94f8e38d945b07b7d0d8894ed304",
+      "head_tree": "790dd47ea6704c7d998954ed4527180b8662b1df",
+      "origin_main": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+      "full_candidate_diff_check": "PASS",
+      "focused": "11/11 PASS",
+      "full_target_suite": "PASS"
+    }
+  },
+  "improvement_claim": {
+    "type": "PROVENANCE_LICENSE_AND_EVALUATION_GOVERNANCE_COVERAGE",
+    "demonstrated": true,
+    "description": "The target now has explicit machine-readable dispositions for 33 ECG image generation/digitization capabilities, mixed BSD/GPL source boundaries, model/checkpoint and data/asset fail-closed boundaries, and regression coverage without adding an image runtime or diagnostic authority."
+  },
+  "non_claims": [
+    "No image digitization accuracy improvement is claimed.",
+    "No donor model/checkpoint was executed or imported.",
+    "No donor physiological/image/font/texture/pickle asset was imported.",
+    "No donor source label became project gold.",
+    "No donor benchmark or timing result became a target clinical metric.",
+    "No clinical activation eligibility changed."
+  ],
+  "rollback": {
+    "rollback_commit": "60b0193ef9cf0753658f5e31b0f532dc02baf243",
+    "rollback_tree": "5555e82ed2c43fa92c0f87b3c34506c2a6deebe9",
+    "runtime_files_to_remove": [],
+    "governance_only": true
+  }
+}
