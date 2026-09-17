@@ -1,0 +1,169 @@
+{
+  "schema": "ecg-donor-inventory-v1",
+  "donor_id": "DONOR-008",
+  "upstream_commit": "01d23451660675553468806480b2646eccb92479",
+  "upstream_tree": "c113fe473e1358896ae92d970a3064b156b48603",
+  "scope": "WHOLE_REPOSITORY",
+  "tracked_file_counts": {
+    "all": 478,
+    "python": 55,
+    "compiled_or_cache": 40,
+    "pickle_tokenizers": 3,
+    "vendored_ecg_qa": 370,
+    "vendored_ecg_qa_json": 354,
+    "csv": 4,
+    "tsv": 6
+  },
+  "top_level": [
+    ".gitignore",
+    ".python-version",
+    ".vscode/settings.json",
+    "LICENSE",
+    "README.md",
+    "pyproject.toml",
+    "scripts/",
+    "src/",
+    "tests/",
+    "uv.lock"
+  ],
+  "runtime_dependencies_declared": [
+    "datasets>=4.4.2",
+    "h5py>=3.15.1",
+    "matplotlib>=3.10.8",
+    "maturin>=1.11.5",
+    "numpy>=2.4.0",
+    "pandas>=2.3.3",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.16.3",
+    "torch>=2.9.1",
+    "tqdm>=4.67.1",
+    "transformers>=4.57.3",
+    "wfdb>=4.3.0"
+  ],
+  "base_dataset_modules": [
+    "code15",
+    "cpsc",
+    "csn",
+    "echonext",
+    "heed",
+    "mimic_iv",
+    "ptb_xl"
+  ],
+  "mapping_modules": [
+    "ecg_bench_pulse",
+    "ecg_comprehension",
+    "ecg_grounding",
+    "ecg_instruct_45k",
+    "ecg_instruct_pulse",
+    "ecg_protocol_gg_cot",
+    "ecg_qa",
+    "ecg_qa_cot",
+    "heed",
+    "pretrain_mimic"
+  ],
+  "material_capabilities": [
+    {
+      "capability_id": "DONOR-008-CAP-001",
+      "name": "dataset preprocessing orchestration",
+      "source_paths": ["src/ecg_datasets/build_base.py", "src/ecg_datasets/base/base_dataset.py"],
+      "observed_behavior": "Loads dataset-specific rows, normalizes lead order for selected datasets, changes sampling rate when needed, segments signals, rejects NaN/Inf outputs, and persists waveform/report metadata.",
+      "initial_disposition": "ADAPTER"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-002",
+      "name": "explicit lead-order mapping",
+      "source_paths": ["src/configs/constants.py", "src/ecg_datasets/base/*/*.py"],
+      "observed_behavior": "Declares a target lead order and dataset-specific source lead orders, then constructs reorder indices.",
+      "initial_disposition": "INTEGRATED"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-003",
+      "name": "sampling-rate normalization",
+      "source_paths": ["src/ecg_datasets/base/base_dataset.py"],
+      "observed_behavior": "Uses cubic interpolation when source and target sampling frequencies differ.",
+      "initial_disposition": "RESEARCH_ONLY"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-004",
+      "name": "fixed-sample segmentation",
+      "source_paths": ["src/ecg_datasets/base/base_dataset.py"],
+      "observed_behavior": "Splits processed signals into non-overlapping fixed-length sample segments and repeats the report for each segment.",
+      "initial_disposition": "INTEGRATED"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-005",
+      "name": "WFDB record ingestion",
+      "source_paths": ["src/ecg_datasets/base/base_dataset.py"],
+      "observed_behavior": "Uses wfdb.rdsamp and carries source sampling frequency forward.",
+      "initial_disposition": "SUPERSEDED",
+      "target_reason": "Canonical target already contains target-owned WFDB signal support from DONOR-001."
+    },
+    {
+      "capability_id": "DONOR-008-CAP-006",
+      "name": "base dataset adapters",
+      "source_paths": ["src/ecg_datasets/base/"],
+      "observed_behavior": "Dataset-specific ingestion and report extraction for seven ECG datasets.",
+      "initial_disposition": "DATA_ONLY"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-007",
+      "name": "research dataset mapping",
+      "source_paths": ["src/ecg_datasets/map/"],
+      "observed_behavior": "Maps external research text/question-answer datasets onto preprocessed ECG segment paths.",
+      "initial_disposition": "RESEARCH_ONLY"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-008",
+      "name": "PTB-XL report translation",
+      "source_paths": ["src/ecg_datasets/base/ptb_xl/ptb_xl.py"],
+      "observed_behavior": "Invokes google/translategemma-12b-it through a Transformers pipeline to translate reports from German to English.",
+      "initial_disposition": "LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-009",
+      "name": "ECG Byte BPE tokenizer training",
+      "source_paths": ["src/ecg_tokenizer/build_ecg_tokenizer.py", "src/ecg_tokenizer/ecg_byte/"],
+      "observed_behavior": "Min-max normalizes signals, quantizes to a 26-symbol alphabet, trains BPE, and persists tokenizer vocab/merges via pickle.",
+      "initial_disposition": "CHALLENGER"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-010",
+      "name": "checked-in trained tokenizer artifacts",
+      "source_paths": ["src/ecg_tokenizer/ecg_byte_tokenizer_5000.pkl", "src/ecg_tokenizer/ecg_byte_tokenizer_8000.pkl", "src/ecg_tokenizer/ecg_byte_tokenizer_10000.pkl"],
+      "observed_behavior": "Three serialized trained tokenizer artifacts are tracked in Git.",
+      "initial_disposition": "LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-011",
+      "name": "dataset publication and QA utilities",
+      "source_paths": ["src/upload_hf.py", "src/q_a_stats.py", "src/utils/", "scripts/upload_hf.sh"],
+      "observed_behavior": "Research publication, statistics, seeding, file, and visualization support.",
+      "initial_disposition": "RESEARCH_ONLY"
+    },
+    {
+      "capability_id": "DONOR-008-CAP-012",
+      "name": "committed Python cache artifacts",
+      "source_paths": ["**/__pycache__/**", "**/*.pyc"],
+      "observed_behavior": "Forty generated/cache files are tracked.",
+      "initial_disposition": "REJECTED"
+    }
+  ],
+  "notable_repository_risks": [
+    "Root MIT license does not govern all vendored/dataset-derived content.",
+    "Vendored ECG-QA subtree includes its own CC-BY-4.0 license and hundreds of JSON/CSV/TSV source-data artifacts.",
+    "Three trained tokenizer pickle artifacts lack separately established training-data provenance/license for target import.",
+    "PTB-XL translation depends on an unpinned external model checkpoint/license and GPU execution.",
+    "Default DATA_DIR is coupled to ../ECG-Bench/ecg_bench/data rather than a neutral configurable path.",
+    "Base preprocessing swallows per-record exceptions and counts skips without structured failure provenance.",
+    "Cubic interpolation and fixed-sample segmentation are implementation choices, not established target clinical truth.",
+    "Committed __pycache__/pyc files are non-source repository noise."
+  ],
+  "clinical_state": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}
