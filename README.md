@@ -2,6 +2,10 @@
 
 Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for Cardiology NP OS.
 
+## Product input and next implementation
+
+The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration is outside scope. Photo/PDF intake and digitization are the next functional implementation priority. The current waveform CLI is engineering execution and explicitly excludes diagnostic interpretation; model metadata and donor acceptance do not establish a completed clinical interpreter.
+
 ## Live operating state
 
 The immutable pre-donor engineering baseline remains:
@@ -19,7 +23,7 @@ Current governed state:
 - `activation = NOT_ELIGIBLE`
 - `clinical_validity = NOT_INFERRED`
 
-The donor program is active. At this handoff checkpoint **12 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-013, `HeartWise-AI/DeepECG_Docker`**. Verify the live registry before starting because another lane may have advanced it.
+The donor program is active. At this handoff checkpoint **13 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-014, `HeartWise-AI/ECG_tokenizer`**. Verify the live registry before starting because another lane may have advanced it.
 
 This is software/research/evaluation infrastructure. It does not authorize patient-specific ECG diagnosis, treatment, project clinical-gold creation, fabricated diagnostic performance, runtime activation, or transfer of clinical authority.
 

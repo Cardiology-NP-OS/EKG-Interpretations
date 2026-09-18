@@ -1,0 +1,109 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-013",
+  "donor_repository": "HeartWise-AI/DeepECG_Docker",
+  "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+  "donor_tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
+  "donor_license": {
+    "source_code_spdx": null,
+    "source_code_scope": "LICENSE_REVIEW_REQUIRED_NO_DONOR_SOURCE_COPY",
+    "model_weight_scope": "UNRESOLVED_NO_WEIGHTS_IMPORTED",
+    "dataset_asset_status": "TREE_METADATA_ONLY_NO_RAW_BYTES_IMPORTED"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_013_parent_commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+    "donor_013_parent_tree": "3fad006629893baeacf91e70474fc1880b4ae7e8"
+  },
+  "target_resulting_implementation": {
+    "type": "TARGET_OWNED_NONDIAGNOSTIC_MODEL_PROBABILITY_COMPARISON",
+    "verified_candidate_commit": "00fe0faea0f95180f384e41f015e320892cb366c",
+    "verified_candidate_tree": "d10d7b3aa6e6aec523af8df49dd4931dc32274cf",
+    "verification_record_commit": "394157419268f1c628f26027a7b1331746da70bf",
+    "verification_record_tree": "7cb47337cd461377d8be7b8e336a4e0e99a63471",
+    "executable_target_paths": [
+      "lib/probability_comparison.js"
+    ],
+    "runtime_dependencies_added": []
+  },
+  "verification": {
+    "candidate_ci_run_id": 35369421016,
+    "candidate_ci_conclusion": "success",
+    "verification_record_commit": "394157419268f1c628f26027a7b1331746da70bf",
+    "verification_record_tree": "7cb47337cd461377d8be7b8e336a4e0e99a63471",
+    "verification_record_ci_run_id": 35369685449,
+    "verification_record_ci_conclusion": "success",
+    "fresh_checkout": "PASS_SAME_EXECUTION_PRINCIPAL",
+    "independently_attested": false,
+    "review_record": "donors/heartwise-ai_deepecg_docker/REVIEW_VERIFICATION.json",
+    "full_target_suite": "PASS",
+    "focused_closure": "15/15 PASS",
+    "full_candidate_diff_check": "PASS"
+  },
+  "promotion": {
+    "method": "NON_FORCE_FAST_FORWARD_FROM_VERIFIED_PARENT",
+    "commit": "394157419268f1c628f26027a7b1331746da70bf",
+    "tree": "7cb47337cd461377d8be7b8e336a4e0e99a63471",
+    "previous_main_commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+    "target_main_ci_run_id": 35369792580,
+    "target_main_ci_conclusion": "success",
+    "target_main_ci_url": "https://github.com/Cardiology-NP-OS/EKG-Interpretations/actions/runs/35369792580",
+    "force": false
+  },
+  "capability_disposition_summary": {
+    "CHALLENGER": 10,
+    "EVALUATION_ONLY": 3,
+    "INTEGRATED": 1,
+    "LICENSE_REVIEW_REQUIRED": 3,
+    "REJECTED": 14,
+    "RESEARCH_ONLY": 6,
+    "SUPERSEDED": 3,
+    "total": 40
+  },
+  "boundaries": {
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false,
+    "donor_pipeline_executed": false,
+    "model_metadata_count": 11,
+    "model_metadata_is_functional_interpreter": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_results_promoted_to_target_metrics": false,
+    "runtime_model_activation": false,
+    "clinical_authority_added": false
+  },
+  "outstanding_limitations": [
+    "No tracked upstream source license was found; weights and sample asset rights remain unresolved.",
+    "Eleven upstream model names are inactive unexecuted metadata, not working target classifiers.",
+    "The source pipeline and Docker image were not executed; source execution proof is three lightweight tests plus three selected synthetic method probes.",
+    "Comparison fingerprints bind caller-declared identities but do not independently authenticate model or dataset bytes.",
+    "Fresh-checkout verification used the same execution principal; independently attested verifier credit is not claimed.",
+    "Photo/PDF digitization, validated interpretation, and the complete durable clinical report workflow remain functional work to implement.",
+    "Zero approved adjudicated project gold ECGs; target diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "rollback": {
+    "parent_commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+    "method": "Revert donor acceptance and donor implementation/verification commits as needed; do not force-reset shared main."
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "evidence_sha256": {
+    "ECG_DONOR_REGISTRY.json": "160ff428bcef09656b7bc30bb6b0eda3eaa4383201cf0f4c03907046f5778c86",
+    "README.md": "8f6402d3d1ecae27b2ab8937ecd52b6b915dfcc6be4eb86d6da12d94f989caa9",
+    "docs/AI_HANDOFF.md": "e95a89c27d9db298bd885763d4775f172fba4fdd9743fa1368c93c237485ef26",
+    "lib/probability_comparison.js": "21fab89150e60b3351e39a3e1216826250ffee6e9c1d50d6f6f7edb58772a759",
+    "tests/probability_comparison.test.js": "dd4ca0325b0d594658c8e61c54845bd21ac3482c8248ea3a1fb1d87d8f489078",
+    "tests/deepecg_docker_donor_closure.test.js": "7860122f8590d87f0d0e1a0e043579c7edf27249e3aaff1b0227504bfc7ef3a8",
+    "donors/heartwise-ai_deepecg_docker/REVIEW_VERIFICATION.json": "76ef1d0d330b9ff609e88563035a3fc7c7d3e46a4a943acb25deea687450e4a2",
+    "donors/heartwise-ai_deepecg_docker/GAP_MATRIX.json": "c0848d12765c3fdfdc68f13a01c3a551b3245d187ba624986710bfb6c406100e"
+  }
+}

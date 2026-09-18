@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 12,
+  "completed_donors": 13,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-013",
+  "next_donor_id": "DONOR-014",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -348,7 +348,7 @@
     {
       "donor_id": "DONOR-013",
       "repository": "HeartWise-AI/DeepECG_Docker",
-      "status": "IMPLEMENTED_UNVERIFIED",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
       "audited_tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
       "manifest": "donors/heartwise-ai_deepecg_docker/DONOR_MANIFEST.json",
@@ -358,13 +358,28 @@
       "license_boundary": "donors/heartwise-ai_deepecg_docker/LICENSE_BOUNDARY.json",
       "dataset_boundary": "donors/heartwise-ai_deepecg_docker/DATASET_BOUNDARY.json",
       "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
-      "receipt": "donors/heartwise-ai_deepecg_docker/DONOR_RECEIPT_DRAFT.json",
-      "receipt_status": "PENDING",
+      "receipt": "donors/heartwise-ai_deepecg_docker/DONOR_RECEIPT.json",
+      "receipt_status": "FINALIZED",
       "integration": "Target-owned nonruntime model probability agreement; no donor runtime, model weights, or source code imported.",
       "runtime_dependency_added": false,
       "model_weights_imported": false,
       "dataset_bytes_imported": false,
-      "clinical_authority_added": false
+      "clinical_authority_added": false,
+      "verified_candidate_commit": "00fe0faea0f95180f384e41f015e320892cb366c",
+      "verified_candidate_tree": "d10d7b3aa6e6aec523af8df49dd4931dc32274cf",
+      "candidate_ci_run_id": 35369421016,
+      "candidate_ci_conclusion": "success",
+      "review_verification": "donors/heartwise-ai_deepecg_docker/REVIEW_VERIFICATION.json",
+      "independently_attested": false,
+      "verification_record_commit": "394157419268f1c628f26027a7b1331746da70bf",
+      "verification_record_tree": "7cb47337cd461377d8be7b8e336a4e0e99a63471",
+      "verification_record_ci_run_id": 35369685449,
+      "verification_record_ci_conclusion": "success",
+      "promotion_commit": "394157419268f1c628f26027a7b1331746da70bf",
+      "promotion_tree": "7cb47337cd461377d8be7b8e336a4e0e99a63471",
+      "target_main_ci_run_id": 35369792580,
+      "target_main_ci_conclusion": "success",
+      "source_code_copied": false
     },
     {
       "donor_id": "DONOR-014",
