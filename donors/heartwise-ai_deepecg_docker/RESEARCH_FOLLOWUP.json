@@ -1,0 +1,15 @@
+{
+  "schema": "ekg-donor-013-research-followup-v1",
+  "source_readme_citation": {
+    "doi": "10.1093/eurheartj/ehaf1119",
+    "title": "Foundation models for electrocardiogram interpretation: clinical implications",
+    "locator": "README.md Citation section"
+  },
+  "publisher_identity_and_article_content_verified": false,
+  "retrieval_status": "DOI_OPEN_UNAVAILABLE",
+  "safe_next_action": "Retrieve the authoritative final article and capture atomic claims with exact locators using ARTICLE_EVIDENCE_SCHEMA.",
+  "published_performance_promoted_to_target_metrics": false,
+  "runtime_authority": false,
+  "project_gold": false,
+  "clinical_validity_inferred": false
+}

@@ -1,0 +1,327 @@
+{
+  "schema": "ekg-donor-013-gap-matrix-v1",
+  "donor_id": "DONOR-013",
+  "capability_count": 40,
+  "capabilities": [
+    {
+      "capability_id": "D13-001",
+      "capability": "Pipeline orchestration",
+      "disposition": "SUPERSEDED",
+      "donor_component": "main.py; utils/analysis_pipeline.py",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-FAILURE-ACCOUNTING",
+      "reason": "Target execution pipeline already owns preprocessing, analysis, and auditable failures."
+    },
+    {
+      "capability_id": "D13-002",
+      "capability": "Preprocessing analysis full-run modes",
+      "disposition": "SUPERSEDED",
+      "donor_component": "main.py; utils/parser.py; run_pipeline.bash",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
+      "reason": "Keep target mode contracts; donor shell/config runtime is not installed."
+    },
+    {
+      "capability_id": "D13-003",
+      "capability": "English/French BERT diagnosis-label challengers",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/bert_classifier.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Two text classifiers retained only as unexecuted model metadata; licenses and checkpoints unresolved."
+    },
+    {
+      "capability_id": "D13-004",
+      "capability": "EfficientNet 77-class challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/efficientnet_wrapper.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Architecture/name reference only; no trained artifact admitted."
+    },
+    {
+      "capability_id": "D13-005",
+      "capability": "WCR 77-class challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/wcr_ecg_transformer.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Architecture/name reference only; exact fork and checkpoint unresolved."
+    },
+    {
+      "capability_id": "D13-006",
+      "capability": "EfficientNet LVEF <=40 challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/efficientnet_wrapper.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Donor-specific output concept is inactive research metadata, not target diagnostic support."
+    },
+    {
+      "capability_id": "D13-007",
+      "capability": "EfficientNet LVEF <50 challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/efficientnet_wrapper.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Donor-specific output concept is inactive research metadata, not target diagnostic support."
+    },
+    {
+      "capability_id": "D13-008",
+      "capability": "EfficientNet five-year AF challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/efficientnet_wrapper.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "No cohort transportability, checkpoint identity, or target validity inferred."
+    },
+    {
+      "capability_id": "D13-009",
+      "capability": "WCR LVEF <=40 challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/wcr_ecg_transformer.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Donor-specific output concept is inactive research metadata, not target diagnostic support."
+    },
+    {
+      "capability_id": "D13-010",
+      "capability": "WCR LVEF <50 challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/wcr_ecg_transformer.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Donor-specific output concept is inactive research metadata, not target diagnostic support."
+    },
+    {
+      "capability_id": "D13-011",
+      "capability": "WCR five-year AF challenger",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/wcr_ecg_transformer.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "No cohort transportability, checkpoint identity, or target validity inferred."
+    },
+    {
+      "capability_id": "D13-012",
+      "capability": "ResNet challenger wrapper",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/resnet_wrapper.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Wrapper exists but is not exported by donor models.__all__; execution completeness not assumed."
+    },
+    {
+      "capability_id": "D13-013",
+      "capability": "77-column positional label permutation",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "utils/constants.py:WCR_COLUMN_CONVERSION",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-LABEL-HARMONIZATION",
+      "reason": "Keep permutation as source context; new comparison requires explicit exact label identities."
+    },
+    {
+      "capability_id": "D13-014",
+      "capability": "Model-to-model probability agreement",
+      "disposition": "INTEGRATED",
+      "donor_component": "utils/analysis_pipeline.py:AnalysisPipeline._run_analysis_impl",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-PROBABILITY-COMPARISON",
+      "reason": "Independent target implementation computes probability differences and frozen-threshold disagreement with exact record/source binding; never clinical accuracy."
+    },
+    {
+      "capability_id": "D13-015",
+      "capability": "BERT predictions relabeled as ground truth",
+      "disposition": "REJECTED",
+      "donor_component": "utils/analysis_pipeline.py:391-440; compute_optimal_thresholds.py:100-102",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-CLINICAL-AUTHORITY",
+      "reason": "Model predictions cannot become project gold or an adjudicated diagnostic reference."
+    },
+    {
+      "capability_id": "D13-016",
+      "capability": "Youden tuning on rows used for scoring",
+      "disposition": "REJECTED",
+      "donor_component": "utils/analysis_pipeline.py:compute_metrics; compute_metrics_binary",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
+      "reason": "Do not optimize thresholds on evaluation rows; target comparison accepts only explicit externally frozen policies."
+    },
+    {
+      "capability_id": "D13-017",
+      "capability": "F1 threshold fitting on compared rows",
+      "disposition": "REJECTED",
+      "donor_component": "compute_optimal_thresholds.py:compute_optimal_threshold_f1; process_file",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-LEAKAGE-CONTROL",
+      "reason": "Same-row tuning/scoring cannot establish independent performance; no optimizer integrated."
+    },
+    {
+      "capability_id": "D13-018",
+      "capability": "Unknown threshold fallback to 0.5",
+      "disposition": "REJECTED",
+      "donor_component": "compute_optimal_thresholds.py:get_bert_threshold",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-METRICS",
+      "reason": "Unknown or absent threshold fails closed; every label needs both explicit thresholds."
+    },
+    {
+      "capability_id": "D13-019",
+      "capability": "Cohort-specific threshold and calibration context",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "thresholds/; utils/constants.py:BERT_THRESHOLDS; WCR_THRESHOLDS",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT",
+      "reason": "Donor threshold/performance values are not imported or promoted to target metrics."
+    },
+    {
+      "capability_id": "D13-020",
+      "capability": "Nonstandard NaN threshold JSON",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "thresholds/wcr_77_classes_ecg_machine_diagnosis.json; utils/constants.py:_load_wcr_thresholds",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-REPRODUCIBILITY",
+      "reason": "Record nonfinite source caveat; target contract accepts only finite probabilities and thresholds."
+    },
+    {
+      "capability_id": "D13-021",
+      "capability": "Length inferred as sample-rate conversion",
+      "disposition": "REJECTED",
+      "donor_component": "utils/files_handler.py:NPYProcessor.process_single_file; XMLProcessor.process_batch",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-RESAMPLING",
+      "reason": "Synthetic 3000-sample input is reported successful and remains 3000; no calibrated resampling contract established."
+    },
+    {
+      "capability_id": "D13-022",
+      "capability": "NaN-only input rejection misses infinity",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "utils/files_handler.py:NPYProcessor.process_single_file",
+      "canonical_target_implementation": "ECG-CAP-QUALITY-NOISE-ROBUSTNESS",
+      "reason": "Synthetic infinity input is accepted by donor; retain negative fixture requirement, target finite guards remain mandatory."
+    },
+    {
+      "capability_id": "D13-023",
+      "capability": "CLSA and MHI XML import concepts",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "utils/files_handler.py:XMLProcessor",
+      "canonical_target_implementation": "ECG-CAP-SIGNAL-FORMAT-ADAPTERS",
+      "reason": "Vendor parsing needs independent format/calibration/version contracts; no XML decoder added."
+    },
+    {
+      "capability_id": "D13-024",
+      "capability": "Algebraic derived limb-lead concepts",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "utils/files_handler.py:_process_clsa_xml; _process_mhi_xml",
+      "canonical_target_implementation": "ECG-CAP-QUALITY-LEAD-INTEGRITY",
+      "reason": "Measured versus derived leads must be explicit; derivation is not silently admitted."
+    },
+    {
+      "capability_id": "D13-025",
+      "capability": "Missing leads replaced by NaN then zero",
+      "disposition": "REJECTED",
+      "donor_component": "utils/files_handler.py:_process_clsa_xml; _process_mhi_xml; utils/ecg_signal_processor.py:flatten_fft_peak",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING",
+      "reason": "Synthetic zero replacement cannot erase missing-lead provenance."
+    },
+    {
+      "capability_id": "D13-026",
+      "capability": "Batch-dependent spectral amplitude scaling",
+      "disposition": "REJECTED",
+      "donor_component": "utils/ecg_signal_processor.py:scale_ecg_signals",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-NORMALIZATION",
+      "reason": "One record's scale depends on batch peers and an unverified cohort constant; target transformations remain explicit per-record contracts."
+    },
+    {
+      "capability_id": "D13-027",
+      "capability": "Spectral peak flattening and LOESS context",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "utils/ecg_signal_processor.py:detect_peaks_with_sliding_window; flatten_fft_peak; find_crossings_for_peaks",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
+      "reason": "Filtering concepts retained without copied code or numerical-parity claim; needs independent DSP specification."
+    },
+    {
+      "capability_id": "D13-028",
+      "capability": "FFT applied on matrix default axis",
+      "disposition": "REJECTED",
+      "donor_component": "utils/ecg_signal_processor.py:adjust_spectral_power; scale_ecg_signals",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
+      "reason": "Default-axis FFT differs from per-lead temporal analysis; semantics are not promoted into canonical DSP."
+    },
+    {
+      "capability_id": "D13-029",
+      "capability": "Unbound base64 float32 reshape",
+      "disposition": "REJECTED",
+      "donor_component": "utils/files_handler.py:ECGFileHandler",
+      "canonical_target_implementation": "ECG-CAP-SIGNAL-FORMAT-ADAPTERS",
+      "reason": "Payload reshape alone does not establish leads, units, rate, duration, endianness, or source identity."
+    },
+    {
+      "capability_id": "D13-030",
+      "capability": "Basename-derived output identities",
+      "disposition": "REJECTED",
+      "donor_component": "main.py:create_analysis_dataframe; utils/files_handler.py:process_batch",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY",
+      "reason": "Equal basenames can collide across paths; target comparison joins exact record IDs plus source hashes."
+    },
+    {
+      "capability_id": "D13-031",
+      "capability": "Failure reports and error collector",
+      "disposition": "SUPERSEDED",
+      "donor_component": "utils/error_collector.py; tests/test_error_collector.py; utils/files_handler.py:save_report",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-FAILURE-MODES",
+      "reason": "Retain three executed source tests as bounded evidence; target categorized failure accounting already exists."
+    },
+    {
+      "capability_id": "D13-032",
+      "capability": "Mutable remote snapshot and cache-exists trust",
+      "disposition": "REJECTED",
+      "donor_component": "utils/huggingface_wrapper.py:get_model",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION",
+      "reason": "Unpinned revision and existence-only cache bypass exact checkpoint/source verification."
+    },
+    {
+      "capability_id": "D13-033",
+      "capability": "Arbitrary pt TorchScript/state loaders",
+      "disposition": "REJECTED",
+      "donor_component": "models/wcr_ecg_transformer.py; efficientnet_wrapper.py; resnet_wrapper.py; notebooks/",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION",
+      "reason": "No arbitrary model or notebook loader is executed; unsafe state loading is not integrated."
+    },
+    {
+      "capability_id": "D13-034",
+      "capability": "Unpinned container Git dependencies",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "donor_component": "dockerfile; requirements.txt",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
+      "reason": "Queue exact associated repositories; no Docker build, editable fork dependency, or transitive package import."
+    },
+    {
+      "capability_id": "D13-035",
+      "capability": "Source-code licensing absent in tracked tree",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "donor_component": "complete upstream tree",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-LICENSE-PROVENANCE",
+      "reason": "No tracked license file found; do not infer permission from public availability; donor code is not copied."
+    },
+    {
+      "capability_id": "D13-036",
+      "capability": "Fixture and input-template data rights",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "donor_component": "ecg_signals/; inputs/",
+      "canonical_target_implementation": "ECG-CAP-DATASET-CATALOG",
+      "reason": "Sample payloads and templates remain tree metadata only; raw data and source labels are not imported."
+    },
+    {
+      "capability_id": "D13-037",
+      "capability": "Supervised and SSL training notebooks",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "notebooks/; data/project_dataset.py; models/heartwise_model_factory.py",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT",
+      "reason": "Training/objective context is inspected without executing notebooks or claiming target reproduction."
+    },
+    {
+      "capability_id": "D13-038",
+      "capability": "Identical train/test manifest blobs",
+      "disposition": "REJECTED",
+      "donor_component": "notebooks/ssl_manifests/finetuning/afib_2y/train.tsv; test.tsv",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
+      "reason": "Identical tracked manifests cannot substantiate independent held-out split evidence."
+    },
+    {
+      "capability_id": "D13-039",
+      "capability": "Associated statistical plots package",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "requirements.txt:HeartWise_StatPlots",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-REPRODUCIBILITY",
+      "reason": "Associated first-party package is queued separately; no dependency imported and no performance plots treated as target evidence."
+    },
+    {
+      "capability_id": "D13-040",
+      "capability": "Credential file copied into container image",
+      "disposition": "REJECTED",
+      "donor_component": "dockerfile:COPY api_key.json; models_setup.py; utils/huggingface_wrapper.py:upload_model",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-SOURCE-INTEGRITY",
+      "reason": "Credential file contents are not inspected or copied; upload behavior and credential-baking are excluded."
+    }
+  ]
+}

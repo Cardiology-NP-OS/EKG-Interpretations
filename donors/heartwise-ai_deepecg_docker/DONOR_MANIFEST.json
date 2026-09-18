@@ -1,0 +1,31 @@
+{
+  "schema": "ekg-donor-manifest-v1",
+  "donor_id": "DONOR-013",
+  "repository": "HeartWise-AI/DeepECG_Docker",
+  "audited_head": {
+    "branch": "main",
+    "commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+    "tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
+    "commit_verified": true
+  },
+  "target_basis": {
+    "commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+    "tree": "3fad006629893baeacf91e70474fc1880b4ae7e8"
+  },
+  "software_license": {
+    "spdx": null,
+    "license_file": null,
+    "reuse_status": "LICENSE_REVIEW_REQUIRED"
+  },
+  "repository_inventory": {
+    "complete": true,
+    "truncated": false,
+    "tracked_file_count": 41,
+    "tracked_bytes": 1017267
+  },
+  "acquisition": "Git partial clone with selective sparse exact-byte source checkout; complete connector tree inventory",
+  "credential_file_contents_inspected": false,
+  "sample_payloads_materialized": false,
+  "donor_source_code_copied": false,
+  "clinical_authority_added": false
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "ekg-donor-013-dataset-boundary-v1",
+  "sample_assets": [
+    {
+      "path": "ecg_signals/dummy_ecg.npy",
+      "git_blob_sha": "e4b722e86ddda3d5af77aa249a08cd8d890fcc14",
+      "bytes": 480128,
+      "mode": "100755",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "ecg_signals/dummy_ecg.xml",
+      "git_blob_sha": "692f8edc19d5bb0016efd9eb16e88620704344a5",
+      "bytes": 220701,
+      "mode": "100755",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "inputs/data_rows_template_npy.csv",
+      "git_blob_sha": "f7c53e7e2b07b70dea7a1c082a0062c5235c1160",
+      "bytes": 348,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "inputs/data_rows_template_xml.csv",
+      "git_blob_sha": "1a5caf1b544d9a7a8a3246582b26c6a647f095e4",
+      "bytes": 278,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    }
+  ],
+  "raw_dataset_bytes_imported": false,
+  "source_labels_promoted_to_project_gold": false,
+  "reference_prediction_kind": "MODEL_PREDICTIONS_NOT_PROJECT_GOLD",
+  "same_train_test_manifest_blob": "8b622df8e98bb3f74b112f03f1e398b6bde01362",
+  "patient_split_evidence": "NOT_ESTABLISHED",
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false
+}

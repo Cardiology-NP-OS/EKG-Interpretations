@@ -1,0 +1,20 @@
+{
+  "schema": "ekg-donor-013-receipt-draft-v1",
+  "donor_id": "DONOR-013",
+  "repository": "HeartWise-AI/DeepECG_Docker",
+  "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+  "donor_tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
+  "acceptance_state": "IMPLEMENTED_UNVERIFIED",
+  "target_parent_commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+  "target_implementation": [
+    "lib/probability_comparison.js"
+  ],
+  "upstream_test_scope": "3 source error collector tests and 3 synthetic extracted NPY-method probes",
+  "local_candidate_proof": "LOCAL_TEST_PROOF.json",
+  "independent_verification": "NOT_PERFORMED",
+  "candidate_github_ci": "NOT_RUN",
+  "promotion": "NOT_PERFORMED",
+  "next_gate": "VERIFY_AFTER_REQUESTED_SOL_XHIGH_SWITCH",
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false
+}

@@ -1,6 +1,6 @@
 {
   "schema": "ekg-edge-case-coverage-v1",
-  "updated_date": "2026-09-17",
+  "updated_date": "2026-09-18",
   "status": "REQUIRED_COVERAGE_ACTIVE",
   "authority": {
     "diagnostic_runtime": "GOVERNED_INACTIVE",
@@ -12,14 +12,16 @@
       "id": "SOURCE-PROVENANCE",
       "tests": [
         "tests/ci_contract.test.js",
-        "tests/v12_1_provenance.test.js"
+        "tests/v12_1_provenance.test.js",
+        "tests/probability_comparison.test.js"
       ],
       "scope": "checksum drift, path aliases, Git/index/worktree divergence, symlink/junction and source substitution"
     },
     {
       "id": "STRUCTURED-INPUT-ADVERSARIAL",
       "tests": [
-        "tests/input_quality_guard.test.js"
+        "tests/input_quality_guard.test.js",
+        "tests/probability_comparison.test.js"
       ],
       "scope": "cycles, getters/proxies, sparse arrays, Unicode-equivalent keys, depth/width/node/string budgets"
     },
@@ -92,7 +94,8 @@
       "id": "EVALUATION",
       "tests": [
         "tests/evaluation_runtime.test.js",
-        "tests/evaluation/repository_normalization.test.js"
+        "tests/evaluation/repository_normalization.test.js",
+        "tests/probability_comparison.test.js"
       ],
       "scope": "annotation bounds/types, unmapped labels, nonreportable metrics, robustness/reproducibility drift"
     },
@@ -100,7 +103,8 @@
       "id": "GOVERNANCE",
       "tests": [
         "tests/governance_runtime.test.js",
-        "tests/research/research_authority.test.js"
+        "tests/research/research_authority.test.js",
+        "tests/probability_comparison.test.js"
       ],
       "scope": "authority drift, license closure, dependency fingerprints, source-code licensing"
     },
@@ -109,7 +113,8 @@
       "tests": [
         "tests/ecg_preprocess_donor_closure.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/ecg_fm_donor_closure.test.js"
+        "tests/ecg_fm_donor_closure.test.js",
+        "tests/deepecg_docker_donor_closure.test.js"
       ],
       "scope": "exact source identity, terminal dispositions, receipt/registry consistency, no silent imports"
     },

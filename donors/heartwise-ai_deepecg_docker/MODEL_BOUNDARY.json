@@ -1,0 +1,346 @@
+{
+  "schema": "ekg-donor-013-model-boundary-v1",
+  "models": [
+    {
+      "challenger_id": "MODEL-D013-BERT",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "Bert_diagnosis2classification",
+      "source_path": "models/bert_classifier.py",
+      "outputs": {
+        "count": 77,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-BERT-EN-FR",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "Bert_diagnosis2classification_En_Fr",
+      "source_path": "models/bert_classifier.py",
+      "outputs": {
+        "count": 77,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-EFFICIENTNET-77",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "efficientnetv2_77_classes",
+      "source_path": "models/efficientnet_wrapper.py",
+      "outputs": {
+        "count": 77,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-EFFICIENTNET-LVEF40",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "efficientnetv2_lvef_equal_under_40",
+      "source_path": "models/efficientnet_wrapper.py",
+      "outputs": {
+        "count": 1,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-EFFICIENTNET-LVEF50",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "efficientnetv2_lvef_under_50",
+      "source_path": "models/efficientnet_wrapper.py",
+      "outputs": {
+        "count": 1,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-EFFICIENTNET-AF5Y",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "efficientnetv2_afib_5y",
+      "source_path": "models/efficientnet_wrapper.py",
+      "outputs": {
+        "count": 1,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-WCR-77",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "wcr_77_classes",
+      "source_path": "models/wcr_ecg_transformer.py",
+      "outputs": {
+        "count": 77,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-WCR-LVEF40",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "wcr_lvef_equal_under_40",
+      "source_path": "models/wcr_ecg_transformer.py",
+      "outputs": {
+        "count": 1,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-WCR-LVEF50",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "wcr_lvef_under_50",
+      "source_path": "models/wcr_ecg_transformer.py",
+      "outputs": {
+        "count": 1,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-WCR-AF5Y",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "wcr_afib_5y",
+      "source_path": "models/wcr_ecg_transformer.py",
+      "outputs": {
+        "count": 1,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    },
+    {
+      "challenger_id": "MODEL-D013-RESNET-77",
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+      "model_family": "resnet_77_classes",
+      "source_path": "models/resnet_wrapper.py",
+      "outputs": {
+        "count": 77,
+        "authority": "SOURCE_CONTEXT_ONLY"
+      },
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "LICENSE_REVIEW_REQUIRED",
+      "weight_license": "LICENSE_REVIEW_REQUIRED",
+      "weights_imported": false,
+      "execution_status": "BLOCKED_LICENSE_AND_CHECKPOINT_IDENTITY",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_deepecg_docker/MODEL_BOUNDARY.json",
+      "input_contract": "Text input for BERT; donor assumes 2500 x 12 waveform geometry and 250 Hz elsewhere. Actual source sampling/calibration and model-specific preprocessing are not established for target use.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      }
+    }
+  ],
+  "weights_imported": false,
+  "models_executed": false,
+  "missing_evidence": [
+    "exact checkpoint revision/hash/bytes",
+    "explicit weight license",
+    "admitted training-data and population context",
+    "validated preprocessing and calibrated source sampling",
+    "independent target-controlled validation"
+  ],
+  "runtime_authority": false,
+  "clinical_validity": "NOT_INFERRED"
+}

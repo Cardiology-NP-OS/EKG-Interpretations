@@ -1,0 +1,30 @@
+{
+  "schema": "ekg-model-probability-comparison-contract-v1",
+  "implementation": "lib/probability_comparison.js",
+  "function": "compareModelProbabilities",
+  "comparison_kind": "MODEL_TO_MODEL_AGREEMENT",
+  "input_kind": "MODEL_PREDICTIONS",
+  "records": "Both sides must have the exact same record IDs and exact per-record source hashes; no partial intersection.",
+  "labels": "Both sides must have the same explicit stable label IDs; probability vectors are permuted by identity.",
+  "thresholds": "Every label requires explicit inclusive >= thresholds in [0,1] for each model; no optimizer or fallback.",
+  "provenance": "Each model: modelId, checkpointSha256, preprocessingSha256, datasetManifestSha256. Threshold policy: sourceCommit, sourceTree, artifactSha256. Hashes are caller-declared; byte verification is a separate upstream gate.",
+  "bounds": {
+    "maxLabels": 256,
+    "maxRecords": 10000,
+    "maxProbabilityCellsPerTable": 1000000
+  },
+  "unsupported": [
+    "project gold",
+    "source-label accuracy",
+    "patient diagnosis",
+    "clinical sensitivity/specificity",
+    "threshold fitting",
+    "model execution",
+    "raw waveform parsing"
+  ],
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

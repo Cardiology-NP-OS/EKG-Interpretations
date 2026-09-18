@@ -1,6 +1,6 @@
 {
   "schema": "ecg-license-ledger-v1",
-  "updated_date": "2026-09-17",
+  "updated_date": "2026-09-18",
   "entries": [
     {
       "donor_id": "DONOR-001",
@@ -492,6 +492,33 @@
         "raw_data_imported": false,
         "tracked_split_assets_imported": false,
         "source_labels_promoted_to_project_gold": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
+    },
+    {
+      "donor_id": "DONOR-013",
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "source_code_license": {
+        "spdx": null,
+        "status": "LICENSE_REVIEW_REQUIRED",
+        "license_file": null
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "INDEPENDENT_TARGET_IMPLEMENTATION"
+      ],
+      "attribution_required": "UNRESOLVED_DONOR_TERMS_PROVENANCE_RETAINED",
+      "model_weight_license": {
+        "status": "LICENSE_REVIEW_REQUIRED",
+        "weights_imported": false
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_ASSET",
+        "source_labels_promoted_to_project_gold": false,
+        "raw_bytes_imported": false
       },
       "dependency_license_action": {
         "status": "NO_RUNTIME_DEPENDENCY_ADDED",

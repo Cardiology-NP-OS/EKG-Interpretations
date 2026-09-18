@@ -1,8 +1,8 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 323,
-  "capability_count": 59,
+  "generated_from_donor_capability_registry_count": 363,
+  "capability_count": 60,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
   "approved_adjudicated_gold_count": 0,
@@ -4136,7 +4136,50 @@
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
       "runtime_status": "INACTIVE_CHALLENGER_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-EVALUATION-PROBABILITY-COMPARISON",
+      "capability_family": "Evaluation",
+      "name": "Explicit non-runtime model probability comparison",
+      "canonical_target_path": "lib/probability_comparison.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "HeartWise-AI/DeepECG_Docker",
+          "commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+          "tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
+          "manifest": "donors/heartwise-ai_deepecg_docker/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "D13-014"
+      ],
+      "licenses": [
+        {
+          "source": "HeartWise-AI/DeepECG_Docker",
+          "spdx": null,
+          "status": "LICENSE_REVIEW_REQUIRED_DONOR_CODE_NOT_COPIED_INDEPENDENT_TARGET_IMPLEMENTATION"
+        }
+      ],
+      "test_paths": [
+        "tests/probability_comparison.test.js",
+        "tests/deepecg_docker_donor_closure.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/MODEL_PROBABILITY_COMPARISON_CONTRACT.json"
+      ],
+      "research_paths": [
+        "research/benchmarks/MODEL_AGREEMENT_LIMITATIONS.md"
+      ],
+      "limitations": [
+        "Agreement is not accuracy; model predictions are not project gold.",
+        "Comparison binds caller-declared hashes; independent asset/data/policy verification remains upstream."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
     }
   ],
-  "updated_date": "2026-09-17"
+  "updated_date": "2026-09-18"
 }

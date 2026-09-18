@@ -44,3 +44,9 @@ All entries are non-authoritative references. No challenger receives runtime or 
 - Small checkpoint exact identity: c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2, 121,892,376 bytes; external deterministic synthetic smoke passed with output shape [1, 93, 512].
 - Target-owned executable additions are generic safetensors structural inspection and foundation-representation input packing; donor source code is not copied.
 - Donor model performance claims, downstream labels, split assets, calibration, thresholds, and clinical validity remain non-authoritative research context. Runtime authority is false and metrics remain NOT_REPORTABLE.
+
+## DONOR-013 -- HeartWise-AI/DeepECG_Docker
+
+Exact source commit cabf6c06b74731c86b8c5a27ae7101f14db5ec38, tree 6433a9443a47ace3b3df616f57d422758ebe3ded. No tracked code license; reuse status LICENSE_REVIEW_REQUIRED. No donor source, weights, sample payloads, or credentials copied.
+
+Functional addition: target-owned non-runtime model probability agreement in lib/probability_comparison.js. Eleven model names remain inactive metadata with missing checkpoint/license evidence; they do not count as a functional interpreter. No diagnostic authority or clinical validity inferred.

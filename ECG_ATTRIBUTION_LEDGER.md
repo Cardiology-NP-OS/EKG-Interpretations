@@ -224,3 +224,9 @@ ECGFounder is credited for the Net1D architecture context, exact external checkp
 - Provenance files: donors/edoar-do_hubert-ecg/DONOR_MANIFEST.json, INVENTORY.json, GAP_MATRIX.json, HARVEST_PLAN.md, LICENSE_BOUNDARY.json, DATASET_BOUNDARY.json, MODEL_BOUNDARY.json, SOURCE_IDENTITY_MIGRATION.json, ASSOCIATED_REPOSITORY_DISPOSITIONS.json, COMPARATIVE_PROOF.json, model asset specs, structural verification, and synthetic smoke evidence.
 
 HuBERT-ECG is credited for the foundation-model architecture and reproducibility context that motivated the target-owned checkpoint-safety and representation-adapter surfaces. The non-commercial donor license is preserved as a hard reuse boundary; clinical validity remains not inferred and diagnostic runtime remains governed inactive.
+
+## DONOR-013 -- HeartWise-AI/DeepECG_Docker
+
+Exact source commit cabf6c06b74731c86b8c5a27ae7101f14db5ec38, tree 6433a9443a47ace3b3df616f57d422758ebe3ded. No tracked code license; reuse status LICENSE_REVIEW_REQUIRED. No donor source, weights, sample payloads, or credentials copied.
+
+Functional addition: target-owned non-runtime model probability agreement in lib/probability_comparison.js. Eleven model names remain inactive metadata with missing checkpoint/license evidence; they do not count as a functional interpreter. No diagnostic authority or clinical validity inferred.

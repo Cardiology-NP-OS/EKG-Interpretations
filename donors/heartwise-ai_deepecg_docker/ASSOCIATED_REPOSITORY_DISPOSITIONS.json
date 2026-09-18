@@ -1,0 +1,28 @@
+{
+  "schema": "ekg-donor-013-associated-repositories-v1",
+  "repositories": [
+    {
+      "registered_repository": "HeartWise-AI/fairseq-signals",
+      "resolved_repository": "HeartWise-AI/DeepECG-SSL-finetune",
+      "repository_id": "848017407",
+      "observed_commit": "a1a130c3dcd44d7234caf3697612a47244f48cb6",
+      "observed_tree": "0db0e866a7f0706960cda7ca960c16779579e591",
+      "disposition": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
+      "equivalence_to_Jwoo5_fairseq_signals_inferred": false,
+      "dependency_imported": false,
+      "observation_scope": "Repository metadata and main identity only; full source/license audit not performed."
+    },
+    {
+      "registered_repository": "HeartWise-AI/HeartWise_StatPlots",
+      "resolved_repository": "HeartWise-AI/HeartWise_StatPlots",
+      "repository_id": "833328823",
+      "observed_commit": "aba58379f29d54227bb919135eb09b2db874ceb4",
+      "observed_tree": "8e8f278383c1f72f2d0428e8e2356fc685a35287",
+      "disposition": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
+      "equivalence_to_Jwoo5_fairseq_signals_inferred": false,
+      "dependency_imported": false,
+      "observation_scope": "Repository metadata and main identity only; full source/license audit not performed."
+    }
+  ],
+  "clinical_authority_added": false
+}

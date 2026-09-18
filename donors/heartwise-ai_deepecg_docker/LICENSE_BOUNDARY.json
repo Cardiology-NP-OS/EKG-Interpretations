@@ -1,0 +1,23 @@
+{
+  "schema": "ekg-donor-013-license-boundary-v1",
+  "source_code": {
+    "spdx": null,
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "license_files": [],
+    "basis": "Complete exact tree contains no LICENSE/COPYING/NOTICE license file; public visibility is not licensing evidence."
+  },
+  "model_weights": {
+    "status": "LICENSE_REVIEW_REQUIRED",
+    "weights_imported": false,
+    "runtime_activation": false,
+    "exact_checkpoint_identities_admitted": false
+  },
+  "datasets": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_ASSET",
+    "raw_bytes_imported": false
+  },
+  "donor_source_code_copied": false,
+  "target_implementation": "Independent target-owned model agreement code; no donor code or model artifacts copied.",
+  "runtime_dependency_added": false,
+  "clinical_authority_added": false
+}

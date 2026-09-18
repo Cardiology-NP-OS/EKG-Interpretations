@@ -1,0 +1,23 @@
+{
+  "schema": "ekg-donor-013-comparative-proof-v1",
+  "source_basis": {
+    "commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+    "tree": "6433a9443a47ace3b3df616f57d422758ebe3ded"
+  },
+  "target_test": "tests/probability_comparison.test.js",
+  "source_negative_examples": "UPSTREAM_VERIFICATION.json",
+  "target_positive_behavior": [
+    "Explicit MODEL_PREDICTIONS kind; no ground truth conversion",
+    "Exact label and record-set alignment without intersection",
+    "Per-record source hash plus dataset/checkpoint/preprocessing/policy identity binding",
+    "Frozen explicit finite thresholds with no missing-label fallback",
+    "Finite probability guards and bounded dense structures",
+    "Order-invariant deterministic disagreement and probability difference",
+    "No diagnostic accuracy, project gold, or runtime authority"
+  ],
+  "identity_limit": "Caller-supplied provenance hashes are bound into comparison identity; this utility does not independently verify model, dataset, or policy bytes.",
+  "synthetic_engineering_proof_only": true,
+  "numerical_parity_with_donor_claimed": false,
+  "external_superiority_established": false,
+  "clinical_validity_inferred": false
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "ekg-donor-013-upstream-verification-v1",
+  "source_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+  "source_tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
+  "test_error_collector": {
+    "command": "python tests/test_error_collector.py",
+    "exit_code": 0,
+    "stdout": "All error collector tests passed.",
+    "test_functions": 3
+  },
+  "synthetic_source_method_probe": {
+    "method": "AST-extracted pinned NPYProcessor.process_single_file; no upstream package import or model load",
+    "source_path": "utils/files_handler.py",
+    "source_blob_sha": "29158a2beb5f096f0e7d52b9ff43d852af0e04d6",
+    "start_line": 205,
+    "end_line": 236,
+    "patient_data_used": false,
+    "cases": [
+      {
+        "case": "nonmultiple_length",
+        "input_shape": [
+          3000,
+          12
+        ],
+        "donor_status": "Success",
+        "output_shape": [
+          3000,
+          12
+        ],
+        "output_finite": true
+      },
+      {
+        "case": "infinite_sample",
+        "input_shape": [
+          2500,
+          12
+        ],
+        "donor_status": "Success",
+        "output_shape": [
+          2500,
+          12
+        ],
+        "output_finite": false
+      },
+      {
+        "case": "nan_sample",
+        "input_shape": [
+          2500,
+          12
+        ],
+        "donor_status": "Failed",
+        "output_shape": null,
+        "output_finite": null
+      }
+    ]
+  },
+  "full_upstream_pipeline_executed": false,
+  "docker_built": false,
+  "models_executed": false,
+  "limitation": "Only the dependency-light three-function upstream test and selected NPY source method were executed. No GPU, model weights, restricted samples, or diagnostic validity evidence.",
+  "clinical_authority_added": false
+}

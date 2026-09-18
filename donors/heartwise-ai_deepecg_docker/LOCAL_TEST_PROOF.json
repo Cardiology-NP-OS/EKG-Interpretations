@@ -1,0 +1,39 @@
+{
+  "schema": "ekg-donor-013-local-test-proof-v1",
+  "scope": "LOCAL_CANDIDATE_ENGINEERING_ONLY",
+  "target_parent_commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+  "full_node_suite_commands": 62,
+  "checks": [
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "log_relative_to_work": "donor013-candidate-npm-final.log",
+      "log_sha256": "16503072b2adc803395011de7f677c3119aeb902b025624220a40c7c0fc20c32",
+      "passing_json_summaries": 61
+    },
+    {
+      "command": "npm run gate:ci",
+      "exit_code": 0,
+      "log_relative_to_work": "donor013-candidate-ci-gate-final.log",
+      "log_sha256": "5f4a3c5de66fcb032f4135fc0fc22984808c5f3c105b071aadb0ec01ed0e11fd",
+      "passing_json_summaries": 1
+    },
+    {
+      "command": "python tools/ep5_pkt09_terminal_specialist_completion_gate.py",
+      "exit_code": 0,
+      "log_relative_to_work": "donor013-candidate-python-final.log",
+      "log_sha256": "fe1a1618ed089da49f3b55f3d62f791f22a4c319bbd39e5d0dcb0140b3a4e514",
+      "passing_json_summaries": 2
+    }
+  ],
+  "new_comparison_tests": 54,
+  "donor_closure_checks": 13,
+  "terminal_specialist_checks": 360,
+  "diff_check_passed": true,
+  "independent_verification": false,
+  "candidate_github_ci": "NOT_RUN",
+  "promotion": "NOT_PERFORMED",
+  "clinical_accuracy_claimed": false,
+  "project_gold": false,
+  "runtime_authority": false
+}

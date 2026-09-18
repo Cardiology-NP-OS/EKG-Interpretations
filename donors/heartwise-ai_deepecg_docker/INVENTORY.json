@@ -1,0 +1,1416 @@
+{
+  "schema": "ekg-donor-013-inventory-v1",
+  "donor_id": "DONOR-013",
+  "repository": "HeartWise-AI/DeepECG_Docker",
+  "commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
+  "tree": "6433a9443a47ace3b3df616f57d422758ebe3ded",
+  "recursive_tree_audit": {
+    "complete": true,
+    "truncated": false,
+    "tracked_file_count": 41,
+    "tracked_bytes": 1017267
+  },
+  "package_summary": {
+    "source_python_files": 21,
+    "notebooks": 3,
+    "upstream_test_functions": 3,
+    "materialized_exact_source_files": 34,
+    "license_files": []
+  },
+  "tracked_files": [
+    {
+      "path": ".dockerignore",
+      "git_blob_sha": "e953d66277394447a94a058e9dadfe71e756d64e",
+      "bytes": 78,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": ".gitignore",
+      "git_blob_sha": "0de793f78f2d30c4f335f18fb34f65fa3888c1a0",
+      "bytes": 470,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha": "86c432fe5e5a203df26f2921a0702135b9670921",
+      "bytes": 22826,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "a818497b7a9c6ada2bd32bd527af1b81e29012011aafb25675891a2e72a911fc"
+    },
+    {
+      "path": "api_key.json",
+      "git_blob_sha": "b85e6d6fce25bf309bd4374957547c821708b19e",
+      "bytes": 35,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "compute_optimal_thresholds.py",
+      "git_blob_sha": "0374fc4116ce71ead6419f16a88e8e0e8557324c",
+      "bytes": 12648,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "92ef4141efe23d6b960d45ce7e3fc83c1d2a4f2e2e088a43ee6f10f3336c6320",
+      "symbols": [
+        {
+          "name": "get_pattern_name",
+          "kind": "FunctionDef",
+          "start_line": 14,
+          "end_line": 20
+        },
+        {
+          "name": "get_bert_threshold",
+          "kind": "FunctionDef",
+          "start_line": 23,
+          "end_line": 27
+        },
+        {
+          "name": "compute_optimal_threshold_youden",
+          "kind": "FunctionDef",
+          "start_line": 30,
+          "end_line": 42
+        },
+        {
+          "name": "compute_optimal_threshold_f1",
+          "kind": "FunctionDef",
+          "start_line": 45,
+          "end_line": 58
+        },
+        {
+          "name": "process_file",
+          "kind": "FunctionDef",
+          "start_line": 61,
+          "end_line": 149
+        },
+        {
+          "name": "main",
+          "kind": "FunctionDef",
+          "start_line": 152,
+          "end_line": 299
+        }
+      ],
+      "imports": [
+        "argparse",
+        "json",
+        "numpy",
+        "pandas",
+        "sklearn.metrics",
+        "utils.constants"
+      ]
+    },
+    {
+      "path": "data/project_dataset.py",
+      "git_blob_sha": "d5ea42648b0c20c75fb38853169053ae98874601",
+      "bytes": 1273,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "b0117b72278e4ce959f72a39025bbf2cf51055a3dadc01f957898930c3f12d91",
+      "symbols": [
+        {
+          "name": "ProjectDataset",
+          "kind": "ClassDef",
+          "start_line": 7,
+          "end_line": 29
+        },
+        {
+          "name": "create_dataloader",
+          "kind": "FunctionDef",
+          "start_line": 31,
+          "end_line": 34
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 10,
+          "end_line": 13
+        },
+        {
+          "name": "__len__",
+          "kind": "FunctionDef",
+          "start_line": 15,
+          "end_line": 16
+        },
+        {
+          "name": "__getitem__",
+          "kind": "FunctionDef",
+          "start_line": 18,
+          "end_line": 29
+        }
+      ],
+      "imports": [
+        "os",
+        "pandas",
+        "torch",
+        "torch.utils.data",
+        "utils.files_handler"
+      ]
+    },
+    {
+      "path": "dockerfile",
+      "git_blob_sha": "51762e566750400eb999cc916eeccd631486eb01",
+      "bytes": 1325,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "b42692cd2d88306f5858818e265576d798fd5dddb81e03252d7fcebeaaf10a86"
+    },
+    {
+      "path": "ecg_signals/dummy_ecg.npy",
+      "git_blob_sha": "e4b722e86ddda3d5af77aa249a08cd8d890fcc14",
+      "bytes": 480128,
+      "mode": "100755",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "ecg_signals/dummy_ecg.xml",
+      "git_blob_sha": "692f8edc19d5bb0016efd9eb16e88620704344a5",
+      "bytes": 220701,
+      "mode": "100755",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "heartwise.config",
+      "git_blob_sha": "7fb8756399e19fb121567fbed39613500a0b6754",
+      "bytes": 335,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "c5a2d236ad4232bc29c0ae037e5aa616b8035df4fdc7fef06867a52ee872a5a4"
+    },
+    {
+      "path": "inputs/data_rows_template_npy.csv",
+      "git_blob_sha": "f7c53e7e2b07b70dea7a1c082a0062c5235c1160",
+      "bytes": 348,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "inputs/data_rows_template_xml.csv",
+      "git_blob_sha": "1a5caf1b544d9a7a8a3246582b26c6a647f095e4",
+      "bytes": 278,
+      "mode": "100644",
+      "inspection": "TREE_METADATA_ONLY_CREDENTIAL_SAMPLE_OR_NONMATERIAL_FILE"
+    },
+    {
+      "path": "main.py",
+      "git_blob_sha": "209fe8f0c5a93d12dd0f0716fad75dc1df945f33",
+      "bytes": 14128,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "51d411198da717accfa2ebb0d6a23f1118e816b16dcc8e00f9c616ba628d879d",
+      "symbols": [
+        {
+          "name": "set_up_directories",
+          "kind": "FunctionDef",
+          "start_line": 27,
+          "end_line": 46
+        },
+        {
+          "name": "save_and_perform_preprocessing",
+          "kind": "FunctionDef",
+          "start_line": 48,
+          "end_line": 66
+        },
+        {
+          "name": "perform_analysis",
+          "kind": "FunctionDef",
+          "start_line": 68,
+          "end_line": 94
+        },
+        {
+          "name": "validate_dataframe",
+          "kind": "FunctionDef",
+          "start_line": 96,
+          "end_line": 148
+        },
+        {
+          "name": "create_preprocessing_dataframe",
+          "kind": "FunctionDef",
+          "start_line": 150,
+          "end_line": 180
+        },
+        {
+          "name": "create_analysis_dataframe",
+          "kind": "FunctionDef",
+          "start_line": 182,
+          "end_line": 215
+        },
+        {
+          "name": "main",
+          "kind": "FunctionDef",
+          "start_line": 217,
+          "end_line": 317
+        }
+      ],
+      "imports": [
+        "datetime",
+        "os",
+        "pandas",
+        "sys",
+        "utils.analysis_pipeline",
+        "utils.constants",
+        "utils.files_handler",
+        "utils.log_config",
+        "utils.parser",
+        "warnings"
+      ]
+    },
+    {
+      "path": "models/__init__.py",
+      "git_blob_sha": "ff401e4370979ed6ac31ca26d16cf780204d403b",
+      "bytes": 761,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "3b65705ef4552a334bdada7755c6ba487fec2b2cb01b2e4a2b0285034cf9b74a",
+      "symbols": [],
+      "imports": [
+        "models.bert_classifier",
+        "models.efficientnet_wrapper",
+        "models.heartwise_model_factory",
+        "models.wcr_ecg_transformer"
+      ]
+    },
+    {
+      "path": "models/bert_classifier.py",
+      "git_blob_sha": "ba4ccca701cd14ea3e0bf219aba439028c1b9c75",
+      "bytes": 3052,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "8b6209cd18e45e91f2c54cf5da9d842acffcc425d543eb4d9003efef83772736",
+      "symbols": [
+        {
+          "name": "BaseBertClassifier",
+          "kind": "ClassDef",
+          "start_line": 13,
+          "end_line": 64
+        },
+        {
+          "name": "BertClassifier",
+          "kind": "ClassDef",
+          "start_line": 66,
+          "end_line": 82
+        },
+        {
+          "name": "BertClassifier_En_Fr",
+          "kind": "ClassDef",
+          "start_line": 84,
+          "end_line": 100
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 16,
+          "end_line": 33
+        },
+        {
+          "name": "_load_model",
+          "kind": "FunctionDef",
+          "start_line": 35,
+          "end_line": 43
+        },
+        {
+          "name": "preprocessing",
+          "kind": "FunctionDef",
+          "start_line": 45,
+          "end_line": 52
+        },
+        {
+          "name": "__call__",
+          "kind": "FunctionDef",
+          "start_line": 54,
+          "end_line": 64
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 70,
+          "end_line": 82
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 88,
+          "end_line": 100
+        }
+      ],
+      "imports": [
+        "models.heartwise_model_factory",
+        "os",
+        "torch",
+        "transformers",
+        "utils.huggingface_wrapper",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "models/efficientnet_wrapper.py",
+      "git_blob_sha": "a4b1e029cfa42e160390779ff26f18b8cffebd21",
+      "bytes": 3032,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "ccf11172f68951ce51b73f0a8a9a7e18c9e535cd6797af10e1dfca92de57efff",
+      "symbols": [
+        {
+          "name": "EfficientNetWrapper",
+          "kind": "ClassDef",
+          "start_line": 12,
+          "end_line": 43
+        },
+        {
+          "name": "EfficientNetV2_77_classes",
+          "kind": "ClassDef",
+          "start_line": 46,
+          "end_line": 59
+        },
+        {
+          "name": "EfficientNetV2_LVEF_Equal_Under_40",
+          "kind": "ClassDef",
+          "start_line": 61,
+          "end_line": 74
+        },
+        {
+          "name": "EfficientNetV2_LVEF_Under_50",
+          "kind": "ClassDef",
+          "start_line": 76,
+          "end_line": 89
+        },
+        {
+          "name": "EfficientNetV2_AFIB_5Y",
+          "kind": "ClassDef",
+          "start_line": 91,
+          "end_line": 104
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 16,
+          "end_line": 32
+        },
+        {
+          "name": "_load_model",
+          "kind": "FunctionDef",
+          "start_line": 34,
+          "end_line": 39
+        },
+        {
+          "name": "__call__",
+          "kind": "FunctionDef",
+          "start_line": 41,
+          "end_line": 43
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 49,
+          "end_line": 59
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 64,
+          "end_line": 74
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 79,
+          "end_line": 89
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 94,
+          "end_line": 104
+        }
+      ],
+      "imports": [
+        "models.heartwise_model_factory",
+        "os",
+        "torch",
+        "utils.huggingface_wrapper",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "models/heartwise_model_factory.py",
+      "git_blob_sha": "a2cb29400916c6a4307c9858fc7b4940d189a5d4",
+      "bytes": 992,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "f65627f4963b379e49bb6ec41f0fb37df8ce9afa922fed250ef85f1211d1050c",
+      "symbols": [
+        {
+          "name": "HeartWiseModelFactory",
+          "kind": "ClassDef",
+          "start_line": 1,
+          "end_line": 24
+        },
+        {
+          "name": "create_model",
+          "kind": "FunctionDef",
+          "start_line": 7,
+          "end_line": 24
+        }
+      ],
+      "imports": []
+    },
+    {
+      "path": "models/resnet_wrapper.py",
+      "git_blob_sha": "77ab66fd91bb3a1ea21c9482d075c410fbd68a81",
+      "bytes": 1771,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "6d08c9d22de5bf8a926f7f31f39ebcc101303b4fba67bbb9f72eaa0d4ea14a05",
+      "symbols": [
+        {
+          "name": "ResNetWrapper",
+          "kind": "ClassDef",
+          "start_line": 10,
+          "end_line": 40
+        },
+        {
+          "name": "ResNet_77_classes",
+          "kind": "ClassDef",
+          "start_line": 42,
+          "end_line": 55
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 14,
+          "end_line": 29
+        },
+        {
+          "name": "_load_model",
+          "kind": "FunctionDef",
+          "start_line": 31,
+          "end_line": 36
+        },
+        {
+          "name": "__call__",
+          "kind": "FunctionDef",
+          "start_line": 38,
+          "end_line": 40
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 45,
+          "end_line": 55
+        }
+      ],
+      "imports": [
+        "models.heartwise_model_factory",
+        "os",
+        "torch",
+        "utils.huggingface_wrapper",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "models/wcr_ecg_transformer.py",
+      "git_blob_sha": "a3264982248e7638f47c5b8e39d5da108d0a2496",
+      "bytes": 3818,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "4d5af2c00da46ad7e543c1b92c65c620febeb8a3821071d91c2646dd5afad97e",
+      "symbols": [
+        {
+          "name": "WCREcgTransformer",
+          "kind": "ClassDef",
+          "start_line": 22,
+          "end_line": 63
+        },
+        {
+          "name": "WCR_77_classes",
+          "kind": "ClassDef",
+          "start_line": 66,
+          "end_line": 79
+        },
+        {
+          "name": "WCR_LVEF_Equal_Under_40",
+          "kind": "ClassDef",
+          "start_line": 81,
+          "end_line": 94
+        },
+        {
+          "name": "WCR_LVEF_Under_50",
+          "kind": "ClassDef",
+          "start_line": 96,
+          "end_line": 109
+        },
+        {
+          "name": "WCR_AFIB_5Y",
+          "kind": "ClassDef",
+          "start_line": 111,
+          "end_line": 124
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 25,
+          "end_line": 41
+        },
+        {
+          "name": "_load_model",
+          "kind": "FunctionDef",
+          "start_line": 43,
+          "end_line": 58
+        },
+        {
+          "name": "__call__",
+          "kind": "FunctionDef",
+          "start_line": 60,
+          "end_line": 63
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 69,
+          "end_line": 79
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 84,
+          "end_line": 94
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 99,
+          "end_line": 109
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 114,
+          "end_line": 124
+        }
+      ],
+      "imports": [
+        "importlib.util",
+        "models.heartwise_model_factory",
+        "os",
+        "sys",
+        "torch",
+        "utils.huggingface_wrapper",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "models_setup.py",
+      "git_blob_sha": "9acbf5f3601d2668ad5aec8c0c922495bed74ec0",
+      "bytes": 788,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "a28c9fa648d8cb3eee6557e4d5908105c7d9a35b645d0ff6afadefd5dd9d549f",
+      "symbols": [],
+      "imports": [
+        "models",
+        "models.heartwise_model_factory",
+        "torch",
+        "utils.files_handler",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "notebooks/EfficientNetv2.py",
+      "git_blob_sha": "48b99f3c810340cb72b6fbf6848b2c771a2ef530",
+      "bytes": 11428,
+      "mode": "100755",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "6e41254e8d2d6c7b047c399cb5d6864fb8affe61dd079b8946cdb36fcd82b80a",
+      "symbols": [
+        {
+          "name": "_find_optimal_num_groups",
+          "kind": "FunctionDef",
+          "start_line": 7,
+          "end_line": 28
+        },
+        {
+          "name": "get_backbone_config",
+          "kind": "FunctionDef",
+          "start_line": 30,
+          "end_line": 54
+        },
+        {
+          "name": "get_activation",
+          "kind": "FunctionDef",
+          "start_line": 56,
+          "end_line": 65
+        },
+        {
+          "name": "CustomNorm",
+          "kind": "ClassDef",
+          "start_line": 67,
+          "end_line": 91
+        },
+        {
+          "name": "SEBlock",
+          "kind": "ClassDef",
+          "start_line": 94,
+          "end_line": 106
+        },
+        {
+          "name": "StochasticDepth",
+          "kind": "ClassDef",
+          "start_line": 108,
+          "end_line": 120
+        },
+        {
+          "name": "FusedMBConv1d",
+          "kind": "ClassDef",
+          "start_line": 122,
+          "end_line": 145
+        },
+        {
+          "name": "MBConv1d",
+          "kind": "ClassDef",
+          "start_line": 147,
+          "end_line": 184
+        },
+        {
+          "name": "EfficientNet1DV2",
+          "kind": "ClassDef",
+          "start_line": 186,
+          "end_line": 260
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 68,
+          "end_line": 88
+        },
+        {
+          "name": "forward",
+          "kind": "FunctionDef",
+          "start_line": 90,
+          "end_line": 91
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 95,
+          "end_line": 103
+        },
+        {
+          "name": "forward",
+          "kind": "FunctionDef",
+          "start_line": 105,
+          "end_line": 106
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 109,
+          "end_line": 111
+        },
+        {
+          "name": "forward",
+          "kind": "FunctionDef",
+          "start_line": 113,
+          "end_line": 120
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 123,
+          "end_line": 136
+        },
+        {
+          "name": "forward",
+          "kind": "FunctionDef",
+          "start_line": 138,
+          "end_line": 145
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 148,
+          "end_line": 173
+        },
+        {
+          "name": "forward",
+          "kind": "FunctionDef",
+          "start_line": 175,
+          "end_line": 184
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 187,
+          "end_line": 231
+        },
+        {
+          "name": "_make_layers",
+          "kind": "FunctionDef",
+          "start_line": 233,
+          "end_line": 252
+        },
+        {
+          "name": "forward",
+          "kind": "FunctionDef",
+          "start_line": 254,
+          "end_line": 260
+        }
+      ],
+      "imports": [
+        "math",
+        "torch",
+        "torch.nn",
+        "torch.nn.functional"
+      ]
+    },
+    {
+      "path": "notebooks/sl_e2e_training.ipynb",
+      "git_blob_sha": "65218d572ee7971d4c5cdfc8a1886304afad4b09",
+      "bytes": 33196,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "e329ea81d686b7418d3e9c4ac8091b67b1e7a4c6bef0fac68d6c54c1953730ea",
+      "notebook_code_cells": 14,
+      "notebook_code_source_sha256": "1b871213988591d4ce5a0cb5a3fc8459e518bf722561fe11e70651a41507a709",
+      "notebook_outputs_not_admitted": true
+    },
+    {
+      "path": "notebooks/sl_fine_tuning.ipynb",
+      "git_blob_sha": "426b26c05dff4f9aaf77d5d618c5bdfc217806ac",
+      "bytes": 21225,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "b9e654b105fdee1646fc75377348f2e6a5a7d07f2c323a0305afe5996602ad45",
+      "notebook_code_cells": 18,
+      "notebook_code_source_sha256": "44fb654332e8cf7301278007979f674fcfc762854544879c485a384645a76bab",
+      "notebook_outputs_not_admitted": true
+    },
+    {
+      "path": "notebooks/ssl_fine_tuning.ipynb",
+      "git_blob_sha": "dad467b00428d3e2f0e9bb6273c70c024885111c",
+      "bytes": 68976,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "412e65e2f7bd2740f8bcb15c7eac9ead95f529e67cd9105d41876239c1328b10",
+      "notebook_code_cells": 16,
+      "notebook_code_source_sha256": "ae021526cb201eb4e8560f585ce736c308c23d76c3876065ef66396c7055391c",
+      "notebook_outputs_not_admitted": true
+    },
+    {
+      "path": "notebooks/ssl_manifests/finetuning/afib_2y/test.tsv",
+      "git_blob_sha": "8b622df8e98bb3f74b112f03f1e398b6bde01362",
+      "bytes": 133,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "ea6d8a0019383bc8a5937fdd2d03e15cacc89ba439ea46bd9423538c87ec1b6f"
+    },
+    {
+      "path": "notebooks/ssl_manifests/finetuning/afib_2y/train.tsv",
+      "git_blob_sha": "8b622df8e98bb3f74b112f03f1e398b6bde01362",
+      "bytes": 133,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "ea6d8a0019383bc8a5937fdd2d03e15cacc89ba439ea46bd9423538c87ec1b6f"
+    },
+    {
+      "path": "requirements.txt",
+      "git_blob_sha": "6cc47d9bcef332f8674f520315af9c9b81f327ac",
+      "bytes": 182,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "04d9844ca943e5df4c715c108c7829c487e38084e628eeb0270f0daba2a0cc47"
+    },
+    {
+      "path": "run_pipeline.bash",
+      "git_blob_sha": "8018cab3f9d7ac51c1352259a35155906e6e6dd8",
+      "bytes": 3077,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "cd990870d9d98364d7e08794578613a653e6f7f7a273b3a99540febeefc5b720"
+    },
+    {
+      "path": "tests/test_error_collector.py",
+      "git_blob_sha": "081de5addb28e0d6f7e2ad011299239972c923e7",
+      "bytes": 1009,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "f1664955860449b7ffd087eba2c610ee8ce54a72c4395577322d462c7c0cd2dc",
+      "symbols": [
+        {
+          "name": "test_collect_appends_when_errors_provided",
+          "kind": "FunctionDef",
+          "start_line": 9,
+          "end_line": 15
+        },
+        {
+          "name": "test_collect_no_detail",
+          "kind": "FunctionDef",
+          "start_line": 18,
+          "end_line": 22
+        },
+        {
+          "name": "test_collect_does_nothing_when_errors_none",
+          "kind": "FunctionDef",
+          "start_line": 25,
+          "end_line": 26
+        }
+      ],
+      "imports": [
+        "os",
+        "sys",
+        "utils.error_collector"
+      ]
+    },
+    {
+      "path": "thresholds/77_tasks_final.json",
+      "git_blob_sha": "288e10091b890f76c146b8b73ed41f231ef2e587",
+      "bytes": 9005,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "5be7f7a15dddd2e516033807ae4a594c25e344d6139a7981d01e954e1c7e244a"
+    },
+    {
+      "path": "thresholds/digital_biomarker_final.json",
+      "git_blob_sha": "3ed8abf6252811c32d423e67853db385e6e021f7",
+      "bytes": 474,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "2150ea5780960c42a014c3a97b1bef442dfa03e82493548d386c40758f234495"
+    },
+    {
+      "path": "thresholds/wcr_77_classes_ecg_machine_diagnosis.json",
+      "git_blob_sha": "1bc04c96dfd70dd2098b73a4d7f404141527782a",
+      "bytes": 24210,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "23c7fff26b65bd2f0926113f51b983264af8de61b3e9623fb5288e3d63486537"
+    },
+    {
+      "path": "utils/analysis_pipeline.py",
+      "git_blob_sha": "289cc838172b17604e0a67da225db09b825a3adc",
+      "bytes": 19469,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "ae045b75881c8ee8ab1e37a17df81099691959b2e2a0476f13f51aaf2091b4d7",
+      "symbols": [
+        {
+          "name": "compute_best_threshold",
+          "kind": "FunctionDef",
+          "start_line": 30,
+          "end_line": 47
+        },
+        {
+          "name": "compute_metrics_binary",
+          "kind": "FunctionDef",
+          "start_line": 49,
+          "end_line": 108
+        },
+        {
+          "name": "compute_metrics",
+          "kind": "FunctionDef",
+          "start_line": 110,
+          "end_line": 223
+        },
+        {
+          "name": "_log_wcr_threshold_warnings",
+          "kind": "FunctionDef",
+          "start_line": 225,
+          "end_line": 244
+        },
+        {
+          "name": "AnalysisPipeline",
+          "kind": "ClassDef",
+          "start_line": 247,
+          "end_line": 470
+        },
+        {
+          "name": "save_and_preprocess_data",
+          "kind": "FunctionDef",
+          "start_line": 251,
+          "end_line": 330
+        },
+        {
+          "name": "run_analysis",
+          "kind": "FunctionDef",
+          "start_line": 333,
+          "end_line": 358
+        },
+        {
+          "name": "_run_analysis_impl",
+          "kind": "FunctionDef",
+          "start_line": 361,
+          "end_line": 470
+        }
+      ],
+      "imports": [
+        "data.project_dataset",
+        "models",
+        "numpy",
+        "os",
+        "pandas",
+        "sklearn.metrics",
+        "torch",
+        "tqdm",
+        "utils.constants",
+        "utils.ecg_signal_processor",
+        "utils.error_collector",
+        "utils.files_handler",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "utils/constants.py",
+      "git_blob_sha": "4c1b20d8e087d6514b7ded18dcddddc244371f5d",
+      "bytes": 13711,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "b79f446cefc10fd467937dfc6407c1892cbd02e41562e0faece8e05fd4cb351b",
+      "symbols": [
+        {
+          "name": "_load_wcr_thresholds",
+          "kind": "FunctionDef",
+          "start_line": 487,
+          "end_line": 505
+        },
+        {
+          "name": "Mode",
+          "kind": "ClassDef",
+          "start_line": 516,
+          "end_line": 519
+        }
+      ],
+      "imports": [
+        "json",
+        "math",
+        "models.bert_classifier",
+        "models.efficientnet_wrapper",
+        "models.wcr_ecg_transformer",
+        "os"
+      ]
+    },
+    {
+      "path": "utils/ecg_signal_processor.py",
+      "git_blob_sha": "31b31794696dfe7453713866f582ec33414a57ae",
+      "bytes": 12740,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "57bf4cea38b0d18ee571dfc7a453f76c39a43eaf0a543551310a3d0c19392a3c",
+      "symbols": [
+        {
+          "name": "ECGSignalProcessor",
+          "kind": "ClassDef",
+          "start_line": 15,
+          "end_line": 289
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 18,
+          "end_line": 19
+        },
+        {
+          "name": "compute_magnitude_spectrum",
+          "kind": "FunctionDef",
+          "start_line": 21,
+          "end_line": 26
+        },
+        {
+          "name": "plot_mean_spectrum",
+          "kind": "FunctionDef",
+          "start_line": 28,
+          "end_line": 35
+        },
+        {
+          "name": "adjust_spectral_power",
+          "kind": "FunctionDef",
+          "start_line": 37,
+          "end_line": 41
+        },
+        {
+          "name": "compute_average_spectral_power",
+          "kind": "FunctionDef",
+          "start_line": 43,
+          "end_line": 44
+        },
+        {
+          "name": "scale_ecg_signals",
+          "kind": "FunctionDef",
+          "start_line": 46,
+          "end_line": 53
+        },
+        {
+          "name": "detect_peaks_with_sliding_window",
+          "kind": "FunctionDef",
+          "start_line": 55,
+          "end_line": 132
+        },
+        {
+          "name": "flatten_fft_peak",
+          "kind": "FunctionDef",
+          "start_line": 134,
+          "end_line": 171
+        },
+        {
+          "name": "process_signals_parallel",
+          "kind": "FunctionDef",
+          "start_line": 173,
+          "end_line": 182
+        },
+        {
+          "name": "plot_mean_spectrum_with_median_loess",
+          "kind": "FunctionDef",
+          "start_line": 184,
+          "end_line": 201
+        },
+        {
+          "name": "find_crossings_for_peaks",
+          "kind": "FunctionDef",
+          "start_line": 203,
+          "end_line": 247
+        },
+        {
+          "name": "widen_ranges",
+          "kind": "FunctionDef",
+          "start_line": 249,
+          "end_line": 250
+        },
+        {
+          "name": "clean_and_process_ecg_leads",
+          "kind": "FunctionDef",
+          "start_line": 252,
+          "end_line": 289
+        }
+      ],
+      "imports": [
+        "concurrent.futures",
+        "numpy",
+        "pandas",
+        "scipy.interpolate",
+        "scipy.signal",
+        "statsmodels.nonparametric.smoothers_lowess",
+        "tqdm",
+        "typing",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "utils/error_collector.py",
+      "git_blob_sha": "d6846a150872a5441e40986eafdc47bc091813c3",
+      "bytes": 694,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "3f300de458171c4133466abe4290f67c16f0494a0437c56cabcb12811c09e9f7",
+      "symbols": [
+        {
+          "name": "collect",
+          "kind": "FunctionDef",
+          "start_line": 4,
+          "end_line": 24
+        }
+      ],
+      "imports": [
+        "typing"
+      ]
+    },
+    {
+      "path": "utils/extract_metada_from_dicoms.py",
+      "git_blob_sha": "f6bacd720d009366751898bdef3de19c7d6aea7e",
+      "bytes": 1273,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "91abccb53d638106729b6d1e8eef505669997d4fd6031cfb7dbb53ab1b133153",
+      "symbols": [
+        {
+          "name": "find_dcm_files_in_subfolders",
+          "kind": "FunctionDef",
+          "start_line": 9,
+          "end_line": 15
+        }
+      ],
+      "imports": [
+        "heartwise_statplots.files_handler",
+        "numpy",
+        "os",
+        "pandas",
+        "tqdm"
+      ]
+    },
+    {
+      "path": "utils/files_handler.py",
+      "git_blob_sha": "29158a2beb5f096f0e7d52b9ff43d852af0e04d6",
+      "bytes": 21865,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "2207c0424b7e3683bad3be4f699df78c80e7466b1edef16b4ca7d35f7469d549",
+      "symbols": [
+        {
+          "name": "load_df",
+          "kind": "FunctionDef",
+          "start_line": 17,
+          "end_line": 26
+        },
+        {
+          "name": "save_df",
+          "kind": "FunctionDef",
+          "start_line": 28,
+          "end_line": 35
+        },
+        {
+          "name": "set_path",
+          "kind": "FunctionDef",
+          "start_line": 37,
+          "end_line": 52
+        },
+        {
+          "name": "load_and_prepare_data",
+          "kind": "FunctionDef",
+          "start_line": 54,
+          "end_line": 121
+        },
+        {
+          "name": "save_to_csv",
+          "kind": "FunctionDef",
+          "start_line": 123,
+          "end_line": 150
+        },
+        {
+          "name": "save_json",
+          "kind": "FunctionDef",
+          "start_line": 152,
+          "end_line": 157
+        },
+        {
+          "name": "read_api_key",
+          "kind": "FunctionDef",
+          "start_line": 159,
+          "end_line": 163
+        },
+        {
+          "name": "ECGFileHandler",
+          "kind": "ClassDef",
+          "start_line": 166,
+          "end_line": 195
+        },
+        {
+          "name": "NPYProcessor",
+          "kind": "ClassDef",
+          "start_line": 198,
+          "end_line": 270
+        },
+        {
+          "name": "XMLProcessor",
+          "kind": "ClassDef",
+          "start_line": 273,
+          "end_line": 463
+        },
+        {
+          "name": "save_ecg_signal",
+          "kind": "FunctionDef",
+          "start_line": 170,
+          "end_line": 178
+        },
+        {
+          "name": "load_ecg_signal",
+          "kind": "FunctionDef",
+          "start_line": 181,
+          "end_line": 190
+        },
+        {
+          "name": "list_files",
+          "kind": "FunctionDef",
+          "start_line": 193,
+          "end_line": 195
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 201,
+          "end_line": 203
+        },
+        {
+          "name": "process_single_file",
+          "kind": "FunctionDef",
+          "start_line": 205,
+          "end_line": 236
+        },
+        {
+          "name": "process_batch",
+          "kind": "FunctionDef",
+          "start_line": 238,
+          "end_line": 252
+        },
+        {
+          "name": "save_report",
+          "kind": "FunctionDef",
+          "start_line": 254,
+          "end_line": 270
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 276,
+          "end_line": 278
+        },
+        {
+          "name": "parse_xml_to_dict",
+          "kind": "FunctionDef",
+          "start_line": 281,
+          "end_line": 293
+        },
+        {
+          "name": "flatten_dict",
+          "kind": "FunctionDef",
+          "start_line": 296,
+          "end_line": 307
+        },
+        {
+          "name": "decode_as_base64",
+          "kind": "FunctionDef",
+          "start_line": 310,
+          "end_line": 314
+        },
+        {
+          "name": "xml_to_dict",
+          "kind": "FunctionDef",
+          "start_line": 317,
+          "end_line": 320
+        },
+        {
+          "name": "process_single_file",
+          "kind": "FunctionDef",
+          "start_line": 322,
+          "end_line": 342
+        },
+        {
+          "name": "process_batch",
+          "kind": "FunctionDef",
+          "start_line": 344,
+          "end_line": 376
+        },
+        {
+          "name": "_process_clsa_xml",
+          "kind": "FunctionDef",
+          "start_line": 378,
+          "end_line": 405
+        },
+        {
+          "name": "_process_mhi_xml",
+          "kind": "FunctionDef",
+          "start_line": 407,
+          "end_line": 437
+        },
+        {
+          "name": "save_report",
+          "kind": "FunctionDef",
+          "start_line": 439,
+          "end_line": 463
+        }
+      ],
+      "imports": [
+        "base64",
+        "concurrent.futures",
+        "csv",
+        "json",
+        "numpy",
+        "os",
+        "pandas",
+        "struct",
+        "tqdm",
+        "utils.log_config",
+        "utils.parser",
+        "xml.etree.ElementTree"
+      ]
+    },
+    {
+      "path": "utils/huggingface_wrapper.py",
+      "git_blob_sha": "f3eccdebe5c5e857c0a5ba62b9a4e3c001e96fcf",
+      "bytes": 2736,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "0711e261a72b5b23dfded2c74871ed85878afdde7ca4b04dcc29491a8fe08b0e",
+      "symbols": [
+        {
+          "name": "HuggingFaceWrapper",
+          "kind": "ClassDef",
+          "start_line": 9,
+          "end_line": 69
+        },
+        {
+          "name": "__init__",
+          "kind": "FunctionDef",
+          "start_line": 12,
+          "end_line": 14
+        },
+        {
+          "name": "get_model",
+          "kind": "FunctionDef",
+          "start_line": 17,
+          "end_line": 31
+        },
+        {
+          "name": "upload_model",
+          "kind": "FunctionDef",
+          "start_line": 33,
+          "end_line": 69
+        }
+      ],
+      "imports": [
+        "huggingface_hub",
+        "os",
+        "utils.log_config"
+      ]
+    },
+    {
+      "path": "utils/log_config.py",
+      "git_blob_sha": "4cacc3a96f6f71e2f387917136c2c2d18045f6a1",
+      "bytes": 692,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "83dd67d313035777f7c140f6e57917ca268e4fc7b5c3cdec1b0a2ef11f0a4970",
+      "symbols": [
+        {
+          "name": "get_logger",
+          "kind": "FunctionDef",
+          "start_line": 5,
+          "end_line": 23
+        }
+      ],
+      "imports": [
+        "logging",
+        "sys"
+      ]
+    },
+    {
+      "path": "utils/parser.py",
+      "git_blob_sha": "a01654ffe719703df38451809b80e4f7e992ae50",
+      "bytes": 2252,
+      "mode": "100644",
+      "inspection": "MATERIALIZED_EXACT_SOURCE",
+      "sha256": "68e390ab8a37989b7ebd96601c097e14ebdd2bf3d1003eae27907f6e7187163a",
+      "symbols": [
+        {
+          "name": "HearWiseArgs",
+          "kind": "ClassDef",
+          "start_line": 5,
+          "end_line": 36
+        },
+        {
+          "name": "str2bool",
+          "kind": "FunctionDef",
+          "start_line": 9,
+          "end_line": 18
+        },
+        {
+          "name": "parse_arguments",
+          "kind": "FunctionDef",
+          "start_line": 21,
+          "end_line": 36
+        }
+      ],
+      "imports": [
+        "argparse"
+      ]
+    }
+  ],
+  "clinical_authority_added": false
+}
