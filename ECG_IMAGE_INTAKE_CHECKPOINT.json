@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "IMPLEMENTED_UNVERIFIED",
   "updated_date": "2026-09-18",
-  "scope": "Target-owned photo/PDF product path as raster-matrix engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery, 90-degree orientation search, grid calibration, millivolt digitization with sparse-column hold, optional measurement connection, durable case records. Encoded PDF/JPEG/PNG decoding remains an explicit fail-closed adapter boundary.",
+  "scope": "Target-owned photo/PDF product path as raster-matrix engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery, 90-degree orientation search, grid calibration, millivolt digitization with sparse-column hold, stdlib PNG encode/decode, optional measurement connection, durable case records. JPEG and PDF decoding remain fail-closed.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -13,6 +13,7 @@
     "lib/image_digitization.js",
     "lib/image_intake_pipeline.js",
     "lib/image_case_store.js",
+    "lib/image_png_codec.js",
     "tools/run_image_intake.js"
   ],
   "tests": [
@@ -22,7 +23,7 @@
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
   "proofBoundary": {
     "syntheticAndAdversarialEngineeringEvidence": true,
-    "encodedFileDecodingImplemented": false,
+    "encodedFileDecodingImplemented": "PNG_ONLY",
     "externalComparativeSuperiorityEstablished": false,
     "worldBestClaim": "NOT_ESTABLISHED",
     "clinicalPerformanceClaimed": false,
