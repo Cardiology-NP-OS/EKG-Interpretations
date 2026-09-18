@@ -1,0 +1,38 @@
+{
+  "schema": "ekg-image-intake-checkpoint-v1",
+  "status": "IMPLEMENTED_UNVERIFIED",
+  "updated_date": "2026-09-18",
+  "scope": "Target-owned photo/PDF product path as raster-matrix engineering: synthetic 12-lead paper generation, ROI localization, grid calibration, millivolt digitization, optional measurement connection, durable case records. Encoded PDF/JPEG/PNG decoding remains an explicit fail-closed adapter boundary.",
+  "productPriority": "photo-pdf-intake",
+  "liveMonitorIntegration": "OUT_OF_SCOPE",
+  "implementations": [
+    "lib/paper_ecg_raster.js",
+    "lib/image_roi_localization.js",
+    "lib/image_grid_calibration.js",
+    "lib/image_digitization.js",
+    "lib/image_intake_pipeline.js",
+    "lib/image_case_store.js",
+    "tools/run_image_intake.js"
+  ],
+  "tests": [
+    "tests/image_intake_pipeline.test.js"
+  ],
+  "registryPromotion": "NOT_CLAIMED",
+  "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
+  "proofBoundary": {
+    "syntheticAndAdversarialEngineeringEvidence": true,
+    "encodedFileDecodingImplemented": false,
+    "externalComparativeSuperiorityEstablished": false,
+    "worldBestClaim": "NOT_ESTABLISHED",
+    "clinicalPerformanceClaimed": false,
+    "clinicalValidityInferred": false
+  },
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "approvedAdjudicatedGoldCount": 0,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidity": "NOT_INFERRED",
+  "clinicalControlChanged": false,
+  "clinicalAuthorityAdded": false
+}
