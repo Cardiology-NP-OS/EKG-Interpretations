@@ -31,7 +31,7 @@ On `Continue`/`resume`/`keep going`:
 
 The donor pipeline is `ACQUIRE -> INVENTORY -> EXTRACT -> GAP -> DECIDE -> IMPLEMENT -> TEST -> COMPARE -> RECEIPT -> VERIFY -> PROMOTE -> ACCEPT`.
 
-At the prepared handoff basis, 11/21 primary donors are accepted and the next frontier is DONOR-012 `Edoar-do/HuBERT-ECG` (registered previously as `Edoardo-BS/HuBERT-ECG`). Treat that only as a handoff hint; the live registry wins.
+At the prepared handoff basis, 12/21 primary donors are accepted and the next frontier is DONOR-013 `HeartWise-AI/DeepECG_Docker`. Treat that only as a handoff hint; the live registry wins.
 
 ## Canonical ownership
 Donor identity is provenance; capability identity belongs to EKG. `donors/` is audit history, not architecture. Consolidate overlapping donor ideas into one strongest brand-neutral target capability while preserving exact provenance/licensing and useful failure tests.

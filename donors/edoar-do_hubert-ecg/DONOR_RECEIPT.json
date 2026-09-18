@@ -1,0 +1,148 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-012",
+  "donor_repository": "Edoar-do/HuBERT-ECG",
+  "previous_repository_identity": "Edoardo-BS/HuBERT-ECG",
+  "donor_commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+  "donor_tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+  "donor_license": {
+    "source_code_spdx": "CC-BY-NC-4.0",
+    "source_code_scope": "NONCOMMERCIAL_ATTRIBUTION_REQUIRED_NO_DONOR_SOURCE_COPY",
+    "model_weight_scope": "CC-BY-NC-4.0_EXTERNAL_EXACT_CHALLENGERS_NO_GIT_IMPORT",
+    "dataset_asset_status": "REPRODUCIBILITY_CORPUS_AND_SOURCE_DATASETS_SEPARATELY_GOVERNED"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_012_rollback_commit": "fc58bdcd1a57f5045c23c927bfc941ecee962227",
+    "donor_012_rollback_tree": "bffb5dcb63862c89d103bf448f5835f18c4d7a5f"
+  },
+  "target_resulting_implementation": {
+    "type": "TARGET_OWNED_SAFETENSORS_VERIFICATION_PLUS_FOUNDATION_INPUT_ADAPTER_EXTERNAL_CHALLENGER_SMOKE",
+    "verified_candidate_commit": "2b692698d6f5b864d6b626c515f45b29af278d07",
+    "verified_candidate_tree": "cdceb1b9bfc6876e13ebfe6883de009bd91bffa5",
+    "verification_record_commit": "b037310d9d9996dc44f15f329c45d0a6f9b08864",
+    "verification_record_tree": "38c942491a8c5581e16f560023b6cdc5bae62894",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false,
+    "executable_target_paths": [
+      "lib/safetensors_asset.js",
+      "tools/inspect_safetensors.js",
+      "lib/foundation_representation_adapter.js",
+      "tools/prepare_foundation_input.js"
+    ]
+  },
+  "verification": {
+    "candidate_ci_run_id": 35293206439,
+    "candidate_ci_conclusion": "success",
+    "verification_record_ci_run_id": 35293351399,
+    "verification_record_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "14/14 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS",
+    "verification_record_commit": "b037310d9d9996dc44f15f329c45d0a6f9b08864",
+    "verification_record_tree": "38c942491a8c5581e16f560023b6cdc5bae62894"
+  },
+  "promotion": {
+    "merge_commit": "1f28c9d848f1e8f4dfa10160f70dbeb1643dd952",
+    "merge_tree": "38c942491a8c5581e16f560023b6cdc5bae62894",
+    "parents": [
+      "fc58bdcd1a57f5045c23c927bfc941ecee962227",
+      "b037310d9d9996dc44f15f329c45d0a6f9b08864"
+    ],
+    "target_main_ci_run_id": 35293463728,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "CHALLENGER": 5,
+    "DATA_ONLY": 1,
+    "EVALUATION_ONLY": 8,
+    "INTEGRATED": 2,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "REJECTED": 8,
+    "RESEARCH_ONLY": 7,
+    "SUPERSEDED": 1,
+    "total": 33
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "exact_small_safetensors_structural_verified": true,
+    "exact_small_checkpoint_synthetic_smoke_executed": true,
+    "base_checkpoint_executed": false,
+    "large_checkpoint_executed": false,
+    "donor_checkpoints_imported": false,
+    "reproducibility_corpus_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_results_promoted_to_target_metrics": false,
+    "runtime_model_activation": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "ECG_ATTRIBUTION_LEDGER.md": "c59b2ce26be785c311c7e571e4838302e0b90b5c07f69c45eb94845e60eccfdc",
+    "ECG_CAPABILITY_REGISTRY.json": "27f727bdef53c5a2d91a5f254e18f758703569cee1e85008751cc5715e2f781c",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "b049952290feabcf32fa116befebe71846934f8826f7a74856f57f2dc2a379ce",
+    "ECG_DONOR_REGISTRY.json": "f9c5771d2d7e036ae6e1b1b0919bef3a7ebf3b04bcb01aa4ca07094d89ebd7ce",
+    "ECG_LICENSE_LEDGER.json": "26a16da543418efcfb4db688e0b9d49cce1adf80fab3de39e0f6c37faf0b245f",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "ef4e0bda2b1e7a99c89b06f4d9999a0df597a0048158441893b5ede233daf053",
+    "README.md": "aee667a2032667f7bfcf56045dbb18b22e069c28dc481f81998e8245422c70fc",
+    "docs/AI_HANDOFF.md": "c7fd987f5dabf0d715be029477f1d3cfa9f663b65a40e9d8601dd03efe8a2d08",
+    "donors/edoar-do_hubert-ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "11dd3e22fabbd9ea75944fb015e0528bbe2b2f926d838dd7113de21dd26a77ae",
+    "donors/edoar-do_hubert-ecg/COMPARATIVE_PROOF.json": "824945c505f4918eeeb02362a3274afecb933b83e211ac0cf6cfec9e31c7d767",
+    "donors/edoar-do_hubert-ecg/DATASET_BOUNDARY.json": "df641dd923b69d7c858c3324b36537295eb26307d6d9c5874759c6730f9e05c6",
+    "donors/edoar-do_hubert-ecg/DONOR_MANIFEST.json": "42d38ee051402e91881f6ade994d979f1d7e1429c7734e1893b3423e4e871075",
+    "donors/edoar-do_hubert-ecg/GAP_MATRIX.json": "3be87836e120b2d2051dbd15e4faa26c8ff984676bc83fc8e1f41b404035d42c",
+    "donors/edoar-do_hubert-ecg/HARVEST_PLAN.md": "3c64a77fa84ead46451ae1945d29097538d9a163403d9280fd0cd243eb5a807d",
+    "donors/edoar-do_hubert-ecg/INDEPENDENT_VERIFICATION.json": "e49a3a193487921fbb19d6c006b2594eb25050dc5806f312e5ad18c2e11b36d9",
+    "donors/edoar-do_hubert-ecg/INVENTORY.json": "fb05b9133a54daee905f579db7ab7bf1602341bf7a7d7a94f2190cb644b8289d",
+    "donors/edoar-do_hubert-ecg/LICENSE_BOUNDARY.json": "eb5b7ba0504d43d6cd46554b125b94117243abea620e74f88d17433dc08b9900",
+    "donors/edoar-do_hubert-ecg/MODEL_ASSET_IDENTITY_VERIFICATION_SMALL.json": "88a61a554cc3839d33251db751fc9fcb63b4bca093e589c839bbedd6dee4efbd",
+    "donors/edoar-do_hubert-ecg/MODEL_ASSET_SPEC_BASE.json": "25419aaec86a1dff02ff1d73f1ccd93b5dad3705a5b4ff146525f64102c4fbbf",
+    "donors/edoar-do_hubert-ecg/MODEL_ASSET_SPEC_LARGE.json": "ac7c3caf4482bfeeaac529c33e6481acd6ce902ebc651f6d9820e4ffd6f337da",
+    "donors/edoar-do_hubert-ecg/MODEL_ASSET_SPEC_SMALL.json": "b343a9d15f880b72bfc1261967fc2e0544ce17c9b1c1219a39b9103954dc124e",
+    "donors/edoar-do_hubert-ecg/MODEL_BOUNDARY.json": "0d97988cf9e8d62e612da73bd9ccb626c9bc6ff9f2f681aa8364a0ed6f0fd187",
+    "donors/edoar-do_hubert-ecg/MODEL_SMOKE_VERIFICATION.json": "711fab8ff5631855d40037e20b88cef5c720d63883df4fec90cb2c8965667b2a",
+    "donors/edoar-do_hubert-ecg/SAFETENSORS_INSPECTION_SMALL.json": "98d3c616de9e3ba2cffeea8099b98738c3c25d3c86030585b6af1daa81ef225e",
+    "donors/edoar-do_hubert-ecg/SOURCE_IDENTITY_MIGRATION.json": "a7a5f7146c2df73952ecddb8b85d7d8b48c1f471118dab18ac493873dd185ba7",
+    "evaluation/protocols/FOUNDATION_REPRESENTATION_INPUT_100HZ_5S_12LEAD.json": "03971a4950e6206a4271d105b1eb778150ca0756d9ab392815b75daf68c30b5c",
+    "evaluation/protocols/FOUNDATION_REPRESENTATION_INPUT_CONTRACT.json": "aca462102e65d1cb891e449ff18f84d70e15796f6ff58149e16397641b6e43d7",
+    "evaluation/splits/SOURCE_DATASET_SPLIT_CATALOG.json": "ec72bc281d95f2ff5d318eab5b9097c21e4f37b2ae63050605801ee1b205c7e7",
+    "lib/foundation_representation_adapter.js": "d720781e408768354e2abdf7c6412e0e44dd47bce1c2bb7632e03314feccf5ac",
+    "lib/safetensors_asset.js": "2af653a35dd813a8696458f08a5adec16a609d5ea4416d2dd10d9ce9b8883843",
+    "package.json": "6df5e4898309f0450635191cdb5253406778cfc1ece6c25d5869c02538345dd5",
+    "tests/foundation_input_cli.test.js": "47c4f588ed16a94b0b9a7f783ac0c5a6b285c9351f6b3d8d7692ec04963195af",
+    "tests/foundation_representation_adapter.test.js": "7994da9ce5b48168ff170a472b7d8074ac66c446272feed17a5e98d3fcd9dc86",
+    "tests/hubert_ecg_donor_closure.test.js": "d36e08cc56a93fb2f2460a9ed51a197969c598f52b2eb8e5b3b67cc954a17f07",
+    "tests/safetensors_asset.test.js": "a044ea7f4cf40ee8dd061e05a89a68a8b1f36e243770554f0d99a047343ae7c6",
+    "tests/safetensors_cli.test.js": "f14bfa85de1cb6d88833065c724bd800d51c3e6ad9c2d1580c11e13068849aae",
+    "tools/inspect_safetensors.js": "b7e1f4f660b28e02e78177db605242da84c4236379428308d81cdf8982dcf3e0",
+    "tools/prepare_foundation_input.js": "3975ff512cb60ec17865bb99fe9a472d1e761ebb0693b1312f525dc654bf2438"
+  },
+  "outstanding_limitations": [
+    "The exact Small checkpoint was executed only as a synthetic non-authoritative challenger smoke; this does not establish clinical validity.",
+    "Base and Large checkpoints are identity-pinned but were not executed in this acceptance.",
+    "CC BY-NC 4.0 non-commercial and attribution restrictions remain binding on donor code and model assets.",
+    "The 92-file reproducibility corpus and external source datasets remain data-only/non-gold and were not imported.",
+    "The target compatibility adapter is geometry-compatible but does not claim donor-byte-exact preprocessing parity.",
+    "No governed adjudicated project clinical gold exists, so diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "final_disposition": "TARGET_OWNED_EXECUTABLE_MODEL_ASSET_SAFETY_AND_INPUT_ADAPTER_WITH_EXTERNAL_HUBERT_CHALLENGER_NONAUTHORITATIVE",
+  "rollback": {
+    "commit": "fc58bdcd1a57f5045c23c927bfc941ecee962227",
+    "tree": "bffb5dcb63862c89d103bf448f5835f18c4d7a5f",
+    "method": "revert Donor-012 finalization commit then promotion merge; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

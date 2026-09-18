@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 11,
+  "completed_donors": 12,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-012",
+  "next_donor_id": "DONOR-013",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -310,7 +310,7 @@
     {
       "donor_id": "DONOR-012",
       "repository": "Edoar-do/HuBERT-ECG",
-      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "status": "ACCEPTED_ON_MAIN",
       "previous_repository_identity": "Edoardo-BS/HuBERT-ECG",
       "source_identity_migration": "donors/edoar-do_hubert-ecg/SOURCE_IDENTITY_MIGRATION.json",
       "audited_commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
@@ -323,7 +323,7 @@
       "dataset_boundary": "donors/edoar-do_hubert-ecg/DATASET_BOUNDARY.json",
       "model_boundary": "donors/edoar-do_hubert-ecg/MODEL_BOUNDARY.json",
       "associated_repository_dispositions": "donors/edoar-do_hubert-ecg/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-      "receipt_status": "PENDING",
+      "receipt_status": "FINALIZED",
       "integration": "target-owned safetensors structural verification and foundation-representation input adapter; exact external Small challenger synthetic smoke",
       "runtime_dependency_added": false,
       "source_code_copied": false,
@@ -334,7 +334,16 @@
       "verified_candidate_tree": "cdceb1b9bfc6876e13ebfe6883de009bd91bffa5",
       "candidate_ci_run_id": 35293206439,
       "candidate_ci_conclusion": "success",
-      "independent_verification": "donors/edoar-do_hubert-ecg/INDEPENDENT_VERIFICATION.json"
+      "independent_verification": "donors/edoar-do_hubert-ecg/INDEPENDENT_VERIFICATION.json",
+      "receipt": "donors/edoar-do_hubert-ecg/DONOR_RECEIPT.json",
+      "verification_record_commit": "b037310d9d9996dc44f15f329c45d0a6f9b08864",
+      "verification_record_tree": "38c942491a8c5581e16f560023b6cdc5bae62894",
+      "verification_record_ci_run_id": 35293351399,
+      "verification_record_ci_conclusion": "success",
+      "promotion_commit": "1f28c9d848f1e8f4dfa10160f70dbeb1643dd952",
+      "promotion_tree": "38c942491a8c5581e16f560023b6cdc5bae62894",
+      "target_main_ci_run_id": 35293463728,
+      "target_main_ci_conclusion": "success"
     },
     {
       "donor_id": "DONOR-013",

@@ -107,6 +107,18 @@ check("candidate or accepted donor frontier remains stage safe",()=>{
     assert.strictEqual(reg.completed_donors,11);assert.strictEqual(reg.next_donor_id,"DONOR-012");assert.strictEqual(donor.receipt_status,"PENDING");
   }
 });
+check("accepted receipt binds verified candidate promotion and target-main CI",()=>{
+  if(donor.status==="ACCEPTED_ON_MAIN"){
+    const receipt=read("donors/edoar-do_hubert-ecg/DONOR_RECEIPT.json");
+    assert.strictEqual(receipt.acceptance_state,"ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+    assert.strictEqual(receipt.target_resulting_implementation.verified_candidate_commit,donor.verified_candidate_commit);
+    assert.strictEqual(receipt.verification.verification_record_commit,donor.verification_record_commit);
+    assert.strictEqual(receipt.promotion.merge_commit,donor.promotion_commit);
+    assert.strictEqual(receipt.promotion.target_main_ci_run_id,donor.target_main_ci_run_id);
+    assert.strictEqual(receipt.boundaries.exact_small_checkpoint_synthetic_smoke_executed,true);
+    assert.strictEqual(receipt.boundaries.clinical_authority_added,false);
+  }
+});
 check("governed inactive state remains explicit",()=>{
   assert.strictEqual(reg.governed_clinical_state.diagnostic_runtime,"GOVERNED_INACTIVE");
   assert.strictEqual(reg.governed_clinical_state.evidence_admission,"NOT_ADMITTED");
