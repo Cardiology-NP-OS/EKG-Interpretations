@@ -1,0 +1,232 @@
+{
+  "schema": "ekg-donor-013-review-verification-v1",
+  "donor_id": "DONOR-013",
+  "candidate_commit": "00fe0faea0f95180f384e41f015e320892cb366c",
+  "candidate_tree": "d10d7b3aa6e6aec523af8df49dd4931dc32274cf",
+  "parent_commit": "81e5920826a37cc5d8236293969662a1bfd27df5",
+  "candidate_ci": {
+    "run_id": 35369421016,
+    "conclusion": "success",
+    "head_sha": "00fe0faea0f95180f384e41f015e320892cb366c",
+    "url": "https://github.com/Cardiology-NP-OS/EKG-Interpretations/actions/runs/35369421016",
+    "jobs": [
+      {
+        "id": 105679586316,
+        "name": "Quarantined V12.1 candidate validation",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run quarantined candidate gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run PKT-EP1-07 measurement evidence gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run PKT-EP1-09 evaluation gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 1 system status gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 2 source-evidence bridge gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 3 signal/QC exposure gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 4 blinded-review gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 5 candidate-control reconciliation gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 6 adjudication-dataset gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 7 metric-reporting eligibility gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 8 diagnostic activation gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP3 packet 9 integration freeze gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 1 Stage-3 baseline gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 2 compatibility attestation gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 3 fresh-host recovery reproduction gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 4 repin authorization gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 5 reconciliation acknowledgement gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 6 evidence admission readiness gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 7 engineering-ready inactive release candidate gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 8 evidence intake quarantine gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run EP5 packet 9 terminal specialist completion gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 105679586508,
+        "name": "Synthetic contract CI (non-clinical)",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Node",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run self-contained contract tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run CI evidence-boundary gate",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report external-source preflight",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Node",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "fresh_checkout": {
+    "result": "PASS",
+    "tracked_blob_count": 579,
+    "checkout_bytes_match_git_blobs": true,
+    "clean_after_checks": true,
+    "full_node_test_commands": 62,
+    "comparison_tests": 54,
+    "donor_closure_checks": 15,
+    "terminal_specialist_checks": 360,
+    "ci_gate": "PASS",
+    "diff_check": "PASS"
+  },
+  "historical_registry_rows_preserved": {
+    "ECG_CAPABILITY_REGISTRY.json": 59,
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": 323,
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": 20,
+    "ECG_LICENSE_LEDGER.json": 15
+  },
+  "historical_donor_bytes_unchanged": true,
+  "governed_state_unchanged": true,
+  "review_findings": [
+    {
+      "issue": "Abbreviated donor component paths did not resolve against the exact tracked inventory.",
+      "resolution": "Expanded 10 component lists and added full inventory/canonical target reference checks.",
+      "regression_red_exit": 1,
+      "regression_green_exit": 0
+    }
+  ],
+  "logs": [
+    {
+      "log_relative_to_work": "donor013-final-verifier-npm.log",
+      "sha256": "763d631f28f655c420fe77c124c9ec3a8a9705f6157bccecac25b946a683d0e3",
+      "exit_code": 0,
+      "scope": "FRESH_CHECKOUT_SAME_EXECUTION_PRINCIPAL_ENGINEERING"
+    },
+    {
+      "log_relative_to_work": "donor013-final-verifier-ci-gate.log",
+      "sha256": "5f4a3c5de66fcb032f4135fc0fc22984808c5f3c105b071aadb0ec01ed0e11fd",
+      "exit_code": 0,
+      "scope": "FRESH_CHECKOUT_SAME_EXECUTION_PRINCIPAL_ENGINEERING"
+    },
+    {
+      "log_relative_to_work": "donor013-final-verifier-python.log",
+      "sha256": "fe1a1618ed089da49f3b55f3d62f791f22a4c319bbd39e5d0dcb0140b3a4e514",
+      "exit_code": 0,
+      "scope": "FRESH_CHECKOUT_SAME_EXECUTION_PRINCIPAL_ENGINEERING"
+    },
+    {
+      "log_relative_to_work": "donor013-final-verifier-identity.log",
+      "sha256": "1ac5acf94f2db8c896d208ae325a9db2863461ec2c919623eb22d5398300cb7d",
+      "exit_code": 0,
+      "scope": "FRESH_CHECKOUT_SAME_EXECUTION_PRINCIPAL_ENGINEERING"
+    }
+  ],
+  "independently_attested": false,
+  "independence_limit": "The fresh checkout and review use the same assistant execution principal; no independently attested verifier credit is claimed.",
+  "clinical_accuracy_claimed": false,
+  "clinical_authority_added": false,
+  "review_disposition": "PASS_WITH_EXPLICIT_ENGINEERING_SCOPE_LIMITS"
+}
