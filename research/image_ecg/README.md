@@ -6,6 +6,7 @@ Target-owned executable engineering for synthetic paper rasters now lives in:
 
 - `lib/paper_ecg_raster.js`
 - `lib/image_roi_localization.js`
+- `lib/image_roi_discovery.js`
 - `lib/image_grid_calibration.js`
 - `lib/image_digitization.js`
 - `lib/image_intake_pipeline.js`
