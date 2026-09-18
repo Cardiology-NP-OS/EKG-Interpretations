@@ -1,0 +1,151 @@
+{
+  "schema": "ecg-donor-receipt-v1",
+  "donor_id": "DONOR-011",
+  "donor_repository": "PKUDigitalHealth/ECGFounder",
+  "donor_commit": "04edac702b61c91face519774ddcc0cd712fef23",
+  "donor_tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+  "donor_release": {
+    "tag": null,
+    "release_commit": null,
+    "head_is_release_tag_commit": false
+  },
+  "donor_license": {
+    "source_code_spdx": "MIT",
+    "license_blob_sha": "689c66875909c6eb6eea1cc8fe82ee8d49d4a8c4",
+    "dataset_asset_status": "LICENSE_REVIEW_REQUIRED_FOR_TRACKED_DERIVED_LABEL_TABLES_AND_EXTERNAL_DATASETS",
+    "model_weight_status": "HF_REPOSITORY_MIT_METADATA_EXACT_HASHES_PINNED_12LEAD_EXTERNAL_SYNTHETIC_SMOKE_NO_GIT_IMPORT"
+  },
+  "target_baseline": {
+    "immutable_pre_donor_baseline_commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
+    "immutable_pre_donor_baseline_tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6",
+    "donor_011_rollback_commit": "81cd4d1ddafadafc9ab7ffebb31866c9ce193aee",
+    "donor_011_rollback_tree": "d6d230e2e949fd350270e12242c9a895233b965c"
+  },
+  "target_resulting_implementation": {
+    "type": "TARGET_OWNED_EXECUTABLE_DSP_PLUS_EXACT_EXTERNAL_MODEL_CHALLENGER_VERIFICATION",
+    "verified_candidate_commit": "5be76fa139b3d3f687556557362b297fbec68a78",
+    "verified_candidate_tree": "5dab0aaa0868ff074c8bed01e9954a8082f6cb8d",
+    "verification_record_commit": "5e9a72e3dd49d4eb374a8f193971764acda35f3f",
+    "verification_record_tree": "cd98c75ad4c5430dcae4feb1de8377846c67b760",
+    "runtime_dependencies_added": [],
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false,
+    "executable_target_paths": [
+      "lib/signal_dsp_filtering.js",
+      "lib/signal_preprocessing_pipeline.js",
+      "tools/preprocess_wfdb.js",
+      "lib/model_asset_safety.js",
+      "tools/verify_model_asset.js"
+    ]
+  },
+  "verification": {
+    "candidate_ci_run_id": 35289566893,
+    "candidate_ci_conclusion": "success",
+    "verification_record_ci_run_id": 35289828862,
+    "verification_record_ci_conclusion": "success",
+    "independent_fresh_clone": "PASS",
+    "focused_closure": "13/13 PASS",
+    "full_target_suite": "PASS",
+    "full_candidate_diff_check": "PASS",
+    "verification_record_commit": "5e9a72e3dd49d4eb374a8f193971764acda35f3f",
+    "verification_record_tree": "cd98c75ad4c5430dcae4feb1de8377846c67b760"
+  },
+  "promotion": {
+    "merge_commit": "12f34ade09a1e3cb2ea382aa9612ada9339eba50",
+    "merge_tree": "cd98c75ad4c5430dcae4feb1de8377846c67b760",
+    "parents": [
+      "81cd4d1ddafadafc9ab7ffebb31866c9ce193aee",
+      "5e9a72e3dd49d4eb374a8f193971764acda35f3f"
+    ],
+    "target_main_ci_run_id": 35289896230,
+    "target_main_ci_conclusion": "success",
+    "non_force_push": true
+  },
+  "capability_disposition_summary": {
+    "CHALLENGER": 3,
+    "DATA_ONLY": 2,
+    "EVALUATION_ONLY": 2,
+    "INTEGRATED": 5,
+    "LICENSE_REVIEW_REQUIRED": 1,
+    "REJECTED": 3,
+    "RESEARCH_ONLY": 2,
+    "SUPERSEDED": 1,
+    "total": 19
+  },
+  "associated_repositories": {
+    "dispositions_file": "donors/pkudigitalhealth_ecgfounder/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+    "new_associated_donors_queued": 0
+  },
+  "boundaries": {
+    "whole_package_runtime_dependency_added": false,
+    "exact_12lead_checkpoint_synthetic_smoke_executed": true,
+    "one_lead_checkpoint_executed": false,
+    "donor_checkpoints_imported": false,
+    "external_dataset_bytes_imported": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_results_promoted_to_target_metrics": false,
+    "runtime_model_activation": false,
+    "clinical_authority_added": false
+  },
+  "evidence_sha256": {
+    "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json": "7f5c5583f59c2694d08c3d9b2864ded0359df57396099e8dd9d6b9068fd0b317",
+    "donors/pkudigitalhealth_ecgfounder/INVENTORY.json": "35b0beed1dfc4de48e04cd7d4295d6ef5851dc4c1206664e3c3b9076fc13f2fa",
+    "donors/pkudigitalhealth_ecgfounder/GAP_MATRIX.json": "e140d8a3ef6a23832428fd652305cd17d66ce2533d8012250657e3cf03f2347e",
+    "donors/pkudigitalhealth_ecgfounder/HARVEST_PLAN.md": "d04b93e846beecab4d0944ea79df2f626a9d3944874173507038c2014fca85c2",
+    "donors/pkudigitalhealth_ecgfounder/LICENSE_BOUNDARY.json": "eb0ec9c2d421d7ee144e51908d671a7269630edb3c374aec77ee57bc64091405",
+    "donors/pkudigitalhealth_ecgfounder/DATASET_BOUNDARY.json": "36f08db52800d0c8c77d5b5803c4d352688ebb8503f6ab93f741b29351e29591",
+    "donors/pkudigitalhealth_ecgfounder/MODEL_BOUNDARY.json": "76bea9904178a855d19c82b705a38a076c570899775564c0a5b34974ee53a9bf",
+    "donors/pkudigitalhealth_ecgfounder/MODEL_ASSET_SPEC_12LEAD.json": "6314384e20b87d29fc6da214fb1ae4893e76929482b0fe1daff2bb2847e855ce",
+    "donors/pkudigitalhealth_ecgfounder/MODEL_ASSET_SPEC_1LEAD.json": "ad62650ac1011287244da932a42ed3144c67edf75b32bca67620fdfd1a02efc9",
+    "donors/pkudigitalhealth_ecgfounder/MODEL_ASSET_IDENTITY_VERIFICATION_12LEAD.json": "81654d901a8e959534dddb5ca54848c771efe95e0cfbca0135c76d9c55da590f",
+    "donors/pkudigitalhealth_ecgfounder/MODEL_SMOKE_VERIFICATION.json": "cf5d8e795cf4f0e9b21658ddf130fd07026c38b9d0fb4a88a053ee377b5a2edd",
+    "donors/pkudigitalhealth_ecgfounder/ASSOCIATED_REPOSITORY_DISPOSITIONS.json": "4aac2686f24a18c0925219a840e2bb77f5bec8183570ff0a150b8518ca585c3d",
+    "donors/pkudigitalhealth_ecgfounder/COMPARATIVE_PROOF.json": "f6c2f6bc14242680d01d93245e83319cf3de7902aad58bc3ace20b834d4e0cdb",
+    "donors/pkudigitalhealth_ecgfounder/INDEPENDENT_VERIFICATION.json": "2e6056ce4e67503d9db1236109979926d50637e36933e88cc2435740b472f21b",
+    "tests/ecgfounder_donor_closure.test.js": "29547c3010a358772d31e4a8958c12c8b2fbe28b562b99a0525645fb8f72951e",
+    "tests/signal_dsp_filtering.test.js": "44d62a70e8f1b7874baa65b9d39d745d8227087af5a9f16ee31563c6d16cf0e9",
+    "tests/model_asset_file_cli.test.js": "1eb2ac071159a842f688f461b74f566b199d46c8ec2443a48e7a9f7426243e17",
+    "tests/preprocess_wfdb_cli.test.js": "0b41e8355ff9d62c9b34236ca978448aa14d00a347625d54c9f0d0b95e4dfcba",
+    "lib/signal_dsp_filtering.js": "2f66790c4a3b10b8cf93c038e6fde7d1b01063b34e102a43f21eb8cb5703e7c0",
+    "lib/signal_preprocessing_pipeline.js": "635d26dcafc83695b6f3f111db72155671ef45ed81726a44b9aaa3f61ebad594",
+    "lib/model_asset_safety.js": "7d2ac1ce82e02fd5da1d36ab74c867018e02785ea710e8fa353a8e8a5a79a20e",
+    "tools/verify_model_asset.js": "01b65fc61cee585489b5280abfd3bc9c7509d6ec0a1fc557db45fab8bc7c3bbb",
+    "evaluation/protocols/FOUNDATION_PRETRAINING_DSP_CONTRACT.json": "fab6cb67c92a4b50925f1c16cd5fc440036e70878fa9bdcda0e20e957b05bea1",
+    "evaluation/protocols/FOUNDATION_PRETRAINING_DSP_CONFIG.json": "9c958fc69781fcf45a72a307d488ff1772d396648a3f445534ea16f73046a60a",
+    "ECG_DONOR_REGISTRY.json": "0f8bbb9ea1721d5dbd7445f90fb448736b0485ad8de7d69c923972037bf56f89",
+    "ECG_DONOR_CAPABILITY_REGISTRY.json": "41f68b5df35e54ae0cdb28e38d8c7265a01bafb2f800fba4e585bb6ff1d971dd",
+    "ECG_CAPABILITY_REGISTRY.json": "53ead15d9b4ce56d9637b215221406139934e8beee208add2b87e67f9ed06893",
+    "ECG_LICENSE_LEDGER.json": "102d1db644b9152ea8ec5b07f1ae8209f7b7472da1a52b7fdda77b32481bd61a",
+    "ECG_DATASET_REGISTRY.json": "02a412aa41e4f09db0554d843a87eecc789b33ea8dca68cafe0401f666cfbc1a",
+    "ECG_MODEL_CHALLENGER_REGISTRY.json": "3ab36de8ea8770a4f792715e5556d43d7d1cf2f61db9f0c0e52c475d47bfdfb0",
+    "ECG_ATTRIBUTION_LEDGER.md": "59c54ef77aa88a9330daa5270755cd59c412387aca3933a7c01fe5da3328f7e6",
+    "package.json": "601fc21fd48e58c394a26b697f6dde537d074a8912a69a7d097a0bd706723660",
+    "README.md": "ae24551989a567683bb722d56e44fbdd2fa69d9691b787f1fc7ed73a02144c2f",
+    "docs/AI_HANDOFF.md": "d06f741f9d0acb35f8c7b69d9a6147c808785e7f09311a38aaad99963727d2fc",
+    "tests/handoff_integrity.test.js": "1b3787ec6aa25fd872ed1462a9e29ed2be6ad60e11470b1017838b4f00c32e98"
+  },
+  "outstanding_limitations": [
+    "The exact 12-lead checkpoint was executed only as a synthetic non-authoritative challenger smoke; this does not establish clinical validity.",
+    "The exact 1-lead checkpoint is identity-pinned but was not executed in this donor acceptance.",
+    "The target-host PyTorch smoke environment differs from the donor-pinned environment; exact environment parity is not claimed.",
+    "Tracked donor CSV derivatives and external datasets remain separately governed and are not imported as project gold.",
+    "No governed adjudicated project clinical gold exists, so diagnostic metrics remain NOT_REPORTABLE."
+  ],
+  "final_disposition": "EXECUTABLE_DSP_INTEGRATED_EXACT_MODEL_CHALLENGER_VERIFIED_NONAUTHORITATIVE",
+  "rollback": {
+    "commit": "81cd4d1ddafadafc9ab7ffebb31866c9ce193aee",
+    "tree": "d6d230e2e949fd350270e12242c9a895233b965c",
+    "method": "revert Donor-011 finalization commit then promotion merge; never force-reset shared main"
+  },
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+  "governed_state_after": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

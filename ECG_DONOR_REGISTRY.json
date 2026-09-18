@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 10,
+  "completed_donors": 11,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-011",
+  "next_donor_id": "DONOR-012",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -274,7 +274,7 @@
     {
       "donor_id": "DONOR-011",
       "repository": "PKUDigitalHealth/ECGFounder",
-      "status": "AUDITED_CANDIDATE_FOR_MERGE",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "04edac702b61c91face519774ddcc0cd712fef23",
       "audited_tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
       "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json",
@@ -285,7 +285,7 @@
       "dataset_boundary": "donors/pkudigitalhealth_ecgfounder/DATASET_BOUNDARY.json",
       "model_boundary": "donors/pkudigitalhealth_ecgfounder/MODEL_BOUNDARY.json",
       "associated_repository_dispositions": "donors/pkudigitalhealth_ecgfounder/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-      "receipt_status": "PENDING_PROMOTION_AND_FINALIZATION",
+      "receipt_status": "FINALIZED",
       "integration": "target-owned executable DSP preprocessing profile plus exact external model challengers",
       "runtime_dependency_added": false,
       "source_code_copied": false,
@@ -296,7 +296,16 @@
       "verified_candidate_tree": "5dab0aaa0868ff074c8bed01e9954a8082f6cb8d",
       "candidate_ci_run_id": 35289566893,
       "candidate_ci_conclusion": "success",
-      "independent_verification": "donors/pkudigitalhealth_ecgfounder/INDEPENDENT_VERIFICATION.json"
+      "independent_verification": "donors/pkudigitalhealth_ecgfounder/INDEPENDENT_VERIFICATION.json",
+      "receipt": "donors/pkudigitalhealth_ecgfounder/DONOR_RECEIPT.json",
+      "promotion_commit": "12f34ade09a1e3cb2ea382aa9612ada9339eba50",
+      "promotion_tree": "cd98c75ad4c5430dcae4feb1de8377846c67b760",
+      "target_main_ci_run_id": 35289896230,
+      "target_main_ci_conclusion": "success",
+      "verification_record_commit": "5e9a72e3dd49d4eb374a8f193971764acda35f3f",
+      "verification_record_tree": "cd98c75ad4c5430dcae4feb1de8377846c67b760",
+      "verification_record_ci_run_id": 35289828862,
+      "verification_record_ci_conclusion": "success"
     },
     {
       "donor_id": "DONOR-012",

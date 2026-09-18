@@ -116,6 +116,18 @@ check("candidate or accepted donor frontier remains stage safe",()=>{
     assert.strictEqual(fs.existsSync(receipt),false);
   }
 });
+check("accepted receipt binds verified candidate promotion and target-main CI",()=>{
+  if(donor.status==="ACCEPTED_ON_MAIN"){
+    const receipt=read("donors/pkudigitalhealth_ecgfounder/DONOR_RECEIPT.json");
+    assert.strictEqual(receipt.acceptance_state,"ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+    assert.strictEqual(receipt.target_resulting_implementation.verified_candidate_commit,donor.verified_candidate_commit);
+    assert.strictEqual(receipt.promotion.merge_commit,donor.promotion_commit);
+    assert.strictEqual(receipt.promotion.target_main_ci_run_id,donor.target_main_ci_run_id);
+    assert.strictEqual(receipt.verification.verification_record_commit,donor.verification_record_commit);
+    assert.strictEqual(receipt.boundaries.exact_12lead_checkpoint_synthetic_smoke_executed,true);
+    assert.strictEqual(receipt.boundaries.clinical_authority_added,false);
+  }
+});
 check("governed inactive state remains explicit",()=>{
   assert.strictEqual(canon.diagnostic_runtime,"GOVERNED_INACTIVE");
   assert.strictEqual(canon.evidence_admission,"NOT_ADMITTED");
