@@ -1,0 +1,29 @@
+{
+  "schema": "ecg-external-safetensors-verification-v1",
+  "donor_id": "DONOR-012",
+  "model_repository": "Edoardo-Coppola/hubert-ecg-small",
+  "model_revision": "eca1c5af82da493a86a2bf0a89733234c9c3617d",
+  "checkpoint_sha256": "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+  "checkpoint_bytes": 121892376,
+  "structural_inspection": {
+    "pass": true,
+    "header_bytes": 16400,
+    "data_bytes": 121875968,
+    "tensor_count": 148,
+    "total_elements": 30468992,
+    "dtype_counts": {
+      "F32": 148
+    },
+    "metadata_keys": [
+      "format"
+    ],
+    "tensor_layout_sha256": "e50d7d89372f603e545fde090d7e6a3bd3792f1184d45b171167b789870331fb",
+    "deserialization_performed": false,
+    "tensor_values_read": false
+  },
+  "target_verifier": "lib/safetensors_asset.js",
+  "local_path_embedded": false,
+  "weights_imported": false,
+  "diagnostic_runtime": "GOVERNED_INACTIVE",
+  "clinical_validity": "NOT_INFERRED"
+}

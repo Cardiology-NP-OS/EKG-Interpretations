@@ -1,0 +1,33 @@
+{
+  "schema": "ekg-donor-manifest-v1",
+  "donor_id": "DONOR-012",
+  "registered_repository": "Edoardo-BS/HuBERT-ECG",
+  "repository": "Edoar-do/HuBERT-ECG",
+  "source_identity_migration": "donors/edoar-do_hubert-ecg/SOURCE_IDENTITY_MIGRATION.json",
+  "audited_head": {
+    "branch": "master",
+    "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+    "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+    "commit_verified": true
+  },
+  "software_license": {
+    "spdx": "CC-BY-NC-4.0",
+    "license_file": "LICENSE",
+    "license_blob_sha": "971de1520b22747d28f371048a20ebe75917a81d",
+    "reuse_status": "NONCOMMERCIAL_RESTRICTION_NO_DONOR_CODE_COPIED"
+  },
+  "repository_inventory": {
+    "tracked_file_count": 154,
+    "tracked_bytes": 63315284,
+    "upstream_test_suite_present": false
+  },
+  "external_model_family": {
+    "owner": "Edoardo-Coppola",
+    "license": "cc-by-nc-4.0",
+    "formats": [
+      "safetensors"
+    ],
+    "small_revision": "eca1c5af82da493a86a2bf0a89733234c9c3617d"
+  },
+  "clinical_authority_added": false
+}

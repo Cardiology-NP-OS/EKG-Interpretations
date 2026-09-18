@@ -1,0 +1,244 @@
+{
+  "schema": "ekg-donor-012-dataset-boundary-v1",
+  "donor_id": "DONOR-012",
+  "reproducibility_bundle": {
+    "file_count": 92,
+    "bytes": 61328825,
+    "source_labels_embedded": true,
+    "raw_waveform_bytes_present": false,
+    "source_labels_promoted_to_project_gold": false,
+    "project_gold_count": 0
+  },
+  "source_datasets": [
+    {
+      "sourceDataset": "Chapman-Shaoxing",
+      "sourceKey": "chapman",
+      "fileCount": 9,
+      "bytes": 4959558,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/chapman"
+      }
+    },
+    {
+      "sourceDataset": "CPSC",
+      "sourceKey": "cpsc",
+      "fileCount": 9,
+      "bytes": 1092485,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/cpsc"
+      }
+    },
+    {
+      "sourceDataset": "CPSC Extra",
+      "sourceKey": "cpscExtra",
+      "fileCount": 8,
+      "bytes": 1774792,
+      "trainFiles": 4,
+      "validationFiles": 0,
+      "testFiles": 4,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/cpscExtra"
+      }
+    },
+    {
+      "sourceDataset": "Georgia 12-lead ECG",
+      "sourceKey": "georgia",
+      "fileCount": 9,
+      "bytes": 5732405,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/georgia"
+      }
+    },
+    {
+      "sourceDataset": "Hefei",
+      "sourceKey": "hefei",
+      "fileCount": 9,
+      "bytes": 9970862,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/hefei"
+      }
+    },
+    {
+      "sourceDataset": "Ningbo",
+      "sourceKey": "ningbo",
+      "fileCount": 9,
+      "bytes": 23463882,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/ningbo"
+      }
+    },
+    {
+      "sourceDataset": "PTB Diagnostic ECG Database",
+      "sourceKey": "ptb",
+      "fileCount": 8,
+      "bytes": 108200,
+      "trainFiles": 4,
+      "validationFiles": 0,
+      "testFiles": 4,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/ptb"
+      }
+    },
+    {
+      "sourceDataset": "PTB-XL",
+      "sourceKey": "ptbxl",
+      "fileCount": 18,
+      "bytes": 10874013,
+      "trainFiles": 6,
+      "validationFiles": 6,
+      "testFiles": 6,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/ptbxl"
+      }
+    },
+    {
+      "sourceDataset": "HuBERT-ECG reproducibility root artifacts",
+      "sourceKey": "root",
+      "fileCount": 2,
+      "bytes": 3836,
+      "trainFiles": 0,
+      "validationFiles": 0,
+      "testFiles": 0,
+      "labelsEmbeddedBySource": false,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/"
+      }
+    },
+    {
+      "sourceDataset": "SaMi-Trop",
+      "sourceKey": "samitrop",
+      "fileCount": 8,
+      "bytes": 410232,
+      "trainFiles": 4,
+      "validationFiles": 0,
+      "testFiles": 4,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/samitrop"
+      }
+    },
+    {
+      "sourceDataset": "SPH ECG dataset",
+      "sourceKey": "sph",
+      "fileCount": 3,
+      "bytes": 2938560,
+      "trainFiles": 1,
+      "validationFiles": 1,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/sph"
+      }
+    }
+  ],
+  "source_split_rules": [
+    "conditions appearing once are dropped by donor split methodology",
+    "conditions appearing twice are placed in train and test",
+    "conditions appearing three times are placed one per split",
+    "other conditions use donor random stratified selection"
+  ],
+  "ribeiro": {
+    "split_folder_present": false,
+    "reason": "donor states non-disclosure/data-use terms prevent distribution",
+    "target_action": "DO_NOT_SYNTHESIZE_OR_RECONSTRUCT"
+  },
+  "cardio_learning_labels_pickle": {
+    "path": "reproducibility/cardio-learning-labels.pkl",
+    "bytes": 1328,
+    "disposition": "LICENSE_REVIEW_REQUIRED_UNSAFE_PICKLE_DO_NOT_DESERIALIZE"
+  },
+  "raw_dataset_bytes_imported": false,
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false,
+  "tracked_reproducibility_assets": {
+    "file_count": 92,
+    "bytes": 61328825,
+    "raw_waveforms_present": false,
+    "labels_present": true
+  },
+  "policy": {
+    "raw_waveforms_imported": false,
+    "tracked_split_csvs_imported": false,
+    "source_labels_are_project_gold": false,
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE"
+  }
+}

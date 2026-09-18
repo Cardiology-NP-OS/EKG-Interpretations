@@ -1,0 +1,69 @@
+{
+  "schema": "ekg-donor-012-model-smoke-verification-v1",
+  "donor_id": "DONOR-012",
+  "model": {
+    "repository": "Edoardo-Coppola/hubert-ecg-small",
+    "revision": "eca1c5af82da493a86a2bf0a89733234c9c3617d",
+    "sha256": "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+    "bytes": 121892376
+  },
+  "structural_verification": {
+    "pass": true,
+    "tensor_count": 148,
+    "total_elements": 30468992,
+    "dtype_counts": {
+      "F32": 148
+    },
+    "tensor_layout_sha256": "e50d7d89372f603e545fde090d7e6a3bd3792f1184d45b171167b789870331fb",
+    "tensor_values_read": false
+  },
+  "strict_state_audit": {
+    "checkpoint_tensor_keys": 148,
+    "expected_model_keys": 148,
+    "missing": 0,
+    "unexpected": 0,
+    "shape_mismatches": 0,
+    "strict_compatible": true
+  },
+  "synthetic_execution": {
+    "pass": true,
+    "input_shape": [
+      1,
+      6000
+    ],
+    "last_hidden_state_shape": [
+      1,
+      93,
+      512
+    ],
+    "finite_output": true,
+    "elapsed_seconds": 0.1383047103881836,
+    "patient_data_used": false
+  },
+  "environment": {
+    "python": "3.12.10",
+    "torch": "2.14.0+cpu",
+    "transformers": "4.40.2",
+    "safetensors": "0.4.5",
+    "donor_pyproject_requires": "transformers>=4.40, torch>=2.0, safetensors>=0.4"
+  },
+  "license_scope": "EXTERNAL_LOCAL_RESEARCH_CHALLENGER_EXECUTION_CC_BY_NC_4_0_NO_GIT_IMPORT",
+  "runtime_authority": false,
+  "clinical_validity": "NOT_INFERRED",
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false,
+  "pass": true,
+  "synthetic_only": true,
+  "input_shape": [
+    1,
+    6000
+  ],
+  "output_shape": [
+    1,
+    93,
+    512
+  ],
+  "parameters": 30468992,
+  "finite_output": true,
+  "project_gold": false
+}

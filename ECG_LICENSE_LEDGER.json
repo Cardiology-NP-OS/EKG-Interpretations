@@ -449,6 +449,54 @@
         "raw_data_imported": false,
         "source_labels_promoted_to_project_gold": false
       }
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoar-do/HuBERT-ECG",
+      "previous_repository_identity": "Edoardo-BS/HuBERT-ECG",
+      "source_code_license": {
+        "spdx": "CC-BY-NC-4.0",
+        "status": "NONCOMMERCIAL_DIRECT_REUSE_NOT_ADMITTED_LICENSE_REVIEW_REQUIRED",
+        "license_file": "LICENSE",
+        "license_blob_sha": "971de1520b22747d28f371048a20ebe75917a81d",
+        "audited_head_commit": "2d0611da529412e021af76d4ed41d5a23a704dc6"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "TARGET_OWNED_GENERAL_SAFETENSORS_STRUCTURAL_VERIFIER",
+        "TARGET_OWNED_FOUNDATION_REPRESENTATION_INPUT_ADAPTER",
+        "EXTERNAL_LOCAL_SYNTHETIC_CHALLENGER_SMOKE_ONLY"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "CC-BY-NC-4.0_NONCOMMERCIAL",
+        "repositories": [
+          "Edoardo-Coppola/hubert-ecg-small",
+          "Edoardo-Coppola/hubert-ecg-base",
+          "Edoardo-Coppola/hubert-ecg-large"
+        ],
+        "checkpoint_sha256": [
+          "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+          "05bc1b1317f8e3063811a03fb840f5bf8a85968191e209c0cfbaa0c52c8aa1ae",
+          "9a0eb8484f73793aa678936984243da92ae80d7b81e2fe77d1ea6dee2bdf5ec2"
+        ],
+        "weights_imported": false,
+        "weights_executed": true,
+        "execution_scope": "SMALL_CHECKPOINT_EXTERNAL_SYNTHETIC_ONLY",
+        "execution_eligible": false,
+        "runtime_authority": false,
+        "clinical_validity": "NOT_INFERRED"
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_PER_EXTERNAL_DATASET_AND_TRACKED_DERIVED_SPLIT_LABEL_ASSET",
+        "raw_data_imported": false,
+        "tracked_split_assets_imported": false,
+        "source_labels_promoted_to_project_gold": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
     }
   ],
   "fail_closed_on_unknown_license": true

@@ -1,0 +1,14 @@
+"use strict";
+const assert=require("assert");
+const {CANONICAL_12_LEADS,FOUNDATION_ADAPTER_GOVERNANCE,packLeadMajor,packPipelineSegment}=require("../lib/foundation_representation_adapter");
+let passed=0;function test(n,f){try{f();passed++;console.log("PASS "+n);}catch(e){console.error("FAIL "+n+": "+(e.stack||e));process.exitCode=1;}}
+const spec={packing:"lead-major-contiguous-v1",inputSampleRateHz:100,windowSeconds:5,samplesPerLead:500,leadCount:12,leadOrder:[...CANONICAL_12_LEADS],vectorLength:6000};
+function leads(){return CANONICAL_12_LEADS.map((leadName,i)=>({leadName,samples:Array.from({length:500},(_,j)=>i*1000+j)}));}
+test("governance remains evaluation-only and inactive",()=>{assert.strictEqual(FOUNDATION_ADAPTER_GOVERNANCE.runtimeAuthority,false);assert.strictEqual(FOUNDATION_ADAPTER_GOVERNANCE.projectGold,false);});
+test("lead-major packing is exact and deterministic",()=>{const a=packLeadMajor({spec,leads:leads()});const b=packLeadMajor({spec,leads:leads()});assert.strictEqual(a.vectorLength,6000);assert.deepStrictEqual(a.values.slice(0,3),[0,1,2]);assert.deepStrictEqual(a.values.slice(500,503),[1000,1001,1002]);assert.strictEqual(a.vectorSha256,b.vectorSha256);});
+test("wrong lead order fails closed",()=>{const x=leads();[x[0],x[1]]=[x[1],x[0]];assert.throws(()=>packLeadMajor({spec,leads:x}),/LEAD_ORDER_MISMATCH/);});
+test("wrong geometry and nonfinite samples fail closed",()=>{const x=leads();x[0].samples.pop();assert.throws(()=>packLeadMajor({spec,leads:x}),/LEAD_LENGTH/);const y=leads();y[0].samples[3]=NaN;assert.throws(()=>packLeadMajor({spec,leads:y}),/NONFINITE/);});
+test("preprocessing pipeline segment composes into model vector",()=>{const pipeline={schema:"ekg-signal-preprocessing-pipeline-v1",record:"synthetic",targetSamplingRateHz:100,runtimeAuthority:false,projectGold:false,provenance:{sourceKind:"SYNTHETIC",assetSha256:"a".repeat(64)},segments:[{paddedSamples:0,leads:leads()}]};const out=packPipelineSegment(pipeline,{spec,segmentIndex:0});assert.strictEqual(out.vectorLength,6000);assert.strictEqual(out.sourceProvenance.segmentIndex,0);assert.strictEqual(out.runtimeAuthority,false);});
+test("padded segments and authority drift are rejected",()=>{const base={schema:"ekg-signal-preprocessing-pipeline-v1",record:"synthetic",targetSamplingRateHz:100,runtimeAuthority:false,projectGold:false,provenance:{},segments:[{paddedSamples:1,leads:leads()}]};assert.throws(()=>packPipelineSegment(base,{spec}),/PADDED_SEGMENT_REJECTED/);base.segments[0].paddedSamples=0;base.projectGold=true;assert.throws(()=>packPipelineSegment(base,{spec}),/PIPELINE_AUTHORITY/);});
+if(process.exitCode)process.exit(process.exitCode);
+console.log(JSON.stringify({schema:"ekg-foundation-representation-adapter-tests-v1",pass:true,passed,total:passed,syntheticOnly:true,diagnosticRuntime:"GOVERNED_INACTIVE",clinicalAuthorityAdded:false}));

@@ -1,0 +1,37 @@
+{
+  "schema": "ekg-donor-012-license-boundary-v1",
+  "donor_id": "DONOR-012",
+  "source_code": {
+    "license": "CC-BY-NC-4.0",
+    "spdx": "CC-BY-NC-4.0",
+    "commercial_restriction": true,
+    "status": "NONCOMMERCIAL_DIRECT_REUSE_NOT_ADMITTED_LICENSE_REVIEW_REQUIRED",
+    "license_blob_sha": "971de1520b22747d28f371048a20ebe75917a81d",
+    "source_code_copied": false,
+    "attribution_required": true
+  },
+  "model_weights": {
+    "license": "CC-BY-NC-4.0",
+    "status": "CC-BY-NC-4.0_NONCOMMERCIAL",
+    "weights_imported": false,
+    "weights_executed_external_small_synthetic_only": true,
+    "runtime_authority": false,
+    "clinical_validity": "NOT_INFERRED",
+    "weights_imported_to_git": false,
+    "runtime_activation": false
+  },
+  "reproducibility_artifacts": {
+    "status": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET_AND_DERIVED_SPLIT_LABEL_ARTIFACT",
+    "files": 92,
+    "bytes": 61328825,
+    "copied_to_target": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "integration_method": [
+    "TARGET_OWNED_SAFETENSORS_STRUCTURAL_VERIFIER",
+    "TARGET_OWNED_FOUNDATION_INPUT_OPERATOR",
+    "GOVERNANCE_RESEARCH_EVALUATION_METADATA"
+  ],
+  "donor_source_code_copied": false,
+  "clinical_authority_added": false
+}

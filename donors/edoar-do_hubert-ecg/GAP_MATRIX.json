@@ -1,0 +1,254 @@
+{
+  "schema": "ekg-donor-012-gap-matrix-v1",
+  "donor_id": "DONOR-012",
+  "capability_count": 33,
+  "capabilities": [
+    {
+      "capability_id": "HBE-001",
+      "capability": "HuBERT-ECG custom Transformer backbone",
+      "disposition": "CHALLENGER",
+      "donor_component": "hubert_ecg/modeling.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "HBE-002",
+      "capability": "Classification/regression head over HuBERT representations",
+      "disposition": "CHALLENGER",
+      "donor_component": "hubert_ecg/modeling_classification.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS"
+    },
+    {
+      "capability_id": "HBE-003",
+      "capability": "Exact small safetensors checkpoint",
+      "disposition": "CHALLENGER",
+      "donor_component": "Edoardo-Coppola/hubert-ecg-small",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "HBE-004",
+      "capability": "Exact base safetensors checkpoint",
+      "disposition": "CHALLENGER",
+      "donor_component": "Edoardo-Coppola/hubert-ecg-base",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "HBE-005",
+      "capability": "Exact large safetensors checkpoint",
+      "disposition": "CHALLENGER",
+      "donor_component": "Edoardo-Coppola/hubert-ecg-large",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "HBE-006",
+      "capability": "Transformers AutoModel custom-code registration",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "hubert_ecg/__init__.py + configuration.py",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT"
+    },
+    {
+      "capability_id": "HBE-007",
+      "capability": "Safetensors-first current checkpoint surface",
+      "disposition": "INTEGRATED",
+      "donor_component": "Hugging Face model repositories",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SAFETENSORS-INSPECTION"
+    },
+    {
+      "capability_id": "HBE-008",
+      "capability": "Legacy arbitrary torch.load checkpoint loading",
+      "disposition": "REJECTED",
+      "donor_component": "modeling.py + modeling_classification.py",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION"
+    },
+    {
+      "capability_id": "HBE-009",
+      "capability": "Permissive legacy strict=False checkpoint conversion",
+      "disposition": "REJECTED",
+      "donor_component": "scripts/convert_checkpoint.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CHECKPOINT-SAFETY"
+    },
+    {
+      "capability_id": "HBE-010",
+      "capability": "Fixed five-second 12-lead donor input geometry",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/dataset.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-FOUNDATION-INPUT-ADAPTER"
+    },
+    {
+      "capability_id": "HBE-011",
+      "capability": "Flatten-before-decimate donor preprocessing behavior",
+      "disposition": "REJECTED",
+      "donor_component": "hubert_ecg/dataset.py",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-RESAMPLING"
+    },
+    {
+      "capability_id": "HBE-012",
+      "capability": "FIR bandpass, 500 Hz resampling and per-lead min-max preprocessing",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/utils.py",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-FILTERING-BASELINE"
+    },
+    {
+      "capability_id": "HBE-013",
+      "capability": "Lead-major fixed-window model input packing",
+      "disposition": "INTEGRATED",
+      "donor_component": "hubert_ecg/dataset.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-FOUNDATION-INPUT-ADAPTER"
+    },
+    {
+      "capability_id": "HBE-014",
+      "capability": "Global-mean NaN imputation",
+      "disposition": "REJECTED",
+      "donor_component": "hubert_ecg/dataset.py",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING"
+    },
+    {
+      "capability_id": "HBE-015",
+      "capability": "Beat-based attention mask via ECG delineation",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "hubert_ecg/dataset.py",
+      "canonical_target_implementation": "ECG-CAP-EVENT-FIDUCIAL-DELINEATION"
+    },
+    {
+      "capability_id": "HBE-016",
+      "capability": "Per-file NumPy ECG dataset loader",
+      "disposition": "SUPERSEDED",
+      "donor_component": "hubert_ecg/dataset.py",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-DATA-LOADERS"
+    },
+    {
+      "capability_id": "HBE-017",
+      "capability": "Memmap ECG dataset builder and reader",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/utils.py + dataset.py",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-DATA-LOADERS"
+    },
+    {
+      "capability_id": "HBE-018",
+      "capability": "Failed-record zero-fill in memmap builder",
+      "disposition": "REJECTED",
+      "donor_component": "hubert_ecg/utils.py",
+      "canonical_target_implementation": "ECG-CAP-PREPROCESS-FAILURE-ACCOUNTING"
+    },
+    {
+      "capability_id": "HBE-019",
+      "capability": "Row-level iterative multilabel train/val/test splitting",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/utils.py",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS"
+    },
+    {
+      "capability_id": "HBE-020",
+      "capability": "PTB-XL strat_fold 1-8/9/10 split helper",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/utils.py",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS"
+    },
+    {
+      "capability_id": "HBE-021",
+      "capability": "Tracked reproducibility split and source-label corpus",
+      "disposition": "LICENSE_REVIEW_REQUIRED",
+      "donor_component": "reproducibility/",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-REPRODUCIBILITY"
+    },
+    {
+      "capability_id": "HBE-022",
+      "capability": "Ribeiro/Cardio-Learning nondisclosure boundary",
+      "disposition": "DATA_ONLY",
+      "donor_component": "reproducibility/README.md",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-DATASET-PROVENANCE"
+    },
+    {
+      "capability_id": "HBE-023",
+      "capability": "K-means feature clustering and pseudolabel generation",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "hubert_ecg/cluster.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "HBE-024",
+      "capability": "MFCC and latent feature dumping",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "hubert_ecg/dumping.py",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT"
+    },
+    {
+      "capability_id": "HBE-025",
+      "capability": "Self-supervised pretraining workflow",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "scripts/pretrain.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "HBE-026",
+      "capability": "Supervised fine-tuning workflow",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "scripts/finetune.py",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT"
+    },
+    {
+      "capability_id": "HBE-027",
+      "capability": "Evaluation metric stack including CinC2020/AUROC/AUPRC",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/metrics.py + scripts/evaluate.py",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-METRICS"
+    },
+    {
+      "capability_id": "HBE-028",
+      "capability": "Random-crop test-time augmentation",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "scripts/evaluate.py + dataset.py",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-ROBUSTNESS"
+    },
+    {
+      "capability_id": "HBE-029",
+      "capability": "Weights and Biases experiment telemetry",
+      "disposition": "REJECTED",
+      "donor_component": "cluster.py + pretrain.py + finetune.py",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY"
+    },
+    {
+      "capability_id": "HBE-030",
+      "capability": "Bootstrap confidence interval utility",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "hubert_ecg/utils.py",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-REPRODUCIBILITY"
+    },
+    {
+      "capability_id": "HBE-031",
+      "capability": "Tracked figure-result XLSX and dataset metadata assets",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "figures/",
+      "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT"
+    },
+    {
+      "capability_id": "HBE-032",
+      "capability": "Legacy checkpoint-to-Hugging-Face conversion workflow",
+      "disposition": "REJECTED",
+      "donor_component": "scripts/convert_checkpoint.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CHECKPOINT-SAFETY"
+    },
+    {
+      "capability_id": "HBE-033",
+      "capability": "Mutable Hub load/push workflows",
+      "disposition": "REJECTED",
+      "donor_component": "README.md + scripts/convert_checkpoint.py",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-REMOTE-ACQUISITION"
+    }
+  ],
+  "ambiguous_capabilities": 0,
+  "implementation_gain": {
+    "target_owned": [
+      "lib/safetensors_asset.js",
+      "tools/inspect_safetensors.js",
+      "lib/foundation_representation_adapter.js",
+      "tools/prepare_foundation_input.js"
+    ],
+    "donor_code_copied": false
+  },
+  "preserved_research_findings": [
+    "rare-label split rules retained in DATASET_BOUNDARY and split catalog",
+    "Ribeiro nondisclosure boundary retained",
+    "external Small checkpoint strict synthetic smoke verified"
+  ],
+  "clinical_authority_added": false
+}

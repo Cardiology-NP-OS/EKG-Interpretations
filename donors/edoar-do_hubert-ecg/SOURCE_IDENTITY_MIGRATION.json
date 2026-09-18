@@ -1,0 +1,34 @@
+{
+  "schema": "ekg-donor-source-identity-migration-v1",
+  "donor_id": "DONOR-012",
+  "registered_identity": {
+    "repository": "Edoardo-BS/HuBERT-ECG",
+    "observed_status": "HTTP_404_ON_2026-09-17"
+  },
+  "live_identity": {
+    "repository": "Edoar-do/HuBERT-ECG",
+    "default_branch": "master",
+    "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+    "tree": "45a5697847403b0bb417c00ae9904372c44f356e"
+  },
+  "continuity_evidence": [
+    {
+      "kind": "LIVE_README_STALE_CLONE_URL",
+      "value": "git clone https://github.com/Edoardo-BS/HuBERT-ECG.git"
+    },
+    {
+      "kind": "HUGGINGFACE_OWNER_REDIRECT",
+      "from": "Edoardo-BS/hubert-ecg-small",
+      "to": "Edoardo-Coppola/hubert-ecg-small",
+      "http_status": 307
+    },
+    {
+      "kind": "NO_SILENT_SUBSTITUTION",
+      "value": true
+    }
+  ],
+  "disposition": "ADOPT_LIVE_RENAMED_OWNER_WITH_REGISTERED_IDENTITY_PRESERVED",
+  "clinical_authority_added": false,
+  "source_substitution": false,
+  "silent_repin": false
+}

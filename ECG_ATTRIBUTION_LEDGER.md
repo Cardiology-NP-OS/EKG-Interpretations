@@ -205,3 +205,22 @@ fairseq-signals is credited for ECG model architecture, self-supervised/multimod
 - Provenance files: `donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, and model asset specs.
 
 ECGFounder is credited for the Net1D architecture context, exact external checkpoints, and preprocessing semantics that motivated the executable target-owned DSP profile. Clinical validity remains not inferred and diagnostic runtime remains governed inactive.
+
+
+## DONOR-012 -- Edoar-do/HuBERT-ECG
+
+- Registry identity: Edoardo-BS/HuBERT-ECG; current resolved repository: Edoar-do/HuBERT-ECG.
+- Audited branch: master
+- Audited commit: 2d0611da529412e021af76d4ed41d5a23a704dc6
+- Audited tree: 45a5697847403b0bb417c00ae9904372c44f356e
+- Source-code license: CC BY-NC 4.0; license blob 971de1520b22747d28f371048a20ebe75917a81d.
+- External Small/Base/Large model assets are CC BY-NC 4.0 and remain outside Git.
+- Integration: target-owned safetensors structural verification and canonical foundation-representation input adapter; exact Small checkpoint synthetic challenger smoke only.
+- Donor source code copied: **no**.
+- Model checkpoint bytes committed to Git: **no**.
+- Reproducibility CSV/pickle, external waveform, source-label, or figure-result bytes copied: **no**.
+- Source labels promoted to project clinical gold: **no**.
+- Donor/paper performance claims promoted to target metrics: **no**.
+- Provenance files: donors/edoar-do_hubert-ecg/DONOR_MANIFEST.json, INVENTORY.json, GAP_MATRIX.json, HARVEST_PLAN.md, LICENSE_BOUNDARY.json, DATASET_BOUNDARY.json, MODEL_BOUNDARY.json, SOURCE_IDENTITY_MIGRATION.json, ASSOCIATED_REPOSITORY_DISPOSITIONS.json, COMPARATIVE_PROOF.json, model asset specs, structural verification, and synthetic smoke evidence.
+
+HuBERT-ECG is credited for the foundation-model architecture and reproducibility context that motivated the target-owned checkpoint-safety and representation-adapter surfaces. The non-commercial donor license is preserved as a hard reuse boundary; clinical validity remains not inferred and diagnostic runtime remains governed inactive.

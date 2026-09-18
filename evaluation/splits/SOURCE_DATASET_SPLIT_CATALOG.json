@@ -1,0 +1,196 @@
+{
+  "schema": "ekg-source-dataset-split-catalog-v1",
+  "authorityClass": "EVALUATION_NON_GOLD",
+  "updatedDate": "2026-09-17",
+  "source": "DONOR-012",
+  "sourceRepository": "Edoar-do/HuBERT-ECG",
+  "sourceCommit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+  "entries": [
+    {
+      "sourceDataset": "Chapman-Shaoxing",
+      "sourceKey": "chapman",
+      "fileCount": 9,
+      "bytes": 4959558,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/chapman"
+      }
+    },
+    {
+      "sourceDataset": "CPSC",
+      "sourceKey": "cpsc",
+      "fileCount": 9,
+      "bytes": 1092485,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/cpsc"
+      }
+    },
+    {
+      "sourceDataset": "CPSC Extra",
+      "sourceKey": "cpscExtra",
+      "fileCount": 8,
+      "bytes": 1774792,
+      "trainFiles": 4,
+      "validationFiles": 0,
+      "testFiles": 4,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/cpscExtra"
+      }
+    },
+    {
+      "sourceDataset": "Georgia 12-lead ECG",
+      "sourceKey": "georgia",
+      "fileCount": 9,
+      "bytes": 5732405,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/georgia"
+      }
+    },
+    {
+      "sourceDataset": "Hefei",
+      "sourceKey": "hefei",
+      "fileCount": 9,
+      "bytes": 9970862,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/hefei"
+      }
+    },
+    {
+      "sourceDataset": "Ningbo",
+      "sourceKey": "ningbo",
+      "fileCount": 9,
+      "bytes": 23463882,
+      "trainFiles": 4,
+      "validationFiles": 4,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/ningbo"
+      }
+    },
+    {
+      "sourceDataset": "PTB Diagnostic ECG Database",
+      "sourceKey": "ptb",
+      "fileCount": 8,
+      "bytes": 108200,
+      "trainFiles": 4,
+      "validationFiles": 0,
+      "testFiles": 4,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/ptb"
+      }
+    },
+    {
+      "sourceDataset": "PTB-XL",
+      "sourceKey": "ptbxl",
+      "fileCount": 18,
+      "bytes": 10874013,
+      "trainFiles": 6,
+      "validationFiles": 6,
+      "testFiles": 6,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/ptbxl"
+      }
+    },
+    {
+      "sourceDataset": "SaMi-Trop",
+      "sourceKey": "samitrop",
+      "fileCount": 8,
+      "bytes": 410232,
+      "trainFiles": 4,
+      "validationFiles": 0,
+      "testFiles": 4,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/samitrop"
+      }
+    },
+    {
+      "sourceDataset": "SPH ECG dataset",
+      "sourceKey": "sph",
+      "fileCount": 3,
+      "bytes": 2938560,
+      "trainFiles": 1,
+      "validationFiles": 1,
+      "testFiles": 1,
+      "labelsEmbeddedBySource": true,
+      "sourceLabelsAreProjectGold": false,
+      "licenseStatus": "LICENSE_REVIEW_REQUIRED_PER_SOURCE_DATASET",
+      "provenance": {
+        "repository": "Edoar-do/HuBERT-ECG",
+        "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+        "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+        "pathPrefix": "reproducibility/sph"
+      }
+    }
+  ],
+  "rules": {
+    "sourceLabelsAreProjectGold": false,
+    "rawDatasetBytesStored": false,
+    "useRequiresDatasetSpecificLicenseReview": true,
+    "clinicalMetricsReportable": false
+  }
+}

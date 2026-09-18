@@ -35,3 +35,12 @@ All entries are non-authoritative references. No challenger receives runtime or 
 - **ECG-CAP-MODEL-MULTIMODAL-CHALLENGERS / FSS-020: ECG-language question-answering architecture family** — source Jwoo5/fairseq-signals at `f8f0ff1c788a82c2059cb452cd5462898867489e` / tree `59535a7b9bf1d321831caa81558dfaa884664d7a`; architecture-only challenger, no tracked checkpoint or target execution, runtime authority false.
 - **ECG-CAP-MODEL-SSL-REPRESENTATIONS / EFM-002: ECG-FM exact pretrained checkpoint** — source bowang-lab/ecg-fm at `9f926f1911bb9f24789b5c6407677d58ad753054` / tree `8a8fd9ff5152ab119f1ef1b0e349065740bbc691`; HF revision `584219ea492cdeef2e19ffbdf9c6ecc874ba427e`, SHA-256 `4d0142bcb485eb9f0c7845e0c19ff3463f6ae9d0e458eab69136efe90ceb9b7e`; not imported or executed; runtime authority false.
 - **ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS / EFM-003: ECG-FM exact finetuned checkpoint** — source bowang-lab/ecg-fm at `9f926f1911bb9f24789b5c6407677d58ad753054` / tree `8a8fd9ff5152ab119f1ef1b0e349065740bbc691`; HF revision `584219ea492cdeef2e19ffbdf9c6ecc874ba427e`, SHA-256 `f3e07588ee808d7e1e9e5608a997c9132883239518349f0565fd890590617b3d`; not imported or executed; runtime authority false.
+
+
+## DONOR-012 — HuBERT-ECG
+
+- Source identity: Edoar-do/HuBERT-ECG at commit 2d0611da529412e021af76d4ed41d5a23a704dc6, tree 45a5697847403b0bb417c00ae9904372c44f356e; prior registry identity Edoardo-BS/HuBERT-ECG is preserved in the donor migration record.
+- Exact external challengers: Small, Base, and Large safetensors checkpoints under CC BY-NC 4.0; no weights are committed to this repository.
+- Small checkpoint exact identity: c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2, 121,892,376 bytes; external deterministic synthetic smoke passed with output shape [1, 93, 512].
+- Target-owned executable additions are generic safetensors structural inspection and foundation-representation input packing; donor source code is not copied.
+- Donor model performance claims, downstream labels, split assets, calibration, thresholds, and clinical validity remain non-authoritative research context. Runtime authority is false and metrics remain NOT_REPORTABLE.

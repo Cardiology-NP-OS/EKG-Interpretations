@@ -1,0 +1,41 @@
+{
+  "schema": "ekg-foundation-representation-input-spec-v1",
+  "profileId": "foundation-representation-12lead-100hz-5s-v1",
+  "packing": "lead-major-contiguous-v1",
+  "inputSampleRateHz": 100,
+  "windowSeconds": 5,
+  "samplesPerLead": 500,
+  "leadCount": 12,
+  "leadOrder": [
+    "I",
+    "II",
+    "III",
+    "aVR",
+    "aVL",
+    "aVF",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6"
+  ],
+  "vectorLength": 6000,
+  "compatibility": "GEOMETRY_COMPATIBLE_NOT_DONOR_BYTE_EXACT",
+  "targetPreparation": "per-lead resample to 100 Hz before deterministic lead-major packing",
+  "sourceContext": {
+    "donor": "Edoar-do/HuBERT-ECG",
+    "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+    "donorPreparation": "crop 12x2500 at 500 Hz, flatten to 30000, scipy.signal.decimate factor 5",
+    "exactParityClaimed": false,
+    "reason": "target avoids filtering across concatenated lead boundaries"
+  },
+  "governedState": {
+    "diagnosticRuntime": "GOVERNED_INACTIVE",
+    "evidenceAdmission": "NOT_ADMITTED",
+    "projectGold": false,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinicalValidity": "NOT_INFERRED"
+  }
+}

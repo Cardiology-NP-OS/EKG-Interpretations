@@ -1,0 +1,47 @@
+{
+  "schema": "ekg-foundation-representation-input-contract-v1",
+  "authority": {
+    "runtime_authority": false,
+    "project_gold": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "metrics": "NOT_REPORTABLE",
+    "clinical_validity_inferred": false
+  },
+  "input": {
+    "lead_order": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ],
+    "sample_rate_hz": 100,
+    "window_seconds": 5,
+    "samples_per_lead": 500,
+    "packing": "lead-major-contiguous-v1",
+    "vector_length": 6000,
+    "padded_segments_allowed": false,
+    "nonfinite_samples_allowed": false
+  },
+  "target_implementation": "lib/foundation_representation_adapter.js",
+  "source_provenance": [
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoar-do/HuBERT-ECG",
+      "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+      "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+      "capabilities": [
+        "HBE-010",
+        "HBE-013"
+      ]
+    }
+  ],
+  "parity_boundary": "This contract preserves model input geometry and lead-major packing. It intentionally does not reproduce donor flatten-before-decimate filtering across lead boundaries."
+}

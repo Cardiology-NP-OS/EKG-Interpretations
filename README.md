@@ -19,7 +19,7 @@ Current governed state:
 - `activation = NOT_ELIGIBLE`
 - `clinical_validity = NOT_INFERRED`
 
-The donor program is active. At this handoff checkpoint **11 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-012, `Edoardo-BS/HuBERT-ECG`**. Verify the live registry before starting because another lane may have advanced it.
+The donor program is active. At this handoff checkpoint **11 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-012, `Edoar-do/HuBERT-ECG`** (registered previously as `Edoardo-BS/HuBERT-ECG`). Verify the live registry before starting because another lane may have advanced it.
 
 This is software/research/evaluation infrastructure. It does not authorize patient-specific ECG diagnosis, treatment, project clinical-gold creation, fabricated diagnostic performance, runtime activation, or transfer of clinical authority.
 
