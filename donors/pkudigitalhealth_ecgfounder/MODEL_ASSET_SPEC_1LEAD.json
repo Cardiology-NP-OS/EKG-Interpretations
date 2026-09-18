@@ -1,0 +1,30 @@
+{
+  "codeLicense": "MIT",
+  "weightLicense": "MIT",
+  "weightLicenseStatus": "COMPATIBLE_WITH_ATTRIBUTION",
+  "preprocessingContract": "foundation-pretraining-dsp-v1; 500 Hz; 10 s; exact lead geometry required",
+  "sampleRateHz": 500,
+  "durationSeconds": 10,
+  "trainingPopulations": [
+    "PUBLISHED_SOURCE_CONTEXT_ONLY",
+    "TARGET_POPULATION_SUPPORT_NOT_ESTABLISHED"
+  ],
+  "labels": [
+    "SOURCE_OR_PRETRAINING_LABEL_SEMANTICS_NOT_PROJECT_GOLD"
+  ],
+  "validationEvidence": "PUBLISHED_RESEARCH_CONTEXT_ONLY_TARGET_METRICS_NOT_REPORTABLE",
+  "calibrationOrThresholdAssumptions": "NOT_ADMITTED_FOR_TARGET",
+  "computeBurden": "30819014-parameter Net1D architecture measured by synthetic target-host smoke; checkpoint runtime burden separately verified",
+  "unsupportedPopulations": [
+    "ALL_TARGET_CLINICAL_POPULATIONS_UNTIL_SEPARATE_VALIDATION"
+  ],
+  "reproducibilityLimits": "Exact source/HF revision/checkpoint hash and preprocessing contract are pinned; clinical validity is not inferred.",
+  "serializationPolicy": "IDENTITY_ONLY_NO_DESERIALIZATION",
+  "checkpointId": "ecgfounder-1lead-d011",
+  "sha256": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+  "bytes": 369807481,
+  "locator": "external/pkudigitalhealth/ecgfounder/1_lead_ECGFounder.pth",
+  "leads": [
+    "I"
+  ]
+}

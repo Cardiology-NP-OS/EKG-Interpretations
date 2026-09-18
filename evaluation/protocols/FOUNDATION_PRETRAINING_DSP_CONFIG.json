@@ -1,0 +1,8 @@
+{
+  "requireCompleteTwelveLead": true,
+  "targetSamplingRateHz": 500,
+  "segmentSamples": 5000,
+  "resamplingMethod": "linear-v1",
+  "remainderPolicy": "drop",
+  "engineeringTransformProfile": "foundation-pretraining-dsp-v1"
+}

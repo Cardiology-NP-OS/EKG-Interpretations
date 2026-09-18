@@ -183,3 +183,25 @@ The donor is credited for heterogeneous preprocessing orchestration, lead-order 
 - Provenance files: `donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, `ASSOCIATED_REPOSITORY_DISPOSITIONS.json`, and `COMPARATIVE_PROOF.json`.
 
 fairseq-signals is credited for ECG model architecture, self-supervised/multimodal research, grouped/temporal split, and signal-perturbation methodology. All model families remain non-executed challengers and all donor/external data remain non-gold research or license-reviewed assets.
+
+## DONOR-011 -- PKUDigitalHealth/ECGFounder
+
+- Repository: `PKUDigitalHealth/ECGFounder`
+- Audited branch: `master`
+- Audited commit: `04edac702b61c91face519774ddcc0cd712fef23`
+- Audited tree: `dea32e6ad4755caed718f96df19b5a06171c48b1`
+- Root source-code license: MIT; upstream license blob `689c66875909c6eb6eea1cc8fe82ee8d49d4a8c4`.
+- Model repository: `PKUDigitalHealth/ECGFounder` at exact Hugging Face revision `d9b1793951b2342f5f7e84f1ac03cd37f8a08724`, model-card license MIT.
+- 12-lead checkpoint SHA-256: `ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997`; 369,942,585 bytes.
+- 1-lead checkpoint SHA-256: `f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603`; 369,807,481 bytes.
+- Integration: target-owned clean reimplementation of the donor-aligned DSP preprocessing semantics plus exact external model-challenger identity contracts.
+- Donor source code copied: **no**.
+- Model checkpoint bytes committed to Git: **no**.
+- Tracked donor CSV/data-derived assets copied: **no**; their data terms remain separately governed.
+- Source labels promoted to project clinical gold: **no**.
+- Donor/paper performance claims promoted to target metrics: **no**.
+- Synthetic architecture smoke: 12 x 5000 input -> 150 finite outputs with 30,819,014 parameters; no patient data.
+- Checkpoint execution remains challenger-only and requires exact identity verification plus safe state loading; runtime and diagnostic authority remain false.
+- Provenance files: `donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json`, `INVENTORY.json`, `GAP_MATRIX.json`, `HARVEST_PLAN.md`, `LICENSE_BOUNDARY.json`, `DATASET_BOUNDARY.json`, `MODEL_BOUNDARY.json`, and model asset specs.
+
+ECGFounder is credited for the Net1D architecture context, exact external checkpoints, and preprocessing semantics that motivated the executable target-owned DSP profile. Clinical validity remains not inferred and diagnostic runtime remains governed inactive.

@@ -1,0 +1,20 @@
+{
+  "schema": "ekg-model-asset-file-verification-v1",
+  "pass": true,
+  "checkpointId": "ecgfounder-12lead-d011",
+  "locator": "external/pkudigitalhealth/ecgfounder/12_lead_ECGFounder.pth",
+  "sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+  "bytes": 369942585,
+  "streamedVerification": true,
+  "localPathEmbedded": false,
+  "executionStatus": "IDENTITY_VERIFIED_CHALLENGER_ONLY",
+  "deserializationPerformed": false,
+  "runtimeAuthority": false,
+  "authorityClass": "CHALLENGER_SAFETY_NONRUNTIME",
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

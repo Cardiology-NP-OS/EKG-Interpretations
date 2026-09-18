@@ -1,0 +1,9 @@
+{
+  "schema": "ekg-donor-011-associated-repositories-v1",
+  "donor_id": "DONOR-011",
+  "repositories": [],
+  "queue_expanded": false,
+  "new_associated_donors_queued": 0,
+  "note": "Hugging Face checkpoint repository is governed as a model asset, not a GitHub donor.",
+  "clinical_authority_added": false
+}

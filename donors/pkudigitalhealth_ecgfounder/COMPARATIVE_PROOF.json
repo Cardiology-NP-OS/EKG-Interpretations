@@ -1,0 +1,35 @@
+{
+  "schema": "ekg-donor-011-comparative-proof-v1",
+  "donor_id": "DONOR-011",
+  "before": {
+    "donor_capability_count": 271,
+    "canonical_capability_count": 57,
+    "foundation_dsp_profile_executable": false
+  },
+  "after": {
+    "donor_capability_count": 290,
+    "canonical_capability_count": 57,
+    "foundation_dsp_profile_executable": true,
+    "target_code": "lib/signal_dsp_filtering.js",
+    "pipeline_integration": "lib/signal_preprocessing_pipeline.js",
+    "focused_test_count": 9,
+    "streaming_model_asset_verification": true,
+    "exact_12lead_checkpoint_identity_verified": true,
+    "exact_12lead_checkpoint_strict_synthetic_smoke": true
+  },
+  "engineering_gain": [
+    "Executable zero-phase notch filtering",
+    "Executable fourth-order Butterworth edge filtering",
+    "Executable median-baseline removal",
+    "Executable matrix-wide z-score normalization",
+    "Existing WFDB pipeline can invoke the profile end to end",
+    "Streaming checkpoint byte-count/SHA-256 verification without deserialization",
+    "Exact 12-lead checkpoint streamed identity verification",
+    "Restricted weights-only checkpoint load with 509/509 strict state compatibility",
+    "Synthetic exact-checkpoint forward pass without patient data or reportable metrics"
+  ],
+  "metrics": {
+    "state": "NOT_REPORTABLE"
+  },
+  "clinical_authority_added": false
+}

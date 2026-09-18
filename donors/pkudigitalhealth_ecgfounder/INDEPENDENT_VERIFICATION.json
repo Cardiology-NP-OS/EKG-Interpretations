@@ -1,0 +1,27 @@
+{
+  "schema": "ecg-donor-independent-verification-v1",
+  "donor_id": "DONOR-011",
+  "repository": "PKUDigitalHealth/ECGFounder",
+  "candidate_commit": "5be76fa139b3d3f687556557362b297fbec68a78",
+  "candidate_tree": "5dab0aaa0868ff074c8bed01e9954a8082f6cb8d",
+  "origin_main_commit": "81cd4d1ddafadafc9ab7ffebb31866c9ce193aee",
+  "verification_date": "2026-09-17",
+  "method": "Fresh shallow private GitHub clone on independent authorized Windows machine (SethsPC)",
+  "result": "PASS",
+  "clean_worktree_before_tests": true,
+  "full_candidate_diff_check": "PASS",
+  "focused_closure": "13/13 PASS",
+  "full_target_suite": "PASS",
+  "clinical_data_used": false,
+  "clinical_accuracy_claimed": false,
+  "governed_state": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "candidate_ci_run_id": 35289566893,
+  "candidate_ci_conclusion": "success"
+}

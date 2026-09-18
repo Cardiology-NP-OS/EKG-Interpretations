@@ -1,0 +1,40 @@
+{
+  "schema": "ekg-donor-011-dataset-boundary-v1",
+  "donor_id": "DONOR-011",
+  "tracked_assets": [
+    {
+      "path": "csv/LVEF.csv",
+      "bytes": 4223107,
+      "disposition": "LICENSE_REVIEW_REQUIRED"
+    },
+    {
+      "path": "csv/ptbxl_label.csv",
+      "bytes": 15559712,
+      "disposition": "DATA_ONLY"
+    },
+    {
+      "path": "csv/ptbxl_label_modified.csv",
+      "bytes": 5706559,
+      "disposition": "LICENSE_REVIEW_REQUIRED"
+    }
+  ],
+  "external_datasets": [
+    {
+      "name": "PTB-XL",
+      "role": "150-task donor validation context",
+      "raw_bytes_imported": false,
+      "source_labels_are_project_gold": false
+    },
+    {
+      "name": "MIMIC-ECG",
+      "role": "reported downstream/fine-tuning context",
+      "raw_bytes_imported": false,
+      "source_labels_are_project_gold": false
+    }
+  ],
+  "raw_dataset_bytes_imported": false,
+  "source_labels_promoted_to_project_gold": false,
+  "approved_adjudicated_gold_count": 0,
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false
+}

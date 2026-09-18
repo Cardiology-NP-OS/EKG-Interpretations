@@ -645,6 +645,103 @@
       },
       "reproducibility_limit": "Exact checkpoint/config/source identities are pinned; target execution, calibration and clinical validity are not established.",
       "model_boundary": "donors/bowang-lab_ecg-fm/MODEL_BOUNDARY.json"
+    },
+    {
+      "donor_id": "DONOR-011",
+      "repository": "PKUDigitalHealth/ECGFounder",
+      "donor_commit": "04edac702b61c91face519774ddcc0cd712fef23",
+      "donor_tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+      "huggingface_repository": "PKUDigitalHealth/ECGFounder",
+      "huggingface_revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+      "challenger_id": "MODEL-D011-ECGFOUNDER-12LEAD",
+      "source_capability": "PFD-002",
+      "model_family": "Net1D residual squeeze-excitation ECG foundation representation",
+      "artifact_type": "EXTERNAL_EXACT_CHECKPOINT",
+      "checkpoint_identity": "12_lead_ECGFounder.pth@d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+      "checkpoint_hash": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+      "checkpoint_bytes": 369942585,
+      "input_contract": {
+        "leads": 12,
+        "sample_rate_hz": 500,
+        "duration_seconds": 10,
+        "input_samples": 5000,
+        "preprocessing_profile": "foundation-pretraining-dsp-v1"
+      },
+      "compute_contract": {
+        "framework": "PyTorch",
+        "burden": "NOT_BENCHMARKED_FOR_TARGET",
+        "measured_architecture_parameters": 30819014,
+        "synthetic_architecture_smoke": "PASS_12LEAD_5000_SAMPLES_CPU",
+        "smoke_runtime": "PyTorch 2.14.0+cpu; donor requirements pin 2.4.0"
+      },
+      "software_license": "MIT",
+      "weight_license": "MIT_DECLARED_BY_HUGGINGFACE_MODEL_REPOSITORY",
+      "weights_imported": false,
+      "execution_status": "SYNTHETIC_CHALLENGER_SMOKE_VERIFIED_STRICT_LOAD",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "training_contract": {
+        "populations": "PUBLISHED_SOURCE_CONTEXT_ONLY; exact target support not established",
+        "labels": "source/pretraining labels are not project gold"
+      },
+      "validation_contract": {
+        "donor_results": "PUBLISHED_RESEARCH_CONTEXT_ONLY",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED_FOR_TARGET_USE"
+      },
+      "reproducibility_limit": "Exact checkpoint hash, input geometry, and donor preprocessing are pinned; target clinical validity is not inferred.",
+      "model_boundary": "donors/pkudigitalhealth_ecgfounder/MODEL_BOUNDARY.json",
+      "synthetic_execution_evidence": "donors/pkudigitalhealth_ecgfounder/MODEL_SMOKE_VERIFICATION.json"
+    },
+    {
+      "donor_id": "DONOR-011",
+      "repository": "PKUDigitalHealth/ECGFounder",
+      "donor_commit": "04edac702b61c91face519774ddcc0cd712fef23",
+      "donor_tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+      "huggingface_repository": "PKUDigitalHealth/ECGFounder",
+      "huggingface_revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+      "challenger_id": "MODEL-D011-ECGFOUNDER-1LEAD",
+      "source_capability": "PFD-003",
+      "model_family": "Net1D residual squeeze-excitation ECG foundation representation",
+      "artifact_type": "EXTERNAL_EXACT_CHECKPOINT",
+      "checkpoint_identity": "1_lead_ECGFounder.pth@d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+      "checkpoint_hash": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+      "checkpoint_bytes": 369807481,
+      "input_contract": {
+        "leads": 1,
+        "sample_rate_hz": 500,
+        "duration_seconds": 10,
+        "input_samples": 5000,
+        "preprocessing_profile": "foundation-pretraining-dsp-v1"
+      },
+      "compute_contract": {
+        "framework": "PyTorch",
+        "burden": "NOT_BENCHMARKED_FOR_TARGET",
+        "measured_architecture_parameters": 30819014,
+        "synthetic_architecture_smoke": "PASS_12LEAD_5000_SAMPLES_CPU",
+        "smoke_runtime": "PyTorch 2.14.0+cpu; donor requirements pin 2.4.0"
+      },
+      "software_license": "MIT",
+      "weight_license": "MIT_DECLARED_BY_HUGGINGFACE_MODEL_REPOSITORY",
+      "weights_imported": false,
+      "execution_status": "IDENTITY_PINNED_NOT_EXECUTED",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "training_contract": {
+        "populations": "PUBLISHED_SOURCE_CONTEXT_ONLY; exact target support not established",
+        "labels": "source/pretraining labels are not project gold"
+      },
+      "validation_contract": {
+        "donor_results": "PUBLISHED_RESEARCH_CONTEXT_ONLY",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED_FOR_TARGET_USE"
+      },
+      "reproducibility_limit": "Exact checkpoint hash, input geometry, and donor preprocessing are pinned; target clinical validity is not inferred.",
+      "model_boundary": "donors/pkudigitalhealth_ecgfounder/MODEL_BOUNDARY.json"
     }
   ]
 }

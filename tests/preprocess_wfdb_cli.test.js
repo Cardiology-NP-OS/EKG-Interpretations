@@ -41,6 +41,22 @@ test("CLI writes deterministic executable preprocessing artifact",()=>{
   assert.strictEqual(artifact.provenance.locator,"synthetic-cli-record");
 });
 
+test("CLI executes the foundation DSP profile through the operator path",()=>{
+  const fx=setup();
+  const config=JSON.parse(fs.readFileSync(fx.configPath,"utf8"));
+  config.engineeringTransformProfile="foundation-pretraining-dsp-v1";
+  fs.writeFileSync(fx.configPath,JSON.stringify(config),"utf8");
+  const runResult=run(fx);
+  assert.strictEqual(runResult.status,0,runResult.stderr);
+  const artifact=JSON.parse(fs.readFileSync(fx.out,"utf8"));
+  assert.strictEqual(artifact.segments[0].engineeringTransform.profileId,"foundation-pretraining-dsp-v1");
+  assert.strictEqual(artifact.segments[0].engineeringTransform.lineNotchHz,50);
+  assert.deepStrictEqual(artifact.segments[0].engineeringTransform.bandpassHz,[0.67,40]);
+  assert.strictEqual(artifact.segments[0].leads[0].unit,"standardized");
+  assert.strictEqual(artifact.runtimeAuthority,false);
+  assert.strictEqual(artifact.metrics,"NOT_REPORTABLE");
+});
+
 test("CLI output omits local source paths and diagnostic authority",()=>{
   const fx=setup();
   const runResult=run(fx);

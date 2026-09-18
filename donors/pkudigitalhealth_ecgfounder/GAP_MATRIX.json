@@ -1,0 +1,158 @@
+{
+  "schema": "ekg-donor-011-gap-matrix-v1",
+  "donor_id": "DONOR-011",
+  "rows": [
+    {
+      "capability_id": "PFD-001",
+      "capability": "Net1D residual squeeze-excitation 1D architecture",
+      "decision": "CHALLENGER",
+      "donor_component": "net1d.py",
+      "canonical_capability_id": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "PFD-002",
+      "capability": "Exact 12-lead ECG foundation checkpoint identity",
+      "decision": "CHALLENGER",
+      "donor_component": "HuggingFace:12_lead_ECGFounder.pth",
+      "canonical_capability_id": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "PFD-003",
+      "capability": "Exact 1-lead ECG foundation checkpoint identity",
+      "decision": "CHALLENGER",
+      "donor_component": "HuggingFace:1_lead_ECGFounder.pth",
+      "canonical_capability_id": "ECG-CAP-MODEL-SSL-REPRESENTATIONS"
+    },
+    {
+      "capability_id": "PFD-004",
+      "capability": "500 Hz ten-second model input contract",
+      "decision": "INTEGRATED",
+      "donor_component": "config.json/README.md",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-WINDOWING-SEGMENTATION"
+    },
+    {
+      "capability_id": "PFD-005",
+      "capability": "MIMIC-style limb-lead reorder contract",
+      "decision": "SUPERSEDED",
+      "donor_component": "dataset.py",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-LEAD-ORDER"
+    },
+    {
+      "capability_id": "PFD-006",
+      "capability": "50 Hz Q30 notch preprocessing",
+      "decision": "INTEGRATED",
+      "donor_component": "util.py:filter_bandpass",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-FILTERING-BASELINE"
+    },
+    {
+      "capability_id": "PFD-007",
+      "capability": "0.67-40 Hz fourth-order bandpass preprocessing",
+      "decision": "INTEGRATED",
+      "donor_component": "util.py:filter_bandpass",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-FILTERING-BASELINE"
+    },
+    {
+      "capability_id": "PFD-008",
+      "capability": "0.4-second median baseline subtraction",
+      "decision": "INTEGRATED",
+      "donor_component": "util.py:filter_bandpass",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-FILTERING-BASELINE"
+    },
+    {
+      "capability_id": "PFD-009",
+      "capability": "Matrix-wide z-score normalization with epsilon",
+      "decision": "INTEGRATED",
+      "donor_component": "dataset.py",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-NORMALIZATION"
+    },
+    {
+      "capability_id": "PFD-010",
+      "capability": "PTB-XL 150-output evaluation harness",
+      "decision": "EVALUATION_ONLY",
+      "donor_component": "ptbxl_eval.py",
+      "canonical_capability_id": "ECG-CAP-EVALUATION-METRICS"
+    },
+    {
+      "capability_id": "PFD-011",
+      "capability": "Dynamic threshold selection on evaluation labels",
+      "decision": "RESEARCH_ONLY",
+      "donor_component": "util.py",
+      "canonical_capability_id": "ECG-CAP-EVALUATION-METRICS"
+    },
+    {
+      "capability_id": "PFD-012",
+      "capability": "Bootstrap interval estimation utilities",
+      "decision": "EVALUATION_ONLY",
+      "donor_component": "util.py",
+      "canonical_capability_id": "ECG-CAP-EVALUATION-METRICS"
+    },
+    {
+      "capability_id": "PFD-013",
+      "capability": "LVEF 12-lead classification dataset adapter",
+      "decision": "DATA_ONLY",
+      "donor_component": "dataset.py",
+      "canonical_capability_id": "ECG-CAP-DATASET-CATALOG"
+    },
+    {
+      "capability_id": "PFD-014",
+      "capability": "LVEF regression dataset adapter",
+      "decision": "DATA_ONLY",
+      "donor_component": "dataset.py",
+      "canonical_capability_id": "ECG-CAP-DATASET-CATALOG"
+    },
+    {
+      "capability_id": "PFD-015",
+      "capability": "Tracked PTB-XL label derivative tables",
+      "decision": "LICENSE_REVIEW_REQUIRED",
+      "donor_component": "csv/ptbxl_label*.csv",
+      "canonical_capability_id": "ECG-CAP-DATASET-CATALOG"
+    },
+    {
+      "capability_id": "PFD-016",
+      "capability": "Downstream fine-tuning workflow",
+      "decision": "RESEARCH_ONLY",
+      "donor_component": "finetune_ECGFounder.ipynb",
+      "canonical_capability_id": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT"
+    },
+    {
+      "capability_id": "PFD-017",
+      "capability": "Permissive strict=False checkpoint loading",
+      "decision": "REJECTED",
+      "donor_component": "ptbxl_eval.py",
+      "canonical_capability_id": "ECG-CAP-MODEL-CHECKPOINT-SAFETY"
+    },
+    {
+      "capability_id": "PFD-018",
+      "capability": "Donor resample_unequal implementation",
+      "decision": "REJECTED",
+      "donor_component": "dataset.py",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-RESAMPLING"
+    },
+    {
+      "capability_id": "PFD-019",
+      "capability": "Silent NaN-to-zero replacement",
+      "decision": "REJECTED",
+      "donor_component": "dataset.py",
+      "canonical_capability_id": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING"
+    }
+  ],
+  "material_capability_count": 19,
+  "ambiguous_capabilities": 0,
+  "implementation_gain": {
+    "new_target_code": [
+      "lib/signal_dsp_filtering.js"
+    ],
+    "pipeline_integration": "lib/signal_preprocessing_pipeline.js",
+    "tests": [
+      "tests/signal_dsp_filtering.test.js"
+    ],
+    "donor_code_copied": false
+  },
+  "known_upstream_defects": [
+    "dataset.py references undefined sample_rate in one path.",
+    "resample_unequal references interp1d without importing it.",
+    "ptbxl_eval.py uses strict=False state loading, which can hide incompatible checkpoint keys.",
+    "No upstream tests are tracked."
+  ],
+  "clinical_authority_added": false
+}
