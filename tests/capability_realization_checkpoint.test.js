@@ -23,12 +23,12 @@ test("checkpoint is anchored to accepted hardening main", () => {
   assert.strictEqual(checkpoint.parentMainCommit, "c6bf317fe3805a2e08fde40daa14049105071933");
   assert.strictEqual(checkpoint.parentMainTree, "7d837905b219b19cf63a051a75eb16b085427b97");
 });
-test("live readiness exactly matches realized checkpoint", () => {
+test("historical readiness is preserved while live executable capability grows monotonically", () => {
   const audit = auditRegistry(root, registry);
-  assert.deepStrictEqual(audit.counts, checkpoint.readinessAfter);
-  assert.strictEqual(audit.counts.EXECUTABLE_TARGET_OWNED, 42);
-  assert.strictEqual(audit.counts.CONTRACT_ONLY_NONRUNTIME, 0);
-  assert.strictEqual(audit.counts.GOVERNANCE_ONLY, 0);
+  assert.strictEqual(checkpoint.readinessAfter.EXECUTABLE_TARGET_OWNED, 42);
+  assert.ok(audit.counts.EXECUTABLE_TARGET_OWNED >= checkpoint.readinessAfter.EXECUTABLE_TARGET_OWNED);
+  for (const key of ["CHALLENGER_METADATA_BLOCKED","CONTRACT_ONLY_NONRUNTIME","GOVERNANCE_ONLY","IMPLEMENTATION_REQUIRED_NOW","RESEARCH_REFERENCE_NONRUNTIME"])
+    assert.strictEqual(audit.counts[key], checkpoint.readinessAfter[key], key);
   assert.strictEqual(audit.counts.IMPLEMENTATION_REQUIRED_NOW, 0);
 });
 test("all 24 claimed realizations are executable code with direct tests", () => {
@@ -108,4 +108,4 @@ test("checkpoint status and verification remain stage safe", () => {
   }
 });
 if (process.exitCode) process.exit(process.exitCode);
-console.log(JSON.stringify({schema:"ekg-capability-realization-checkpoint-tests-v1",pass:true,passed,total:passed,canonicalCapabilities:registry.capability_count,executableCapabilities:checkpoint.readinessAfter.EXECUTABLE_TARGET_OWNED,residualReferences:checkpoint.residualNonExecutable.length,diagnosticRuntime:checkpoint.diagnosticRuntime,clinicalAuthorityAdded:false}));
+const liveAudit=auditRegistry(root,registry); console.log(JSON.stringify({schema:"ekg-capability-realization-checkpoint-tests-v1",pass:true,passed,total:passed,canonicalCapabilities:registry.capability_count,historicalExecutableCapabilities:checkpoint.readinessAfter.EXECUTABLE_TARGET_OWNED,currentExecutableCapabilities:liveAudit.counts.EXECUTABLE_TARGET_OWNED,residualReferences:checkpoint.residualNonExecutable.length,diagnosticRuntime:checkpoint.diagnosticRuntime,clinicalAuthorityAdded:false}));

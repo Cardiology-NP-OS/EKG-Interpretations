@@ -1,0 +1,29 @@
+{
+  "schema": "ekg-donor-012-comparative-proof-v1",
+  "donor_id": "DONOR-012",
+  "before": {
+    "donor_capability_count": 290,
+    "canonical_capability_count": 57,
+    "safetensors_structural_verifier": false,
+    "wfdb_to_foundation_vector_cli": false
+  },
+  "after": {
+    "donor_capability_count": 323,
+    "canonical_capability_count": 59,
+    "safetensors_structural_verifier": true,
+    "wfdb_to_foundation_vector_cli": true,
+    "small_external_checkpoint_synthetic_smoke": true
+  },
+  "engineering_gain": [
+    "Dependency-free safetensors header/tensor-layout verification",
+    "Exact large-file safetensors SHA-256/size gating",
+    "Deterministic tensor-layout fingerprint",
+    "WFDB-to-6000-value foundation input operator",
+    "Exact HuBERT-ECG Small strict safetensors challenger smoke",
+    "Brand-neutral source-dataset split catalog"
+  ],
+  "metrics": {
+    "state": "NOT_REPORTABLE"
+  },
+  "clinical_authority_added": false
+}

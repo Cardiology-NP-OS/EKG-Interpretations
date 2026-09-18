@@ -1,0 +1,20 @@
+{
+  "schema": "ekg-external-safetensors-model-spec-v1",
+  "checkpointId": "hubert-ecg-small-d012",
+  "repository": "Edoardo-Coppola/hubert-ecg-small",
+  "revision": "eca1c5af82da493a86a2bf0a89733234c9c3617d",
+  "filename": "model.safetensors",
+  "sha256": "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+  "bytes": 121892376,
+  "license": "CC-BY-NC-4.0",
+  "inputContract": {
+    "leads": 12,
+    "sampleRateHz": 500,
+    "windowSeconds": 5,
+    "modelInputSamples": 6000,
+    "targetProfile": "foundation-representation-12lead-100hz-5s-v1"
+  },
+  "serializationPolicy": "SAFETENSORS_STRUCTURAL_VERIFY_BEFORE_ANY_MODEL_RUNTIME",
+  "runtimeAuthority": false,
+  "clinicalValidity": "NOT_INFERRED"
+}

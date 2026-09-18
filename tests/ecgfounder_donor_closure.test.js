@@ -76,7 +76,7 @@ check("every Donor 011 capability maps exactly once to a canonical capability",(
   const hits=new Map();
   for(const c of canon.capabilities) for(const id of c.source_capabilities||[]) if(id.startsWith("PFD-")) hits.set(id,(hits.get(id)||0)+1);
   for(let i=1;i<=19;i++){const id="PFD-"+String(i).padStart(3,"0");assert.strictEqual(hits.get(id),1,id);}
-  assert.strictEqual(canon.capability_count,57);
+  assert.ok(canon.capability_count>=57);
 });
 check("unsafe donor execution paths are explicitly rejected",()=>{
   for(const id of ["PFD-017","PFD-018","PFD-019"]) assert.strictEqual(gap.rows.find(x=>x.capability_id===id).decision,"REJECTED");

@@ -1,8 +1,8 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 290,
-  "capability_count": 57,
+  "generated_from_donor_capability_registry_count": 323,
+  "capability_count": 59,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
   "approved_adjudicated_gold_count": 0,
@@ -4050,6 +4050,92 @@
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
       "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-SAFETENSORS-INSPECTION",
+      "capability_family": "Representations / Models",
+      "name": "Safetensors structural and exact-identity inspection",
+      "canonical_target_path": "lib/safetensors_asset.js",
+      "implementation_status": "TARGET_OWNED_IMPLEMENTATION",
+      "authority_class": "ENGINEERING_NONDIAGNOSTIC",
+      "source_provenance": [
+        {
+          "source": "Edoar-do/HuBERT-ECG",
+          "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+          "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+          "manifest": "donors/edoar-do_hubert-ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "HBE-007"
+      ],
+      "licenses": [
+        {
+          "source": "Edoar-do/HuBERT-ECG",
+          "spdx": "CC-BY-NC-4.0",
+          "status": "DONOR_CODE_NOT_COPIED_TARGET_IMPLEMENTATION_INDEPENDENT"
+        }
+      ],
+      "test_paths": [
+        "tests/safetensors_asset.test.js",
+        "tests/safetensors_cli.test.js"
+      ],
+      "evaluation_paths": [
+        "donors/edoar-do_hubert-ecg/SAFETENSORS_INSPECTION_SMALL.json"
+      ],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Structural inspection proves container identity/layout only; it does not establish model semantics, clinical validity, or safe arbitrary code execution."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-FOUNDATION-INPUT-ADAPTER",
+      "capability_family": "Representations / Models",
+      "name": "Canonical preprocessed-lead to foundation-representation input adapter",
+      "canonical_target_path": "lib/foundation_representation_adapter.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
+      "authority_class": "CHALLENGER_EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "Edoar-do/HuBERT-ECG",
+          "commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+          "tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+          "manifest": "donors/edoar-do_hubert-ecg/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "HBE-010",
+        "HBE-013"
+      ],
+      "licenses": [
+        {
+          "source": "Edoar-do/HuBERT-ECG",
+          "spdx": "CC-BY-NC-4.0",
+          "status": "DONOR_CODE_NOT_COPIED_TARGET_IMPLEMENTATION_INDEPENDENT"
+        }
+      ],
+      "test_paths": [
+        "tests/foundation_representation_adapter.test.js",
+        "tests/foundation_input_cli.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/FOUNDATION_REPRESENTATION_INPUT_CONTRACT.json",
+        "evaluation/protocols/FOUNDATION_REPRESENTATION_INPUT_100HZ_5S_12LEAD.json"
+      ],
+      "research_paths": [
+        "research/models/CHALLENGER_CATALOG.md"
+      ],
+      "limitations": [
+        "Adapter guarantees shape/order/provenance only; numerical parity with donor flatten-before-decimate preprocessing is explicitly not claimed."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_CHALLENGER_EVALUATION_ONLY"
     }
   ],
   "updated_date": "2026-09-17"

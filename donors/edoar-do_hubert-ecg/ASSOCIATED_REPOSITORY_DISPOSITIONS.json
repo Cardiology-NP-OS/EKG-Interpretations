@@ -1,0 +1,14 @@
+{
+  "schema": "ekg-donor-012-associated-repositories-v1",
+  "donor_id": "DONOR-012",
+  "repositories": [],
+  "model_asset_repositories": [
+    "Edoardo-Coppola/hubert-ecg-small",
+    "Edoardo-Coppola/hubert-ecg-base",
+    "Edoardo-Coppola/hubert-ecg-large"
+  ],
+  "queue_expanded": false,
+  "new_associated_donors_queued": 0,
+  "note": "Hugging Face model repositories are governed as exact external model assets, not additional source-code donors.",
+  "clinical_authority_added": false
+}

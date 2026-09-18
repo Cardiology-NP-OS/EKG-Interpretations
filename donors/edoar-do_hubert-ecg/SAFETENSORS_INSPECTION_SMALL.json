@@ -1,0 +1,28 @@
+{
+  "schema": "ekg-safetensors-inspection-v1",
+  "pass": true,
+  "bytes": 121892376,
+  "sha256": "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+  "headerBytes": 16400,
+  "dataBytes": 121875968,
+  "tensorCount": 148,
+  "totalElements": "30468992",
+  "dtypeCounts": {
+    "F32": 148
+  },
+  "metadataKeys": [
+    "format"
+  ],
+  "tensorLayoutSha256": "e50d7d89372f603e545fde090d7e6a3bd3792f1184d45b171167b789870331fb",
+  "localPathEmbedded": false,
+  "deserializationPerformed": false,
+  "tensorValuesRead": false,
+  "authorityClass": "CHALLENGER_SAFETY_NONRUNTIME",
+  "runtimeAuthority": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "projectGold": false,
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

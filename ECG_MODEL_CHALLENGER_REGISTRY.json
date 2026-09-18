@@ -742,6 +742,210 @@
       },
       "reproducibility_limit": "Exact checkpoint hash, input geometry, and donor preprocessing are pinned; target clinical validity is not inferred.",
       "model_boundary": "donors/pkudigitalhealth_ecgfounder/MODEL_BOUNDARY.json"
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoar-do/HuBERT-ECG",
+      "previous_repository_identity": "Edoardo-BS/HuBERT-ECG",
+      "donor_commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+      "donor_tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+      "huggingface_repository": "Edoardo-Coppola/hubert-ecg-small",
+      "huggingface_revision": "eca1c5af82da493a86a2bf0a89733234c9c3617d",
+      "challenger_id": "MODEL-D012-HUBERT-ECG-SMALL",
+      "source_capability": "HBE-003",
+      "model_family": "HuBERT-ECG self-supervised Transformer representation",
+      "artifact_type": "EXTERNAL_EXACT_SAFETENSORS_CHECKPOINT",
+      "checkpoint_identity": "model.safetensors@eca1c5af82da493a86a2bf0a89733234c9c3617d",
+      "checkpoint_hash": "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+      "checkpoint_bytes": 121892376,
+      "input_contract": {
+        "leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "sample_rate_hz": 100,
+        "duration_seconds": 5,
+        "samples_per_lead": 500,
+        "packed_vector_length": 6000,
+        "packing": "lead-major-contiguous-v1",
+        "target_adapter": "lib/foundation_representation_adapter.js",
+        "parity_limit": "Donor flatten-before-decimate numerical parity is not claimed."
+      },
+      "compute_contract": {
+        "framework": "PyTorch + Transformers",
+        "reported_parameters_millions": 30.5,
+        "burden": "CPU_SYNTHETIC_SMOKE_ONLY",
+        "measured_parameters": 30468992,
+        "synthetic_output_shape": [
+          1,
+          93,
+          512
+        ]
+      },
+      "software_license": "CC-BY-NC-4.0",
+      "weight_license": "CC-BY-NC-4.0_NONCOMMERCIAL",
+      "weights_imported": false,
+      "execution_status": "EXTERNAL_SYNTHETIC_CHALLENGER_SMOKE_PASS",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "training_contract": {
+        "populations": "Donor README claims 9.1 million 12-lead ECGs from four countries; target support is not established.",
+        "labels": "Self-supervised codebook targets and downstream source labels; none are project gold.",
+        "training_data_provenance": "PUBLISHED_SOURCE_CONTEXT_ONLY"
+      },
+      "validation_contract": {
+        "donor_results": "PUBLISHED_RESEARCH_CONTEXT_ONLY",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED_FOR_TARGET_USE"
+      },
+      "reproducibility_limit": "Exact checkpoint identity is pinned. Target runtime activation and clinical validity are not established.",
+      "model_boundary": "donors/edoar-do_hubert-ecg/MODEL_BOUNDARY.json",
+      "synthetic_execution_evidence": "donors/edoar-do_hubert-ecg/MODEL_SMOKE_VERIFICATION.json",
+      "structural_verification": "donors/edoar-do_hubert-ecg/MODEL_ASSET_IDENTITY_VERIFICATION_SMALL.json"
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoar-do/HuBERT-ECG",
+      "previous_repository_identity": "Edoardo-BS/HuBERT-ECG",
+      "donor_commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+      "donor_tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+      "huggingface_repository": "Edoardo-Coppola/hubert-ecg-base",
+      "huggingface_revision": "8ffa1ad3593366ca45f5351d75317d4ff8f14465",
+      "challenger_id": "MODEL-D012-HUBERT-ECG-BASE",
+      "source_capability": "HBE-004",
+      "model_family": "HuBERT-ECG self-supervised Transformer representation",
+      "artifact_type": "EXTERNAL_EXACT_SAFETENSORS_CHECKPOINT",
+      "checkpoint_identity": "model.safetensors@8ffa1ad3593366ca45f5351d75317d4ff8f14465",
+      "checkpoint_hash": "05bc1b1317f8e3063811a03fb840f5bf8a85968191e209c0cfbaa0c52c8aa1ae",
+      "checkpoint_bytes": 372518672,
+      "input_contract": {
+        "leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "sample_rate_hz": 100,
+        "duration_seconds": 5,
+        "samples_per_lead": 500,
+        "packed_vector_length": 6000,
+        "packing": "lead-major-contiguous-v1",
+        "target_adapter": "lib/foundation_representation_adapter.js",
+        "parity_limit": "Donor flatten-before-decimate numerical parity is not claimed."
+      },
+      "compute_contract": {
+        "framework": "PyTorch + Transformers",
+        "reported_parameters_millions": 93.1,
+        "burden": "NOT_BENCHMARKED_FOR_TARGET",
+        "measured_parameters": null,
+        "synthetic_output_shape": null
+      },
+      "software_license": "CC-BY-NC-4.0",
+      "weight_license": "CC-BY-NC-4.0_NONCOMMERCIAL",
+      "weights_imported": false,
+      "execution_status": "IDENTITY_PINNED_NOT_EXECUTED",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "training_contract": {
+        "populations": "Donor README claims 9.1 million 12-lead ECGs from four countries; target support is not established.",
+        "labels": "Self-supervised codebook targets and downstream source labels; none are project gold.",
+        "training_data_provenance": "PUBLISHED_SOURCE_CONTEXT_ONLY"
+      },
+      "validation_contract": {
+        "donor_results": "PUBLISHED_RESEARCH_CONTEXT_ONLY",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED_FOR_TARGET_USE"
+      },
+      "reproducibility_limit": "Exact checkpoint identity is pinned. Target runtime activation and clinical validity are not established.",
+      "model_boundary": "donors/edoar-do_hubert-ecg/MODEL_BOUNDARY.json"
+    },
+    {
+      "donor_id": "DONOR-012",
+      "repository": "Edoar-do/HuBERT-ECG",
+      "previous_repository_identity": "Edoardo-BS/HuBERT-ECG",
+      "donor_commit": "2d0611da529412e021af76d4ed41d5a23a704dc6",
+      "donor_tree": "45a5697847403b0bb417c00ae9904372c44f356e",
+      "huggingface_repository": "Edoardo-Coppola/hubert-ecg-large",
+      "huggingface_revision": "f297337d4e33198800441e3d64e0dd393774637f",
+      "challenger_id": "MODEL-D012-HUBERT-ECG-LARGE",
+      "source_capability": "HBE-005",
+      "model_family": "HuBERT-ECG self-supervised Transformer representation",
+      "artifact_type": "EXTERNAL_EXACT_SAFETENSORS_CHECKPOINT",
+      "checkpoint_identity": "model.safetensors@f297337d4e33198800441e3d64e0dd393774637f",
+      "checkpoint_hash": "9a0eb8484f73793aa678936984243da92ae80d7b81e2fe77d1ea6dee2bdf5ec2",
+      "checkpoint_bytes": 754626248,
+      "input_contract": {
+        "leads": [
+          "I",
+          "II",
+          "III",
+          "aVR",
+          "aVL",
+          "aVF",
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6"
+        ],
+        "sample_rate_hz": 100,
+        "duration_seconds": 5,
+        "samples_per_lead": 500,
+        "packed_vector_length": 6000,
+        "packing": "lead-major-contiguous-v1",
+        "target_adapter": "lib/foundation_representation_adapter.js",
+        "parity_limit": "Donor flatten-before-decimate numerical parity is not claimed."
+      },
+      "compute_contract": {
+        "framework": "PyTorch + Transformers",
+        "reported_parameters_millions": 188.6,
+        "burden": "NOT_BENCHMARKED_FOR_TARGET",
+        "measured_parameters": null,
+        "synthetic_output_shape": null
+      },
+      "software_license": "CC-BY-NC-4.0",
+      "weight_license": "CC-BY-NC-4.0_NONCOMMERCIAL",
+      "weights_imported": false,
+      "execution_status": "IDENTITY_PINNED_NOT_EXECUTED",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "training_contract": {
+        "populations": "Donor README claims 9.1 million 12-lead ECGs from four countries; target support is not established.",
+        "labels": "Self-supervised codebook targets and downstream source labels; none are project gold.",
+        "training_data_provenance": "PUBLISHED_SOURCE_CONTEXT_ONLY"
+      },
+      "validation_contract": {
+        "donor_results": "PUBLISHED_RESEARCH_CONTEXT_ONLY",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED_FOR_TARGET_USE"
+      },
+      "reproducibility_limit": "Exact checkpoint identity is pinned. Target runtime activation and clinical validity are not established.",
+      "model_boundary": "donors/edoar-do_hubert-ecg/MODEL_BOUNDARY.json"
     }
   ]
 }

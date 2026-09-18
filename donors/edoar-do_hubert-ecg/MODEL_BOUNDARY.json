@@ -1,0 +1,92 @@
+{
+  "schema": "ekg-donor-012-model-boundary-v1",
+  "donor_id": "DONOR-012",
+  "repository": "Edoar-do/HuBERT-ECG",
+  "license": "CC-BY-NC-4.0",
+  "models": [
+    {
+      "size": "small",
+      "repository": "Edoardo-Coppola/hubert-ecg-small",
+      "revision": "eca1c5af82da493a86a2bf0a89733234c9c3617d",
+      "bytes": 121892376,
+      "sha256": "c78fa955268212f8ed20bc69fb1b882d76a4351df2466061335950949394a4d2",
+      "parameters": 30468992,
+      "execution": "SYNTHETIC_CHALLENGER_SMOKE_VERIFIED_STRICT_SAFETENSORS"
+    },
+    {
+      "size": "base",
+      "repository": "Edoardo-Coppola/hubert-ecg-base",
+      "revision": "8ffa1ad3593366ca45f5351d75317d4ff8f14465",
+      "bytes": 372518672,
+      "sha256": "05bc1b1317f8e3063811a03fb840f5bf8a85968191e209c0cfbaa0c52c8aa1ae",
+      "parametersPublished": 93100000,
+      "execution": "IDENTITY_PINNED_NOT_EXECUTED"
+    },
+    {
+      "size": "large",
+      "repository": "Edoardo-Coppola/hubert-ecg-large",
+      "revision": "f297337d4e33198800441e3d64e0dd393774637f",
+      "bytes": 754626248,
+      "sha256": "9a0eb8484f73793aa678936984243da92ae80d7b81e2fe77d1ea6dee2bdf5ec2",
+      "parametersPublished": 188600000,
+      "execution": "IDENTITY_PINNED_NOT_EXECUTED"
+    }
+  ],
+  "input_contract": {
+    "raw_leads": 12,
+    "raw_sample_rate_hz": 500,
+    "raw_window_seconds": 5,
+    "raw_samples_per_lead": 2500,
+    "donor_flattened_samples": 30000,
+    "donor_downsampling_factor": 5,
+    "model_input_samples": 6000
+  },
+  "target_compatibility_contract": {
+    "profile": "foundation-representation-12lead-100hz-5s-v1",
+    "path": "evaluation/protocols/FOUNDATION_REPRESENTATION_INPUT_100HZ_5S_12LEAD.json",
+    "exact_donor_preprocessing_parity": false,
+    "target_path": "per-lead resample to 100 Hz then lead-major pack",
+    "reason": "avoid anti-alias filtering across concatenated lead boundaries"
+  },
+  "small_config": {
+    "config_sha256": "4772bf6606c516468a0b5a7f4e7c630eb1c7c213aeac5968497e3aebfecae33e",
+    "remote_code_sha256": "8a76a50e0e107167023544eecd5444cb6a9bb4eee75fd8d0d5a03dbe9f8034d9",
+    "hidden_size": 512,
+    "layers": 8,
+    "attention_heads": 8,
+    "conv_kernel": [
+      10,
+      3,
+      3,
+      2,
+      2
+    ],
+    "conv_stride": [
+      4,
+      2,
+      2,
+      2,
+      2
+    ],
+    "conv_dim": [
+      512,
+      512,
+      512,
+      512,
+      512
+    ]
+  },
+  "admission_contract": {
+    "safetensors_structural_verification_required": true,
+    "exact_hash_required": true,
+    "license_required": true,
+    "unrestricted_torch_load": "REJECT",
+    "permissive_strict_false_state_load": "REJECT",
+    "missing_any_required_field_action": "FAIL_CLOSED"
+  },
+  "weights_imported": false,
+  "runtime_authority": false,
+  "clinical_validity": "NOT_INFERRED",
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false
+}
