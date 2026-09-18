@@ -1,0 +1,29 @@
+{
+  "schema": "ekg-donor-independent-verification-v1",
+  "donor_id": "DONOR-012",
+  "registered_repository": "Edoardo-BS/HuBERT-ECG",
+  "repository": "Edoar-do/HuBERT-ECG",
+  "candidate_commit": "2b692698d6f5b864d6b626c515f45b29af278d07",
+  "candidate_tree": "cdceb1b9bfc6876e13ebfe6883de009bd91bffa5",
+  "origin_main_commit": "fc58bdcd1a57f5045c23c927bfc941ecee962227",
+  "verification_date": "2026-09-17",
+  "method": "Fresh shallow private GitHub clone on independent authorized Windows worktree",
+  "result": "PASS",
+  "clean_worktree_before_tests": true,
+  "full_candidate_diff_check": "PASS",
+  "focused_closure": "14/14 PASS",
+  "full_target_suite": "PASS",
+  "candidate_ci_run_id": 35293206439,
+  "candidate_ci_conclusion": "success",
+  "clinical_data_used": false,
+  "clinical_accuracy_claimed": false,
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  }
+}

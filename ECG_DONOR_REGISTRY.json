@@ -329,7 +329,12 @@
       "source_code_copied": false,
       "model_weights_imported": false,
       "dataset_bytes_imported": false,
-      "clinical_authority_added": false
+      "clinical_authority_added": false,
+      "verified_candidate_commit": "2b692698d6f5b864d6b626c515f45b29af278d07",
+      "verified_candidate_tree": "cdceb1b9bfc6876e13ebfe6883de009bd91bffa5",
+      "candidate_ci_run_id": 35293206439,
+      "candidate_ci_conclusion": "success",
+      "independent_verification": "donors/edoar-do_hubert-ecg/INDEPENDENT_VERIFICATION.json"
     },
     {
       "donor_id": "DONOR-013",
