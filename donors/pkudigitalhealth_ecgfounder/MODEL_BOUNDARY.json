@@ -1,0 +1,127 @@
+{
+  "schema": "ekg-donor-011-model-boundary-v1",
+  "donor_id": "DONOR-011",
+  "repository": "PKUDigitalHealth/ECGFounder",
+  "huggingface": {
+    "repository": "PKUDigitalHealth/ECGFounder",
+    "revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+    "license": "MIT",
+    "checkpoints": [
+      {
+        "kind": "12-lead pretraining checkpoint",
+        "file": "12_lead_ECGFounder.pth",
+        "sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+        "bytes": 369942585
+      },
+      {
+        "kind": "1-lead pretraining checkpoint",
+        "file": "1_lead_ECGFounder.pth",
+        "sha256": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+        "bytes": 369807481
+      }
+    ]
+  },
+  "input_contract": {
+    "sample_rate_hz": 500,
+    "duration_seconds": 10,
+    "input_samples": 5000,
+    "lead_variants": [
+      12,
+      1
+    ],
+    "twelve_lead_order": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ]
+  },
+  "preprocessing_contract": {
+    "notch_hz": 50,
+    "notch_q": 30,
+    "bandpass_hz": [
+      0.67,
+      40
+    ],
+    "bandpass_order": 4,
+    "median_baseline_seconds": 0.4,
+    "normalization": "matrix-wide z-score with epsilon 1e-8",
+    "target_implementation": "lib/signal_dsp_filtering.js",
+    "parity": "DONOR_ALIGNED_CLEAN_REIMPLEMENTATION_NOT_BYTE_EXACT_SCIPY_FILTFILT"
+  },
+  "evaluation_architecture": {
+    "family": "Net1D residual squeeze-excitation 1D CNN",
+    "in_channels": 12,
+    "base_filters": 64,
+    "filter_list": [
+      64,
+      160,
+      160,
+      400,
+      400,
+      1024,
+      1024
+    ],
+    "blocks": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4
+    ],
+    "kernel_size": 16,
+    "stride": 2,
+    "groups_width": 16,
+    "reported_eval_outputs": 150
+  },
+  "admission_contract": {
+    "exact_checkpoint_required": true,
+    "cryptographic_hash_required": true,
+    "weight_license_required": true,
+    "preprocessing_required": true,
+    "unsafe_or_partial_state_dict_loading": "REJECT",
+    "missing_any_required_field_action": "FAIL_CLOSED"
+  },
+  "weights_imported": false,
+  "execution_status": "12LEAD_SYNTHETIC_CHALLENGER_EXECUTION_VERIFIED_1LEAD_IDENTITY_ONLY",
+  "runtime_authority": false,
+  "clinical_validity": "NOT_INFERRED",
+  "metrics": "NOT_REPORTABLE",
+  "clinical_authority_added": false,
+  "model_asset_specs": [
+    "donors/pkudigitalhealth_ecgfounder/MODEL_ASSET_SPEC_12LEAD.json",
+    "donors/pkudigitalhealth_ecgfounder/MODEL_ASSET_SPEC_1LEAD.json"
+  ],
+  "architecture_smoke": {
+    "status": "PASS",
+    "synthetic_only": true,
+    "input_shape": [
+      1,
+      12,
+      5000
+    ],
+    "output_shape": [
+      1,
+      150
+    ],
+    "parameters": 30819014,
+    "elapsed_seconds": 0.1575455665588379,
+    "checkpoint_loaded": false,
+    "host_runtime": "PyTorch 2.14.0+cpu",
+    "donor_declared_runtime": "PyTorch 2.4.0",
+    "clinical_authority_added": false
+  },
+  "checkpoint_smoke_verification": "donors/pkudigitalhealth_ecgfounder/MODEL_SMOKE_VERIFICATION.json",
+  "models_executed_in_target_runtime": false,
+  "external_checkpoint_synthetic_smoke_executed": true
+}

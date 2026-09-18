@@ -1,0 +1,41 @@
+{
+  "schema": "ekg-donor-011-license-boundary-v1",
+  "donor_id": "DONOR-011",
+  "source_code": {
+    "spdx": "MIT",
+    "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION",
+    "license_blob_sha": "689c66875909c6eb6eea1cc8fe82ee8d49d4a8c4",
+    "copied_source_code": false
+  },
+  "model_weights": {
+    "repository": "PKUDigitalHealth/ECGFounder",
+    "revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+    "declared_license": "MIT",
+    "checkpoints": [
+      {
+        "file": "12_lead_ECGFounder.pth",
+        "sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+        "bytes": 369942585
+      },
+      {
+        "file": "1_lead_ECGFounder.pth",
+        "sha256": "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603",
+        "bytes": 369807481
+      }
+    ],
+    "weights_imported": false,
+    "runtime_authority": false
+  },
+  "tracked_data_assets": {
+    "status": "LICENSE_REVIEW_REQUIRED_DERIVED_LABEL_TABLES",
+    "paths": [
+      "csv/LVEF.csv",
+      "csv/ptbxl_label.csv",
+      "csv/ptbxl_label_modified.csv"
+    ],
+    "target_copy_allowed": false,
+    "source_labels_promoted_to_project_gold": false
+  },
+  "attribution_required": true,
+  "clinical_authority_added": false
+}

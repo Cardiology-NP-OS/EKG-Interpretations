@@ -1,0 +1,56 @@
+{
+  "schema": "ekg-foundation-pretraining-dsp-contract-v1",
+  "status": "EXECUTABLE_NONCLINICAL_ENGINEERING",
+  "implementation": "lib/signal_dsp_filtering.js",
+  "pipelineIntegration": "lib/signal_preprocessing_pipeline.js",
+  "operator": "tools/preprocess_wfdb.js",
+  "profileId": "foundation-pretraining-dsp-v1",
+  "transformOrder": [
+    "zero-phase 50 Hz notch, Q=30",
+    "zero-phase fourth-order Butterworth high-pass at 0.67 Hz",
+    "zero-phase fourth-order Butterworth low-pass at 40 Hz",
+    "0.4 second median-baseline subtraction",
+    "matrix-wide z-score normalization with epsilon 1e-8"
+  ],
+  "inputRequirements": {
+    "finiteSamples": true,
+    "explicitSampleRate": true,
+    "lineNotchBelowNyquist": true,
+    "minimumLengthEnforced": true
+  },
+  "provenance": {
+    "donor": "PKUDigitalHealth/ECGFounder",
+    "donorCommit": "04edac702b61c91face519774ddcc0cd712fef23",
+    "donorTree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+    "donorComponents": [
+      "util.py:filter_bandpass",
+      "dataset.py:z_score_normalization"
+    ],
+    "integrationMethod": "TARGET_OWNED_CLEAN_REIMPLEMENTATION",
+    "exactScipyFiltfiltParityClaimed": false
+  },
+  "validation": {
+    "focusedTest": "tests/signal_dsp_filtering.test.js",
+    "cliTest": "tests/preprocess_wfdb_cli.test.js",
+    "syntheticOnly": true,
+    "assertions": [
+      "50 Hz attenuation",
+      "sub-Hz baseline attenuation",
+      "10 Hz passband preservation",
+      "determinism",
+      "matrix-wide standardization",
+      "WFDB pipeline integration",
+      "operator CLI integration",
+      "fail-closed invalid profile and numeric inputs"
+    ]
+  },
+  "governedState": {
+    "completionState": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnosticRuntime": "GOVERNED_INACTIVE",
+    "evidenceAdmission": "NOT_ADMITTED",
+    "approvedAdjudicatedGoldCount": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinicalValidity": "NOT_INFERRED"
+  }
+}

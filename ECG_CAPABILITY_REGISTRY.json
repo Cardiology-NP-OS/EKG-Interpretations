@@ -1,7 +1,7 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 271,
+  "generated_from_donor_capability_registry_count": 290,
   "capability_count": 57,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
@@ -80,6 +80,12 @@
           "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
           "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
           "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -88,7 +94,10 @@
         "ECGB-031",
         "ECGB-032",
         "PTBXLFB-003",
-        "EFM-016"
+        "EFM-016",
+        "PFD-013",
+        "PFD-014",
+        "PFD-015"
       ],
       "licenses": [
         {
@@ -105,6 +114,11 @@
           "source": "bowang-lab/ecg-fm",
           "spdx": "MIT",
           "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -580,6 +594,12 @@
           "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
           "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
           "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -588,7 +608,10 @@
         "PTBXLFB-026",
         "TECG-018",
         "FSS-026",
-        "EFM-012"
+        "EFM-012",
+        "PFD-010",
+        "PFD-011",
+        "PFD-012"
       ],
       "licenses": [
         {
@@ -610,6 +633,11 @@
           "source": "bowang-lab/ecg-fm",
           "spdx": "MIT",
           "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -2181,13 +2209,20 @@
           "commit": "f8f0ff1c788a82c2059cb452cd5462898867489e",
           "tree": "59535a7b9bf1d321831caa81558dfaa884664d7a",
           "manifest": "donors/jwoo5_fairseq-signals/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "TECG-022",
         "TECG-033",
         "ECP-007",
-        "FSS-022"
+        "FSS-022",
+        "PFD-017"
       ],
       "licenses": [
         {
@@ -2204,12 +2239,18 @@
           "source": "Jwoo5/fairseq-signals",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_GOVERNANCE_ONLY_CHALLENGER_HARVEST"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
-        "tests/model_asset_safety.test.js"
+        "tests/model_asset_safety.test.js",
+        "tests/model_asset_file_cli.test.js"
       ],
       "evaluation_paths": [
         "evaluation/protocols/MODEL_ASSET_SAFETY_CONTRACT.json"
@@ -2223,7 +2264,11 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY"
+      "runtime_status": "NONCLINICAL_GOVERNANCE_ONLY",
+      "implementation_paths": [
+        "lib/model_asset_safety.js",
+        "tools/verify_model_asset.js"
+      ]
     },
     {
       "capability_id": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
@@ -2472,6 +2517,12 @@
           "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
           "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
           "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2483,7 +2534,10 @@
         "FSS-016",
         "FSS-017",
         "EFM-002",
-        "EFM-004"
+        "EFM-004",
+        "PFD-001",
+        "PFD-002",
+        "PFD-003"
       ],
       "licenses": [
         {
@@ -2505,6 +2559,11 @@
           "source": "bowang-lab/ecg-fm",
           "spdx": "MIT",
           "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -2537,18 +2596,30 @@
           "commit": "ff419d983568ef492eb8d229af643c0ef0100b32",
           "tree": "2a735eae4761375a0a322aac0dc05c468a88041c",
           "manifest": "donors/neuropsychology_neurokit/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "NK-002",
         "NK-006",
-        "NK-011"
+        "NK-011",
+        "PFD-019"
       ],
       "licenses": [
         {
           "source": "neuropsychology/NeuroKit",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_REVIEW_AND_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -2600,6 +2671,12 @@
           "commit": "4c37b775e56d23e2c844fcd0aec52d2cd05cb35e",
           "tree": "b9be6b9546e2b437493b286532ffbbba00e01a8c",
           "manifest": "donors/tmehari_ptbxl_feature_benchmark/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2607,7 +2684,10 @@
         "PTBXLFB-028",
         "TECG-002",
         "TECG-003",
-        "WFDB-017"
+        "WFDB-017",
+        "PFD-006",
+        "PFD-007",
+        "PFD-008"
       ],
       "licenses": [
         {
@@ -2629,14 +2709,22 @@
           "source": "tmehari/ptbxl_feature_benchmark",
           "spdx": null,
           "status": "LICENSE_REVIEW_REQUIRED_CURRENT_HEAD_NO_LICENSE_FILE"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/signal_transformations.test.js"
+        "tests/signal_transformations.test.js",
+        "tests/signal_dsp_filtering.test.js",
+        "tests/preprocess_wfdb_cli.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json"
+        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json",
+        "evaluation/protocols/FOUNDATION_PRETRAINING_DSP_CONTRACT.json"
       ],
       "research_paths": [
         "research/preprocessing/README.md"
@@ -2651,7 +2739,12 @@
         "tmehari/ptbxl_feature_benchmark:PTBXLFB-028"
       ],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY",
+      "implementation_paths": [
+        "lib/signal_transformations.js",
+        "lib/signal_dsp_filtering.js",
+        "lib/signal_preprocessing_pipeline.js"
+      ]
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-NORMALIZATION",
@@ -2666,24 +2759,39 @@
           "commit": "f627b5ff9dcfdb11d4c3150f9c1ebb47cfc3909d",
           "tree": "a861ed52e8c655770beef2540e0802e63e806f18",
           "manifest": "donors/mit-lcp_wfdb-python/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
-        "WFDB-016"
+        "WFDB-016",
+        "PFD-009"
       ],
       "licenses": [
         {
           "source": "MIT-LCP/wfdb-python",
           "spdx": "MIT",
           "status": "COMPATIBLE"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
         "tests/evaluation/repository_normalization.test.js",
-        "tests/signal_transformations.test.js"
+        "tests/signal_transformations.test.js",
+        "tests/signal_dsp_filtering.test.js",
+        "tests/preprocess_wfdb_cli.test.js"
       ],
       "evaluation_paths": [
-        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json"
+        "evaluation/protocols/SIGNAL_TRANSFORMATION_CONTRACT.json",
+        "evaluation/protocols/FOUNDATION_PRETRAINING_DSP_CONTRACT.json"
       ],
       "research_paths": [
         "research/preprocessing/README.md"
@@ -2694,7 +2802,12 @@
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
-      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY"
+      "runtime_status": "NONCLINICAL_ENGINEERING_ONLY",
+      "implementation_paths": [
+        "lib/signal_transformations.js",
+        "lib/signal_dsp_filtering.js",
+        "lib/signal_preprocessing_pipeline.js"
+      ]
     },
     {
       "capability_id": "ECG-CAP-PREPROCESS-RESAMPLING",
@@ -2721,12 +2834,19 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "NK-003",
         "WFDB-015",
-        "ECP-003"
+        "ECP-003",
+        "PFD-018"
       ],
       "licenses": [
         {
@@ -2743,6 +2863,11 @@
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -2799,13 +2924,20 @@
           "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
           "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
           "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
         "ECGB-016",
         "NK-012",
         "ECP-004",
-        "EFM-005"
+        "EFM-005",
+        "PFD-004"
       ],
       "licenses": [
         {
@@ -2827,6 +2959,11 @@
           "source": "bowang-lab/ecg-fm",
           "spdx": "MIT",
           "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -3356,6 +3493,12 @@
           "commit": "9f926f1911bb9f24789b5c6407677d58ad753054",
           "tree": "8a8fd9ff5152ab119f1ef1b0e349065740bbc691",
           "manifest": "donors/bowang-lab_ecg-fm/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -3370,7 +3513,8 @@
         "FSS-027",
         "FSS-030",
         "EFM-011",
-        "EFM-015"
+        "EFM-015",
+        "PFD-016"
       ],
       "licenses": [
         {
@@ -3397,6 +3541,11 @@
           "source": "bowang-lab/ecg-fm",
           "spdx": "MIT",
           "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -3662,16 +3811,28 @@
           "commit": "01d23451660675553468806480b2646eccb92479",
           "tree": "c113fe473e1358896ae92d970a3064b156b48603",
           "manifest": "donors/elm-research_ecg-preprocess/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+          "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+          "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
-        "ECP-002"
+        "ECP-002",
+        "PFD-005"
       ],
       "licenses": [
         {
           "source": "ELM-Research/ECG-Preprocess",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION"
+        },
+        {
+          "source": "PKUDigitalHealth/ECGFounder",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -3890,5 +4051,6 @@
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
       "runtime_status": "INACTIVE_CHALLENGER_REFERENCE"
     }
-  ]
+  ],
+  "updated_date": "2026-09-17"
 }

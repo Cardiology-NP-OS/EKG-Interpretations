@@ -412,6 +412,43 @@
         "status": "NO_RUNTIME_DEPENDENCY_ADDED",
         "fairseq_signals_donor": "DONOR-009"
       }
+    },
+    {
+      "donor_id": "DONOR-011",
+      "repository": "PKUDigitalHealth/ECGFounder",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION",
+        "license_file": "LICENSE",
+        "license_blob_sha": "689c66875909c6eb6eea1cc8fe82ee8d49d4a8c4",
+        "audited_head_commit": "04edac702b61c91face519774ddcc0cd712fef23"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "TARGET_OWNED_DSP_CLEAN_REIMPLEMENTATION",
+        "EXACT_EXTERNAL_MODEL_CHALLENGER_METADATA"
+      ],
+      "attribution_required": true,
+      "model_weight_license": {
+        "status": "MIT_DECLARED_BY_HUGGINGFACE_MODEL_REPOSITORY",
+        "repository": "PKUDigitalHealth/ECGFounder",
+        "revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+        "checkpoint_sha256": [
+          "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+          "f863a38897fb49a27fec7e44008ea3c7bdbd29c77fa4a02ecbb8c56df4f37603"
+        ],
+        "weights_imported": false,
+        "weights_executed": true,
+        "execution_eligible": false,
+        "execution_scope": "EXTERNAL_LOCAL_12LEAD_SYNTHETIC_CHALLENGER_SMOKE_ONLY",
+        "runtime_authority": false,
+        "clinical_validity": "NOT_INFERRED"
+      },
+      "dataset_license": {
+        "status": "LICENSE_REVIEW_REQUIRED_TRACKED_DERIVED_LABEL_TABLES",
+        "raw_data_imported": false,
+        "source_labels_promoted_to_project_gold": false
+      }
     }
   ],
   "fail_closed_on_unknown_license": true

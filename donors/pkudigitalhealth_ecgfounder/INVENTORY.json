@@ -1,0 +1,94 @@
+{
+  "schema": "ekg-donor-011-inventory-v1",
+  "donor_id": "DONOR-011",
+  "repository": "PKUDigitalHealth/ECGFounder",
+  "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+  "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+  "recursive_tree_audit": {
+    "complete": true,
+    "tracked_file_count": 13,
+    "tracked_bytes": 25569159,
+    "truncated": false
+  },
+  "tracked_files": [
+    {
+      "path": "LICENSE",
+      "blob_sha": "689c66875909c6eb6eea1cc8fe82ee8d49d4a8c4",
+      "bytes": 1073
+    },
+    {
+      "path": "README.md",
+      "blob_sha": "0ee34849de5efa13e64a54996562e0a34ea8192b",
+      "bytes": 2826
+    },
+    {
+      "path": "csv/LVEF.csv",
+      "blob_sha": "f222d16f0f7f38748b44caaf25fb7dff550a7a1f",
+      "bytes": 4223107
+    },
+    {
+      "path": "csv/ptbxl_label.csv",
+      "blob_sha": "c127966a0ecf757471d00cc34d287b4cf87362d2",
+      "bytes": 15559712
+    },
+    {
+      "path": "csv/ptbxl_label_modified.csv",
+      "blob_sha": "53bad91c53329966ec5b44964b78f821f640edca",
+      "bytes": 5706559
+    },
+    {
+      "path": "dataset.py",
+      "blob_sha": "71b3e5a1e5612f26b62550b7ee52ba37c6a168fa",
+      "bytes": 8986
+    },
+    {
+      "path": "finetune_ECGFounder.ipynb",
+      "blob_sha": "84978513ea4862736f4afafe7fe2767834bfeec9",
+      "bytes": 15519
+    },
+    {
+      "path": "finetune_model.py",
+      "blob_sha": "2617aecd86cde15b4b437fb45e1301f44d6ade5d",
+      "bytes": 1998
+    },
+    {
+      "path": "net1d.py",
+      "blob_sha": "1e48d2800698c89fb1e404debd80c5a7e51545f4",
+      "bytes": 13449
+    },
+    {
+      "path": "ptbxl_eval.py",
+      "blob_sha": "a3a677037672d98da9b95c42fd92a66d4717c939",
+      "bytes": 9306
+    },
+    {
+      "path": "requirements.txt",
+      "blob_sha": "53b12fc72b0df1061e82cb0bc9497f3c6b4d250c",
+      "bytes": 152
+    },
+    {
+      "path": "tasks.txt",
+      "blob_sha": "acfa2d12ec910711670e8672af1386f544676b3c",
+      "bytes": 4068
+    },
+    {
+      "path": "util.py",
+      "blob_sha": "f07b21dcd72290f127ea5e24a2eadd2cdf035eba",
+      "bytes": 22404
+    }
+  ],
+  "package_summary": {
+    "python_source_files": 5,
+    "notebooks": 1,
+    "tracked_csv_assets": 3,
+    "documentation_or_metadata_files": 4,
+    "upstream_tests": 0
+  },
+  "notable_findings": [
+    "No upstream test suite is tracked.",
+    "Three tracked CSV assets are data-derived and remain outside target.",
+    "README requires preprocessing fidelity, but ptbxl_eval.py uses a separate preprocessing path.",
+    "dataset.py contains unresolved execution defects; target does not copy those paths."
+  ],
+  "clinical_authority_added": false
+}

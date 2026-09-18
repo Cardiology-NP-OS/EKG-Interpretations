@@ -1,0 +1,27 @@
+{
+  "schema": "ekg-donor-manifest-v1",
+  "donor_id": "DONOR-011",
+  "repository": "PKUDigitalHealth/ECGFounder",
+  "audited_head": {
+    "branch": "master",
+    "commit": "04edac702b61c91face519774ddcc0cd712fef23",
+    "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+    "commit_verified": true
+  },
+  "software_license": {
+    "spdx": "MIT",
+    "license_file": "LICENSE",
+    "license_blob_sha": "689c66875909c6eb6eea1cc8fe82ee8d49d4a8c4"
+  },
+  "repository_inventory": {
+    "tracked_file_count": 13,
+    "tracked_bytes": 25569159,
+    "upstream_test_suite_present": false
+  },
+  "external_model_repository": {
+    "repository": "PKUDigitalHealth/ECGFounder",
+    "revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+    "declared_license": "MIT"
+  },
+  "clinical_authority_added": false
+}

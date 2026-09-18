@@ -1,0 +1,87 @@
+{
+  "schema": "ekg-donor-011-model-smoke-verification-v1",
+  "donor_id": "DONOR-011",
+  "repository": "PKUDigitalHealth/ECGFounder",
+  "source_commit": "04edac702b61c91face519774ddcc0cd712fef23",
+  "source_tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
+  "checkpoint": {
+    "file": "12_lead_ECGFounder.pth",
+    "huggingface_revision": "d9b1793951b2342f5f7e84f1ac03cd37f8a08724",
+    "sha256": "ee199f3781f4ae1f732973267f003da0a759ea12bddb0dd28a77faa60aca7997",
+    "bytes": 369942585,
+    "identity_verification": "PASS",
+    "identity_evidence": "donors/pkudigitalhealth_ecgfounder/MODEL_ASSET_IDENTITY_VERIFICATION_12LEAD.json"
+  },
+  "static_pickle_audit": {
+    "deserialization_performed": false,
+    "zip_entries": 1125,
+    "data_pickle_bytes": 148647,
+    "declared_globals": [
+      "_codecs encode",
+      "collections OrderedDict",
+      "numpy dtype",
+      "numpy.core.multiarray scalar",
+      "torch FloatStorage",
+      "torch LongStorage",
+      "torch._utils _rebuild_tensor_v2"
+    ]
+  },
+  "safe_load": {
+    "weights_only": true,
+    "unrestricted_pickle_used": false,
+    "explicit_safe_globals": [
+      "numpy.core.multiarray.scalar as legacy serialized path",
+      "numpy.dtype",
+      "NumPy Float32/Float64/Int64 dtype classes"
+    ],
+    "state_dict_keys": 509,
+    "expected_model_keys": 509,
+    "missing_keys": 0,
+    "unexpected_keys": 0,
+    "shape_mismatches": 0,
+    "strict_compatible": true,
+    "strict_load": true,
+    "top_level_checkpoint_fields": [
+      "epoch",
+      "optimizer",
+      "scheduler",
+      "state_dict",
+      "step",
+      "val_auroc"
+    ],
+    "top_level_metric_fields_admitted": false
+  },
+  "architecture": {
+    "input_shape": [
+      1,
+      12,
+      5000
+    ],
+    "output_shape": [
+      1,
+      150
+    ],
+    "parameters": 30819014,
+    "synthetic_forward_pass": "PASS",
+    "finite_output": true,
+    "elapsed_seconds": 0.16270136833190918
+  },
+  "environment": {
+    "host_runtime": "Python 3.12 / PyTorch 2.14.0+cpu",
+    "donor_requirements_runtime": "Python 3.10 / PyTorch 2.4.0",
+    "exact_environment_parity": false,
+    "limitation": "Synthetic compatibility smoke only; donor-pinned environment was not reproduced exactly."
+  },
+  "governed_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "patient_data_used": false,
+  "source_labels_used": false,
+  "clinical_authority_added": false
+}
