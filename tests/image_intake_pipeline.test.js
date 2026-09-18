@@ -5,6 +5,8 @@ const os = require("os");
 const path = require("path");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOVERNANCE } = require("../lib/paper_ecg_raster");
 const { localizeLeadRois } = require("../lib/image_roi_localization");
+const { discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
+const { rotate90 } = require("../lib/image_robustness");
 const { estimateGridCalibration } = require("../lib/image_grid_calibration");
 const { digitizeLeadRois, pearson, peakAmplitude } = require("../lib/image_digitization");
 const { runImageIntakePipeline, INTAKE_GOVERNANCE } = require("../lib/image_intake_pipeline");
@@ -144,6 +146,42 @@ test("malformed ROI coordinates fail closed", () => {
     image: paper.image,
     expectedRois: [{ lead: "I", x: -1, y: 0, width: 10, height: 10 }],
   }), /ROI_BOX_X/);
+});
+
+test("standard-layout discovery recovers twelve panels without supplied ROIs", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const grid = estimateGridCalibration({ image: paper.image, paperSpeedMmPerS: 25, gainMmPerMv: 10 });
+  const found = discoverStandardLayoutRois({ image: paper.image, pxPerMm: grid.pxPerMm, paperSpeedMmPerS: 25 });
+  assert.strictEqual(found.completeTwelveLeadPanels, true);
+  assert.strictEqual(found.roiCount, paper.rois.length);
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://discover-1", projectGold: false },
+  });
+  assert.strictEqual(out.report.roiSource, "DISCOVERED_3X4_RHYTHM");
+  assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
+  assert.strictEqual(out.digitized.leadCount, found.roiCount);
+});
+
+test("orientation search recovers a 90-degree rotated synthetic page", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const rotated = rotate90(paper.image);
+  const out = runImageIntakePipeline({
+    sourceKind: "phone_photo",
+    format: "raster_matrix",
+    raster: rotated,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowOrientationSearch: true,
+    provenance: { locator: "case://rotated-1", projectGold: false },
+  });
+  assert.ok(out.report.orientationTurns >= 1);
+  assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
+  assert.strictEqual(out.report.diagnosticInterpretationIncluded, false);
 });
 
 test("project gold provenance is rejected", () => {
