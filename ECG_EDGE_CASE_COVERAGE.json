@@ -125,6 +125,14 @@
         "tests/edge_case_coverage.test.js"
       ],
       "scope": "source-of-truth docs, Neon boundary, research format, branch retirement classification"
+    },
+    {
+      "id": "PHOTO-PDF-DURABLE-EXTRACTION",
+      "tests": [
+        "tests/image_case_pipeline_test.py",
+        "tests/image_signal_pipeline.test.js"
+      ],
+      "scope": "real PNG/JPEG/PDF decoders, orientation/alpha, byte and pixel budgets, atomic publication/fresh-process recovery, substitution, explicit calibration and ROI, overlapping leads, missing/ambiguous/clipped/thick traces, uncertainty gates, independently timed measurements, immutable saved analysis"
     }
   ],
   "policy": [

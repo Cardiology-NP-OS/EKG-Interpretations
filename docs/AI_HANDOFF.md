@@ -38,6 +38,8 @@ At the prepared handoff basis, 13/21 primary donors are accepted and the next fr
 The owner confirmed photo/PDF ECG submissions and excluded live monitor integration. After DONOR-013 acceptance, prioritize executable photo/PDF intake, durable cases, calibrated trace extraction, connected measurements, and the eventual evidence-backed interpretation/report workflow. This owner direction takes precedence over mechanically starting another donor audit. Keep the remaining donor queue visible; registered capabilities and model names do not count as working product functions.
 
 ## Canonical ownership
+The executable image input increment is documented in `docs/IMAGE_INPUT_WORKFLOW.md`. Run both `python tests/image_case_pipeline_test.py` and `npm run test:images` with the pinned decoder environment. Review extraction geometry, operator-confirmed calibration, uncertainty rejection, per-lead timing, saved-analysis integrity, and decoder limits before promotion. It does not perform validated diagnosis or automatic arbitrary-photo digitization. Next functional work is an image region/calibration correction UI, broader image recovery backed by reference cases, and evidence-backed interpretation/reporting after review.
+
 Donor identity is provenance; capability identity belongs to EKG. `donors/` is audit history, not architecture. Consolidate overlapping donor ideas into one strongest brand-neutral target capability while preserving exact provenance/licensing and useful failure tests.
 
 ## Models

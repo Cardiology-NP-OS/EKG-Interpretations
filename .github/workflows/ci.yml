@@ -8,6 +8,30 @@ permissions:
   contents: read
 
 jobs:
+  image-input-ci:
+    name: Photo/PDF intake and connected measurement (synthetic only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned decoders
+        run: python -m pip install -r requirements-image.txt
+      - name: Exercise real decoders and durable extraction
+        run: python tests/image_case_pipeline_test.py
+      - name: Exercise connected measurements and saved analysis
+        env:
+          EKG_IMAGE_PYTHON: python
+        run: npm run test:images
+
   synthetic-contract-ci:
     name: Synthetic contract CI (non-clinical)
     runs-on: ubuntu-latest

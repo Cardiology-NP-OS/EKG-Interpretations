@@ -4,7 +4,7 @@ Canonical governed ECG engineering, research-evaluation, provenance, and donor-i
 
 ## Product input and next implementation
 
-The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration is outside scope. Photo/PDF intake and digitization are the next functional implementation priority. The current waveform CLI is engineering execution and explicitly excludes diagnostic interpretation; model metadata and donor acceptance do not establish a completed clinical interpreter.
+The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration is outside scope. The [image operator](docs/IMAGE_INPUT_WORKFLOW.md) now preserves PNG/JPEG/PDF originals, rasterizes pages, saves cases, extracts a single dark trace per explicitly selected and calibrated lead region, and connects those traces to measurements and a saved analysis. The operator requires manual region selection and calibration; arbitrary photographs, automatic digitization, validated diagnosis, and the clinician report remain unfinished. Both image and waveform operators explicitly exclude diagnostic interpretation; model metadata and donor acceptance do not establish a completed clinical interpreter.
 
 ## Live operating state
 
