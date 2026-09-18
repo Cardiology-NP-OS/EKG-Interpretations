@@ -69,9 +69,10 @@
       "id": "RENDERING-IMAGE",
       "tests": [
         "tests/waveform_rendering.test.js",
-        "tests/image_robustness.test.js"
+        "tests/image_robustness.test.js",
+        "tests/image_intake_pipeline.test.js"
       ],
-      "scope": "escaping hostile labels, nonfinite samples, bounded dimensions/sample budget, malformed transforms"
+      "scope": "escaping hostile labels, nonfinite samples, bounded dimensions/sample budget, malformed transforms, missing raster for PDF/photo, hostile ROI bounds, project-gold intake rejection"
     },
     {
       "id": "DATASET-SPLITS",
