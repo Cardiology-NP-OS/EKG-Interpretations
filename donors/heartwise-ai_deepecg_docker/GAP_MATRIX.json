@@ -127,7 +127,7 @@
       "capability_id": "D13-016",
       "capability": "Youden tuning on rows used for scoring",
       "disposition": "REJECTED",
-      "donor_component": "utils/analysis_pipeline.py:compute_metrics; compute_metrics_binary",
+      "donor_component": "utils/analysis_pipeline.py:compute_metrics; utils/analysis_pipeline.py:compute_metrics_binary",
       "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
       "reason": "Do not optimize thresholds on evaluation rows; target comparison accepts only explicit externally frozen policies."
     },
@@ -135,7 +135,7 @@
       "capability_id": "D13-017",
       "capability": "F1 threshold fitting on compared rows",
       "disposition": "REJECTED",
-      "donor_component": "compute_optimal_thresholds.py:compute_optimal_threshold_f1; process_file",
+      "donor_component": "compute_optimal_thresholds.py:compute_optimal_threshold_f1; compute_optimal_thresholds.py:process_file",
       "canonical_target_implementation": "ECG-CAP-EVALUATION-LEAKAGE-CONTROL",
       "reason": "Same-row tuning/scoring cannot establish independent performance; no optimizer integrated."
     },
@@ -151,7 +151,7 @@
       "capability_id": "D13-019",
       "capability": "Cohort-specific threshold and calibration context",
       "disposition": "RESEARCH_ONLY",
-      "donor_component": "thresholds/; utils/constants.py:BERT_THRESHOLDS; WCR_THRESHOLDS",
+      "donor_component": "thresholds/; utils/constants.py:BERT_THRESHOLDS; utils/constants.py:WCR_THRESHOLDS",
       "canonical_target_implementation": "ECG-CAP-RESEARCH-MODEL-BENCHMARK-CONTEXT",
       "reason": "Donor threshold/performance values are not imported or promoted to target metrics."
     },
@@ -167,7 +167,7 @@
       "capability_id": "D13-021",
       "capability": "Length inferred as sample-rate conversion",
       "disposition": "REJECTED",
-      "donor_component": "utils/files_handler.py:NPYProcessor.process_single_file; XMLProcessor.process_batch",
+      "donor_component": "utils/files_handler.py:NPYProcessor.process_single_file; utils/files_handler.py:XMLProcessor.process_batch",
       "canonical_target_implementation": "ECG-CAP-PREPROCESS-RESAMPLING",
       "reason": "Synthetic 3000-sample input is reported successful and remains 3000; no calibrated resampling contract established."
     },
@@ -191,7 +191,7 @@
       "capability_id": "D13-024",
       "capability": "Algebraic derived limb-lead concepts",
       "disposition": "RESEARCH_ONLY",
-      "donor_component": "utils/files_handler.py:_process_clsa_xml; _process_mhi_xml",
+      "donor_component": "utils/files_handler.py:_process_clsa_xml; utils/files_handler.py:_process_mhi_xml",
       "canonical_target_implementation": "ECG-CAP-QUALITY-LEAD-INTEGRITY",
       "reason": "Measured versus derived leads must be explicit; derivation is not silently admitted."
     },
@@ -199,7 +199,7 @@
       "capability_id": "D13-025",
       "capability": "Missing leads replaced by NaN then zero",
       "disposition": "REJECTED",
-      "donor_component": "utils/files_handler.py:_process_clsa_xml; _process_mhi_xml; utils/ecg_signal_processor.py:flatten_fft_peak",
+      "donor_component": "utils/files_handler.py:_process_clsa_xml; utils/files_handler.py:_process_mhi_xml; utils/ecg_signal_processor.py:flatten_fft_peak",
       "canonical_target_implementation": "ECG-CAP-PREPROCESS-ARTIFACT-HANDLING",
       "reason": "Synthetic zero replacement cannot erase missing-lead provenance."
     },
@@ -215,7 +215,7 @@
       "capability_id": "D13-027",
       "capability": "Spectral peak flattening and LOESS context",
       "disposition": "RESEARCH_ONLY",
-      "donor_component": "utils/ecg_signal_processor.py:detect_peaks_with_sliding_window; flatten_fft_peak; find_crossings_for_peaks",
+      "donor_component": "utils/ecg_signal_processor.py:detect_peaks_with_sliding_window; utils/ecg_signal_processor.py:flatten_fft_peak; utils/ecg_signal_processor.py:find_crossings_for_peaks",
       "canonical_target_implementation": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
       "reason": "Filtering concepts retained without copied code or numerical-parity claim; needs independent DSP specification."
     },
@@ -223,7 +223,7 @@
       "capability_id": "D13-028",
       "capability": "FFT applied on matrix default axis",
       "disposition": "REJECTED",
-      "donor_component": "utils/ecg_signal_processor.py:adjust_spectral_power; scale_ecg_signals",
+      "donor_component": "utils/ecg_signal_processor.py:adjust_spectral_power; utils/ecg_signal_processor.py:scale_ecg_signals",
       "canonical_target_implementation": "ECG-CAP-PREPROCESS-FILTERING-BASELINE",
       "reason": "Default-axis FFT differs from per-lead temporal analysis; semantics are not promoted into canonical DSP."
     },
@@ -263,7 +263,7 @@
       "capability_id": "D13-033",
       "capability": "Arbitrary pt TorchScript/state loaders",
       "disposition": "REJECTED",
-      "donor_component": "models/wcr_ecg_transformer.py; efficientnet_wrapper.py; resnet_wrapper.py; notebooks/",
+      "donor_component": "models/wcr_ecg_transformer.py; models/efficientnet_wrapper.py; models/resnet_wrapper.py; notebooks/",
       "canonical_target_implementation": "ECG-CAP-GOVERNANCE-UNSAFE-DESERIALIZATION",
       "reason": "No arbitrary model or notebook loader is executed; unsafe state loading is not integrated."
     },
@@ -303,7 +303,7 @@
       "capability_id": "D13-038",
       "capability": "Identical train/test manifest blobs",
       "disposition": "REJECTED",
-      "donor_component": "notebooks/ssl_manifests/finetuning/afib_2y/train.tsv; test.tsv",
+      "donor_component": "notebooks/ssl_manifests/finetuning/afib_2y/train.tsv; notebooks/ssl_manifests/finetuning/afib_2y/test.tsv",
       "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
       "reason": "Identical tracked manifests cannot substantiate independent held-out split evidence."
     },

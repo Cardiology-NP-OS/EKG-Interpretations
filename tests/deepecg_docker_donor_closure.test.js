@@ -25,6 +25,23 @@ test("source and target comparison basis are immutable exact identities", () => 
   assert.strictEqual(manifest.target_basis.tree, "3fad006629893baeacf91e70474fc1880b4ae7e8");
   assert.strictEqual(donor.audited_commit, manifest.audited_head.commit);
 });
+test("each source component resolves in the pinned complete inventory", () => {
+  const sourcePaths = new Set(inventory.tracked_files.map(row => row.path));
+  const targetIds = new Set(canonical.capabilities.map(row => row.capability_id));
+  for (const row of gap.capabilities) {
+    assert.ok(targetIds.has(row.canonical_target_implementation), row.capability_id);
+    for (const component of row.donor_component.split(";")) {
+      const sourcePath = component.trim().split(":")[0];
+      if (sourcePath === "complete upstream tree") {
+        assert.strictEqual(inventory.recursive_tree_audit.complete, true);
+      } else if (sourcePath.endsWith("/")) {
+        assert.ok([...sourcePaths].some(name => name.startsWith(sourcePath)), sourcePath);
+      } else {
+        assert.ok(sourcePaths.has(sourcePath), row.capability_id + ":" + sourcePath);
+      }
+    }
+  }
+});
 test("complete tree has 41 files and exact total bytes", () => {
   assert.strictEqual(inventory.recursive_tree_audit.tracked_file_count, 41);
   assert.strictEqual(inventory.recursive_tree_audit.tracked_bytes, 1017267);
@@ -119,16 +136,42 @@ test("new suites are wired into CI and edge categories", () => {
     assert.ok(edges.categories.some(row => row.tests.includes(name)));
   }
 });
-test("model switch checkpoint cannot claim acceptance or advance frontier", () => {
-  assert.strictEqual(donor.status, "IMPLEMENTED_UNVERIFIED");
-  assert.strictEqual(donor.receipt_status, "PENDING");
-  assert.strictEqual(donorRegistry.completed_donors, 12);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-013");
-  assert.strictEqual(donor.target_main_ci_conclusion, undefined);
+test("pending and accepted donor frontiers require their actual stage evidence", () => {
+  if (donor.status === "ACCEPTED_ON_MAIN") {
+    assert.strictEqual(donor.receipt_status, "FINALIZED");
+    assert.ok(donorRegistry.completed_donors >= 13);
+    assert.notStrictEqual(donorRegistry.next_donor_id, "DONOR-013");
+    assert.strictEqual(donor.target_main_ci_conclusion, "success");
+  } else {
+    assert.strictEqual(donor.status, "IMPLEMENTED_UNVERIFIED");
+    assert.strictEqual(donor.receipt_status, "PENDING");
+    assert.strictEqual(donorRegistry.completed_donors, 12);
+    assert.strictEqual(donorRegistry.next_donor_id, "DONOR-013");
+    assert.strictEqual(donor.target_main_ci_conclusion, undefined);
+  }
   const receipt = read(base + "DONOR_RECEIPT_DRAFT.json");
   assert.strictEqual(receipt.acceptance_state, "IMPLEMENTED_UNVERIFIED");
   assert.strictEqual(receipt.independent_verification, "NOT_PERFORMED");
   assert.strictEqual(receipt.promotion, "NOT_PERFORMED");
+});
+test("accepted receipt binds exact verified candidate and successful main CI", () => {
+  if (donor.status !== "ACCEPTED_ON_MAIN") return;
+  const receipt = read(base + "DONOR_RECEIPT.json");
+  const verification = read(base + "REVIEW_VERIFICATION.json");
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.target_resulting_implementation.verified_candidate_commit, donor.verified_candidate_commit);
+  assert.strictEqual(receipt.target_resulting_implementation.verified_candidate_tree, donor.verified_candidate_tree);
+  assert.strictEqual(verification.candidate_commit, donor.verified_candidate_commit);
+  assert.strictEqual(verification.candidate_tree, donor.verified_candidate_tree);
+  assert.strictEqual(verification.candidate_ci.conclusion, "success");
+  assert.strictEqual(verification.independently_attested, false);
+  assert.strictEqual(receipt.verification.candidate_ci_run_id, verification.candidate_ci.run_id);
+  assert.strictEqual(receipt.verification.verification_record_commit, donor.verification_record_commit);
+  assert.strictEqual(receipt.verification.verification_record_ci_conclusion, "success");
+  assert.strictEqual(receipt.promotion.commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, donor.target_main_ci_run_id);
+  assert.strictEqual(receipt.promotion.target_main_ci_conclusion, "success");
+  assert.strictEqual(receipt.boundaries.clinical_authority_added, false);
 });
 test("governed inactive invariants retained", () => {
   assert.strictEqual(donorRegistry.governed_clinical_state.diagnostic_runtime, "GOVERNED_INACTIVE");
@@ -138,4 +181,4 @@ test("governed inactive invariants retained", () => {
   assert.strictEqual(donorRegistry.governed_clinical_state.activation, "NOT_ELIGIBLE");
   assert.strictEqual(canonical.capability_count, canonical.capabilities.length);
 });
-console.log(JSON.stringify({schema:"ekg-donor-013-closure-tests-v1",pass:true,passed,total:passed,acceptance:false,runtimeAuthority:false}));
+console.log(JSON.stringify({schema:"ekg-donor-013-closure-tests-v1",pass:true,passed,total:passed,acceptance:donor.status === "ACCEPTED_ON_MAIN",runtimeAuthority:false}));
