@@ -8,7 +8,7 @@ const cp = require("child_process");
 
 const { encodeGrayscalePng } = require("../lib/image_png_codec");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS } = require("../lib/paper_ecg_raster");
-const { decodeImageSourceFile, validateManifest } = require("../lib/image_decoder_bridge");
+const { DECODER_LIMITS, NORMALIZATION, decodeImageSourceFile, readRegularFile, validateManifest } = require("../lib/image_decoder_bridge");
 const { runImageFileIntake } = require("../lib/image_file_intake");
 
 let passed = 0;
@@ -99,6 +99,15 @@ test("manifest validation rejects path and authority substitution", () => {
     sourceFormat: "jpeg",
     sourceSha256: "a".repeat(64),
     sourceBytes: 100,
+    pdfDpi: null,
+    limits: { ...DECODER_LIMITS },
+    normalization: NORMALIZATION,
+    decoder: {
+      Pillow: "12.3.0",
+      pypdfium2: "5.13.0",
+      pdfium: "test",
+      implementationSha256: "c".repeat(64),
+    },
     pages: [{
       pageIndex: 0,
       file: "page-0001.png",
@@ -124,6 +133,46 @@ test("manifest validation rejects path and authority substitution", () => {
   const authority = JSON.parse(JSON.stringify(base));
   authority.runtimeAuthority = true;
   assert.throws(() => validateManifest(authority), /IMAGE_DECODER_GOVERNANCE/);
+
+  const extra = JSON.parse(JSON.stringify(base));
+  extra.unexpected = true;
+  assert.throws(() => validateManifest(extra), /IMAGE_DECODER_MANIFEST_FIELDS/);
+
+  const limits = JSON.parse(JSON.stringify(base));
+  limits.limits.maxPages = 99;
+  assert.throws(() => validateManifest(limits), /IMAGE_DECODER_LIMITS/);
+
+  const decoder = JSON.parse(JSON.stringify(base));
+  decoder.decoder.implementationSha256 = "not-a-hash";
+  assert.throws(() => validateManifest(decoder), /IMAGE_DECODER_IDENTITY/);
+
+  const pageExtra = JSON.parse(JSON.stringify(base));
+  pageExtra.pages[0].unexpected = true;
+  assert.throws(() => validateManifest(pageExtra), /IMAGE_DECODER_PAGE_MANIFEST_FIELDS/);
+});
+
+test("bridge regular-file reads detect replacement between stat and open", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-read-race-"));
+  const file = path.join(temp, "artifact.bin");
+  fs.writeFileSync(file, Buffer.from("original"));
+  const originalOpen = fs.openSync;
+  let injected = false;
+  fs.openSync = function(target, flags, mode) {
+    if (!injected && path.resolve(String(target)) === path.resolve(file)) {
+      injected = true;
+      fs.writeFileSync(file, Buffer.from("replacement-content"));
+    }
+    return originalOpen.call(fs, target, flags, mode);
+  };
+  try {
+    assert.throws(
+      () => readRegularFile(file, 1024, "IMAGE_DECODER_TEST_READ"),
+      /IMAGE_DECODER_TEST_READ/,
+    );
+  } finally {
+    fs.openSync = originalOpen;
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
 });
 
 test("Node bridge decodes real JPEG and verifies source plus normalized raster", () => {
