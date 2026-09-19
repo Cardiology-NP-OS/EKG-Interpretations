@@ -6,6 +6,8 @@ const {
   cropToContent,
   deskewImage,
   estimateDeskewAngle,
+  projectRectangleToQuadrilateral,
+  rectifyPerspective,
   rotateArbitraryExpandedInkPreserving,
   rotateArbitraryExpandedNearest,
   rotateArbitraryInkPreserving,
@@ -136,6 +138,60 @@ test("deskew applies the estimated correction within the acquisition canvas", ()
     darkThreshold: 64,
   });
   assert.ok(Math.abs(residual.correctionDegrees) <= 0.5, JSON.stringify(residual));
+});
+
+test("explicit quadrilateral rectification recovers a synthetic trapezoid", () => {
+  const source = gridFixture(200, 20);
+  const corners = {
+    topLeft: { x: 28, y: 18 },
+    topRight: { x: 286, y: 8 },
+    bottomRight: { x: 304, y: 246 },
+    bottomLeft: { x: 12, y: 236 },
+  };
+  const distorted = projectRectangleToQuadrilateral(source, {
+    destinationCorners: corners,
+    canvasWidth: 320,
+    canvasHeight: 260,
+  });
+  const rectified = rectifyPerspective(distorted, {
+    corners,
+    outputWidth: 200,
+    outputHeight: 200,
+  });
+  assert.strictEqual(rectified.image.length, 200);
+  assert.strictEqual(rectified.image[0].length, 200);
+  assert.strictEqual(rectified.method, "EXPLICIT_QUADRILATERAL_HOMOGRAPHY_DARK_SUPPORT_3X3");
+  const residual = estimateDeskewAngle(rectified.image, {
+    maxAbsDegrees: 2,
+    stepDegrees: 0.5,
+    darkThreshold: 64,
+  });
+  assert.ok(Math.abs(residual.correctionDegrees) <= 0.5, JSON.stringify(residual));
+  assert.strictEqual(rectified.runtimeAuthority, false);
+});
+
+test("perspective rectification rejects degenerate or out-of-bounds quadrilaterals", () => {
+  const source = gridFixture(100, 20);
+  assert.throws(() => rectifyPerspective(source, {
+    corners: {
+      topLeft: { x: 0, y: 0 },
+      topRight: { x: 99, y: 0 },
+      bottomRight: { x: 99, y: 0 },
+      bottomLeft: { x: 0, y: 99 },
+    },
+    outputWidth: 100,
+    outputHeight: 100,
+  }), /IMAGE_PERSPECTIVE_DEGENERATE|IMAGE_PERSPECTIVE_NONCONVEX/);
+  assert.throws(() => rectifyPerspective(source, {
+    corners: {
+      topLeft: { x: -1, y: 0 },
+      topRight: { x: 99, y: 0 },
+      bottomRight: { x: 99, y: 99 },
+      bottomLeft: { x: 0, y: 99 },
+    },
+    outputWidth: 100,
+    outputHeight: 100,
+  }), /IMAGE_PERSPECTIVE_POINT_BOUNDS/);
 });
 
 test("blank or unsafe deskew searches fail closed", () => {
