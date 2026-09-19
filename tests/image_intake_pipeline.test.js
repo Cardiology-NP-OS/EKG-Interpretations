@@ -96,7 +96,7 @@ test("intake rejects encoded photos without an explicit raster matrix", () => {
   }), /INTAKE_ENCODED_IMAGE_RASTERIZATION_REQUIRED/);
 });
 
-test("end-to-end raster intake produces a governed report and durable case", () => {
+test("end-to-end raster intake produces a governed report and basic persisted case", () => {
   const paper = renderFixture({ pxPerMm: 5 });
   const out = runImageIntakePipeline({
     sourceKind: "synthetic_raster",
@@ -138,6 +138,49 @@ test("optional measurement connection stays non-diagnostic", () => {
   assert.ok(out.measurements.candidateRPeaks.events.length >= 1);
   assert.strictEqual(out.measurements.diagnosticInterpretationIncluded, false);
   assert.strictEqual(out.report.measurementsConnected, true);
+});
+
+test("measurement connection rejects assumed paper speed or gain", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  assert.throws(() => runImageIntakePipeline({
+    sourceKind: "scanned_paper_ecg",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    provenance: { locator: "case://scan-assumed-calibration", projectGold: false },
+    connectMeasurements: true,
+    measureLead: "II",
+  }), /INTAKE_MEASUREMENT_EXPLICIT_CALIBRATION_REQUIRED/);
+});
+
+test("measurement connection rejects auto-discovered lead identity", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  assert.throws(() => runImageIntakePipeline({
+    sourceKind: "scanned_paper_ecg",
+    format: "raster_matrix",
+    raster: paper.image,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://scan-discovered-layout", projectGold: false },
+    connectMeasurements: true,
+    measureLead: "II",
+  }), /INTAKE_MEASUREMENT_EXPLICIT_ROIS_REQUIRED/);
+});
+
+test("measurement connection requires an explicit baseline for every supplied ROI", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const withoutBaselines = paper.rois.map(({ baselineY, ...roi }) => roi);
+  assert.throws(() => runImageIntakePipeline({
+    sourceKind: "scanned_paper_ecg",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: withoutBaselines,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://scan-missing-baseline", projectGold: false },
+    connectMeasurements: true,
+    measureLead: "II",
+  }), /INTAKE_MEASUREMENT_BASELINE_REQUIRED/);
 });
 
 test("malformed ROI coordinates fail closed", () => {
