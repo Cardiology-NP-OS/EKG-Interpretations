@@ -175,6 +175,49 @@ test("bridge regular-file reads detect replacement between stat and open", () =>
   }
 });
 
+test("manifest validation independently enforces aggregate pixel budget", () => {
+  const manifest = {
+    schema: "ekg-image-decoder-result-v1",
+    sourceFormat: "pdf",
+    sourceSha256: "a".repeat(64),
+    sourceBytes: 100,
+    pdfDpi: 72,
+    limits: {
+      maxInputBytes: 32 * 1024 * 1024,
+      maxPages: 8,
+      maxPagePixels: 4_000_000,
+      maxTotalPixels: 8_000_000,
+      maxDimension: 4000,
+      maxArtifactBytes: 16 * 1024 * 1024,
+    },
+    normalization: "RGB8_PNG_WHITE_ALPHA_BACKGROUND_EXIF_TRANSPOSE",
+    decoder: {
+      Pillow: "12.3.0",
+      pypdfium2: "5.13.0",
+      pdfium: "test",
+      implementationSha256: "b".repeat(64),
+    },
+    pages: [0, 1, 2].map(index => ({
+      pageIndex: index,
+      file: `page-${String(index + 1).padStart(4, "0")}.png`,
+      width: 2000,
+      height: 2000,
+      originalOrientation: 0,
+      rasterSha256: "c".repeat(64),
+      rasterBytes: 1024,
+    })),
+    runtimeAuthority: false,
+    projectGold: false,
+    diagnosticRuntime: "GOVERNED_INACTIVE",
+    evidenceAdmission: "NOT_ADMITTED",
+    metrics: "NOT_REPORTABLE",
+    activation: "NOT_ELIGIBLE",
+    clinicalValidityInferred: false,
+    diagnosticInterpretationIncluded: false,
+  };
+  assert.throws(() => validateManifest(manifest), /IMAGE_DECODER_TOTAL_PIXELS/);
+});
+
 test("Node bridge decodes real JPEG and verifies source plus normalized raster", () => {
   withEncodedFixture("jpeg", ({ paper, encoded }) => {
     const out = decodeImageSourceFile({ sourcePath: encoded });
