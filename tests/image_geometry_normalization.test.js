@@ -5,6 +5,7 @@ const {
   GEOMETRY_GOVERNANCE,
   deskewImage,
   estimateDeskewAngle,
+  rotateArbitraryExpandedInkPreserving,
   rotateArbitraryExpandedNearest,
   rotateArbitraryNearest,
 } = require("../lib/image_geometry_normalization");
@@ -39,6 +40,34 @@ test("expanded arbitrary rotation preserves full source support", () => {
   assert.ok(rotated.length > image.length);
   assert.ok(rotated[0].length > image[0].length);
   assert.ok(rotated.flat().includes(0));
+});
+
+test("ink-preserving expanded rotation avoids long holes in a one-pixel trace", () => {
+  const image = Array.from({ length: 80 }, () => Array(240).fill(255));
+  for (let x = 10; x < 230; x += 1) image[40][x] = 0;
+  const rotated = rotateArbitraryExpandedInkPreserving(image, { degrees: 3 });
+  let maxMissingRun = 0;
+  let current = 0;
+  for (let x = 0; x < rotated[0].length; x += 1) {
+    let hasInk = false;
+    for (let y = 0; y < rotated.length; y += 1) {
+      if (rotated[y][x] <= 80) { hasInk = true; break; }
+    }
+    if (hasInk) current = 0;
+    else {
+      current += 1;
+      maxMissingRun = Math.max(maxMissingRun, current);
+    }
+  }
+  // Outer white margins are expected; continuity is evaluated only between ink-bearing columns.
+  const inkColumns = [];
+  for (let x = 0; x < rotated[0].length; x += 1) {
+    if (rotated.some(row => row[x] <= 80)) inkColumns.push(x);
+  }
+  assert.ok(inkColumns.length > 0);
+  for (let x = inkColumns[0]; x <= inkColumns[inkColumns.length - 1]; x += 1) {
+    assert.ok(rotated.some(row => row[x] <= 80), `missing ink column ${x}`);
+  }
 });
 
 test("projection deskew recovers a synthetic three-degree grid rotation", () => {
