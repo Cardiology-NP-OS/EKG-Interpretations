@@ -562,6 +562,7 @@ test("optional measurement connection stays non-diagnostic", () => {
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
     preflight: externalPreflight(paper.image, { sourceKind: "scanned_paper_ecg", format: "raster_matrix" }),
+    roiLeadIdentityVerified: true,
     provenance: { locator: "case://scan-measure-1", projectGold: false },
     connectMeasurements: true,
     measureLead: "II",
@@ -570,6 +571,32 @@ test("optional measurement connection stays non-diagnostic", () => {
   assert.ok(out.measurements.candidateRPeaks.events.length >= 1);
   assert.strictEqual(out.measurements.diagnosticInterpretationIncluded, false);
   assert.strictEqual(out.report.measurementsConnected, true);
+});
+
+test("external named-lead permissions require explicit ROI-to-lead identity verification", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const base = {
+    sourceKind: "scanned_paper_ecg",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "scanned_paper_ecg", format: "raster_matrix" }),
+    provenance: { locator: "case://scan-roi-lead-identity", projectGold: false },
+  };
+  const out = runImageIntakePipeline(base);
+  assert.strictEqual(out.report.analysisPermissions.specificLeadClaimsAllowed, false);
+  assert.strictEqual(out.report.analysisPermissions.twelveLeadClaimsAllowed, false);
+  assert.strictEqual(out.report.preflight.roiLeadIdentityVerified, false);
+  assert.throws(
+    () => runImageIntakePipeline({ ...base, connectMeasurements: true, measureLead: "II" }),
+    /INTAKE_MEASUREMENT_ROI_LEAD_IDENTITY_UNVERIFIED/,
+  );
+  const verified = runImageIntakePipeline({ ...base, roiLeadIdentityVerified: true });
+  assert.strictEqual(verified.report.analysisPermissions.specificLeadClaimsAllowed, true);
+  assert.strictEqual(verified.report.analysisPermissions.twelveLeadClaimsAllowed, true);
+  assert.strictEqual(verified.report.preflight.roiLeadIdentityVerified, true);
 });
 
 test("measurement connection rejects assumed paper speed or gain", () => {
