@@ -2,9 +2,25 @@
 
 Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for Cardiology NP OS.
 
-## Product input and next implementation
+## Product input and current implementation
 
-The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration is outside scope. Photo/PDF intake and digitization are the next functional implementation priority. The current waveform CLI is engineering execution and explicitly excludes diagnostic interpretation; model metadata and donor acceptance do not establish a completed clinical interpreter.
+The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration remains outside scope.
+
+The image path is no longer only planned. Current `main` contains a target-owned **implemented but not yet externally validated** image-engineering path with:
+
+- strict-subset PNG decoding for bounded 8-bit grayscale/RGB/RGBA inputs
+- synthetic paper-ECG generation and standard-layout ROI discovery
+- bounded orientation search, grid calibration, and sparse-column waveform digitization
+- mandatory source-bound preflight for external image inputs
+- explicit ROI lead-identity verification before named-lead claims
+- durable content-addressed source/raster persistence
+- append-only immutable digitized extraction generations
+- canonical per-lead measurement/rhythm/phenotype analysis reuse
+- immutable analysis generations bound to the exact extraction and preflight permissions
+
+JPEG and PDF decoding remain fail-closed. Simultaneous multilead comparison is not yet established. The image checkpoint remains `IMPLEMENTED_UNVERIFIED`: synthetic/adversarial engineering evidence exists, but external comparative superiority, clinical performance, and clinical validity are not established.
+
+The next product gates are external paired image-to-digital benchmarking, broader real-world layout/quality robustness, JPEG/PDF decoding, multilead image analysis, Platform integration, and then separately governed clinical validation.
 
 ## Live operating state
 
