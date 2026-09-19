@@ -9,7 +9,6 @@ const cp = require("child_process");
 const { encodeGrayscalePng } = require("../lib/image_png_codec");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS } = require("../lib/paper_ecg_raster");
 const { DECODER_LIMITS, EXPECTED_DECODER_WRAPPERS, NORMALIZATION, decodeImageSourceFile, readRegularFile, validateManifest } = require("../lib/image_decoder_bridge");
-const { readImageCase } = require("../lib/image_case_store");
 const { runImageFileIntake, persistImageFileIntakeCase, runAndPersistImageFileIntake } = require("../lib/image_file_intake");
 const { persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
 
