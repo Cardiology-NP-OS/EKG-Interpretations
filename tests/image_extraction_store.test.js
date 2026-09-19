@@ -113,6 +113,16 @@ test("an extraction cannot be attached to a different case identity", () => {
   );
 });
 
+test("undeclared analysis-permission fields fail closed before extraction identity is minted", () => {
+  const fx = fixture("case://extract-store-permission-fields");
+  const changed = JSON.parse(JSON.stringify(fx.result));
+  changed.report.analysisPermissions.runtimeAuthority = true;
+  assert.throws(
+    () => persistImageExtraction(fx.caseReceipt.path, changed),
+    /EXTRACTION_ANALYSIS_PERMISSIONS_FIELDS/,
+  );
+});
+
 test("nonfinite extracted samples fail closed before persistence", () => {
   const fx = fixture("case://extract-store-nonfinite");
   const changed = {
