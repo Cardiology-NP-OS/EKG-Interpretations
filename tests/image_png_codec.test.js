@@ -56,6 +56,40 @@ function encodedPng({ width, height, colorType, raw, beforeIdat = [], splitIdatW
   return Buffer.concat(pieces);
 }
 
+function externalPngPreflight(image) {
+  return {
+    source_kind: "phone_photo",
+    format: "png",
+    readable: true,
+    quality_flags: [],
+    lead_labels: ["I","II","III","aVR","aVL","aVF","V1","V2","V3","V4","V5","V6"],
+    lead_labels_verified: true,
+    presented_as_12_lead: true,
+    lead_mislabel_suspected: false,
+    evidence_complete: true,
+    signal_quality_sufficient: true,
+    source_identity_established: true,
+    serial_comparison_requested: false,
+    serial_pair_verified: true,
+    machine_text_conflict: false,
+    calibration: {
+      paper_speed_mm_s: 25,
+      gain_mm_mV: 10,
+      calibration_source: "visible",
+      local_scale_trustworthy: true,
+    },
+    geometry: {
+      rotation_or_skew: false,
+      perspective_distortion: false,
+      distorted_aspect_ratio: false,
+    },
+    image: { width_px: image[0].length, height_px: image.length },
+    metadata_claims: [],
+    measurements: [],
+    embedded_text: [],
+  };
+}
+
 let passed = 0;
 function test(name, fn) {
   try { fn(); passed += 1; console.log(`PASS ${name}`); }
@@ -178,6 +212,7 @@ test("intake decodes PNG bytes when no raster matrix is supplied", () => {
     bytes,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPngPreflight(paper.image),
     provenance: { locator: "case://png-1", projectGold: false },
   });
   assert.strictEqual(out.report.encodedSource, "png-v1");
