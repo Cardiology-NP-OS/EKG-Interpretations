@@ -29,6 +29,46 @@ function renderFixture(geometry) {
   });
 }
 
+function externalPreflight(image, options = {}) {
+  const sourceKind = options.sourceKind || "phone_photo";
+  const format = options.format || "raster_matrix";
+  const leadLabels = options.leadLabels || STANDARD_LEADS.slice();
+  const verified = options.leadLabelsVerified === undefined ? true : options.leadLabelsVerified;
+  const paperSpeed = options.paperSpeedMmPerS === undefined ? 25 : options.paperSpeedMmPerS;
+  const gain = options.gainMmPerMv === undefined ? 10 : options.gainMmPerMv;
+  return {
+    source_kind: sourceKind,
+    format,
+    readable: options.readable === undefined ? true : options.readable,
+    quality_flags: options.qualityFlags || [],
+    lead_labels: leadLabels,
+    lead_labels_verified: verified,
+    presented_as_12_lead: options.presentedAs12Lead === undefined ? true : options.presentedAs12Lead,
+    lead_mislabel_suspected: options.leadMislabelSuspected === true,
+    evidence_complete: options.evidenceComplete === undefined ? true : options.evidenceComplete,
+    signal_quality_sufficient: options.signalQualitySufficient === undefined ? true : options.signalQualitySufficient,
+    source_identity_established: options.sourceIdentityEstablished === undefined ? true : options.sourceIdentityEstablished,
+    serial_comparison_requested: false,
+    serial_pair_verified: true,
+    machine_text_conflict: false,
+    calibration: {
+      paper_speed_mm_s: paperSpeed,
+      gain_mm_mV: gain,
+      calibration_source: options.calibrationSource || "visible",
+      local_scale_trustworthy: options.localScaleTrustworthy === undefined ? true : options.localScaleTrustworthy,
+    },
+    geometry: {
+      rotation_or_skew: options.rotationOrSkew === true,
+      perspective_distortion: options.perspectiveDistortion === true,
+      distorted_aspect_ratio: options.distortedAspectRatio === true,
+    },
+    image: { width_px: image[0].length, height_px: image.length },
+    metadata_claims: [],
+    measurements: [],
+    embedded_text: [],
+  };
+}
+
 test("paper raster is rectangular grayscale with twelve-lead ROIs", () => {
   const paper = renderFixture();
   assert.strictEqual(paper.image.length, paper.height);
@@ -147,6 +187,71 @@ test("intake rejects encoded photos without an explicit raster matrix", () => {
   }), /INTAKE_ENCODED_IMAGE_RASTERIZATION_REQUIRED/);
 });
 
+test("external image intake requires preflight", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  assert.throws(() => runImageIntakePipeline({
+    sourceKind: "phone_photo",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://preflight-required", projectGold: false },
+  }), /INTAKE_PREFLIGHT_REQUIRED/);
+});
+
+test("external preflight must bind source kind format dimensions and calibration", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const base = {
+    sourceKind: "phone_photo",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://preflight-binding", projectGold: false },
+  };
+  assert.throws(() => runImageIntakePipeline({
+    ...base,
+    preflight: externalPreflight(paper.image, { sourceKind: "screenshot", format: "raster_matrix" }),
+  }), /INTAKE_PREFLIGHT_SOURCE_KIND_MISMATCH/);
+  assert.throws(() => runImageIntakePipeline({
+    ...base,
+    preflight: externalPreflight(paper.image, { sourceKind: "phone_photo", format: "png" }),
+  }), /INTAKE_PREFLIGHT_FORMAT_MISMATCH/);
+  const wrongDimensions = externalPreflight(paper.image, { sourceKind: "phone_photo", format: "raster_matrix" });
+  wrongDimensions.image.width_px += 1;
+  assert.throws(() => runImageIntakePipeline({ ...base, preflight: wrongDimensions }), /INTAKE_PREFLIGHT_DIMENSIONS_MISMATCH/);
+  assert.throws(() => runImageIntakePipeline({
+    ...base,
+    preflight: externalPreflight(paper.image, {
+      sourceKind: "phone_photo",
+      format: "raster_matrix",
+      paperSpeedMmPerS: 50,
+    }),
+  }), /INTAKE_PREFLIGHT_PAPER_SPEED_MISMATCH/);
+});
+
+test("unverified external lead identity propagates restrictive analysis permissions", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "phone_photo",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, {
+      sourceKind: "phone_photo",
+      format: "raster_matrix",
+      leadLabelsVerified: false,
+    }),
+    provenance: { locator: "case://preflight-lead-identity", projectGold: false },
+  });
+  assert.strictEqual(out.report.analysisPermissions.specificLeadClaimsAllowed, false);
+  assert.strictEqual(out.report.analysisPermissions.twelveLeadClaimsAllowed, false);
+});
+
 test("end-to-end raster intake produces a governed report and basic persisted case", () => {
   const paper = renderFixture({ pxPerMm: 5 });
   const out = runImageIntakePipeline({
@@ -182,6 +287,7 @@ test("intake-aware persistence automatically preserves PNG source and normalized
     expectedRois: paper.rois,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "phone_photo", format: "png" }),
     provenance: { locator: "case://persist-auto-artifacts", projectGold: false },
   };
   const out = runImageIntakePipeline(intakeInput);
@@ -220,6 +326,7 @@ test("case persistence preserves and verifies supplied original and normalized a
     expectedRois: paper.rois,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "phone_photo", format: "png" }),
     provenance: { locator: "case://persist-artifacts", projectGold: false },
   });
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-artifacts-"));
@@ -247,6 +354,7 @@ test("case reopen rejects preserved source artifact tampering", () => {
     expectedRois: paper.rois,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "phone_photo", format: "png" }),
     provenance: { locator: "case://persist-artifact-tamper", projectGold: false },
   });
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-artifact-tamper-"));
@@ -384,6 +492,7 @@ test("optional measurement connection stays non-diagnostic", () => {
     expectedRois: paper.rois,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "scanned_paper_ecg", format: "raster_matrix" }),
     provenance: { locator: "case://scan-measure-1", projectGold: false },
     connectMeasurements: true,
     measureLead: "II",
@@ -401,6 +510,7 @@ test("measurement connection rejects assumed paper speed or gain", () => {
     format: "raster_matrix",
     raster: paper.image,
     expectedRois: paper.rois,
+    preflight: externalPreflight(paper.image, { sourceKind: "scanned_paper_ecg", format: "raster_matrix" }),
     provenance: { locator: "case://scan-assumed-calibration", projectGold: false },
     connectMeasurements: true,
     measureLead: "II",
@@ -415,6 +525,7 @@ test("measurement connection rejects auto-discovered lead identity", () => {
     raster: paper.image,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "scanned_paper_ecg", format: "raster_matrix" }),
     provenance: { locator: "case://scan-discovered-layout", projectGold: false },
     connectMeasurements: true,
     measureLead: "II",
@@ -431,6 +542,7 @@ test("measurement connection requires an explicit baseline for every supplied RO
     expectedRois: withoutBaselines,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
+    preflight: externalPreflight(paper.image, { sourceKind: "scanned_paper_ecg", format: "raster_matrix" }),
     provenance: { locator: "case://scan-missing-baseline", projectGold: false },
     connectMeasurements: true,
     measureLead: "II",
@@ -474,6 +586,11 @@ test("orientation search recovers a 90-degree rotated synthetic page", () => {
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
     allowOrientationSearch: true,
+    preflight: externalPreflight(rotated, {
+      sourceKind: "phone_photo",
+      format: "raster_matrix",
+      rotationOrSkew: true,
+    }),
     provenance: { locator: "case://rotated-1", projectGold: false },
   });
   assert.ok(out.report.orientationTurns >= 1);
