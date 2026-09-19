@@ -10,7 +10,10 @@ const { encodeGrayscalePng } = require("../lib/image_png_codec");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS } = require("../lib/paper_ecg_raster");
 const { DECODER_LIMITS, EXPECTED_DECODER_WRAPPERS, NORMALIZATION, decodeImageSourceFile, readRegularFile, validateManifest } = require("../lib/image_decoder_bridge");
 const { runImageFileIntake, persistImageFileIntakeCase, runAndPersistImageFileIntake } = require("../lib/image_file_intake");
-const { persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
+const { readImageCase } = require("../lib/image_case_store");
+const { persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
+const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
+const { persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
 
 let passed = 0;
 function test(name, fn) {
@@ -97,6 +100,30 @@ function paperFixture() {
   });
 }
 
+function analysisConfig() {
+  return {
+    measurement: {
+      detector: { minAbsoluteDeviation: 0.25, refractoryMs: 240 },
+      delineation: {
+        baseline: 0,
+        qrs: { threshold: 0.35, beforeMs: 80, afterMs: 80 },
+        p: { threshold: 0.15, searchStartMsBeforeR: 240, searchEndMsBeforeR: 80 },
+        t: { threshold: 0.2, searchStartMsAfterR: 100, searchEndMsAfterR: 400 },
+      },
+    },
+    phenotypes: {
+      minBeatCount: 2,
+      rrIrregularity: { minIntervals: 2, cvAtOrAbove: 0.1, maxSuccessiveDeltaMsAtOrAbove: 100 },
+      pause: { minIntervals: 1, absoluteRrMsAtOrAbove: 1400, medianMultipleAtOrAbove: 1.5 },
+      qrsDuration: { medianMsAtOrAbove: 120 },
+      pWaveCoverage: { ratioAtOrBelow: 0.5 },
+      prDuration: { medianMsAtOrAbove: 200 },
+    },
+    thresholdAuthority: "SYNTHETIC_FILE_DECODER_TEST_ONLY_NOT_CLINICALLY_VALIDATED",
+    quality: { maxHeldGapColumns: 2, maxHeldFraction: 0.2 },
+  };
+}
+
 function withEncodedFixture(format, fn) {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-decoder-test-"));
   try {
@@ -105,34 +132,6 @@ function withEncodedFixture(format, fn) {
     fs.writeFileSync(png, encodeGrayscalePng(paper.image));
     const encoded = path.join(temp, format === "jpeg" ? "source.jpg" : "source.pdf");
     convertWithPillow(png, encoded, format);
-    fn({ temp, paper, encoded });
-  } finally {
-    fs.rmSync(temp, { recursive: true, force: true });
-  }
-}
-
-function withTwoPagePdfFixture(fn) {
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-decoder-pdf-pages-"));
-  try {
-    const paper = paperFixture();
-    const png = path.join(temp, "source.png");
-    const encoded = path.join(temp, "source.pdf");
-    fs.writeFileSync(png, encodeGrayscalePng(paper.image));
-    const code = [
-      "from PIL import Image",
-      "import sys",
-      "src,out=sys.argv[1:3]",
-      "im=Image.open(src).convert('RGB')",
-      "second=im.copy()",
-      "im.save(out, 'PDF', resolution=72, save_all=True, append_images=[second])",
-      "second.close(); im.close()",
-    ].join("\n");
-    const run = cp.spawnSync(pythonExecutable(), ["-c", code, png, encoded], {
-      encoding: "utf8",
-      timeout: 30_000,
-      shell: false,
-    });
-    assert.strictEqual(run.status, 0, run.stderr);
     fn({ temp, paper, encoded });
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
@@ -368,8 +367,8 @@ test("multi-page PDF pages have distinct case identity and persist the exact sou
     assert.strictEqual(page0.result.report.sourceSha256, page1.result.report.sourceSha256);
 
     const store = path.join(temp, "cases");
-    const receipt0 = persistImageIntakeCase(store, page0.intakeInput, page0.result);
-    const receipt1 = persistImageIntakeCase(store, page1.intakeInput, page1.result);
+    const receipt0 = persistImageFileIntakeCase(store, page0);
+    const receipt1 = persistImageFileIntakeCase(store, page1);
     const stored0 = readImageCase(receipt0.path);
     const stored1 = readImageCase(receipt1.path);
     assert.strictEqual(stored0.persistence.originalBytesPreserved, true);
@@ -418,49 +417,41 @@ test("JPEG file intake persists exact source bytes and normalized raster through
   });
 });
 
-test("two pages from one PDF mint distinct case identities while preserving one source identity", () => {
-  withTwoPagePdfFixture(({ paper, encoded }) => {
-    const decoded = decodeImageSourceFile({ sourcePath: encoded, pdfDpi: 72 });
-    assert.strictEqual(decoded.pages.length, 2);
-    const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-pdf-case-store-"));
+test("real JPEG reaches immutable extraction and immutable canonical analysis", () => {
+  withEncodedFixture("jpeg", ({ paper, encoded }) => {
+    const decoded = decodeImageSourceFile({ sourcePath: encoded });
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-jpeg-full-chain-"));
     try {
-      const base = {
+      const persisted = runAndPersistImageFileIntake(root, {
         sourcePath: encoded,
-        pdfDpi: 72,
-        sourceKind: "original_digital_ecg_pdf",
+        sourceKind: "phone_photo",
         expectedRois: paper.rois,
         paperSpeedMmPerS: 25,
         gainMmPerMv: 10,
         roiLeadIdentityVerified: true,
-        provenance: { locator: "case://two-page-pdf", projectGold: false },
-      };
-      const page0 = runImageFileIntake({
-        ...base,
-        pageIndex: 0,
-        preflight: externalPreflight(decoded.pages[0].raster, "original_digital_ecg_pdf", "pdf"),
+        preflight: externalPreflight(decoded.pages[0].raster, "phone_photo", "jpeg"),
+        provenance: { locator: "case://jpeg-full-chain", projectGold: false },
       });
-      const page1 = runImageFileIntake({
-        ...base,
-        pageIndex: 1,
-        preflight: externalPreflight(decoded.pages[1].raster, "original_digital_ecg_pdf", "pdf"),
-      });
-      assert.notStrictEqual(page0.result.report.caseId, page1.result.report.caseId);
-      assert.strictEqual(page0.result.report.sourceSha256, page1.result.report.sourceSha256);
-      assert.strictEqual(page0.result.report.sourcePageIndex, 0);
-      assert.strictEqual(page1.result.report.sourcePageIndex, 1);
-
-      const receipt0 = persistImageFileIntakeCase(root, page0);
-      const receipt1 = persistImageFileIntakeCase(root, page1);
-      assert.notStrictEqual(receipt0.caseId, receipt1.caseId);
-      assert.strictEqual(fs.readdirSync(root).filter(name => name.startsWith("case-")).length, 2);
-      for (const receipt of [receipt0, receipt1]) {
-        const stored = readImageCase(receipt.path);
-        assert.strictEqual(stored.report.sourceSha256, decoded.sourceSha256);
-        assert.deepStrictEqual(
-          fs.readFileSync(path.join(path.dirname(receipt.path), "original.bin")),
-          fs.readFileSync(encoded),
-        );
-      }
+      const extractionReceipt = persistImageExtraction(
+        persisted.caseReceipt.path,
+        persisted.fileIntake.result,
+      );
+      const extraction = readImageExtraction(
+        persisted.caseReceipt.path,
+        extractionReceipt.extractionId,
+      );
+      const analysis = runImageSignalAnalysis(extraction, analysisConfig());
+      const analysisReceipt = persistImageAnalysis(persisted.caseReceipt.path, analysis);
+      const reopened = readImageAnalysis(
+        persisted.caseReceipt.path,
+        analysisReceipt.analysisId,
+      );
+      assert.strictEqual(reopened.caseId, persisted.caseReceipt.caseId);
+      assert.strictEqual(reopened.extractionId, extractionReceipt.extractionId);
+      assert.strictEqual(reopened.processedLeadCount, 12);
+      assert.strictEqual(reopened.completeStandardTwelveLead, true);
+      assert.strictEqual(reopened.diagnosticInterpretationIncluded, false);
+      assert.strictEqual(reopened.runtimeAuthority, false);
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
