@@ -2,9 +2,13 @@
 
 Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for Cardiology NP OS.
 
-## Product input and next implementation
+## Product input and current implementation
 
-The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration is outside scope. Photo/PDF intake and digitization are the next functional implementation priority. The current waveform CLI is engineering execution and explicitly excludes diagnostic interpretation; model metadata and donor acceptance do not establish a completed clinical interpreter.
+The product goal is to accept photographs or PDF images of ECGs and produce calibrated traces, measurements, evidence-backed interpretation, and a saved report for clinician review. Live monitor integration is outside scope.
+
+The current engineering path can bounded-decode PNG/JPEG/PDF source files, normalize selected pages, require external-input preflight, digitize governed traces, preserve the original source and normalized raster, and create immutable extraction/analysis generations. JPEG/PDF decoding runs through a pinned Pillow/pypdfium2 worker process and is separately exercised in CI.
+
+This is generated-fixture engineering evidence, not clinical validation. Automatic lead identity, real-photo/perspective robustness, reference-case accuracy, evidence-backed clinical interpretation, diagnostic runtime, project gold, and reportable clinical metrics remain inactive/unestablished.
 
 ## Live operating state
 
@@ -78,6 +82,12 @@ npm test
 npm run gate:ci
 python tools/ep5_pkt09_terminal_specialist_completion_gate.py
 git diff --check
+```
+
+For native image-decoder work, install `requirements-image.txt` in an isolated environment and run:
+
+```bash
+npm run test:image-decoder
 ```
 
 Also run donor-focused tests and exact-SHA GitHub CI. Fresh-clone verification is required when available. Skipped/unavailable evidence is not PASS.
