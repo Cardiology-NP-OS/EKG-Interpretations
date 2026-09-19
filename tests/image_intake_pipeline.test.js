@@ -80,6 +80,55 @@ test("digitization recovers QRS polarity and correlated morphology on lead II", 
   assert.ok(peakAmplitude(recovered) > 0.4);
 });
 
+function sparseTraceFixture(missingColumns) {
+  const image = Array.from({ length: 20 }, () => Array(12).fill(255));
+  for (let x = 0; x < 12; x += 1) {
+    if (!missingColumns.includes(x)) image[10][x] = 0;
+  }
+  return image;
+}
+
+test("digitization records a bounded two-column hold explicitly", () => {
+  const out = digitizeLeadRois({
+    image: sparseTraceFixture([4, 5]),
+    rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10, paperSpeedMmPerS: 25, gainMmPerMv: 10 },
+  });
+  const lead = out.leads[0];
+  assert.strictEqual(lead.sampleCount, 12);
+  assert.strictEqual(lead.quality.observedInkColumns, 10);
+  assert.strictEqual(lead.quality.heldColumnCount, 2);
+  assert.strictEqual(lead.quality.maxHeldGapColumns, 2);
+  assert.strictEqual(lead.quality.maxHeldColumns, 2);
+  assert.strictEqual(lead.quality.holdPolicy, "BOUNDED_LAST_OBSERVATION_CARRY_FORWARD");
+});
+
+test("digitization rejects a missing run longer than the configured hold", () => {
+  assert.throws(() => digitizeLeadRois({
+    image: sparseTraceFixture([4, 5, 6]),
+    rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 },
+  }), /DIGITIZATION_MISSING_RUN_EXCEEDED:II:6:3/);
+});
+
+test("digitization can require complete column coverage with zero hold", () => {
+  assert.throws(() => digitizeLeadRois({
+    image: sparseTraceFixture([4]),
+    rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 },
+    maxHeldColumns: 0,
+  }), /DIGITIZATION_MISSING_RUN_EXCEEDED/);
+});
+
+test("digitization rejects unsafe sparse-hold limits", () => {
+  assert.throws(() => digitizeLeadRois({
+    image: sparseTraceFixture([]),
+    rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 },
+    maxHeldColumns: 9,
+  }), /DIGITIZATION_MAX_HELD_COLUMNS/);
+});
+
 test("intake fails closed on PDF bytes without a raster", () => {
   assert.throws(() => runImageIntakePipeline({
     sourceKind: "original_digital_ecg_pdf",
