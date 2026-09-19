@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "IMPLEMENTED_UNVERIFIED",
   "updated_date": "2026-09-18",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery with digitization-qualified 90-degree orientation search, grid calibration, bounded sparse-column digitization, strict-subset stdlib PNG decode, measurement gating, atomic content-addressed case persistence with verified source/raster artifacts, and append-only immutable digitized extraction generations. JPEG and PDF decoding remain fail-closed.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery with digitization-qualified 90-degree orientation search, grid calibration, bounded sparse-column digitization, strict-subset stdlib PNG decode, measurement gating, atomic content-addressed case persistence with verified source/raster artifacts, append-only immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions. JPEG and PDF decoding remain fail-closed.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -15,12 +15,16 @@
     "lib/image_case_store.js",
     "lib/image_extraction_store.js",
     "lib/image_png_codec.js",
-    "tools/run_image_intake.js"
+    "tools/run_image_intake.js",
+    "lib/image_signal_analysis.js",
+    "lib/image_analysis_store.js"
   ],
   "tests": [
     "tests/image_intake_pipeline.test.js",
     "tests/image_png_codec.test.js",
-    "tests/image_extraction_store.test.js"
+    "tests/image_extraction_store.test.js",
+    "tests/image_signal_analysis.test.js",
+    "tests/image_analysis_store.test.js"
   ],
   "registryPromotion": "NOT_CLAIMED",
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
@@ -36,7 +40,11 @@
     "originalEncodedBytesPreservedWhenSupplied": true,
     "normalizedRasterPreserved": true,
     "immutableExtractionGenerationsImplemented": true,
-    "immutableAnalysisGenerationsImplemented": false
+    "immutableAnalysisGenerationsImplemented": true,
+    "analysisReusesCanonicalSignalIntelligence": true,
+    "simultaneousLeadComparisonPerformed": false,
+    "externalInputPreflightMandatory": false,
+    "externalInputPreflightNote": "The input-quality guard remains optional at the image-intake entrypoint; this is an unfinished consolidation gate for externally supplied images."
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
