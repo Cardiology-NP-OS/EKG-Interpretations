@@ -10,6 +10,7 @@ const { rotate90 } = require("../lib/image_robustness");
 const { estimateGridCalibration } = require("../lib/image_grid_calibration");
 const { digitizeLeadRois, pearson, peakAmplitude } = require("../lib/image_digitization");
 const { runImageIntakePipeline, INTAKE_GOVERNANCE } = require("../lib/image_intake_pipeline");
+const { encodeGrayscalePng } = require("../lib/image_png_codec");
 const { persistImageCase, readImageCase } = require("../lib/image_case_store");
 
 let passed = 0;
@@ -168,6 +169,73 @@ test("end-to-end raster intake produces a governed report and basic persisted ca
   const stored = readImageCase(receipt.path);
   assert.strictEqual(stored.caseId, out.report.caseId);
   assert.strictEqual(stored.diagnosticInterpretationIncluded, false);
+});
+
+test("case persistence preserves and verifies supplied original and normalized artifacts", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const originalBytes = encodeGrayscalePng(paper.image);
+  const out = runImageIntakePipeline({
+    sourceKind: "phone_photo",
+    format: "png",
+    bytes: originalBytes,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-artifacts", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-artifacts-"));
+  const receipt = persistImageCase(dir, out, {
+    originalBytes,
+    normalizedRaster: paper.image,
+  });
+  const stored = readImageCase(receipt.path);
+  const caseDir = path.dirname(receipt.path);
+  assert.strictEqual(stored.persistence.originalBytesPreserved, true);
+  assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+  assert.deepStrictEqual(fs.readFileSync(path.join(caseDir, "original.bin")), originalBytes);
+  assert.strictEqual(stored.artifacts.original.bytes, originalBytes.length);
+  assert.ok(stored.artifacts.normalizedRaster.bytes > 0);
+  assert.strictEqual(stored.artifacts.normalizedRaster.encoding, "PNG_GRAYSCALE8_STRICT_SUBSET");
+});
+
+test("case reopen rejects preserved source artifact tampering", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const originalBytes = encodeGrayscalePng(paper.image);
+  const out = runImageIntakePipeline({
+    sourceKind: "phone_photo",
+    format: "png",
+    bytes: originalBytes,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-artifact-tamper", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-artifact-tamper-"));
+  const receipt = persistImageCase(dir, out, {
+    originalBytes,
+    normalizedRaster: paper.image,
+  });
+  const original = path.join(path.dirname(receipt.path), "original.bin");
+  fs.appendFileSync(original, Buffer.from([0]));
+  assert.throws(() => readImageCase(receipt.path), /CASE_ARTIFACT_SIZE_MISMATCH|CASE_ARTIFACT_HASH_MISMATCH/);
+});
+
+test("case reopen rejects normalized raster artifact tampering", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-raster-tamper", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-raster-tamper-"));
+  const receipt = persistImageCase(dir, out, { normalizedRaster: paper.image });
+  const raster = path.join(path.dirname(receipt.path), "normalized.png");
+  fs.appendFileSync(raster, Buffer.from([0]));
+  assert.throws(() => readImageCase(receipt.path), /CASE_ARTIFACT_SIZE_MISMATCH|CASE_ARTIFACT_HASH_MISMATCH/);
 });
 
 test("case persistence is content-stable and idempotent", () => {
