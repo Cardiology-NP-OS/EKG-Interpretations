@@ -3,6 +3,7 @@ const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
+const cp = require("child_process");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOVERNANCE } = require("../lib/paper_ecg_raster");
 const { localizeLeadRois } = require("../lib/image_roi_localization");
 const { discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
@@ -11,7 +12,7 @@ const { estimateGridCalibration } = require("../lib/image_grid_calibration");
 const { digitizeLeadRois, pearson, peakAmplitude } = require("../lib/image_digitization");
 const { runImageIntakePipeline, INTAKE_GOVERNANCE } = require("../lib/image_intake_pipeline");
 const { encodeGrayscalePng } = require("../lib/image_png_codec");
-const { persistImageCase, readImageCase } = require("../lib/image_case_store");
+const { persistImageCase, persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
 
 let passed = 0;
 function test(name, fn) {
@@ -169,6 +170,44 @@ test("end-to-end raster intake produces a governed report and basic persisted ca
   const stored = readImageCase(receipt.path);
   assert.strictEqual(stored.caseId, out.report.caseId);
   assert.strictEqual(stored.diagnosticInterpretationIncluded, false);
+});
+
+test("intake-aware persistence automatically preserves PNG source and normalized raster", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const originalBytes = encodeGrayscalePng(paper.image);
+  const intakeInput = {
+    sourceKind: "phone_photo",
+    format: "png",
+    bytes: originalBytes,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-auto-artifacts", projectGold: false },
+  };
+  const out = runImageIntakePipeline(intakeInput);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-auto-artifacts-"));
+  const receipt = persistImageIntakeCase(dir, intakeInput, out);
+  const stored = readImageCase(receipt.path);
+  assert.strictEqual(stored.persistence.originalBytesPreserved, true);
+  assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+  assert.deepStrictEqual(fs.readFileSync(path.join(path.dirname(receipt.path), "original.bin")), originalBytes);
+});
+
+test("fixture CLI automatically persists its normalized raster", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-cli-store-"));
+  const result = cp.spawnSync(process.execPath, [
+    path.join(__dirname, "..", "tools", "run_image_intake.js"),
+    "--fixture",
+    "--out",
+    dir,
+  ], { encoding: "utf8" });
+  assert.strictEqual(result.status, 0, result.stderr);
+  const caseDir = fs.readdirSync(dir).find(name => name.startsWith("case-"));
+  assert.ok(caseDir);
+  const stored = readImageCase(path.join(dir, caseDir));
+  assert.strictEqual(stored.persistence.originalBytesPreserved, false);
+  assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+  assert.ok(fs.existsSync(path.join(dir, caseDir, "normalized.png")));
 });
 
 test("case persistence preserves and verifies supplied original and normalized artifacts", () => {
