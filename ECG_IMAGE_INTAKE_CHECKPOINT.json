@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "IMPLEMENTED_UNVERIFIED",
   "updated_date": "2026-09-18",
-  "scope": "Target-owned photo/PDF product path as raster-matrix engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery, 90-degree orientation search, grid calibration, millivolt digitization with sparse-column hold, stdlib PNG encode/decode, optional measurement connection, durable case records. JPEG and PDF decoding remain fail-closed.",
+  "scope": "Target-owned photo/PDF product path as raster-matrix engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery, 90-degree orientation search, grid calibration, millivolt digitization with sparse-column hold, strict-subset stdlib PNG encode/decode, optional measurement connection, and basic case-record persistence. JPEG and PDF decoding remain fail-closed; durable immutable source/case persistence remains a consolidation gate.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -17,13 +17,16 @@
     "tools/run_image_intake.js"
   ],
   "tests": [
-    "tests/image_intake_pipeline.test.js"
+    "tests/image_intake_pipeline.test.js",
+    "tests/image_png_codec.test.js"
   ],
   "registryPromotion": "NOT_CLAIMED",
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
   "proofBoundary": {
     "syntheticAndAdversarialEngineeringEvidence": true,
-    "encodedFileDecodingImplemented": "PNG_ONLY",
+    "encodedFileDecodingImplemented": "PNG_STRICT_SUBSET_ONLY",
+    "pngSupportedSubset": "8-bit non-interlaced grayscale, RGB, and RGBA; RGBA is composited over white; tRNS and unsupported critical chunks fail closed",
+    "durableImmutableCasePersistenceImplemented": false,
     "externalComparativeSuperiorityEstablished": false,
     "worldBestClaim": "NOT_ESTABLISHED",
     "clinicalPerformanceClaimed": false,
