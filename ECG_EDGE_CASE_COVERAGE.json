@@ -139,7 +139,7 @@
         "tests/image_signal_analysis.test.js",
         "tests/image_analysis_store.test.js"
       ],
-      "scope": "bounded PNG/JPEG/PDF source decoding; EXIF normalization and white alpha composition; PDF encryption/forms/page/pixel/DPI limits; source/file replacement detection; strict decoder manifest, page-path, source/raster hash and aggregate pixel verification; multi-page page identity; mandatory bound external preflight; explicit ROI-to-lead identity verification; immutable time/voltage/lead/twelve-lead permissions; bounded digitization; atomic case publication with exact source and normalized-page persistence; immutable extraction/analysis generations; authority/tamper/collision rejection"
+      "scope": "bounded PNG/JPEG/PDF source decoding; pinned Pillow/pypdfium2 wrapper identity; EXIF normalization and white alpha composition; PDF encryption/forms/page/pixel/DPI limits; source/file replacement detection; strict decoder manifest, canonical page paths, source/raster hashes and aggregate pixel verification; original-digital-PDF format binding; multi-page page identity; mandatory bound external preflight; explicit ROI-to-lead identity verification; immutable time/voltage/lead/twelve-lead permissions; bounded digitization; atomic canonical case publication with exact source and normalized-page persistence; real generated-JPEG integration through immutable extraction and immutable canonical analysis; authority/tamper/collision rejection"
     }
   ],
   "policy": [
