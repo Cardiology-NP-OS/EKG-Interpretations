@@ -7,6 +7,7 @@ const {
   estimateDeskewAngle,
   rotateArbitraryExpandedInkPreserving,
   rotateArbitraryExpandedNearest,
+  rotateArbitraryInkPreserving,
   rotateArbitraryNearest,
 } = require("../lib/image_geometry_normalization");
 
@@ -83,17 +84,17 @@ test("projection deskew recovers a synthetic three-degree grid rotation", () => 
   assert.strictEqual(estimate.runtimeAuthority, false);
 });
 
-test("deskew applies the estimated correction on an expanded canvas without clipping support", () => {
+test("deskew applies the estimated correction within the acquisition canvas", () => {
   const source = gridFixture();
-  const skewed = rotateArbitraryExpandedNearest(source, { degrees: -2.5 });
+  const skewed = rotateArbitraryExpandedInkPreserving(source, { degrees: -2.5 });
   const out = deskewImage(skewed, {
     maxAbsDegrees: 5,
     stepDegrees: 0.5,
     darkThreshold: 64,
   });
   assert.ok(Math.abs(out.appliedDegrees - 2.5) <= 0.5, JSON.stringify(out.estimate));
-  assert.ok(out.image.length >= skewed.length);
-  assert.ok(out.image[0].length >= skewed[0].length);
+  assert.strictEqual(out.image.length, skewed.length);
+  assert.strictEqual(out.image[0].length, skewed[0].length);
   assert.ok(out.image.flat().includes(0));
   const residual = estimateDeskewAngle(out.image, {
     maxAbsDegrees: 2,
