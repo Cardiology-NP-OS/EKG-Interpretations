@@ -170,6 +170,104 @@ test("end-to-end raster intake produces a governed report and basic persisted ca
   assert.strictEqual(stored.diagnosticInterpretationIncluded, false);
 });
 
+test("case persistence is content-stable and idempotent", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-idempotent", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-idem-"));
+  const first = persistImageCase(dir, out);
+  const second = persistImageCase(dir, out);
+  assert.strictEqual(first.idempotent, false);
+  assert.strictEqual(second.idempotent, true);
+  assert.strictEqual(first.sha256, second.sha256);
+  assert.strictEqual(first.path, second.path);
+  assert.strictEqual(fs.readdirSync(dir).filter(name => name.startsWith("case-")).length, 1);
+  assert.strictEqual(fs.readdirSync(dir).filter(name => name.startsWith(".staging-")).length, 0);
+});
+
+test("case reopen rejects manifest tampering", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-tamper", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-tamper-"));
+  const receipt = persistImageCase(dir, out);
+  fs.appendFileSync(receipt.path, " ");
+  assert.throws(() => readImageCase(receipt.path), /CASE_MANIFEST_HASH_MISMATCH/);
+});
+
+test("case reopen rejects hash-sidecar substitution", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-hash-tamper", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-hash-"));
+  const receipt = persistImageCase(dir, out);
+  fs.writeFileSync(path.join(path.dirname(receipt.path), "manifest.sha256"), `${"0".repeat(64)}\n`);
+  assert.throws(() => readImageCase(receipt.path), /CASE_MANIFEST_HASH_MISMATCH/);
+});
+
+test("failed atomic publication leaves no published or staging case", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-interrupted", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-fail-"));
+  const originalRename = fs.renameSync;
+  fs.renameSync = () => { throw new Error("INJECTED_RENAME_FAILURE"); };
+  try {
+    assert.throws(() => persistImageCase(dir, out), /INJECTED_RENAME_FAILURE/);
+  } finally {
+    fs.renameSync = originalRename;
+  }
+  assert.strictEqual(fs.readdirSync(dir).filter(name => name.startsWith("case-")).length, 0);
+  assert.strictEqual(fs.readdirSync(dir).filter(name => name.startsWith(".staging-")).length, 0);
+});
+
+test("case directory identity cannot be substituted", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-dir-identity", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-dir-"));
+  const receipt = persistImageCase(dir, out);
+  const originalDir = path.dirname(receipt.path);
+  const substituted = path.join(dir, `case-${"0".repeat(64)}`);
+  fs.renameSync(originalDir, substituted);
+  assert.throws(() => readImageCase(substituted), /CASE_DIRECTORY_IDENTITY/);
+});
+
 test("optional measurement connection stays non-diagnostic", () => {
   const paper = renderFixture({ pxPerMm: 5 });
   const out = runImageIntakePipeline({
