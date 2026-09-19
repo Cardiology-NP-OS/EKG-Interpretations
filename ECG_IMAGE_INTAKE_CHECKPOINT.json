@@ -1,6 +1,6 @@
 {
   "schema": "ekg-image-intake-checkpoint-v1",
-  "status": "IMPLEMENTED_UNVERIFIED",
+  "status": "ENGINEERING_VERIFIED_GOVERNED_INACTIVE",
   "updated_date": "2026-09-19",
   "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, ROI localization and standard-layout discovery, digitization-qualified orientation search, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
   "productPriority": "photo-pdf-intake",
@@ -70,7 +70,13 @@
     "nativeDecoderProcessBoundary": true,
     "hardenedOsSandbox": false,
     "realClinicalImageValidationEstablished": false,
-    "decoderSyntheticIntegrationVerified": true
+    "decoderSyntheticIntegrationVerified": true,
+    "decoderExactHeadCiVerified": true,
+    "decoderWrapperVersionEnforced": true,
+    "fileIntakeCanonicalPersistenceHelperImplemented": true,
+    "jpegFullChainThroughImmutableAnalysisVerified": true,
+    "pdfMultipageCanonicalPersistenceVerified": true,
+    "sourceKindFormatBindingEnforcedForOriginalDigitalPdf": true
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
