@@ -11,6 +11,7 @@ import io
 import json
 import math
 import os
+import re
 from contextlib import closing
 from pathlib import Path
 import stat
@@ -43,6 +44,7 @@ LIMITS = {
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 JPEG_SIGNATURE = b"\xff\xd8"
 PDF_SIGNATURE = b"%PDF-"
+PAGE_FILE_RE = re.compile(r"page-\d{4}\.png\Z")
 
 
 class DecoderError(ValueError):
@@ -161,6 +163,21 @@ def _write_bytes(path: Path, raw: bytes) -> None:
         raise DecoderError("IMAGE_DECODER_OUTPUT_WRITE_FAILED") from exc
 
 
+def _cleanup_output(path: Path) -> None:
+    allowed = {"original.bin", "decoder-result.json"}
+    try:
+        for item in path.iterdir():
+            if item.name in allowed or PAGE_FILE_RE.fullmatch(item.name):
+                try:
+                    info = item.lstat()
+                    if stat.S_ISREG(info.st_mode) and not item.is_symlink():
+                        item.unlink()
+                except OSError:
+                    pass
+    except OSError:
+        pass
+
+
 def _png_bytes(image: Image.Image) -> bytes:
     clean = Image.new("RGB", image.size, "white")
     clean.paste(image)
@@ -260,51 +277,55 @@ def _decode_image(raw: bytes, source_format: str):
 def decode_source_file(source: str | Path, output_dir: str | Path, dpi: int = 200) -> dict:
     source_path = Path(source).absolute()
     out = _output_directory(Path(output_dir).absolute())
-    raw = read_source_bytes(source_path)
-    source_format = _detect_format(raw)
+    try:
+        raw = read_source_bytes(source_path)
+        source_format = _detect_format(raw)
 
-    _write_bytes(out / "original.bin", raw)
+        _write_bytes(out / "original.bin", raw)
 
-    pages = []
-    iterator = _decode_pdf(raw, dpi) if source_format == "pdf" else _decode_image(raw, source_format)
-    for index, image, orientation in iterator:
-        try:
-            name = f"page-{index + 1:04d}.png"
-            png = _png_bytes(image)
-            _write_bytes(out / name, png)
-            pages.append(
-                {
-                    "pageIndex": index,
-                    "file": name,
-                    "width": image.width,
-                    "height": image.height,
-                    "originalOrientation": orientation,
-                    "rasterSha256": sha256(png),
-                    "rasterBytes": len(png),
-                }
-            )
-        finally:
-            image.close()
+        pages = []
+        iterator = _decode_pdf(raw, dpi) if source_format == "pdf" else _decode_image(raw, source_format)
+        for index, image, orientation in iterator:
+            try:
+                name = f"page-{index + 1:04d}.png"
+                png = _png_bytes(image)
+                _write_bytes(out / name, png)
+                pages.append(
+                    {
+                        "pageIndex": index,
+                        "file": name,
+                        "width": image.width,
+                        "height": image.height,
+                        "originalOrientation": orientation,
+                        "rasterSha256": sha256(png),
+                        "rasterBytes": len(png),
+                    }
+                )
+            finally:
+                image.close()
 
-    check(bool(pages), "IMAGE_DECODER_PAGE_LIMIT")
-    check(len(pages) <= LIMITS["maxPages"], "IMAGE_DECODER_PAGE_LIMIT")
+        check(bool(pages), "IMAGE_DECODER_PAGE_LIMIT")
+        check(len(pages) <= LIMITS["maxPages"], "IMAGE_DECODER_PAGE_LIMIT")
 
-    manifest = {
-        "schema": "ekg-image-decoder-result-v1",
-        "sourceFormat": source_format,
-        "sourceSha256": sha256(raw),
-        "sourceBytes": len(raw),
-        "pdfDpi": dpi if source_format == "pdf" else None,
-        "limits": dict(LIMITS),
-        "normalization": "RGB8_PNG_WHITE_ALPHA_BACKGROUND_EXIF_TRANSPOSE",
-        "decoder": {
-            "Pillow": importlib.metadata.version("Pillow"),
-            "pypdfium2": str(pdfium.PYPDFIUM_INFO),
-            "pdfium": str(pdfium.PDFIUM_INFO),
-            "implementationSha256": sha256(Path(__file__).read_bytes()),
-        },
-        "pages": pages,
-        **GOVERNANCE,
-    }
-    _write_bytes(out / "decoder-result.json", canonical_json(manifest))
-    return manifest
+        manifest = {
+            "schema": "ekg-image-decoder-result-v1",
+            "sourceFormat": source_format,
+            "sourceSha256": sha256(raw),
+            "sourceBytes": len(raw),
+            "pdfDpi": dpi if source_format == "pdf" else None,
+            "limits": dict(LIMITS),
+            "normalization": "RGB8_PNG_WHITE_ALPHA_BACKGROUND_EXIF_TRANSPOSE",
+            "decoder": {
+                "Pillow": importlib.metadata.version("Pillow"),
+                "pypdfium2": str(pdfium.PYPDFIUM_INFO),
+                "pdfium": str(pdfium.PDFIUM_INFO),
+                "implementationSha256": sha256(Path(__file__).read_bytes()),
+            },
+            "pages": pages,
+            **GOVERNANCE,
+        }
+        _write_bytes(out / "decoder-result.json", canonical_json(manifest))
+        return manifest
+    except Exception:
+        _cleanup_output(out)
+        raise
