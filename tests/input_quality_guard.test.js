@@ -158,6 +158,18 @@ test("distorted geometry blocks pixel-derived measurement without local scale", 
   assert.equal(result.exactTimeMeasurementAllowed, false);
   assert.equal(result.exactVoltageMeasurementAllowed, false);
 });
+test("raster-matrix image transport is explicitly preflightable", () => {
+  const input = baseInput();
+  input.source_kind = "phone_photo";
+  input.format = "raster_matrix";
+  const result = preflightInput(input);
+  assert.equal(result.pass, true);
+  assert.equal(result.sourceBinding.sourceKind, "phone_photo");
+  assert.equal(result.sourceBinding.format, "raster_matrix");
+  assert.equal(result.sourceBinding.imageWidthPx, input.image.width_px);
+  assert.equal(result.sourceBinding.imageHeightPx, input.image.height_px);
+});
+
 test("unsupported format fails closed", () => {
   const input = baseInput();
   input.format = "exe";
