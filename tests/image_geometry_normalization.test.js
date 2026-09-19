@@ -3,6 +3,7 @@
 const assert = require("assert");
 const {
   GEOMETRY_GOVERNANCE,
+  cropToContent,
   deskewImage,
   estimateDeskewAngle,
   rotateArbitraryExpandedInkPreserving,
@@ -91,6 +92,17 @@ test("deskew resampling does not manufacture a three-column gap in a one-pixel t
     }
   }
   assert.ok(maxGap <= 2, `max missing run ${maxGap}`);
+});
+
+test("content crop removes only deterministic white rotation padding", () => {
+  const image = Array.from({ length: 10 }, () => Array(14).fill(255));
+  for (let y = 2; y <= 7; y += 1) {
+    for (let x = 3; x <= 10; x += 1) image[y][x] = 200;
+  }
+  const out = cropToContent(image, 250);
+  assert.deepStrictEqual(out.bounds, { x: 3, y: 2, width: 8, height: 6, threshold: 250 });
+  assert.strictEqual(out.image.length, 6);
+  assert.strictEqual(out.image[0].length, 8);
 });
 
 test("projection deskew recovers a synthetic three-degree grid rotation", () => {
