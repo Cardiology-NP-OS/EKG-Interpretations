@@ -10,6 +10,7 @@ const { encodeGrayscalePng } = require("../lib/image_png_codec");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS } = require("../lib/paper_ecg_raster");
 const { DECODER_LIMITS, NORMALIZATION, decodeImageSourceFile, readRegularFile, validateManifest } = require("../lib/image_decoder_bridge");
 const { runImageFileIntake } = require("../lib/image_file_intake");
+const { persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
 
 let passed = 0;
 function test(name, fn) {
@@ -30,6 +31,23 @@ function convertWithPillow(sourcePng, outputPath, mode) {
     "im.save(out, 'JPEG', quality=100, subsampling=0) if mode=='jpeg' else im.save(out, 'PDF', resolution=72)",
   ].join("\n");
   const run = cp.spawnSync(pythonExecutable(), ["-c", code, sourcePng, outputPath, mode], {
+    encoding: "utf8",
+    timeout: 30_000,
+    shell: false,
+  });
+  assert.strictEqual(run.status, 0, run.stderr);
+}
+
+function createTwoPagePdf(sourcePng, outputPath) {
+  const code = [
+    "from PIL import Image",
+    "import sys",
+    "src,out=sys.argv[1:3]",
+    "im=Image.open(src).convert('RGB')",
+    "second=im.copy()",
+    "im.save(out,'PDF',resolution=72,save_all=True,append_images=[second])",
+  ].join("\n");
+  const run = cp.spawnSync(pythonExecutable(), ["-c", code, sourcePng, outputPath], {
     encoding: "utf8",
     timeout: 30_000,
     shell: false,
@@ -275,6 +293,64 @@ test("PDF file intake selects page zero and preserves PDF decoder identity", () 
     assert.strictEqual(out.result.report.format, "pdf");
     assert.strictEqual(out.result.report.diagnosticInterpretationIncluded, false);
   });
+});
+
+test("multi-page PDF pages have distinct case identity and persist the exact source plus selected page", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-multipage-case-"));
+  try {
+    const paper = paperFixture();
+    const sourcePng = path.join(temp, "paper.png");
+    const sourcePdf = path.join(temp, "paper.pdf");
+    fs.writeFileSync(sourcePng, encodeGrayscalePng(paper.image));
+    createTwoPagePdf(sourcePng, sourcePdf);
+    const decoded = decodeImageSourceFile({ sourcePath: sourcePdf, pdfDpi: 72 });
+    assert.strictEqual(decoded.pages.length, 2);
+
+    const common = {
+      sourcePath: sourcePdf,
+      pdfDpi: 72,
+      sourceKind: "original_digital_ecg_pdf",
+      expectedRois: paper.rois,
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      roiLeadIdentityVerified: true,
+      provenance: { locator: "case://multipage-pdf", projectGold: false },
+    };
+    const page0 = runImageFileIntake({
+      ...common,
+      pageIndex: 0,
+      preflight: externalPreflight(decoded.pages[0].raster, "original_digital_ecg_pdf", "pdf"),
+    });
+    const page1 = runImageFileIntake({
+      ...common,
+      pageIndex: 1,
+      preflight: externalPreflight(decoded.pages[1].raster, "original_digital_ecg_pdf", "pdf"),
+    });
+    assert.notStrictEqual(page0.result.report.caseId, page1.result.report.caseId);
+    assert.strictEqual(page0.result.report.sourcePageIndex, 0);
+    assert.strictEqual(page1.result.report.sourcePageIndex, 1);
+    assert.strictEqual(page0.result.report.sourceSha256, page1.result.report.sourceSha256);
+
+    const store = path.join(temp, "cases");
+    const receipt0 = persistImageIntakeCase(store, page0.intakeInput, page0.result);
+    const receipt1 = persistImageIntakeCase(store, page1.intakeInput, page1.result);
+    const stored0 = readImageCase(receipt0.path);
+    const stored1 = readImageCase(receipt1.path);
+    assert.strictEqual(stored0.persistence.originalBytesPreserved, true);
+    assert.strictEqual(stored1.persistence.originalBytesPreserved, true);
+    assert.strictEqual(stored0.persistence.normalizedRasterPreserved, true);
+    assert.strictEqual(stored1.persistence.normalizedRasterPreserved, true);
+    assert.deepStrictEqual(
+      fs.readFileSync(path.join(path.dirname(receipt0.path), "original.bin")),
+      fs.readFileSync(sourcePdf),
+    );
+    assert.deepStrictEqual(
+      fs.readFileSync(path.join(path.dirname(receipt1.path), "original.bin")),
+      fs.readFileSync(sourcePdf),
+    );
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
 });
 
 test("decoded file intake rejects a page index outside the decoded document", () => {
