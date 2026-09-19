@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { renderPaperEcgRaster, syntheticLeadMap } = require("../lib/paper_ecg_raster");
 const { runImageIntakePipeline } = require("../lib/image_intake_pipeline");
-const { persistImageCase } = require("../lib/image_case_store");
+const { persistImageIntakeCase } = require("../lib/image_case_store");
 
 function parseArgs(argv) {
   const out = { fixture: false, outDir: null };
@@ -26,7 +26,7 @@ function main() {
     leads: syntheticLeadMap(250, 10),
     sampleRateHz: 250,
   });
-  const result = runImageIntakePipeline({
+  const intakeInput = {
     sourceKind: "synthetic_raster",
     format: "raster_matrix",
     raster: paper.image,
@@ -35,7 +35,8 @@ function main() {
     gainMmPerMv: 10,
     provenance: { locator: "cli://synthetic-fixture", projectGold: false },
     connectMeasurements: true,
-  });
+  };
+  const result = runImageIntakePipeline(intakeInput);
   const payload = {
     report: result.report,
     roiCount: result.rois.roiCount,
@@ -45,7 +46,7 @@ function main() {
   };
   process.stdout.write(`${JSON.stringify(payload)}\n`);
   if (args.outDir) {
-    const receipt = persistImageCase(path.resolve(args.outDir), result);
+    const receipt = persistImageIntakeCase(path.resolve(args.outDir), intakeInput, result);
     fs.writeFileSync(path.join(args.outDir, "intake-report.json"), `${JSON.stringify(result.report, null, 2)}\n`);
     process.stderr.write(`${receipt.path}\n`);
   }

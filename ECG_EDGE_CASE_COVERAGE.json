@@ -126,6 +126,18 @@
         "tests/edge_case_coverage.test.js"
       ],
       "scope": "source-of-truth docs, Neon boundary, research format, branch retirement classification"
+    },
+    {
+      "id": "PHOTO-PDF-DURABLE-EXTRACTION",
+      "tests": [
+        "tests/input_quality_guard.test.js",
+        "tests/image_intake_pipeline.test.js",
+        "tests/image_png_codec.test.js",
+        "tests/image_extraction_store.test.js",
+        "tests/image_signal_analysis.test.js",
+        "tests/image_analysis_store.test.js"
+      ],
+      "scope": "mandatory bound external-image preflight; source-kind/format/dimension/calibration substitution rejection; explicit ROI-to-lead identity verification for external named-lead measurement/analysis; immutable propagation of time/voltage/lead-identity/twelve-lead permissions; strict encoded-image subset; digitization-qualified orientation; bounded sparse-column hold; atomic case publication; verified canonical artifact paths and source/raster hashes; append-only content-addressed extraction and analysis generations; canonical target-owned signal-intelligence reuse; per-lead failure isolation; tamper/collision/case-identity/authority rejection"
     }
   ],
   "policy": [
