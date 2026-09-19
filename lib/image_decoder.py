@@ -223,12 +223,12 @@ def _decode_pdf(raw: bytes, dpi: int):
                     scale = dpi / 72
                     width = math.ceil(width_pt * scale)
                     height = math.ceil(height_pt * scale)
-                    pixels = _dimensions(width, height, total)
+                    _dimensions(width, height, total)
                     with closing(page.render(scale=scale, draw_annots=True)) as bitmap:
                         image = bitmap.to_pil().convert("RGB")
                         try:
-                            _dimensions(image.width, image.height, total)
-                            total += pixels
+                            rendered_pixels = _dimensions(image.width, image.height, total)
+                            total += rendered_pixels
                             yield index, image.copy(), 0
                         finally:
                             image.close()
