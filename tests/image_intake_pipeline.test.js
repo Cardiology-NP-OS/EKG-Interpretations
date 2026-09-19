@@ -7,7 +7,7 @@ const cp = require("child_process");
 const crypto = require("crypto");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOVERNANCE } = require("../lib/paper_ecg_raster");
 const { localizeLeadRois } = require("../lib/image_roi_localization");
-const { discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
+const { chooseRowOrigin, discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
 const { rotate90 } = require("../lib/image_robustness");
 const { rotateArbitraryExpandedInkPreserving } = require("../lib/image_geometry_normalization");
 const { estimateGridCalibration } = require("../lib/image_grid_calibration");
@@ -652,6 +652,17 @@ test("malformed ROI coordinates fail closed", () => {
     image: paper.image,
     expectedRois: [{ lead: "I", x: -1, y: 0, width: 10, height: 10 }],
   }), /ROI_BOX_X/);
+});
+
+test("row-origin selection centers the exact row width inside trace support", () => {
+  const image = Array.from({ length: 20 }, () => Array(140).fill(255));
+  for (let x = 7; x <= 132; x += 1) image[10][x] = 0;
+  const origin = chooseRowOrigin(image, { start: 8, end: 13 }, 120, 40);
+  assert.strictEqual(origin.firstSupport, 7);
+  assert.strictEqual(origin.lastSupport, 132);
+  assert.strictEqual(origin.supportSpan, 126);
+  assert.strictEqual(origin.x0, 10);
+  assert.strictEqual(origin.supportColumns, 120);
 });
 
 test("standard-layout discovery recovers twelve panels without supplied ROIs", () => {
