@@ -96,6 +96,14 @@ test("extraction reopen rejects hash-sidecar substitution", () => {
   );
 });
 
+test("unknown extraction IDs fail with the bounded store contract", () => {
+  const fx = fixture("case://extract-store-missing");
+  assert.throws(
+    () => readImageExtraction(fx.caseReceipt.path, `extract-${"0".repeat(64)}`),
+    /EXTRACTION_FILE_REQUIRED/,
+  );
+});
+
 test("an extraction cannot be attached to a different case identity", () => {
   const fx = fixture("case://extract-store-case-a");
   const other = fixture("case://extract-store-case-b");
