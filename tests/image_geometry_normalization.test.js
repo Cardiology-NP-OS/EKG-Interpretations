@@ -5,6 +5,7 @@ const {
   GEOMETRY_GOVERNANCE,
   deskewImage,
   estimateDeskewAngle,
+  rotateArbitraryExpandedNearest,
   rotateArbitraryNearest,
 } = require("../lib/image_geometry_normalization");
 
@@ -30,6 +31,14 @@ test("arbitrary rotation is deterministic bounded grayscale", () => {
   assert.strictEqual(rotated[0].length, 3);
   assert.ok(rotated.flat().every(v => Number.isInteger(v) && v >= 0 && v <= 255));
   assert.throws(() => rotateArbitraryNearest(image, { degrees: 16 }), /IMAGE_GEOMETRY_DEGREES_LIMIT/);
+});
+
+test("expanded arbitrary rotation preserves full source support", () => {
+  const image = [[0,255,255],[255,0,255],[255,255,0]];
+  const rotated = rotateArbitraryExpandedNearest(image, { degrees: 10 });
+  assert.ok(rotated.length > image.length);
+  assert.ok(rotated[0].length > image[0].length);
+  assert.ok(rotated.flat().includes(0));
 });
 
 test("projection deskew recovers a synthetic three-degree grid rotation", () => {
