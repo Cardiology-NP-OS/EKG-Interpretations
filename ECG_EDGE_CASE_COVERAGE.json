@@ -1,6 +1,6 @@
 {
   "schema": "ekg-edge-case-coverage-v1",
-  "updated_date": "2026-09-18",
+  "updated_date": "2026-09-19",
   "status": "REQUIRED_COVERAGE_ACTIVE",
   "authority": {
     "diagnostic_runtime": "GOVERNED_INACTIVE",
@@ -130,6 +130,8 @@
     {
       "id": "PHOTO-PDF-DURABLE-EXTRACTION",
       "tests": [
+        "tests/image_decoder_bridge.test.js",
+        "tests/image_decoder_test.py",
         "tests/input_quality_guard.test.js",
         "tests/image_intake_pipeline.test.js",
         "tests/image_png_codec.test.js",
@@ -137,7 +139,7 @@
         "tests/image_signal_analysis.test.js",
         "tests/image_analysis_store.test.js"
       ],
-      "scope": "mandatory bound external-image preflight; source-kind/format/dimension/calibration substitution rejection; explicit ROI-to-lead identity verification for external named-lead measurement/analysis; immutable propagation of time/voltage/lead-identity/twelve-lead permissions; strict encoded-image subset; digitization-qualified orientation; bounded sparse-column hold; atomic case publication; verified canonical artifact paths and source/raster hashes; append-only content-addressed extraction and analysis generations; canonical target-owned signal-intelligence reuse; per-lead failure isolation; tamper/collision/case-identity/authority rejection"
+      "scope": "bounded PNG/JPEG/PDF source decoding; pinned Pillow/pypdfium2 wrapper identity; EXIF normalization and white alpha composition; PDF encryption/forms/page/pixel/DPI limits; source/file replacement detection; strict decoder manifest, canonical page paths, source/raster hashes and aggregate pixel verification; original-digital-PDF format binding; multi-page page identity; mandatory bound external preflight; explicit ROI-to-lead identity verification; immutable time/voltage/lead/twelve-lead permissions; bounded digitization; atomic canonical case publication with exact source and normalized-page persistence; real generated-JPEG integration through immutable extraction and immutable canonical analysis; authority/tamper/collision rejection"
     }
   ],
   "policy": [

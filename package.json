@@ -26,6 +26,7 @@
     "preprocess:wfdb": "node tools/preprocess_wfdb.js",
     "execute:wfdb": "node tools/run_ecg_pipeline.js",
     "intake:fixture": "node tools/run_image_intake.js --fixture",
-    "verify:model-asset": "node tools/verify_model_asset.js"
+    "verify:model-asset": "node tools/verify_model_asset.js",
+    "test:image-decoder": "python tests/image_decoder_test.py && node tests/image_decoder_bridge.test.js"
   }
 }

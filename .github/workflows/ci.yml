@@ -8,6 +8,28 @@ permissions:
   contents: read
 
 jobs:
+  image-decoder-ci:
+    name: Bounded JPEG/PDF decoder and canonical intake
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned native decoder wrappers
+        run: python -m pip install --disable-pip-version-check -r requirements-image.txt
+      - name: Exercise bounded decoder and bridge
+        env:
+          EKG_IMAGE_PYTHON: python
+        run: npm run test:image-decoder
+
   synthetic-contract-ci:
     name: Synthetic contract CI (non-clinical)
     runs-on: ubuntu-latest

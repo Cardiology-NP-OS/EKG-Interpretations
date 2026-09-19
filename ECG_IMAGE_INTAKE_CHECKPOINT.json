@@ -1,8 +1,8 @@
 {
   "schema": "ekg-image-intake-checkpoint-v1",
-  "status": "IMPLEMENTED_UNVERIFIED",
-  "updated_date": "2026-09-18",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery with digitization-qualified 90-degree orientation search, grid calibration, bounded sparse-column digitization, strict-subset stdlib PNG decode, mandatory bound preflight for every external image input, measurement gating, atomic content-addressed case persistence with verified source/raster artifacts, append-only immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions. JPEG and PDF decoding remain fail-closed.",
+  "status": "ENGINEERING_VERIFIED_GOVERNED_INACTIVE",
+  "updated_date": "2026-09-19",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, ROI localization and standard-layout discovery, digitization-qualified orientation search, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -17,20 +17,26 @@
     "lib/image_png_codec.js",
     "tools/run_image_intake.js",
     "lib/image_signal_analysis.js",
-    "lib/image_analysis_store.js"
+    "lib/image_analysis_store.js",
+    "lib/image_decoder.py",
+    "lib/image_decoder_bridge.js",
+    "lib/image_file_intake.js",
+    "tools/decode_image_source.py"
   ],
   "tests": [
     "tests/image_intake_pipeline.test.js",
     "tests/image_png_codec.test.js",
     "tests/image_extraction_store.test.js",
     "tests/image_signal_analysis.test.js",
-    "tests/image_analysis_store.test.js"
+    "tests/image_analysis_store.test.js",
+    "tests/image_decoder_test.py",
+    "tests/image_decoder_bridge.test.js"
   ],
   "registryPromotion": "NOT_CLAIMED",
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
   "proofBoundary": {
     "syntheticAndAdversarialEngineeringEvidence": true,
-    "encodedFileDecodingImplemented": "PNG_STRICT_SUBSET_ONLY",
+    "encodedFileDecodingImplemented": "PNG_JPEG_PDF_BOUNDED_ENGINEERING",
     "pngSupportedSubset": "8-bit non-interlaced grayscale, RGB, and RGBA; RGBA is composited over white; tRNS and unsupported critical chunks fail closed",
     "durableImmutableCasePersistenceImplemented": true,
     "externalComparativeSuperiorityEstablished": false,
@@ -48,7 +54,29 @@
     "preflightPermissionsPersistIntoExtraction": true,
     "preflightPermissionsEnforcedDuringAnalysis": true,
     "externalRoiLeadIdentityVerificationRequiredForNamedLeadClaims": true,
-    "externalRoiLeadIdentityNote": "Supplying ROIs is not itself treated as lead-identity proof. External named-lead measurement/analysis and twelve-lead claims require roiLeadIdentityVerified=true in addition to a preflight that permits specific-lead claims."
+    "externalRoiLeadIdentityNote": "Supplying ROIs is not itself treated as lead-identity proof. External named-lead measurement/analysis and twelve-lead claims require roiLeadIdentityVerified=true in addition to a preflight that permits specific-lead claims.",
+    "jpegSupported": true,
+    "pdfSupported": true,
+    "pdfPageLimit": 8,
+    "maxPagePixels": 4000000,
+    "maxTotalDecodedPixels": 8000000,
+    "originalEncodedBytesPreservedForFileIntake": true,
+    "multiPagePdfCaseIdentityIncludesPageIndex": true,
+    "decoderDependenciesPinned": true,
+    "decoderDependencies": [
+      "Pillow==12.3.0",
+      "pypdfium2==5.13.0"
+    ],
+    "nativeDecoderProcessBoundary": true,
+    "hardenedOsSandbox": false,
+    "realClinicalImageValidationEstablished": false,
+    "decoderSyntheticIntegrationVerified": true,
+    "decoderExactHeadCiVerified": true,
+    "decoderWrapperVersionEnforced": true,
+    "fileIntakeCanonicalPersistenceHelperImplemented": true,
+    "jpegFullChainThroughImmutableAnalysisVerified": true,
+    "pdfMultipageCanonicalPersistenceVerified": true,
+    "sourceKindFormatBindingEnforcedForOriginalDigitalPdf": true
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
