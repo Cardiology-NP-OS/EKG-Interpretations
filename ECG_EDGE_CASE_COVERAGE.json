@@ -126,6 +126,15 @@
         "tests/edge_case_coverage.test.js"
       ],
       "scope": "source-of-truth docs, Neon boundary, research format, branch retirement classification"
+    },
+    {
+      "id": "PHOTO-PDF-DURABLE-EXTRACTION",
+      "tests": [
+        "tests/image_intake_pipeline.test.js",
+        "tests/image_png_codec.test.js",
+        "tests/image_extraction_store.test.js"
+      ],
+      "scope": "strict encoded-image subset, orientation-qualified digitization, bounded sparse-column hold, atomic case publication, preserved source/raster artifact hashes, append-only content-addressed extraction generations, tamper/collision/case-identity rejection"
     }
   ],
   "policy": [
