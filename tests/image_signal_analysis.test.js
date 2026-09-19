@@ -133,6 +133,40 @@ test("if every canonical lead fails quality, analysis fails closed", () => {
   );
 });
 
+test("immutable extraction calibration permissions cannot be bypassed by later analysis", () => {
+  const fx = fixture("case://image-analysis-permission-calibration");
+  const changed = JSON.parse(JSON.stringify(fx.result));
+  changed.report.analysisPermissions.exactTimeMeasurementAllowed = false;
+  const extraction = buildExtraction(fx.caseRecord, changed);
+  assert.throws(
+    () => runImageSignalAnalysis(extraction, analysisConfig()),
+    /IMAGE_ANALYSIS_MEASUREMENT_PERMISSION_REQUIRED/,
+  );
+});
+
+test("immutable lead-identity permission blocks named-lead analysis", () => {
+  const fx = fixture("case://image-analysis-permission-lead");
+  const changed = JSON.parse(JSON.stringify(fx.result));
+  changed.report.analysisPermissions.specificLeadClaimsAllowed = false;
+  changed.report.analysisPermissions.twelveLeadClaimsAllowed = false;
+  const extraction = buildExtraction(fx.caseRecord, changed);
+  assert.throws(
+    () => runImageSignalAnalysis(extraction, analysisConfig()),
+    /IMAGE_ANALYSIS_LEAD_IDENTITY_PERMISSION_REQUIRED/,
+  );
+});
+
+test("twelve-lead permission controls completeness even when twelve traces are processed", () => {
+  const fx = fixture("case://image-analysis-permission-twelve");
+  const changed = JSON.parse(JSON.stringify(fx.result));
+  changed.report.analysisPermissions.twelveLeadClaimsAllowed = false;
+  const extraction = buildExtraction(fx.caseRecord, changed);
+  const out = runImageSignalAnalysis(extraction, analysisConfig());
+  assert.strictEqual(out.processedLeadCount, 12);
+  assert.strictEqual(out.completeStandardTwelveLead, false);
+  assert.strictEqual(out.sourcePermissions.twelveLeadClaimsAllowed, false);
+});
+
 test("analysis rejects extraction identity substitution", () => {
   const fx = fixture("case://image-analysis-identity");
   const changed = JSON.parse(JSON.stringify(fx.extraction));
