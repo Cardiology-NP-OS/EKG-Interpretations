@@ -9,6 +9,7 @@ const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOV
 const { localizeLeadRois } = require("../lib/image_roi_localization");
 const { discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
 const { rotate90 } = require("../lib/image_robustness");
+const { rotateArbitraryNearest } = require("../lib/image_geometry_normalization");
 const { estimateGridCalibration } = require("../lib/image_grid_calibration");
 const { digitizeLeadRois, pearson, peakAmplitude } = require("../lib/image_digitization");
 const { runImageIntakePipeline, INTAKE_GOVERNANCE } = require("../lib/image_intake_pipeline");
@@ -670,6 +671,60 @@ test("standard-layout discovery recovers twelve panels without supplied ROIs", (
   assert.strictEqual(out.report.roiSource, "DISCOVERED_3X4_RHYTHM");
   assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
   assert.strictEqual(out.digitized.leadCount, found.roiCount);
+});
+
+test("continuous deskew recovers a three-degree synthetic page before layout discovery", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const skewed = rotateArbitraryNearest(paper.image, { degrees: 3 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: skewed,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowDeskewSearch: true,
+    maxDeskewDegrees: 5,
+    deskewStepDegrees: 0.5,
+    deskewDarkThreshold: 245,
+    provenance: { locator: "case://deskew-3deg", projectGold: false },
+  });
+  assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
+  assert.strictEqual(out.report.roiSource, "DISCOVERED_3X4_RHYTHM");
+  assert.strictEqual(out.report.geometryNormalization.deskewApplied, true);
+  assert.ok(
+    Math.abs(out.report.geometryNormalization.deskewCorrectionDegrees + 3) <= 0.5,
+    JSON.stringify(out.report.geometryNormalization),
+  );
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-deskew-case-"));
+  const receipt = persistImageIntakeCase(dir, {
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: skewed,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowDeskewSearch: true,
+    maxDeskewDegrees: 5,
+    deskewStepDegrees: 0.5,
+    deskewDarkThreshold: 245,
+    provenance: { locator: "case://deskew-3deg", projectGold: false },
+  }, out);
+  const stored = readImageCase(receipt.path);
+  assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+});
+
+test("automatic deskew rejects fixed ROI coordinates", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  assert.throws(() => runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowDeskewSearch: true,
+    provenance: { locator: "case://deskew-fixed-roi", projectGold: false },
+  }), /INTAKE_DESKEW_WITH_EXPLICIT_ROIS_UNSUPPORTED/);
 });
 
 test("orientation search recovers a 90-degree rotated synthetic page", () => {
