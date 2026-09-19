@@ -4,6 +4,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const cp = require("child_process");
+const crypto = require("crypto");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOVERNANCE } = require("../lib/paper_ecg_raster");
 const { localizeLeadRois } = require("../lib/image_roi_localization");
 const { discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
@@ -426,6 +427,31 @@ test("case reopen rejects normalized raster artifact tampering", () => {
   const raster = path.join(path.dirname(receipt.path), "normalized.png");
   fs.appendFileSync(raster, Buffer.from([0]));
   assert.throws(() => readImageCase(receipt.path), /CASE_ARTIFACT_SIZE_MISMATCH|CASE_ARTIFACT_HASH_MISMATCH/);
+});
+
+test("case reopen rejects substituted artifact filenames even with a matching manifest hash", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://persist-artifact-path", projectGold: false },
+  });
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-case-artifact-path-"));
+  const receipt = persistImageCase(dir, out, { normalizedRaster: paper.image });
+  const caseDir = path.dirname(receipt.path);
+  const manifest = JSON.parse(fs.readFileSync(receipt.path, "utf8"));
+  manifest.artifacts.normalizedRaster.file = "../normalized.png";
+  const body = `${JSON.stringify(manifest, null, 2)}\n`;
+  fs.writeFileSync(receipt.path, body);
+  fs.writeFileSync(
+    path.join(caseDir, "manifest.sha256"),
+    `${crypto.createHash("sha256").update(body).digest("hex")}\n`,
+  );
+  assert.throws(() => readImageCase(receipt.path), /CASE_ARTIFACT_MANIFEST/);
 });
 
 test("case persistence is content-stable and idempotent", () => {
