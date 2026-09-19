@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "IMPLEMENTED_UNVERIFIED",
   "updated_date": "2026-09-18",
-  "scope": "Target-owned photo/PDF product path as raster-matrix engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery, 90-degree orientation search, grid calibration, millivolt digitization with sparse-column hold, strict-subset stdlib PNG encode/decode, optional measurement connection, and basic case-record persistence. JPEG and PDF decoding remain fail-closed; durable immutable source/case persistence remains a consolidation gate.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery with digitization-qualified 90-degree orientation search, grid calibration, bounded sparse-column digitization, strict-subset stdlib PNG decode, measurement gating, atomic content-addressed case persistence with verified source/raster artifacts, and append-only immutable digitized extraction generations. JPEG and PDF decoding remain fail-closed.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -13,12 +13,14 @@
     "lib/image_digitization.js",
     "lib/image_intake_pipeline.js",
     "lib/image_case_store.js",
+    "lib/image_extraction_store.js",
     "lib/image_png_codec.js",
     "tools/run_image_intake.js"
   ],
   "tests": [
     "tests/image_intake_pipeline.test.js",
-    "tests/image_png_codec.test.js"
+    "tests/image_png_codec.test.js",
+    "tests/image_extraction_store.test.js"
   ],
   "registryPromotion": "NOT_CLAIMED",
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
@@ -26,11 +28,15 @@
     "syntheticAndAdversarialEngineeringEvidence": true,
     "encodedFileDecodingImplemented": "PNG_STRICT_SUBSET_ONLY",
     "pngSupportedSubset": "8-bit non-interlaced grayscale, RGB, and RGBA; RGBA is composited over white; tRNS and unsupported critical chunks fail closed",
-    "durableImmutableCasePersistenceImplemented": false,
+    "durableImmutableCasePersistenceImplemented": true,
     "externalComparativeSuperiorityEstablished": false,
     "worldBestClaim": "NOT_ESTABLISHED",
     "clinicalPerformanceClaimed": false,
-    "clinicalValidityInferred": false
+    "clinicalValidityInferred": false,
+    "originalEncodedBytesPreservedWhenSupplied": true,
+    "normalizedRasterPreserved": true,
+    "immutableExtractionGenerationsImplemented": true,
+    "immutableAnalysisGenerationsImplemented": false
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
