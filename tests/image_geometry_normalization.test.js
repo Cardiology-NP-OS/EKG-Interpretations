@@ -71,6 +71,28 @@ test("ink-preserving expanded rotation avoids long holes in a one-pixel trace", 
   }
 });
 
+test("deskew resampling does not manufacture a three-column gap in a one-pixel trace", () => {
+  const image = Array.from({ length: 120 }, () => Array(360).fill(255));
+  for (let x = 20; x < 340; x += 1) image[60][x] = 0;
+  const skewed = rotateArbitraryExpandedInkPreserving(image, { degrees: 3 });
+  const recovered = rotateArbitraryInkPreserving(skewed, { degrees: -3 });
+  const inkColumns = [];
+  for (let x = 0; x < recovered[0].length; x += 1) {
+    if (recovered.some(row => row[x] <= 80)) inkColumns.push(x);
+  }
+  assert.ok(inkColumns.length > 0);
+  let gap = 0;
+  let maxGap = 0;
+  for (let x = inkColumns[0]; x <= inkColumns[inkColumns.length - 1]; x += 1) {
+    if (recovered.some(row => row[x] <= 80)) gap = 0;
+    else {
+      gap += 1;
+      maxGap = Math.max(maxGap, gap);
+    }
+  }
+  assert.ok(maxGap <= 2, `max missing run ${maxGap}`);
+});
+
 test("projection deskew recovers a synthetic three-degree grid rotation", () => {
   const source = gridFixture();
   const skewed = rotateArbitraryNearest(source, { degrees: 3 });
