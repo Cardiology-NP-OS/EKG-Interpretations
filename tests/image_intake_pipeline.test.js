@@ -9,7 +9,7 @@ const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOV
 const { localizeLeadRois } = require("../lib/image_roi_localization");
 const { discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
 const { rotate90 } = require("../lib/image_robustness");
-const { rotateArbitraryExpandedNearest } = require("../lib/image_geometry_normalization");
+const { rotateArbitraryExpandedInkPreserving } = require("../lib/image_geometry_normalization");
 const { estimateGridCalibration } = require("../lib/image_grid_calibration");
 const { digitizeLeadRois, pearson, peakAmplitude } = require("../lib/image_digitization");
 const { runImageIntakePipeline, INTAKE_GOVERNANCE } = require("../lib/image_intake_pipeline");
@@ -675,7 +675,7 @@ test("standard-layout discovery recovers twelve panels without supplied ROIs", (
 
 test("continuous deskew recovers a three-degree synthetic page before layout discovery", () => {
   const paper = renderFixture({ pxPerMm: 5 });
-  const skewed = rotateArbitraryExpandedNearest(paper.image, { degrees: 3 });
+  const skewed = rotateArbitraryExpandedInkPreserving(paper.image, { degrees: 3 });
   const out = runImageIntakePipeline({
     sourceKind: "synthetic_raster",
     format: "raster_matrix",
