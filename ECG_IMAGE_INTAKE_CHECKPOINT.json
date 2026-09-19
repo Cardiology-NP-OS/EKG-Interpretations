@@ -46,7 +46,9 @@
     "externalInputPreflightMandatory": true,
     "externalInputPreflightNote": "Every non-synthetic image intake requires a validated preflight receipt bound to source kind, transport format, raster dimensions, and any explicit paper speed/gain. Resulting analysis permissions are content-addressed into immutable extraction generations and enforced during later signal analysis.",
     "preflightPermissionsPersistIntoExtraction": true,
-    "preflightPermissionsEnforcedDuringAnalysis": true
+    "preflightPermissionsEnforcedDuringAnalysis": true,
+    "externalRoiLeadIdentityVerificationRequiredForNamedLeadClaims": true,
+    "externalRoiLeadIdentityNote": "Supplying ROIs is not itself treated as lead-identity proof. External named-lead measurement/analysis and twelve-lead claims require roiLeadIdentityVerified=true in addition to a preflight that permits specific-lead claims."
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
