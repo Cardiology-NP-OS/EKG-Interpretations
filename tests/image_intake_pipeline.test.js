@@ -143,6 +143,17 @@ test("digitization records a bounded two-column hold explicitly", () => {
   assert.strictEqual(lead.quality.maxHeldGapColumns, 2);
   assert.strictEqual(lead.quality.maxHeldColumns, 2);
   assert.strictEqual(lead.quality.holdPolicy, "BOUNDED_LAST_OBSERVATION_CARRY_FORWARD");
+  assert.strictEqual(lead.quality.baselineSource, "EXPLICIT_ROI");
+});
+
+test("digitization marks geometry-derived baseline as an assumption", () => {
+  const out = digitizeLeadRois({
+    image: sparseTraceFixture([]),
+    rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 },
+  });
+  assert.strictEqual(out.leads[0].baselineY, 11);
+  assert.strictEqual(out.leads[0].quality.baselineSource, "ROI_GEOMETRY_ASSUMPTION_55_PERCENT");
 });
 
 test("digitization rejects a missing run longer than the configured hold", () => {
@@ -185,6 +196,38 @@ test("intake rejects encoded photos without an explicit raster matrix", () => {
     format: "jpeg",
     provenance: { locator: "case://photo-1", projectGold: false },
   }), /INTAKE_ENCODED_IMAGE_RASTERIZATION_REQUIRED/);
+});
+
+test("assumed paper speed or gain cannot grant downstream exact-measurement permission", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: paper.rois,
+    provenance: { locator: "case://assumed-grid-permission", projectGold: false },
+  });
+  assert.strictEqual(out.grid.speedSource, "STANDARD_ASSUMPTION_25");
+  assert.strictEqual(out.grid.gainSource, "STANDARD_ASSUMPTION_10");
+  assert.strictEqual(out.report.analysisPermissions.exactTimeMeasurementAllowed, false);
+  assert.strictEqual(out.report.analysisPermissions.exactVoltageMeasurementAllowed, false);
+});
+
+test("geometry-derived baseline blocks downstream exact-voltage permission", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const rois = paper.rois.map(({ baselineY, ...roi }) => roi);
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    expectedRois: rois,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://assumed-baseline-permission", projectGold: false },
+  });
+  assert.strictEqual(out.report.analysisPermissions.exactTimeMeasurementAllowed, true);
+  assert.strictEqual(out.report.analysisPermissions.exactVoltageMeasurementAllowed, false);
+  assert.ok(out.digitized.leads.every(lead => lead.quality.baselineSource === "ROI_GEOMETRY_ASSUMPTION_55_PERCENT"));
 });
 
 test("external image intake requires preflight", () => {
