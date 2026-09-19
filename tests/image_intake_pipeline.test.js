@@ -685,7 +685,7 @@ test("continuous deskew recovers a three-degree synthetic page before layout dis
     allowDeskewSearch: true,
     maxDeskewDegrees: 5,
     deskewStepDegrees: 0.5,
-    deskewDarkThreshold: 245,
+    deskewDarkThreshold: 210,
     provenance: { locator: "case://deskew-3deg", projectGold: false },
   });
   assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
@@ -706,7 +706,7 @@ test("continuous deskew recovers a three-degree synthetic page before layout dis
     allowDeskewSearch: true,
     maxDeskewDegrees: 5,
     deskewStepDegrees: 0.5,
-    deskewDarkThreshold: 245,
+    deskewDarkThreshold: 210,
     provenance: { locator: "case://deskew-3deg", projectGold: false },
   }, out);
   const stored = readImageCase(receipt.path);
