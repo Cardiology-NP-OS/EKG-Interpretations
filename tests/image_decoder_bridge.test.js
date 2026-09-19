@@ -8,8 +8,9 @@ const cp = require("child_process");
 
 const { encodeGrayscalePng } = require("../lib/image_png_codec");
 const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS } = require("../lib/paper_ecg_raster");
-const { DECODER_LIMITS, NORMALIZATION, decodeImageSourceFile, readRegularFile, validateManifest } = require("../lib/image_decoder_bridge");
-const { runImageFileIntake } = require("../lib/image_file_intake");
+const { DECODER_LIMITS, EXPECTED_DECODER_WRAPPERS, NORMALIZATION, decodeImageSourceFile, readRegularFile, validateManifest } = require("../lib/image_decoder_bridge");
+const { readImageCase } = require("../lib/image_case_store");
+const { runImageFileIntake, persistImageFileIntakeCase, runAndPersistImageFileIntake } = require("../lib/image_file_intake");
 const { persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
 
 let passed = 0;
@@ -111,6 +112,34 @@ function withEncodedFixture(format, fn) {
   }
 }
 
+function withTwoPagePdfFixture(fn) {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-decoder-pdf-pages-"));
+  try {
+    const paper = paperFixture();
+    const png = path.join(temp, "source.png");
+    const encoded = path.join(temp, "source.pdf");
+    fs.writeFileSync(png, encodeGrayscalePng(paper.image));
+    const code = [
+      "from PIL import Image",
+      "import sys",
+      "src,out=sys.argv[1:3]",
+      "im=Image.open(src).convert('RGB')",
+      "second=im.copy()",
+      "im.save(out, 'PDF', resolution=72, save_all=True, append_images=[second])",
+      "second.close(); im.close()",
+    ].join("\n");
+    const run = cp.spawnSync(pythonExecutable(), ["-c", code, png, encoded], {
+      encoding: "utf8",
+      timeout: 30_000,
+      shell: false,
+    });
+    assert.strictEqual(run.status, 0, run.stderr);
+    fn({ temp, paper, encoded });
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
+}
+
 test("manifest validation rejects path and authority substitution", () => {
   const base = {
     schema: "ekg-image-decoder-result-v1",
@@ -163,6 +192,14 @@ test("manifest validation rejects path and authority substitution", () => {
   const decoder = JSON.parse(JSON.stringify(base));
   decoder.decoder.implementationSha256 = "not-a-hash";
   assert.throws(() => validateManifest(decoder), /IMAGE_DECODER_IDENTITY/);
+
+  const wrapperVersion = JSON.parse(JSON.stringify(base));
+  wrapperVersion.decoder.Pillow = "0.0.0";
+  assert.throws(() => validateManifest(wrapperVersion), /IMAGE_DECODER_IDENTITY/);
+  assert.deepStrictEqual(EXPECTED_DECODER_WRAPPERS, {
+    Pillow: "12.3.0",
+    pypdfium2: "5.13.0",
+  });
 
   const pageExtra = JSON.parse(JSON.stringify(base));
   pageExtra.pages[0].unexpected = true;
@@ -351,6 +388,95 @@ test("multi-page PDF pages have distinct case identity and persist the exact sou
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
   }
+});
+
+test("JPEG file intake persists exact source bytes and normalized raster through canonical case store", () => {
+  withEncodedFixture("jpeg", ({ paper, encoded }) => {
+    const decoded = decodeImageSourceFile({ sourcePath: encoded });
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-jpeg-case-store-"));
+    try {
+      const persisted = runAndPersistImageFileIntake(root, {
+        sourcePath: encoded,
+        sourceKind: "phone_photo",
+        expectedRois: paper.rois,
+        paperSpeedMmPerS: 25,
+        gainMmPerMv: 10,
+        roiLeadIdentityVerified: true,
+        preflight: externalPreflight(decoded.pages[0].raster, "phone_photo", "jpeg"),
+        provenance: { locator: "case://jpeg-persisted-file-intake", projectGold: false },
+      });
+      const stored = readImageCase(persisted.caseReceipt.path);
+      const caseDir = path.dirname(persisted.caseReceipt.path);
+      assert.strictEqual(stored.report.sourceSha256, decoded.sourceSha256);
+      assert.strictEqual(stored.report.sourcePageIndex, 0);
+      assert.strictEqual(stored.persistence.originalBytesPreserved, true);
+      assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+      assert.deepStrictEqual(fs.readFileSync(path.join(caseDir, "original.bin")), fs.readFileSync(encoded));
+      assert.ok(fs.statSync(path.join(caseDir, "normalized.png")).size > 0);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+});
+
+test("two pages from one PDF mint distinct case identities while preserving one source identity", () => {
+  withTwoPagePdfFixture(({ paper, encoded }) => {
+    const decoded = decodeImageSourceFile({ sourcePath: encoded, pdfDpi: 72 });
+    assert.strictEqual(decoded.pages.length, 2);
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-pdf-case-store-"));
+    try {
+      const base = {
+        sourcePath: encoded,
+        pdfDpi: 72,
+        sourceKind: "original_digital_ecg_pdf",
+        expectedRois: paper.rois,
+        paperSpeedMmPerS: 25,
+        gainMmPerMv: 10,
+        roiLeadIdentityVerified: true,
+        provenance: { locator: "case://two-page-pdf", projectGold: false },
+      };
+      const page0 = runImageFileIntake({
+        ...base,
+        pageIndex: 0,
+        preflight: externalPreflight(decoded.pages[0].raster, "original_digital_ecg_pdf", "pdf"),
+      });
+      const page1 = runImageFileIntake({
+        ...base,
+        pageIndex: 1,
+        preflight: externalPreflight(decoded.pages[1].raster, "original_digital_ecg_pdf", "pdf"),
+      });
+      assert.notStrictEqual(page0.result.report.caseId, page1.result.report.caseId);
+      assert.strictEqual(page0.result.report.sourceSha256, page1.result.report.sourceSha256);
+      assert.strictEqual(page0.result.report.sourcePageIndex, 0);
+      assert.strictEqual(page1.result.report.sourcePageIndex, 1);
+
+      const receipt0 = persistImageFileIntakeCase(root, page0);
+      const receipt1 = persistImageFileIntakeCase(root, page1);
+      assert.notStrictEqual(receipt0.caseId, receipt1.caseId);
+      assert.strictEqual(fs.readdirSync(root).filter(name => name.startsWith("case-")).length, 2);
+      for (const receipt of [receipt0, receipt1]) {
+        const stored = readImageCase(receipt.path);
+        assert.strictEqual(stored.report.sourceSha256, decoded.sourceSha256);
+        assert.deepStrictEqual(
+          fs.readFileSync(path.join(path.dirname(receipt.path), "original.bin")),
+          fs.readFileSync(encoded),
+        );
+      }
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+});
+
+test("original-digital-PDF source kind cannot be attached to a JPEG source", () => {
+  withEncodedFixture("jpeg", ({ encoded }) => {
+    assert.throws(() => runImageFileIntake({
+      sourcePath: encoded,
+      sourceKind: "original_digital_ecg_pdf",
+      preflight: {},
+      provenance: { locator: "case://source-kind-format-mismatch", projectGold: false },
+    }), /IMAGE_FILE_INTAKE_SOURCE_KIND_FORMAT_MISMATCH/);
+  });
 });
 
 test("decoded file intake rejects a page index outside the decoded document", () => {
