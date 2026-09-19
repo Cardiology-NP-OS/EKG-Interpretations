@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "IMPLEMENTED_UNVERIFIED",
   "updated_date": "2026-09-18",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery with digitization-qualified 90-degree orientation search, grid calibration, bounded sparse-column digitization, strict-subset stdlib PNG decode, measurement gating, atomic content-addressed case persistence with verified source/raster artifacts, append-only immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions. JPEG and PDF decoding remain fail-closed.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: synthetic 12-lead paper generation, ROI localization, standard-layout ROI discovery with digitization-qualified 90-degree orientation search, grid calibration, bounded sparse-column digitization, strict-subset stdlib PNG decode, mandatory bound preflight for every external image input, measurement gating, atomic content-addressed case persistence with verified source/raster artifacts, append-only immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions. JPEG and PDF decoding remain fail-closed.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -43,8 +43,10 @@
     "immutableAnalysisGenerationsImplemented": true,
     "analysisReusesCanonicalSignalIntelligence": true,
     "simultaneousLeadComparisonPerformed": false,
-    "externalInputPreflightMandatory": false,
-    "externalInputPreflightNote": "The input-quality guard remains optional at the image-intake entrypoint; this is an unfinished consolidation gate for externally supplied images."
+    "externalInputPreflightMandatory": true,
+    "externalInputPreflightNote": "Every non-synthetic image intake requires a validated preflight receipt bound to source kind, transport format, raster dimensions, and any explicit paper speed/gain. Resulting analysis permissions are content-addressed into immutable extraction generations and enforced during later signal analysis.",
+    "preflightPermissionsPersistIntoExtraction": true,
+    "preflightPermissionsEnforcedDuringAnalysis": true
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
