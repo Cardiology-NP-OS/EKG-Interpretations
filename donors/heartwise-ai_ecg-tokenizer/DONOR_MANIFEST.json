@@ -1,0 +1,66 @@
+{
+  "schema": "ekg-donor-manifest-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "audited_head": {
+    "branch": "main",
+    "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+    "tree": null,
+    "commit_verified": true,
+    "tree_verification": "UNRESOLVED_CONNECTOR_SURFACE_DO_NOT_INVENT"
+  },
+  "target_basis": {
+    "commit": "dd2b7a0bc3c2fd0576db4c7de05b1f2eb887e456",
+    "tree": "11c01cb7505b9b9dbe8e9d247ff2fb5d5bc24bd4"
+  },
+  "software_license": {
+    "spdx": "MIT",
+    "license_file": "LICENSE",
+    "license_blob_sha": "09ef05852eeeab23785b9a44e93154e10b7028d8",
+    "reuse_status": "SOURCE_REUSE_ALLOWED_WITH_ATTRIBUTION"
+  },
+  "audited_exact_files": [
+    {
+      "path": "README.md",
+      "blob_sha": "9e4cae0032c1ab3613401ba7f4b18d90bfce44d0"
+    },
+    {
+      "path": "LICENSE",
+      "blob_sha": "09ef05852eeeab23785b9a44e93154e10b7028d8"
+    },
+    {
+      "path": "pyproject.toml",
+      "blob_sha": "7d1dde0077d590628d78961eddcd7dfd6c3d7e65"
+    },
+    {
+      "path": "models/ecg_tokenizer_wrapper.py",
+      "blob_sha": "283ed5fb888e9b9a715eba48faf781bcfa851a9e"
+    },
+    {
+      "path": "models/bridge/bridge.py",
+      "blob_sha": "8d5a6b1b590f40b047d1a059af168b6d6765a32a"
+    },
+    {
+      "path": "models/local_residual_vq.py",
+      "blob_sha": "1a733422956ac53f7dad8b3d0736d45efdd41629"
+    },
+    {
+      "path": "models/scalable_encoder.py",
+      "blob_sha": "2b5935d858d4153ec5c5b45fb735f094aea08767"
+    },
+    {
+      "path": "tests/models/test_qformer_mix_strategy.py",
+      "blob_sha": "73d79686807d2584bd2de1e1d6ccdf4f38980765"
+    },
+    {
+      "path": "tests/models/test_qformer_token_axis.py",
+      "blob_sha": "79c4dc7e0707dad86de1593f1ddf5e4ea3520c12"
+    }
+  ],
+  "acquisition": "GitHub connector exact commit/file inspection; no upstream clone or model/data materialization",
+  "model_weights_imported": false,
+  "dataset_bytes_imported": false,
+  "donor_source_code_copied": false,
+  "donor_runtime_dependency_added": false,
+  "clinical_authority_added": false
+}
