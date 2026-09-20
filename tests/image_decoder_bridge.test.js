@@ -14,6 +14,8 @@ const { readImageCase } = require("../lib/image_case_store");
 const { persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
 const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
 const { projectRectangleToQuadrilateral } = require("../lib/image_geometry_normalization");
+const { renderLeadLabel } = require("../lib/image_lead_identity");
+const { runImageIntakePipeline } = require("../lib/image_intake_pipeline");
 const { persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
 
 let passed = 0;
@@ -365,6 +367,75 @@ test("generated JPEG phone photo reaches automatic perspective recovery without 
     assert.deepStrictEqual(
       fs.readFileSync(path.join(path.dirname(persisted.caseReceipt.path), "original.bin")),
       fs.readFileSync(jpeg),
+    );
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test("generated JPEG lead labels unlock identity claims but not unverified voltage analysis", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-jpeg-lead-identity-"));
+  try {
+    const paper = paperFixture();
+    const discovery = runImageIntakePipeline({
+      sourceKind: "synthetic_raster",
+      format: "raster_matrix",
+      raster: paper.image,
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      provenance: { locator: "case://lead-label-discovery-helper", projectGold: false },
+    });
+    const labeled = paper.image.map(row => row.slice());
+    for (const roi of discovery.discovery.rois) {
+      renderLeadLabel(labeled, roi.lead, roi.x + 4, roi.y + 4, { scale: 2, value: 8 });
+    }
+
+    const png = path.join(temp, "labeled.png");
+    const jpeg = path.join(temp, "labeled.jpg");
+    fs.writeFileSync(png, encodeGrayscalePng(labeled));
+    convertWithPillow(png, jpeg, "jpeg");
+
+    const decoded = decodeImageSourceFile({ sourcePath: jpeg });
+    const persisted = runAndPersistImageFileIntake(path.join(temp, "cases"), {
+      sourcePath: jpeg,
+      sourceKind: "phone_photo",
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      verifyLeadLabelsFromRaster: true,
+      leadLabelScale: 2,
+      leadLabelDarkThreshold: 80,
+      leadLabelSearchRadius: 4,
+      leadLabelMinScore: 0.88,
+      leadLabelOffsetX: 4,
+      leadLabelOffsetY: 4,
+      preflight: externalPreflight(decoded.pages[0].raster, "phone_photo", "jpeg"),
+      provenance: { locator: "case://jpeg-lead-identity", projectGold: false },
+    });
+
+    const report = persisted.fileIntake.result.report;
+    assert.strictEqual(report.roiSource, "DISCOVERED_3X4_RHYTHM");
+    assert.strictEqual(report.roi.leadIdentityVerified, true);
+    assert.strictEqual(report.roi.leadIdentitySource, "STRICT_BITMAP_LABEL_TEMPLATE_V1");
+    assert.ok(report.leadIdentity);
+    assert.strictEqual(report.leadIdentity.verified, true);
+    assert.strictEqual(report.analysisPermissions.specificLeadClaimsAllowed, true);
+    assert.strictEqual(report.analysisPermissions.twelveLeadClaimsAllowed, true);
+    assert.strictEqual(report.analysisPermissions.exactVoltageMeasurementAllowed, false);
+
+    const extractionReceipt = persistImageExtraction(
+      persisted.caseReceipt.path,
+      persisted.fileIntake.result,
+    );
+    const extraction = readImageExtraction(
+      persisted.caseReceipt.path,
+      extractionReceipt.extractionId,
+    );
+    assert.strictEqual(extraction.analysisPermissions.specificLeadClaimsAllowed, true);
+    assert.strictEqual(extraction.analysisPermissions.twelveLeadClaimsAllowed, true);
+    assert.strictEqual(extraction.analysisPermissions.exactVoltageMeasurementAllowed, false);
+    assert.throws(
+      () => runImageSignalAnalysis(extraction, analysisConfig()),
+      /IMAGE_ANALYSIS_MEASUREMENT_PERMISSION_REQUIRED/,
     );
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
