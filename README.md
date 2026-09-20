@@ -8,7 +8,7 @@ The product goal is to accept photographs or PDF images of ECGs and produce cali
 
 The current engineering path can bounded-decode PNG/JPEG/PDF source files, normalize selected pages, require external-input preflight, digitize governed traces, preserve the original source and normalized raster, and create immutable extraction/analysis generations. JPEG/PDF decoding runs through a pinned Pillow/pypdfium2 worker process and is separately exercised in CI.
 
-This is generated-fixture engineering evidence, not clinical validation. Automatic lead identity, real-photo/perspective robustness, reference-case accuracy, evidence-backed clinical interpretation, diagnostic runtime, project gold, and reportable clinical metrics remain inactive/unestablished.
+This is generated-fixture engineering evidence, not clinical validation. Bounded automatic perspective detection, supported printed-label lead identity, trace-baseline verification, calibrated digitization, immutable extraction/analysis, and temporally scoped multi-lead aggregation are implemented for governed engineering fixtures. Real-photo/reference-case clinical accuracy, evidence-backed clinical interpretation, diagnostic runtime, project gold, and reportable clinical metrics remain inactive/unestablished.
 
 ## Live operating state
 
@@ -27,7 +27,7 @@ Current governed state:
 - `activation = NOT_ELIGIBLE`
 - `clinical_validity = NOT_INFERRED`
 
-The donor program is active. At this handoff checkpoint **13 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-014, `HeartWise-AI/ECG_tokenizer`**. Verify the live registry before starting because another lane may have advanced it.
+The donor program is active. At this handoff checkpoint **14 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-015, `HeartWise-AI/ECG_LLM_Judge`**. Verify the live registry before starting because another lane may have advanced it.
 
 This is software/research/evaluation infrastructure. It does not authorize patient-specific ECG diagnosis, treatment, project clinical-gold creation, fabricated diagnostic performance, runtime activation, or transfer of clinical authority.
 
