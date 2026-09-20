@@ -168,6 +168,27 @@ test("persistence rejects falsified simultaneous paper groups", () => {
   );
 });
 
+test("persistence requires complete supplemental paper-window accounting", () => {
+  const fx = fixture("case://analysis-store-supplemental-accounting");
+  assert.strictEqual(fx.analysis.supplementalPaperWindowAnalyses.length, 1);
+  const changed = JSON.parse(JSON.stringify(fx.analysis));
+  changed.supplementalPaperWindowAnalyses = [];
+  assert.throws(
+    () => persistImageAnalysis(fx.caseReceipt.path, changed),
+    /IMAGE_ANALYSIS_SUPPLEMENTAL_ACCOUNTING/,
+  );
+});
+
+test("persistence rejects supplemental panel-window substitution", () => {
+  const fx = fixture("case://analysis-store-supplemental-window");
+  const changed = JSON.parse(JSON.stringify(fx.analysis));
+  changed.supplementalPaperWindowAnalyses[0].paperWindow.startSeconds = 2.5;
+  assert.throws(
+    () => persistImageAnalysis(fx.caseReceipt.path, changed),
+    /IMAGE_ANALYSIS_SUPPLEMENTAL_SOURCE/,
+  );
+});
+
 test("persistence rejects lead paper-window substitution", () => {
   const fx = fixture("case://analysis-store-window-tamper");
   const changed = JSON.parse(JSON.stringify(fx.analysis));
