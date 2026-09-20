@@ -68,9 +68,15 @@
     }
   ],
   "promotion": {
-    "status": "NOT_PERFORMED"
+    "status": "ACCEPTED_ON_MAIN",
+    "method": "MERGE_PR_14_WITH_EXPECTED_HEAD_SHA",
+    "commit": "de7e13a28c502fa5e1ced202a888ee66a44db700",
+    "tree": "75d8f4d894280ef381d495cb79d8902a7f11bc69",
+    "target_main_ci_run_id": 35541060481,
+    "target_main_ci_conclusion": "success",
+    "force": false
   },
-  "acceptance_state": "VERIFIED_CANDIDATE_NOT_PROMOTED",
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
   "governed_state_after": {
     "diagnostic_runtime": "GOVERNED_INACTIVE",
     "evidence_admission": "NOT_ADMITTED",
