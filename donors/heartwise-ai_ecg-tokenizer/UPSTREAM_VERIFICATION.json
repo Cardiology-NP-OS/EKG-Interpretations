@@ -1,0 +1,39 @@
+{
+  "schema": "ekg-donor-014-upstream-verification-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "audited_branch": "main",
+  "audited_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "audited_tree": null,
+  "audited_tree_status": "UNRESOLVED_CONNECTOR_SURFACE_DO_NOT_INVENT",
+  "repository_metadata": {
+    "repository_id": "856673323",
+    "default_branch": "main",
+    "visibility": "public",
+    "archived": false,
+    "repository_size_kb": 88774
+  },
+  "latest_commit_observed": {
+    "sha": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+    "created_at": "2026-08-26T13:45:14Z",
+    "message_prefix": "build(deps): bump the uv group across 1 directory with 2 updates (#133)"
+  },
+  "source_license": {
+    "spdx": "MIT",
+    "path": "LICENSE",
+    "blob_sha": "09ef05852eeeab23785b9a44e93154e10b7028d8"
+  },
+  "selected_exact_blob_audit_count": 15,
+  "full_recursive_tree_verified": false,
+  "upstream_test_suite_executed_by_target": false,
+  "donor_models_executed_by_target": false,
+  "donor_checkpoints_materialized": false,
+  "donor_dataset_bytes_materialized": false,
+  "observations": [
+    "ResidualVQ.get_output_from_indices reconstructs by summing residual codebook contributions.",
+    "Bridge/test surfaces distinguish channel-token and time-token semantics and reject incompatible structural configurations.",
+    "Upstream training/evaluation configs reference local/external checkpoints and datasets rather than target-admitted immutable assets.",
+    "The donor dependency stack is model-specific and is not required for the harvested target-owned contracts."
+  ],
+  "evidence_boundary": "SOURCE_INSPECTION_ONLY_NO_TARGET_CLINICAL_VALIDATION"
+}
