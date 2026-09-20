@@ -73,7 +73,7 @@
         "tests/image_geometry_normalization.test.js",
         "tests/image_intake_pipeline.test.js"
       ],
-      "scope": "escaping hostile labels, nonfinite samples, bounded dimensions/sample budget, malformed transforms, bounded continuous deskew estimation, ink-continuity-preserving resampling, deterministic crop provenance, full-row origin alignment, cumulative-time panel boundaries, missing raster for encoded paths, hostile ROI bounds, project-gold intake rejection"
+      "scope": "escaping hostile labels, nonfinite samples, bounded dimensions/sample budget, malformed transforms, explicit verified quadrilateral perspective rectification, homography degeneracy/bounds/output-budget rejection, bounded continuous deskew estimation, ink-continuity-preserving resampling, deterministic crop provenance, full-row origin alignment, cumulative-time panel boundaries, missing raster for encoded paths, hostile ROI bounds, project-gold intake rejection"
     },
     {
       "id": "DATASET-SPLITS",
@@ -141,7 +141,7 @@
         "tests/image_analysis_store.test.js",
         "tests/image_geometry_normalization.test.js"
       ],
-      "scope": "bounded PNG/JPEG/PDF source decoding; pinned Pillow/pypdfium2 wrapper identity; EXIF normalization and white alpha composition; PDF encryption/forms/page/pixel/DPI limits; source/file replacement detection; strict decoder manifest, canonical page paths, source/raster hashes and aggregate pixel verification; original-digital-PDF format binding; multi-page page identity; mandatory bound external preflight; explicit ROI-to-lead identity verification; immutable time/voltage/lead/twelve-lead permissions; bounded digitization; atomic canonical case publication with exact source and normalized-page persistence; real generated-JPEG integration through immutable extraction and immutable canonical analysis; authority/tamper/collision rejection; bounded 3-degree continuous deskew recovery through layout discovery/digitization without raising the two-column hold threshold; replayable deskew/crop persistence provenance"
+      "scope": "bounded PNG/JPEG/PDF source decoding; pinned Pillow/pypdfium2 wrapper identity; EXIF normalization and white alpha composition; PDF encryption/forms/page/pixel/DPI limits; source/file replacement detection; strict decoder manifest, canonical page paths, source/raster hashes and aggregate pixel verification; original-digital-PDF format binding; multi-page page identity; mandatory bound external preflight; explicit ROI-to-lead identity verification; immutable time/voltage/lead/twelve-lead permissions; bounded digitization; atomic canonical case publication with exact source and normalized-page persistence; real generated-JPEG integration through immutable extraction and immutable canonical analysis; authority/tamper/collision rejection; bounded 3-degree continuous deskew recovery through layout discovery/digitization without raising the two-column hold threshold; replayable deskew/crop persistence provenance; explicit verified perspective rectification through deskew/layout/digitization/persistence replay without relaxing digitization thresholds"
     }
   ],
   "policy": [
