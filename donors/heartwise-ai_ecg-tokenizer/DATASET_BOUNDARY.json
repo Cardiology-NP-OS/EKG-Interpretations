@@ -25,5 +25,8 @@
     ]
   },
   "phi_or_restricted_data_imported": false,
-  "clinical_gold_created": false
+  "clinical_gold_created": false,
+  "tracked_dataset_like_files": [],
+  "repository_contains_tracked_dataset_payloads": false,
+  "full_tree_evidence": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json"
 }
