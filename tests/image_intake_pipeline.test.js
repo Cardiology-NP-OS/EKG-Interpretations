@@ -774,6 +774,109 @@ test("explicit perspective rectification recovers a distorted paper through cano
   assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
 });
 
+test("automatic perspective detection recovers distorted paper through canonical intake", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const canvasWidth = paper.width + 160;
+  const canvasHeight = paper.height + 120;
+  const corners = {
+    topLeft: { x: 62, y: 42 },
+    topRight: { x: canvasWidth - 78, y: 18 },
+    bottomRight: { x: canvasWidth - 46, y: canvasHeight - 68 },
+    bottomLeft: { x: 34, y: canvasHeight - 38 },
+  };
+  const distorted = projectRectangleToQuadrilateral(paper.image, {
+    destinationCorners: corners,
+    canvasWidth,
+    canvasHeight,
+  });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: distorted,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowPerspectiveDetection: true,
+    perspectiveDetectionDarkThreshold: 245,
+    perspectiveDetectionMinAreaFraction: 0.4,
+    perspectiveDetectionMinEdgeSupportFraction: 0.15,
+    perspectiveDetectionEdgeTolerancePx: 6,
+    perspectiveOutputWidth: paper.width,
+    perspectiveOutputHeight: paper.height,
+    allowDeskewSearch: true,
+    maxDeskewDegrees: 3,
+    deskewStepDegrees: 0.5,
+    deskewDarkThreshold: 210,
+    provenance: { locator: "case://auto-perspective", projectGold: false },
+  });
+  assert.strictEqual(out.report.geometryNormalization.perspective.applied, true);
+  assert.strictEqual(out.report.geometryNormalization.perspective.source, "AUTOMATIC_DARK_SUPPORT");
+  assert.strictEqual(out.report.geometryNormalization.perspective.cornersVerified, false);
+  assert.ok(out.report.geometryNormalization.perspective.detection);
+  assert.ok(out.report.geometryNormalization.perspective.detection.areaFraction > 0.4);
+  assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
+  assert.strictEqual(out.report.roiSource, "DISCOVERED_3X4_RHYTHM");
+  assert.strictEqual(out.digitized.leadCount, paper.rois.length);
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-auto-perspective-case-"));
+  const receipt = persistImageIntakeCase(dir, {
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: distorted,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowPerspectiveDetection: true,
+    perspectiveDetectionDarkThreshold: 245,
+    perspectiveDetectionMinAreaFraction: 0.4,
+    perspectiveDetectionMinEdgeSupportFraction: 0.15,
+    perspectiveDetectionEdgeTolerancePx: 6,
+    perspectiveOutputWidth: paper.width,
+    perspectiveOutputHeight: paper.height,
+    allowDeskewSearch: true,
+    maxDeskewDegrees: 3,
+    deskewStepDegrees: 0.5,
+    deskewDarkThreshold: 210,
+    provenance: { locator: "case://auto-perspective", projectGold: false },
+  }, out);
+  const stored = readImageCase(receipt.path);
+  assert.strictEqual(stored.report.geometryNormalization.perspective.source, "AUTOMATIC_DARK_SUPPORT");
+  assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+});
+
+test("automatic perspective detection rejects conflicting modes and fixed ROIs", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const corners = {
+    topLeft: { x: 0, y: 0 },
+    topRight: { x: paper.width - 1, y: 0 },
+    bottomRight: { x: paper.width - 1, y: paper.height - 1 },
+    bottomLeft: { x: 0, y: paper.height - 1 },
+  };
+  const base = {
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    provenance: { locator: "case://auto-perspective-guards", projectGold: false },
+  };
+  assert.throws(
+    () => runImageIntakePipeline({
+      ...base,
+      allowPerspectiveDetection: true,
+      perspectiveCorners: corners,
+      perspectiveCornersVerified: true,
+    }),
+    /INTAKE_PERSPECTIVE_MODE_CONFLICT/,
+  );
+  assert.throws(
+    () => runImageIntakePipeline({
+      ...base,
+      allowPerspectiveDetection: true,
+      expectedRois: paper.rois,
+    }),
+    /INTAKE_PERSPECTIVE_WITH_EXPLICIT_ROIS_UNSUPPORTED/,
+  );
+});
+
 test("perspective correction requires verified corners and rejects fixed ROI coordinates", () => {
   const paper = renderFixture({ pxPerMm: 5 });
   const corners = {

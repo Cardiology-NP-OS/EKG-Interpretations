@@ -5,6 +5,7 @@ const {
   GEOMETRY_GOVERNANCE,
   cropToContent,
   deskewImage,
+  detectPerspectiveCorners,
   estimateDeskewAngle,
   projectRectangleToQuadrilateral,
   rectifyPerspective,
@@ -138,6 +139,58 @@ test("deskew applies the estimated correction within the acquisition canvas", ()
     darkThreshold: 64,
   });
   assert.ok(Math.abs(residual.correctionDegrees) <= 0.5, JSON.stringify(residual));
+});
+
+test("automatic perspective detection recovers a visible-boundary synthetic trapezoid", () => {
+  // 201 px places the 20 px grid on both outer edges, making all four projected
+  // support corners observable rather than asking the detector to infer an invisible margin.
+  const source = gridFixture(201, 20);
+  const corners = {
+    topLeft: { x: 28, y: 18 },
+    topRight: { x: 286, y: 8 },
+    bottomRight: { x: 304, y: 246 },
+    bottomLeft: { x: 12, y: 236 },
+  };
+  const distorted = projectRectangleToQuadrilateral(source, {
+    destinationCorners: corners,
+    canvasWidth: 320,
+    canvasHeight: 260,
+  });
+  const detected = detectPerspectiveCorners(distorted, {
+    darkThreshold: 245,
+    minAreaFraction: 0.2,
+    minEdgeSupportFraction: 0.2,
+    edgeTolerancePx: 5,
+  });
+  for (const key of ["topLeft","topRight","bottomRight","bottomLeft"]) {
+    assert.ok(
+      Math.hypot(
+        detected.corners[key].x - corners[key].x,
+        detected.corners[key].y - corners[key].y,
+      ) <= 6,
+      `${key}: ${JSON.stringify(detected.corners[key])}`,
+    );
+  }
+  assert.ok(detected.areaFraction > 0.5);
+  assert.ok(detected.edgeSupport.every(value => value >= 0.2));
+  assert.strictEqual(detected.runtimeAuthority, false);
+});
+
+test("automatic perspective detection fails closed on blank or tiny support", () => {
+  const blank = Array.from({ length: 120 }, () => Array(160).fill(255));
+  assert.throws(
+    () => detectPerspectiveCorners(blank),
+    /IMAGE_PERSPECTIVE_DETECT_INSUFFICIENT_SUPPORT/,
+  );
+
+  const tiny = Array.from({ length: 120 }, () => Array(160).fill(255));
+  for (let y = 50; y < 60; y += 1) {
+    for (let x = 70; x < 90; x += 1) tiny[y][x] = 0;
+  }
+  assert.throws(
+    () => detectPerspectiveCorners(tiny, { minAreaFraction: 0.2 }),
+    /IMAGE_PERSPECTIVE_DETECT_AREA_TOO_SMALL|IMAGE_PERSPECTIVE_DETECT_AMBIGUOUS_CORNERS/,
+  );
 });
 
 test("explicit quadrilateral rectification recovers a synthetic trapezoid", () => {

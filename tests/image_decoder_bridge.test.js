@@ -13,6 +13,7 @@ const { runImageFileIntake, persistImageFileIntakeCase, runAndPersistImageFileIn
 const { readImageCase } = require("../lib/image_case_store");
 const { persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
 const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
+const { projectRectangleToQuadrilateral } = require("../lib/image_geometry_normalization");
 const { persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
 
 let passed = 0;
@@ -304,6 +305,70 @@ test("JPEG file intake reaches canonical pipeline with source hash and page iden
     assert.strictEqual(out.result.report.analysisPermissions.specificLeadClaimsAllowed, true);
     assert.strictEqual(out.result.report.diagnosticInterpretationIncluded, false);
   });
+});
+
+test("generated JPEG phone photo reaches automatic perspective recovery without supplied ROIs", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-jpeg-auto-perspective-"));
+  try {
+    const paper = paperFixture();
+    const canvasWidth = paper.width + 160;
+    const canvasHeight = paper.height + 120;
+    const corners = {
+      topLeft: { x: 62, y: 42 },
+      topRight: { x: canvasWidth - 78, y: 18 },
+      bottomRight: { x: canvasWidth - 46, y: canvasHeight - 68 },
+      bottomLeft: { x: 34, y: canvasHeight - 38 },
+    };
+    const distorted = projectRectangleToQuadrilateral(paper.image, {
+      destinationCorners: corners,
+      canvasWidth,
+      canvasHeight,
+    });
+    const png = path.join(temp, "distorted.png");
+    const jpeg = path.join(temp, "distorted.jpg");
+    fs.writeFileSync(png, encodeGrayscalePng(distorted));
+    convertWithPillow(png, jpeg, "jpeg");
+
+    const decoded = decodeImageSourceFile({ sourcePath: jpeg });
+    const persisted = runAndPersistImageFileIntake(path.join(temp, "cases"), {
+      sourcePath: jpeg,
+      sourceKind: "phone_photo",
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      allowPerspectiveDetection: true,
+      perspectiveDetectionDarkThreshold: 245,
+      perspectiveDetectionMinAreaFraction: 0.4,
+      perspectiveDetectionMinEdgeSupportFraction: 0.15,
+      perspectiveDetectionEdgeTolerancePx: 6,
+      perspectiveOutputWidth: paper.width,
+      perspectiveOutputHeight: paper.height,
+      allowDeskewSearch: true,
+      maxDeskewDegrees: 3,
+      deskewStepDegrees: 0.5,
+      deskewDarkThreshold: 210,
+      preflight: externalPreflight(decoded.pages[0].raster, "phone_photo", "jpeg"),
+      provenance: { locator: "case://jpeg-auto-perspective", projectGold: false },
+    });
+
+    const report = persisted.fileIntake.result.report;
+    assert.strictEqual(report.format, "jpeg");
+    assert.strictEqual(report.geometryNormalization.perspective.applied, true);
+    assert.strictEqual(report.geometryNormalization.perspective.source, "AUTOMATIC_DARK_SUPPORT");
+    assert.strictEqual(report.geometryNormalization.perspective.cornersVerified, false);
+    assert.strictEqual(report.roi.completeTwelveLeadPanels, true);
+    assert.strictEqual(report.roiSource, "DISCOVERED_3X4_RHYTHM");
+    assert.strictEqual(persisted.fileIntake.result.digitized.leadCount, paper.rois.length);
+
+    const stored = readImageCase(persisted.caseReceipt.path);
+    assert.strictEqual(stored.persistence.originalBytesPreserved, true);
+    assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+    assert.deepStrictEqual(
+      fs.readFileSync(path.join(path.dirname(persisted.caseReceipt.path), "original.bin")),
+      fs.readFileSync(jpeg),
+    );
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
 });
 
 test("PDF file intake selects page zero and preserves PDF decoder identity", () => {
