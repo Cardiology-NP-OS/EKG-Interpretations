@@ -1,0 +1,62 @@
+{
+  "schema": "ekg-preclinical-validation-checkpoint-v2",
+  "checkpoint_date": "2026-09-20",
+  "repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "purpose": "Freeze the accepted engineering state before real clinical-accuracy evaluation begins.",
+  "frozen_engineering_basis": {
+    "commit": "32e74373523512c3fcf3921fcb8e2501b8ea2bbb",
+    "tree": "8134669d78b125adbca7d68c3e1f52c7fce63603",
+    "exact_main_ci_run_id": 35542758154,
+    "exact_main_ci_conclusion": "success",
+    "required_jobs": [
+      "Synthetic contract CI (non-clinical)",
+      "Bounded JPEG/PDF decoder and canonical intake",
+      "Quarantined V12.1 candidate validation"
+    ]
+  },
+  "integrated_state": {
+    "primary_donors_completed": 14,
+    "primary_donors_required": 21,
+    "next_primary_donor": "DONOR-015",
+    "donor_014": "ACCEPTED_ON_MAIN",
+    "photo_pdf_pipeline": true,
+    "immutable_case_extraction_analysis": true,
+    "automatic_perspective_engineering_path": true,
+    "supported_glyph_lead_identity": true,
+    "trace_baseline_verification": true,
+    "canonical_per_lead_analysis": true,
+    "whole_record_cross_lead_aggregation": true,
+    "same_window_panel_comparison": true,
+    "representation_semantics_contract": true
+  },
+  "clinical_validation_state": {
+    "clinical_accuracy_testing_started": false,
+    "clinical_accuracy_claimed": false,
+    "clinical_validity_inferred": false,
+    "real_clinical_image_validation_established": false,
+    "real_clinical_voltage_accuracy_established": false,
+    "approved_adjudicated_gold_count": 0,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE"
+  },
+  "evaluation_domains": [
+    "signal-domain beat/rhythm and interval accuracy",
+    "waveform delineation and measurement error",
+    "image digitization error against paired digital waveforms",
+    "lead identity and calibration correctness on real ECG images",
+    "end-to-end interpretation agreement only after lower layers are quantified"
+  ],
+  "mandatory_evaluation_controls": [
+    "Evaluate a frozen target commit/tree and record it with every result.",
+    "Use immutable dataset manifests with source, license, version, and record hashes.",
+    "Use patient-level separation where applicable; no train/development/test patient leakage.",
+    "Predefine label mapping, exclusions, abstention handling, and metrics before inspecting final test results.",
+    "Keep source labels, adjudicated project gold, and model predictions separate.",
+    "Report all failures and abstentions; do not silently drop unsupported or unreadable cases.",
+    "Compute confidence intervals and clinically relevant subgroup/error analyses.",
+    "Do not promote evaluation evidence to runtime authority without a separate governed evidence-admission decision."
+  ],
+  "authority_note": "This checkpoint establishes engineering readiness to begin validation. It is not evidence of clinical accuracy, safety, efficacy, or diagnostic validity."
+}
