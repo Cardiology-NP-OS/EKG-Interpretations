@@ -90,9 +90,10 @@
       "id": "MODEL-ASSETS",
       "tests": [
         "tests/model_asset_safety.test.js",
-        "tests/ecg_fm_donor_closure.test.js"
+        "tests/ecg_fm_donor_closure.test.js",
+        "tests/representation_contract.test.js"
       ],
-      "scope": "immutable bytes/hash, mutable remote rejection, unsafe deserialization, unknown weight license, preprocessing/input contract"
+      "scope": "immutable bytes/hash, mutable remote rejection, unsafe deserialization, unknown weight license, preprocessing/input contract; explicit representation-axis semantics; residual-VQ additive reconstruction; bridge/checkpoint structural binding"
     },
     {
       "id": "EVALUATION",
@@ -118,9 +119,10 @@
         "tests/ecg_preprocess_donor_closure.test.js",
         "tests/fairseq_signals_donor_closure.test.js",
         "tests/ecg_fm_donor_closure.test.js",
-        "tests/deepecg_docker_donor_closure.test.js"
+        "tests/deepecg_docker_donor_closure.test.js",
+        "tests/ecg_tokenizer_donor_closure.test.js"
       ],
-      "scope": "exact source identity, terminal dispositions, receipt/registry consistency, no silent imports"
+      "scope": "exact source identity, terminal dispositions, receipt/registry consistency, no silent imports; DONOR-014 exact commit/tree, full recursive upstream inventory, no tracked weight/data payloads, associated-donor queue registration, representation-contract closure"
     },
     {
       "id": "HANDOFF-CONTINUITY",
