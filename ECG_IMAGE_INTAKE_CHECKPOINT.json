@@ -91,7 +91,7 @@
     "deskewCropBoundsReplayedDuringPersistence": true,
     "panelPixelBoundariesUseCumulativeTimeRounding": true,
     "perspectiveCorrectionImplemented": true,
-    "perspectiveCorrectionNote": "Perspective correction remains a separate unfinished geometry gate; continuous deskew does not establish projective rectification.",
+    "perspectiveCorrectionNote": "Explicit verified quadrilateral perspective rectification is implemented and replayable during persistence. Automatic corner detection is a separate bounded engineering path with generated-fixture evidence only; neither path establishes real clinical-photo robustness.",
     "perspectiveCorrectionMode": "EXPLICIT_VERIFIED_QUADRILATERAL_HOMOGRAPHY",
     "perspectiveCornersMustBeVerified": true,
     "perspectiveWithFixedRoisRejected": true,
