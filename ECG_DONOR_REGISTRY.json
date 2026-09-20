@@ -7,9 +7,9 @@
     "tree": "dc9d10b741d486319da01b7ef68e7afc80d6e3c6"
   },
   "program_state": "IN_PROGRESS",
-  "completed_donors": 13,
+  "completed_donors": 14,
   "required_donor_count": 21,
-  "next_donor_id": "DONOR-014",
+  "next_donor_id": "DONOR-015",
   "donors": [
     {
       "donor_id": "DONOR-001",
@@ -384,7 +384,7 @@
     {
       "donor_id": "DONOR-014",
       "repository": "HeartWise-AI/ECG_tokenizer",
-      "status": "VERIFIED_CANDIDATE",
+      "status": "ACCEPTED_ON_MAIN",
       "audited_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
       "audited_tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
       "audited_tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
@@ -397,7 +397,7 @@
       "model_boundary": "donors/heartwise-ai_ecg-tokenizer/MODEL_BOUNDARY.json",
       "upstream_verification": "donors/heartwise-ai_ecg-tokenizer/UPSTREAM_VERIFICATION.json",
       "receipt": "donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT.json",
-      "receipt_status": "FINALIZED_CANDIDATE",
+      "receipt_status": "FINALIZED",
       "integration": "Target-owned nonruntime representation-semantics contract plus architecture-only tokenizer/bridge challenger metadata; no donor runtime, weights, datasets, or clinical claims imported.",
       "runtime_dependency_added": false,
       "model_weights_imported": false,
@@ -412,7 +412,11 @@
       "verified_candidate_tree": "67af315ed4bca26e3ba6944dd1ab893cdc9dc081",
       "candidate_ci_run_id": 35540276319,
       "candidate_ci_conclusion": "success",
-      "independently_attested": false
+      "independently_attested": false,
+      "promotion_commit": "de7e13a28c502fa5e1ced202a888ee66a44db700",
+      "promotion_tree": "75d8f4d894280ef381d495cb79d8902a7f11bc69",
+      "target_main_ci_run_id": 35541158296,
+      "target_main_ci_conclusion": "success"
     },
     {
       "donor_id": "DONOR-015",
