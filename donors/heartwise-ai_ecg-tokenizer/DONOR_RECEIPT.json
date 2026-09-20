@@ -68,9 +68,16 @@
     }
   ],
   "promotion": {
-    "status": "NOT_PERFORMED"
+    "status": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+    "method": "MERGE_PR_WITH_VERIFIED_CANDIDATE_AND_POST_MERGE_CI",
+    "pr_number": 14,
+    "commit": "de7e13a28c502fa5e1ced202a888ee66a44db700",
+    "tree": "75d8f4d894280ef381d495cb79d8902a7f11bc69",
+    "previous_main_commit": "dd2b7a0bc3c2fd0576db4c7de05b1f2eb887e456",
+    "target_main_ci_run_id": 35541158296,
+    "target_main_ci_conclusion": "success"
   },
-  "acceptance_state": "VERIFIED_CANDIDATE_NOT_PROMOTED",
+  "acceptance_state": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
   "governed_state_after": {
     "diagnostic_runtime": "GOVERNED_INACTIVE",
     "evidence_admission": "NOT_ADMITTED",
