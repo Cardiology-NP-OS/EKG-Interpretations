@@ -142,8 +142,10 @@ test("deskew applies the estimated correction within the acquisition canvas", ()
   assert.ok(Math.abs(residual.correctionDegrees) <= 0.5, JSON.stringify(residual));
 });
 
-test("automatic perspective detection recovers a synthetic trapezoid envelope", () => {
-  const source = gridFixture(200, 20);
+test("automatic perspective detection recovers a visible-boundary synthetic trapezoid", () => {
+  // 201 px places the 20 px grid on both outer edges, making all four projected
+  // support corners observable rather than asking the detector to infer an invisible margin.
+  const source = gridFixture(201, 20);
   const corners = {
     topLeft: { x: 28, y: 18 },
     topRight: { x: 286, y: 8 },
