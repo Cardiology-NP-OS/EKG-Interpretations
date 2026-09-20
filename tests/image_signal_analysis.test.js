@@ -122,17 +122,24 @@ test("cross-lead summaries distinguish whole-record aggregation from same-window
     leads: group.leads,
   }));
   assert.deepStrictEqual(groups, [
-    { startSeconds: 0, durationSeconds: 2.5, leads: ["I", "III"] },
+    { startSeconds: 0, durationSeconds: 2.5, leads: ["I", "II", "III"] },
     { startSeconds: 2.5, durationSeconds: 2.5, leads: ["aVR", "aVL", "aVF"] },
     { startSeconds: 5, durationSeconds: 2.5, leads: ["V1", "V2", "V3"] },
     { startSeconds: 7.5, durationSeconds: 2.5, leads: ["V4", "V5", "V6"] },
   ]);
   assert.ok(out.simultaneousPaperGroups.every(group => group.simultaneousWithinPaperWindow === true));
   assert.ok(out.simultaneousPaperGroups.every(group => group.temporalAlignmentSource === "ROI_LAYOUT_METADATA"));
-  assert.ok(out.simultaneousPaperGroups.every(group => group.leads.every(lead => lead !== "II")));
+  assert.ok(out.simultaneousPaperGroups.every(group => group.leadCount === 3));
+  assert.strictEqual(out.supplementalPaperWindowAnalyses.length, 1);
+  assert.strictEqual(out.supplementalPaperWindowFailures.length, 0);
+  const supplementalII = out.supplementalPaperWindowAnalyses[0];
+  assert.strictEqual(supplementalII.leadName, "II");
+  assert.strictEqual(supplementalII.rhythmStrip, false);
+  assert.strictEqual(supplementalII.paperWindow.startSeconds, 0);
+  assert.strictEqual(supplementalII.paperWindow.durationSeconds, 2.5);
   assert.strictEqual(
     out.temporalAlignmentPolicy,
-    "STANDARD_3X4_PANEL_WINDOWS_ONLY_RHYTHM_STRIP_EXCLUDED_FROM_SIMULTANEOUS_GROUPS",
+    "STANDARD_3X4_PANEL_WINDOWS_WITH_SUPPLEMENTAL_NONCANONICAL_PANEL_DUPLICATES_RHYTHM_STRIP_EXCLUDED",
   );
 
   const leadII = out.leadAnalyses.find(row => row.leadName === "II");
