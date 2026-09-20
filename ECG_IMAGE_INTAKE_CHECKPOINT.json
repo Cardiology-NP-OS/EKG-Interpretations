@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "ENGINEERING_VERIFIED_GOVERNED_INACTIVE",
   "updated_date": "2026-09-19",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, strict bitmap-template lead-label identity verification for supported printed labels, bounded trace-derived baseline verification, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, strict bitmap-template lead-label identity verification for supported printed labels, bounded trace-derived baseline verification, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry and temporal-window provenance, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, whole-record cross-lead aggregation, temporally scoped same-window paper-panel comparison, and immutable analysis generations bound to exact extractions and preflight permissions.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -54,7 +54,7 @@
     "immutableExtractionGenerationsImplemented": true,
     "immutableAnalysisGenerationsImplemented": true,
     "analysisReusesCanonicalSignalIntelligence": true,
-    "simultaneousLeadComparisonPerformed": false,
+    "simultaneousLeadComparisonPerformed": true,
     "externalInputPreflightMandatory": true,
     "externalInputPreflightNote": "Every non-synthetic image intake requires a validated preflight receipt bound to source kind, transport format, raster dimensions, and any explicit paper speed/gain. Resulting analysis permissions are content-addressed into immutable extraction generations and enforced during later signal analysis.",
     "preflightPermissionsPersistIntoExtraction": true,
@@ -127,7 +127,23 @@
     "generatedJpegAutomaticImageToAnalysisPath": "JPEG_DECODE_TO_LAYOUT_TO_LABEL_IDENTITY_TO_TRACE_BASELINE_TO_IMMUTABLE_EXTRACTION_TO_CANONICAL_ANALYSIS_TO_IMMUTABLE_ANALYSIS",
     "realClinicalBaselineValidationEstablished": false,
     "realClinicalVoltageAccuracyEstablished": false,
-    "traceBaselineVerificationNote": "A discovered ROI baseline remains non-authoritative when it is only the 55-percent geometry assumption. Voltage permission can be granted only when every lead has an explicit ROI baseline or a trace-derived baseline receipt that passes bounded dominant-row/inlier-support gates, with explicit gain and trustworthy grid scale. Current positive evidence is synthetic/generated-JPEG engineering evidence; it does not establish baseline or voltage accuracy on real clinical photos, sustained ST shifts, pacing artifacts, noise, handwriting, glare, or other acquisition conditions."
+    "traceBaselineVerificationNote": "A discovered ROI baseline remains non-authoritative when it is only the 55-percent geometry assumption. Voltage permission can be granted only when every lead has an explicit ROI baseline or a trace-derived baseline receipt that passes bounded dominant-row/inlier-support gates, with explicit gain and trustworthy grid scale. Current positive evidence is synthetic/generated-JPEG engineering evidence; it does not establish baseline or voltage accuracy on real clinical photos, sustained ST shifts, pacing artifacts, noise, handwriting, glare, or other acquisition conditions.",
+    "simultaneousLeadComparisonScope": "STANDARD_3X4_PANEL_WINDOWS_ONLY",
+    "wholeRecordCrossLeadAggregationPerformed": true,
+    "paperTemporalWindowProvenancePersisted": true,
+    "rhythmStripExcludedFromSimultaneousPaperGroups": true,
+    "simultaneousPaperGroupCountForStandard3x4": 4,
+    "simultaneousLeadComparisonNote": "The image path does not treat the full 12-lead print as one simultaneous 10-second block. Standard 3x4 panel metadata is preserved into immutable extraction. Whole-record cross-lead summaries use one canonical analysis per lead, preferring the 10-second lead-II rhythm strip. Same-window comparison separately analyzes the noncanonical 2.5-second panel-II trace as supplemental evidence, so the 0-2.5 s group is I/II/III while the rhythm-strip II is excluded from simultaneous grouping. Supplemental panel traces are source-bound and fully accounted during immutable analysis validation.",
+    "generatedJpegSameWindowCrossLeadAnalysisVerified": true,
+    "simultaneousPaperGroupLeadCountForStandard3x4": 3,
+    "supplementalNoncanonicalPanelDuplicatesAnalyzedForSimultaneousGroups": true,
+    "canonicalWholeRecordDuplicatePolicy": "PREFER_RHYTHM_STRIP_THEN_FIRST",
+    "firstStandardPaperWindowLeads": [
+      "I",
+      "II",
+      "III"
+    ],
+    "generatedJpegFullThreeLeadPaperGroupsVerified": true
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
