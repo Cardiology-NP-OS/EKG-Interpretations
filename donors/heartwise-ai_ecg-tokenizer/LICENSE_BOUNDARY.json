@@ -1,0 +1,23 @@
+{
+  "schema": "ekg-donor-014-license-boundary-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "source_code": {
+    "spdx": "MIT",
+    "license_path": "LICENSE",
+    "license_blob_sha": "09ef05852eeeab23785b9a44e93154e10b7028d8",
+    "reuse_status": "COMPATIBLE_WITH_ATTRIBUTION"
+  },
+  "model_weights": {
+    "status": "NOT_ADMITTED_NOT_IMPORTED",
+    "reason": "Repository configs reference local/external checkpoints; no exact target-admitted checkpoint hash/license/bytes established in this audit."
+  },
+  "datasets": {
+    "status": "NOT_ADMITTED_NOT_IMPORTED",
+    "reason": "Repository code/config/docs reference MIMIC/MHI and local parquet paths; no raw dataset bytes are imported into the target."
+  },
+  "source_code_copied": false,
+  "runtime_dependency_added": false,
+  "clinical_authority_added": false
+}
