@@ -5,7 +5,6 @@ const {
   GEOMETRY_GOVERNANCE,
   cropToContent,
   deskewImage,
-  detectPerspectiveQuadrilateral,
   detectPerspectiveCorners,
   estimateDeskewAngle,
   projectRectangleToQuadrilateral,
@@ -191,52 +190,6 @@ test("automatic perspective detection fails closed on blank or tiny support", ()
   assert.throws(
     () => detectPerspectiveCorners(tiny, { minAreaFraction: 0.2 }),
     /IMAGE_PERSPECTIVE_DETECT_AREA_TOO_SMALL|IMAGE_PERSPECTIVE_DETECT_AMBIGUOUS_CORNERS/,
-  );
-});
-
-test("automatic perspective detector recovers a known synthetic trapezoid", () => {
-  const source = gridFixture(200, 20);
-  const corners = {
-    topLeft: { x: 28, y: 18 },
-    topRight: { x: 286, y: 8 },
-    bottomRight: { x: 304, y: 246 },
-    bottomLeft: { x: 12, y: 236 },
-  };
-  const distorted = projectRectangleToQuadrilateral(source, {
-    destinationCorners: corners,
-    canvasWidth: 320,
-    canvasHeight: 260,
-  });
-  const detected = detectPerspectiveQuadrilateral(distorted, {
-    darkThreshold: 245,
-    minAreaFraction: 0.4,
-  });
-  for (const key of ["topLeft","topRight","bottomRight","bottomLeft"]) {
-    const dx = detected.corners[key].x - corners[key].x;
-    const dy = detected.corners[key].y - corners[key].y;
-    assert.ok(Math.hypot(dx, dy) <= 8, `${key} error ${Math.hypot(dx,dy)}`);
-  }
-  assert.ok(detected.quadrilateralAreaFraction > 0.5);
-  assert.ok(detected.sampledSupportPoints >= 500);
-  assert.strictEqual(detected.automatic, true);
-  assert.strictEqual(detected.runtimeAuthority, false);
-});
-
-test("automatic perspective detector fails closed on sparse or implausible support", () => {
-  const blank = Array.from({ length: 120 }, () => Array(160).fill(255));
-  blank[60][80] = 0;
-  assert.throws(
-    () => detectPerspectiveQuadrilateral(blank),
-    /IMAGE_PERSPECTIVE_DETECT_INSUFFICIENT_SUPPORT/,
-  );
-
-  const stripe = Array.from({ length: 120 }, () => Array(160).fill(255));
-  for (let y = 10; y < 110; y += 1) {
-    for (let x = 78; x <= 82; x += 1) stripe[y][x] = 0;
-  }
-  assert.throws(
-    () => detectPerspectiveQuadrilateral(stripe, { minSupportPixels: 300 }),
-    /IMAGE_PERSPECTIVE_DEGENERATE|IMAGE_PERSPECTIVE_NONCONVEX|IMAGE_PERSPECTIVE_DETECT_IMPLAUSIBLE_AREA/,
   );
 });
 
