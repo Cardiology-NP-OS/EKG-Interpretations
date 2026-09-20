@@ -183,14 +183,24 @@ test("donor artifact directory contains governance evidence only, not donor runt
   }
 });
 
-test("DONOR-014 remains implemented-unverified until verification and promotion", () => {
-  assert.strictEqual(donor.status, "IMPLEMENTED_UNVERIFIED");
-  assert.strictEqual(donor.receipt_status, "PENDING");
+test("DONOR-014 is verified candidate but not promoted", () => {
+  const receipt = read(base + "DONOR_RECEIPT.json");
+  const review = read(base + "REVIEW_VERIFICATION.json");
+  assert.strictEqual(donor.status, "VERIFIED_CANDIDATE");
+  assert.strictEqual(donor.receipt_status, "FINALIZED_CANDIDATE");
+  assert.strictEqual(donor.verified_candidate_commit, "50ee3dd668a3c19d5c250defac50358c12827bcc");
+  assert.strictEqual(donor.verified_candidate_tree, "67af315ed4bca26e3ba6944dd1ab893cdc9dc081");
+  assert.strictEqual(donor.candidate_ci_run_id, 35540276319);
+  assert.strictEqual(donor.candidate_ci_conclusion, "success");
+  assert.strictEqual(donor.independently_attested, false);
   assert.strictEqual(donorRegistry.completed_donors, 13);
   assert.strictEqual(donorRegistry.next_donor_id, "DONOR-014");
-  assert.strictEqual(draft.acceptance_state, "IMPLEMENTED_UNVERIFIED");
-  assert.strictEqual(draft.independent_verification, "NOT_PERFORMED");
-  assert.strictEqual(draft.promotion, "NOT_PERFORMED");
+  assert.strictEqual(receipt.acceptance_state, "VERIFIED_CANDIDATE_NOT_PROMOTED");
+  assert.strictEqual(receipt.promotion.status, "NOT_PERFORMED");
+  assert.strictEqual(review.review_disposition, "PASS_WITH_EXPLICIT_ENGINEERING_SCOPE_LIMITS");
+  assert.strictEqual(review.independently_attested, false);
+  assert.strictEqual(draft.superseded, true);
+  assert.strictEqual(draft.superseded_by, base + "DONOR_RECEIPT.json");
 });
 
 test("governed inactive clinical invariants remain unchanged", () => {
