@@ -9,7 +9,10 @@ const { renderPaperEcgRaster, syntheticLeadMap, STANDARD_LEADS, IMAGE_RASTER_GOV
 const { localizeLeadRois } = require("../lib/image_roi_localization");
 const { chooseRowOrigin, discoverStandardLayoutRois } = require("../lib/image_roi_discovery");
 const { rotate90 } = require("../lib/image_robustness");
-const { rotateArbitraryExpandedInkPreserving } = require("../lib/image_geometry_normalization");
+const {
+  projectRectangleToQuadrilateral,
+  rotateArbitraryExpandedInkPreserving,
+} = require("../lib/image_geometry_normalization");
 const { estimateGridCalibration } = require("../lib/image_grid_calibration");
 const { digitizeLeadRois, pearson, peakAmplitude } = require("../lib/image_digitization");
 const { runImageIntakePipeline, INTAKE_GOVERNANCE } = require("../lib/image_intake_pipeline");
@@ -722,6 +725,86 @@ test("continuous deskew recovers a three-degree synthetic page before layout dis
   }, out);
   const stored = readImageCase(receipt.path);
   assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+});
+
+test("explicit perspective rectification recovers a distorted paper through canonical intake", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const canvasWidth = paper.width + 160;
+  const canvasHeight = paper.height + 120;
+  const corners = {
+    topLeft: { x: 62, y: 42 },
+    topRight: { x: canvasWidth - 78, y: 18 },
+    bottomRight: { x: canvasWidth - 46, y: canvasHeight - 68 },
+    bottomLeft: { x: 34, y: canvasHeight - 38 },
+  };
+  const distorted = projectRectangleToQuadrilateral(paper.image, {
+    destinationCorners: corners,
+    canvasWidth,
+    canvasHeight,
+  });
+
+  const intakeInput = {
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: distorted,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    perspectiveCorners: corners,
+    perspectiveCornersVerified: true,
+    perspectiveOutputWidth: paper.width,
+    perspectiveOutputHeight: paper.height,
+    allowDeskewSearch: true,
+    maxDeskewDegrees: 3,
+    deskewStepDegrees: 0.5,
+    deskewDarkThreshold: 210,
+    provenance: { locator: "case://perspective-rectified", projectGold: false },
+  };
+  const out = runImageIntakePipeline(intakeInput);
+  assert.strictEqual(out.report.geometryNormalization.perspective.applied, true);
+  assert.strictEqual(out.report.geometryNormalization.perspective.outputWidth, paper.width);
+  assert.strictEqual(out.report.geometryNormalization.perspective.outputHeight, paper.height);
+  assert.strictEqual(out.rois.completeTwelveLeadPanels, true);
+  assert.strictEqual(out.report.roiSource, "DISCOVERED_3X4_RHYTHM");
+  assert.strictEqual(out.digitized.leadCount, paper.rois.length);
+
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-perspective-case-"));
+  const receipt = persistImageIntakeCase(dir, intakeInput, out);
+  const stored = readImageCase(receipt.path);
+  assert.strictEqual(stored.report.geometryNormalization.perspective.applied, true);
+  assert.strictEqual(stored.persistence.normalizedRasterPreserved, true);
+});
+
+test("perspective correction requires verified corners and rejects fixed ROI coordinates", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const corners = {
+    topLeft: { x: 0, y: 0 },
+    topRight: { x: paper.width - 1, y: 0 },
+    bottomRight: { x: paper.width - 1, y: paper.height - 1 },
+    bottomLeft: { x: 0, y: paper.height - 1 },
+  };
+  const base = {
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    perspectiveCorners: corners,
+    perspectiveOutputWidth: paper.width,
+    perspectiveOutputHeight: paper.height,
+    provenance: { locator: "case://perspective-guard", projectGold: false },
+  };
+  assert.throws(
+    () => runImageIntakePipeline(base),
+    /INTAKE_PERSPECTIVE_CORNERS_UNVERIFIED/,
+  );
+  assert.throws(
+    () => runImageIntakePipeline({
+      ...base,
+      perspectiveCornersVerified: true,
+      expectedRois: paper.rois,
+    }),
+    /INTAKE_PERSPECTIVE_WITH_EXPLICIT_ROIS_UNSUPPORTED/,
+  );
 });
 
 test("automatic deskew rejects fixed ROI coordinates", () => {
