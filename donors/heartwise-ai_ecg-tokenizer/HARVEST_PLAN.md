@@ -43,7 +43,7 @@ Do **not** import the donor runtime, checkpoints, generated outputs, datasets, o
 - Repository: HeartWise-AI/ECG_tokenizer
 - Branch: main
 - Commit: 64f7963a7f55b90895dce31f1e7d55c7eba2d51d
-- Git tree SHA: unresolved through the available connector surface; intentionally not invented.
+- Git tree SHA: 6c0d631ca1ca9dad892ae8343362d20147fdd44e (verified from the upstream Git commit object).
 - Source license: MIT.
 
 ## Target basis
@@ -53,4 +53,4 @@ Do **not** import the donor runtime, checkpoints, generated outputs, datasets, o
 
 ## Acceptance boundary
 
-DONOR-014 remains `IMPLEMENTED_UNVERIFIED` until exact-head CI, review verification, and promotion are separately recorded.
+DONOR-014 remains `IMPLEMENTED_UNVERIFIED` until exact-head CI, same-principal review verification with no independence claim, and promotion are separately recorded.
