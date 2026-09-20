@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "ENGINEERING_VERIFIED_GOVERNED_INACTIVE",
   "updated_date": "2026-09-19",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, strict bitmap-template lead-label identity verification for supported printed labels, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -12,6 +12,7 @@
     "lib/image_grid_calibration.js",
     "lib/image_digitization.js",
     "lib/image_geometry_normalization.js",
+    "lib/image_lead_identity.js",
     "lib/image_intake_pipeline.js",
     "lib/image_case_store.js",
     "lib/image_extraction_store.js",
@@ -32,7 +33,8 @@
     "tests/image_analysis_store.test.js",
     "tests/image_decoder_test.py",
     "tests/image_decoder_bridge.test.js",
-    "tests/image_geometry_normalization.test.js"
+    "tests/image_geometry_normalization.test.js",
+    "tests/image_lead_identity.test.js"
   ],
   "registryPromotion": "NOT_CLAIMED",
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
@@ -104,7 +106,16 @@
     "automaticPerspectiveClinicalPhotoValidationEstablished": false,
     "automaticPerspectiveGeneratedJpegFileIntakeVerified": true,
     "automaticPerspectiveGeneratedJpegPersistenceVerified": true,
-    "automaticPerspectiveGeneratedJpegNote": "A generated trapezoid ECG encoded as real JPEG is decoded through the pinned native decoder, automatically corner-detected, rectified, deskewed, layout-discovered, digitized, and persisted without supplied ROIs. This remains generated-fixture engineering evidence, not clinical-photo validation."
+    "automaticPerspectiveGeneratedJpegNote": "A generated trapezoid ECG encoded as real JPEG is decoded through the pinned native decoder, automatically corner-detected, rectified, deskewed, layout-discovered, digitized, and persisted without supplied ROIs. This remains generated-fixture engineering evidence, not clinical-photo validation.",
+    "automaticLeadIdentityVerificationImplemented": true,
+    "automaticLeadIdentityVerificationMode": "STRICT_BITMAP_LABEL_TEMPLATE_V1",
+    "positionalLayoutAloneGrantsLeadIdentity": false,
+    "generatedJpegLeadIdentityVerificationVerified": true,
+    "generatedJpegLeadIdentityPermissionsPersistIntoExtraction": true,
+    "generalOcrLeadIdentityImplemented": false,
+    "realClinicalLeadLabelValidationEstablished": false,
+    "leadIdentityDoesNotBypassVoltageBaselineGate": true,
+    "leadIdentityVerificationNote": "Named-lead permissions can be unlocked only when supported printed lead labels match the strict bitmap-template verifier or when supplied ROI identity is explicitly attested. The verifier is engineering-scoped to supported templates and generated JPEG evidence; it is not general OCR and does not establish robustness to arbitrary fonts, handwriting, clipped labels, glare, blur, or real clinical photos. Successful identity verification does not make voltage calibration/baseline exact."
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
