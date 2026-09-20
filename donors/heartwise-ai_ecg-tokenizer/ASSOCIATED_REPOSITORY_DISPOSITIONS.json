@@ -6,9 +6,13 @@
     {
       "repository": "HeartWise-AI/ECG_Dataset_QA",
       "relationship": "Dataset-generation package extracted from ECG_tokenizer upstream history",
-      "disposition": "SEPARATE_DONOR_OR_RESEARCH_SOURCE_NOT_SILENTLY_INCLUDED",
+      "disposition": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
       "audited_in_donor_014": false,
-      "source_bytes_imported": false
+      "source_bytes_imported": false,
+      "registered_donor_id": "DONOR-A007",
+      "observed_commit": "a664ab92f6036752a96b119d87118b7e4b9d36c2",
+      "observed_tree": "8465d628ad7460c4dcd8b5edce2acba23180c1b8",
+      "license_status": "LICENSE_REVIEW_REQUIRED_NO_LICENSE_FILE_AT_OBSERVED_HEAD"
     },
     {
       "repository": "HeartWise-AI/DeepECG_Docker",
