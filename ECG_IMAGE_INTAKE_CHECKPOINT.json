@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "ENGINEERING_VERIFIED_GOVERNED_INACTIVE",
   "updated_date": "2026-09-19",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, strict bitmap-template lead-label identity verification for supported printed labels, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, strict bitmap-template lead-label identity verification for supported printed labels, bounded trace-derived baseline verification, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -10,6 +10,7 @@
     "lib/image_roi_localization.js",
     "lib/image_roi_discovery.js",
     "lib/image_grid_calibration.js",
+    "lib/image_baseline_estimation.js",
     "lib/image_digitization.js",
     "lib/image_geometry_normalization.js",
     "lib/image_lead_identity.js",
@@ -34,7 +35,8 @@
     "tests/image_decoder_test.py",
     "tests/image_decoder_bridge.test.js",
     "tests/image_geometry_normalization.test.js",
-    "tests/image_lead_identity.test.js"
+    "tests/image_lead_identity.test.js",
+    "tests/image_baseline_estimation.test.js"
   ],
   "registryPromotion": "NOT_CLAIMED",
   "registryNote": "ECG-CAP-IMAGE-ROI-LOCALIZATION, ECG-CAP-IMAGE-GRID-CALIBRATION, and ECG-CAP-IMAGE-DIGITIZATION remain RESEARCH_REFERENCE in the frozen realization checkpoint so historical readiness counts stay exact. Executable code exists independently of that promotion.",
@@ -115,7 +117,17 @@
     "generalOcrLeadIdentityImplemented": false,
     "realClinicalLeadLabelValidationEstablished": false,
     "leadIdentityDoesNotBypassVoltageBaselineGate": true,
-    "leadIdentityVerificationNote": "Named-lead permissions can be unlocked only when supported printed lead labels match the strict bitmap-template verifier or when supplied ROI identity is explicitly attested. The verifier is engineering-scoped to supported templates and generated JPEG evidence; it is not general OCR and does not establish robustness to arbitrary fonts, handwriting, clipped labels, glare, blur, or real clinical photos. Successful identity verification does not make voltage calibration/baseline exact."
+    "leadIdentityVerificationNote": "Named-lead permissions can be unlocked only when supported printed lead labels match the strict bitmap-template verifier or when supplied ROI identity is explicitly attested. The verifier is engineering-scoped to supported templates and generated JPEG evidence; it is not general OCR and does not establish robustness to arbitrary fonts, handwriting, clipped labels, glare, blur, or real clinical photos. Successful identity verification does not make voltage calibration/baseline exact.",
+    "traceBaselineEstimationImplemented": true,
+    "traceBaselineEstimationMode": "DOMINANT_TRACE_ROW_WITH_BOUNDED_INLIER_SUPPORT_V1",
+    "discoveredBaselineGeometryAssumptionGrantsVoltagePermission": false,
+    "verifiedTraceBaselineCanGrantVoltagePermission": true,
+    "generatedJpegTraceBaselineVerificationVerified": true,
+    "generatedJpegAutomaticImageToAnalysisVerified": true,
+    "generatedJpegAutomaticImageToAnalysisPath": "JPEG_DECODE_TO_LAYOUT_TO_LABEL_IDENTITY_TO_TRACE_BASELINE_TO_IMMUTABLE_EXTRACTION_TO_CANONICAL_ANALYSIS_TO_IMMUTABLE_ANALYSIS",
+    "realClinicalBaselineValidationEstablished": false,
+    "realClinicalVoltageAccuracyEstablished": false,
+    "traceBaselineVerificationNote": "A discovered ROI baseline remains non-authoritative when it is only the 55-percent geometry assumption. Voltage permission can be granted only when every lead has an explicit ROI baseline or a trace-derived baseline receipt that passes bounded dominant-row/inlier-support gates, with explicit gain and trustworthy grid scale. Current positive evidence is synthetic/generated-JPEG engineering evidence; it does not establish baseline or voltage accuracy on real clinical photos, sustained ST shifts, pacing artifacts, noise, handwriting, glare, or other acquisition conditions."
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
