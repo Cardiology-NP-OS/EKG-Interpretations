@@ -1,0 +1,29 @@
+{
+  "schema": "ekg-donor-014-dataset-boundary-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "referenced_sources": [
+    {
+      "name": "MIMIC-derived ECG data",
+      "evidence": "README/config/script references",
+      "raw_bytes_imported": false,
+      "target_admission": "NOT_ADMITTED"
+    },
+    {
+      "name": "MHI ECG data",
+      "evidence": "README/config/script references",
+      "raw_bytes_imported": false,
+      "target_admission": "NOT_ADMITTED"
+    }
+  ],
+  "patient_grouped_probe_concept": {
+    "disposition": "SUPERSEDED_BY_TARGET_CONTRACTS",
+    "target_capabilities": [
+      "ECG-CAP-EVALUATION-PATIENT-SPLITS",
+      "ECG-CAP-EVALUATION-REPRODUCIBILITY"
+    ]
+  },
+  "phi_or_restricted_data_imported": false,
+  "clinical_gold_created": false
+}
