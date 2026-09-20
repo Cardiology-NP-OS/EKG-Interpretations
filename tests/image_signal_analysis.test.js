@@ -95,13 +95,51 @@ test("canonical image analysis processes all twelve synthetic leads through exis
 test("analysis remains explicitly non-diagnostic and non-authoritative", () => {
   const fx = fixture("case://image-analysis-governance");
   const out = runImageSignalAnalysis(fx.extraction, analysisConfig());
-  assert.strictEqual(out.simultaneousLeadComparisonPerformed, false);
+  assert.strictEqual(out.simultaneousLeadComparisonPerformed, true);
+  assert.strictEqual(out.crossLeadAggregationPerformed, true);
   assert.strictEqual(out.diagnosticInterpretationIncluded, false);
   assert.strictEqual(out.runtimeAuthority, false);
   assert.strictEqual(out.projectGold, false);
   assert.strictEqual(out.metrics, "NOT_REPORTABLE");
   assert.strictEqual(out.activation, "NOT_ELIGIBLE");
   assert.ok(!Object.prototype.hasOwnProperty.call(out, "diagnosis"));
+});
+
+test("cross-lead summaries distinguish whole-record aggregation from same-window panel groups", () => {
+  const fx = fixture("case://image-analysis-cross-lead");
+  const out = runImageSignalAnalysis(fx.extraction, analysisConfig());
+
+  assert.strictEqual(out.crossLeadAggregationPerformed, true);
+  assert.strictEqual(out.crossLeadConsistency.beatCount.count, 12);
+  assert.strictEqual(out.crossLeadConsistency.ventricularRateBpm.count, 12);
+  assert.ok(Array.isArray(out.crossLeadCandidateEvidence));
+  assert.strictEqual(out.simultaneousLeadComparisonPerformed, true);
+  assert.strictEqual(out.simultaneousPaperGroups.length, 4);
+
+  const groups = out.simultaneousPaperGroups.map(group => ({
+    startSeconds: group.startSeconds,
+    durationSeconds: group.durationSeconds,
+    leads: group.leads,
+  }));
+  assert.deepStrictEqual(groups, [
+    { startSeconds: 0, durationSeconds: 2.5, leads: ["I", "III"] },
+    { startSeconds: 2.5, durationSeconds: 2.5, leads: ["aVR", "aVL", "aVF"] },
+    { startSeconds: 5, durationSeconds: 2.5, leads: ["V1", "V2", "V3"] },
+    { startSeconds: 7.5, durationSeconds: 2.5, leads: ["V4", "V5", "V6"] },
+  ]);
+  assert.ok(out.simultaneousPaperGroups.every(group => group.simultaneousWithinPaperWindow === true));
+  assert.ok(out.simultaneousPaperGroups.every(group => group.temporalAlignmentSource === "ROI_LAYOUT_METADATA"));
+  assert.ok(out.simultaneousPaperGroups.every(group => group.leads.every(lead => lead !== "II")));
+  assert.strictEqual(
+    out.temporalAlignmentPolicy,
+    "STANDARD_3X4_PANEL_WINDOWS_ONLY_RHYTHM_STRIP_EXCLUDED_FROM_SIMULTANEOUS_GROUPS",
+  );
+
+  const leadII = out.leadAnalyses.find(row => row.leadName === "II");
+  assert.ok(leadII);
+  assert.strictEqual(leadII.rhythmStrip, true);
+  assert.strictEqual(leadII.paperWindow.startSeconds, 0);
+  assert.strictEqual(leadII.paperWindow.durationSeconds, 10);
 });
 
 test("one quality-gated lead becomes a partial result without corrupting other leads", () => {
