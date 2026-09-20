@@ -28,15 +28,16 @@ function pythonExecutable() {
   return process.env.EKG_IMAGE_PYTHON || (process.platform === "win32" ? "python" : "python3");
 }
 
-function convertWithPillow(sourcePng, outputPath, mode) {
+function convertWithPillow(sourcePng, outputPath, mode, jpegQuality = 100) {
+  assert.ok(Number.isInteger(jpegQuality) && jpegQuality >= 10 && jpegQuality <= 100);
   const code = [
     "from PIL import Image",
     "import sys",
-    "src,out,mode=sys.argv[1:4]",
+    "src,out,mode,quality=sys.argv[1:5]",
     "im=Image.open(src).convert('RGB')",
-    "im.save(out, 'JPEG', quality=100, subsampling=0) if mode=='jpeg' else im.save(out, 'PDF', resolution=72)",
+    "im.save(out, 'JPEG', quality=int(quality), subsampling=0) if mode=='jpeg' else im.save(out, 'PDF', resolution=72)",
   ].join("\n");
-  const run = cp.spawnSync(pythonExecutable(), ["-c", code, sourcePng, outputPath, mode], {
+  const run = cp.spawnSync(pythonExecutable(), ["-c", code, sourcePng, outputPath, mode, String(jpegQuality)], {
     encoding: "utf8",
     timeout: 30_000,
     shell: false,
@@ -538,6 +539,62 @@ test("generated JPEG reaches canonical analysis only after independent trace-bas
     assert.strictEqual(reopened.analysisId, analysisReceipt.analysisId);
     assert.strictEqual(reopened.completeStandardTwelveLead, true);
     assert.strictEqual(reopened.runtimeAuthority, false);
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test("generated labeled ECG survives bounded JPEG quality sweep through canonical analysis", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-jpeg-quality-sweep-"));
+  try {
+    const paper = paperFixture();
+    const discovery = runImageIntakePipeline({
+      sourceKind: "synthetic_raster",
+      format: "raster_matrix",
+      raster: paper.image,
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      provenance: { locator: "case://jpeg-quality-discovery", projectGold: false },
+    });
+    const labeled = paper.image.map(row => row.slice());
+    for (const roi of discovery.discovery.rois) {
+      renderLeadLabel(labeled, roi.lead, roi.x + 4, roi.y + 4, { scale: 2, value: 8 });
+    }
+    const png = path.join(temp, "quality-source.png");
+    fs.writeFileSync(png, encodeGrayscalePng(labeled));
+
+    for (const quality of [95, 85, 70]) {
+      const jpeg = path.join(temp, `quality-${quality}.jpg`);
+      convertWithPillow(png, jpeg, "jpeg", quality);
+      const decoded = decodeImageSourceFile({ sourcePath: jpeg });
+      const out = runImageFileIntake({
+        sourcePath: jpeg,
+        sourceKind: "phone_photo",
+        paperSpeedMmPerS: 25,
+        gainMmPerMv: 10,
+        verifyLeadLabelsFromRaster: true,
+        leadLabelScale: 2,
+        leadLabelDarkThreshold: 100,
+        leadLabelSearchRadius: 5,
+        leadLabelMinScore: 0.82,
+        leadLabelOffsetX: 4,
+        leadLabelOffsetY: 4,
+        allowTraceBaselineEstimation: true,
+        preflight: externalPreflight(decoded.pages[0].raster, "phone_photo", "jpeg"),
+        provenance: { locator: `case://jpeg-quality-${quality}`, projectGold: false },
+      });
+      assert.strictEqual(out.result.report.roi.leadIdentityVerified, true, `quality ${quality}`);
+      assert.strictEqual(out.result.report.calibration.verifiedVoltageBaseline, true, `quality ${quality}`);
+      const extraction = require("../lib/image_extraction_store").buildExtraction(
+        { caseId: out.result.report.caseId },
+        out.result,
+      );
+      const analysis = runImageSignalAnalysis(extraction, analysisConfig());
+      assert.strictEqual(analysis.status, "COMPLETE", `quality ${quality}`);
+      assert.strictEqual(analysis.completeStandardTwelveLead, true, `quality ${quality}`);
+      assert.strictEqual(analysis.simultaneousPaperGroups.length, 4, `quality ${quality}`);
+      assert.strictEqual(analysis.runtimeAuthority, false);
+    }
   } finally {
     fs.rmSync(temp, { recursive: true, force: true });
   }
