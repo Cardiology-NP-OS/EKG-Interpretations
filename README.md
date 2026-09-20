@@ -37,6 +37,8 @@ Read, in order:
 1. [`docs/AI_HANDOFF.md`](docs/AI_HANDOFF.md) — execution contract, source-of-truth order, continuation semantics.
 2. [`docs/REPOSITORY_ARCHITECTURE.md`](docs/REPOSITORY_ARCHITECTURE.md) — canonical ownership and filesystem map.
 3. [`ECG_DONOR_REGISTRY.json`](ECG_DONOR_REGISTRY.json) — live donor frontier.
+
+[`ECG_PRECLINICAL_VALIDATION_CHECKPOINT.json`](ECG_PRECLINICAL_VALIDATION_CHECKPOINT.json) — frozen engineering basis and entry controls for clinical-accuracy evaluation.
 4. [`ECG_CAPABILITY_REGISTRY.json`](ECG_CAPABILITY_REGISTRY.json) and [`ECG_DONOR_CAPABILITY_REGISTRY.json`](ECG_DONOR_CAPABILITY_REGISTRY.json) — brand-neutral capabilities and donor provenance.
 5. [`ECG_DATASET_REGISTRY.json`](ECG_DATASET_REGISTRY.json), [`ECG_MODEL_CHALLENGER_REGISTRY.json`](ECG_MODEL_CHALLENGER_REGISTRY.json), [`ECG_LICENSE_LEDGER.json`](ECG_LICENSE_LEDGER.json).
 6. [`docs/NEON_AND_CROSS_REPO_OPERATIONS.md`](docs/NEON_AND_CROSS_REPO_OPERATIONS.md) — System-Control, Platform, Build-Ledger, and research-holding-area boundaries.
