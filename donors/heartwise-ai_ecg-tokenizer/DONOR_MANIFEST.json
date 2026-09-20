@@ -22,7 +22,7 @@
   "audited_exact_files": [
     {
       "path": "README.md",
-      "blob_sha": "9e4cae0032c1ab3613401ba7f4b18d90bfce44d0"
+      "blob_sha": "038290c77976425adb0e0875544640e287d740d1"
     },
     {
       "path": "LICENSE",
@@ -38,7 +38,7 @@
     },
     {
       "path": "models/bridge/bridge.py",
-      "blob_sha": "8d5a6b1b590f40b047d1a059af168b6d6765a32a"
+      "blob_sha": "bea1335f02602a1950bd8c90468fcc36c865f6e3"
     },
     {
       "path": "models/local_residual_vq.py",
@@ -50,11 +50,35 @@
     },
     {
       "path": "tests/models/test_qformer_mix_strategy.py",
-      "blob_sha": "73d79686807d2584bd2de1e1d6ccdf4f38980765"
+      "blob_sha": "cff746fde83194f03bf824642b1f778636b821f3"
     },
     {
       "path": "tests/models/test_qformer_token_axis.py",
-      "blob_sha": "79c4dc7e0707dad86de1593f1ddf5e4ea3520c12"
+      "blob_sha": "b9e44323e86e21004bc646b1861c7a00b3c305d0"
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/NEXT_STEPS.md",
+      "blob_sha": "a87426bc80dc9008800b3aa3b4b182e2601f7665"
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/REPRODUCE.md",
+      "blob_sha": "643b1f52808cbbbbb59a10661acc6e4f2d9d155c"
+    },
+    {
+      "path": "scripts/probe_axis_views.py",
+      "blob_sha": "39ca1069e658db45a3c111e43962760d7a8d6e0d"
+    },
+    {
+      "path": "scripts/probe_tokenizer.py",
+      "blob_sha": "dda708c8a36ed60e097d483210b286032707a849"
+    },
+    {
+      "path": "scripts/train_tokenizer_aux.py",
+      "blob_sha": "889a5f601c990dbb58be23a99fc12885ef4e43fd"
+    },
+    {
+      "path": "utils/checkpoint_structure.py",
+      "blob_sha": "3193850a7dd899e0f375a4e409337f537a6dac20"
     }
   ],
   "acquisition": "GitHub connector exact commit/file inspection; no upstream clone or model/data materialization",
