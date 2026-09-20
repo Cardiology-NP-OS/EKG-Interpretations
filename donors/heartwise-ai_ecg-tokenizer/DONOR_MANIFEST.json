@@ -5,9 +5,9 @@
   "audited_head": {
     "branch": "main",
     "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
-    "tree": null,
+    "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
     "commit_verified": true,
-    "tree_verification": "UNRESOLVED_CONNECTOR_SURFACE_DO_NOT_INVENT"
+    "tree_verification": "VERIFIED_GIT_COMMIT_OBJECT"
   },
   "target_basis": {
     "commit": "dd2b7a0bc3c2fd0576db4c7de05b1f2eb887e456",
