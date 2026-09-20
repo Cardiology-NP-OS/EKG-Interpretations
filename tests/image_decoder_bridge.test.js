@@ -510,6 +510,18 @@ test("generated JPEG reaches canonical analysis only after independent trace-bas
     assert.strictEqual(analysis.status, "COMPLETE");
     assert.strictEqual(analysis.processedLeadCount, 12);
     assert.strictEqual(analysis.completeStandardTwelveLead, true);
+    assert.strictEqual(analysis.crossLeadAggregationPerformed, true);
+    assert.strictEqual(analysis.simultaneousLeadComparisonPerformed, true);
+    assert.strictEqual(analysis.simultaneousPaperGroups.length, 4);
+    assert.deepStrictEqual(
+      analysis.simultaneousPaperGroups.map(group => [group.startSeconds, group.durationSeconds, group.leads]),
+      [
+        [0, 2.5, ["I", "III"]],
+        [2.5, 2.5, ["aVR", "aVL", "aVF"]],
+        [5, 2.5, ["V1", "V2", "V3"]],
+        [7.5, 2.5, ["V4", "V5", "V6"]],
+      ],
+    );
     assert.strictEqual(analysis.diagnosticInterpretationIncluded, false);
 
     const analysisReceipt = persistImageAnalysis(persisted.caseReceipt.path, analysis);
