@@ -1,0 +1,59 @@
+name: Quarantined Clinical Accuracy Pilot
+
+on:
+  push:
+    branches:
+      - validation/clinical-accuracy-v1
+    paths:
+      - "validation/clinical_accuracy/**"
+      - ".github/workflows/clinical_accuracy_pilot.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mitbih-rpeak-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout validation branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Assert frozen target library code
+        shell: bash
+        run: |
+          git diff --exit-code 32e74373523512c3fcf3921fcb8e2501b8ea2bbb..HEAD -- lib/
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation-only WFDB reader
+        run: python -m pip install --disable-pip-version-check "wfdb==4.3.1"
+
+      - name: Run MIT-BIH R-peak pilot
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/clinical-validation"
+          python validation/clinical_accuracy/run_mitbih_rpeak_pilot.py \
+            --output "$RUNNER_TEMP/clinical-validation/mitbih-rpeak-pilot-v1.json" \
+            | tee "$RUNNER_TEMP/clinical-validation/mitbih-rpeak-pilot-v1.log"
+
+      - name: Upload quarantined result
+        uses: actions/upload-artifact@v4
+        with:
+          name: mitbih-rpeak-pilot-v1
+          path: |
+            ${{ runner.temp }}/clinical-validation/mitbih-rpeak-pilot-v1.json
+            ${{ runner.temp }}/clinical-validation/mitbih-rpeak-pilot-v1.log
+          if-no-files-found: error
+          retention-days: 30
