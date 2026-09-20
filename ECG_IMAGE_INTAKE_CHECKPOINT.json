@@ -133,8 +133,17 @@
     "paperTemporalWindowProvenancePersisted": true,
     "rhythmStripExcludedFromSimultaneousPaperGroups": true,
     "simultaneousPaperGroupCountForStandard3x4": 4,
-    "simultaneousLeadComparisonNote": "The image path does not treat the full 12-lead print as one simultaneous 10-second block. Standard 3x4 panel metadata is preserved into immutable extraction; cross-lead summaries are produced for the whole analyzed record, while simultaneous comparison is restricted to non-rhythm-strip leads sharing the same 2.5-second paper window. The selected 10-second lead-II rhythm strip is excluded from simultaneous panel groups.",
-    "generatedJpegSameWindowCrossLeadAnalysisVerified": true
+    "simultaneousLeadComparisonNote": "The image path does not treat the full 12-lead print as one simultaneous 10-second block. Standard 3x4 panel metadata is preserved into immutable extraction. Whole-record cross-lead summaries use one canonical analysis per lead, preferring the 10-second lead-II rhythm strip. Same-window comparison separately analyzes the noncanonical 2.5-second panel-II trace as supplemental evidence, so the 0-2.5 s group is I/II/III while the rhythm-strip II is excluded from simultaneous grouping. Supplemental panel traces are source-bound and fully accounted during immutable analysis validation.",
+    "generatedJpegSameWindowCrossLeadAnalysisVerified": true,
+    "simultaneousPaperGroupLeadCountForStandard3x4": 3,
+    "supplementalNoncanonicalPanelDuplicatesAnalyzedForSimultaneousGroups": true,
+    "canonicalWholeRecordDuplicatePolicy": "PREFER_RHYTHM_STRIP_THEN_FIRST",
+    "firstStandardPaperWindowLeads": [
+      "I",
+      "II",
+      "III"
+    ],
+    "generatedJpegFullThreeLeadPaperGroupsVerified": true
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
