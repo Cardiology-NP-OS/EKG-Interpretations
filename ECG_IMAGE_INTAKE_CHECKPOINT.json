@@ -101,7 +101,10 @@
     "automaticPerspectiveCornerDetectionSyntheticTrapezoidVerified": true,
     "automaticPerspectiveThroughCanonicalIntakeVerified": true,
     "automaticPerspectivePersistenceReplayVerified": true,
-    "automaticPerspectiveClinicalPhotoValidationEstablished": false
+    "automaticPerspectiveClinicalPhotoValidationEstablished": false,
+    "automaticPerspectiveGeneratedJpegFileIntakeVerified": true,
+    "automaticPerspectiveGeneratedJpegPersistenceVerified": true,
+    "automaticPerspectiveGeneratedJpegNote": "A generated trapezoid ECG encoded as real JPEG is decoded through the pinned native decoder, automatically corner-detected, rectified, deskewed, layout-discovered, digitized, and persisted without supplied ROIs. This remains generated-fixture engineering evidence, not clinical-photo validation."
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
