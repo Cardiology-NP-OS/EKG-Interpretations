@@ -183,20 +183,26 @@ test("donor artifact directory contains governance evidence only, not donor runt
   }
 });
 
-test("DONOR-014 is verified candidate but not promoted", () => {
+test("DONOR-014 is accepted on main with post-promotion CI", () => {
   const receipt = read(base + "DONOR_RECEIPT.json");
   const review = read(base + "REVIEW_VERIFICATION.json");
-  assert.strictEqual(donor.status, "VERIFIED_CANDIDATE");
-  assert.strictEqual(donor.receipt_status, "FINALIZED_CANDIDATE");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt_status, "FINALIZED");
   assert.strictEqual(donor.verified_candidate_commit, "50ee3dd668a3c19d5c250defac50358c12827bcc");
   assert.strictEqual(donor.verified_candidate_tree, "67af315ed4bca26e3ba6944dd1ab893cdc9dc081");
   assert.strictEqual(donor.candidate_ci_run_id, 35540276319);
   assert.strictEqual(donor.candidate_ci_conclusion, "success");
+  assert.strictEqual(donor.promotion_commit, "de7e13a28c502fa5e1ced202a888ee66a44db700");
+  assert.strictEqual(donor.promotion_tree, "75d8f4d894280ef381d495cb79d8902a7f11bc69");
+  assert.strictEqual(donor.target_main_ci_run_id, 35541060481);
+  assert.strictEqual(donor.target_main_ci_conclusion, "success");
   assert.strictEqual(donor.independently_attested, false);
-  assert.strictEqual(donorRegistry.completed_donors, 13);
-  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-014");
-  assert.strictEqual(receipt.acceptance_state, "VERIFIED_CANDIDATE_NOT_PROMOTED");
-  assert.strictEqual(receipt.promotion.status, "NOT_PERFORMED");
+  assert.strictEqual(donorRegistry.completed_donors, 14);
+  assert.strictEqual(donorRegistry.next_donor_id, "DONOR-015");
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(receipt.promotion.commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.tree, donor.promotion_tree);
   assert.strictEqual(review.review_disposition, "PASS_WITH_EXPLICIT_ENGINEERING_SCOPE_LIMITS");
   assert.strictEqual(review.independently_attested, false);
   assert.strictEqual(draft.superseded, true);
@@ -231,7 +237,7 @@ console.log(JSON.stringify({
   pass: true,
   passed,
   total: passed,
-  acceptance: false,
+  acceptance: true,
   runtimeAuthority: false,
   clinicalAuthorityAdded: false
 }));
