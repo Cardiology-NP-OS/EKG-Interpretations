@@ -1,8 +1,8 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 363,
-  "capability_count": 60,
+  "generated_from_donor_capability_registry_count": 373,
+  "capability_count": 61,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
   "approved_adjudicated_gold_count": 0,
