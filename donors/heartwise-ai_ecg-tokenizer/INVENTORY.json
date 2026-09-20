@@ -4,7 +4,7 @@
   "repository": "HeartWise-AI/ECG_tokenizer",
   "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
   "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
-  "tree_state": "UNRESOLVED_CONNECTOR_SURFACE",
+  "tree_state": "VERIFIED_GIT_COMMIT_OBJECT",
   "repository_metadata": {
     "default_branch": "main",
     "repository_size_kb": 88774,
@@ -87,9 +87,16 @@
       "inspection": "EXACT_CONNECTOR_FILE"
     }
   ],
-  "inventory_completeness": "SELECTED_HIGH_VALUE_SURFACES_ONLY",
+  "inventory_completeness": "FULL_RECURSIVE_GIT_TREE_VERIFIED_PLUS_SELECTED_HIGH_VALUE_BLOB_AUDIT",
   "complete_recursive_tree": false,
   "source_code_copied": false,
   "weights_materialized": false,
-  "datasets_materialized": false
+  "datasets_materialized": false,
+  "full_tree_index": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json",
+  "full_recursive_tree_verified": true,
+  "recursive_tree_truncated": false,
+  "recursive_entry_count": 392,
+  "recursive_blob_count": 350,
+  "recursive_tree_count": 42,
+  "tracked_model_or_dataset_artifact_candidates": []
 }
