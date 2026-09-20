@@ -1,6 +1,6 @@
 {
   "schema": "ecg-model-challenger-registry-v1",
-  "updated_date": "2026-09-18",
+  "updated_date": "2026-09-20",
   "policy": {
     "challenger_predictions_are_clinical_truth": false,
     "challenger_predictions_are_project_gold": false,
@@ -1276,6 +1276,93 @@
         "thresholds": "NOT_ADMITTED",
         "unsupported_populations": "NOT_ESTABLISHED"
       }
+    },
+    {
+      "challenger_id": "MODEL-D014-RVQ-TOKENIZER",
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "model_family": "Residual-VQ ECG tokenizer",
+      "source_path": "models/ecg_tokenizer_wrapper.py; models/local_residual_vq.py",
+      "artifact_type": "ARCHITECTURE_ONLY_NO_TARGET_ADMITTED_CHECKPOINT",
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "MIT",
+      "weight_license": "UNRESOLVED_NO_WEIGHTS_IMPORTED",
+      "weights_imported": false,
+      "execution_status": "ARCHITECTURE_ONLY_NONEXECUTED",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_ecg-tokenizer/MODEL_BOUNDARY.json",
+      "input_contract": "Source architecture expects multi-lead ECG tensors including 12-channel configurations; exact donor checkpoint preprocessing, sampling, duration, calibration, and target parity are not admitted.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "donor_results": "RESEARCH_CONTEXT_ONLY_NOT_REPRODUCED_TARGET_EVIDENCE",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      },
+      "reproducibility_limit": "Source architecture is exact-commit/blob pinned, but no target-admitted immutable checkpoint/weight license/training dataset identity exists."
+    },
+    {
+      "challenger_id": "MODEL-D014-QFORMER-BRIDGE",
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "model_family": "Q-Former ECG-to-LLM bridge",
+      "source_path": "models/bridge/bridge.py",
+      "artifact_type": "ARCHITECTURE_ONLY_NO_TARGET_ADMITTED_CHECKPOINT",
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "MIT",
+      "weight_license": "UNRESOLVED_NO_WEIGHTS_IMPORTED",
+      "weights_imported": false,
+      "execution_status": "ARCHITECTURE_ONLY_NONEXECUTED",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_ecg-tokenizer/MODEL_BOUNDARY.json",
+      "input_contract": "Discrete/continuous ECG representation bridge; target retains only representation-axis/additivity invariants and does not import the LLM bridge runtime.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "donor_results": "RESEARCH_CONTEXT_ONLY_NOT_REPRODUCED_TARGET_EVIDENCE",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      },
+      "reproducibility_limit": "No target-admitted Stage-1 bridge checkpoint or downstream LLM checkpoint is present."
+    },
+    {
+      "challenger_id": "MODEL-D014-SCALABLE-ENCODER",
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "model_family": "Scalable residual-convolution ECG encoder",
+      "source_path": "models/scalable_encoder.py",
+      "artifact_type": "ARCHITECTURE_ONLY_NO_TARGET_ADMITTED_CHECKPOINT",
+      "checkpoint_hash": null,
+      "checkpoint_revision": null,
+      "checkpoint_bytes": null,
+      "software_license": "MIT",
+      "weight_license": "UNRESOLVED_NO_WEIGHTS_IMPORTED",
+      "weights_imported": false,
+      "execution_status": "ARCHITECTURE_ONLY_NONEXECUTED",
+      "runtime_authority": false,
+      "clinical_validity": "NOT_INFERRED",
+      "model_boundary": "donors/heartwise-ai_ecg-tokenizer/MODEL_BOUNDARY.json",
+      "input_contract": "12-channel convolutional encoder architecture with fixed downstream representation shape in donor source; target execution/preprocessing parity is not established.",
+      "training_data_provenance": "NOT_ADMITTED",
+      "validation_contract": {
+        "donor_results": "RESEARCH_CONTEXT_ONLY_NOT_REPRODUCED_TARGET_EVIDENCE",
+        "target_metrics": "NOT_REPORTABLE",
+        "calibration": "NOT_ADMITTED",
+        "thresholds": "NOT_ADMITTED",
+        "unsupported_populations": "NOT_ESTABLISHED"
+      },
+      "reproducibility_limit": "Architecture only; no target-admitted checkpoint, dataset, or target-controlled performance validation."
     }
   ]
 }
