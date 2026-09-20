@@ -148,6 +148,13 @@
         "tests/image_baseline_estimation.test.js"
       ],
       "scope": "bounded PNG/JPEG/PDF source decoding; pinned Pillow/pypdfium2 wrapper identity; EXIF normalization and white alpha composition; PDF encryption/forms/page/pixel/DPI limits; source/file replacement detection; strict decoder manifest, canonical page paths, source/raster hashes and aggregate pixel verification; original-digital-PDF format binding; multi-page page identity; mandatory bound external preflight; explicit ROI-to-lead identity verification; immutable time/voltage/lead/twelve-lead permissions; bounded digitization; atomic canonical case publication with exact source and normalized-page persistence; real generated-JPEG integration through immutable extraction and immutable canonical analysis; authority/tamper/collision rejection; bounded 3-degree continuous deskew recovery through layout discovery/digitization without raising the two-column hold threshold; replayable deskew/crop persistence provenance; explicit verified perspective rectification through deskew/layout/digitization/persistence replay without relaxing digitization thresholds; bounded automatic perspective detection through canonical rectification/layout/digitization and replayable persistence, with unsupported sparse/ambiguous geometry failing closed; generated-JPEG raster label verification unlocks lead/twelve-lead identity permissions while immutable voltage/baseline permission remains false and downstream analysis stays blocked; generated-JPEG trace-baseline verification can independently unlock voltage permission after label identity, enabling immutable canonical analysis only when time/voltage/identity gates all pass; immutable paper row/column/time-window provenance; whole-record cross-lead consistency/candidate aggregation; same-window 3x4 panel groups only; canonical whole-record lead-II prefers the 10-second rhythm strip while the noncanonical 2.5-second panel-II trace is retained as supplemental same-window evidence; all four standard panel groups contain three leads; supplemental-source accounting, rhythm-strip exclusion, and immutable recomputation reject dropped/substituted temporal traces, falsified groups, or cross-lead summaries; generated-JPEG full chain verifies four complete three-lead same-window groups"
+    },
+    {
+      "id": "PRECLINICAL-VALIDATION-CHECKPOINT",
+      "tests": [
+        "tests/preclinical_validation_checkpoint.test.js"
+      ],
+      "scope": "exact frozen main SHA/tree/CI binding, accepted donor frontier, integrated image-stack readiness, zero-gold nonreportable runtime boundary, immutable dataset/test-set leakage discipline"
     }
   ],
   "policy": [
