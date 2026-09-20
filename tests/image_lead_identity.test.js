@@ -22,7 +22,7 @@ function labeledFixture() {
   });
   const image = paper.image.map(row => row.slice());
   for (const roi of paper.rois) {
-    renderLeadLabel(image, roi.lead, roi.x + 4, roi.y + 4, { scale: 2, value: 8 });
+    renderLeadLabel(image, roi.lead, roi.x + 4, roi.y - 18, { scale: 2, value: 8 });
   }
   return { paper, image };
 }
@@ -66,7 +66,7 @@ test("wrong positional lead hypothesis fails label verification", () => {
 test("missing printed label fails closed", () => {
   const { paper, image } = labeledFixture();
   const target = paper.rois.find(roi => roi.lead === "V6");
-  for (let y = target.y; y < target.y + 30; y += 1) {
+  for (let y = target.y - 20; y < target.y; y += 1) {
     for (let x = target.x; x < target.x + 50; x += 1) image[y][x] = 255;
   }
   const result = verifyLeadLabelsFromRaster({
