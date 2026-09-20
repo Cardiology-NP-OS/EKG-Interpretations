@@ -1,0 +1,170 @@
+{
+  "schema": "ekg-clinical-validation-result-receipt-v1",
+  "result_id": "MITBIH-RPEAK-PILOT-V1-RESULT",
+  "pilot_id": "MITBIH-RPEAK-PILOT-V1",
+  "observed_at": "2026-09-20T23:46:00Z",
+  "code_under_test": {
+    "repository": "Cardiology-NP-OS/EKG-Interpretations",
+    "commit": "32e74373523512c3fcf3921fcb8e2501b8ea2bbb",
+    "tree": "8134669d78b125adbca7d68c3e1f52c7fce63603",
+    "target_entrypoint": "lib/signal_measurement_contract.js::detectCandidateRPeaks",
+    "detector_configuration": {
+      "minAbsoluteDeviation": 0.9,
+      "refractoryMs": 200
+    }
+  },
+  "validation_harness": {
+    "branch_head": "e3bbec4e97c739a4e3094151c47740d4b2d6808d",
+    "workflow_run_id": 35545536843,
+    "workflow_job_id": 106170639021,
+    "artifact_id": 10615897667,
+    "artifact_zip_sha256": "5920d613209564fa7ebfafeceb369a7cab3318bd5e2904d880dba7354b08b515",
+    "result_json_sha256": "f04fdb95a1c53e084da384872116ad45876435c31a914793d01512f74aa5abb6",
+    "reader": "wfdb==4.3.1",
+    "acquisition": "DIRECT_VERSION_PINNED_HTTPS_WITH_SHA256_MANIFEST_VERIFICATION"
+  },
+  "dataset": {
+    "name": "MIT-BIH Arrhythmia Database",
+    "version": "1.0.0",
+    "doi": "10.13026/C2F305",
+    "physionet_release": "mitdb/1.0.0",
+    "license": "Open Data Commons Attribution License v1.0",
+    "records": [
+      "100",
+      "101",
+      "102",
+      "103",
+      "104"
+    ],
+    "selection_rule": "FIRST_FIVE_NUMERIC_RECORD_IDS_IN_CANONICAL_DATABASE_ORDER_NO_RESULT_BASED_SELECTION",
+    "signal_selection": "FIRST_SIGNAL_CHANNEL_AS_STORED_BY_SOURCE",
+    "reference_annotation": "atr",
+    "matching_tolerance_ms": 150
+  },
+  "aggregate": {
+    "referenceBeatCount": 10638,
+    "predictedEventCount": 10536,
+    "matchedEventCount": 10479,
+    "falsePositiveCount": 57,
+    "falseNegativeCount": 159,
+    "microSensitivity": 0.985053581500282,
+    "microPositivePredictiveValue": 0.9945899772209568,
+    "microF1": 0.9897988098611504,
+    "timingMeanAbsoluteErrorMs": 3.356183266002905,
+    "timingMedianAbsoluteErrorMs": 2.7777777777777777
+  },
+  "records": [
+    {
+      "recordId": "100",
+      "leadName": "MLII",
+      "referenceBeatCount": 2273,
+      "predictedEventCount": 2274,
+      "matchedEventCount": 2273,
+      "falsePositiveCount": 1,
+      "falseNegativeCount": 0,
+      "sensitivity": 1,
+      "positivePredictiveValue": 0.9995602462620933,
+      "f1": 0.9997800747745768,
+      "timingMeanAbsoluteErrorMs": 1.5838099428068633,
+      "timingMedianAbsoluteErrorMs": 2.7777777777777777,
+      "sourceFilesSha256": {
+        "100.hea": "60ebc904c7bf3e04d142638d3fd5c903e8dc9f10f1ea3264e07926aa089ee75e",
+        "100.dat": "b2ea3c250e56e48f4b7b90697832b8ecd1afa1e0bb31f2dcfea4ed6e1075a639",
+        "100.atr": "8d8a5349fb16638ebbf649f1779d12e96d91b736b2aafe59db43719ae583d471"
+      }
+    },
+    {
+      "recordId": "101",
+      "leadName": "MLII",
+      "referenceBeatCount": 1865,
+      "predictedEventCount": 1880,
+      "matchedEventCount": 1862,
+      "falsePositiveCount": 18,
+      "falseNegativeCount": 3,
+      "sensitivity": 0.9983914209115281,
+      "positivePredictiveValue": 0.9904255319148936,
+      "f1": 0.9943925233644859,
+      "timingMeanAbsoluteErrorMs": 1.9080439193221148,
+      "timingMedianAbsoluteErrorMs": 2.7777777777777777,
+      "sourceFilesSha256": {
+        "101.hea": "d5f02fbe8673fa05465442191b98ca0d28a1670e7ef0e83fb9ef8723113a311c",
+        "101.dat": "698d1ea6f472d23ca50317c72c96cda2698badd8578220ed0380cdf241e39006",
+        "101.atr": "441cdd6486cfdf4c53e344d1048ab81296773e7058d53069022adc68543a0663"
+      }
+    },
+    {
+      "recordId": "102",
+      "leadName": "V5",
+      "referenceBeatCount": 2187,
+      "predictedEventCount": 2074,
+      "matchedEventCount": 2074,
+      "falsePositiveCount": 0,
+      "falseNegativeCount": 113,
+      "sensitivity": 0.9483310470964792,
+      "positivePredictiveValue": 1,
+      "f1": 0.9734804036611124,
+      "timingMeanAbsoluteErrorMs": 3.829154612664738,
+      "timingMedianAbsoluteErrorMs": 2.7777777777777777,
+      "sourceFilesSha256": {
+        "102.hea": "a22f09934ee1cfe339d1502f68eb3f0175815f47273b81ea55f75aeb5584cb0d",
+        "102.dat": "2b56039f9ece83b53511e0fc24e95f23b90712c8017fe4d915e040e78713c38e",
+        "102.atr": "24e29031c081806ff6d4ec20fb386e28d8f885f0dca5f74dc29c881e8b196d09"
+      }
+    },
+    {
+      "recordId": "103",
+      "leadName": "MLII",
+      "referenceBeatCount": 2084,
+      "predictedEventCount": 2102,
+      "matchedEventCount": 2081,
+      "falsePositiveCount": 21,
+      "falseNegativeCount": 3,
+      "sensitivity": 0.9985604606525912,
+      "positivePredictiveValue": 0.9900095147478591,
+      "f1": 0.9942666029622552,
+      "timingMeanAbsoluteErrorMs": 2.102354637193657,
+      "timingMedianAbsoluteErrorMs": 2.7777777777777777,
+      "sourceFilesSha256": {
+        "103.hea": "3da9706fc27cc5d627a31b04b74b908ac0b6e061843a87cbd57801e5ea0fed7b",
+        "103.dat": "f7994f0bd196730779998b4bddf26cb47f396599fb370a08b5cb29a3ac4d555d",
+        "103.atr": "392ce37fbc7e89b3f14998e197a844f23cce6a3db6edaa71b4b49bf3ca5b6596"
+      }
+    },
+    {
+      "recordId": "104",
+      "leadName": "V5",
+      "referenceBeatCount": 2229,
+      "predictedEventCount": 2206,
+      "matchedEventCount": 2189,
+      "falsePositiveCount": 17,
+      "falseNegativeCount": 40,
+      "sensitivity": 0.9820547330641544,
+      "positivePredictiveValue": 0.9922937443336355,
+      "f1": 0.9871476888387825,
+      "timingMeanAbsoluteErrorMs": 7.172224760164458,
+      "timingMedianAbsoluteErrorMs": 5.555555555555555,
+      "sourceFilesSha256": {
+        "104.hea": "46b5d09e2cae7caaf48f61fc7d0f20962035cf057cf675097fc7d64c4796748f",
+        "104.dat": "aeb19bd805996167c6edd8f1b1a659486c0cbad101f06f1426548784d9634354",
+        "104.atr": "4f945bef6a4e30b588d7ebdb0763f5294322aa5632b4bb128ee140c7035463c9"
+      }
+    }
+  ],
+  "audit_findings": [
+    "All fifteen downloaded source files were SHA-256 verified against the PhysioNet v1.0.0 SHA256SUMS manifest.",
+    "Record 102 is the weakest sensitivity case in this pilot: 2074/2187 reference beats matched, 113 false negatives, sensitivity 0.9483310471.",
+    "Record 104 has the largest pilot timing mean absolute error: 7.1722 ms.",
+    "No detector parameter was retuned after observing pilot results."
+  ],
+  "authority": {
+    "sourceLabelsAreProjectGold": false,
+    "projectGold": false,
+    "reportable": false,
+    "evidenceAdmission": "NOT_ADMITTED",
+    "runtimeAuthority": false,
+    "diagnosticRuntime": "GOVERNED_INACTIVE",
+    "activation": "NOT_ELIGIBLE",
+    "clinicalValidityInferred": false
+  },
+  "interpretation_boundary": "QUARANTINED_FIVE_RECORD_REAL_REFERENCE_PILOT_NOT_FINAL_CLINICAL_VALIDATION"
+}
