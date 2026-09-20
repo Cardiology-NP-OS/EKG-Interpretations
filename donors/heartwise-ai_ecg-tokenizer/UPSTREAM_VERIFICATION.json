@@ -4,8 +4,8 @@
   "repository": "HeartWise-AI/ECG_tokenizer",
   "audited_branch": "main",
   "audited_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
-  "audited_tree": null,
-  "audited_tree_status": "UNRESOLVED_CONNECTOR_SURFACE_DO_NOT_INVENT",
+  "audited_tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+  "audited_tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
   "repository_metadata": {
     "repository_id": "856673323",
     "default_branch": "main",
