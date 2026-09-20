@@ -147,6 +147,38 @@ test("persistence rejects nested authority escalation", () => {
   );
 });
 
+test("persistence rejects falsified cross-lead consistency", () => {
+  const fx = fixture("case://analysis-store-cross-lead-tamper");
+  const changed = JSON.parse(JSON.stringify(fx.analysis));
+  changed.crossLeadConsistency.beatCount.median += 1;
+  assert.throws(
+    () => persistImageAnalysis(fx.caseReceipt.path, changed),
+    /IMAGE_ANALYSIS_CROSS_LEAD_CONSISTENCY/,
+  );
+});
+
+test("persistence rejects falsified simultaneous paper groups", () => {
+  const fx = fixture("case://analysis-store-simultaneous-tamper");
+  const changed = JSON.parse(JSON.stringify(fx.analysis));
+  changed.simultaneousPaperGroups[0].leads = ["I", "III", "V6"];
+  changed.simultaneousPaperGroups[0].leadCount = 3;
+  assert.throws(
+    () => persistImageAnalysis(fx.caseReceipt.path, changed),
+    /IMAGE_ANALYSIS_SIMULTANEOUS_GROUPS/,
+  );
+});
+
+test("persistence rejects lead paper-window substitution", () => {
+  const fx = fixture("case://analysis-store-window-tamper");
+  const changed = JSON.parse(JSON.stringify(fx.analysis));
+  const row = changed.leadAnalyses.find(item => item.leadName === "V1");
+  row.paperWindow.startSeconds = 7.5;
+  assert.throws(
+    () => persistImageAnalysis(fx.caseReceipt.path, changed),
+    /IMAGE_ANALYSIS_PAPER_WINDOW_BINDING/,
+  );
+});
+
 test("analysis cannot bind to a substituted extraction identity", () => {
   const fx = fixture("case://analysis-store-extraction-id");
   const changed = JSON.parse(JSON.stringify(fx.analysis));
