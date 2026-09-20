@@ -403,7 +403,10 @@
       "model_weights_imported": false,
       "dataset_bytes_imported": false,
       "source_code_copied": false,
-      "clinical_authority_added": false
+      "clinical_authority_added": false,
+      "full_tree_index": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json",
+      "associated_repository_dispositions": "donors/heartwise-ai_ecg-tokenizer/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
+      "research_followup": "donors/heartwise-ai_ecg-tokenizer/RESEARCH_FOLLOWUP.json"
     },
     {
       "donor_id": "DONOR-015",
@@ -491,6 +494,17 @@
       "observed_commit": "aba58379f29d54227bb919135eb09b2db874ceb4",
       "observed_tree": "8e8f278383c1f72f2d0428e8e2356fc685a35287",
       "reason": "Material first-party dependency from donor Dockerfile/requirements; requires separate exact source/license audit."
+    },
+    {
+      "donor_id": "DONOR-A007",
+      "repository": "HeartWise-AI/ECG_Dataset_QA",
+      "repository_id": "1310133643",
+      "status": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
+      "discovered_by": "DONOR-014",
+      "observed_commit": "a664ab92f6036752a96b119d87118b7e4b9d36c2",
+      "observed_tree": "8465d628ad7460c4dcd8b5edce2acba23180c1b8",
+      "reason": "Dataset-generation package extracted from ECG_tokenizer upstream history; separate audit required before any data/code reuse.",
+      "license_note": "No LICENSE file found at observed head; do not inherit the primary donor MIT license."
     }
   ],
   "completion_rule": "No donor or associated material first-party repository may remain ambiguous before program completion.",
