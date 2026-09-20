@@ -384,7 +384,7 @@
     {
       "donor_id": "DONOR-014",
       "repository": "HeartWise-AI/ECG_tokenizer",
-      "status": "IMPLEMENTED_UNVERIFIED",
+      "status": "VERIFIED_CANDIDATE",
       "audited_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
       "audited_tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
       "audited_tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
@@ -396,8 +396,8 @@
       "dataset_boundary": "donors/heartwise-ai_ecg-tokenizer/DATASET_BOUNDARY.json",
       "model_boundary": "donors/heartwise-ai_ecg-tokenizer/MODEL_BOUNDARY.json",
       "upstream_verification": "donors/heartwise-ai_ecg-tokenizer/UPSTREAM_VERIFICATION.json",
-      "receipt": "donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT_DRAFT.json",
-      "receipt_status": "PENDING",
+      "receipt": "donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT.json",
+      "receipt_status": "FINALIZED_CANDIDATE",
       "integration": "Target-owned nonruntime representation-semantics contract plus architecture-only tokenizer/bridge challenger metadata; no donor runtime, weights, datasets, or clinical claims imported.",
       "runtime_dependency_added": false,
       "model_weights_imported": false,
@@ -406,7 +406,13 @@
       "clinical_authority_added": false,
       "full_tree_index": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json",
       "associated_repository_dispositions": "donors/heartwise-ai_ecg-tokenizer/ASSOCIATED_REPOSITORY_DISPOSITIONS.json",
-      "research_followup": "donors/heartwise-ai_ecg-tokenizer/RESEARCH_FOLLOWUP.json"
+      "research_followup": "donors/heartwise-ai_ecg-tokenizer/RESEARCH_FOLLOWUP.json",
+      "review_verification": "donors/heartwise-ai_ecg-tokenizer/REVIEW_VERIFICATION.json",
+      "verified_candidate_commit": "50ee3dd668a3c19d5c250defac50358c12827bcc",
+      "verified_candidate_tree": "67af315ed4bca26e3ba6944dd1ab893cdc9dc081",
+      "candidate_ci_run_id": 35540276319,
+      "candidate_ci_conclusion": "success",
+      "independently_attested": false
     },
     {
       "donor_id": "DONOR-015",
