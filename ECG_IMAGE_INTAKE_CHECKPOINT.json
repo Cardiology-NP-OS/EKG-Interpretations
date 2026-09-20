@@ -2,7 +2,7 @@
   "schema": "ekg-image-intake-checkpoint-v1",
   "status": "ENGINEERING_VERIFIED_GOVERNED_INACTIVE",
   "updated_date": "2026-09-19",
-  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit bounded quadrilateral perspective rectification, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
+  "scope": "Target-owned photo/PDF product path as governed image engineering: bounded PNG/JPEG/PDF source decoding, EXIF/alpha normalization, bounded PDF rasterization, mandatory bound preflight for every external image input, explicit verified quadrilateral perspective rectification, bounded automatic perspective-corner detection from observable dark grid/paper support, bounded continuous deskew with deterministic post-transform crop, digitization-qualified 90-degree orientation search, ROI localization and standard-layout discovery, grid calibration, bounded sparse-column digitization, measurement gating, atomic content-addressed case persistence with replayable geometry provenance and verified original source/normalized raster artifacts, immutable digitized extraction generations, canonical per-lead measurement/rhythm/phenotype analysis, and immutable analysis generations bound to exact extractions and preflight permissions.",
   "productPriority": "photo-pdf-intake",
   "liveMonitorIntegration": "OUT_OF_SCOPE",
   "implementations": [
@@ -94,8 +94,14 @@
     "perspectiveTransformProvenancePersisted": true,
     "perspectiveTransformReplayedDuringPersistence": true,
     "perspectiveSyntheticTrapezoidRecoveryVerified": true,
-    "automaticPerspectiveCornerDetectionImplemented": false,
-    "automaticPerspectiveCornerDetectionNote": "Perspective rectification currently requires explicit verified quadrilateral corners; automatic page-corner detection remains unfinished."
+    "automaticPerspectiveCornerDetectionImplemented": true,
+    "automaticPerspectiveCornerDetectionNote": "Automatic detection is engineering-verified only when the paper/grid boundary is observable in raster support and passes convex-area plus edge-support gates. It is not evidence of reliable corner detection on arbitrary phone photos, cluttered backgrounds, glare, occlusion, or weak paper/background contrast.",
+    "automaticPerspectiveCornerDetectionMode": "DIRECTIONAL_EXTREMA_WITH_CONVEX_AREA_AND_EDGE_SUPPORT_GATES",
+    "automaticPerspectiveCornerDetectionObservableSupportRequired": true,
+    "automaticPerspectiveCornerDetectionSyntheticTrapezoidVerified": true,
+    "automaticPerspectiveThroughCanonicalIntakeVerified": true,
+    "automaticPerspectivePersistenceReplayVerified": true,
+    "automaticPerspectiveClinicalPhotoValidationEstablished": false
   },
   "diagnosticRuntime": "GOVERNED_INACTIVE",
   "evidenceAdmission": "NOT_ADMITTED",
