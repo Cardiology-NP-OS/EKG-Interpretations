@@ -1,0 +1,78 @@
+{
+  "schema": "ekg-preclinical-validation-checkpoint-v1",
+  "checkpoint_id": "PRECLINICAL-V1-2026-09-20",
+  "checkpoint_ref": "checkpoint/preclinical-validation-v1",
+  "code_under_test": {
+    "repository": "Cardiology-NP-OS/EKG-Interpretations",
+    "commit": "32e74373523512c3fcf3921fcb8e2501b8ea2bbb",
+    "tree": "8134669d78b125adbca7d68c3e1f52c7fce63603",
+    "immutable_for_validation": true
+  },
+  "integration_state": {
+    "donor_program": {
+      "completed_primary_donors": 14,
+      "required_primary_donors": 21,
+      "next_primary_donor_id": "DONOR-015",
+      "next_primary_donor_repository": "HeartWise-AI/ECG_LLM_Judge"
+    },
+    "image_path": {
+      "png_jpeg_pdf_decode": true,
+      "mandatory_external_preflight": true,
+      "explicit_perspective_rectification": true,
+      "automatic_bounded_perspective_detection": true,
+      "continuous_deskew": true,
+      "automatic_supported_label_identity": true,
+      "trace_baseline_verification": true,
+      "immutable_extraction": true,
+      "canonical_per_lead_analysis": true,
+      "whole_record_cross_lead_aggregation": true,
+      "temporally_scoped_same_window_groups": true,
+      "real_clinical_image_validation_established": false,
+      "real_clinical_voltage_accuracy_established": false
+    }
+  },
+  "verification": {
+    "exact_main_ci_run_id": 35542645087,
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 106162978033,
+        "name": "Quarantined V12.1 candidate validation",
+        "conclusion": "success"
+      },
+      {
+        "id": 106162978140,
+        "name": "Synthetic contract CI (non-clinical)",
+        "conclusion": "success"
+      },
+      {
+        "id": 106162978180,
+        "name": "Bounded JPEG/PDF decoder and canonical intake",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "dataset_state": {
+    "approved_adjudicated_project_gold_count": 0,
+    "source_labels_are_project_gold": false,
+    "model_predictions_are_project_gold": false,
+    "dataset_terms_review_required_before_new_use": true
+  },
+  "governed_clinical_state": {
+    "completion_state": "SPECIALIST_COMPLETE_INACTIVE",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "validation_transition": {
+    "status": "READY_TO_BEGIN_QUARANTINED_VALIDATION",
+    "metrics_may_be_computed_in_validation_workspace": true,
+    "metrics_may_be_promoted_to_reportable_clinical_metrics": false,
+    "runtime_activation_authorized": false,
+    "project_gold_creation_authorized": false,
+    "note": "Clinical-accuracy work must remain quarantined from runtime authority. Test-set labels and results do not become project gold or reportable clinical metrics without separate adjudication/admission."
+  }
+}
