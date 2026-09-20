@@ -1,0 +1,77 @@
+{
+  "schema": "ekg-preclinical-validation-checkpoint-v1",
+  "checkpoint_date": "2026-09-20",
+  "repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "checkpoint_purpose": "Freeze a reproducible engineering baseline before real clinical-accuracy evaluation begins.",
+  "promoted_engineering_basis": {
+    "commit": "de7e13a28c502fa5e1ced202a888ee66a44db700",
+    "tree": "75d8f4d894280ef381d495cb79d8902a7f11bc69",
+    "post_merge_ci_run_id": 35541158296,
+    "post_merge_ci_conclusion": "success",
+    "required_jobs": [
+      "Synthetic contract CI (non-clinical)",
+      "Bounded JPEG/PDF decoder and canonical intake",
+      "Quarantined V12.1 candidate validation"
+    ]
+  },
+  "integrated_state": {
+    "primary_donors_completed": 14,
+    "primary_donors_required": 21,
+    "next_primary_donor": "DONOR-015",
+    "donor_014": "ACCEPTED_ON_MAIN_POST_PROMOTION_CI",
+    "image_path": [
+      "bounded PNG/JPEG/PDF decode",
+      "mandatory external preflight",
+      "bounded perspective detection/rectification",
+      "continuous deskew and deterministic crop",
+      "standard 3x4+rhythm ROI discovery",
+      "strict supported-glyph lead identity verification",
+      "bounded trace-derived baseline verification",
+      "calibrated digitization",
+      "immutable case/extraction/analysis generations",
+      "canonical per-lead signal intelligence",
+      "whole-record cross-lead aggregation",
+      "temporally scoped same-window panel comparison"
+    ],
+    "representation_governance": [
+      "explicit representation-axis semantics",
+      "additive residual-VQ semantics",
+      "bridge axis/position compatibility",
+      "checkpoint/config structural binding"
+    ]
+  },
+  "clinical_validation_state": {
+    "clinical_accuracy_testing_started": false,
+    "clinical_accuracy_claimed": false,
+    "clinical_validity_inferred": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "real_clinical_image_validation_established": false,
+    "real_clinical_voltage_accuracy_established": false,
+    "general_ocr_lead_identity_established": false
+  },
+  "clinical_accuracy_entry_requirements": [
+    "Freeze the evaluated target commit/tree before scoring.",
+    "Use immutable dataset manifests with record hashes and source/license provenance.",
+    "Keep training/development/test patients separated; no patient leakage.",
+    "Define label mapping and exclusion rules before looking at final test results.",
+    "Distinguish waveform measurement accuracy, rhythm/classification accuracy, image digitization accuracy, and report/interpretation accuracy.",
+    "Use adjudicated or established reference labels appropriate to each task; do not treat donor labels or synthetic fixtures as project gold.",
+    "Predefine metrics, confidence intervals, subgroup analyses, and abstention handling.",
+    "Record every failure/abstention; do not silently drop unreadable or unsupported cases.",
+    "Evaluation outputs remain nonruntime and nonreportable until evidence-admission governance explicitly changes."
+  ],
+  "first_validation_lane": {
+    "state": "READY_TO_START_AFTER_CHECKPOINT_MERGE",
+    "priority": [
+      "signal-domain interval/rhythm accuracy on immutable reference ECGs",
+      "image digitization error against paired digital waveform ground truth",
+      "lead identity and calibration correctness on real ECG images",
+      "end-to-end interpretation agreement only after the earlier layers are quantified"
+    ]
+  },
+  "authority_note": "This checkpoint records engineering readiness for validation. It is not evidence of clinical accuracy, safety, efficacy, or diagnostic validity."
+}
