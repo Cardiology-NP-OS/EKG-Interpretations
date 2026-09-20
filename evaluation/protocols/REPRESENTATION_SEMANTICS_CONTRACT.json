@@ -17,8 +17,8 @@
       "donor_id": "DONOR-014",
       "repository": "HeartWise-AI/ECG_tokenizer",
       "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
-      "tree": null,
-      "tree_status": "UNRESOLVED_CONNECTOR_SURFACE",
+      "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+      "tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
       "source_paths": [
         "models/local_residual_vq.py",
         "models/bridge/bridge.py",
