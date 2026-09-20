@@ -1,0 +1,37 @@
+{
+  "schema": "ekg-representation-semantics-contract-v1",
+  "implementation": "lib/representation_contract.js",
+  "tests": [
+    "tests/representation_contract.test.js"
+  ],
+  "requirements": [
+    "representation token-axis semantics must be explicit, never inferred from ambiguous tensor shape",
+    "residual vector-quantization reconstruction must declare additive codebook semantics",
+    "convex softmax averaging across residual codebooks is rejected as non-additive fusion",
+    "bridge token-axis semantic and position count must exactly match the declared representation axis",
+    "bridge structural configuration must be bound to the checkpoint/config identity",
+    "representation contracts cannot grant runtime or clinical authority"
+  ],
+  "donorProvenance": [
+    {
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+      "tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
+      "source_paths": [
+        "models/local_residual_vq.py",
+        "models/bridge/bridge.py",
+        "tests/models/test_qformer_mix_strategy.py",
+        "tests/models/test_qformer_token_axis.py",
+        "scripts/probe_axis_views.py"
+      ]
+    }
+  ],
+  "runtimeAuthority": false,
+  "diagnosticRuntime": "GOVERNED_INACTIVE",
+  "evidenceAdmission": "NOT_ADMITTED",
+  "metrics": "NOT_REPORTABLE",
+  "activation": "NOT_ELIGIBLE",
+  "clinicalValidityInferred": false
+}

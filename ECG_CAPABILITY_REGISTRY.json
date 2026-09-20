@@ -1,8 +1,8 @@
 {
   "schema": "ecg-capability-registry-v1",
   "canonical_owner": "Cardiology-NP-OS/EKG-Interpretations",
-  "generated_from_donor_capability_registry_count": 363,
-  "capability_count": 60,
+  "generated_from_donor_capability_registry_count": 373,
+  "capability_count": 61,
   "diagnostic_runtime": "GOVERNED_INACTIVE",
   "evidence_admission": "NOT_ADMITTED",
   "approved_adjudicated_gold_count": 0,
@@ -2523,6 +2523,13 @@
           "commit": "04edac702b61c91face519774ddcc0cd712fef23",
           "tree": "dea32e6ad4755caed718f96df19b5a06171c48b1",
           "manifest": "donors/pkudigitalhealth_ecgfounder/DONOR_MANIFEST.json"
+        },
+        {
+          "source": "HeartWise-AI/ECG_tokenizer",
+          "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+          "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+          "tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
+          "manifest": "donors/heartwise-ai_ecg-tokenizer/DONOR_MANIFEST.json"
         }
       ],
       "source_capabilities": [
@@ -2537,7 +2544,10 @@
         "EFM-004",
         "PFD-001",
         "PFD-002",
-        "PFD-003"
+        "PFD-003",
+        "D014-C006",
+        "D014-C007",
+        "D014-C009"
       ],
       "licenses": [
         {
@@ -2564,6 +2574,11 @@
           "source": "PKUDigitalHealth/ECGFounder",
           "spdx": "MIT",
           "status": "COMPATIBLE_FOR_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION_CODE_ONLY_DATA_AND_WEIGHTS_SEPARATELY_GOVERNED"
+        },
+        {
+          "source": "HeartWise-AI/ECG_tokenizer",
+          "spdx": "MIT",
+          "status": "SOURCE_CODE_COMPATIBLE_MODEL_AND_DATA_TERMS_SEPARATELY_GOVERNED"
         }
       ],
       "test_paths": [
@@ -4175,6 +4190,52 @@
       "limitations": [
         "Agreement is not accuracy; model predictions are not project gold.",
         "Comparison binds caller-declared hashes; independent asset/data/policy verification remains upstream."
+      ],
+      "supersedes": [],
+      "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",
+      "runtime_status": "INACTIVE_EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "ECG-CAP-MODEL-REPRESENTATION-SEMANTICS",
+      "capability_family": "Representations / models",
+      "name": "Representation axis and residual-codebook semantics",
+      "canonical_target_path": "lib/representation_contract.js",
+      "implementation_status": "TARGET_OWNED_EVALUATION_IMPLEMENTATION",
+      "authority_class": "EVALUATION_NONRUNTIME",
+      "source_provenance": [
+        {
+          "source": "HeartWise-AI/ECG_tokenizer",
+          "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+          "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+          "tree_status": "VERIFIED_GIT_COMMIT_OBJECT",
+          "manifest": "donors/heartwise-ai_ecg-tokenizer/DONOR_MANIFEST.json"
+        }
+      ],
+      "source_capabilities": [
+        "D014-C001",
+        "D014-C002",
+        "D014-C003"
+      ],
+      "licenses": [
+        {
+          "source": "HeartWise-AI/ECG_tokenizer",
+          "spdx": "MIT",
+          "status": "COMPATIBLE_FOR_TARGET_OWNED_CLEAN_REIMPLEMENTATION_WITH_ATTRIBUTION"
+        }
+      ],
+      "test_paths": [
+        "tests/representation_contract.test.js"
+      ],
+      "evaluation_paths": [
+        "evaluation/protocols/REPRESENTATION_SEMANTICS_CONTRACT.json"
+      ],
+      "research_paths": [],
+      "implementation_paths": [
+        "lib/representation_contract.js"
+      ],
+      "limitations": [
+        "Contract validates declared representation semantics; it does not establish donor checkpoint parity.",
+        "No donor model weights, datasets, generated outputs, or clinical-performance claims become target evidence."
       ],
       "supersedes": [],
       "dependency_status": "NO_NEW_RUNTIME_DEPENDENCY",

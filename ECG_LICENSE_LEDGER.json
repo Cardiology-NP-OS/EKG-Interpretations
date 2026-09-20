@@ -524,6 +524,34 @@
         "status": "NO_RUNTIME_DEPENDENCY_ADDED",
         "transitive_dependency_import": false
       }
+    },
+    {
+      "donor_id": "DONOR-014",
+      "repository": "HeartWise-AI/ECG_tokenizer",
+      "source_code_license": {
+        "spdx": "MIT",
+        "status": "COMPATIBLE_WITH_ATTRIBUTION",
+        "license_file": "LICENSE"
+      },
+      "copied_source_code": false,
+      "integration_method": [
+        "INDEPENDENT_TARGET_IMPLEMENTATION",
+        "ARCHITECTURE_ONLY_CHALLENGER_METADATA"
+      ],
+      "attribution_required": "YES_FOR_ANY_SUBSTANTIAL_SOURCE_REUSE; CURRENT_TARGET_IMPLEMENTATION_IS_INDEPENDENT",
+      "model_weight_license": {
+        "status": "UNRESOLVED_NO_WEIGHTS_IMPORTED",
+        "weights_imported": false
+      },
+      "dataset_license": {
+        "status": "NOT_ADMITTED_PER_ASSET",
+        "source_labels_promoted_to_project_gold": false,
+        "raw_bytes_imported": false
+      },
+      "dependency_license_action": {
+        "status": "NO_RUNTIME_DEPENDENCY_ADDED",
+        "transitive_dependency_import": false
+      }
     }
   ],
   "fail_closed_on_unknown_license": true

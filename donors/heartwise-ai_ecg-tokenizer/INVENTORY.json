@@ -1,0 +1,102 @@
+{
+  "schema": "ekg-donor-014-inventory-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+  "tree_state": "VERIFIED_GIT_COMMIT_OBJECT",
+  "repository_metadata": {
+    "default_branch": "main",
+    "repository_size_kb": 88774,
+    "archived": false
+  },
+  "exact_files": [
+    {
+      "path": "README.md",
+      "blob_sha": "038290c77976425adb0e0875544640e287d740d1",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "LICENSE",
+      "blob_sha": "09ef05852eeeab23785b9a44e93154e10b7028d8",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "pyproject.toml",
+      "blob_sha": "7d1dde0077d590628d78961eddcd7dfd6c3d7e65",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "models/ecg_tokenizer_wrapper.py",
+      "blob_sha": "283ed5fb888e9b9a715eba48faf781bcfa851a9e",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "models/bridge/bridge.py",
+      "blob_sha": "bea1335f02602a1950bd8c90468fcc36c865f6e3",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "models/local_residual_vq.py",
+      "blob_sha": "1a733422956ac53f7dad8b3d0736d45efdd41629",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "models/scalable_encoder.py",
+      "blob_sha": "2b5935d858d4153ec5c5b45fb735f094aea08767",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "tests/models/test_qformer_mix_strategy.py",
+      "blob_sha": "cff746fde83194f03bf824642b1f778636b821f3",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "tests/models/test_qformer_token_axis.py",
+      "blob_sha": "b9e44323e86e21004bc646b1861c7a00b3c305d0",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/NEXT_STEPS.md",
+      "blob_sha": "a87426bc80dc9008800b3aa3b4b182e2601f7665",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/REPRODUCE.md",
+      "blob_sha": "643b1f52808cbbbbb59a10661acc6e4f2d9d155c",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "scripts/probe_axis_views.py",
+      "blob_sha": "39ca1069e658db45a3c111e43962760d7a8d6e0d",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "scripts/probe_tokenizer.py",
+      "blob_sha": "dda708c8a36ed60e097d483210b286032707a849",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "scripts/train_tokenizer_aux.py",
+      "blob_sha": "889a5f601c990dbb58be23a99fc12885ef4e43fd",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    },
+    {
+      "path": "utils/checkpoint_structure.py",
+      "blob_sha": "3193850a7dd899e0f375a4e409337f537a6dac20",
+      "inspection": "EXACT_CONNECTOR_FILE"
+    }
+  ],
+  "inventory_completeness": "FULL_RECURSIVE_GIT_TREE_VERIFIED_PLUS_SELECTED_HIGH_VALUE_BLOB_AUDIT",
+  "complete_recursive_tree": false,
+  "source_code_copied": false,
+  "weights_materialized": false,
+  "datasets_materialized": false,
+  "full_tree_index": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json",
+  "full_recursive_tree_verified": true,
+  "recursive_tree_truncated": false,
+  "recursive_entry_count": 392,
+  "recursive_blob_count": 350,
+  "recursive_tree_count": 42,
+  "tracked_model_or_dataset_artifact_candidates": []
+}

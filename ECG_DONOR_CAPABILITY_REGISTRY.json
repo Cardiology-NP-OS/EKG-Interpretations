@@ -4193,9 +4193,119 @@
       "donor": "HeartWise-AI/DeepECG_Docker",
       "donor_commit": "cabf6c06b74731c86b8c5a27ae7101f14db5ec38",
       "classification": "REJECTED"
+    },
+    {
+      "capability_id": "D014-C001",
+      "capability": "Residual-VQ reconstruction is additive across codebooks",
+      "disposition": "INTEGRATED",
+      "donor_component": "models/local_residual_vq.py; models/bridge/bridge.py; tests/models/test_qformer_mix_strategy.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-REPRESENTATION-SEMANTICS",
+      "reason": "Target-owned contract now rejects non-additive residual-codebook reconstruction/fusion without importing donor runtime code.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "INTEGRATED"
+    },
+    {
+      "capability_id": "D014-C002",
+      "capability": "Representation token axis is explicit and temporally meaningful",
+      "disposition": "INTEGRATED",
+      "donor_component": "models/bridge/bridge.py; tests/models/test_qformer_token_axis.py; scripts/probe_axis_views.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-REPRESENTATION-SEMANTICS",
+      "reason": "Target-owned contract requires explicit axis semantics and exact bridge axis/position agreement.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "INTEGRATED"
+    },
+    {
+      "capability_id": "D014-C003",
+      "capability": "Fusion strategy and bridge structure are checkpoint/config bound",
+      "disposition": "EVALUATION_ONLY",
+      "donor_component": "models/bridge/bridge.py; tests/models/test_qformer_mix_strategy.py; tests/models/test_qformer_token_axis.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-REPRESENTATION-SEMANTICS",
+      "reason": "Useful as a nonruntime structural evaluation invariant; no donor checkpoint is admitted.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "EVALUATION_ONLY"
+    },
+    {
+      "capability_id": "D014-C004",
+      "capability": "Checkpoint structural mismatch rejection",
+      "disposition": "SUPERSEDED",
+      "donor_component": "utils/checkpoint_structure.py; tests/models/test_qformer_token_axis.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CHECKPOINT-SAFETY",
+      "reason": "Existing target checkpoint identity/safe-loading governance already covers the higher-level requirement.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "SUPERSEDED"
+    },
+    {
+      "capability_id": "D014-C005",
+      "capability": "Patient-grouped frozen representation probes",
+      "disposition": "SUPERSEDED",
+      "donor_component": "scripts/probe_tokenizer.py; scripts/probe_axis_views.py",
+      "canonical_target_implementation": "ECG-CAP-EVALUATION-PATIENT-SPLITS",
+      "reason": "Existing target patient/record split and reproducibility contracts supersede the donor-specific probe harness.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "SUPERSEDED"
+    },
+    {
+      "capability_id": "D014-C006",
+      "capability": "Scalable convolutional tokenizer encoder with fixed downstream interface",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/scalable_encoder.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "reason": "Architecture retained as challenger context only; no target-admitted checkpoint or runtime dependency.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "CHALLENGER"
+    },
+    {
+      "capability_id": "D014-C007",
+      "capability": "Auxiliary-loss and split-codebook tokenizer training experiments",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "scripts/train_tokenizer_aux.py; docs/tokenizer_aux_loss/REPRODUCE.md",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "reason": "Training concept is research context only because target-controlled dataset/checkpoint validation is absent.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "RESEARCH_ONLY"
+    },
+    {
+      "capability_id": "D014-C008",
+      "capability": "Per-endpoint generated-text versus margin/numeric readout policy",
+      "disposition": "RESEARCH_ONLY",
+      "donor_component": "README.md; docs/tokenizer_aux_loss/NEXT_STEPS.md",
+      "canonical_target_implementation": "ECG-CAP-MODEL-CLASSIFICATION-CHALLENGERS",
+      "reason": "Readout-policy observations remain research-only; donor metrics and thresholds are not target reportable evidence.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "RESEARCH_ONLY"
+    },
+    {
+      "capability_id": "D014-C009",
+      "capability": "ECG-to-LLM Q-Former/MedGemma bridge architecture",
+      "disposition": "CHALLENGER",
+      "donor_component": "models/bridge/bridge.py; models/ecg_tokenizer_wrapper.py",
+      "canonical_target_implementation": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "reason": "Architecture-only challenger metadata; no model weights, LLM runtime, or diagnostic authority imported.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "CHALLENGER"
+    },
+    {
+      "capability_id": "D014-C010",
+      "capability": "Full CUDA/PyTorch/Transformers/PEFT/W&B donor runtime stack",
+      "disposition": "REJECTED",
+      "donor_component": "pyproject.toml",
+      "canonical_target_implementation": "ECG-CAP-GOVERNANCE-DEPENDENCY-REPRODUCIBILITY",
+      "reason": "Direct dependency import is unnecessary for the harvested invariants and would expand the governed runtime surface.",
+      "donor": "HeartWise-AI/ECG_tokenizer",
+      "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "classification": "REJECTED"
     }
   ],
-  "capability_count": 363,
+  "capability_count": 373,
   "deduplication_policy": {
     "one_canonical_implementation_per_capability": true,
     "alternates_retained_only_for_measurable_challenger_or_evaluation_value": true

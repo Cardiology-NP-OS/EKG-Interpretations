@@ -1,0 +1,25 @@
+{
+  "schema": "ekg-donor-014-associated-repository-dispositions-v1",
+  "donor_id": "DONOR-014",
+  "primary_repository": "HeartWise-AI/ECG_tokenizer",
+  "repositories": [
+    {
+      "repository": "HeartWise-AI/ECG_Dataset_QA",
+      "relationship": "Dataset-generation package extracted from ECG_tokenizer upstream history",
+      "disposition": "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW",
+      "audited_in_donor_014": false,
+      "source_bytes_imported": false,
+      "registered_donor_id": "DONOR-A007",
+      "observed_commit": "a664ab92f6036752a96b119d87118b7e4b9d36c2",
+      "observed_tree": "8465d628ad7460c4dcd8b5edce2acba23180c1b8",
+      "license_status": "LICENSE_REVIEW_REQUIRED_NO_LICENSE_FILE_AT_OBSERVED_HEAD"
+    },
+    {
+      "repository": "HeartWise-AI/DeepECG_Docker",
+      "relationship": "Related HeartWise ECG model ecosystem; already handled separately as DONOR-013",
+      "disposition": "ALREADY_GOVERNED_SEPARATE_DONOR",
+      "audited_in_donor_014": false,
+      "source_bytes_imported": false
+    }
+  ]
+}

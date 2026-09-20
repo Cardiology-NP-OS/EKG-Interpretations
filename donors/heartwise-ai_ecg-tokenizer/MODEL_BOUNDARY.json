@@ -1,0 +1,60 @@
+{
+  "schema": "ekg-donor-014-model-boundary-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "source_architectures": [
+    {
+      "family": "Residual-VQ ECG tokenizer",
+      "source_paths": [
+        "models/ecg_tokenizer_wrapper.py",
+        "models/local_residual_vq.py"
+      ],
+      "artifact_type": "ARCHITECTURE_ONLY_NO_TARGET_ADMITTED_CHECKPOINT",
+      "target_runtime_authority": false
+    },
+    {
+      "family": "Q-Former ECG-to-LLM bridge",
+      "source_paths": [
+        "models/bridge/bridge.py"
+      ],
+      "artifact_type": "ARCHITECTURE_ONLY_NO_TARGET_ADMITTED_CHECKPOINT",
+      "target_runtime_authority": false
+    },
+    {
+      "family": "Scalable residual-convolution ECG encoder",
+      "source_paths": [
+        "models/scalable_encoder.py"
+      ],
+      "artifact_type": "ARCHITECTURE_ONLY_NO_TARGET_ADMITTED_CHECKPOINT",
+      "target_runtime_authority": false
+    }
+  ],
+  "dependency_surface": {
+    "python": ">=3.12",
+    "notable": [
+      "torch==2.6.0+cu124",
+      "transformers>=5.5.0",
+      "peft==0.19.1",
+      "vector-quantize-pytorch==1.24.2",
+      "wandb>=0.27.0",
+      "wfdb==4.1.2"
+    ],
+    "direct_target_import_status": "REJECTED_UNNECESSARY_HEAVY_MODEL_STACK"
+  },
+  "checkpoints": {
+    "imported": false,
+    "executed_by_target": false,
+    "exact_weight_identity_established": false,
+    "weight_license_established": false,
+    "training_data_admitted": false
+  },
+  "donor_results": {
+    "authority": "RESEARCH_CONTEXT_ONLY_NOT_TARGET_REPRODUCED",
+    "reportable_target_metrics": false
+  },
+  "clinical_validity": "NOT_INFERRED",
+  "tracked_checkpoint_like_files": [],
+  "repository_contains_tracked_model_weights": false,
+  "full_tree_evidence": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json"
+}

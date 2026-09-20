@@ -1,0 +1,31 @@
+{
+  "schema": "ekg-donor-014-research-followup-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "questions": [
+    {
+      "id": "D014-R01",
+      "question": "Does an exact public checkpoint exist for the x1_split tokenizer/bridge configuration with explicit weight license and immutable hash?",
+      "priority": "HIGH",
+      "current_status": "UNRESOLVED",
+      "effect": "Would permit a governed challenger asset review, not runtime activation."
+    },
+    {
+      "id": "D014-R02",
+      "question": "Can the donor's time-axis bridge behavior be reproduced in a target-controlled synthetic representation benchmark without importing the donor runtime?",
+      "priority": "MEDIUM",
+      "current_status": "TARGET_CONTRACT_IMPLEMENTED_SYNTHETIC_MODEL_EXECUTION_NOT_REQUIRED",
+      "effect": "Could deepen representation-axis regression coverage."
+    },
+    {
+      "id": "D014-R03",
+      "question": "Should HeartWise-AI/ECG_Dataset_QA be promoted into the formal donor queue as a separate source?",
+      "priority": "MEDIUM",
+      "current_status": "SEPARATE_REPOSITORY_NOT_SILENTLY_INCLUDED",
+      "effect": "Would require its own provenance/license/dataset audit."
+    }
+  ],
+  "runtime_authority": false,
+  "clinical_validity_inferred": false
+}

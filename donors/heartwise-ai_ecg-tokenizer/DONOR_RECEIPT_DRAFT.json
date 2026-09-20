@@ -1,0 +1,54 @@
+{
+  "schema": "ekg-donor-receipt-draft-v1",
+  "donor_id": "DONOR-014",
+  "donor_repository": "HeartWise-AI/ECG_tokenizer",
+  "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "donor_tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+  "donor_tree_status": "UNRESOLVED_CONNECTOR_SURFACE",
+  "target_baseline": {
+    "commit": "dd2b7a0bc3c2fd0576db4c7de05b1f2eb887e456",
+    "tree": "11c01cb7505b9b9dbe8e9d247ff2fb5d5bc24bd4"
+  },
+  "target_resulting_implementation": {
+    "type": "TARGET_OWNED_REPRESENTATION_SEMANTICS_EVALUATION_CONTRACT",
+    "paths": [
+      "lib/representation_contract.js",
+      "tests/representation_contract.test.js",
+      "evaluation/protocols/REPRESENTATION_SEMANTICS_CONTRACT.json"
+    ],
+    "runtime_dependencies_added": []
+  },
+  "capability_disposition_summary": {
+    "INTEGRATED": 2,
+    "EVALUATION_ONLY": 1,
+    "SUPERSEDED": 2,
+    "CHALLENGER": 2,
+    "RESEARCH_ONLY": 2,
+    "REJECTED": 1,
+    "total": 10
+  },
+  "boundaries": {
+    "donor_source_code_copied": false,
+    "donor_weights_copied": false,
+    "donor_dataset_bytes_copied": false,
+    "donor_pipeline_executed": false,
+    "runtime_model_activation": false,
+    "source_labels_promoted_to_project_gold": false,
+    "donor_validation_results_promoted_to_target_metrics": false,
+    "clinical_authority_added": false
+  },
+  "acceptance_state": "IMPLEMENTED_UNVERIFIED",
+  "independent_verification": "NOT_PERFORMED",
+  "promotion": "NOT_PERFORMED",
+  "governed_state_after": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "approved_adjudicated_gold_count": 0,
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity": "NOT_INFERRED"
+  },
+  "superseded": true,
+  "superseded_by": "donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT.json",
+  "superseded_reason": "Candidate verification completed; finalized candidate receipt now governs."
+}
