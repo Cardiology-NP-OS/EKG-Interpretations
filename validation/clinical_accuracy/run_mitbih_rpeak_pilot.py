@@ -35,10 +35,15 @@ def parse_sha256s(path):
     with open(path, "r", encoding="utf8", errors="replace") as f:
         for line in f:
             line = line.strip()
-            if not line or "  " not in line:
+            if not line:
                 continue
-            digest, name = line.split("  ", 1)
-            out[name.lstrip("*")] = digest
+            parts = line.split(maxsplit=1)
+            if len(parts) != 2:
+                continue
+            digest, name = parts
+            if len(digest) != 64:
+                continue
+            out[name.lstrip("*")] = digest.lower()
     return out
 
 def download_exact_release_file(name, destination):
