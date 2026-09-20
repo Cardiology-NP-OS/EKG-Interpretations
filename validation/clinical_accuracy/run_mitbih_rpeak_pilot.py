@@ -7,12 +7,16 @@ import os
 import statistics
 import subprocess
 import tempfile
+import urllib.request
 from pathlib import Path
 
 import wfdb
 
 RECORDS = ["100", "101", "102", "103", "104"]
-PN_DIR = "mitdb/1.0.0"
+PHYSIONET_DB = "mitdb"
+PHYSIONET_VERSION = "1.0.0"
+PHYSIONET_RELEASE_DIR = f"{PHYSIONET_DB}/{PHYSIONET_VERSION}"
+PHYSIONET_BASE_URL = f"https://physionet.org/files/{PHYSIONET_RELEASE_DIR}"
 BEAT_SYMBOLS = {
     "N","L","R","B","A","a","J","S","V","r","F","e","j","n","E","/","f","Q","?"
 }
@@ -36,6 +40,18 @@ def parse_sha256s(path):
             digest, name = line.split("  ", 1)
             out[name.lstrip("*")] = digest
     return out
+
+def download_exact_release_file(name, destination):
+    url = f"{PHYSIONET_BASE_URL}/{name}"
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "EKG-Interpretations-Clinical-Validation/1.0"},
+    )
+    with urllib.request.urlopen(request, timeout=60) as response:
+        if response.status != 200:
+            raise RuntimeError(f"SOURCE_DOWNLOAD_STATUS:{name}:{response.status}")
+        destination.write_bytes(response.read())
+
 
 def safe_ratio(n, d):
     return None if d == 0 else n / d
@@ -79,7 +95,7 @@ def main():
 
     with tempfile.TemporaryDirectory(prefix="mitbih-rpeak-pilot-") as td:
         temp = Path(td)
-        wfdb.dl_files(PN_DIR, str(temp), ["SHA256SUMS.txt"], keep_subdirs=False, overwrite=True)
+        download_exact_release_file("SHA256SUMS.txt", temp / "SHA256SUMS.txt")
         expected_hashes = parse_sha256s(temp / "SHA256SUMS.txt")
 
         record_results = []
@@ -88,7 +104,8 @@ def main():
 
         for record_id in RECORDS:
             filenames = [f"{record_id}.hea", f"{record_id}.dat", f"{record_id}.atr"]
-            wfdb.dl_files(PN_DIR, str(temp), filenames, keep_subdirs=False, overwrite=True)
+            for name in filenames:
+                download_exact_release_file(name, temp / name)
 
             source_hashes = {}
             for name in filenames:
@@ -186,7 +203,9 @@ def main():
             "dataset": {
                 "name": "MIT-BIH Arrhythmia Database",
                 "version": "1.0.0",
-                "physionetDirectory": PN_DIR,
+                "physionetDirectory": PHYSIONET_RELEASE_DIR,
+                "physionetBaseUrl": PHYSIONET_BASE_URL,
+                "acquisition": "DIRECT_VERSION_PINNED_HTTPS_WITH_SHA256_MANIFEST_VERIFICATION",
                 "records": RECORDS,
                 "referenceAnnotation": "atr",
                 "license": "Open Data Commons Attribution License v1.0",
