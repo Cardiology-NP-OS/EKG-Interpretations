@@ -53,5 +53,8 @@
     "authority": "RESEARCH_CONTEXT_ONLY_NOT_TARGET_REPRODUCED",
     "reportable_target_metrics": false
   },
-  "clinical_validity": "NOT_INFERRED"
+  "clinical_validity": "NOT_INFERRED",
+  "tracked_checkpoint_like_files": [],
+  "repository_contains_tracked_model_weights": false,
+  "full_tree_evidence": "donors/heartwise-ai_ecg-tokenizer/FULL_TREE_INDEX.json"
 }
