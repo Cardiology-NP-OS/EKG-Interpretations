@@ -1,0 +1,72 @@
+{
+  "schema": "ekg-donor-014-review-verification-v1",
+  "donor_id": "DONOR-014",
+  "candidate_commit": "50ee3dd668a3c19d5c250defac50358c12827bcc",
+  "candidate_tree": "67af315ed4bca26e3ba6944dd1ab893cdc9dc081",
+  "candidate_ci": {
+    "run_id": 35540276319,
+    "conclusion": "success",
+    "head_sha": "50ee3dd668a3c19d5c250defac50358c12827bcc",
+    "jobs": [
+      {
+        "id": 106156555994,
+        "name": "Quarantined V12.1 candidate validation",
+        "conclusion": "success"
+      },
+      {
+        "id": 106156555973,
+        "name": "Synthetic contract CI (non-clinical)",
+        "conclusion": "success"
+      },
+      {
+        "id": 106156555882,
+        "name": "Bounded JPEG/PDF decoder and canonical intake",
+        "conclusion": "success"
+      }
+    ],
+    "focused_receipts": [
+      {
+        "schema": "ekg-representation-semantics-tests-v1",
+        "pass": true,
+        "passed": 9,
+        "total": 9
+      },
+      {
+        "schema": "ekg-donor-014-closure-tests-v1",
+        "pass": true,
+        "passed": 14,
+        "total": 14
+      }
+    ]
+  },
+  "upstream_identity": {
+    "repository": "HeartWise-AI/ECG_tokenizer",
+    "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+    "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+    "recursive_tree_entries": 392,
+    "recursive_tree_truncated": false
+  },
+  "review_findings": [
+    {
+      "issue": "DONOR-014 closure test existed but was not wired into npm test:ci.",
+      "resolution": "Added tests/ecg_tokenizer_donor_closure.test.js to test:ci and required a fresh green candidate."
+    },
+    {
+      "issue": "Initial donor packet left upstream Git tree unresolved.",
+      "resolution": "Resolved exact tree from upstream Git commit object and bound all donor/capability records to it."
+    },
+    {
+      "issue": "Initial inventory sampled only selected files.",
+      "resolution": "Added full non-truncated 392-entry recursive Git tree index and confirmed no tracked checkpoint/dataset payload candidates."
+    },
+    {
+      "issue": "Associated HeartWise-AI/ECG_Dataset_QA repository was named but not globally queued.",
+      "resolution": "Registered DONOR-A007 with exact commit/tree and explicit license-review requirement."
+    }
+  ],
+  "independently_attested": false,
+  "independence_limit": "Review and verification use the same assistant execution principal; no independent-attestation credit is claimed.",
+  "clinical_accuracy_claimed": false,
+  "clinical_authority_added": false,
+  "review_disposition": "PASS_WITH_EXPLICIT_ENGINEERING_SCOPE_LIMITS"
+}
