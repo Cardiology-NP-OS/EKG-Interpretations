@@ -54,6 +54,7 @@ function fixture(locator) {
     format: "raster_matrix",
     raster: paper.image,
     expectedRois: paper.rois,
+    roiLeadIdentityVerified: true,
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
     provenance: { locator, projectGold: false },
