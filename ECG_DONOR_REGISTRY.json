@@ -1,6 +1,6 @@
 {
   "schema": "ecg-donor-registry-v1",
-  "updated_date": "2026-09-18",
+  "updated_date": "2026-09-20",
   "target_repository": "Cardiology-NP-OS/EKG-Interpretations",
   "accepted_engine": {
     "commit": "7961425ecd5f5aa09d5e7e8d7bf296e6845e1d82",
@@ -384,7 +384,26 @@
     {
       "donor_id": "DONOR-014",
       "repository": "HeartWise-AI/ECG_tokenizer",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_UNVERIFIED",
+      "audited_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+      "audited_tree": null,
+      "audited_tree_status": "UNRESOLVED_CONNECTOR_SURFACE",
+      "manifest": "donors/heartwise-ai_ecg-tokenizer/DONOR_MANIFEST.json",
+      "inventory": "donors/heartwise-ai_ecg-tokenizer/INVENTORY.json",
+      "gap_matrix": "donors/heartwise-ai_ecg-tokenizer/GAP_MATRIX.json",
+      "harvest_plan": "donors/heartwise-ai_ecg-tokenizer/HARVEST_PLAN.md",
+      "license_boundary": "donors/heartwise-ai_ecg-tokenizer/LICENSE_BOUNDARY.json",
+      "dataset_boundary": "donors/heartwise-ai_ecg-tokenizer/DATASET_BOUNDARY.json",
+      "model_boundary": "donors/heartwise-ai_ecg-tokenizer/MODEL_BOUNDARY.json",
+      "upstream_verification": "donors/heartwise-ai_ecg-tokenizer/UPSTREAM_VERIFICATION.json",
+      "receipt": "donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT_DRAFT.json",
+      "receipt_status": "PENDING",
+      "integration": "Target-owned nonruntime representation-semantics contract plus architecture-only tokenizer/bridge challenger metadata; no donor runtime, weights, datasets, or clinical claims imported.",
+      "runtime_dependency_added": false,
+      "model_weights_imported": false,
+      "dataset_bytes_imported": false,
+      "source_code_copied": false,
+      "clinical_authority_added": false
     },
     {
       "donor_id": "DONOR-015",
