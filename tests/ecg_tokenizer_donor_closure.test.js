@@ -17,6 +17,7 @@ const models = read(base + "MODEL_BOUNDARY.json");
 const assoc = read(base + "ASSOCIATED_REPOSITORY_DISPOSITIONS.json");
 const upstream = read(base + "UPSTREAM_VERIFICATION.json");
 const draft = read(base + "DONOR_RECEIPT_DRAFT.json");
+const fullTree = read(base + "FULL_TREE_INDEX.json");
 const donorRegistry = read("ECG_DONOR_REGISTRY.json");
 const canonical = read("ECG_CAPABILITY_REGISTRY.json");
 const donorCapabilities = read("ECG_DONOR_CAPABILITY_REGISTRY.json");
@@ -32,15 +33,17 @@ function test(name, fn) {
   console.log("PASS " + name);
 }
 
-test("source commit is exact and unresolved tree is explicit rather than invented", () => {
+test("source commit and Git tree are exact and verified", () => {
   assert.strictEqual(manifest.audited_head.branch, "main");
   assert.strictEqual(manifest.audited_head.commit, "64f7963a7f55b90895dce31f1e7d55c7eba2d51d");
-  assert.strictEqual(manifest.audited_head.tree, null);
-  assert.strictEqual(manifest.audited_head.tree_verification, "UNRESOLVED_CONNECTOR_SURFACE_DO_NOT_INVENT");
+  assert.strictEqual(manifest.audited_head.tree, "6c0d631ca1ca9dad892ae8343362d20147fdd44e");
+  assert.strictEqual(manifest.audited_head.tree_verification, "VERIFIED_GIT_COMMIT_OBJECT");
   assert.strictEqual(upstream.audited_commit, manifest.audited_head.commit);
-  assert.strictEqual(upstream.audited_tree, null);
+  assert.strictEqual(upstream.audited_tree, manifest.audited_head.tree);
+  assert.strictEqual(upstream.audited_tree_status, "VERIFIED_GIT_COMMIT_OBJECT");
   assert.strictEqual(donor.audited_commit, manifest.audited_head.commit);
-  assert.strictEqual(donor.audited_tree, null);
+  assert.strictEqual(donor.audited_tree, manifest.audited_head.tree);
+  assert.strictEqual(donor.audited_tree_status, "VERIFIED_GIT_COMMIT_OBJECT");
 });
 
 test("target pre-donor basis is the exact green PR13 merge", () => {
@@ -49,18 +52,31 @@ test("target pre-donor basis is the exact green PR13 merge", () => {
   assert.deepStrictEqual(draft.target_baseline, manifest.target_basis);
 });
 
-test("selected upstream inventory is exact-blob pinned and honestly incomplete", () => {
-  assert.strictEqual(inventory.inventory_completeness, "SELECTED_HIGH_VALUE_SURFACES_ONLY");
-  assert.strictEqual(inventory.complete_recursive_tree, false);
-  assert.strictEqual(inventory.tree, null);
+test("upstream inventory binds a complete non-truncated recursive Git tree", () => {
+  assert.strictEqual(
+    inventory.inventory_completeness,
+    "FULL_RECURSIVE_GIT_TREE_VERIFIED_PLUS_SELECTED_HIGH_VALUE_BLOB_AUDIT"
+  );
+  assert.strictEqual(inventory.full_recursive_tree_verified, true);
+  assert.strictEqual(inventory.recursive_tree_truncated, false);
+  assert.strictEqual(inventory.tree, "6c0d631ca1ca9dad892ae8343362d20147fdd44e");
+  assert.strictEqual(inventory.recursive_entry_count, 392);
+  assert.strictEqual(inventory.recursive_blob_count, 350);
+  assert.strictEqual(inventory.recursive_tree_count, 42);
   assert.strictEqual(inventory.exact_files.length, 15);
   assert.strictEqual(new Set(inventory.exact_files.map(row => row.path)).size, 15);
   for (const row of inventory.exact_files) {
     assert.match(row.blob_sha, /^[0-9a-f]{40}$/);
     assert.strictEqual(row.inspection, "EXACT_CONNECTOR_FILE");
   }
+  assert.strictEqual(fullTree.tree, inventory.tree);
+  assert.strictEqual(fullTree.recursive_tree_truncated, false);
+  assert.strictEqual(fullTree.entry_count, 392);
+  assert.strictEqual(fullTree.blob_count, 350);
+  assert.strictEqual(fullTree.tree_count, 42);
+  assert.deepStrictEqual(fullTree.tracked_model_or_dataset_artifact_candidates, []);
+  assert.deepStrictEqual(inventory.tracked_model_or_dataset_artifact_candidates, []);
   assert.strictEqual(upstream.selected_exact_blob_audit_count, 15);
-  assert.strictEqual(upstream.full_recursive_tree_verified, false);
 });
 
 test("MIT source boundary is explicit while weights and datasets remain unadmitted", () => {
@@ -138,12 +154,22 @@ test("license ledger forbids silent dependency, data, and weight import", () => 
   assert.strictEqual(row.dependency_license_action.transitive_dependency_import, false);
 });
 
-test("associated repositories remain separately governed", () => {
+test("associated repositories remain separately governed and globally queued", () => {
   const qa = assoc.repositories.find(row => row.repository === "HeartWise-AI/ECG_Dataset_QA");
   const docker = assoc.repositories.find(row => row.repository === "HeartWise-AI/DeepECG_Docker");
   assert.ok(qa);
   assert.strictEqual(qa.audited_in_donor_014, false);
-  assert.strictEqual(qa.disposition, "SEPARATE_DONOR_OR_RESEARCH_SOURCE_NOT_SILENTLY_INCLUDED");
+  assert.strictEqual(qa.registered_donor_id, "DONOR-A007");
+  assert.strictEqual(qa.observed_commit, "a664ab92f6036752a96b119d87118b7e4b9d36c2");
+  assert.strictEqual(qa.observed_tree, "8465d628ad7460c4dcd8b5edce2acba23180c1b8");
+  assert.strictEqual(qa.disposition, "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW");
+  const queued = donorRegistry.donors.find(row => row.donor_id === "DONOR-A007");
+  assert.ok(queued);
+  assert.strictEqual(queued.repository, "HeartWise-AI/ECG_Dataset_QA");
+  assert.strictEqual(queued.observed_commit, qa.observed_commit);
+  assert.strictEqual(queued.observed_tree, qa.observed_tree);
+  assert.strictEqual(queued.status, "QUEUED_ASSOCIATED_DONOR_LICENSE_REVIEW");
+  assert.match(queued.license_note, /No LICENSE file/);
   assert.ok(docker);
   assert.strictEqual(docker.disposition, "ALREADY_GOVERNED_SEPARATE_DONOR");
 });
