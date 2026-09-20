@@ -9,6 +9,7 @@ const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
 const {
   addDeterministicNoise,
   adjustIntensity,
+  boxBlur,
   deterministicNoiseField,
   occludeRectangle,
 } = require("../lib/image_robustness");
@@ -109,6 +110,35 @@ test("mild linear intensity shift survives the complete automatic chain", () => 
   const fx = labeledFixture();
   const degraded = adjustIntensity(fx.image, { gain: 0.9, offset: 15 });
   assertFullAutomatic(runAutomatic(degraded, "case://degradation-intensity"));
+});
+
+test("one-pixel box blur survives or fails closed without authority escalation", () => {
+  const fx = labeledFixture();
+  const degraded = boxBlur(fx.image, { radius: 1 });
+  let outcome;
+  try {
+    const out = runAutomatic(degraded, "case://degradation-box-blur-1");
+    outcome = {
+      stage: "ANALYSIS",
+      status: out.analysis.status,
+      processedLeadCount: out.analysis.processedLeadCount,
+      failures: out.analysis.failures,
+      runtimeAuthority: out.analysis.runtimeAuthority,
+    };
+    assert.strictEqual(out.analysis.runtimeAuthority, false);
+    assert.ok(out.analysis.status === "COMPLETE" || out.analysis.status === "PARTIAL");
+  } catch (error) {
+    const reason = String(error && error.message ? error.message : error).split(":")[0];
+    outcome = { stage: "FAIL_CLOSED", reason };
+    assert.ok([
+      "INTAKE_LEAD_IDENTITY_VERIFICATION_FAILED",
+      "DIGITIZATION_NO_INK_COLUMN",
+      "DIGITIZATION_MISSING_RUN_EXCEEDED",
+      "DIGITIZATION_TRACE_TOO_SPARSE",
+      "IMAGE_ANALYSIS_NO_USABLE_LEADS",
+    ].includes(reason), reason);
+  }
+  console.log(`BOX_BLUR_PROFILE ${JSON.stringify(outcome)}`);
 });
 
 test("bounded deterministic pixel noise survives the complete automatic chain", () => {
