@@ -1,0 +1,131 @@
+{
+  "schema": "ekg-donor-014-gap-matrix-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "donor_commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "capabilities": [
+    {
+      "id": "D014-C001",
+      "capability": "Residual-VQ reconstruction is additive across codebooks",
+      "donor_evidence": [
+        "models/local_residual_vq.py",
+        "models/bridge/bridge.py",
+        "tests/models/test_qformer_mix_strategy.py"
+      ],
+      "target_overlap": "No explicit generic RVQ-additivity evaluation contract found",
+      "disposition": "INTEGRATE_TARGET_OWNED_EVALUATION_CONTRACT",
+      "runtime_dependency_required": false
+    },
+    {
+      "id": "D014-C002",
+      "capability": "Representation token axis is explicit; time-major bridge reconstructs temporal positions instead of treating channels as time",
+      "donor_evidence": [
+        "models/bridge/bridge.py",
+        "tests/models/test_qformer_token_axis.py",
+        "scripts/probe_axis_views.py"
+      ],
+      "target_overlap": "Foundation representations exist, but no explicit axis-semantics contract found",
+      "disposition": "INTEGRATE_TARGET_OWNED_EVALUATION_CONTRACT",
+      "runtime_dependency_required": false
+    },
+    {
+      "id": "D014-C003",
+      "capability": "Codebook fusion strategy is configuration-bound and checkpoint-compatible; invalid strategy/axis combinations fail closed",
+      "donor_evidence": [
+        "models/bridge/bridge.py",
+        "tests/models/test_qformer_mix_strategy.py",
+        "tests/models/test_qformer_token_axis.py"
+      ],
+      "target_overlap": "Partial overlap with checkpoint safety/reproducibility",
+      "disposition": "EVALUATION_ONLY_EXTEND_EXISTING_CONTRACT",
+      "runtime_dependency_required": false
+    },
+    {
+      "id": "D014-C004",
+      "capability": "Checkpoint structural configuration mismatch rejection",
+      "donor_evidence": [
+        "utils/checkpoint_structure.py",
+        "tests/models/test_qformer_token_axis.py"
+      ],
+      "target_overlap": "ECG-CAP-MODEL-CHECKPOINT-SAFETY already exists",
+      "disposition": "SUPERSEDED_BY_TARGET",
+      "runtime_dependency_required": false
+    },
+    {
+      "id": "D014-C005",
+      "capability": "Patient-grouped frozen representation probes",
+      "donor_evidence": [
+        "scripts/probe_tokenizer.py",
+        "scripts/probe_axis_views.py"
+      ],
+      "target_overlap": "ECG-CAP-EVALUATION-PATIENT-SPLITS and ECG-CAP-EVALUATION-REPRODUCIBILITY already exist",
+      "disposition": "SUPERSEDED_BY_TARGET_WITH_RESEARCH_REFERENCE",
+      "runtime_dependency_required": false
+    },
+    {
+      "id": "D014-C006",
+      "capability": "Scalable convolutional tokenizer encoder with fixed downstream interface",
+      "donor_evidence": [
+        "models/scalable_encoder.py"
+      ],
+      "target_overlap": "ECG-CAP-MODEL-SSL-REPRESENTATIONS",
+      "disposition": "CHALLENGER_ARCHITECTURE_ONLY",
+      "runtime_dependency_required": true
+    },
+    {
+      "id": "D014-C007",
+      "capability": "Auxiliary-loss and split-codebook tokenizer training experiments",
+      "donor_evidence": [
+        "scripts/train_tokenizer_aux.py",
+        "docs/tokenizer_aux_loss/REPRODUCE.md"
+      ],
+      "target_overlap": "Foundation representation research only",
+      "disposition": "RESEARCH_ONLY",
+      "runtime_dependency_required": true
+    },
+    {
+      "id": "D014-C008",
+      "capability": "Per-endpoint generated-text vs margin/numeric readout policy",
+      "donor_evidence": [
+        "README.md",
+        "docs/tokenizer_aux_loss/NEXT_STEPS.md"
+      ],
+      "target_overlap": "Target diagnostic metrics are not reportable",
+      "disposition": "RESEARCH_ONLY_NOT_TARGET_RUNTIME",
+      "runtime_dependency_required": true
+    },
+    {
+      "id": "D014-C009",
+      "capability": "ECG-to-LLM Q-Former/MedGemma bridge",
+      "donor_evidence": [
+        "models/bridge/bridge.py",
+        "models/ecg_tokenizer_wrapper.py"
+      ],
+      "target_overlap": "No target runtime need established",
+      "disposition": "CHALLENGER_ARCHITECTURE_ONLY",
+      "runtime_dependency_required": true
+    },
+    {
+      "id": "D014-C010",
+      "capability": "Full CUDA/PyTorch/Transformers/PEFT/W&B donor runtime stack",
+      "donor_evidence": [
+        "pyproject.toml"
+      ],
+      "target_overlap": "Target has target-owned governed engines without this dependency stack",
+      "disposition": "REJECTED_DIRECT_RUNTIME_IMPORT",
+      "runtime_dependency_required": true
+    }
+  ],
+  "summary": {
+    "INTEGRATE_TARGET_OWNED_EVALUATION_CONTRACT": 2,
+    "EVALUATION_ONLY_EXTEND_EXISTING_CONTRACT": 1,
+    "SUPERSEDED_BY_TARGET": 1,
+    "SUPERSEDED_BY_TARGET_WITH_RESEARCH_REFERENCE": 1,
+    "CHALLENGER_ARCHITECTURE_ONLY": 2,
+    "RESEARCH_ONLY": 1,
+    "RESEARCH_ONLY_NOT_TARGET_RUNTIME": 1,
+    "REJECTED_DIRECT_RUNTIME_IMPORT": 1,
+    "total": 10
+  },
+  "clinical_authority_added": false
+}
