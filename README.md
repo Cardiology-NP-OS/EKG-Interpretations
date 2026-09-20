@@ -27,7 +27,7 @@ Current governed state:
 - `activation = NOT_ELIGIBLE`
 - `clinical_validity = NOT_INFERRED`
 
-The donor program is active. At this handoff checkpoint **13 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-014, `HeartWise-AI/ECG_tokenizer`**. Verify the live registry before starting because another lane may have advanced it.
+The donor program is active. At this pre-clinical-validation checkpoint **14 of 21 primary donors are accepted** and the first unfinished donor is **DONOR-015, `HeartWise-AI/ECG_LLM_Judge`**. Verify the live registry before starting because another lane may have advanced it.
 
 This is software/research/evaluation infrastructure. It does not authorize patient-specific ECG diagnosis, treatment, project clinical-gold creation, fabricated diagnostic performance, runtime activation, or transfer of clinical authority.
 
@@ -37,7 +37,8 @@ Read, in order:
 1. [`docs/AI_HANDOFF.md`](docs/AI_HANDOFF.md) — execution contract, source-of-truth order, continuation semantics.
 2. [`docs/REPOSITORY_ARCHITECTURE.md`](docs/REPOSITORY_ARCHITECTURE.md) — canonical ownership and filesystem map.
 3. [`ECG_DONOR_REGISTRY.json`](ECG_DONOR_REGISTRY.json) — live donor frontier.
-4. [`ECG_CAPABILITY_REGISTRY.json`](ECG_CAPABILITY_REGISTRY.json) and [`ECG_DONOR_CAPABILITY_REGISTRY.json`](ECG_DONOR_CAPABILITY_REGISTRY.json) — brand-neutral capabilities and donor provenance.
+4. [`ECG_PRECLINICAL_VALIDATION_CHECKPOINT.json`](ECG_PRECLINICAL_VALIDATION_CHECKPOINT.json) — frozen engineering baseline and entry conditions for clinical-accuracy evaluation.
+5. [`ECG_CAPABILITY_REGISTRY.json`](ECG_CAPABILITY_REGISTRY.json) and [`ECG_DONOR_CAPABILITY_REGISTRY.json`](ECG_DONOR_CAPABILITY_REGISTRY.json) — brand-neutral capabilities and donor provenance.
 5. [`ECG_DATASET_REGISTRY.json`](ECG_DATASET_REGISTRY.json), [`ECG_MODEL_CHALLENGER_REGISTRY.json`](ECG_MODEL_CHALLENGER_REGISTRY.json), [`ECG_LICENSE_LEDGER.json`](ECG_LICENSE_LEDGER.json).
 6. [`docs/NEON_AND_CROSS_REPO_OPERATIONS.md`](docs/NEON_AND_CROSS_REPO_OPERATIONS.md) — System-Control, Platform, Build-Ledger, and research-holding-area boundaries.
 7. [`docs/RESEARCH_EVIDENCE_FORMAT.md`](docs/RESEARCH_EVIDENCE_FORMAT.md) — exact article/source evidence format.
