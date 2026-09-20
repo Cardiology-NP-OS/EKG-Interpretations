@@ -1,0 +1,2758 @@
+{
+  "schema": "ekg-donor-014-full-tree-index-v1",
+  "donor_id": "DONOR-014",
+  "repository": "HeartWise-AI/ECG_tokenizer",
+  "commit": "64f7963a7f55b90895dce31f1e7d55c7eba2d51d",
+  "tree": "6c0d631ca1ca9dad892ae8343362d20147fdd44e",
+  "recursive_tree_truncated": false,
+  "entry_count": 392,
+  "blob_count": 350,
+  "tree_count": 42,
+  "tracked_model_or_dataset_artifact_candidates": [],
+  "entries": [
+    {
+      "path": ".github",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "7a21836b1d6de1221275ae454b4ea8596dc822db",
+      "size": null
+    },
+    {
+      "path": ".github/workflows",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a35c7ef2f500926e73e7d32b8845c6b05254d4c7",
+      "size": null
+    },
+    {
+      "path": ".github/workflows/python-tests.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0b340abed0762834ecc292691322b1e82c1fadbb",
+      "size": 844
+    },
+    {
+      "path": ".gitignore",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "842b41b6c60b766db53b5a49d2dd4993dd6681d2",
+      "size": 550
+    },
+    {
+      "path": ".python-version",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e4fba2183587225f216eeada4c78dfab6b2e65f5",
+      "size": 5
+    },
+    {
+      "path": "CLAUDE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b629960a64061f09ce6c56efd3ed1d083874b9e8",
+      "size": 3080
+    },
+    {
+      "path": "LICENSE",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "09ef05852eeeab23785b9a44e93154e10b7028d8",
+      "size": 1069
+    },
+    {
+      "path": "README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "038290c77976425adb0e0875544640e287d740d1",
+      "size": 11939
+    },
+    {
+      "path": "codecov.yml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "aa6cf3580eacca10d6a782046c6c4877a878548c",
+      "size": 415
+    },
+    {
+      "path": "config",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "48835cd796f36e5b79804f61d41bea638e29154d",
+      "size": null
+    },
+    {
+      "path": "config/bert_classifier",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "8c170242fd3af72d3d1559f8fab4381b55a0ffab",
+      "size": null
+    },
+    {
+      "path": "config/bert_classifier/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "11a19a819518c1e0772479c7fcd62429d51aec5d",
+      "size": 756
+    },
+    {
+      "path": "config/dpo_bucket_sampling_50k.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "97f2f4fb9b2770c582bf1253c5f3e0a97c01806d",
+      "size": 253
+    },
+    {
+      "path": "config/dpo_finetuning_beta02.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cbc19cf6e13eb93f3874a14e843325a8f2f0c8a5",
+      "size": 772
+    },
+    {
+      "path": "config/dpo_finetuning_beta05.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4d4af6e5bd2c130f14cbb57e839ad003355f628d",
+      "size": 772
+    },
+    {
+      "path": "config/dpo_finetuning_example.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "93b6d1ba5d0d04c01bf2f025e6b0d65a04de40cd",
+      "size": 677
+    },
+    {
+      "path": "config/dpo_finetuning_filtered.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0df834fc65951f90de588f4ebbd3fedeb1902e94",
+      "size": 822
+    },
+    {
+      "path": "config/dpo_finetuning_full.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d135ecce51292eec3fd21fd8fdf181ecdb9be7d8",
+      "size": 770
+    },
+    {
+      "path": "config/dpo_finetuning_test.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6c1d5213a111f1b23effb599a86355b8e18f1f62",
+      "size": 771
+    },
+    {
+      "path": "config/dpo_sampling_50k.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a7144da6bc2204f205302faa436dcf121f675028",
+      "size": 335
+    },
+    {
+      "path": "config/dpo_sampling_75k.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fcef0bded9af45ace8c8de7ca15bc2c730c4fc7b",
+      "size": 336
+    },
+    {
+      "path": "config/ecg_text_stage1",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "f3d576571b7f34b074adfbb3e657af6edfbeeb1f",
+      "size": null
+    },
+    {
+      "path": "config/ecg_text_stage1/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "05be85423abe9754f75ff061c6572fadb7dc2c62",
+      "size": 3084
+    },
+    {
+      "path": "config/ecg_text_stage1/medgemma_1.5_base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "efd106cba97148124d26d3a3a32f4a996cc48177",
+      "size": 3737
+    },
+    {
+      "path": "config/ecg_text_stage1/medgemma_1.5_sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "89b6c1a3b849938f864a41c7338fcdfe97ed27a1",
+      "size": 1550
+    },
+    {
+      "path": "config/ecg_text_stage1/sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6ecfc97204ca12caad8f7df0db48c7be97ed9cd3",
+      "size": 1321
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3b50b457f78b27c0f79a2a98845f532f94895d36",
+      "size": 3928
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_cb2_off0_fullETG.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "52d6e2217564d4fb3f3bb210b283f4d7e83d5753",
+      "size": 4217
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_cb8_fullETG.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "079ca6a452a0c9f1004b430be7dc048c9087667d",
+      "size": 4218
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_cb8_fullETG_concatmix.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6e98da9ea71c6449b7987e64d4d3c500365e82b8",
+      "size": 3640
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_cb8_fullETG_summix.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "81bd63fb450b5410e3a7049d8463592717c50024",
+      "size": 3460
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_cb8_fullETG_timeaxis.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9d0c4f406020e23b626f260e953608f662ff7bb9",
+      "size": 3756
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_sweep_cb1_last.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1a652b9c3dc5ea9fdf6b85845d2af0ba16591ff1",
+      "size": 4018
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_sweep_cb2_off0.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3e880b57bb1c63ee8941b7b1bc95a9baf9931055",
+      "size": 4016
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_sweep_cb8_all.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cdf6499d285b85ea91624c4bd6b035f1e2b88ee1",
+      "size": 4015
+    },
+    {
+      "path": "config/ecg_text_stage1/winner_sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7a312c827f5a8df43a0625cc0f68263ac16cbd47",
+      "size": 1981
+    },
+    {
+      "path": "config/grpo_finetuning",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "2e544c24517695097884bffb3e7663f8fedbc045",
+      "size": null
+    },
+    {
+      "path": "config/grpo_finetuning/2wjwbk0b_rlvr_binary_v1.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "31d90bb23bdb85c67026426e7db5e6f95e77b695",
+      "size": 1574
+    },
+    {
+      "path": "config/grpo_finetuning/2wjwbk0b_rlvr_judge_v1.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e349d517d87069b7c90472fb61918567bc13dabe",
+      "size": 1981
+    },
+    {
+      "path": "config/grpo_finetuning/2wjwbk0b_rlvr_labelset_v1.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3c674e4258a86a5c4a004b4ee3c568da2290591e",
+      "size": 1907
+    },
+    {
+      "path": "config/grpo_finetuning/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f68871df95ee2052a3a07e9bb9bf2431a667d9a8",
+      "size": 1280
+    },
+    {
+      "path": "config/linear_probing",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "737409ae3b7f088697d7bf482db7f6ee04e13104",
+      "size": null
+    },
+    {
+      "path": "config/linear_probing/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "720479826b248dfe6de0f25c7dc3b57e9b73ebf1",
+      "size": 2448
+    },
+    {
+      "path": "config/linear_probing/sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "68511693a4cb405180ec297f0c3a7950f96a851a",
+      "size": 1040
+    },
+    {
+      "path": "config/llm_finetuning",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "4bf5b894227db8e5833327d4caaa2eca23023999",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/gpt2",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "6023a99554a79383f3f6d892b877e0b8fac216dd",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/gpt2/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bb49cd8208e9535438848e225fc7fbc9423b7410",
+      "size": 1825
+    },
+    {
+      "path": "config/llm_finetuning/gpt2/sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e0979c733525e471e98f15f63a15b597e9f6371a",
+      "size": 1486
+    },
+    {
+      "path": "config/llm_finetuning/gpt2_large",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "3e0decf73234f1de9149951c69e5bb013ba35871",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/gpt2_large/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0f0fbc59d9134267855f425dbd30ebbbc2a82500",
+      "size": 1678
+    },
+    {
+      "path": "config/llm_finetuning/gpt2_medium",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "02b740bc5427e47badef856b55fca17db8f34f8d",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/gpt2_medium/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4627cad2d6192c4578bb4b59717c9b661ac74deb",
+      "size": 1855
+    },
+    {
+      "path": "config/llm_finetuning/llama32_1b",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "3a274e3f23b54ed4f3c6afea4489bddc56e625a7",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/llama32_1b/lora_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c0d17c2833d16879b2b98acdfc632ea51d2409ff",
+      "size": 1784
+    },
+    {
+      "path": "config/llm_finetuning/llama32_1b/sequence_token_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6563f393026a245b5cdca7f70553276d73d3fadb",
+      "size": 5164
+    },
+    {
+      "path": "config/llm_finetuning/llama32_1b/test_phase_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d11b7e80f28ab4246d0aa455b22050c65d5691c5",
+      "size": 3979
+    },
+    {
+      "path": "config/llm_finetuning/llama32_3b",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a68b0dac718222f8a6ea39ab0363888517cbe558",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/llama32_3b/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a454d7b4da22f7319151a5c9d7ab23f43f919d0d",
+      "size": 2137
+    },
+    {
+      "path": "config/llm_finetuning/medgemma",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "e927e9e8b09ce3fcb09602a4e5d79e69990bb603",
+      "size": null
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/2wjwbk0b_gapfill_v1.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ef86686ccd4a2fe987cface1b2c7daf4e891e5d2",
+      "size": 5109
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/2wjwbk0b_gapfill_v2.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0c8e6af969d7044008c476ef9bad88e194931f2d",
+      "size": 5497
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/2wjwbk0b_rft_bestof5_v1.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "63f1dc125b787db781b521f0ce81c9192ee875a3",
+      "size": 4433
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4682d751d6f9a8988adb8b46b0df62ab8529d2f4",
+      "size": 6160
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/cot_sft.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "13ce9ccf24a093e98d623156027a636105d7a221",
+      "size": 5700
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4d_x1split_cb8_concatmix_retrain.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3256e07be465550fe9f6fcbae913941ae1396469",
+      "size": 8500
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4d_x1split_cb8_retrain.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5b8e743c5626dc0dd0b840dacc2a797e121745ee",
+      "size": 8319
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4d_x1split_cb8_timeaxis_retrain.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8541ab4c5879247ad8cb36cae23b008cee0d2a75",
+      "size": 8506
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4d_x1split_retrain.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6202c849d3014a8ff73a731062d8d316720e1536",
+      "size": 8296
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4dw86nh_binary_qa.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "821ebd506e8e9ce3f70f54fb5311fc246048099d",
+      "size": 4783
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4dw86nh_full_enhanced.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "eba25c09cf6548dfb2b6952d21d23d4d4a06e81a",
+      "size": 4757
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/e4dw86nh_prompt_variations.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "21670837ff6dea8b34d19b936b97e3e8adaa406b",
+      "size": 4644
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/inference_2wjwbk0b.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bb30b91d11e256368e0ffeabb9ea694a3aba95aa",
+      "size": 4809
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/lvef_prompt_variations.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "de50dbe54caec8aec5efe460556dea9b47e91228",
+      "size": 7026
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_1.5_qformer_z8wuml4t.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "889b2de5d68485f6531bb54c6b2fb94c12a463ac",
+      "size": 8433
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e1d232b91f5447012a2a23b5d406abda983f7278",
+      "size": 3951
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_cf_projection.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f9adb5face20c47409c5c50154328687ed82122b",
+      "size": 6725
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_champion_5M.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "524aa01c4ea7dbb91dfbd5eadc7b9cb79222272a",
+      "size": 7183
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_champion_5M_1CB.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fe1ea3d29d2cb6941f0a30e7db0fcb14dc9a9a25",
+      "size": 7304
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_champion_5M_1CB_balanced.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1a3147bd1c75ef31441e97752a8e1c12cbc611cb",
+      "size": 8024
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_champion_5M_projection.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "be58a31fbcc6058a782cff338b551097edddec29",
+      "size": 6218
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_champion_5M_weighted.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6cd90286021a915c1090c9e21edfe7cff59be650",
+      "size": 7878
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_optimized.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "53822487fbadf53eba11f5e7de3129bcc5310e37",
+      "size": 7356
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/medgemma_4b_robert_qa_2phase_projection.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ec6a958bf726dfec4bd11da12ad85a8da4c3efb4",
+      "size": 4537
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/sft_combined_multitask.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3aeaa6132760a8b6ba767415627f958d62615ce2",
+      "size": 5900
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/sft_multitask_finetune.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d53e0f52beb2e9c879fe94414b30fd8af0e86b0d",
+      "size": 5374
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/sweep_cf_phase1.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "38c2e410dae94eea07d466e218e5d08f601211a0",
+      "size": 1270
+    },
+    {
+      "path": "config/llm_finetuning/medgemma/sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8761a0170835b76912f06fa0b9a5c73f24519f92",
+      "size": 1540
+    },
+    {
+      "path": "config/siglip_phase1",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "e6eabd2616c8fab485f8c63b85d7db6e8a71b878",
+      "size": null
+    },
+    {
+      "path": "config/siglip_phase1/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "af9012849d604b08b731e659c5039d909b92941b",
+      "size": 3702
+    },
+    {
+      "path": "config/siglip_phase1/sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "213b3f62084e849c20d6033b5901c80ea9fefbf1",
+      "size": 1120
+    },
+    {
+      "path": "config/tokenizer",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5a6b05c64ffa0bae374413e0830ab7927b9512a0",
+      "size": null
+    },
+    {
+      "path": "config/tokenizer/classification_base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "098ac4652aa2cb138174441b224f4e21cfd1f7c6",
+      "size": 2489
+    },
+    {
+      "path": "config/tokenizer/embedding_extraction_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d04f6d3218685738843f191d29c6bfec47f879d0",
+      "size": 2077
+    },
+    {
+      "path": "config/tokenizer/reconstruction_base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f3b4e16e5a192347241f4ea4aef3b63cf3868a2f",
+      "size": 2260
+    },
+    {
+      "path": "config/tokenizer/sweep_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6c2398b67df19491fbc3d0c2ff2924108b0fceea",
+      "size": 871
+    },
+    {
+      "path": "config/vqvae_training",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "ca97e8ab84a648508ec1ad53a1a646bd7eef9b51",
+      "size": null
+    },
+    {
+      "path": "config/vqvae_training/base_config.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "aa012b37685caeaca8cd28d213faf3efc6b2516f",
+      "size": 2102
+    },
+    {
+      "path": "data",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "c37535e0fa41dc14882a9ebf1feb8e08e37772cf",
+      "size": null
+    },
+    {
+      "path": "data/bert_clinical_report_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "487a38e640d92468092c72dfaf3df13d55754cc9",
+      "size": 2493
+    },
+    {
+      "path": "data/dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8aaa8d2038c448b00a3fe2b49066389509ff1b35",
+      "size": 33464
+    },
+    {
+      "path": "data/dpo_pair_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a7587c83a1174d662e06feaff3bf7590063f8eea",
+      "size": 10930
+    },
+    {
+      "path": "data/ecg_augmentations.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "599ad03382ef8241c7aca571c494e8615ed6f005",
+      "size": 6255
+    },
+    {
+      "path": "data/ecg_clinical_report_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c04c51a2277f7d464ddda91c550f4c1e4a96816e",
+      "size": 61961
+    },
+    {
+      "path": "data/ecg_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "001ab0128663340d021b7c21853f07560b23a3af",
+      "size": 5777
+    },
+    {
+      "path": "data/ecg_text_stage1_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b6e6a3ee14056f87e67f1038b8fb6f47d9e52776",
+      "size": 9588
+    },
+    {
+      "path": "data/ecg_tokenizer_classifier_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "048b4fe7cad3371a67ccb779ac655cc10d53e40c",
+      "size": 4511
+    },
+    {
+      "path": "data/grpo_binary_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "45efa583103f2a9d6305b9b88ed03a117b92be70",
+      "size": 4781
+    },
+    {
+      "path": "data/grpo_labelset_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c032ccc51affd0dd777ec6f75e736bd910263c2d",
+      "size": 5705
+    },
+    {
+      "path": "data/grpo_prompt_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0d215b2e15e124c6fecd6136133c6cf4465be181",
+      "size": 6368
+    },
+    {
+      "path": "data/siglip_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f710b5138101e20c63fe5a747a8fa4e0e7d8c521",
+      "size": 15340
+    },
+    {
+      "path": "docker",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "c9e7ef0683f55d49a0434d6a3c477df015c41d18",
+      "size": null
+    },
+    {
+      "path": "docker/.dockerignore",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8b19a458e3ac63dbcc6d24573b1f50ccf65d0336",
+      "size": 602
+    },
+    {
+      "path": "docker/Dockerfile",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ae3f200baac4abad3182d1c9c530bfdcb1c4c935",
+      "size": 4449
+    },
+    {
+      "path": "docker/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c7e48e197f874b344cb19f297cda4ac5309ff23e",
+      "size": 5145
+    },
+    {
+      "path": "docker/docker-compose.yaml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f8cb8ec9d234b19ce55640f19ad37f4e94531959",
+      "size": 2156
+    },
+    {
+      "path": "docker/entrypoint.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "839d125d165a9ea6a4953088e18e0862fba9f6d3",
+      "size": 600
+    },
+    {
+      "path": "docker/heartwise.config",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "90d5368aba25e6eb8e58fc12b35801da69446554",
+      "size": 1034
+    },
+    {
+      "path": "docker/run_pipeline.bash",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0fae76ff750b73d78618df6bce58782977dc95de",
+      "size": 20079
+    },
+    {
+      "path": "docs",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "52f45bf655d5d116bb6057e1e3577389109d48bf",
+      "size": null
+    },
+    {
+      "path": "docs/superpowers",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "2c83305fafe78b6bb2a5e3e9bbfd19fda2861f5c",
+      "size": null
+    },
+    {
+      "path": "docs/superpowers/specs",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "6ee3c916cfb5d92414f69ee4f55349e7810b521b",
+      "size": null
+    },
+    {
+      "path": "docs/superpowers/specs/2026-04-22-llama32-1b-report-head-design.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a1a553e139b0e1438a1fafb042c9879098de59f9",
+      "size": 17404
+    },
+    {
+      "path": "docs/supplemental_hard_negatives.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2de28c54df513c71ef396bf8dc80fa85aecb1f13",
+      "size": 7693
+    },
+    {
+      "path": "docs/supplemental_methods_stage2.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7716e9a30ae59ccddb62f2cf710b214c7fabde49",
+      "size": 12902
+    },
+    {
+      "path": "docs/tokenizer_aux_loss",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "f6dbcdb2750448e3f6601ecaa56a42e6bdad2522",
+      "size": null
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/NEXT_STEPS.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a87426bc80dc9008800b3aa3b4b182e2601f7665",
+      "size": 29303
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/REPRODUCE.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "643b1f52808cbbbbb59a10661acc6e4f2d9d155c",
+      "size": 13422
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/STEP32_TIME_AXIS_BRIDGE_DESIGN.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7c763e6b90bf27f4b7839a160f02a8b5151b2981",
+      "size": 4878
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/probe_BRIDGE_CB8_E5.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fe709b21f8f9cecb2ee180c783a29e8d54e6de2c",
+      "size": 6251
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/probe_BRIDGE_E4D_OLD_ETC.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2c3037ebe2f1d68488e66c554b2c41037ebcb82c",
+      "size": 6260
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/probe_BRIDGE_X1SPLIT_PT.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f90856ed2d2ce1ebc920dbe873e82a16cf09d23e",
+      "size": 6295
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/probe_TFQ_PREV_PT.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e24dcc46de76bbf13b24c12ce990b52a65553c58",
+      "size": 6104
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/probe_WCRV2_PT.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5c9f95df674dbaddd4e00c9f7991c93668f7c2c6",
+      "size": 6131
+    },
+    {
+      "path": "docs/tokenizer_aux_loss/probe_X1_SPLIT_PT.json",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "44a9f775fe0ece6472199937ed77f5b8e1e0780c",
+      "size": 6096
+    },
+    {
+      "path": "inference",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "7c95af3b596450e54878d7f56b2fdd77b9f116d4",
+      "size": null
+    },
+    {
+      "path": "inference/README.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "04068790d571863afc5d1952154c9b44c31e568e",
+      "size": 4329
+    },
+    {
+      "path": "inference/compare_three_models.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f2edb15b2fd5db299b037968ced6d2c42986bb78",
+      "size": 8442
+    },
+    {
+      "path": "inference/evaluate_cf.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dc51c24a133fd6655a83a32beccb1e97f52e21e2",
+      "size": 11098
+    },
+    {
+      "path": "inference/generate_all_qa_pairs.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b498263d8f102757e4e20455d3b84de64e0015b8",
+      "size": 24153
+    },
+    {
+      "path": "inference/generate_cf_for_mimic_mhi.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4b5037614858df71c04aa650b8757e4d0801eec0",
+      "size": 5399
+    },
+    {
+      "path": "inference/generate_dpo_multi.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0368fd1d4509fca1ce51f5ff06288cdc345f588d",
+      "size": 14588
+    },
+    {
+      "path": "inference/generate_ecg_answer.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cedc61a0b69a3d17c1c6c430ff1a169ad22df361",
+      "size": 22905
+    },
+    {
+      "path": "inference/generate_gpt2_reports.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c35a603c3599f03f23fb6a51533dfce0c8166de5",
+      "size": 14388
+    },
+    {
+      "path": "inference/generate_llama32_reports.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6cc9bbb5ea51cc910c250108335f6cb4f39dd343",
+      "size": 13778
+    },
+    {
+      "path": "inference/generate_stage1_etg_preview.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "45ade3b0c789daec5eecfce50d775b2aa56bf457",
+      "size": 11721
+    },
+    {
+      "path": "inference/generate_stage1_val_reports.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5c05a0441ab8f0c73e04f4fd5443066c09a12c58",
+      "size": 13877
+    },
+    {
+      "path": "inference/merge_dpo_generations.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "08397d83a6655b0b6d823f2c9b604919f1d0d26f",
+      "size": 3145
+    },
+    {
+      "path": "inference/pipeline_args.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "eeda057ba454186efd2d4f27ae01898d8d528a2d",
+      "size": 12809
+    },
+    {
+      "path": "inference/preprocessing.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "440973396c44459172ecd12dcffc9b67dc405811",
+      "size": 7202
+    },
+    {
+      "path": "inference/run_bert_subprocess.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2c0a5f193af4051cc270ec8fdee630440c3cae8c",
+      "size": 7098
+    },
+    {
+      "path": "inference/run_cot_inference.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fd34348df3a34bed2378a748a056ac59c310eec4",
+      "size": 9794
+    },
+    {
+      "path": "inference/test_emergent_properties.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b8d482423e695bc74e8b8261e0781a340d872f0c",
+      "size": 14054
+    },
+    {
+      "path": "inference/tests_multiple_ECG",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "f48cc2a74ad3405b408814d1c66fb9221eede94a",
+      "size": null
+    },
+    {
+      "path": "inference/tests_multiple_ECG/run_combined_questions.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f9819a0d18b11105f687fb4ab21caaada45d0802",
+      "size": 12806
+    },
+    {
+      "path": "inference/tests_multiple_ECG/run_custom_questions.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5ee6b8d0d55e7b23645f09ec084c2abc1547e8ed",
+      "size": 14128
+    },
+    {
+      "path": "models",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "304344e42221a56aa583b4890b1fb1fd1b401815",
+      "size": null
+    },
+    {
+      "path": "models/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6c1484de86a971803ae3d2fabbbfaedb912ab8f4",
+      "size": 1488
+    },
+    {
+      "path": "models/bert_classifier.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "47af7ce68155b1af4d96832853dbb441e4a1cb28",
+      "size": 1992
+    },
+    {
+      "path": "models/bridge",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "c9e44f12f2a827217c23c6f375a73c8ea948ad1b",
+      "size": null
+    },
+    {
+      "path": "models/bridge/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ee93695b72fe99bb8d61836478985639d5fa8d6c",
+      "size": 920
+    },
+    {
+      "path": "models/bridge/bridge.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bea1335f02602a1950bd8c90468fcc36c865f6e3",
+      "size": 112485
+    },
+    {
+      "path": "models/decoder",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "a317d7ff84e2dc0ba5bae54523afd845e6a78108",
+      "size": null
+    },
+    {
+      "path": "models/decoder/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e8b1152a1c74154e24fa7c8929e5b59487cd482b",
+      "size": 342
+    },
+    {
+      "path": "models/decoder/gpt2_decoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "952f0fd757af4ee6e2d978cfcd2141b2673c89bf",
+      "size": 20819
+    },
+    {
+      "path": "models/decoder/llama32_report_decoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0a21883952dd6649db4328b86a4cff1833c58758",
+      "size": 10637
+    },
+    {
+      "path": "models/decoder/medgemma_decoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a236acaeb63c3fd446281680b481673a415fb4fb",
+      "size": 132362
+    },
+    {
+      "path": "models/decoder/qwen_decoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2bb4b44356bf37073e6b36759c34c864c8637290",
+      "size": 2318
+    },
+    {
+      "path": "models/ecg_tokenizer_wrapper.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "283ed5fb888e9b9a715eba48faf781bcfa851a9e",
+      "size": 86337
+    },
+    {
+      "path": "models/local_residual_vq.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1a733422956ac53f7dad8b3d0736d45efdd41629",
+      "size": 17639
+    },
+    {
+      "path": "models/openrlhf_ecg_wrapper.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d3c925c437d811eafcc3814271c9c58c95b5f298",
+      "size": 6598
+    },
+    {
+      "path": "models/scalable_encoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2b5935d858d4153ec5c5b45fb735f094aea08767",
+      "size": 2046
+    },
+    {
+      "path": "models/text_encoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "66fab66d6a81dcc400e0a107eb839efa9047e780",
+      "size": 6085
+    },
+    {
+      "path": "models/types.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a10cb5dede8c6c2df8f5dca64978cd9f78d8dde8",
+      "size": 3116
+    },
+    {
+      "path": "projects",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "d21891f1b736493f221b862dce827aea262cd8fc",
+      "size": null
+    },
+    {
+      "path": "projects/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "390bdc0fe976d52cd013db82b9dd25d6850e8c40",
+      "size": 737
+    },
+    {
+      "path": "projects/base_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "087db4696cc48be7ddbfb272d13600dc999fa5ad",
+      "size": 5894
+    },
+    {
+      "path": "projects/bert_report_classifier_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "34f717b01f4cf6bd3ee6942bf561ada077af5bee",
+      "size": 4369
+    },
+    {
+      "path": "projects/dpo_finetuning_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6b1c80a684d92216d4fc2c9d99aa8976609d89c3",
+      "size": 2853
+    },
+    {
+      "path": "projects/ecg_text_stage1_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "df4b07f5590ed51c98afea8cf3a03c68fde22abf",
+      "size": 22926
+    },
+    {
+      "path": "projects/grpo_finetuning_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ef9d9224165269a578a14edf780b054d4cb5c7b6",
+      "size": 4949
+    },
+    {
+      "path": "projects/linear_probing_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3a603bad7d9241a372bf30595464c9f80d421df1",
+      "size": 12702
+    },
+    {
+      "path": "projects/llm_finetuning_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e4e1b719902344800798866e5ecae23325c24ce8",
+      "size": 75122
+    },
+    {
+      "path": "projects/rl_finetuning_base.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5f280bdcba76167d7933b305ae6cfeecc6bec4cc",
+      "size": 14171
+    },
+    {
+      "path": "projects/siglip_phase1_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5a2c54fb66b4231124b5f6ccd2ed93962cf14a09",
+      "size": 63878
+    },
+    {
+      "path": "projects/tokenizer_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9822dffbb334ec633ee476925545839b6e5489f2",
+      "size": 11504
+    },
+    {
+      "path": "projects/types.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "53363bb164a209dc2ccc7ec2fa4baa7ada34447e",
+      "size": 1055
+    },
+    {
+      "path": "pyproject.toml",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7d1dde0077d590628d78961eddcd7dfd6c3d7e65",
+      "size": 1572
+    },
+    {
+      "path": "pytest.ini",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ea3ada4094f20cdfa993a434152aa77c5caf3c4c",
+      "size": 502
+    },
+    {
+      "path": "run_inference.ipynb",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e42b11990753495c0eca6f36d58c36969f566a6f",
+      "size": 20175
+    },
+    {
+      "path": "run_schema_conversion.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "e8ea914c7f8e848fab38a6adc9562a9bb64c120b",
+      "size": 719
+    },
+    {
+      "path": "run_test_dataset.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "4cbeede11c068dd10c7eb1331172c472034eb705",
+      "size": 2321
+    },
+    {
+      "path": "runners",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "482813fec4fa0c84cbc00560d85dea85e6f5f7a0",
+      "size": null
+    },
+    {
+      "path": "runners/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8bb891fc8a2ced72ad732e2dd9a56c6e4c356187",
+      "size": 659
+    },
+    {
+      "path": "runners/base_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7da2ff822c75dcd820291b11b76c4d91c26bcd92",
+      "size": 3642
+    },
+    {
+      "path": "runners/bert_report_classifier_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cd4cb6e478171abb8da384e7f3caa05b19c9c10d",
+      "size": 6558
+    },
+    {
+      "path": "runners/dpo_finetuning_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9406d5d20b00a98181b19245d5818b5201c315e9",
+      "size": 19323
+    },
+    {
+      "path": "runners/ecg_text_stage1_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3806be548c29677c17d1565faf4d40eb1a830f99",
+      "size": 165651
+    },
+    {
+      "path": "runners/ecg_text_stage1_runner.py.backup",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6ddbd6695e3ba7274612d3dcb233e58ba5215918",
+      "size": 153153
+    },
+    {
+      "path": "runners/grpo_finetuning_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "12e2a380e5096958cee96824c25a4b7c121dd432",
+      "size": 32524
+    },
+    {
+      "path": "runners/llm_finetuning_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7571ecd115251718e0f99da64b61d9a10a9433ba",
+      "size": 175597
+    },
+    {
+      "path": "runners/rl_finetuning_base.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fb55693f26e3dc5c11ca171580acdc95db07df06",
+      "size": 7733
+    },
+    {
+      "path": "runners/siglip_phase1_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e243fe4f04943fa658712c441b8bb427caa05f88",
+      "size": 149097
+    },
+    {
+      "path": "runners/tokenizer_runner.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8ac1b062c31aee615016588e01428c2e39d9c52a",
+      "size": 30857
+    },
+    {
+      "path": "runners/types.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c1884428a1ad6885419fea40f8426bb5a695a2bd",
+      "size": 828
+    },
+    {
+      "path": "scripts",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "1d4614f5b632bb060f10652d45fbb4ead3b89a82",
+      "size": null
+    },
+    {
+      "path": "scripts/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3a1fb0f05c088a1a1d65676aa934f4a57f42284f",
+      "size": 68
+    },
+    {
+      "path": "scripts/adapt_tokenizer_ckpt.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "633c625ee46f407f05facb8ab9c7453dcb485e04",
+      "size": 5858
+    },
+    {
+      "path": "scripts/binary_auroc_eval.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f081a4823ffdfa8b87b46d6b4f01b832aed4d2f3",
+      "size": 19896
+    },
+    {
+      "path": "scripts/binary_auroc_synonym_eval.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d50ed0334975bb8a58519885d6a7a0e8a6b18d7b",
+      "size": 19736
+    },
+    {
+      "path": "scripts/build_bestof_dpo_pairs.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "67695b851c6e38363f96e3b45301858dbf9aa16e",
+      "size": 4854
+    },
+    {
+      "path": "scripts/build_grpo_failed_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7c0ab1abcf1302c0a3e02a2162191c3375fa5c16",
+      "size": 3495
+    },
+    {
+      "path": "scripts/build_grpo_focused_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5c1bbfe22a172cf0fcaefa277f5b910f7fa771ea",
+      "size": 3268
+    },
+    {
+      "path": "scripts/build_grpo_hard_mined_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "aad6558052ac4e0689153244e14fc0bd88ef51ad",
+      "size": 8173
+    },
+    {
+      "path": "scripts/build_offline_grpo_groups.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "be254f6d9deccb17be36cb06a1e2e281993515da",
+      "size": 6197
+    },
+    {
+      "path": "scripts/build_openrlhf_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d27c74e55b38360caac11f6ea2efa1ce5f12a8d9",
+      "size": 4636
+    },
+    {
+      "path": "scripts/build_rft_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ee872fd2672a27647922c9b48b65eb8b466c2e38",
+      "size": 4013
+    },
+    {
+      "path": "scripts/build_rft_targets_from_bestof.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "938e24d89c9ec9c5d1d746ea94ed5ba55498d408",
+      "size": 4044
+    },
+    {
+      "path": "scripts/build_tokenizer_aux_targets.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0fcc3e00e3d2d8c4b2b80583236d3fd81f010fd1",
+      "size": 3322
+    },
+    {
+      "path": "scripts/calibrate_endpoints_on_train.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b30185ec205cf545f6baf3e7b714396980304c15",
+      "size": 19640
+    },
+    {
+      "path": "scripts/compare_inference.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ff2903c5bf522e50fb1ff91acfd91977df186dac",
+      "size": 4227
+    },
+    {
+      "path": "scripts/compare_psa_vs_original.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d7bef9c83e1cdd497f63ba55cead00d2c76fa8fe",
+      "size": 24820
+    },
+    {
+      "path": "scripts/create_weighted_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bd36325bdfb224f083243e01804b33c7c63cdd38",
+      "size": 9214
+    },
+    {
+      "path": "scripts/dpo_pref_eval.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b9b162b8d77fe060be79019ac1b762c7807e7351",
+      "size": 14531
+    },
+    {
+      "path": "scripts/echonext_lvef_decoding_comparison.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9ec0930749d6d4b690438ebb9a51e548f6ea9776",
+      "size": 25345
+    },
+    {
+      "path": "scripts/eval_judge_csv.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "75eb3d73fb05a2ba41cc9d3fd5d362f458814b38",
+      "size": 6706
+    },
+    {
+      "path": "scripts/eval_workflow_utils.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4f064c8cb3e4f012f87891be8e7dcaa14a03ed16",
+      "size": 82672
+    },
+    {
+      "path": "scripts/evaluate_endpoint_pyes_calibrated.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "53e5ec06b7eff8de3d2bfd604ebf7cec0611d3fe",
+      "size": 24361
+    },
+    {
+      "path": "scripts/filter_dpo_pairs_by_baseline.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c8b374b7443266022c76dd618c6caee3f9ee4508",
+      "size": 29528
+    },
+    {
+      "path": "scripts/generate_dpo_candidates.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "60e78cbd5786cf7b61266bc828a48966c6fdee87",
+      "size": 14226
+    },
+    {
+      "path": "scripts/grpo_openrlhf_v1.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0c2cfc230e600d9de1eaaa02548ec6414402a376",
+      "size": 47917
+    },
+    {
+      "path": "scripts/log_rlvr_hourly_status.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "35a822bf4c44a30f47a8d4f153ae84b83724579c",
+      "size": 1184
+    },
+    {
+      "path": "scripts/main.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "eb1aa049e9e97885f0dbbbb1c2b2b8a06fb31533",
+      "size": 5207
+    },
+    {
+      "path": "scripts/merge_sharded_judge.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6638972ee10c2ec7361d41b1ac909ceeb7c80caa",
+      "size": 2552
+    },
+    {
+      "path": "scripts/prepare_sft_datasets.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "af63edc448ca9762a834c6b1e9504bab8cb71544",
+      "size": 10017
+    },
+    {
+      "path": "scripts/probe_axis_views.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "39ca1069e658db45a3c111e43962760d7a8d6e0d",
+      "size": 16742
+    },
+    {
+      "path": "scripts/probe_bridge.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "83482613a0a12a8888fa12d6c0e957b6968d562d",
+      "size": 11268
+    },
+    {
+      "path": "scripts/probe_tokenizer.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dda708c8a36ed60e097d483210b286032707a849",
+      "size": 10320
+    },
+    {
+      "path": "scripts/probe_wcrv2.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5cd4ac50d458cd9f3364a7d989c34efb54f1fc66",
+      "size": 8488
+    },
+    {
+      "path": "scripts/rank_dpo_generations.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "de8566b10612203071de925595522f769b4c3452",
+      "size": 22840
+    },
+    {
+      "path": "scripts/rank_dpo_generations_fast.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "efcde51a89253de56c6556a5c9738c4a4d67076e",
+      "size": 20162
+    },
+    {
+      "path": "scripts/rlvr_eval_bestofn.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "41b4b80b4d4b42024b5f8d13eff186c6adf09b9b",
+      "size": 9636
+    },
+    {
+      "path": "scripts/rlvr_eval_subset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "086031bd0045049d08ade2aee51e8e9bca71fa47",
+      "size": 30816
+    },
+    {
+      "path": "scripts/rlvr_iteration_loop.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5d18e20974cf93523095af1651888a485718b10b",
+      "size": 8225
+    },
+    {
+      "path": "scripts/run_2wjwbk0b_gapfill_v1.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "98bd222505c18e4206aa847b3feed7c3cd05b785",
+      "size": 1053
+    },
+    {
+      "path": "scripts/run_2wjwbk0b_gapfill_v2.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "bb961581f65fcf50f89f1202ab2473d6a846c694",
+      "size": 1053
+    },
+    {
+      "path": "scripts/run_combined_full.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "4e062c3981849b81ca89d527abe4d045b2265ca2",
+      "size": 1686
+    },
+    {
+      "path": "scripts/run_csv_llm_judge_sharded.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "e0758ca1ffc9946dfbc4a59331be613bee2f2e8d",
+      "size": 7375
+    },
+    {
+      "path": "scripts/run_full_test_llm_judge_compare.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "e38231827aa04f9310736d7d9b373b4a81bd5313",
+      "size": 6055
+    },
+    {
+      "path": "scripts/run_full_test_llm_judge_compare_sharded.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "a6b7b6bfc78f47c6620f16ab6826722d03193c20",
+      "size": 13120
+    },
+    {
+      "path": "scripts/run_fulltest_gen_any.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "29ac56637d9b0b99d1485fbfe3eb5110d506c80c",
+      "size": 8992
+    },
+    {
+      "path": "scripts/run_fulltest_gen_resumable.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "095e25760f821313ede9eba357716ef2764f67cc",
+      "size": 537
+    },
+    {
+      "path": "scripts/run_openrlhf_grpo.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "7a32b54364a4e2e72459956dff468ab500ce297d",
+      "size": 3889
+    },
+    {
+      "path": "scripts/run_rlvr_binary_phase1.sh",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d5e818ef86ab1380562f2c4a2e1b03be52ca3799",
+      "size": 527
+    },
+    {
+      "path": "scripts/run_rlvr_judge_phase3.sh",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "7793835c3d66b05b5a7f8a530d5f3faa1e8603ea",
+      "size": 602
+    },
+    {
+      "path": "scripts/run_rlvr_labelset_phase2.sh",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "731f8de8abe60c26e4858f5fdd7a6fd98875740b",
+      "size": 440
+    },
+    {
+      "path": "scripts/run_sweep.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "864eb56e4aef661425395983a903ae26db91782d",
+      "size": 8296
+    },
+    {
+      "path": "scripts/run_timeaxis_eval_chain.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "8d761aedec10c47c69bb85d1973422428574939a",
+      "size": 6196
+    },
+    {
+      "path": "scripts/runner.sh",
+      "type": "blob",
+      "mode": "100755",
+      "sha": "080c54866d00f1e29f861f767acf43c270606fe0",
+      "size": 3327
+    },
+    {
+      "path": "scripts/sample_and_generate_dpo.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9e81c319ba81e4c3035b807dbe3166135c675132",
+      "size": 22249
+    },
+    {
+      "path": "scripts/schema_sft_checks.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "958b110ecee535fd6f2f0091a113a1b9c0d287fd",
+      "size": 7045
+    },
+    {
+      "path": "scripts/score_deterministic.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6814f824e7a34e846202db65980aa13fa39f8951",
+      "size": 8216
+    },
+    {
+      "path": "scripts/test_openrlhf_reward.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "eafab39ca31965e0a218507b6f172a59ec3dbb6b",
+      "size": 1132
+    },
+    {
+      "path": "scripts/train_dpo_policy.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "37a79caef96e4a87fd952e8def308038db8fa760",
+      "size": 28843
+    },
+    {
+      "path": "scripts/train_offline_grpo_policy.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5159680569ad6c6b9a3ef3713c44156821e9cd5e",
+      "size": 7899
+    },
+    {
+      "path": "scripts/train_rft_policy.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e82cf982c0b5fb8a7c2df2f17b48376b8756e619",
+      "size": 8404
+    },
+    {
+      "path": "scripts/train_tokenizer_aux.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "889a5f601c990dbb58be23a99fc12885ef4e43fd",
+      "size": 14346
+    },
+    {
+      "path": "scripts/validate_verifier_vs_judge.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "49843477f0a2af54476c73102b12ad4e51638b0b",
+      "size": 3963
+    },
+    {
+      "path": "scripts/verify_inference_reproducibility.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ed71206fe15ba5b432faa0f4bec23347897498c0",
+      "size": 20397
+    },
+    {
+      "path": "services",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "b3b5289ca51c3f27bf792ab3f48a9d4121a87042",
+      "size": null
+    },
+    {
+      "path": "services/README_OPENRLHF.md",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "31766ecb970e5a44c00b3aa65a2bb32ac6b3e9c4",
+      "size": 4304
+    },
+    {
+      "path": "services/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "path": "services/ecg_preencode.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2b5495aac12db702148f132683acbd420ca99c23",
+      "size": 4256
+    },
+    {
+      "path": "services/openrlhf_judge_reward.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "924f2265d9cc490db0c04fcd7b642b82c543fd8c",
+      "size": 5717
+    },
+    {
+      "path": "services/verifiable_reward.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4a2681b7a43316857dc8cad3fbffe2a38bf233d9",
+      "size": 62504
+    },
+    {
+      "path": "tests",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "78b321928af283cf0836e06216b77742e1163032",
+      "size": null
+    },
+    {
+      "path": "tests/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3848b1c3db7e965914527d69a5e814c2021ed760",
+      "size": 62
+    },
+    {
+      "path": "tests/conftest.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "416ef78ff3fbac10ce272298b0d16db2115468f2",
+      "size": 3998
+    },
+    {
+      "path": "tests/data",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "1dc2cb852b42a09516dbb9bf98346636dbfaaeed",
+      "size": null
+    },
+    {
+      "path": "tests/data/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "76bc1f87da2cb9b47a15c69803bcff1dfff5ddcc",
+      "size": 36
+    },
+    {
+      "path": "tests/data/test_bert_clinical_report_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "db766592c910e74b9035daf81c9420378d458214",
+      "size": 6495
+    },
+    {
+      "path": "tests/data/test_ecg_clinical_report_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2cbc869e6076c9b796e3832621139428643de23e",
+      "size": 4714
+    },
+    {
+      "path": "tests/data/test_ecg_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f652b951ba5af6a6de4171fdd18356e91c3901d6",
+      "size": 9277
+    },
+    {
+      "path": "tests/models",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "61292f4124560e7e420b6d05b897dbb9e0a8a601",
+      "size": null
+    },
+    {
+      "path": "tests/models/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "74cfebb26951571dc29350d8fb329151625559ae",
+      "size": 69
+    },
+    {
+      "path": "tests/models/test_embedding_reducer.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0cae76031c20a72039b5bea399c880f13674ccbd",
+      "size": 3597
+    },
+    {
+      "path": "tests/models/test_gpt2_with_embeddings.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6fd9dcca203e534216e511fccab58c88572e4b10",
+      "size": 4898
+    },
+    {
+      "path": "tests/models/test_linear_reducer.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d98d0753052e11f53d54b85a1b1dab28f13e0a30",
+      "size": 3097
+    },
+    {
+      "path": "tests/models/test_llama32_report_decoder.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ab1875fca70dd0f9090f24624f2aa792b9fcecc4",
+      "size": 8992
+    },
+    {
+      "path": "tests/models/test_models_integration.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f74855a9b8977a62dd400bd87118b61ebb3e9da8",
+      "size": 6758
+    },
+    {
+      "path": "tests/models/test_qformer_mix_strategy.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "cff746fde83194f03bf824642b1f778636b821f3",
+      "size": 5580
+    },
+    {
+      "path": "tests/models/test_qformer_token_axis.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b9e44323e86e21004bc646b1861c7a00b3c305d0",
+      "size": 21800
+    },
+    {
+      "path": "tests/models/test_simple_embedding_reducer.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "83e015ad99973a26c7b4319b639798cbd472cec9",
+      "size": 2795
+    },
+    {
+      "path": "tests/projects",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "11fdf211c5c92d5623675efda4ff9ed321acea48",
+      "size": null
+    },
+    {
+      "path": "tests/projects/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0519ecba6ea913e21689ec692e81e9e4973fbf73",
+      "size": 1
+    },
+    {
+      "path": "tests/projects/test_bert_report_classifier_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5bfc490123a9f8037b9da9e3f16c69d1b64b2b98",
+      "size": 1992
+    },
+    {
+      "path": "tests/projects/test_init.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "77ca42e90b5716d1b594e555b5ff90f817d0e733",
+      "size": 562
+    },
+    {
+      "path": "tests/projects/test_llm_finetuning_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e9ac012e225d4510b0763543302b4d42949f9129",
+      "size": 1902
+    },
+    {
+      "path": "tests/projects/test_tokenizer_project.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "232e8e115ed2e0ede32499c2c11194535b00c03a",
+      "size": 1418
+    },
+    {
+      "path": "tests/test_artifact_provenance.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3665d0cea70e54484b0b5a8972bb83473b5436d1",
+      "size": 20542
+    },
+    {
+      "path": "tests/test_bridge_checkpoint_option_propagation.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8350bb87e89464328ed0bac0aee755bc6db3a101",
+      "size": 13847
+    },
+    {
+      "path": "tests/test_cf_evaluation.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bc469330fd4f4bb93a2c3745e1af86a8ba925eb7",
+      "size": 5290
+    },
+    {
+      "path": "tests/test_checkpoint_structure.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b4c3eae83d42e87cd16e0532b9f3ebaea481a107",
+      "size": 2198
+    },
+    {
+      "path": "tests/test_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f5a80478edb38327988373598fe639187492c3fd",
+      "size": 3663
+    },
+    {
+      "path": "tests/test_create_weighted_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a8a363d07fe3807205613d49f46435a9d8077fe3",
+      "size": 1068
+    },
+    {
+      "path": "tests/test_ecg_waveform.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "17698d25fbdd2a59978f576ca4ce334b01164d02",
+      "size": 1257
+    },
+    {
+      "path": "tests/test_endpoint_labels.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "28fd6aa6d693e077af2861dd6bad93ae9bfcb41d",
+      "size": 2272
+    },
+    {
+      "path": "tests/test_endpoint_readout.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "91efde5d98e00ea6ccc64f8538e6c75dafd4c739",
+      "size": 14299
+    },
+    {
+      "path": "tests/test_filter_dpo_pairs_by_baseline.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a641a84189017a720f8f83c567e492979a85f864",
+      "size": 847
+    },
+    {
+      "path": "tests/test_inference_quality.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d571cbdcad0a1517bdeb87f26f0f09aaf6bff1be",
+      "size": 8687
+    },
+    {
+      "path": "tests/test_main_cleanup.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "15d7605f4be3d8da4483be2fb1a70fa64e441f3c",
+      "size": 3311
+    },
+    {
+      "path": "tests/test_patient_identity.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b96b6689f5e9ddd3c30f29cf7d1b849587c8383d",
+      "size": 3291
+    },
+    {
+      "path": "tests/test_rlvr_eval_bestofn.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d4a1981839c539ee59eb33a8fc0a58d01eb61368",
+      "size": 1256
+    },
+    {
+      "path": "tests/test_rlvr_eval_subset_resume.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b53a41f81131635580cf0a269e7bb3d749b7b73d",
+      "size": 10324
+    },
+    {
+      "path": "tests/test_rlvr_iteration_loop.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0b63c26db8507161b12fcd7cf2d06aef30063b5f",
+      "size": 2581
+    },
+    {
+      "path": "tests/test_sample_and_generate_dpo.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "11d7758cdfa9335f5a6eb16b19d3544fec434832",
+      "size": 2636
+    },
+    {
+      "path": "tests/test_schema_sft_checks.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "898360ed671284022631ccade42b66c14b6d953c",
+      "size": 753
+    },
+    {
+      "path": "tests/test_score_deterministic.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d287f5e1f4d8bf29ef6fcdc1a3301d8d03914676",
+      "size": 5972
+    },
+    {
+      "path": "tests/test_train_dpo_policy.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8fdc64139d251fd5489ce5a5d1d219b9067d38cf",
+      "size": 965
+    },
+    {
+      "path": "tests/test_train_rft_policy.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e0db34dc3f79be81cf346328ccbeb62d4c69e4b3",
+      "size": 683
+    },
+    {
+      "path": "tests/test_verifiable_reward.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e5b6a036322d653650c0a8b65ba5fcf14cb41cd6",
+      "size": 7838
+    },
+    {
+      "path": "tests/utils",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "173600dad15a9dcb5774d3b4cbd6e41c5db0edf2",
+      "size": null
+    },
+    {
+      "path": "tests/utils/test_files_handler.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5a8c3c59968d47c30db774b91dcfdd72e38feafd",
+      "size": 6860
+    },
+    {
+      "path": "tests/utils/test_registry.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "147d1156eb04f53b98b2f33983a03f4f1b3cafc3",
+      "size": 4216
+    },
+    {
+      "path": "tests/utils/test_schedulers.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "03bd69c3373d05fe568eccf85b7f324c8acbaa3f",
+      "size": 6727
+    },
+    {
+      "path": "tests/workflows",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "5a9136fd322715b49320872bc12d49b1991d88f5",
+      "size": null
+    },
+    {
+      "path": "tests/workflows/test_eval_workflows.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f3e9989736ea4d936238010ed5df1fe594a2f270",
+      "size": 84658
+    },
+    {
+      "path": "utils",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "b92aa486a0ee199c5011c22dc881c6733b611908",
+      "size": null
+    },
+    {
+      "path": "utils/artifact_provenance.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "863e19dc93d1122baaf952c553cba430f175dd2e",
+      "size": 12086
+    },
+    {
+      "path": "utils/attention_visualization.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "6a1301106f35b90df9c31364acffb2846bb8173a",
+      "size": 12461
+    },
+    {
+      "path": "utils/checkpoint_structure.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3193850a7dd899e0f375a4e409337f537a6dac20",
+      "size": 3017
+    },
+    {
+      "path": "utils/compute_mean_std_per_lead.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "80231d38cd49843a4db1fa570810bfe6045be732",
+      "size": 3648
+    },
+    {
+      "path": "utils/config",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "cbf8e304c62bd4d909d6d90fef030d73b482d066",
+      "size": null
+    },
+    {
+      "path": "utils/config/__init__.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5daa1e89b26e5da190435a4002ca1870577c2642",
+      "size": 789
+    },
+    {
+      "path": "utils/config/bert_classifier_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1064a132d889dab7fc4d1e61fc989ceba195753f",
+      "size": 658
+    },
+    {
+      "path": "utils/config/dpo_finetuning_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "97504d5360c3e5d11ccce58dbdab7ff1b40c1783",
+      "size": 3343
+    },
+    {
+      "path": "utils/config/ecg_text_stage1_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "043430d5f1086de0ad93a8884137c3d565f2760a",
+      "size": 2901
+    },
+    {
+      "path": "utils/config/grpo_finetuning_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "49c2bd7819b2679989df4edb1eeed053436d9ca2",
+      "size": 3750
+    },
+    {
+      "path": "utils/config/heartwise_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "62074ddec338da6719f9f95f24cde8121841e4de",
+      "size": 3733
+    },
+    {
+      "path": "utils/config/linear_probing_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "35212aa8ad6b3ac737a819044e45c7ef2c8cf7a4",
+      "size": 1379
+    },
+    {
+      "path": "utils/config/llm_finetuning_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "528398673f877884d80041170122f61c47e8323a",
+      "size": 13308
+    },
+    {
+      "path": "utils/config/siglip_phase1_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "93dd8dddf78a3b034978d390b0f1c5a6d10b8981",
+      "size": 5481
+    },
+    {
+      "path": "utils/config/tokenizer_config.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "4aece1cee4f698cd89bd5f1fedcd7540a2ce11d8",
+      "size": 1268
+    },
+    {
+      "path": "utils/constants.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "dbbc4b32c3433eaad756c395397a4e2bdc679fb0",
+      "size": 81707
+    },
+    {
+      "path": "utils/data_splitter.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e8792f017bf59fcd208d956558628c9709b9c280",
+      "size": 4744
+    },
+    {
+      "path": "utils/ddp.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "38fd3c7efc345af72489b88629ec8d12e26d73f1",
+      "size": 7179
+    },
+    {
+      "path": "utils/debug.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0653870585d1b79e22b1f0b8033fd693619c57de",
+      "size": 1114
+    },
+    {
+      "path": "utils/ecg_waveform.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bc384752a48d977e523d12f9b54f167d20e0b91c",
+      "size": 1681
+    },
+    {
+      "path": "utils/endpoint_contract.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "891532c25aa425d46fcc00c92de5ab1632210a51",
+      "size": 3554
+    },
+    {
+      "path": "utils/endpoint_labels.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1d2df84b0052089234e9e857f5f17706be13db9b",
+      "size": 4069
+    },
+    {
+      "path": "utils/endpoint_readout.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d77c333b0c8d9637bb02e2b25707413a05c7fe14",
+      "size": 17845
+    },
+    {
+      "path": "utils/enums.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9665ab8aaef87355c94bae6d908c29cd89c65675",
+      "size": 5122
+    },
+    {
+      "path": "utils/evaluate_offline_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "444b729d748e1db7ec875d30fa7d2c40d2d1c976",
+      "size": 16224
+    },
+    {
+      "path": "utils/fft_analysis.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "93d5a247545ecc9a80d139770850f10f24d6b5fa",
+      "size": 7378
+    },
+    {
+      "path": "utils/file_counter.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "5d3a825ef1e1bab8a57c8a6d285b1e0f5a1745cb",
+      "size": 719
+    },
+    {
+      "path": "utils/files_handler.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "3ea6968f59c67945e08946bfc64751f541bf7e81",
+      "size": 12067
+    },
+    {
+      "path": "utils/generate_ecg_cf_eval_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "810da906c4b2725a543b210a0619021563a69c10",
+      "size": 17981
+    },
+    {
+      "path": "utils/generate_ecg_qa_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f6110f30adedb6e2df2851bcbce7a3a8e848fa4d",
+      "size": 13781
+    },
+    {
+      "path": "utils/huggingface_wrapper.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9590191fc25262a696fad47e70d01d0769e185a0",
+      "size": 2133
+    },
+    {
+      "path": "utils/lm_injection.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "1f294a709b50c14e28349edc6801de16eabc01bd",
+      "size": 2213
+    },
+    {
+      "path": "utils/merge_mimic_mhi.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "c9cbfc9531458228d4b59849d4325096b075a9cb",
+      "size": 455
+    },
+    {
+      "path": "utils/metrics",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "7e608f85e319738e16e8962e818fbe9cbbc0e5e5",
+      "size": null
+    },
+    {
+      "path": "utils/metrics/aggregate_text_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a45384192573c22504003d70555c65327f3c3a75",
+      "size": 5812
+    },
+    {
+      "path": "utils/metrics/category_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "238cad7b3ae1cdc41ef698c84fce9745cde63bbe",
+      "size": 10164
+    },
+    {
+      "path": "utils/metrics/cf_evaluator.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0343a6cd35f3720b19675a721a13e3aeb4c18c75",
+      "size": 21542
+    },
+    {
+      "path": "utils/metrics/ecg_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "99ea9a053c2a7739762c21faee10e2c8247be283",
+      "size": 7757
+    },
+    {
+      "path": "utils/metrics/generate_recall_report.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b0a88d609a58067541279aad313571494cdff8bc",
+      "size": 8659
+    },
+    {
+      "path": "utils/metrics/llm_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f7d51b9c992a3bcafb2c5e238c7f476612664182",
+      "size": 23934
+    },
+    {
+      "path": "utils/metrics/siglip_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bb63e0d7d481b4f6bb346a6bd92b3034b7ac7c2a",
+      "size": 2461
+    },
+    {
+      "path": "utils/metrics/siglip_recall.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "fdb2584881674c0e37e71e541511666ee55178fd",
+      "size": 7064
+    },
+    {
+      "path": "utils/parser.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "da8b648c81afdea39d4c57e35b967d88622dc3d4",
+      "size": 7433
+    },
+    {
+      "path": "utils/parser_typing.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b0fa1316805166c78797e36077af7ad4a211cf9d",
+      "size": 1290
+    },
+    {
+      "path": "utils/patient_identity.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "e46e65b7f75ff7e1a86bec1a408197837c4077eb",
+      "size": 2857
+    },
+    {
+      "path": "utils/plot_ecg_demo.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "d1e1f53a3aa65864544c08ce31e39944c85df798",
+      "size": 5538
+    },
+    {
+      "path": "utils/plot_metrics.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "524f9cbad6d5852db8c9e44bbdf5e1d84f445e4c",
+      "size": 11122
+    },
+    {
+      "path": "utils/plot_siglip_retrieval_ecgs.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "21b4f86ca79f6576803362953cc0a16ee73c97be",
+      "size": 8354
+    },
+    {
+      "path": "utils/plot_validation_ecgs.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8bf720f6c8261594f90392919f408a91e8c9e6dc",
+      "size": 18920
+    },
+    {
+      "path": "utils/preprocess_parquet.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "23236c814dd8e4bad88ea35d5e57edb89d1fac11",
+      "size": 9364
+    },
+    {
+      "path": "utils/preprocessing",
+      "type": "tree",
+      "mode": "040000",
+      "sha": "823359ed2f13bba89362f4454a77f35fd76134b0",
+      "size": null
+    },
+    {
+      "path": "utils/preprocessing/analysis_pipeline.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "b2bffc6d507a55afad75b889e6c503dceedd161f",
+      "size": 8662
+    },
+    {
+      "path": "utils/preprocessing/ecg_signal_processor.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "62038c2107eeb90c07a3c58fd8e0506d72d899b2",
+      "size": 15734
+    },
+    {
+      "path": "utils/preprocessing/plot_dataset_fft.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "8bb33dde53e752e58ecd21e0bacec6fe1adbff1c",
+      "size": 5804
+    },
+    {
+      "path": "utils/registry.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "9e58924fa3cfda0acc777866a90b8ebd745b916e",
+      "size": 2214
+    },
+    {
+      "path": "utils/rewards.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "a09503961e30dd88ffa36f82510608f4496f5253",
+      "size": 9520
+    },
+    {
+      "path": "utils/rewards_binary.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "26ed43ce5b5eb1415d4e2a6d627520fec582f7ac",
+      "size": 1617
+    },
+    {
+      "path": "utils/rewards_judge.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "beff723731fce4cf0d058d7e9a4daeff78c2a278",
+      "size": 2940
+    },
+    {
+      "path": "utils/rewards_labelset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "bed30836054905de9616cb9017f8507c4051d11e",
+      "size": 4960
+    },
+    {
+      "path": "utils/schedulers.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "0fc07d096fe0b0cca713c43699e46db47ecfce81",
+      "size": 10203
+    },
+    {
+      "path": "utils/schema_sft.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "ef47c8bc91ac8406a158a5784d1c9c6da18148eb",
+      "size": 18762
+    },
+    {
+      "path": "utils/seed.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "f29fd586ccd307d0da214a67929c2b0c3ce97325",
+      "size": 723
+    },
+    {
+      "path": "utils/stratified_sampling_dataset.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "da307e62875f01957ddfe992b18e76c98e12110f",
+      "size": 1749
+    },
+    {
+      "path": "utils/wandb_wrapper.py",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "2ed8926685784457e7ee7d1f8ce7b5f1b2b13e74",
+      "size": 3128
+    },
+    {
+      "path": "uv.lock",
+      "type": "blob",
+      "mode": "100644",
+      "sha": "30377adc2569c8d581d5c39cf8bc2ae120c569ba",
+      "size": 612980
+    }
+  ]
+}
