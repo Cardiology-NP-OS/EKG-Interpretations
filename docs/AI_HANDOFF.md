@@ -31,7 +31,7 @@ On `Continue`/`resume`/`keep going`:
 
 The donor pipeline is `ACQUIRE -> INVENTORY -> EXTRACT -> GAP -> DECIDE -> IMPLEMENT -> TEST -> COMPARE -> RECEIPT -> VERIFY -> PROMOTE -> ACCEPT`.
 
-At the prepared handoff basis, 14/21 primary donors are accepted and the next frontier is DONOR-015 `HeartWise-AI/ECG_LLM_Judge`. Treat that only as a handoff hint; the live registry wins.
+At the prepared handoff basis, 14/21 primary donors are accepted and the next frontier is DONOR-015 `HeartWise-AI/ECG_LLM_Judge`. Treat that only as a handoff hint; the live registry wins. Before clinical-accuracy work, read `ECG_PRECLINICAL_VALIDATION_CHECKPOINT.json` and preserve its frozen-basis/evidence-admission boundaries.
 
 ## Owner-directed product priority
 
