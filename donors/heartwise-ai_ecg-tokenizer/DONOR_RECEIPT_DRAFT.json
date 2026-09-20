@@ -47,5 +47,8 @@
     "metrics": "NOT_REPORTABLE",
     "activation": "NOT_ELIGIBLE",
     "clinical_validity": "NOT_INFERRED"
-  }
+  },
+  "superseded": true,
+  "superseded_by": "donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT.json",
+  "superseded_reason": "Candidate verification completed; finalized candidate receipt now governs."
 }
