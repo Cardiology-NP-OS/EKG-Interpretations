@@ -687,6 +687,27 @@ test("standard-layout discovery recovers twelve panels without supplied ROIs", (
   assert.strictEqual(out.digitized.leadCount, found.roiCount);
 });
 
+test("trace-derived baselines replace the discovered 55-percent assumption when verified", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const out = runImageIntakePipeline({
+    sourceKind: "synthetic_raster",
+    format: "raster_matrix",
+    raster: paper.image,
+    paperSpeedMmPerS: 25,
+    gainMmPerMv: 10,
+    allowTraceBaselineEstimation: true,
+    provenance: { locator: "case://trace-baseline-auto", projectGold: false },
+  });
+  assert.strictEqual(out.report.roiSource, "DISCOVERED_3X4_RHYTHM");
+  assert.strictEqual(out.report.calibration.verifiedVoltageBaseline, true);
+  assert.deepStrictEqual(out.report.calibration.baselineSources, ["TRACE_BASELINE_VERIFIED"]);
+  assert.ok(out.digitized.leads.every(lead => lead.quality.baselineSource === "TRACE_BASELINE_VERIFIED"));
+  assert.ok(out.digitized.leads.every(lead => lead.quality.baselineEvidence && lead.quality.baselineEvidence.verified === true));
+  assert.strictEqual(out.report.exactVoltageMeasurementAllowed, true);
+  assert.strictEqual(out.report.analysisPermissions.specificLeadClaimsAllowed, false);
+  assert.strictEqual(out.report.analysisPermissions.twelveLeadClaimsAllowed, false);
+});
+
 test("continuous deskew recovers a three-degree synthetic page before layout discovery", () => {
   const paper = renderFixture({ pxPerMm: 5 });
   const skewed = rotateArbitraryExpandedInkPreserving(paper.image, { degrees: 3 });

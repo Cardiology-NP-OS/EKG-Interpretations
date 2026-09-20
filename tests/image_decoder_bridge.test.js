@@ -442,6 +442,89 @@ test("generated JPEG lead labels unlock identity claims but not unverified volta
   }
 });
 
+test("generated JPEG reaches canonical analysis only after independent trace-baseline verification", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-jpeg-baseline-analysis-"));
+  try {
+    const paper = paperFixture();
+    const discovery = runImageIntakePipeline({
+      sourceKind: "synthetic_raster",
+      format: "raster_matrix",
+      raster: paper.image,
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      provenance: { locator: "case://baseline-discovery-helper", projectGold: false },
+    });
+    const labeled = paper.image.map(row => row.slice());
+    for (const roi of discovery.discovery.rois) {
+      renderLeadLabel(labeled, roi.lead, roi.x + 4, roi.y + 4, { scale: 2, value: 8 });
+    }
+
+    const png = path.join(temp, "labeled-baseline.png");
+    const jpeg = path.join(temp, "labeled-baseline.jpg");
+    fs.writeFileSync(png, encodeGrayscalePng(labeled));
+    convertWithPillow(png, jpeg, "jpeg");
+
+    const decoded = decodeImageSourceFile({ sourcePath: jpeg });
+    const persisted = runAndPersistImageFileIntake(path.join(temp, "cases"), {
+      sourcePath: jpeg,
+      sourceKind: "phone_photo",
+      paperSpeedMmPerS: 25,
+      gainMmPerMv: 10,
+      verifyLeadLabelsFromRaster: true,
+      leadLabelScale: 2,
+      leadLabelDarkThreshold: 80,
+      leadLabelSearchRadius: 4,
+      leadLabelMinScore: 0.88,
+      leadLabelOffsetX: 4,
+      leadLabelOffsetY: 4,
+      allowTraceBaselineEstimation: true,
+      preflight: externalPreflight(decoded.pages[0].raster, "phone_photo", "jpeg"),
+      provenance: { locator: "case://jpeg-baseline-analysis", projectGold: false },
+    });
+
+    const report = persisted.fileIntake.result.report;
+    assert.strictEqual(report.roi.leadIdentityVerified, true);
+    assert.strictEqual(report.calibration.verifiedVoltageBaseline, true);
+    assert.deepStrictEqual(report.calibration.baselineSources, ["TRACE_BASELINE_VERIFIED"]);
+    assert.strictEqual(report.analysisPermissions.exactTimeMeasurementAllowed, true);
+    assert.strictEqual(report.analysisPermissions.exactVoltageMeasurementAllowed, true);
+    assert.strictEqual(report.analysisPermissions.specificLeadClaimsAllowed, true);
+    assert.strictEqual(report.analysisPermissions.twelveLeadClaimsAllowed, true);
+
+    const extractionReceipt = persistImageExtraction(
+      persisted.caseReceipt.path,
+      persisted.fileIntake.result,
+    );
+    const extraction = readImageExtraction(
+      persisted.caseReceipt.path,
+      extractionReceipt.extractionId,
+    );
+    assert.ok(extraction.leads.every(lead =>
+      lead.quality &&
+      lead.quality.baselineSource === "TRACE_BASELINE_VERIFIED" &&
+      lead.quality.baselineEvidence &&
+      lead.quality.baselineEvidence.verified === true
+    ));
+
+    const analysis = runImageSignalAnalysis(extraction, analysisConfig());
+    assert.strictEqual(analysis.status, "COMPLETE");
+    assert.strictEqual(analysis.processedLeadCount, 12);
+    assert.strictEqual(analysis.completeStandardTwelveLead, true);
+    assert.strictEqual(analysis.diagnosticInterpretationIncluded, false);
+
+    const analysisReceipt = persistImageAnalysis(persisted.caseReceipt.path, analysis);
+    const reopened = readImageAnalysis(
+      persisted.caseReceipt.path,
+      analysisReceipt.analysisId,
+    );
+    assert.strictEqual(reopened.analysisId, analysisReceipt.analysisId);
+    assert.strictEqual(reopened.completeStandardTwelveLead, true);
+    assert.strictEqual(reopened.runtimeAuthority, false);
+  } finally {
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
 test("PDF file intake selects page zero and preserves PDF decoder identity", () => {
   withEncodedFixture("pdf", ({ paper, encoded }) => {
     const decoded = decodeImageSourceFile({ sourcePath: encoded, pdfDpi: 72 });
