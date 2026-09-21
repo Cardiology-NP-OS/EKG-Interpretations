@@ -43,7 +43,7 @@ function analysisConfig() {
   };
 }
 
-function fixture(locator) {
+function fixture(locator, strictTraceMaxThicknessPx) {
   const paper = renderPaperEcgRaster({
     leads: syntheticLeadMap(250, 10),
     sampleRateHz: 250,
@@ -58,6 +58,7 @@ function fixture(locator) {
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
     provenance: { locator, projectGold: false },
+    ...(strictTraceMaxThicknessPx === undefined ? {} : { strictTraceMaxThicknessPx }),
   };
   const result = runImageIntakePipeline(input);
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-analysis-"));
@@ -265,6 +266,95 @@ test("configuration rejects executable, nonfinite and authority-bearing data bef
     assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_CONFIG_GOVERNANCE/);
   }
   assert.throws(() => runImageSignalAnalysis(fx.extraction, { ...analysisConfig(), unexpected: true }), /IMAGE_ANALYSIS_CONFIG_FIELDS/);
+});
+
+test("strict extraction requires explicit pixel limits and retains all immutable quality metadata", () => {
+  const fx = fixture("case://strict-analysis-complete", 100);
+  const config = analysisConfig();
+  config.quality.maxAmplitudeUncertaintyMv = 1;
+  config.quality.maxTimePixelUncertaintyMs = 4;
+  const out = runImageSignalAnalysis(fx.extraction, config);
+  assert.strictEqual(out.status, "COMPLETE");
+  assert.strictEqual(out.processedLeadCount, 12);
+  assert.strictEqual(out.supplementalPaperWindowAnalyses.length, 1);
+  assert.ok(out.leadAnalyses.every(row => row.extractionQuality.timePixelUncertaintyMs === 4));
+  assert.ok(out.leadAnalyses.every(row => row.extractionQuality.calibrationUncertaintyQuantified === false));
+  assert.strictEqual(out.runtimeAuthority, false);
+  assert.strictEqual(out.metrics, "NOT_REPORTABLE");
+  assert.throws(() => runImageSignalAnalysis(fx.extraction, analysisConfig()), /IMAGE_ANALYSIS_NO_USABLE_LEADS/);
+  const legacy = fixture("case://strict-analysis-legacy");
+  assert.throws(() => runImageSignalAnalysis(legacy.extraction, config), /IMAGE_ANALYSIS_NO_USABLE_LEADS/);
+});
+
+test("pixel limits retain partial and all-failed semantics without detector tuning", () => {
+  const fx = fixture("case://strict-analysis-partial", 100);
+  const config = analysisConfig();
+  config.quality.maxAmplitudeUncertaintyMv = 0.5;
+  config.quality.maxTimePixelUncertaintyMs = 4;
+  const out = runImageSignalAnalysis(fx.extraction, config);
+  assert.strictEqual(out.status, "PARTIAL");
+  assert.deepStrictEqual(out.leadAnalyses.map(row => row.leadName).sort(), ["I", "II", "III"]);
+  assert.strictEqual(out.attemptedLeadCount, out.processedLeadCount + out.failures.length);
+  assert.ok(out.failures.every(row => row.reason === "IMAGE_ANALYSIS_QUALITY_GATE"));
+  config.quality.maxAmplitudeUncertaintyMv = 0.01;
+  assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_NO_USABLE_LEADS/);
+  config.quality.maxAmplitudeUncertaintyMv = 1;
+  config.quality.maxTimePixelUncertaintyMs = 3.99;
+  assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_NO_USABLE_LEADS/);
+});
+
+test("pixel limits are a complete positive finite pair", () => {
+  const fx = fixture("case://strict-analysis-config", 100);
+  for (const patch of [
+    { maxAmplitudeUncertaintyMv: 1 }, { maxTimePixelUncertaintyMs: 4 },
+    { maxAmplitudeUncertaintyMv: 0, maxTimePixelUncertaintyMs: 4 },
+    { maxAmplitudeUncertaintyMv: 1, maxTimePixelUncertaintyMs: -1 },
+    { maxAmplitudeUncertaintyMv: "1", maxTimePixelUncertaintyMs: 4 },
+    { maxAmplitudeUncertaintyMv: 1, maxTimePixelUncertaintyMs: null },
+  ]) {
+    const config = analysisConfig();
+    Object.assign(config.quality, patch);
+    assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_PIXEL_UNCERTAINTY_POLICY/);
+  }
+  const config = analysisConfig();
+  Object.assign(config.quality, { maxAmplitudeUncertaintyMv: Infinity, maxTimePixelUncertaintyMs: 4 });
+  assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_CONFIG_DATA/);
+});
+
+test("rehashing inconsistent strict pixel metadata cannot bypass the quality gate", () => {
+  const fx = fixture("case://strict-analysis-metadata", 100);
+  const config = analysisConfig();
+  Object.assign(config.quality, { maxAmplitudeUncertaintyMv: 1, maxTimePixelUncertaintyMs: 4 });
+  for (const patch of [
+    { maxAmplitudeUncertaintyMv: 0.001 }, { timePixelUncertaintyMs: 0.001 },
+    { maxStrokeThicknessPx: 0 }, { maxStrokeThicknessPx: 101 },
+    { calibrationUncertaintyQuantified: true }, { coverage: 0.99 },
+    { heldColumnCount: 1 }, { observedInkColumns: 0 }, { tracePolicy: "UNVERIFIED" },
+  ]) {
+    const changed = JSON.parse(JSON.stringify(fx.result));
+    Object.assign(changed.digitized.leads[0].quality, patch);
+    const out = runImageSignalAnalysis(buildExtraction(fx.caseRecord, changed), config);
+    assert.strictEqual(out.status, "PARTIAL");
+    assert.deepStrictEqual(out.failures, [{ leadName: "I", reason: "IMAGE_ANALYSIS_QUALITY_GATE" }]);
+  }
+});
+
+test("supplemental strict traces use the same uncertainty gate without disappearing from accounting", () => {
+  const fx = fixture("case://strict-analysis-supplemental", 100);
+  const changed = JSON.parse(JSON.stringify(fx.result));
+  const panel = changed.digitized.leads.find(lead => lead.lead === "II" && !lead.rhythmStrip);
+  panel.quality.maxStrokeThicknessPx = 80;
+  panel.quality.maxAmplitudeUncertaintyMv = 0.8;
+  const config = analysisConfig();
+  Object.assign(config.quality, { maxAmplitudeUncertaintyMv: 0.75, maxTimePixelUncertaintyMs: 4 });
+  const out = runImageSignalAnalysis(buildExtraction(fx.caseRecord, changed), config);
+  assert.strictEqual(out.status, "COMPLETE");
+  assert.strictEqual(out.processedLeadCount, 12);
+  assert.strictEqual(out.supplementalPaperWindowAnalyses.length, 0);
+  assert.strictEqual(out.supplementalPaperWindowFailures.length, 1);
+  assert.strictEqual(out.supplementalPaperWindowFailures[0].leadName, "II");
+  assert.strictEqual(out.supplementalPaperWindowFailures[0].reason, "IMAGE_ANALYSIS_QUALITY_GATE");
+  assert.strictEqual(out.simultaneousPaperGroups[0].leadCount, 2);
 });
 
 if (process.exitCode) process.exit(process.exitCode);

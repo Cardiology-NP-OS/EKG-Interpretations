@@ -41,7 +41,7 @@ function analysisConfig(authority = "SYNTHETIC_TEST_CONFIGURATION_ONLY_NOT_CLINI
   };
 }
 
-function fixture(locator) {
+function fixture(locator, strictTraceMaxThicknessPx) {
   const paper = renderPaperEcgRaster({
     leads: syntheticLeadMap(250, 10),
     sampleRateHz: 250,
@@ -56,13 +56,18 @@ function fixture(locator) {
     paperSpeedMmPerS: 25,
     gainMmPerMv: 10,
     provenance: { locator, projectGold: false },
+    ...(strictTraceMaxThicknessPx === undefined ? {} : { strictTraceMaxThicknessPx }),
   };
   const result = runImageIntakePipeline(input);
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-image-analysis-store-"));
   const caseReceipt = persistImageIntakeCase(root, input, result);
   const extractionReceipt = persistImageExtraction(caseReceipt.path, result);
   const extraction = readImageExtraction(caseReceipt.path, extractionReceipt.extractionId);
-  const analysis = runImageSignalAnalysis(extraction, analysisConfig());
+  const config = analysisConfig();
+  if (strictTraceMaxThicknessPx !== undefined) {
+    Object.assign(config.quality, { maxAmplitudeUncertaintyMv: 1, maxTimePixelUncertaintyMs: 4 });
+  }
+  const analysis = runImageSignalAnalysis(extraction, config);
   return { root, input, result, caseReceipt, extractionReceipt, extraction, analysis };
 }
 
@@ -403,6 +408,44 @@ test("analysis cannot bind to a substituted extraction identity", () => {
     () => persistImageAnalysis(fx.caseReceipt.path, changed),
     /EXTRACTION_FILE_REQUIRED|IMAGE_ANALYSIS_EXTRACTION_MISMATCH/,
   );
+});
+
+test("saved strict analyses bind configuration, implementation identities and exact extraction quality", () => {
+  const fx = fixture("case://strict-provenance-store", 100);
+  try {
+    const receipt = persistImageAnalysis(fx.caseReceipt.path, fx.analysis);
+    const reopened = readImageAnalysis(fx.caseReceipt.path, receipt.analysisId);
+    assert.deepStrictEqual(reopened.configuration, fx.analysis.configuration);
+    assert.strictEqual(reopened.implementations.length, 8);
+    const crypto = require("crypto");
+    for (const row of reopened.implementations) {
+      assert.strictEqual(row.sha256, crypto.createHash("sha256").update(fs.readFileSync(path.resolve(__dirname, "..", row.file))).digest("hex"));
+    }
+    for (const mutate of [
+      out => { out.leadAnalyses[0].extractionQuality.maxAmplitudeUncertaintyMv = 0.001; },
+      out => { out.supplementalPaperWindowAnalyses[0].extractionQuality.maxAmplitudeUncertaintyMv = 0.001; },
+      out => { out.configuration.quality.maxTimePixelUncertaintyMs = 0.001; },
+      out => { out.implementations[0].sha256 = "invalid"; },
+      out => { out.qualityPolicy.maxAmplitudeUncertaintyMv = 0.001; out.configuration.quality.maxAmplitudeUncertaintyMv = 0.001; },
+      out => { delete out.configuration; },
+    ]) {
+      const changed = JSON.parse(JSON.stringify(fx.analysis));
+      mutate(changed);
+      assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, changed), /IMAGE_ANALYSIS_(QUALITY_BINDING|CONFIG_BINDING|IMPLEMENTATION_IDENTITY|CONFIG_DATA)/);
+    }
+  } finally {
+    fs.rmSync(fx.root, { recursive: true, force: true });
+  }
+});
+
+test("legacy saved analysis quality also cannot be substituted independently of its source", () => {
+  const fx = fixture("case://legacy-quality-binding");
+  try {
+    fx.analysis.leadAnalyses[0].extractionQuality = { ...fx.analysis.leadAnalyses[0].extractionQuality, heldColumnCount: 999 };
+    assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, fx.analysis), /IMAGE_ANALYSIS_QUALITY_BINDING/);
+  } finally {
+    fs.rmSync(fx.root, { recursive: true, force: true });
+  }
 });
 
 if (process.exitCode) process.exit(process.exitCode);

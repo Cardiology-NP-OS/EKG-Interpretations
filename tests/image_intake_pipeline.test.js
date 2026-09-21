@@ -196,6 +196,119 @@ test("digitization rejects unsafe sparse-hold limits", () => {
   }), /DIGITIZATION_MAX_HELD_COLUMNS/);
 });
 
+test("strict trace uses the contiguous-run center and reports only pixel uncertainty", () => {
+  const image = sparseTraceFixture([]);
+  for (let x = 0; x < 12; x += 1) image[9][x] = 40;
+  const before = image.map(row => row.slice());
+  const input = {
+    image, rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 },
+  };
+  const legacy = digitizeLeadRois(input).leads[0];
+  assert.ok(legacy.samples.every(value => value === 0));
+  assert.strictEqual(legacy.quality.tracePolicy, undefined);
+  const lead = digitizeLeadRois({ ...input, strictTraceMaxThicknessPx: 2 }).leads[0];
+  assert.ok(lead.samples.every(value => value === 0.05));
+  assert.strictEqual(lead.quality.tracePolicy, "SINGLE_CONTIGUOUS_DARK_TRACE");
+  assert.strictEqual(lead.quality.maxStrokeThicknessPx, 2);
+  assert.strictEqual(lead.quality.maxAmplitudeUncertaintyMv, 0.1);
+  assert.strictEqual(lead.quality.timePixelUncertaintyMs, 5);
+  assert.strictEqual(lead.quality.calibrationUncertaintyQuantified, false);
+  assert.strictEqual(lead.quality.maxHeldColumns, 0);
+  assert.strictEqual(lead.quality.heldColumnCount, 0);
+  assert.strictEqual(lead.quality.coverage, 1);
+  assert.deepStrictEqual(lead.quality.sourceRegion, { x: 0, y: 0, width: 12, height: 20 });
+  assert.deepStrictEqual(input.image, before);
+});
+
+test("strict trace absolute ROI coordinates preserve known bipolar samples within half-pixel bounds", () => {
+  const image = Array.from({ length: 40 }, () => Array(30).fill(255));
+  const truth = Array.from({ length: 12 }, (_, x) => (x - 6) / 20);
+  for (let x = 0; x < truth.length; x += 1) image[Math.round(20 - truth[x] * 10)][5 + x] = 0;
+  const result = digitizeLeadRois({
+    image, rois: [{ lead: "II", x: 5, y: 8, width: 12, height: 25, baselineY: 20 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 }, strictTraceMaxThicknessPx: 1,
+  });
+  const lead = result.leads[0];
+  assert.ok(lead.samples.some(value => value < 0) && lead.samples.some(value => value > 0));
+  assert.strictEqual(lead.quality.maxAmplitudeUncertaintyMv, 0.05);
+  lead.samples.forEach((value, index) => assert.ok(Math.abs(value - truth[index]) <= 0.05 + Number.EPSILON));
+});
+
+test("strict trace rejects missing columns anywhere instead of holding", () => {
+  for (const x of [0, 4, 11]) {
+    assert.throws(() => digitizeLeadRois({
+      image: sparseTraceFixture([x]),
+      rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+      calibration: { pxPerSecond: 100, pxPerMv: 10 }, strictTraceMaxThicknessPx: 3,
+    }), new RegExp(`DIGITIZATION_TRACE_MISSING:II:${x}$`));
+  }
+});
+
+test("strict trace rejects separated ink, either clipped edge and excessive thickness", () => {
+  const cases = [
+    { y: 5, code: "AMBIGUOUS" }, { y: 0, code: "CLIPPED" }, { y: 19, code: "CLIPPED" },
+    { y: 9, code: "THICKNESS" },
+  ];
+  for (const { y, code } of cases) {
+    const image = sparseTraceFixture([]);
+    image[y][4] = 60;
+    assert.throws(() => digitizeLeadRois({
+      image, rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+      calibration: { pxPerSecond: 100, pxPerMv: 10 }, strictTraceMaxThicknessPx: 1,
+    }), new RegExp(`DIGITIZATION_TRACE_${code}:II:4$`));
+  }
+});
+
+test("strict trace honors exclusive grayscale ink threshold without bridging gaps", () => {
+  const image = sparseTraceFixture([]);
+  image[9][4] = 80;
+  image[8][4] = 79;
+  const input = {
+    image, rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 }, strictTraceMaxThicknessPx: 3,
+  };
+  assert.throws(() => digitizeLeadRois(input), /DIGITIZATION_TRACE_AMBIGUOUS:II:4/);
+  assert.strictEqual(digitizeLeadRois({ ...input, inkCeiling: 81 }).leads[0].quality.maxStrokeThicknessPx, 3);
+});
+
+test("strict trace rejects invalid limits, hold conflicts, unsafe ROI and nonfinite uncertainty", () => {
+  const input = {
+    image: sparseTraceFixture([]),
+    rois: [{ lead: "II", x: 0, y: 0, width: 12, height: 20, baselineY: 10 }],
+    calibration: { pxPerSecond: 100, pxPerMv: 10 }, strictTraceMaxThicknessPx: 3,
+  };
+  for (const value of [null, false, "3", 0, -1, 1.5, 19, 101, Infinity, NaN]) {
+    assert.throws(() => digitizeLeadRois({ ...input, strictTraceMaxThicknessPx: value }), /DIGITIZATION_STRICT_THICKNESS_LIMIT/);
+  }
+  assert.throws(() => digitizeLeadRois({ ...input, maxHeldColumns: 1 }), /DIGITIZATION_STRICT_HOLD_FORBIDDEN/);
+  for (const patch of [{ x: -1 }, { y: -1 }, { width: 13 }, { height: 21 }, { y: 0.5 }]) {
+    assert.throws(() => digitizeLeadRois({ ...input, rois: [{ ...input.rois[0], ...patch }] }), /DIGITIZATION_ROI/);
+  }
+  for (const baselineY of [-1, 20, 0.5, null]) {
+    assert.throws(() => digitizeLeadRois({ ...input, rois: [{ ...input.rois[0], baselineY }] }), /DIGITIZATION_BASELINE/);
+  }
+  for (const key of ["pxPerSecond", "pxPerMv"]) {
+    assert.throws(() => digitizeLeadRois({ ...input, calibration: { ...input.calibration, [key]: Number.MIN_VALUE } }), /DIGITIZATION_PIXEL_UNCERTAINTY/);
+  }
+});
+
+test("strict intake preserves calibrated permissions but cannot bypass uncertainty analysis", () => {
+  const paper = renderFixture({ pxPerMm: 5 });
+  const input = {
+    sourceKind: "synthetic_raster", format: "raster_matrix", raster: paper.image,
+    expectedRois: paper.rois, paperSpeedMmPerS: 25, gainMmPerMv: 10,
+    roiLeadIdentityVerified: true, strictTraceMaxThicknessPx: 100,
+    provenance: { locator: "case://strict-intake", projectGold: false },
+  };
+  const result = runImageIntakePipeline(input);
+  assert.ok(result.digitized.leads.every(lead => lead.quality.tracePolicy === "SINGLE_CONTIGUOUS_DARK_TRACE"));
+  assert.strictEqual(result.report.analysisPermissions.exactVoltageMeasurementAllowed, true);
+  assert.strictEqual(result.runtimeAuthority, false);
+  assert.strictEqual(result.diagnosticInterpretationIncluded, false);
+  assert.throws(() => runImageIntakePipeline({ ...input, connectMeasurements: true }), /INTAKE_STRICT_TRACE_ANALYSIS_REQUIRED/);
+});
+
 test("intake fails closed on PDF bytes without a raster", () => {
   assert.throws(() => runImageIntakePipeline({
     sourceKind: "original_digital_ecg_pdf",
