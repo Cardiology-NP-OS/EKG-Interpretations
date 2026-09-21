@@ -84,6 +84,15 @@ test("paper raster is rectangular grayscale with twelve-lead ROIs", () => {
   assert.strictEqual(IMAGE_RASTER_GOVERNANCE.diagnosticInterpretationIncluded, false);
 });
 
+test("ROI localization rejects shared pixels even when a region is marked as a rhythm strip", () => {
+  const paper = renderFixture();
+  const panel = paper.rois.find(roi => !roi.rhythmStrip);
+  for (const rhythmStrip of [false, true]) {
+    const duplicate = { ...panel, lead: "V6", rhythmStrip };
+    assert.throws(() => localizeLeadRois({ image: paper.image, expectedRois: [panel, duplicate] }), /ROI_OVERLAP/);
+  }
+});
+
 test("ROI localization accepts exact layout and rejects empty ink boxes", () => {
   const paper = renderFixture();
   const found = localizeLeadRois({ image: paper.image, expectedRois: paper.rois });
