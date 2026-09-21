@@ -30,11 +30,13 @@ Multilead input is not assumed to use channel zero. Leads receive deterministic,
 
 The synthetic cohort contains no signal bytes, record identifiers, or labels from `MITBIH-RPEAK-FULL-V1`. It covers low amplitude, P/T confusion, pacing, broad/inverted QRS, rapid rhythm, long RR/search-back, noise, baseline wander, morphology transitions, lead degradation, and lead competition. Synthetic success is necessary regression evidence, not evidence of clinical accuracy or dataset generalization.
 
-## External development-data blocker
+## Real-signal development cohort
 
-The repository registers potentially useful non-MIT sources such as LUDB 1.0.1, QTDB 1.0.0, St Petersburg INCART 1.0.0, and BUT PDB. Current repository authority still marks their use as requiring license, provenance, split, overlap, and annotation-scope review. They were not downloaded, scored, or used for tuning in this implementation session.
+LUDB 1.0.1 is admitted only for nonclinical detector development by `validation/development/LUDB_QRS_V2_DEV_V1.json`. Its official PhysioNet ODC-By 1.0 terms were independently checked, its 2,805 source files were verified against the version-pinned source SHA-256 inventory, and no data bytes are committed to this repository. The frozen split contains 160 tuning records and a 40-record internal holdout. The holdout is inaccessible to the real-signal development runner until detector configuration and implementation are frozen after tuning-split development.
 
-Before any real-signal development run, commit a versioned manifest containing exact file hashes, record/patient inclusion and exclusion rules, split identity, lead-selection rules, annotation source/scope, license determination, and an explicit exclusion of all 48 locked MIT-BIH V1 records.
+`evaluation/protocols/LUDB_QRS_V2_DEVELOPMENT_V1.json` fixes the detector, lead-selection, annotation, matching, metric, and governance semantics before tuning metrics are computed. Record `1`, whose annotation encoding was inspected during loader development, is forced into the tuning split and exchanged with record `8` so it cannot contaminate the internal holdout claim.
+
+QTDB remains excluded because it contains excerpts from other databases and record-level MIT-BIH overlap has not been resolved. BUT PDB remains blocked because its canonical source and license are unresolved. INCART is reserved for a separately frozen long-duration development extension.
 
 ## Evaluation matcher
 

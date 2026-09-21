@@ -1,0 +1,69 @@
+{
+  "schema": "ekg-qrs-real-signal-development-protocol-v1",
+  "protocol_id": "LUDB-QRS-V2-DEVELOPMENT-V1",
+  "state": "PREDECLARED_BEFORE_TUNING_METRICS",
+  "purpose": "NONCLINICAL_REAL_SIGNAL_DETECTOR_DEVELOPMENT",
+  "detector_code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "entrypoint": "lib/qrs_multilead_v2.js::detectCandidateRPeaksMultiLeadV2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "configuration": "evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json"
+  },
+  "cohort": "validation/development/LUDB_QRS_V2_DEV_V1.json",
+  "split_manifest": "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json",
+  "executed_split": "train",
+  "internal_holdout_split": "validation",
+  "internal_holdout_authorized": false,
+  "record_inclusion_rule": "ALL RECORDS ASSIGNED TO train BY THE FROZEN SPLIT MANIFEST",
+  "record_exclusion_rule": "ALL validation RECORDS AND ANY RECORD FAILING SOURCE HASH OR CONTRACT VERIFICATION",
+  "lead_selection_rule": "DETECTOR_SELECTS THE HIGHEST DETERMINISTIC UNSUPERVISED ENGINEERING_QUALITY_SCORE LEAD WITH FAILOVER; CHANNEL ZERO IS NOT ASSUMED",
+  "reference_rule": "AFTER LEAD SELECTION, USE ONLY SYMBOL N FROM THAT SELECTED LEAD'S CARDIOLOGIST MANUAL ANNOTATION FILE",
+  "annotation_files": "ONE WFDB ANNOTATOR EXTENSION PER LEAD: i,ii,iii,avr,avl,avf,v1,v2,v3,v4,v5,v6",
+  "matching": {
+    "protocol": "RPEAK-EVENT-MATCHER-V2",
+    "entrypoint": "lib/event_matcher_v2.js::matchEventsV2",
+    "tolerance_ms": 100,
+    "tolerance_boundary": "INCLUSIVE",
+    "assignment": "ORDERED_MAXIMUM_CARDINALITY_THEN_MINIMUM_TOTAL_ABSOLUTE_ERROR",
+    "candidate_reuse": false
+  },
+  "reported_metrics": [
+    "sensitivity",
+    "positive_predictive_value",
+    "f1",
+    "false_positive_count",
+    "false_negative_count",
+    "timing_mean_absolute_error_ms",
+    "timing_median_absolute_error_ms",
+    "record_median",
+    "record_minimum",
+    "record_fifth_percentile",
+    "paced_metadata_subgroup",
+    "bundle_branch_metadata_subgroup",
+    "ventricular_extrasystole_metadata_subgroup"
+  ],
+  "development_targets": {
+    "micro_sensitivity_minimum": 0.99,
+    "micro_positive_predictive_value_minimum": 0.99,
+    "micro_f1_minimum": 0.99,
+    "catastrophic_record_sensitivity_floor": 0.9,
+    "interpretation": "ENGINEERING_TARGETS_ONLY_NOT_CLINICAL_ACCEPTANCE_THRESHOLDS"
+  },
+  "change_policy": {
+    "parameter_change": "REQUIRES_NEW_CONFIGURATION_ID_AND_NEW_TRAIN_RESULT",
+    "holdout_access": "PROHIBITED_UNTIL_CONFIGURATION_AND_IMPLEMENTATION_ARE_FROZEN_AFTER_TRAIN_DEVELOPMENT",
+    "locked_mitbih_access": "PROHIBITED_FOR_PARAMETER_OR_IMPLEMENTATION_SELECTION",
+    "locked_v2_evaluation": "NOT_AUTHORIZED"
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "clinical_validity_inferred": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  }
+}
