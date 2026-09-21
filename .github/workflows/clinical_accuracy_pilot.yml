@@ -1,12 +1,6 @@
 name: Quarantined Clinical Accuracy Validation
 
 on:
-  push:
-    branches:
-      - validation/clinical-accuracy-v1
-    paths:
-      - "validation/clinical_accuracy/**"
-      - ".github/workflows/clinical_accuracy_pilot.yml"
   workflow_dispatch:
 
 permissions:
