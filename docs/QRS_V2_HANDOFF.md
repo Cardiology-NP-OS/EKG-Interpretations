@@ -21,6 +21,8 @@ The protocol froze the detector, configuration, evaluator, matcher, split, all 4
 
 The immutable outcome is `HOLDOUT_ENGINEERING_TARGETS_NOT_MET`. Aggregate annotation-observable sensitivity, PPV, and F1 all exceeded the predeclared 0.99 minima, but one record had sensitivity `0.875`, below the strictly-less-than-0.9 catastrophic threshold. Aggregate success cannot override that record gate.
 
+A later bounded continuation added `QRS-V2-POST-HOLDOUT-SYNTHETIC-CHARACTERIZATION-V1`. It contains only target-owned deterministic synthetic signals and reproduces two generic limitations of the unchanged candidate: transient amplitude collapse on the globally selected lead produces exactly one FN, and a selected-lead-local QRS-like transient produces exactly one FP. In each fixture, the alternate synthetic lead scores all references with zero FP/FN when isolated. These fixtures characterize the current failure surface; they do not define a passing future configuration, reuse holdout record identities or sample indices, or authorize parameter selection.
+
 ## Train versus one-shot holdout
 
 | Annotation-observable metric | Frozen open train (160) | One-shot holdout (40) |
@@ -59,6 +61,9 @@ The failure outcome remains unchanged by this analysis. LUDB source labels are e
 - Frozen coverage-aware train receipt remains SHA-256 `44747991a5dcc4d576e003dd0bf46e20c382bf4d4f204e50dc175961d34cb872`.
 - Historical initial train receipt remains SHA-256 `34738b112f033a9cb699afc1ea840c89ef79f5e0a4d47c6c2b0a02aa5bb58daf`.
 - Historical locked V1 receipt remains SHA-256 `08dc1f4be4b51a05b29e4c22791ed0c9cd7e4d6cb1d138f143a7d23c4ff6c84a`.
+- Post-holdout synthetic characterization manifest: `validation/development/QRS_V2_POST_HOLDOUT_SYNTHETIC_CHARACTERIZATION_V1.json`, SHA-256 `b91c609bf2482716bde80805ca8df0aba96e95248fbcd07aea96ad0ad83723c6`.
+- Synthetic characterization generator: `validation/development/qrs_v2_post_holdout_synthetic_corpus.js`, SHA-256 `5ea2524fdb8c4a5eb23d66723e930ca882057849a5d50598b34342469f50be2a`.
+- Synthetic characterization test: `tests/qrs_v2_post_holdout_synthetic.test.js`, SHA-256 `74e7e557623f286624cc5d8257fc803cb7c6f0b077ab337292a137e40ab6c8aa`.
 
 Record identities, sample indices, source-label comparisons, and worst-record ordering remain outside Git.
 
@@ -72,7 +77,7 @@ Record identities, sample indices, source-label comparisons, and worst-record or
 
 ## Verification
 
-- `npm run test:qrs-v2`: 79/79 focused assertions passed.
+- `npm run test:qrs-v2`: 86/86 focused assertions passed, including 7/7 post-holdout synthetic characterization assertions.
 - `npm test`: exit 0; all wired suites passed.
 - `npm run gate:ci`: 30/30, `synthetic-contract-ci-only`.
 - `python tools/ep5_pkt09_terminal_specialist_completion_gate.py`: 360/360.
