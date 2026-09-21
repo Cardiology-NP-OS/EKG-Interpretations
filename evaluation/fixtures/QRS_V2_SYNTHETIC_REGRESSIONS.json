@@ -1,0 +1,194 @@
+{
+  "schema": "ekg-qrs-v2-synthetic-regression-fixtures-v1",
+  "fixtureId": "QRS-V2-SYNTHETIC-REGRESSIONS-V1",
+  "fixture_set_id": "QRS-V2-SYNTHETIC-REGRESSIONS-V1",
+  "version": "1.0.0",
+  "provenance": {
+    "source": "TARGET_OWNED_DETERMINISTIC_SYNTHETIC_GENERATOR",
+    "locator": "validation/development/qrs_v2_synthetic_corpus.js"
+  },
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "authority": {
+    "source_kind": "DETERMINISTIC_SYNTHETIC_ENGINEERING_FIXTURE",
+    "source_labels_are_project_gold": false,
+    "project_gold": false,
+    "runtime_authority": false,
+    "clinical_validity_inferred": false,
+    "clinical_authority_implication": "NONE"
+  },
+  "generator": {
+    "implementation": "validation/development/qrs_v2_synthetic_corpus.js",
+    "sample_rate_hz": 250,
+    "duration_ms": 8000,
+    "deterministic_noise_seed": 22041,
+    "default_qrs_width_ms": 72,
+    "default_p_offset_ms": -170,
+    "default_t_offset_ms": 260
+  },
+  "fixtures": [
+    {
+      "id": "CLEAN_NORMAL_QRS",
+      "mechanism": "clean normal QRS",
+      "beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "expected": {"matched": 9, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 40}
+    },
+    {
+      "id": "LOW_AMPLITUDE_QRS_THRESHOLD_COLLAPSE",
+      "mechanism": "low-amplitude QRS with P/T amplitude near or above R amplitude",
+      "beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "qrs_amplitude": 0.18,
+      "p_amplitude": 0.16,
+      "t_amplitude": 0.22,
+      "noise_amplitude": 0.004,
+      "expected": {"matched": 9, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48}
+    },
+    {
+      "id": "INVERTED_QRS",
+      "mechanism": "inverted QRS polarity",
+      "beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "qrs_polarity": -1,
+      "expected": {"matched": 9, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 40}
+    },
+    {
+      "id": "BUNDLE_BRANCH_WIDE_QRS",
+      "mechanism": "broad notched QRS morphology",
+      "beats_ms": [600, 1450, 2300, 3150, 4000, 4850, 5700, 6550],
+      "qrs_width_ms": 176,
+      "qrs_notch_ms": 44,
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 64}
+    },
+    {
+      "id": "HIGH_P_WAVE_FALSE_R",
+      "mechanism": "P-wave amplitude exceeds R amplitude but has slower morphology",
+      "beats_ms": [650, 1500, 2350, 3200, 4050, 4900, 5750, 6600],
+      "qrs_amplitude": 0.62,
+      "p_amplitude": 1.15,
+      "p_width_ms": 150,
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48}
+    },
+    {
+      "id": "TALL_T_WAVE_FALSE_R",
+      "mechanism": "T-wave amplitude exceeds R amplitude but has slower slope",
+      "beats_ms": [600, 1450, 2300, 3150, 4000, 4850, 5700, 6550],
+      "qrs_amplitude": 0.7,
+      "t_amplitude": 1.35,
+      "t_width_ms": 210,
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48}
+    },
+    {
+      "id": "P_T_AMPLITUDE_EXCEEDS_R",
+      "mechanism": "both P and T amplitudes exceed R amplitude",
+      "beats_ms": [650, 1550, 2450, 3350, 4250, 5150, 6050, 6950],
+      "qrs_amplitude": 0.52,
+      "p_amplitude": 0.85,
+      "p_width_ms": 160,
+      "t_amplitude": 1.05,
+      "t_width_ms": 220,
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 52}
+    },
+    {
+      "id": "PACER_SPIKE_DOUBLE_DETECTION",
+      "mechanism": "high narrow pacing spike 32 ms before each QRS",
+      "beats_ms": [650, 1500, 2350, 3200, 4050, 4900, 5750, 6600],
+      "pacer": {"offset_ms": -32, "amplitude": 2.8, "width_ms": 4},
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48, "paced_complexes": 8}
+    },
+    {
+      "id": "PACED_MORPHOLOGY_FIDUCIAL_SHIFT",
+      "mechanism": "pacing spike plus broad paced QRS must localize to QRS rather than spike",
+      "beats_ms": [650, 1550, 2450, 3350, 4250, 5150, 6050, 6950],
+      "qrs_width_ms": 132,
+      "pacer": {"offset_ms": -40, "amplitude": 3.2, "width_ms": 4},
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 56, "paced_complexes": 8}
+    },
+    {
+      "id": "DUPLICATE_QRS_LOCAL_EXTREMA",
+      "mechanism": "notched QRS has two local extrema within one complex",
+      "beats_ms": [600, 1450, 2300, 3150, 4000, 4850, 5700, 6550],
+      "qrs_notch_ms": 28,
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48}
+    },
+    {
+      "id": "TACHYCARDIA_REFRACTORY_BOUNDARY",
+      "mechanism": "rapid rhythm near the configured refractory interval",
+      "beats_ms": [500, 740, 980, 1220, 1460, 1700, 1940, 2180, 2420, 2660, 2900, 3140, 3380, 3620, 3860, 4100, 4340, 4580, 4820, 5060, 5300, 5540, 5780, 6020, 6260, 6500, 6740, 6980, 7220, 7460],
+      "include_p": false,
+      "include_t": false,
+      "qrs_width_ms": 56,
+      "expected": {"matched": 30, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 36}
+    },
+    {
+      "id": "LONG_RR_SEARCHBACK",
+      "mechanism": "one reduced-amplitude QRS inside an otherwise implausibly long RR gap",
+      "beats_ms": [600, 1300, 2000, 2700, 3400, 4100, 4800, 5500, 6200, 6900],
+      "beat_amplitudes": [1, 1, 1, 1, 0.22, 1, 1, 1, 1, 1],
+      "expected": {"matched": 10, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48, "searchback_minimum": 1}
+    },
+    {
+      "id": "SUDDEN_QRS_AMPLITUDE_REDUCTION",
+      "mechanism": "abrupt sustained QRS amplitude reduction",
+      "beats_ms": [600, 1300, 2000, 2700, 3400, 4100, 4800, 5500, 6200, 6900],
+      "beat_amplitudes": [1, 1, 1, 1, 0.32, 0.32, 0.32, 0.32, 0.32, 0.32],
+      "expected": {"matched": 10, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48}
+    },
+    {
+      "id": "SUDDEN_QRS_AMPLITUDE_INCREASE",
+      "mechanism": "abrupt sustained QRS amplitude increase without threshold corruption",
+      "beats_ms": [600, 1300, 2000, 2700, 3400, 4100, 4800, 5500, 6200, 6900],
+      "beat_amplitudes": [0.3, 0.3, 0.3, 0.3, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
+      "expected": {"matched": 10, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48}
+    },
+    {
+      "id": "NOISE_BURST_THRESHOLD_CORRUPTION",
+      "mechanism": "bounded high-frequency noise burst between QRS complexes",
+      "beats_ms": [600, 1300, 2000, 2700, 3400, 4100, 4800, 5500, 6200, 6900],
+      "noise_burst": {"start_ms": 2920, "end_ms": 3180, "amplitude": 0.32},
+      "expected": {"matched": 10, "false_positive_maximum": 1, "false_negative": 0, "max_timing_error_ms": 52}
+    },
+    {
+      "id": "BASELINE_WANDER",
+      "mechanism": "large low-frequency baseline wander",
+      "beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "baseline_wander": {"amplitude": 0.65, "frequency_hz": 0.22},
+      "expected": {"matched": 9, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 44}
+    },
+    {
+      "id": "PVC_MORPHOLOGY_TRANSITION",
+      "mechanism": "alternating normal and broad inverted ventricular ectopic morphology",
+      "beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "beat_widths_ms": [72, 72, 154, 72, 154, 72, 154, 72, 72],
+      "beat_polarities": [1, 1, -1, 1, -1, 1, -1, 1, 1],
+      "expected": {"matched": 9, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 64}
+    },
+    {
+      "id": "FALSE_SEARCHBACK_PREVENTION",
+      "mechanism": "true long pause containing only a tall slow T-like deflection",
+      "beats_ms": [600, 1300, 2000, 4100, 4800, 5500, 6200, 6900],
+      "pause_decoy": {"center_ms": 3050, "amplitude": 0.9, "width_ms": 240},
+      "expected": {"matched": 8, "false_positive": 0, "false_negative": 0, "max_timing_error_ms": 48, "searchback_maximum": 0}
+    }
+  ],
+  "multilead_fixtures": [
+    {
+      "id": "FIRST_LEAD_NOT_BEST_LEAD",
+      "mechanism": "channel zero is noise-degraded while the second lead contains stable QRS morphology",
+      "expected_selected_lead": "II"
+    },
+    {
+      "id": "MISSING_DEGRADED_LEAD",
+      "mechanism": "one flat lead must be rejected without preventing detection from the usable lead",
+      "expected_selected_lead": "V5"
+    },
+    {
+      "id": "COMPETING_LEAD_QUALITY",
+      "mechanism": "two usable leads differ in impulsive QRS-to-background quality",
+      "expected_selected_lead": "V2"
+    },
+    {
+      "id": "LEAD_INVERSION",
+      "mechanism": "the best lead is inverted but remains usable for detection",
+      "expected_selected_lead": "aVR"
+    }
+  ]
+}
