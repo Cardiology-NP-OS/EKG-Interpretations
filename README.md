@@ -1,6 +1,10 @@
 # EKG Interpretations
 
-Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for Cardiology NP OS.
+Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for the clinician-facing Cardiology OS.
+
+Read [AGENTS.md](AGENTS.md) for all ten inline product invariants and repository guardrails. Canonical policy: [PRODUCT_INVARIANTS.md](https://github.com/Cardiology-NP-OS/cardiology-np-build/blob/main/PRODUCT_INVARIANTS.md); sibling checkout: [../cardiology-np-build/PRODUCT_INVARIANTS.md](../cardiology-np-build/PRODUCT_INVARIANTS.md).
+
+**Maturity and manifest posture:** this is quarantined engineering infrastructure, not a clinically active specialist. There is no root module.json; that is a manifest-standardisation gap, not implicit safety permission. `manifests/V12_RECOVERED_BASELINE.json` declares `clinical_accuracy_claimed: false`; `manifests/PRECLINICAL_VALIDATION_CHECKPOINT_V1.json` and the clinical controls preserve the inactive/nonreportable state below. Historical readiness language is not permission to repeat a spent evaluation. Real submissions can contain PHI; the fixture-based pipeline does not establish the production vault, privacy, retention/deletion or deployment security guarantees.
 
 ## Product input and current implementation
 
@@ -84,11 +88,14 @@ python tools/ep5_pkt09_terminal_specialist_completion_gate.py
 git diff --check
 ```
 
-For native image-decoder work, install `requirements-image.txt` in an isolated environment and run:
+CI uses Node 22 and Python 3.12. No lint or typecheck script is configured. For native image-decoder verification, install the pinned wrappers in an isolated environment and put its Python on PATH:
 
 ```bash
+python -m pip install --disable-pip-version-check -r requirements-image.txt
 npm run test:image-decoder
 ```
+
+Set `EKG_IMAGE_PYTHON` to the same interpreter for the Node bridge. These commands test generated fixtures, not a clinical cohort. Do not dispatch `clinical_accuracy_pilot.yml` or run `validate:qrs-v2-ludb-coverage-v2-holdout`: MITBIH-RPEAK-FULL-V1 is immutable and the LUDB holdout is SPENT/FAILED; V1 remains the default. Contract/preservation tests do not authorise retuning or repeating those evaluations.
 
 Also run donor-focused tests and exact-SHA GitHub CI. Fresh-clone verification is required when available. Skipped/unavailable evidence is not PASS.
 
@@ -111,6 +118,10 @@ Neon Cardiology-NP-System-Control is coordination/metadata authority, not a pati
 Do not commit PHI, restricted raw datasets, credentials, or unlicensed weights. Do not infer model-weight or dataset rights from source-code licenses. Missing checkpoint identity, preprocessing, license, or source version fails closed for reuse.
 
 `SOURCE LABELS != PROJECT GOLD` and `MODEL PREDICTIONS != PROJECT GOLD`.
+
+## Next unfinished product work
+
+Prioritise the canonical photo/PDF workflow over mechanically advancing the donor queue: real-image paired-reference validation with separately proven lead/calibration evidence, clinician correction/review UI, and evidence-backed interpretation/reporting remain unfinished. The opt-in strict trace/uncertainty path is documented in [docs/IMAGE_DECODER_DEPENDENCIES.md](docs/IMAGE_DECODER_DEPENDENCIES.md); it does not validate arbitrary photographs. Native decoder isolation, access control, PHI retention/deletion and binary distribution review remain deployment prerequisites. Any new confirmatory study requires a separately authorised frozen protocol and fresh protected data, not spent holdout reuse.
 
 ## Continuation
 
