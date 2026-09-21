@@ -102,13 +102,19 @@ test("holdout outcomes cannot authorize post-hoc tuning or clinical claims", () 
   assert.strictEqual(protocol.locked_v2_readiness, "NOT_READY_FOR_LOCKED_V2_EVALUATION");
 });
 
-test("receipt paths and outside-Git record-level artifacts are predeclared", () => {
+test("receipt paths and outside-Git record-level artifacts remain bound after execution", () => {
   assert.strictEqual(protocol.result_identity.result_id, "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1");
   assert.match(protocol.result_identity.compact_receipt_path, /HOLDOUT_V1_RECEIPT\.json$/);
   assert.match(protocol.result_identity.compact_comparison_path, /TRAIN_HOLDOUT_V1_COMPARISON\.json$/);
   assert.strictEqual(protocol.result_identity.record_level_artifacts_repository_storage, false);
-  assert.strictEqual(fs.existsSync(path.join(root, protocol.result_identity.compact_receipt_path)), false);
-  assert.strictEqual(fs.existsSync(path.join(root, protocol.result_identity.compact_comparison_path)), false);
+  const finalizedReceipt = require(path.join(root, protocol.result_identity.compact_receipt_path));
+  const finalizedComparison = require(path.join(root, protocol.result_identity.compact_comparison_path));
+  assert.strictEqual(finalizedReceipt.result_id, protocol.result_identity.result_id);
+  assert.strictEqual(finalizedReceipt.protocol.id, protocol.protocol_id);
+  assert.strictEqual(finalizedReceipt.artifacts.record_level_result.repository_storage, false);
+  assert.strictEqual(finalizedReceipt.artifacts.train_holdout_comparison.repository_storage, false);
+  assert.strictEqual(finalizedComparison.result_id, protocol.result_identity.result_id);
+  assert.strictEqual(finalizedComparison.outside_git_artifacts.repository_storage, false);
 });
 
 if (process.exitCode) process.exit(process.exitCode);

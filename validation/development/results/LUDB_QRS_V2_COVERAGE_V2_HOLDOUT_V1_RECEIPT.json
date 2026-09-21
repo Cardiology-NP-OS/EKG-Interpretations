@@ -1,0 +1,172 @@
+{
+  "schema": "ekg-ludb-qrs-v2-annotation-coverage-holdout-result-receipt-v1",
+  "result_id": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+  "state": "FROZEN_ONE_SHOT_INTERNAL_HOLDOUT_RESULT_TARGETS_NOT_MET",
+  "executed_at_utc_date": "2026-09-21",
+  "protocol": {
+    "id": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+    "path": "evaluation/protocols/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1.json",
+    "sha256": "5e5dd8dfbd20c1129fbbafac701b4490aab92e1f3997ae1d38045b8cea78fa88",
+    "predeclared_commit": "577d2488dc06daabc73b625cb89eb9594b393d2c",
+    "predeclared_tree": "d032f661e52e12dcc197e77d89bea7ab3d1cee44",
+    "exact_head_ci": {
+      "run_id": 35601184795,
+      "run_number": 698,
+      "conclusion": "success",
+      "all_jobs_successful": true
+    }
+  },
+  "code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "entrypoint": "lib/qrs_multilead_v2.js::detectCandidateRPeaksMultiLeadV2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "changed_after_frozen_train_result": false
+  },
+  "evaluator": {
+    "protocol_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2",
+    "algorithm": "closed-first-to-last-reference-with-boundary-rescue-v2",
+    "implementation": "lib/annotation_coverage_evaluator_v2.js::scoreAnnotationObservableInterval",
+    "matcher_protocol": "RPEAK-EVENT-MATCHER-V2",
+    "tolerance_ms": 100,
+    "tolerance_boundary": "INCLUSIVE",
+    "changed_after_frozen_train_result": false
+  },
+  "artifacts": {
+    "record_level_result": {
+      "repository_storage": false,
+      "filename": "ludb-qrs-v2-coverage-v2-holdout-v1-result.json",
+      "bytes": 81750,
+      "sha256": "fc58c88267d84ed2f6f2ce0b4342d9684ca57ce138f63cab9f4bb94a8ed90ded",
+      "contains_record_level_source_label_comparisons": true,
+      "disposition": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT"
+    },
+    "train_holdout_comparison": {
+      "repository_storage": false,
+      "filename": "ludb-qrs-v2-coverage-v2-train-holdout-v1-comparison.json",
+      "bytes": 14366,
+      "sha256": "9a80b76d0acea1277be8ddc9afd4560254d5b5bf5eafe71405ee869fda686ffe",
+      "contains_record_level_source_label_comparisons": true,
+      "disposition": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT"
+    },
+    "compact_comparison": "validation/development/results/LUDB_QRS_V2_COVERAGE_V2_TRAIN_HOLDOUT_V1_COMPARISON.json"
+  },
+  "dataset": {
+    "id": "ECG-DATASET-LUDB",
+    "version": "1.0.1",
+    "archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+    "source_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f",
+    "source_manifest_entries_verified": 2805,
+    "source_manifest_entries_failed": 0,
+    "executed_split": "validation",
+    "record_count": 40,
+    "holdout_annotations_parsed_or_scored_before_this_execution": false,
+    "holdout_annotations_parsed_and_scored_by_this_execution": true,
+    "holdout_now_consumed": true,
+    "post_holdout_parameter_tuning_on_this_split_allowed": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "full_record_context": {
+    "reference_event_count": 364,
+    "predicted_event_count": 445,
+    "matched_event_count": 363,
+    "false_positive_count": 82,
+    "false_negative_count": 1,
+    "sensitivity": 0.9972527472527473,
+    "positive_predictive_value": 0.8157303370786517,
+    "f1": 0.8974042027194067,
+    "timing_mean_absolute_error_ms": 18.429752066115704,
+    "timing_median_absolute_error_ms": 8
+  },
+  "annotation_observable_metrics": {
+    "reference_event_count": 364,
+    "predicted_event_count": 365,
+    "matched_event_count": 363,
+    "false_positive_count": 2,
+    "false_negative_count": 1,
+    "sensitivity": 0.9972527472527473,
+    "positive_predictive_value": 0.9945205479452055,
+    "f1": 0.9958847736625515,
+    "timing_mean_absolute_error_ms": 18.429752066115704,
+    "timing_median_absolute_error_ms": 8
+  },
+  "false_positive_decomposition": {
+    "full_record_apparent_false_positive_count": 82,
+    "excluded_outside_annotation_coverage_count": 80,
+    "excluded_before_count": 41,
+    "excluded_after_count": 39,
+    "remaining_internal_false_positive_count": 2,
+    "accounting_reconciles": true
+  },
+  "record_distribution": {
+    "record_sensitivity_median": 1,
+    "record_sensitivity_minimum": 0.875,
+    "record_sensitivity_p05": 1,
+    "record_positive_predictive_value_median": 1,
+    "record_positive_predictive_value_minimum": 0.8,
+    "record_positive_predictive_value_p05": 1,
+    "record_f1_median": 1,
+    "record_f1_minimum": 0.888888888888889,
+    "record_f1_p05": 0.9966666666666667,
+    "excluded_edge_detection_count_median": 2,
+    "excluded_edge_detection_count_maximum": 3,
+    "annotation_coverage_fraction_median": 0.7199,
+    "annotation_coverage_fraction_minimum": 0.4502,
+    "annotation_coverage_fraction_maximum": 0.8536
+  },
+  "failure_analysis": {
+    "error_record_count": 2,
+    "internal_false_positive_records": 1,
+    "false_negative_records": 1,
+    "catastrophic_record_count": 1,
+    "catastrophic_record_observable_metrics": {
+      "sensitivity": 0.875,
+      "positive_predictive_value": 1,
+      "f1": 0.9333333333333333,
+      "false_negative_count": 1,
+      "internal_false_positive_count": 0
+    },
+    "false_negative_mechanism": "The single missed reference had a selected-lead 100 ms local peak-to-peak amplitude of about 0.160, while the other reference windows on that selected lead were about 0.860 to 0.988. Other leads retained larger local excursions. This is consistent with transient selected-lead amplitude collapse in a source-metadata cardiac-pacing and ventricular-extrasystole record; it is an engineering observation, not a causal clinical inference.",
+    "internal_false_positive_mechanisms": [
+      "One selected-lead detection coincided with a large excursion confined primarily to that lead and had no nearby N annotation on any of the twelve source lead annotation files, consistent with a lead-local transient or artifact.",
+      "One selected-lead detection aligned within 27 samples of an N annotation on every other lead, including exact alignment on one lead, but the selected lead had no annotation for that complex. The scored false positive therefore exposes internal per-lead source-annotation incompleteness and is not sufficient evidence of a detector error."
+    ],
+    "record_identities_and_sample_indices": "PRESENT_ONLY_IN_HASH_BOUND_OUTSIDE_GIT_ARTIFACTS",
+    "source_label_caveat": "LUDB SOURCE LABELS ARE NOT PROJECT GOLD AND DO NOT ESTABLISH CLINICAL TRUTH"
+  },
+  "holdout_criteria": {
+    "micro_sensitivity_minimum": 0.99,
+    "micro_positive_predictive_value_minimum": 0.99,
+    "micro_f1_minimum": 0.99,
+    "catastrophic_record_sensitivity_floor": 0.9,
+    "aggregate_targets_met": true,
+    "catastrophic_record_present": true,
+    "outcome": "HOLDOUT_ENGINEERING_TARGETS_NOT_MET",
+    "interpretation": "ENGINEERING_TARGETS_ONLY_NOT_CLINICAL_ACCEPTANCE_THRESHOLDS"
+  },
+  "decision": {
+    "candidate_passed_one_shot_holdout": false,
+    "detector_configuration_promotion_eligible": false,
+    "post_holdout_tuning_on_this_split_allowed": false,
+    "holdout_may_be_reopened_for_candidate_selection": false,
+    "reason": "Aggregate targets passed, but one record had observable sensitivity 0.875, below the predeclared 0.9 catastrophic floor. The fail outcome is frozen even though one of two internal apparent false positives is attributable to selected-lead annotation incompleteness.",
+    "required_next_gate": "ESTABLISH A NEW OPEN DEVELOPMENT CORPUS AND NEW CONFIGURATION ID BEFORE ANY DETECTOR CHANGE; THIS HOLDOUT REMAINS SPENT"
+  },
+  "frozen_v1_preservation": {
+    "protocol_id": "MITBIH-RPEAK-FULL-V1",
+    "receipt_sha256": "08dc1f4be4b51a05b29e4c22791ed0c9cd7e4d6cb1d138f143a7d23c4ff6c84a",
+    "locked_cohort_used_for_parameter_selection": false,
+    "locked_v2_evaluation_executed": false
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false
+  },
+  "locked_v2_readiness": "NOT_READY_FOR_LOCKED_V2_EVALUATION"
+}
