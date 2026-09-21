@@ -233,6 +233,40 @@ test("invalid quality policy fails before analysis", () => {
   );
 });
 
+test("configuration rejects executable, nonfinite and authority-bearing data before measurement", () => {
+  const fx = fixture("case://image-analysis-config-data");
+  let invoked = 0;
+  const accessor = analysisConfig();
+  Object.defineProperty(accessor, "measurement", { enumerable: true, get() { invoked += 1; throw new Error("GETTER"); } });
+  const nested = analysisConfig();
+  Object.defineProperty(nested.measurement, "detector", { enumerable: true, get() { invoked += 1; throw new Error("NESTED_GETTER"); } });
+  const proxied = new Proxy(analysisConfig(), { ownKeys() { invoked += 1; throw new Error("PROXY"); } });
+  const nestedProxy = analysisConfig();
+  nestedProxy.quality = new Proxy(nestedProxy.quality, { get() { invoked += 1; throw new Error("NESTED_PROXY"); } });
+  const nonfinite = analysisConfig();
+  nonfinite.measurement.detector.minAbsoluteDeviation = Infinity;
+  const cyclic = analysisConfig();
+  cyclic.quality.cycle = cyclic;
+  const hidden = analysisConfig();
+  Object.defineProperty(hidden, "hidden", { value: true });
+  const symbol = analysisConfig();
+  symbol[Symbol("hidden")] = true;
+  const sparse = analysisConfig();
+  sparse.measurement.extra = Array(3);
+  const oversized = analysisConfig();
+  oversized.measurement.extra = Array(100001).fill(0);
+  for (const config of [accessor, nested, proxied, nestedProxy, nonfinite, cyclic, hidden, symbol, sparse, oversized]) {
+    assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_CONFIG_DATA/);
+  }
+  assert.strictEqual(invoked, 0);
+  for (const key of ["runtimeAuthority", "projectGold", "diagnosticRuntime", "evidenceAdmission", "metrics", "activation", "clinicalValidityInferred", "diagnosticInterpretationIncluded"]) {
+    const config = analysisConfig();
+    config.measurement[key] = "UNAUTHORIZED";
+    assert.throws(() => runImageSignalAnalysis(fx.extraction, config), /IMAGE_ANALYSIS_CONFIG_GOVERNANCE/);
+  }
+  assert.throws(() => runImageSignalAnalysis(fx.extraction, { ...analysisConfig(), unexpected: true }), /IMAGE_ANALYSIS_CONFIG_FIELDS/);
+});
+
 if (process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({
   schema: "ekg-image-signal-analysis-tests-v1",

@@ -6,7 +6,7 @@ const os = require("os");
 const path = require("path");
 const { renderPaperEcgRaster, syntheticLeadMap } = require("../lib/paper_ecg_raster");
 const { runImageIntakePipeline } = require("../lib/image_intake_pipeline");
-const { persistImageCase, persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
+const { persistImageCase, persistImageIntakeCase, readImageCase, readStoreFile } = require("../lib/image_case_store");
 const { buildExtraction, persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
 const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
 const { analysisIdentity, persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
@@ -65,6 +65,85 @@ function fixture(locator) {
   const analysis = runImageSignalAnalysis(extraction, analysisConfig());
   return { root, input, result, caseReceipt, extractionReceipt, extraction, analysis };
 }
+
+test("store reads reject substitution, growth and over-budget files and always close descriptors", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-store-read-"));
+  const file = path.join(root, "original.bin");
+  const other = path.join(root, "other.bin");
+  fs.writeFileSync(file, "original");
+  fs.writeFileSync(other, "replaced");
+  const original = { openSync: fs.openSync, closeSync: fs.closeSync, readSync: fs.readSync };
+  let opened = 0;
+  let closed = 0;
+  try {
+    fs.openSync = (...args) => { opened += 1; return original.openSync(...args); };
+    fs.closeSync = fd => { closed += 1; return original.closeSync(fd); };
+    assert.throws(() => readStoreFile(file, 7, "READ_FILE"), /IMAGE_STORE_BYTES_LIMIT/);
+    assert.strictEqual(opened, 0);
+    fs.openSync = (name, ...args) => { opened += 1; return original.openSync(name === file ? other : name, ...args); };
+    assert.throws(() => readStoreFile(file, 8, "READ_FILE"), /IMAGE_STORE_FILE_CHANGED/);
+    assert.strictEqual(closed, opened);
+    fs.openSync = (...args) => { opened += 1; return original.openSync(...args); };
+    let changed = false;
+    fs.readSync = (...args) => {
+      const count = original.readSync(...args);
+      if (!changed) { changed = true; fs.appendFileSync(file, "growth"); }
+      return count;
+    };
+    assert.throws(() => readStoreFile(file, 8, "READ_FILE"), /IMAGE_STORE_FILE_CHANGED/);
+    assert.strictEqual(closed, opened);
+  } finally {
+    Object.assign(fs, original);
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("all store readers reject ambiguous JSON even with a recomputed sidecar", () => {
+  const crypto = require("crypto");
+  const fx = fixture("case://canonical-store-json");
+  const analysisReceipt = persistImageAnalysis(fx.caseReceipt.path, fx.analysis);
+  const cases = [
+    [fx.caseReceipt.path, () => readImageCase(fx.caseReceipt.path)],
+    [fx.extractionReceipt.path, () => readImageExtraction(fx.caseReceipt.path, fx.extractionReceipt.extractionId)],
+    [analysisReceipt.path, () => readImageAnalysis(fx.caseReceipt.path, analysisReceipt.analysisId)],
+  ];
+  try {
+    for (const [file, reopen] of cases) {
+      const body = fs.readFileSync(file, "utf8");
+      const hashFile = file.replace(/\.json$/, ".sha256");
+      const sidecar = fs.readFileSync(hashFile);
+      try {
+        for (const changed of [
+          body.replace('"runtimeAuthority": false', '"runtimeAuthority": true, "runtimeAuthority": false'),
+          body.replace('"runtimeAuthority": false', '"runtimeAuthority": false, "unbounded": 1e400'),
+          body + " ",
+        ]) {
+          assert.notStrictEqual(changed, body);
+          fs.writeFileSync(file, changed);
+          fs.writeFileSync(hashFile, crypto.createHash("sha256").update(changed).digest("hex") + "\n");
+          assert.throws(reopen, /(?:CASE_MANIFEST|EXTRACTION|IMAGE_ANALYSIS)_JSON/);
+        }
+      } finally {
+        fs.writeFileSync(file, body);
+        fs.writeFileSync(hashFile, sidecar);
+      }
+      assert.ok(reopen());
+    }
+  } finally {
+    fs.rmSync(fx.root, { recursive: true, force: true });
+  }
+});
+
+test("case reopening rejects directory indirection", () => {
+  const fx = fixture("case://store-directory-indirection");
+  const link = path.join(fx.root, "redirected");
+  try {
+    fs.symlinkSync(path.dirname(fx.caseReceipt.path), link, "junction");
+    assert.throws(() => readImageCase(path.join(link, "manifest.json")), /IMAGE_STORE_DIRECTORY_REQUIRED/);
+  } finally {
+    fs.rmSync(fx.root, { recursive: true, force: true });
+  }
+});
 
 for (const kind of ["case", "extraction", "analysis"]) {
   test(`${kind} persistence uses writable sync descriptors and propagates durability failures`, () => {
