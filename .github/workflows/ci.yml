@@ -9,8 +9,12 @@ permissions:
 
 jobs:
   image-decoder-ci:
-    name: Bounded JPEG/PDF decoder and canonical intake
-    runs-on: ubuntu-latest
+    name: Bounded JPEG/PDF decoder and canonical intake (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     timeout-minutes: 10
     steps:
       - name: Checkout
@@ -29,6 +33,9 @@ jobs:
         env:
           EKG_IMAGE_PYTHON: python
         run: npm run test:image-decoder
+      - name: Exercise Windows persistence and contract regressions
+        if: runner.os == 'Windows'
+        run: npm test
 
   synthetic-contract-ci:
     name: Synthetic contract CI (non-clinical)

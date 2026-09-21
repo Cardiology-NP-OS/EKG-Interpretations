@@ -6,10 +6,10 @@ const os = require("os");
 const path = require("path");
 const { renderPaperEcgRaster, syntheticLeadMap } = require("../lib/paper_ecg_raster");
 const { runImageIntakePipeline } = require("../lib/image_intake_pipeline");
-const { persistImageIntakeCase } = require("../lib/image_case_store");
-const { persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
+const { persistImageCase, persistImageIntakeCase, readImageCase } = require("../lib/image_case_store");
+const { buildExtraction, persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
 const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
-const { persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
+const { analysisIdentity, persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
 
 let passed = 0;
 function test(name, fn) {
@@ -63,7 +63,123 @@ function fixture(locator) {
   const extractionReceipt = persistImageExtraction(caseReceipt.path, result);
   const extraction = readImageExtraction(caseReceipt.path, extractionReceipt.extractionId);
   const analysis = runImageSignalAnalysis(extraction, analysisConfig());
-  return { root, caseReceipt, extractionReceipt, extraction, analysis };
+  return { root, input, result, caseReceipt, extractionReceipt, extraction, analysis };
+}
+
+for (const kind of ["case", "extraction", "analysis"]) {
+  test(`${kind} persistence uses writable sync descriptors and propagates durability failures`, () => {
+    const fx = fixture(`case://durability-${kind}`);
+    const files = kind === "case"
+      ? ["original.bin", "normalized.png", "manifest.json", "manifest.sha256"]
+      : [`${kind}.json`, `${kind}.sha256`];
+    const directories = process.platform === "win32" ? [] : ["stage", "parent"];
+    const scenarios = ["success", ...files, ...directories, "rename", "racing-sync", "racing-io",
+      ...["EEXIST", "ENOTEMPTY", "EPERM", "EACCES"].map(code => `collision-${code}`)];
+    if (process.platform !== "win32") scenarios.push("collision-parent");
+    try {
+      for (const [index, scenario] of scenarios.entries()) {
+        const parent = kind === "case"
+          ? path.join(fx.root, `cases-${index}`)
+          : path.join(path.dirname(fx.caseReceipt.path), kind === "extraction" ? "extractions" : "analyses");
+        fs.mkdirSync(parent, { recursive: true });
+        const before = new Set(fs.readdirSync(parent));
+        const result = JSON.parse(JSON.stringify(fx.result));
+        result.digitized.leads[0].samples[0] += (index + 1) / 1000;
+        const analysis = runImageSignalAnalysis(fx.extraction, analysisConfig(`SYNTHETIC_DURABILITY_${index}`));
+        const finalName = kind === "case" ? `case-${fx.result.report.caseId}`
+          : kind === "extraction" ? buildExtraction(readImageCase(fx.caseReceipt.path), result).extractionId
+            : analysisIdentity(analysis);
+        const persist = () => kind === "case"
+          ? persistImageCase(parent, fx.result, {
+            originalBytes: Buffer.from("synthetic durability fixture"),
+            normalizedRaster: fx.input.raster,
+          })
+          : kind === "extraction"
+            ? persistImageExtraction(fx.caseReceipt.path, result)
+            : persistImageAnalysis(fx.caseReceipt.path, analysis);
+        const reopen = dir => kind === "case" ? readImageCase(dir)
+          : kind === "extraction" ? readImageExtraction(fx.caseReceipt.path, path.basename(dir))
+            : readImageAnalysis(fx.caseReceipt.path, path.basename(dir));
+        const original = { openSync: fs.openSync, closeSync: fs.closeSync, fsyncSync: fs.fsyncSync, renameSync: fs.renameSync };
+        const descriptors = new Map();
+        const events = [];
+        const failure = Object.assign(new Error(`INJECTED_${kind}_${scenario}`), { code: "EIO" });
+        let receipt;
+        let injected = false;
+        fs.openSync = (file, flags, ...args) => {
+          const fd = original.openSync(file, flags, ...args);
+          descriptors.set(fd, { file: path.resolve(file), flags });
+          return fd;
+        };
+        fs.closeSync = fd => {
+          descriptors.delete(fd);
+          return original.closeSync(fd);
+        };
+        fs.fsyncSync = fd => {
+          const { file, flags } = descriptors.get(fd);
+          const directory = fs.fstatSync(fd).isDirectory();
+          assert.strictEqual(flags, directory ? "r" : "r+", `${kind} ${scenario} descriptor`);
+          const event = directory ? (file === parent ? "parent" : "stage") : path.basename(file);
+          events.push(event);
+          if (scenario === event || (scenario === "collision-parent" && event === "parent") ||
+              (scenario === "racing-sync" && event === files[files.length - 1])) {
+            if (scenario === "racing-sync") {
+              fs.cpSync(path.dirname(file), path.join(parent, finalName), { recursive: true });
+            }
+            injected = true;
+            throw failure;
+          }
+          return original.fsyncSync(fd);
+        };
+        fs.renameSync = (stage, finalDir) => {
+          events.push("rename");
+          if (scenario.startsWith("collision-") || scenario === "racing-io") {
+            fs.cpSync(stage, finalDir, { recursive: true });
+            if (scenario === "racing-io") {
+              injected = true;
+              throw failure;
+            }
+            throw Object.assign(new Error("INJECTED_CONCURRENT_PUBLICATION"), {
+              code: scenario === "collision-parent" ? "EEXIST" : scenario.slice("collision-".length),
+            });
+          }
+          if (scenario === "rename") {
+            injected = true;
+            throw failure;
+          }
+          return original.renameSync(stage, finalDir);
+        };
+        const succeeds = scenario === "success" || (scenario.startsWith("collision-") && scenario !== "collision-parent");
+        try {
+          if (succeeds) receipt = persist();
+          else assert.throws(persist, error => error === failure, `${kind} ${scenario}`);
+          assert.strictEqual(injected, !succeeds, `${kind} ${scenario} injection reached`);
+          assert.strictEqual(descriptors.size, 0, `${kind} ${scenario} descriptors closed`);
+        } finally {
+          Object.assign(fs, original);
+        }
+        const added = fs.readdirSync(parent).filter(name => !before.has(name));
+        assert.ok(added.every(name => !name.startsWith(".staging-")), `${kind} ${scenario} staging cleanup`);
+        const published = succeeds || ["parent", "collision-parent", "racing-sync", "racing-io"].includes(scenario);
+        assert.strictEqual(added.length, published ? 1 : 0, `${kind} ${scenario} publication`);
+        if (succeeds || scenario === "parent" || scenario === "collision-parent" || scenario === "racing-io") {
+          const artifact = reopen(path.join(parent, added[0]));
+          assert.strictEqual(artifact.runtimeAuthority, false);
+          assert.strictEqual(artifact.diagnosticRuntime, "GOVERNED_INACTIVE");
+        }
+        if (succeeds) {
+          assert.deepStrictEqual(events, [...files, ...directories.filter(x => x === "stage"), "rename", ...directories.filter(x => x === "parent")]);
+          const again = persist();
+          assert.strictEqual(again.idempotent, true);
+          assert.strictEqual(again.sha256, receipt.sha256);
+        } else if (files.includes(scenario) || scenario === "stage" || scenario === "racing-sync") {
+          assert.ok(!events.includes("rename"), `${kind} ${scenario} cannot publish before sync`);
+        }
+      }
+    } finally {
+      fs.rmSync(fx.root, { recursive: true, force: true });
+    }
+  });
 }
 
 test("analysis persists as an immutable content-addressed generation", () => {
