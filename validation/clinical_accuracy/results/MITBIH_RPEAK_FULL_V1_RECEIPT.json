@@ -1,0 +1,97 @@
+{
+  "schema": "ekg-clinical-validation-result-receipt-v1",
+  "result_id": "MITBIH-RPEAK-FULL-V1-RECEIPT",
+  "protocol_id": "MITBIH-RPEAK-FULL-V1",
+  "observed_at": "2026-09-21T00:52:19Z",
+  "code_under_test": {
+    "repository": "Cardiology-NP-OS/EKG-Interpretations",
+    "commit": "32e74373523512c3fcf3921fcb8e2501b8ea2bbb",
+    "tree": "8134669d78b125adbca7d68c3e1f52c7fce63603",
+    "target_entrypoint": "lib/signal_measurement_contract.js::detectCandidateRPeaks",
+    "detector_configuration": {
+      "minAbsoluteDeviation": 0.9,
+      "refractoryMs": 200
+    }
+  },
+  "validation_harness": {
+    "branch_head": "7cf32d2630e25b30514f7738040880480a2b21f1",
+    "workflow_run_id": 35548228948,
+    "workflow_job_id": 106177970902,
+    "artifact_id": 10617947247,
+    "artifact_name": "mitbih-rpeak-full-v1",
+    "artifact_zip_digest": "sha256:c753b85dfa42c5cfd5caf38748eec106cab89353018de6e2cdd77ee15ae1413b",
+    "workflow_conclusion": "success",
+    "recovery_ci_run_id": 35548228961,
+    "recovery_ci_conclusion": "success",
+    "reader": "wfdb==4.3.1",
+    "acquisition": "DIRECT_VERSION_PINNED_HTTPS_WITH_SHA256_MANIFEST_VERIFICATION"
+  },
+  "dataset": {
+    "name": "MIT-BIH Arrhythmia Database",
+    "version": "1.0.0",
+    "physionet_release": "mitdb/1.0.0",
+    "expected_record_count": 48,
+    "observed_record_count": 48,
+    "selection_rule": "ALL_RECORD_IDS_IN_VERSION_PINNED_PHYSIONET_RECORDS_FILE_NO_RESULT_BASED_EXCLUSIONS",
+    "signal_selection": "FIRST_SIGNAL_CHANNEL_AS_STORED_BY_SOURCE",
+    "reference_annotation": "atr",
+    "matching_tolerance_ms": 150
+  },
+  "aggregate": {
+    "referenceBeatCount": 109494,
+    "predictedEventCount": 103560,
+    "matchedEventCount": 94145,
+    "falsePositiveCount": 9415,
+    "falseNegativeCount": 15349,
+    "microSensitivity": 0.8598188028567776,
+    "microPositivePredictiveValue": 0.9090865198918502,
+    "microF1": 0.8837665568353563,
+    "timingMeanAbsoluteErrorMs": 5.17930379261305,
+    "timingMedianAbsoluteErrorMs": 2.7777777777777777,
+    "eventLevelWilson95CiMicroSensitivity": {
+      "lower": 0.857749806732002,
+      "upper": 0.8618625522900081
+    },
+    "eventLevelWilson95CiMicroPositivePredictiveValue": {
+      "lower": 0.9073203823572914,
+      "upper": 0.9108223092083797
+    }
+  },
+  "record_distribution": {
+    "recordSensitivityMedian": 0.9922306782630297,
+    "recordSensitivityMin": 0.07291112293773283,
+    "recordPositivePredictiveValueMedian": 0.985174218903936,
+    "recordPositivePredictiveValueMin": 0.5204578665367755,
+    "recordF1Median": 0.944806892352335,
+    "recordF1Min": 0.13524185587364265
+  },
+  "audit_findings": [
+    "The five-record pilot materially overestimated full-cohort robustness.",
+    "Full-cohort micro sensitivity is 0.8598188028567776 and micro PPV is 0.9090865198918502.",
+    "Worst-record sensitivity is 0.07291112293773283; worst-record F1 is 0.13524185587364265.",
+    "No detector parameter was retuned after the pilot or after observing the full-cohort result.",
+    "These results validate only the frozen R-peak detector boundary, not the complete ECG interpretation system."
+  ],
+  "next_action": {
+    "state": "REQUIRES_ERROR_ANALYSIS_AND_SEPARATE_DEVELOPMENT_COHORT",
+    "tune_on_this_full_test_cohort": false,
+    "preserve_full_cohort_as_locked_evaluation_set": true,
+    "recommended_focus": [
+      "identify worst-performing records and failure modes",
+      "create a separate development/tuning cohort",
+      "evaluate detector changes without touching the locked full-cohort labels",
+      "repeat locked evaluation only under a predeclared next-version protocol"
+    ]
+  },
+  "authority": {
+    "sourceLabelsAreProjectGold": false,
+    "projectGold": false,
+    "reportable": false,
+    "evidenceAdmission": "NOT_ADMITTED",
+    "runtimeAuthority": false,
+    "diagnosticRuntime": "GOVERNED_INACTIVE",
+    "activation": "NOT_ELIGIBLE",
+    "clinicalValidityInferred": false
+  },
+  "interpretation_boundary": "QUARANTINED_FULL_DATABASE_DETECTOR_BENCHMARK_NOT_FINAL_CLINICAL_VALIDATION_OF_COMPLETE_ECG_SYSTEM"
+}
