@@ -1,0 +1,157 @@
+{
+  "schema": "ekg-ludb-qrs-v2-annotation-coverage-result-receipt-v2",
+  "result_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2-TRAIN",
+  "state": "FROZEN_COVERAGE_AWARE_TRAIN_RESULT_HOLDOUT_NOT_ACCESSED",
+  "executed_at_utc_date": "2026-09-21",
+  "protocol": {
+    "id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2",
+    "path": "evaluation/protocols/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2.json",
+    "sha256": "63d7023fd3ae535df1d427bf13b6cc52cf999f93bbf6048f9e7a1528565e15a1",
+    "predeclared_commit": "11ac6712ab52ed802c49d6f4bc2c896fe08adc03",
+    "predeclared_tree": "e98a715129bb89ca979d86cf7074f984ca2c61b6",
+    "exact_head_ci": {
+      "run_id": 35598586487,
+      "run_number": 692,
+      "conclusion": "success"
+    }
+  },
+  "code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "entrypoint": "lib/qrs_multilead_v2.js::detectCandidateRPeaksMultiLeadV2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "changed_from_historical_train_result": false
+  },
+  "evaluator": {
+    "algorithm": "closed-first-to-last-reference-with-boundary-rescue-v2",
+    "implementation": "lib/annotation_coverage_evaluator_v2.js::scoreAnnotationObservableInterval",
+    "matcher_protocol": "RPEAK-EVENT-MATCHER-V2",
+    "tolerance_ms": 100,
+    "tolerance_boundary": "INCLUSIVE"
+  },
+  "artifacts": {
+    "record_level_result": {
+      "repository_storage": false,
+      "filename": "ludb-qrs-v2-coverage-v2-train-result.json",
+      "bytes": 292616,
+      "sha256": "ec3842a6654666426129e4055f813567e02f63bd4ca020d66de9cf91c3a34acb",
+      "contains_record_level_source_label_comparisons": true,
+      "disposition": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT"
+    },
+    "side_by_side_comparison": {
+      "repository_storage": false,
+      "filename": "ludb-qrs-v2-evaluator-v1-v2-comparison.json",
+      "bytes": 12236,
+      "sha256": "d2c7e5bb03fb46ae0728b59c11c4bbf188a66d98bc7bf1f63b6e499d5cc3b7c4",
+      "contains_record_level_source_label_comparisons": true,
+      "disposition": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT"
+    },
+    "compact_comparison": "validation/development/results/LUDB_QRS_V2_EVALUATOR_V1_V2_COMPARISON.json"
+  },
+  "dataset": {
+    "id": "ECG-DATASET-LUDB",
+    "version": "1.0.1",
+    "archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+    "source_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f",
+    "source_manifest_entries_verified": 2805,
+    "source_manifest_entries_failed": 0,
+    "executed_split": "train",
+    "record_count": 160,
+    "internal_holdout_record_count": 40,
+    "internal_holdout_annotations_parsed_or_scored": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "historical_full_record_reproduction": {
+    "historical_result_id": "LUDB-QRS-V2-TRAIN-V1",
+    "historical_receipt_sha256": "34738b112f033a9cb699afc1ea840c89ef79f5e0a4d47c6c2b0a02aa5bb58daf",
+    "exact_aggregate_reproduction": true,
+    "reference_event_count": 1466,
+    "predicted_event_count": 1797,
+    "matched_event_count": 1465,
+    "false_positive_count": 332,
+    "false_negative_count": 1,
+    "sensitivity": 0.9993178717598908,
+    "positive_predictive_value": 0.8152476349471341,
+    "f1": 0.8979466748391052,
+    "timing_mean_absolute_error_ms": 14.501023890784984,
+    "timing_median_absolute_error_ms": 4
+  },
+  "annotation_observable_metrics": {
+    "reference_event_count": 1466,
+    "predicted_event_count": 1466,
+    "matched_event_count": 1465,
+    "false_positive_count": 1,
+    "false_negative_count": 1,
+    "sensitivity": 0.9993178717598908,
+    "positive_predictive_value": 0.9993178717598908,
+    "f1": 0.9993178717598908,
+    "timing_mean_absolute_error_ms": 14.501023890784984,
+    "timing_median_absolute_error_ms": 4
+  },
+  "false_positive_decomposition": {
+    "historical_apparent_false_positive_count": 332,
+    "excluded_outside_annotation_coverage_count": 331,
+    "excluded_before_count": 167,
+    "excluded_after_count": 164,
+    "remaining_internal_false_positive_count": 1,
+    "accounting_reconciles": true
+  },
+  "record_distribution": {
+    "record_sensitivity_median": 1,
+    "record_sensitivity_minimum": 0.9,
+    "record_sensitivity_p05": 1,
+    "record_positive_predictive_value_median": 1,
+    "record_positive_predictive_value_minimum": 0.875,
+    "record_positive_predictive_value_p05": 1,
+    "record_f1_median": 1,
+    "record_f1_minimum": 0.9333333333333333,
+    "record_f1_p05": 1,
+    "excluded_edge_detection_count_median": 2,
+    "excluded_edge_detection_count_maximum": 4,
+    "annotation_coverage_fraction_median": 0.7171000000000001,
+    "annotation_coverage_fraction_minimum": 0.544,
+    "annotation_coverage_fraction_maximum": 0.8702
+  },
+  "remaining_train_only_failure_analysis": {
+    "error_record_count": 2,
+    "internal_false_positive_records": 1,
+    "false_negative_records": 1,
+    "catastrophic_record_count": 0,
+    "false_negative_mechanism": "An early morphology-qualified selected-lead candidate was below the adaptive primary threshold; search-back was not yet armed because insufficient accepted RR history existed. The source metadata includes bundle-branch and ventricular-extrasystole descriptors, but no causal clinical inference is made.",
+    "false_positive_mechanism": "One low-strength internal selected-lead event was accepted between annotated QRS references in a sinus-bradycardia metadata record. Its broad raw half-height morphology and proximity before an annotated P-wave interval make non-QRS waveform or noise confusion plausible, but the external source labels do not establish a definitive mechanism.",
+    "record_identities_and_sample_indices": "PRESENT_ONLY_IN_HASH_BOUND_OUTSIDE_GIT_ARTIFACTS"
+  },
+  "development_criteria": {
+    "micro_sensitivity_minimum": 0.99,
+    "micro_positive_predictive_value_minimum": 0.99,
+    "micro_f1_minimum": 0.99,
+    "catastrophic_record_sensitivity_floor": 0.9,
+    "aggregate_targets_met": true,
+    "catastrophic_record_present": false,
+    "interpretation": "ENGINEERING_TARGETS_ONLY_NOT_CLINICAL_ACCEPTANCE_THRESHOLDS"
+  },
+  "decision": {
+    "detector_tuning_justified_now": false,
+    "reason": "The frozen evaluator repair removes 331 edge-coverage artifacts, the unchanged detector meets all predeclared train targets, and only one internal FP plus one FN remain with no catastrophic record. Parameter changes at this checkpoint would be disproportionate and risk train overfit.",
+    "detector_and_configuration_remain_frozen": true,
+    "holdout_run_authorized_by_this_receipt": false,
+    "required_next_gate": "PREDECLARE A SEPARATE HOLDOUT PROTOCOL AND RECEIPT PATH ONLY AFTER FINAL CANDIDATE VERIFICATION; DO NOT IMPROVISE HOLDOUT ACCESS"
+  },
+  "frozen_v1_preservation": {
+    "protocol_id": "MITBIH-RPEAK-FULL-V1",
+    "receipt_sha256": "08dc1f4be4b51a05b29e4c22791ed0c9cd7e4d6cb1d138f143a7d23c4ff6c84a",
+    "locked_cohort_used_for_parameter_selection": false,
+    "locked_v2_evaluation_executed": false
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false
+  },
+  "locked_v2_readiness": "NOT_READY_FOR_LOCKED_V2_EVALUATION"
+}
