@@ -1,0 +1,103 @@
+{
+  "schema": "ekg-ludb-qrs-v2-development-result-receipt-v1",
+  "result_id": "LUDB-QRS-V2-TRAIN-V1",
+  "state": "FROZEN_INITIAL_TRAIN_RESULT_NOT_ACCEPTED_FOR_HOLDOUT",
+  "executed_at_utc_date": "2026-09-21",
+  "protocol": {
+    "id": "LUDB-QRS-V2-DEVELOPMENT-V1",
+    "path": "evaluation/protocols/LUDB_QRS_V2_DEVELOPMENT_V1.json",
+    "sha256": "4909cec05467e2f64c4d7cf5fe262bff5b8138af7305d73a7e465d6d6adfec7e",
+    "predeclared_commit": "a216fa831f96f7539fe353adced6b633953f37e2",
+    "predeclared_tree": "4808ed45d788177a2dcbfcaae16a5900a0f73b24"
+  },
+  "code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "entrypoint": "lib/qrs_multilead_v2.js::detectCandidateRPeaksMultiLeadV2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1"
+  },
+  "result_artifact": {
+    "repository_storage": false,
+    "filename": "ludb-qrs-v2-train-v1.json",
+    "sha256": "a7d5500b481d37807f40798695d017332dd4aff3036e63eeff95d976bd4a077e",
+    "contains_record_level_source_label_comparisons": true,
+    "disposition": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT"
+  },
+  "dataset": {
+    "id": "ECG-DATASET-LUDB",
+    "version": "1.0.1",
+    "executed_split": "train",
+    "record_count": 160,
+    "internal_holdout_record_count": 40,
+    "internal_holdout_annotations_parsed_or_scored": false,
+    "source_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f",
+    "source_manifest_entries_verified": 2805,
+    "source_manifest_entries_failed": 0,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "observed_development_metrics": {
+    "reference_event_count": 1466,
+    "predicted_event_count": 1797,
+    "matched_event_count": 1465,
+    "false_positive_count": 332,
+    "false_negative_count": 1,
+    "sensitivity": 0.9993178717598908,
+    "positive_predictive_value": 0.8152476349471341,
+    "f1": 0.8979466748391052,
+    "timing_mean_absolute_error_ms": 14.501023890784984,
+    "timing_median_absolute_error_ms": 4,
+    "record_sensitivity_median": 1,
+    "record_sensitivity_minimum": 0.9,
+    "record_sensitivity_p05": 1,
+    "record_positive_predictive_value_median": 0.8181818181818182,
+    "record_positive_predictive_value_minimum": 0.5833333333333334,
+    "record_positive_predictive_value_p05": 0.7488636363636364,
+    "record_f1_median": 0.9,
+    "record_f1_minimum": 0.7368421052631579,
+    "record_f1_p05": 0.856390977443609
+  },
+  "subgroups": {
+    "cardiac_pacing": {
+      "record_count": 4,
+      "sensitivity": 1,
+      "positive_predictive_value": 0.8048780487804879,
+      "f1": 0.8918918918918919
+    },
+    "bundle_branch": {
+      "record_count": 31,
+      "sensitivity": 0.9963636363636363,
+      "positive_predictive_value": 0.8130563798219584,
+      "f1": 0.8954248366013071
+    },
+    "ventricular_extrasystole": {
+      "record_count": 5,
+      "sensitivity": 0.9836065573770492,
+      "positive_predictive_value": 0.8571428571428571,
+      "f1": 0.916030534351145
+    }
+  },
+  "interpretation": {
+    "development_targets_met": false,
+    "holdout_gate_open": false,
+    "locked_v2_gate_open": false,
+    "finding": "The initial train run met the sensitivity target but not the PPV or F1 targets.",
+    "evaluator_limitation": "Manual per-lead LUDB QRS annotations do not necessarily cover the entire ten-second signal. Under the predeclared full-record scoring rule, detections outside the first-to-last annotated QRS interval are counted as false positives. Selected record inspection found that many apparent false positives were at those unannotated signal edges; at least one apparent false positive was internal. This receipt preserves the result exactly and does not retroactively change its semantics.",
+    "required_next_protocol_change": "Predeclare a new development-only evaluator version that defines an annotation-observable scoring interval, retains a separate full-record detection count, and emits a side-by-side comparison artifact. Do not alter this receipt or V1 historical metrics."
+  },
+  "frozen_v1_preservation": {
+    "protocol_id": "MITBIH-RPEAK-FULL-V1",
+    "receipt_sha256": "08dc1f4be4b51a05b29e4c22791ed0c9cd7e4d6cb1d138f143a7d23c4ff6c84a",
+    "locked_cohort_used_for_parameter_selection": false,
+    "locked_v2_evaluation_executed": false
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "clinical_validity_inferred": false
+  },
+  "locked_v2_readiness": "NOT_READY_FOR_LOCKED_V2_EVALUATION"
+}

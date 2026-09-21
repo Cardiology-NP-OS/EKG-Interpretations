@@ -36,6 +36,8 @@ LUDB 1.0.1 is admitted only for nonclinical detector development by `validation/
 
 `evaluation/protocols/LUDB_QRS_V2_DEVELOPMENT_V1.json` fixes the detector, lead-selection, annotation, matching, metric, and governance semantics before tuning metrics are computed. Record `1`, whose annotation encoding was inspected during loader development, is forced into the tuning split and exchanged with record `8` so it cannot contaminate the internal holdout claim.
 
+The first predeclared training-split execution is frozen in `validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json`; continuation details and the discovered annotation-coverage limitation are in `docs/QRS_V2_HANDOFF.md`. Its PPV and F1 did not meet the declared development targets, so the internal holdout and locked evaluation remain closed.
+
 QTDB remains excluded because it contains excerpts from other databases and record-level MIT-BIH overlap has not been resolved. BUT PDB remains blocked because its canonical source and license are unresolved. INCART is reserved for a separately frozen long-duration development extension.
 
 ## Evaluation matcher

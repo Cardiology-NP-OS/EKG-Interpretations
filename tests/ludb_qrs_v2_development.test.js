@@ -9,6 +9,7 @@ const cohort = require("../validation/development/LUDB_QRS_V2_DEV_V1.json");
 const split = require("../evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json");
 const protocol = require("../evaluation/protocols/LUDB_QRS_V2_DEVELOPMENT_V1.json");
 const configuration = require("../evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json");
+const receipt = require("../validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json");
 
 let passed = 0;
 function test(name, fn) {
@@ -73,6 +74,27 @@ test("real-signal runner is hard-bound to train and records holdout non-use", ()
   assert.match(runner, /protocol\["internal_holdout_authorized"\] is False/);
   assert.match(runner, /"internalHoldoutAnnotationsParsedOrScored": False/);
   assert.doesNotMatch(runner, /add_argument\("--split"/);
+});
+
+test("initial LUDB train receipt is immutable fail-closed evidence", () => {
+  assert.strictEqual(receipt.protocol.id, protocol.protocol_id);
+  assert.strictEqual(receipt.protocol.predeclared_commit, "a216fa831f96f7539fe353adced6b633953f37e2");
+  assert.match(receipt.result_artifact.sha256, /^[a-f0-9]{64}$/);
+  assert.strictEqual(receipt.dataset.executed_split, "train");
+  assert.strictEqual(receipt.dataset.record_count, split.train_count);
+  assert.strictEqual(receipt.dataset.internal_holdout_record_count, split.validation_count);
+  assert.strictEqual(receipt.dataset.internal_holdout_annotations_parsed_or_scored, false);
+  assert.strictEqual(receipt.observed_development_metrics.reference_event_count, 1466);
+  assert.strictEqual(receipt.observed_development_metrics.matched_event_count, 1465);
+  assert.strictEqual(receipt.observed_development_metrics.false_positive_count, 332);
+  assert.strictEqual(receipt.observed_development_metrics.false_negative_count, 1);
+  assert.strictEqual(receipt.interpretation.development_targets_met, false);
+  assert.strictEqual(receipt.interpretation.holdout_gate_open, false);
+  assert.strictEqual(receipt.interpretation.locked_v2_gate_open, false);
+  assert.strictEqual(receipt.frozen_v1_preservation.locked_cohort_used_for_parameter_selection, false);
+  assert.strictEqual(receipt.authority.metrics, "NOT_REPORTABLE");
+  assert.strictEqual(receipt.authority.clinical_validity_inferred, false);
+  assert.strictEqual(receipt.locked_v2_readiness, "NOT_READY_FOR_LOCKED_V2_EVALUATION");
 });
 
 if (process.exitCode) process.exit(process.exitCode);
