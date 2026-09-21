@@ -1,0 +1,105 @@
+{
+  "schema": "ekg-qrs-v2-post-holdout-synthetic-characterization-fixtures-v1",
+  "fixture_set_id": "QRS-V2-POST-HOLDOUT-SYNTHETIC-CHARACTERIZATION-V1",
+  "version": "1.0.0",
+  "state": "FROZEN_KNOWN_LIMITATION_CHARACTERIZATION_ONLY",
+  "purpose": "REPRODUCE_GENERIC_ENGINEERING_MECHANISMS_WITHOUT_REUSING_SPENT_HOLDOUT_LABELS_OR_TUNING_THE_DETECTOR",
+  "lineage": {
+    "holdout_result_id": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+    "holdout_receipt": "validation/development/results/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1_RECEIPT.json",
+    "holdout_receipt_sha256": "da6a51e7cac19f8f4bdecf5d1c671c9578cb6b547f37acf4f50ec59cab985d7d",
+    "holdout_outcome": "HOLDOUT_ENGINEERING_TARGETS_NOT_MET",
+    "holdout_now_consumed": true,
+    "post_holdout_parameter_tuning_allowed": false
+  },
+  "frozen_candidate": {
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "detector_implementation_sha256": "da8dcab76e4bb43a69e5ec69cd7689a2b9bf49bddf25e9760be46ffbccbbc11b",
+    "multilead_implementation_sha256": "182af61463d4037ae2ac3a1456a65cb9713418018fbdb2ed751933ff27f725d9",
+    "configuration_sha256": "4ab92dfcc44d5348a7759bfd1e58cfe16cf2adbeb5ee982366f209070c66ec57",
+    "implementation_or_parameter_change": false
+  },
+  "generator": {
+    "implementation": "validation/development/qrs_v2_post_holdout_synthetic_corpus.js",
+    "base_generator": "validation/development/qrs_v2_synthetic_corpus.js",
+    "sample_rate_hz": 250,
+    "duration_ms": 8000,
+    "source": "TARGET_OWNED_DETERMINISTIC_SYNTHETIC_GENERATOR",
+    "real_signal_or_annotation_bytes_used": false,
+    "holdout_record_ids_or_sample_indices_used": false,
+    "locked_mitbih_signals_or_labels_used": false
+  },
+  "fixtures": [
+    {
+      "id": "TRANSIENT_SELECTED_LEAD_AMPLITUDE_COLLAPSE",
+      "mechanism": "globally higher-ranked lead contains one transient low-amplitude reference while a lower-ranked lead retains all reference events",
+      "reference_beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "leads": [
+        {
+          "lead_name": "I",
+          "beat_amplitudes": [1, 1, 0.12, 1, 1, 1, 1, 1, 1]
+        },
+        {
+          "lead_name": "V1",
+          "qrs_amplitude": 0.55
+        }
+      ],
+      "expected_frozen_candidate": {
+        "selected_lead": "I",
+        "matched": 8,
+        "false_positive": 0,
+        "false_negative": 1
+      },
+      "expected_alternate_lead_isolation": {
+        "lead_name": "V1",
+        "matched": 9,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    },
+    {
+      "id": "SELECTED_LEAD_LOCAL_TRANSIENT_FALSE_EVENT",
+      "mechanism": "globally higher-ranked lead contains one additional QRS-like local transient absent from the clean alternate lead and the synthetic reference list",
+      "reference_beats_ms": [600, 1400, 2200, 3000, 3800, 4600, 5400, 6200, 7000],
+      "leads": [
+        {
+          "lead_name": "V6",
+          "additional_qrs_like_transient_ms": 1800
+        },
+        {
+          "lead_name": "II"
+        }
+      ],
+      "expected_frozen_candidate": {
+        "selected_lead": "V6",
+        "matched": 9,
+        "false_positive": 1,
+        "false_negative": 0
+      },
+      "expected_alternate_lead_isolation": {
+        "lead_name": "II",
+        "matched": 9,
+        "false_positive": 0,
+        "false_negative": 0
+      }
+    }
+  ],
+  "interpretation": {
+    "current_candidate_pass_claimed": false,
+    "clinical_failure_mechanism_claimed": false,
+    "future_configuration_acceptance_defined": false,
+    "permitted_use": "DETERMINISTIC CHARACTERIZATION AND FUTURE OPEN-DEVELOPMENT REGRESSION DESIGN",
+    "prohibited_use": "POST_HOLDOUT_PARAMETER_SELECTION OR CLINICAL PERFORMANCE CLAIM"
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  }
+}

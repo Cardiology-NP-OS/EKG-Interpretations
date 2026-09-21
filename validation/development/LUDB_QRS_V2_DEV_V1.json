@@ -1,0 +1,104 @@
+{
+  "schema": "ekg-qrs-real-signal-development-cohort-v1",
+  "cohort_id": "LUDB-QRS-V2-DEV-V1",
+  "state": "FROZEN_BEFORE_TUNING_METRICS",
+  "dataset": {
+    "dataset_id": "ECG-DATASET-LUDB",
+    "name": "Lobachevsky University Electrocardiography Database",
+    "version": "1.0.1",
+    "canonical_source": "https://physionet.org/content/ludb/1.0.1/",
+    "version_doi": "10.13026/eegm-h675",
+    "access": "OPEN_ACCESS_SUBJECT_TO_LICENSE",
+    "license": "Open Data Commons Attribution License v1.0",
+    "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+    "license_review": {
+      "status": "INDEPENDENTLY_VERIFIED_FOR_NONCLINICAL_DEVELOPMENT_USE",
+      "reviewed_at": "2026-09-21",
+      "evidence_url": "https://physionet.org/content/ludb/1.0.1/",
+      "attribution_required": true,
+      "redistribution_in_repository": false
+    },
+    "record_count": 200,
+    "subject_count": 200,
+    "record_subject_relation": "ONE_RECORD_PER_SUBJECT",
+    "duration_seconds_per_record": 10,
+    "sample_rate_hz": 500,
+    "lead_count": 12,
+    "lead_names": ["i", "ii", "iii", "avr", "avl", "avf", "v1", "v2", "v3", "v4", "v5", "v6"],
+    "signal_format": "WFDB_FORMAT_16_INTERLEAVED",
+    "annotation_source": "CARDIOLOGIST_MANUAL_PER_LEAD_WAVE_BOUNDARIES_AND_PEAKS",
+    "qrs_reference_symbol": "N",
+    "qrs_reference_semantics": "PER_LEAD_MANUALLY_MARKED_QRS_PEAK",
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "source_identity": {
+    "download_endpoint": "https://physionet.org/content/ludb/get-zip/1.0.1/",
+    "downloaded_archive_sha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+    "source_sha256_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f",
+    "source_sha256_manifest_entries": 2805,
+    "source_files_verified": 2805,
+    "source_files_failed_verification": 0,
+    "records_file_sha256": "2a6ec024c409dfabe22b684e7e8f78011099f9e552c253c27de9cbec25630a5c",
+    "metadata_file_sha256": "dcd40141c6557af1fb413353b51c4ae979c7291a2e22a60377fe425e21f58a28",
+    "license_file_sha256": "86c0ad300f6d380591298bc03652e30b81f65954bbf22435812bcfd46812ab06",
+    "readme_file_sha256": "1cb77b27add858fc191ee1f512aebbcc6015a790165b8080dbf9526608379269",
+    "verification_command": "sha256sum -c SHA256SUMS.txt"
+  },
+  "split": {
+    "manifest": "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json",
+    "tuning_split": "train",
+    "tuning_record_count": 160,
+    "internal_holdout_split": "validation",
+    "internal_holdout_record_count": 40,
+    "patient_disjoint": true,
+    "holdout_annotations_observed_before_freeze": false
+  },
+  "relationship_to_locked_evaluation": {
+    "locked_protocol": "MITBIH-RPEAK-FULL-V1",
+    "locked_dataset": "MIT-BIH Arrhythmia Database 1.0.0",
+    "identity_namespace_disjoint": true,
+    "raw_numeric_record_tokens_may_collide": true,
+    "contains_locked_signal_bytes": false,
+    "contains_locked_annotations": false,
+    "contains_qtdb_or_other_mitbih_derived_excerpts": false,
+    "overlap_review_basis": "LUDB is a separately collected 2017-2018 cohort from Lobachevsky University and Nizhny Novgorod City Hospital No. 5; source identity and acquisition provenance are independent of MIT-BIH Arrhythmia Database.",
+    "prohibited_use": "LOCKED_MITBIH_PARAMETER_SELECTION_OR_CLINICAL_VALIDITY_CLAIM"
+  },
+  "declared_coverage": {
+    "source_documented": [
+      "cardiac pacing",
+      "bundle-branch conduction abnormalities",
+      "ventricular extrasystoles",
+      "sinus tachycardia",
+      "sinus bradycardia",
+      "abnormal rhythm",
+      "repolarization abnormalities",
+      "twelve-lead morphology variability"
+    ],
+    "not_established_from_source_metadata": [
+      "ambulatory noise bursts",
+      "long pauses",
+      "explicit QRS amplitude strata"
+    ]
+  },
+  "exclusions": [
+    "QTDB 1.0.0 because many records are excerpts from other databases and record-level MIT-BIH overlap has not been resolved",
+    "BUT PDB because canonical source identity and license are not established in accepted repository provenance",
+    "INCART 1.0.0 from this cohort version because it is reserved for a later independently frozen long-duration development extension"
+  ],
+  "reader": {
+    "package": "wfdb",
+    "version": "4.3.1",
+    "role": "VALIDATION_ONLY_SIGNAL_AND_ANNOTATION_READER"
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "clinical_validity_inferred": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  }
+}

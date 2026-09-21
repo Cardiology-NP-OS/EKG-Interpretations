@@ -1,0 +1,27 @@
+{
+  "schema": "ekg-rpeak-event-matcher-protocol-v2",
+  "protocol_id": "RPEAK-EVENT-MATCHER-V2",
+  "state": "FROZEN_ENGINEERING_MATCHER_SEMANTICS",
+  "implementation": "lib/event_matcher_v2.js::matchEventsV2",
+  "algorithm": "ordered-max-cardinality-minimum-absolute-error-v2",
+  "semantics": {
+    "ordering": "REFERENCE_AND_PREDICTION_EVENTS_SORTED_BY_SAMPLE_INDEX_WITH_INPUT_INDEX_TIEBREAK",
+    "primary_objective": "MAXIMIZE_ONE_TO_ONE_MATCH_COUNT_WITHIN_INCLUSIVE_TOLERANCE",
+    "secondary_objective": "MINIMIZE_TOTAL_ABSOLUTE_SAMPLE_ERROR_AMONG_ORDER_PRESERVING_MAXIMUM_CARDINALITY_ASSIGNMENTS",
+    "candidate_reuse": false,
+    "tolerance_boundary": "INCLUSIVE",
+    "deterministic_tie_priority": ["MATCH", "SKIP_PREDICTION", "SKIP_REFERENCE"],
+    "resource_boundary": "FAIL_CLOSED_WHEN_DYNAMIC_PROGRAMMING_MATRIX_EXCEEDS_EXPLICIT_MAXIMUM"
+  },
+  "historical_v1_policy": {
+    "rewrite_v1_metrics": false,
+    "v1_protocol": "MITBIH-RPEAK-FULL-V1",
+    "comparison_requires_separate_artifact": true
+  },
+  "tests": "tests/event_matcher_v2.test.js",
+  "authority": {
+    "project_gold": false,
+    "runtime_authority": false,
+    "clinical_validity_inferred": false
+  }
+}

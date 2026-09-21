@@ -1,0 +1,142 @@
+{
+  "schema": "ekg-ludb-qrs-v2-coverage-train-holdout-compact-comparison-v1",
+  "result_id": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+  "outcome": "HOLDOUT_ENGINEERING_TARGETS_NOT_MET",
+  "same_detector_configuration_evaluator_and_matcher": true,
+  "views": {
+    "frozen_open_train_annotation_observable": {
+      "record_count": 160,
+      "reference_event_count": 1466,
+      "predicted_event_count": 1466,
+      "matched_event_count": 1465,
+      "false_positive_count": 1,
+      "false_negative_count": 1,
+      "sensitivity": 0.9993178717598908,
+      "positive_predictive_value": 0.9993178717598908,
+      "f1": 0.9993178717598908,
+      "timing_mean_absolute_error_ms": 14.501023890784984,
+      "timing_median_absolute_error_ms": 4
+    },
+    "one_shot_holdout_annotation_observable": {
+      "record_count": 40,
+      "reference_event_count": 364,
+      "predicted_event_count": 365,
+      "matched_event_count": 363,
+      "false_positive_count": 2,
+      "false_negative_count": 1,
+      "sensitivity": 0.9972527472527473,
+      "positive_predictive_value": 0.9945205479452055,
+      "f1": 0.9958847736625515,
+      "timing_mean_absolute_error_ms": 18.429752066115704,
+      "timing_median_absolute_error_ms": 8
+    },
+    "holdout_minus_train": {
+      "sensitivity": -0.0020651245071435786,
+      "positive_predictive_value": -0.004797323814685339,
+      "f1": -0.003433098097339382,
+      "timing_mean_absolute_error_ms": 3.92872817533072,
+      "timing_median_absolute_error_ms": 4
+    }
+  },
+  "full_record_context": {
+    "frozen_open_train": {
+      "reference_event_count": 1466,
+      "predicted_event_count": 1797,
+      "matched_event_count": 1465,
+      "false_positive_count": 332,
+      "false_negative_count": 1,
+      "sensitivity": 0.9993178717598908,
+      "positive_predictive_value": 0.8152476349471341,
+      "f1": 0.8979466748391052
+    },
+    "one_shot_holdout": {
+      "reference_event_count": 364,
+      "predicted_event_count": 445,
+      "matched_event_count": 363,
+      "false_positive_count": 82,
+      "false_negative_count": 1,
+      "sensitivity": 0.9972527472527473,
+      "positive_predictive_value": 0.8157303370786517,
+      "f1": 0.8974042027194067
+    }
+  },
+  "coverage_effect": {
+    "frozen_open_train": {
+      "full_record_apparent_false_positive_count": 332,
+      "excluded_outside_annotation_coverage_count": 331,
+      "excluded_before_count": 167,
+      "excluded_after_count": 164,
+      "remaining_internal_false_positive_count": 1
+    },
+    "one_shot_holdout": {
+      "full_record_apparent_false_positive_count": 82,
+      "excluded_outside_annotation_coverage_count": 80,
+      "excluded_before_count": 41,
+      "excluded_after_count": 39,
+      "remaining_internal_false_positive_count": 2
+    }
+  },
+  "record_distribution_annotation_observable": {
+    "frozen_open_train": {
+      "sensitivity_median": 1,
+      "sensitivity_minimum": 0.9,
+      "positive_predictive_value_median": 1,
+      "positive_predictive_value_minimum": 0.875,
+      "f1_median": 1,
+      "f1_minimum": 0.9333333333333333
+    },
+    "one_shot_holdout": {
+      "sensitivity_median": 1,
+      "sensitivity_minimum": 0.875,
+      "positive_predictive_value_median": 1,
+      "positive_predictive_value_minimum": 0.8,
+      "f1_median": 1,
+      "f1_minimum": 0.888888888888889
+    }
+  },
+  "holdout_failure_summary": {
+    "aggregate_targets_met": true,
+    "catastrophic_record_count": 1,
+    "catastrophic_record_sensitivity": 0.875,
+    "catastrophic_record_false_negative_count": 1,
+    "catastrophic_failure_pattern": "Transient amplitude collapse on the globally selected lead; other leads retained larger local excursions.",
+    "internal_false_positive_record_count": 1,
+    "internal_false_positive_count": 2,
+    "internal_false_positive_patterns": [
+      "One lead-local transient with no nearby N source annotation on any lead.",
+      "One event annotated N on the other eleven leads but omitted from the selected lead annotation."
+    ],
+    "record_identities_and_sample_indices": "PRESENT_ONLY_IN_HASH_BOUND_OUTSIDE_GIT_ARTIFACTS"
+  },
+  "timing_interpretation": {
+    "full_record_and_annotation_observable_timing_are_identical_within_holdout": true,
+    "reason": "Edge exclusion did not change the matched pairs. Train-to-holdout timing differences reflect different frozen records, not an evaluator-semantic change.",
+    "clinical_timing_accuracy_claimed": false
+  },
+  "outside_git_artifacts": {
+    "record_level_result_sha256": "fc58c88267d84ed2f6f2ce0b4342d9684ca57ce138f63cab9f4bb94a8ed90ded",
+    "record_level_result_bytes": 81750,
+    "train_holdout_comparison_sha256": "9a80b76d0acea1277be8ddc9afd4560254d5b5bf5eafe71405ee869fda686ffe",
+    "train_holdout_comparison_bytes": 14366,
+    "repository_storage": false
+  },
+  "data_boundary": {
+    "holdout_was_unopened_before_execution": true,
+    "holdout_now_consumed": true,
+    "post_holdout_tuning_allowed": false,
+    "locked_mitbih_accessed": false
+  },
+  "interpretation": {
+    "candidate_passed_one_shot_holdout": false,
+    "clinical_accuracy_established": false,
+    "source_labels_are_project_gold": false,
+    "required_next_gate": "NEW_OPEN_DEVELOPMENT_CORPUS_AND_NEW_CONFIGURATION_ID"
+  },
+  "authority": {
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false
+  }
+}

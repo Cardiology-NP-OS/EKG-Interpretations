@@ -1,0 +1,63 @@
+{
+  "schema": "ekg-qrs-development-cohort-v1",
+  "cohort_id": "QRS-V2-SYNTHETIC-DEV-V1",
+  "state": "ACTIVE_SYNTHETIC_ENGINEERING_DEVELOPMENT_ONLY",
+  "version": "1.0.0",
+  "relationship_to_locked_evaluation": {
+    "locked_protocol": "MITBIH-RPEAK-FULL-V1",
+    "locked_dataset": "MIT-BIH Arrhythmia Database 1.0.0",
+    "contains_locked_record_ids": false,
+    "contains_locked_signal_bytes": false,
+    "contains_locked_annotations": false,
+    "permitted_use": "DETECTOR_IMPLEMENTATION_AND_SYNTHETIC_REGRESSION_DEVELOPMENT",
+    "prohibited_use": "CLINICAL_PERFORMANCE_OR_GENERALIZATION_CLAIM"
+  },
+  "source": {
+    "kind": "DETERMINISTIC_TARGET_OWNED_SYNTHETIC_GENERATOR",
+    "manifest": "evaluation/fixtures/QRS_V2_SYNTHETIC_REGRESSIONS.json",
+    "generator": "validation/development/qrs_v2_synthetic_corpus.js",
+    "annotation_source": "EXPLICIT_GENERATOR_EVENT_CENTERS",
+    "source_labels_are_project_gold": false,
+    "project_gold": false,
+    "license_boundary": "TARGET_OWNED_CODE_AND_SYNTHETIC_OUTPUT_NO_EXTERNAL_SIGNAL_OR_ANNOTATION_BYTES"
+  },
+  "inclusion_rule": "ALL_SINGLE_LEAD_FIXTURES_IN_QRS_V2_SYNTHETIC_REGRESSIONS_V1",
+  "exclusion_rule": "NO_REAL_PATIENT_DATA_AND_NO_MITBIH_RPEAK_FULL_V1_RECORDS_OR_LABELS",
+  "lead_selection_rule": "FIXTURE_DEFINED_SINGLE_LEAD; MULTILEAD_FIXTURES_USE UNSUPERVISED QUALITY RANKING",
+  "required_mechanisms": [
+    "low-amplitude QRS",
+    "high-amplitude P waves",
+    "tall T waves",
+    "paced rhythms",
+    "bundle-branch-like broad morphology",
+    "PVC-like ventricular ectopy",
+    "noise burst",
+    "baseline wander",
+    "long RR pause",
+    "rapid rhythm",
+    "morphology transition"
+  ],
+  "external_development_corpus_gate": {
+    "state": "BLOCKED_PENDING_DATASET_LICENSE_AND_SPLIT_REVIEW",
+    "reason": "Current registered non-MIT candidate datasets remain explicitly license-review-required in ECG_DATASET_REGISTRY.json.",
+    "must_not_use_until": [
+      "dataset terms independently verified",
+      "record/patient split and overlap review complete",
+      "exact version and file hashes frozen",
+      "annotation scope and lead-selection rules predeclared"
+    ],
+    "candidate_sources_not_yet_admitted": [
+      "LUDB 1.0.1",
+      "QTDB 1.0.0",
+      "St Petersburg INCART 1.0.0",
+      "BUT PDB"
+    ]
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "clinical_validity_inferred": false
+  }
+}

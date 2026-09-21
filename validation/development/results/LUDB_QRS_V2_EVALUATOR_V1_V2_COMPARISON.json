@@ -1,0 +1,151 @@
+{
+  "schema": "ekg-ludb-qrs-v2-compact-evaluator-comparison-v2",
+  "comparison_id": "LUDB-QRS-V2-EVALUATOR-V1-V2-COMPARISON",
+  "state": "FROZEN_AGGREGATE_COMPARISON_RECORD_LEVEL_ARTIFACT_OUTSIDE_GIT",
+  "protocol_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2",
+  "historical_result_id": "LUDB-QRS-V2-TRAIN-V1",
+  "coverage_aware_result_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2-TRAIN",
+  "same_detector_implementation_and_configuration": true,
+  "views": {
+    "historical_full_record": {
+      "reference_event_count": 1466,
+      "predicted_event_count": 1797,
+      "matched_event_count": 1465,
+      "false_positive_count": 332,
+      "false_negative_count": 1,
+      "sensitivity": 0.9993178717598908,
+      "positive_predictive_value": 0.8152476349471341,
+      "f1": 0.8979466748391052,
+      "timing_mean_absolute_error_ms": 14.501023890784984,
+      "timing_median_absolute_error_ms": 4
+    },
+    "annotation_observable": {
+      "reference_event_count": 1466,
+      "predicted_event_count": 1466,
+      "matched_event_count": 1465,
+      "false_positive_count": 1,
+      "false_negative_count": 1,
+      "sensitivity": 0.9993178717598908,
+      "positive_predictive_value": 0.9993178717598908,
+      "f1": 0.9993178717598908,
+      "timing_mean_absolute_error_ms": 14.501023890784984,
+      "timing_median_absolute_error_ms": 4
+    }
+  },
+  "metric_delta_annotation_observable_minus_historical": {
+    "sensitivity": 0,
+    "positive_predictive_value": 0.1840702368127567,
+    "f1": 0.10137119692078567,
+    "timing_mean_absolute_error_ms": 0,
+    "timing_median_absolute_error_ms": 0
+  },
+  "false_positive_decomposition": {
+    "historical_apparent_false_positive_count": 332,
+    "excluded_outside_annotation_coverage_count": 331,
+    "excluded_before_count": 167,
+    "excluded_after_count": 164,
+    "remaining_internal_false_positive_count": 1
+  },
+  "record_distribution": {
+    "historical": {
+      "sensitivity_minimum": 0.9,
+      "positive_predictive_value_median": 0.8181818181818182,
+      "positive_predictive_value_minimum": 0.5833333333333334,
+      "f1_median": 0.9,
+      "f1_minimum": 0.7368421052631579
+    },
+    "annotation_observable": {
+      "sensitivity_minimum": 0.9,
+      "positive_predictive_value_median": 1,
+      "positive_predictive_value_minimum": 0.875,
+      "f1_median": 1,
+      "f1_minimum": 0.9333333333333333
+    }
+  },
+  "metadata_subgroups": {
+    "cardiac_pacing": {
+      "record_count": 4,
+      "excluded_edge_detection_count": 8,
+      "observable_false_positive_count": 0,
+      "observable_false_negative_count": 0,
+      "observable_f1": 1
+    },
+    "bundle_branch": {
+      "record_count": 31,
+      "excluded_edge_detection_count": 63,
+      "observable_false_positive_count": 0,
+      "observable_false_negative_count": 1,
+      "observable_f1": 0.9981785063752276
+    },
+    "ventricular_extrasystole": {
+      "record_count": 5,
+      "excluded_edge_detection_count": 10,
+      "observable_false_positive_count": 0,
+      "observable_false_negative_count": 1,
+      "observable_f1": 0.9917355371900827
+    },
+    "sinus_tachycardia": {
+      "record_count": 2,
+      "excluded_edge_detection_count": 4,
+      "observable_false_positive_count": 0,
+      "observable_false_negative_count": 0,
+      "observable_f1": 1
+    },
+    "sinus_bradycardia": {
+      "record_count": 19,
+      "excluded_edge_detection_count": 41,
+      "observable_false_positive_count": 1,
+      "observable_false_negative_count": 0,
+      "observable_f1": 0.9961685823754789
+    }
+  },
+  "selected_lead_distribution": {
+    "avf": 10,
+    "avl": 14,
+    "avr": 9,
+    "i": 11,
+    "ii": 1,
+    "iii": 3,
+    "v1": 10,
+    "v2": 26,
+    "v3": 17,
+    "v4": 22,
+    "v5": 25,
+    "v6": 12
+  },
+  "failure_pattern_summary": {
+    "records_with_observable_error": 2,
+    "records_with_internal_false_positive": 1,
+    "records_with_false_negative": 1,
+    "catastrophic_records": 0,
+    "lead_pattern": "The single FN occurred on selected V3 and the single internal FP on selected V5; two errors are insufficient to establish a lead-selection pattern.",
+    "morphology_metadata_pattern": "The FN record carries overlapping bundle-branch and ventricular-extrasystole metadata; the FP record carries sinus-bradycardia metadata. Counts are descriptive only and do not establish causality.",
+    "record_identities": "BOUND_IN_THE_OUTSIDE_GIT_COMPARISON_ARTIFACT"
+  },
+  "outside_git_comparison_artifact": {
+    "filename": "ludb-qrs-v2-evaluator-v1-v2-comparison.json",
+    "bytes": 12236,
+    "sha256": "d2c7e5bb03fb46ae0728b59c11c4bbf188a66d98bc7bf1f63b6e499d5cc3b7c4",
+    "contains_worst_record_identities_and_per_record_accounting": true
+  },
+  "interpretation": {
+    "timing_changed_only_due_to_scoring_scope": false,
+    "timing_unchanged_because_matched_pairs_are_identical": true,
+    "detector_tuning_justified_now": false,
+    "clinical_accuracy_established": false
+  },
+  "development_data_boundary": {
+    "internal_ludb_holdout_annotations_parsed_or_scored": false,
+    "locked_mitbih_signals_or_labels_used": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false
+  }
+}

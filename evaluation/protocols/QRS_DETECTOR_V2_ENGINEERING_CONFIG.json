@@ -1,0 +1,41 @@
+{
+  "schema": "ekg-qrs-detector-engineering-configuration-v1",
+  "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+  "state": "FROZEN_FOR_SYNTHETIC_DEVELOPMENT_ONLY_NOT_LOCKED_EVALUATION",
+  "algorithm": "target-owned-adaptive-qrs-energy-v2",
+  "detector": {
+    "bandpassLowHz": 5,
+    "bandpassHighHz": 18,
+    "integrationWindowMs": 96,
+    "candidateSpacingMs": 48,
+    "bootstrapWindowMs": 8000,
+    "refractoryMs": 200,
+    "refinementWindowBeforeMs": 96,
+    "refinementWindowAfterMs": 64,
+    "primaryThresholdWeight": 0.25,
+    "secondaryThresholdWeight": 0.03,
+    "signalAdaptationRate": 0.125,
+    "noiseAdaptationRate": 0.125,
+    "adaptationClampFactor": 3,
+    "searchbackRrFactor": 1.66,
+    "searchbackMinHistory": 2,
+    "searchbackHistoryBeats": 8,
+    "tWaveWindowStartMs": 180,
+    "tWaveWindowEndMs": 400,
+    "tWaveSlopeRatio": 0.55,
+    "minQrsWidthMs": 12,
+    "maxQrsWidthMs": 220,
+    "minNormalizedSlopePerMs": 0.04,
+    "pacerMaxWidthMs": 10,
+    "pacerAssociationMs": 100
+  },
+  "development_cohort": "validation/development/QRS_V2_SYNTHETIC_DEV_V1.json",
+  "locked_evaluation_authorized": false,
+  "change_policy": "Any parameter change requires a new configuration_id and a new development result; the locked MIT-BIH cohort must not be consulted during selection.",
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "clinical_validity_inferred": false,
+    "metrics": "NOT_REPORTABLE"
+  }
+}

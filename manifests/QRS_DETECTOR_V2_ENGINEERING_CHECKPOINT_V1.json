@@ -1,0 +1,133 @@
+{
+  "schema": "ekg-qrs-detector-v2-engineering-checkpoint-v1",
+  "checkpoint_id": "QRS-DETECTOR-V2-ENGINEERING-2026-09-21",
+  "repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "working_branch": "eng/rpeak-qrs-detector-v2",
+  "base": {
+    "commit": "55792ee32b90542184d530937865f29dfe79149e",
+    "tree": "709b9f41f7e7c639516a6ee3fe308275635e7b83"
+  },
+  "detector_code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "configuration_state": "FROZEN_FOR_SYNTHETIC_DEVELOPMENT_ONLY_NOT_LOCKED_EVALUATION"
+  },
+  "review": {
+    "pull_request": 21,
+    "url": "https://github.com/Cardiology-NP-OS/EKG-Interpretations/pull/21",
+    "state": "DRAFT",
+    "reason": "Real-signal development evidence remains blocked pending dataset license, provenance, and split review."
+  },
+  "verification": {
+    "github_actions": {
+      "run_id": 35586309416,
+      "run_number": 684,
+      "url": "https://github.com/Cardiology-NP-OS/EKG-Interpretations/actions/runs/35586309416",
+      "head_sha": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 106290363415,
+          "name": "Quarantined V12.1 candidate validation",
+          "conclusion": "success"
+        },
+        {
+          "id": 106290363648,
+          "name": "Synthetic contract CI (non-clinical)",
+          "conclusion": "success"
+        },
+        {
+          "id": 106290363724,
+          "name": "Bounded JPEG/PDF decoder and canonical intake",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "local_commands": [
+      {
+        "command": "npm run test:qrs-v2",
+        "result": "38/38 focused assertions passed: 25 detector/lead/pipeline, 9 matcher, 4 preservation/configuration/data-separation/checkpoint"
+      },
+      {
+        "command": "npm test",
+        "result": "exit 0; 74 parsed single-line suite summaries reported 931/931",
+        "log_sha256": "bfbbf64eb13a2b20bb28606d6dd85be61506ac141050bc188c89fb3121590de6"
+      },
+      {
+        "command": "npm run gate:ci",
+        "result": "30/30 gate checks passed; evidence tier synthetic-contract-ci-only; clinical_data_used=false; clinical_accuracy_claimed=false; approved adjudicated gold=0",
+        "log_sha256": "a243e69e7032ef85fb749733ac9498d846da427e070847912fc2b33ad387ba64"
+      },
+      {
+        "command": "node validation/development/run_qrs_v2_synthetic_dev.js",
+        "result": "deterministic synthetic development result emitted",
+        "result_sha256": "b9e1bdea8ede6946207b74ebc5651b82e4c190ae7db4093fc46d57283b69165d"
+      }
+    ]
+  },
+  "development_evidence": {
+    "cohort_id": "QRS-V2-SYNTHETIC-DEV-V1",
+    "cohort_version": "1.0.0",
+    "fixture_set_id": "QRS-V2-SYNTHETIC-REGRESSIONS-V1",
+    "matcher_protocol": "RPEAK-EVENT-MATCHER-V2",
+    "synthetic_only": true,
+    "reference_events": 179,
+    "predicted_events": 179,
+    "matched_events": 179,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "sensitivity": 1,
+    "positive_predictive_value": 1,
+    "f1": 1,
+    "timing_mean_absolute_error_ms": 0,
+    "timing_median_absolute_error_ms": 0,
+    "worst_record_sensitivity": 1,
+    "worst_record_positive_predictive_value": 1,
+    "worst_record_f1": 1,
+    "record_sensitivity_p05": 1,
+    "record_positive_predictive_value_p05": 1,
+    "record_f1_p05": 1,
+    "interpretation_boundary": "Zero timing error is agreement with deterministic generator event centers. It is not evidence of timing accuracy, clinical accuracy, or generalization on real ECG."
+  },
+  "frozen_v1_preservation": {
+    "protocol": "MITBIH-RPEAK-FULL-V1",
+    "locked_cohort_used_for_v2_parameter_selection": false,
+    "locked_v2_evaluation_executed": false,
+    "historical_full_result_inspection_only": true,
+    "historical_full_result_artifact_sha256": "48bcf13e9f3ba710e61916866bbb4a535fe1475e9529422b49b05c8fecaa0479",
+    "byte_guards": {
+      "lib/signal_measurement_contract.js": "78a20eb8682883c8b91efeb4a26d920981d2d7d8d935d89122f77bf2d634592a",
+      "validation/clinical_accuracy/MITBIH_RPEAK_FULL_V1.json": "6af59c2cebd1899ef12e493e0e5ec76e19af0c53743f1d490c485fc54caeb826",
+      "validation/clinical_accuracy/results/MITBIH_RPEAK_FULL_V1_RECEIPT.json": "08dc1f4be4b51a05b29e4c22791ed0c9cd7e4d6cb1d138f143a7d23c4ff6c84a",
+      "validation/clinical_accuracy/run_mitbih_rpeak_full.py": "3c756340e54e013e5a4a0698c5f87a559d662783a5b4f6a8612c204f94c0f9eb",
+      "validation/clinical_accuracy/run_target_rpeak.js": "468e7618f011e19ea5c168bcc525b5c677fef8d036dbc6301abd27873a39e95b"
+    }
+  },
+  "real_signal_development_gate": {
+    "state": "BLOCKED_PENDING_DATASET_LICENSE_PROVENANCE_AND_SPLIT_REVIEW",
+    "candidate_sources_not_admitted": [
+      "LUDB 1.0.1",
+      "QTDB 1.0.0",
+      "St Petersburg INCART 1.0.0",
+      "BUT PDB"
+    ],
+    "required_before_use": [
+      "independent dataset terms verification",
+      "record and patient overlap review against locked evaluation",
+      "exact version and file hash freeze",
+      "annotation scope and lead-selection predeclaration"
+    ]
+  },
+  "governance": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "clinical_validity_inferred": false,
+    "project_gold_created": false
+  },
+  "locked_v2_readiness": "NOT_READY_FOR_LOCKED_V2_EVALUATION",
+  "next_action": "Complete license, provenance, patient/record overlap, and split review; then freeze one version-pinned non-MIT real-signal development cohort before any locked V2 protocol is predeclared."
+}

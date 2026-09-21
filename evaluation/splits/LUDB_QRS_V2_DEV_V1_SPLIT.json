@@ -1,0 +1,48 @@
+{
+  "schema": "ekg-qrs-development-split-v1",
+  "split_id": "LUDB-QRS-V2-DEV-V1-SPLIT",
+  "dataset_id": "ECG-DATASET-LUDB",
+  "dataset_version": "1.0.1",
+  "records_source": "VERSION_PINNED_PHYSIONET_RECORDS_FILE",
+  "records_file_sha256": "2a6ec024c409dfabe22b684e7e8f78011099f9e552c253c27de9cbec25630a5c",
+  "record_namespace": "ludb/1.0.1/data/{sourceRecord}",
+  "patient_namespace": "ludb/1.0.1/subject/{sourceRecord}",
+  "split_method": "LEXICOGRAPHIC_SHA256_RANK_OF_UTF8_LUDB-1.0.1:{sourceRecord}",
+  "base_rule": "FIRST_160_HASH_RANKED_RECORDS_TRAIN_REMAINDER_VALIDATION",
+  "pre_metric_inspection_adjustment": {
+    "reason": "Record 1 annotation encoding was inspected before split freeze and therefore cannot be represented as unseen holdout data.",
+    "forced_train_source_records": ["1"],
+    "boundary_swap_to_validation_source_records": ["8"]
+  },
+  "train_count": 160,
+  "validation_count": 40,
+  "validation_source_records": [
+    "8", "20", "24", "29", "36", "37", "39", "41", "45", "46",
+    "54", "56", "58", "64", "66", "74", "76", "77", "90", "92",
+    "93", "95", "102", "112", "113", "117", "118", "125", "127", "129",
+    "140", "141", "144", "159", "166", "185", "186", "188", "190", "199"
+  ],
+  "train_selection_rule": "ALL_200_SOURCE_RECORDS_EXCEPT_validation_source_records",
+  "patient_group_rule": "ONE SOURCE RECORD PER SUBJECT; NAMESPACED PATIENT ID OCCURS IN EXACTLY ONE SPLIT",
+  "metadata_coverage": {
+    "train": {
+      "cardiac_pacing_records": 4,
+      "bundle_branch_records": 31,
+      "ventricular_extrasystole_records": 5,
+      "sinus_tachycardia_records": 2,
+      "sinus_bradycardia_records": 19
+    },
+    "validation": {
+      "cardiac_pacing_records": 6,
+      "bundle_branch_records": 12,
+      "ventricular_extrasystole_records": 2,
+      "sinus_tachycardia_records": 2,
+      "sinus_bradycardia_records": 6
+    }
+  },
+  "validation_access_policy": "DO_NOT_PARSE_OR_SCORE_VALIDATION_ANNOTATIONS_UNTIL_DETECTOR_CONFIGURATION_IS_FROZEN_AFTER_TRAIN_SPLIT_DEVELOPMENT",
+  "sourceLabelsAreProjectGold": false,
+  "projectGold": false,
+  "runtimeAuthority": false,
+  "clinicalValidityInferred": false
+}

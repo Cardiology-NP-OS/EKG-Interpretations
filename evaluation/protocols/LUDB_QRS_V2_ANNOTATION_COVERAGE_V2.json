@@ -1,0 +1,165 @@
+{
+  "schema": "ekg-qrs-real-signal-annotation-coverage-development-protocol-v2",
+  "protocol_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2",
+  "state": "PREDECLARED_BEFORE_ANNOTATION_COVERAGE_AGGREGATE_OBSERVATION",
+  "purpose": "NONCLINICAL_EVALUATOR_BOUNDARY_REPAIR_WITH_UNCHANGED_DETECTOR",
+  "historical_relationship": {
+    "historical_protocol_id": "LUDB-QRS-V2-DEVELOPMENT-V1",
+    "historical_result_id": "LUDB-QRS-V2-TRAIN-V1",
+    "historical_receipt": "validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json",
+    "historical_receipt_sha256": "34738b112f033a9cb699afc1ea840c89ef79f5e0a4d47c6c2b0a02aa5bb58daf",
+    "rewrite_or_supersede_historical_result": false,
+    "required_reproduction": "THE FULL_RECORD VIEW MUST EXACTLY REPRODUCE THE HISTORICAL AGGREGATE BEFORE THE NEW VIEW IS ACCEPTED"
+  },
+  "detector_code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "entrypoint": "lib/qrs_multilead_v2.js::detectCandidateRPeaksMultiLeadV2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "configuration": "evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json",
+    "detector_parameter_or_implementation_change_from_historical_result": false
+  },
+  "dataset": {
+    "cohort_id": "LUDB-QRS-V2-DEV-V1",
+    "cohort": "validation/development/LUDB_QRS_V2_DEV_V1.json",
+    "dataset_id": "ECG-DATASET-LUDB",
+    "version": "1.0.1",
+    "source_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f"
+  },
+  "split_manifest": "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json",
+  "split_id": "LUDB-QRS-V2-DEV-V1-SPLIT",
+  "executed_split": "train",
+  "executed_record_count": 160,
+  "internal_holdout_split": "validation",
+  "internal_holdout_record_count": 40,
+  "internal_holdout_authorized": false,
+  "record_inclusion_rule": "ALL AND ONLY RECORDS ASSIGNED TO train BY THE EXISTING FROZEN SPLIT MANIFEST",
+  "record_exclusion_rule": "ALL validation RECORDS AND ANY RECORD FAILING SOURCE HASH OR CONTRACT VERIFICATION",
+  "lead_selection_rule": "UNCHANGED HISTORICAL DETECTOR SELECTS THE HIGHEST DETERMINISTIC UNSUPERVISED ENGINEERING_QUALITY_SCORE LEAD WITH FAILOVER",
+  "reference_rule": "AFTER LEAD SELECTION, USE ONLY SYMBOL N FROM THAT SELECTED LEAD'S CARDIOLOGIST MANUAL ANNOTATION FILE",
+  "evaluator": {
+    "algorithm": "closed-first-to-last-reference-with-boundary-rescue-v2",
+    "implementation": "lib/annotation_coverage_evaluator_v2.js::scoreAnnotationObservableInterval",
+    "target_runner": "validation/development/run_target_qrs_v2_coverage_v2.js",
+    "cohort_runner": "validation/development/run_ludb_qrs_v2_coverage_v2_dev.py",
+    "annotation_observable_interval": "CLOSED INTERVAL FROM THE FIRST SELECTED-LEAD N REFERENCE SAMPLE THROUGH THE LAST SELECTED-LEAD N REFERENCE SAMPLE",
+    "start_boundary": "INCLUSIVE",
+    "end_boundary": "INCLUSIVE",
+    "prediction_exactly_on_either_boundary": "INCLUDED",
+    "prediction_before_first_reference": "EXCLUDED FROM FALSE_POSITIVE ACCOUNTING UNLESS MATCHED TO THE FIRST REFERENCE WITHIN INCLUSIVE MATCHER TOLERANCE",
+    "prediction_after_last_reference": "EXCLUDED FROM FALSE_POSITIVE ACCOUNTING UNLESS MATCHED TO THE LAST REFERENCE WITHIN INCLUSIVE MATCHER TOLERANCE",
+    "matcher_tolerance_interaction": "MATCHING MAY RESCUE A PREDICTION OUTSIDE THE CLOSED CORE INTERVAL ONLY WHEN IT IS WITHIN THE INCLUSIVE TOLERANCE OF A BOUNDARY REFERENCE; AN UNMATCHED OUTSIDE PREDICTION REMAINS EXCLUDED",
+    "reference_at_either_boundary": "INCLUDED",
+    "multiple_predictions_near_boundary": "ORDERED MAXIMUM_CARDINALITY MINIMUM_ERROR MATCHING SELECTS AT MOST ONE; ANY UNMATCHED INSIDE PREDICTION IS AN INTERNAL FP AND ANY UNMATCHED OUTSIDE PREDICTION IS EXCLUDED",
+    "empty_annotations": "FAIL_CLOSED",
+    "malformed_or_nonmonotonic_annotations": "FAIL_CLOSED",
+    "duplicate_annotations": "FAIL_CLOSED",
+    "single_reference_annotation": "FAIL_CLOSED_BECAUSE_FIRST_TO_LAST_CANNOT_ESTABLISH_AN_INTERVAL",
+    "detector_output_mutation": "PROHIBITED"
+  },
+  "matching": {
+    "protocol": "RPEAK-EVENT-MATCHER-V2",
+    "entrypoint": "lib/event_matcher_v2.js::matchEventsV2",
+    "tolerance_ms": 100,
+    "tolerance_boundary": "INCLUSIVE",
+    "assignment": "ORDERED_MAXIMUM_CARDINALITY_THEN_MINIMUM_TOTAL_ABSOLUTE_ERROR",
+    "candidate_reuse": false
+  },
+  "required_accounting": {
+    "full_record_view": [
+      "predicted_event_count",
+      "matched_event_count",
+      "false_positive_count",
+      "false_negative_count",
+      "sensitivity",
+      "positive_predictive_value",
+      "f1",
+      "timing_mean_absolute_error_ms",
+      "timing_median_absolute_error_ms"
+    ],
+    "annotation_observable_view": [
+      "reference_event_count",
+      "predicted_event_count",
+      "matched_event_count",
+      "false_positive_count",
+      "false_negative_count",
+      "sensitivity",
+      "positive_predictive_value",
+      "f1",
+      "timing_mean_absolute_error_ms",
+      "timing_median_absolute_error_ms"
+    ],
+    "coverage_decomposition": [
+      "excluded_before_count",
+      "excluded_after_count",
+      "excluded_edge_detection_count",
+      "boundary_rescue_before_count",
+      "boundary_rescue_after_count",
+      "remaining_internal_false_positive_count",
+      "coverage_fraction"
+    ],
+    "distributions": [
+      "record_median",
+      "record_minimum",
+      "record_fifth_percentile",
+      "record_ninety_fifth_percentile",
+      "record_maximum"
+    ],
+    "per_record": "FULL ACCOUNTING IS REQUIRED IN THE LOCAL OUTSIDE_GIT RESULT TO DISTINGUISH EDGE EXCLUSIONS FROM INTERNAL FALSE POSITIVES",
+    "comparison": "A DISTINCT LOCAL SIDE_BY_SIDE ARTIFACT MUST COMPARE THE IMMUTABLE HISTORICAL FULL_RECORD RESULT WITH THIS ANNOTATION_OBSERVABLE RESULT"
+  },
+  "development_criteria": {
+    "micro_sensitivity_minimum": 0.99,
+    "micro_positive_predictive_value_minimum": 0.99,
+    "micro_f1_minimum": 0.99,
+    "catastrophic_record_sensitivity_floor": 0.9,
+    "catastrophic_definition": "ANNOTATION_OBSERVABLE RECORD SENSITIVITY STRICTLY BELOW 0.9",
+    "interpretation": "ENGINEERING_TARGETS_ONLY_NOT_CLINICAL_ACCEPTANCE_THRESHOLDS"
+  },
+  "frozen_file_identities": {
+    "lib/qrs_detector_v2.js": "da8dcab76e4bb43a69e5ec69cd7689a2b9bf49bddf25e9760be46ffbccbbc11b",
+    "lib/qrs_multilead_v2.js": "182af61463d4037ae2ac3a1456a65cb9713418018fbdb2ed751933ff27f725d9",
+    "lib/event_matcher_v2.js": "0bfe788815dec1edf14ea07ed0ea7e23605f692272bcc434e6570680c0319e83",
+    "lib/annotation_coverage_evaluator_v2.js": "43b1efb6423f63ea17aa064817206c9012e6a9bdd49217aca99967bccc7bd70e",
+    "evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json": "4ab92dfcc44d5348a7759bfd1e58cfe16cf2adbeb5ee982366f209070c66ec57",
+    "evaluation/protocols/RPEAK_EVENT_MATCHER_V2.json": "a4bc06e874f29731f2069b9018f7c1acbb462e438d55d2e42a6c17aebe1a1073",
+    "validation/development/LUDB_QRS_V2_DEV_V1.json": "6af21931ef1ae5ef25d787d5fa5dd1e572d8dfbd177f00b3de2accc865857a78",
+    "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json": "d690c12d4e17bfbb5a350def5b9f57b1146f93c1ab9ff3156be3682eb572ae2f",
+    "validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json": "34738b112f033a9cb699afc1ea840c89ef79f5e0a4d47c6c2b0a02aa5bb58daf",
+    "validation/development/run_target_qrs_v2_coverage_v2.js": "0cd23cc830f22099708e9767925a5ad17180bf18d70e14e6df5440a87f79f474",
+    "validation/development/run_ludb_qrs_v2_coverage_v2_dev.py": "ce6c9e0cda9451d08152905161c620eb19e821f5d56b1f96cf0ff929c8941f1f"
+  },
+  "change_policy": {
+    "detector_or_configuration_change": "PROHIBITED_IN_THIS_EVALUATOR_REPAIR",
+    "evaluator_change_after_aggregate_observation": "REQUIRES_NEW_PROTOCOL_VERSION_AND_NEW_RESULT_IDENTITY",
+    "holdout_access": "PROHIBITED",
+    "locked_mitbih_access": "PROHIBITED_FOR_EVALUATOR_OR_DETECTOR_SELECTION",
+    "historical_receipt_change": "PROHIBITED",
+    "locked_v2_evaluation": "NOT_AUTHORIZED"
+  },
+  "result_storage": {
+    "record_level_result": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT",
+    "record_level_comparison": "LOCAL_VALIDATION_ARTIFACT_OUTSIDE_GIT",
+    "compact_receipt": "COMMITTED_ONLY_AFTER_EXECUTION_WITH ARTIFACT HASHES AND AGGREGATE ACCOUNTING"
+  },
+  "limitations": [
+    "The interval is inferred from the first and last selected-lead N annotations; it does not prove that every sample inside that interval was exhaustively annotated.",
+    "An outside prediction matched to a boundary reference is counted to avoid converting permitted timing error into a false negative; unmatched outside predictions remain unscored.",
+    "LUDB records are ten-second twelve-lead ECGs and do not establish long-duration ambulatory performance.",
+    "Per-lead source annotations are external labels and are not project clinical gold.",
+    "Metadata phenotype subgroups are descriptive, may overlap, and do not establish causal failure mechanisms.",
+    "Metrics are nonreportable development evidence and do not establish clinical validity."
+  ],
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "locked_v2_readiness": "NOT_READY_FOR_LOCKED_V2_EVALUATION"
+}
