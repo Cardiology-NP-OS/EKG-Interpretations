@@ -2,7 +2,7 @@
 
 Canonical governed ECG engineering, research-evaluation, provenance, and donor-integration subsystem for the clinician-facing Cardiology OS.
 
-Read [AGENTS.md](AGENTS.md) for all ten inline product invariants and repository guardrails. Canonical policy: [PRODUCT_INVARIANTS.md](https://github.com/Cardiology-NP-OS/cardiology-np-build/blob/main/PRODUCT_INVARIANTS.md); sibling checkout: [../cardiology-np-build/PRODUCT_INVARIANTS.md](../cardiology-np-build/PRODUCT_INVARIANTS.md).
+Read [AGENTS.md](AGENTS.md) for all ten inline product invariants and repository guardrails. Canonical policy: [PRODUCT_INVARIANTS.md](https://github.com/Cardiology-NP-OS/cardiology-np-build/blob/main/PRODUCT_INVARIANTS.md) and [PRODUCT_WORKFLOW.md](https://github.com/Cardiology-NP-OS/cardiology-np-build/blob/main/PRODUCT_WORKFLOW.md); sibling checkout: [../cardiology-np-build/PRODUCT_INVARIANTS.md](../cardiology-np-build/PRODUCT_INVARIANTS.md).
 
 **Maturity and manifest posture:** this is quarantined engineering infrastructure, not a clinically active specialist. There is no root module.json; that is a manifest-standardisation gap, not implicit safety permission. `manifests/V12_RECOVERED_BASELINE.json` declares `clinical_accuracy_claimed: false`; `manifests/PRECLINICAL_VALIDATION_CHECKPOINT_V1.json` and the clinical controls preserve the inactive/nonreportable state below. Historical readiness language is not permission to repeat a spent evaluation. Real submissions can contain PHI; the fixture-based pipeline does not establish the production vault, privacy, retention/deletion or deployment security guarantees.
 
@@ -120,6 +120,8 @@ Do not commit PHI, restricted raw datasets, credentials, or unlicensed weights. 
 `SOURCE LABELS != PROJECT GOLD` and `MODEL PREDICTIONS != PROJECT GOLD`.
 
 ## Next unfinished product work
+
+The source/review-bound ECG contribution must support one integrated complex-patient picture with independent clinician six-axis scoring. Capability comparisons are per intended use, not blanket parity; workflow baseline, frozen targets and per-task p50/p95 remain unmeasured here and do not establish clinical accuracy. Quick ECG capture/retake and Cardiac Reference/Pocket requirements preserve quarantine. Dictation-first input and accurate unsigned procedure/post-op notes are product requirements, not an EKG UI or report-authority grant.
 
 Prioritise the canonical photo/PDF workflow over mechanically advancing the donor queue: real-image paired-reference validation with separately proven lead/calibration evidence, clinician correction/review UI, and evidence-backed interpretation/reporting remain unfinished. The opt-in strict trace/uncertainty path is documented in [docs/IMAGE_DECODER_DEPENDENCIES.md](docs/IMAGE_DECODER_DEPENDENCIES.md); it does not validate arbitrary photographs. Native decoder isolation, access control, PHI retention/deletion and binary distribution review remain deployment prerequisites. Any new confirmatory study requires a separately authorised frozen protocol and fresh protected data, not spent holdout reuse.
 
