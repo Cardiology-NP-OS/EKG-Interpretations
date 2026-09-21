@@ -1,0 +1,182 @@
+{
+  "schema": "ekg-qrs-real-signal-annotation-coverage-holdout-protocol-v1",
+  "protocol_id": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+  "state": "PREDECLARED_BEFORE_FIRST_HOLDOUT_ANNOTATION_PARSE_OR_SCORE",
+  "purpose": "ONE_SHOT_NONCLINICAL_INTERNAL_HOLDOUT_EVALUATION_OF_FROZEN_DETECTOR_AND_EVALUATOR",
+  "candidate_basis": {
+    "branch_head_before_predeclaration": "79ef66e6c8836896cfa35f95ade864487608ffd4",
+    "branch_tree_before_predeclaration": "434e4a773c2b44d3e3c99e7a11a2f941710381a8",
+    "exact_head_ci_run_id": 35599980833,
+    "exact_head_ci_conclusion": "success",
+    "train_result_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2-TRAIN",
+    "train_result_receipt": "validation/development/results/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2_TRAIN_RECEIPT.json",
+    "train_aggregate_targets_met": true,
+    "train_catastrophic_record_count": 0,
+    "known_train_internal_false_positive_count": 1,
+    "known_train_false_negative_count": 1
+  },
+  "prior_holdout_nonuse_proof": {
+    "cohort_manifest_field": "validation/development/LUDB_QRS_V2_DEV_V1.json::split.holdout_annotations_observed_before_freeze=false",
+    "initial_train_receipt_field": "validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json::dataset.internal_holdout_annotations_parsed_or_scored=false",
+    "coverage_train_receipt_field": "validation/development/results/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2_TRAIN_RECEIPT.json::dataset.internal_holdout_annotations_parsed_or_scored=false",
+    "runner_history": "ALL PRIOR LUDB COHORT RUNNERS WERE HARD_BOUND TO train AND EXPOSED NO SPLIT OVERRIDE",
+    "source_hash_verification_distinction": "WHOLE_ARCHIVE CRYPTOGRAPHIC BYTE VERIFICATION OCCURRED; NO HOLDOUT WFDB ANNOTATION LOADER CALL, SEMANTIC PARSE, SCORE, OR PARAMETER SELECTION OCCURRED",
+    "assertion": "THE 40 validation ANNOTATION SETS ARE UNOBSERVED FOR SEMANTIC EVALUATION BEFORE THIS PROTOCOL"
+  },
+  "detector_code_under_test": {
+    "commit": "6f3f6f9517acb86d3024042aeecca4698872ed86",
+    "tree": "9f806f881e2c592215ae1715c5fc5ce9deff1fc3",
+    "algorithm": "target-owned-adaptive-qrs-energy-v2",
+    "entrypoint": "lib/qrs_multilead_v2.js::detectCandidateRPeaksMultiLeadV2",
+    "configuration_id": "QRS-DETECTOR-V2-SYNTHETIC-DEV-CONFIG-V1",
+    "configuration": "evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json",
+    "implementation_or_parameter_change_after_train_result": false,
+    "state": "FROZEN_FOR_ONE_SHOT_INTERNAL_HOLDOUT_NONCLINICAL_ENGINEERING_EVALUATION"
+  },
+  "evaluator": {
+    "protocol_id": "LUDB-QRS-V2-ANNOTATION-COVERAGE-V2",
+    "protocol": "evaluation/protocols/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2.json",
+    "algorithm": "closed-first-to-last-reference-with-boundary-rescue-v2",
+    "implementation": "lib/annotation_coverage_evaluator_v2.js::scoreAnnotationObservableInterval",
+    "target_runner": "validation/development/run_target_qrs_v2_coverage_v2_holdout.js",
+    "cohort_runner": "validation/development/run_ludb_qrs_v2_coverage_v2_holdout.py",
+    "semantics_changed_after_train_result": false,
+    "primary_scoring_view": "ANNOTATION_OBSERVABLE",
+    "full_record_view": "RETAINED_AS CONTEXT WITH EDGE_DETECTION DECOMPOSITION"
+  },
+  "matching": {
+    "protocol": "RPEAK-EVENT-MATCHER-V2",
+    "entrypoint": "lib/event_matcher_v2.js::matchEventsV2",
+    "tolerance_ms": 100,
+    "tolerance_boundary": "INCLUSIVE",
+    "assignment": "ORDERED_MAXIMUM_CARDINALITY_THEN_MINIMUM_TOTAL_ABSOLUTE_ERROR",
+    "candidate_reuse": false,
+    "semantics_changed_after_train_result": false
+  },
+  "dataset": {
+    "cohort_id": "LUDB-QRS-V2-DEV-V1",
+    "cohort": "validation/development/LUDB_QRS_V2_DEV_V1.json",
+    "dataset_id": "ECG-DATASET-LUDB",
+    "version": "1.0.1",
+    "source_manifest_sha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f"
+  },
+  "split_manifest": "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json",
+  "split_id": "LUDB-QRS-V2-DEV-V1-SPLIT",
+  "executed_split": "validation",
+  "executed_record_count": 40,
+  "holdout_authorized": true,
+  "record_inclusion_rule": "ALL AND ONLY THE 40 validation_source_records IN THE EXISTING FROZEN SPLIT MANIFEST",
+  "record_exclusion_rule": "ALL train RECORDS AND ANY validation RECORD FAILING SOURCE HASH OR CONTRACT VERIFICATION",
+  "lead_selection_rule": "UNCHANGED FROZEN DETECTOR SELECTS THE HIGHEST DETERMINISTIC UNSUPERVISED ENGINEERING_QUALITY_SCORE LEAD WITH FAILOVER",
+  "reference_rule": "AFTER LEAD SELECTION, USE ONLY SYMBOL N FROM THAT SELECTED LEAD'S CARDIOLOGIST MANUAL ANNOTATION FILE",
+  "execution_policy": {
+    "one_shot": true,
+    "no_split_argument": true,
+    "target_runner_must_reject_train_records": true,
+    "output_paths_must_not_exist": true,
+    "partial_result_acceptance": false,
+    "all_40_records_required": true,
+    "rerun_policy": "ONLY BYTE_IDENTICAL REPRODUCTION AFTER TOOL OR INFRASTRUCTURE FAILURE; NEVER TO SELECT A BETTER OUTCOME",
+    "holdout_consumed_after_successful_semantic_parse": true
+  },
+  "holdout_criteria": {
+    "micro_sensitivity_minimum": 0.99,
+    "micro_positive_predictive_value_minimum": 0.99,
+    "micro_f1_minimum": 0.99,
+    "catastrophic_record_sensitivity_floor": 0.9,
+    "catastrophic_definition": "ANNOTATION_OBSERVABLE RECORD SENSITIVITY STRICTLY BELOW 0.9",
+    "pass_outcome": "HOLDOUT_ENGINEERING_TARGETS_MET",
+    "fail_outcome": "HOLDOUT_ENGINEERING_TARGETS_NOT_MET",
+    "interpretation": "NONCLINICAL ENGINEERING HOLDOUT CRITERIA ONLY; NOT CLINICAL ACCEPTANCE OR EVIDENCE ADMISSION"
+  },
+  "required_reporting": {
+    "aggregate": [
+      "reference_event_count",
+      "predicted_event_count",
+      "matched_event_count",
+      "false_positive_count",
+      "false_negative_count",
+      "sensitivity",
+      "positive_predictive_value",
+      "f1",
+      "timing_mean_absolute_error_ms",
+      "timing_median_absolute_error_ms"
+    ],
+    "coverage_decomposition": [
+      "full_record_predicted_event_count",
+      "annotation_observable_predicted_event_count",
+      "excluded_before_count",
+      "excluded_after_count",
+      "remaining_internal_false_positive_count"
+    ],
+    "record_distributions": [
+      "median",
+      "minimum",
+      "fifth_percentile",
+      "ninety_fifth_percentile",
+      "maximum"
+    ],
+    "subgroups": [
+      "cardiac_pacing",
+      "bundle_branch",
+      "ventricular_extrasystole",
+      "sinus_tachycardia",
+      "sinus_bradycardia"
+    ],
+    "comparison": "FROZEN TRAIN VERSUS ONE_SHOT HOLDOUT WITH IDENTICAL DETECTOR CONFIGURATION EVALUATOR AND MATCHER",
+    "per_record": "HASH_BOUND LOCAL OUTSIDE_GIT ARTIFACT WITH WORST_RECORD ORDERING AND ERROR ACCOUNTING"
+  },
+  "result_identity": {
+    "result_id": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+    "outside_git_result_filename": "ludb-qrs-v2-coverage-v2-holdout-v1-result.json",
+    "outside_git_comparison_filename": "ludb-qrs-v2-coverage-v2-train-holdout-v1-comparison.json",
+    "compact_receipt_path": "validation/development/results/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1_RECEIPT.json",
+    "compact_comparison_path": "validation/development/results/LUDB_QRS_V2_COVERAGE_V2_TRAIN_HOLDOUT_V1_COMPARISON.json",
+    "record_level_artifacts_repository_storage": false
+  },
+  "frozen_file_identities": {
+    "lib/qrs_detector_v2.js": "da8dcab76e4bb43a69e5ec69cd7689a2b9bf49bddf25e9760be46ffbccbbc11b",
+    "lib/qrs_multilead_v2.js": "182af61463d4037ae2ac3a1456a65cb9713418018fbdb2ed751933ff27f725d9",
+    "lib/event_matcher_v2.js": "0bfe788815dec1edf14ea07ed0ea7e23605f692272bcc434e6570680c0319e83",
+    "lib/annotation_coverage_evaluator_v2.js": "43b1efb6423f63ea17aa064817206c9012e6a9bdd49217aca99967bccc7bd70e",
+    "evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json": "4ab92dfcc44d5348a7759bfd1e58cfe16cf2adbeb5ee982366f209070c66ec57",
+    "evaluation/protocols/RPEAK_EVENT_MATCHER_V2.json": "a4bc06e874f29731f2069b9018f7c1acbb462e438d55d2e42a6c17aebe1a1073",
+    "evaluation/protocols/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2.json": "63d7023fd3ae535df1d427bf13b6cc52cf999f93bbf6048f9e7a1528565e15a1",
+    "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json": "d690c12d4e17bfbb5a350def5b9f57b1146f93c1ab9ff3156be3682eb572ae2f",
+    "validation/development/LUDB_QRS_V2_DEV_V1.json": "6af21931ef1ae5ef25d787d5fa5dd1e572d8dfbd177f00b3de2accc865857a78",
+    "validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json": "34738b112f033a9cb699afc1ea840c89ef79f5e0a4d47c6c2b0a02aa5bb58daf",
+    "validation/development/results/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2_TRAIN_RECEIPT.json": "44747991a5dcc4d576e003dd0bf46e20c382bf4d4f204e50dc175961d34cb872",
+    "validation/development/results/LUDB_QRS_V2_EVALUATOR_V1_V2_COMPARISON.json": "de3fd47f94b55d5921569a69a5715cefd943595fa7b4fa963e44b4a193333134",
+    "validation/development/run_target_qrs_v2_coverage_v2_holdout.js": "894ee19a98ebb55c3a0ad6b52eb216784caff6d6b477d90f60fc84acd4f34aac",
+    "validation/development/run_ludb_qrs_v2_coverage_v2_holdout.py": "ef911607c6486fa492629efcef469a04cfbb49188714c26f04ac854d21e62dd7"
+  },
+  "change_policy": {
+    "detector_or_configuration_change_before_execution": "PROHIBITED_WITHOUT_NEW_HOLDOUT_PROTOCOL_AND_FRESH_UNOPENED_HOLDOUT",
+    "evaluator_or_matcher_change_before_execution": "PROHIBITED_WITHOUT_NEW_HOLDOUT_PROTOCOL_AND_FRESH_UNOPENED_HOLDOUT",
+    "post_holdout_parameter_tuning": "PROHIBITED",
+    "post_holdout_evaluator_selection": "PROHIBITED",
+    "failed_outcome_response": "RETURN TO A NEW OPEN DEVELOPMENT CORPUS AND NEW CONFIGURATION ID; THIS HOLDOUT REMAINS SPENT",
+    "passed_outcome_response": "FREEZE RESULT AND CONTINUE GOVERNANCE REVIEW WITHOUT CLAIMING CLINICAL VALIDITY",
+    "locked_mitbih_access": "PROHIBITED",
+    "locked_v2_evaluation": "NOT_AUTHORIZED"
+  },
+  "limitations": [
+    "This is a one-shot internal engineering holdout, not an external clinical validation cohort.",
+    "The annotation-observable interval is inferred from first and last selected-lead N annotations and does not prove exhaustive annotation of every in-interval waveform.",
+    "LUDB contains ten-second twelve-lead ECGs and does not establish long-duration ambulatory performance.",
+    "Per-lead source annotations are external labels and are not project clinical gold.",
+    "Metadata phenotype subgroups are descriptive, overlap, and do not establish causal failure mechanisms.",
+    "Passing the engineering criteria does not authorize diagnostic runtime, evidence admission, reportable clinical metrics, or locked MIT-BIH V2 evaluation."
+  ],
+  "authority": {
+    "runtime_authority": false,
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "evidence_admission": "NOT_ADMITTED",
+    "metrics": "NOT_REPORTABLE",
+    "activation": "NOT_ELIGIBLE",
+    "clinical_validity_inferred": false,
+    "source_labels_are_project_gold": false,
+    "project_gold": false
+  },
+  "locked_v2_readiness": "NOT_READY_FOR_LOCKED_V2_EVALUATION"
+}
