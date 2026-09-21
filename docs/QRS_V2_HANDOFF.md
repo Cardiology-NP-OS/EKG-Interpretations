@@ -1,6 +1,20 @@
 # QRS detector V2 engineering handoff
 
-## Live checkpoint
+## Generation2 engineering preservation merge
+
+The owner explicitly authorized resolving and landing PR #21 as an engineering preservation merge, not acceptance of clinical ability. This supersedes the historical keep-draft directions below only for repository integration. No detector configuration promotion, clinical authority, holdout reuse, or locked MIT-BIH execution is authorized.
+
+- Merge inputs: PR head `0931059aa9ef4f05cfed829c807d49830c64507a` and main `fb2202fc08c7af0ba1b7eb4f57994e79c0b1c1cd`. All eleven PR commits and prior PR #11 ancestry are retained by a normal merge of main into the PR branch.
+- The sole conflict was `package.json`: retain every script and the exact 85-invocation test union (75 main, 83 PR). Main's provider implementation and both provider tests remain byte-identical.
+- Added one synthetic integration regression in `tests/qrs_detector_v2.test.js`: provider dispatch and JSON-stdin CLI preserve V1 before and after explicit V2 opt-in, bind persisted artifacts to direct detector events, and retain inactive authority.
+- Detector implementations, configuration, matcher, evaluator, protocols, splits, fixtures, historical receipts, clinical controls, and workflows remain unchanged. V1 stays the default. LUDB's spent holdout failure remains `HOLDOUT_ENGINEERING_TARGETS_NOT_MET` with minimum sensitivity `0.875 < 0.9`.
+- Local verification: `npm test` exit 0 on WSL Ubuntu / Node 22.20.0 / npm 10.9.3; `npm run test:image-decoder` exit 0 on that environment with Python 3.14.4, Pillow 12.3.0, and pypdfium2 5.13.0 (7 Python and 14 bridge tests).
+- Windows verification: `npm run test:qrs-v2` exit 0 (87/87); both focused provider tests exit 0; `npm run gate:ci` exit 0 (30/30); `python tools/ep5_pkt09_terminal_specialist_completion_gate.py` exit 0 (360/360); `git diff --check` exit 0. No lint/typecheck command or configuration was found.
+- Residual Windows defect: full tests and decoder bridge persistence fail with `EPERM` at `lib/image_case_store.js:45` because file fsync uses a read-only descriptor. This code is unchanged from main; Linux verification does not establish Windows persistence support. No fsync bypass or unrelated fix was introduced.
+- Historical runner caution: the frozen holdout runner checks predeclaration flags and fresh output paths, not a durable spent-receipt lock. Its historical script remains preserved, not authorized for reuse. No real LUDB or MIT-BIH signals or annotations were parsed or scored in this merge continuation.
+- Exact-head and post-merge CI must be checked against live GitHub identities before declaring landing complete. Do not delete branches here; the main controller owns archiving and lease release. Workspace shared notes are outside this writer's scope.
+
+## Historical checkpoint
 
 - Repository: `Cardiology-NP-OS/EKG-Interpretations`
 - Live main commit/tree: `55792ee32b90542184d530937865f29dfe79149e` / `709b9f41f7e7c639516a6ee3fe308275635e7b83`
