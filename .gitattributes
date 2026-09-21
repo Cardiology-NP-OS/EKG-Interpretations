@@ -1,3 +1,5 @@
+* text=auto eol=lf
+
 # Preserve uploaded clinical-control candidate source bytes exactly.
 clinical_control/v12_1_candidate/source/** -text
 clinical_control/v12_1_candidate/source_core/** -text
