@@ -87,6 +87,70 @@ test("clinical validation transition remains quarantined", () => {
   assert.strictEqual(v.project_gold_creation_authorized, false);
 });
 
+test("accepted donor receipt stays bound to the accepted main promotion", () => {
+  const donor = donors.donors.find(row => row.donor_id === "DONOR-014");
+  const receipt = read("donors/heartwise-ai_ecg-tokenizer/DONOR_RECEIPT.json");
+  assert.strictEqual(donor.status, "ACCEPTED_ON_MAIN");
+  assert.strictEqual(donor.receipt_status, "FINALIZED");
+  assert.strictEqual(receipt.acceptance_state, "ACCEPTED_ON_MAIN_POST_PROMOTION_CI");
+  assert.strictEqual(receipt.promotion.commit, donor.promotion_commit);
+  assert.strictEqual(receipt.promotion.tree, donor.promotion_tree);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, donor.target_main_ci_run_id);
+  assert.strictEqual(receipt.promotion.target_main_ci_run_id, 35541060481);
+  assert.strictEqual(receipt.promotion.target_main_ci_conclusion, "success");
+  assert.strictEqual(receipt.boundaries.clinical_authority_added, false);
+});
+
+test("future entry requirements survive as handoff policy rather than measurement evidence", () => {
+  const handoff = fs.readFileSync(path.join(root, "docs/AI_HANDOFF.md"), "utf8");
+  const section = handoff.split("## Future validation admission requirements\n")[1];
+  assert.ok(section);
+  const policy = section.split("\n## ")[0];
+  assert.strictEqual((policy.match(/^\d+\. \*\*/gm) || []).length, 9);
+  for (const required of [
+    "POLICY_ONLY_NOT_MEASUREMENT_EVIDENCE", "sections 8", "10 (acceptance and proof)",
+    "Do not overwrite accepted receipts, frozen protocols, evaluation runners, or failed results",
+    "before inspecting final test results", "every failure and abstention", "attempted denominators",
+    "confidence intervals", "patient/record clustering", "not independent clinical subjects",
+    "acquisition devices/domains", "worst-record failures", "paired digital-waveform references",
+    "SPENT and FAILED", "V1 remains the default", "No rerun", "fresh unopened protected holdout",
+    "PASS / FAIL / BLOCKED / NOT RUN", "not a passed clinical measurement",
+    "separate governed evidence-admission decision", "capability-specific runtime authorization",
+  ]) assert.ok(policy.includes(required), required);
+  for (const referenced of [
+    "manifests/PRECLINICAL_VALIDATION_CHECKPOINT_V1.json",
+    "validation/clinical_accuracy/MITBIH_RPEAK_FULL_V1.json",
+    "evaluation/protocols/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1.json",
+    "evaluation/protocols/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2.json",
+    "evaluation/splits/LUDB_QRS_V2_DEV_V1_SPLIT.json",
+    "validation/development/LUDB_QRS_V2_DEV_V1.json",
+    "validation/development/results/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1_RECEIPT.json",
+    "evaluation/protocols/GOVERNANCE_RUNTIME_CONTRACT.json",
+    "lib/local_dataset_loader.js", "ECG_IMAGE_INTAKE_CHECKPOINT.json", "docs/QRS_V2_HANDOFF.md",
+  ]) {
+    assert.ok(policy.includes(referenced), referenced);
+    assert.ok(fs.existsSync(path.join(root, referenced)), referenced);
+  }
+});
+
+test("mapped historical controls remain limited and the holdout remains spent and failed", () => {
+  const v1 = read("validation/clinical_accuracy/MITBIH_RPEAK_FULL_V1.json");
+  const holdout = read("evaluation/protocols/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1.json");
+  const result = read("validation/development/results/LUDB_QRS_V2_COVERAGE_V2_HOLDOUT_V1_RECEIPT.json");
+  assert.match(v1.cohort.selection_rule, /NO_RESULT_BASED_EXCLUSIONS/);
+  assert.ok(v1.metrics.uncertainty.includes("event_level_wilson_95_ci_for_micro_sensitivity"));
+  assert.match(v1.metrics.uncertainty_note, /do not treat beats within a record\/patient as statistically independent/);
+  assert.strictEqual(holdout.execution_policy.partial_result_acceptance, false);
+  assert.strictEqual(holdout.execution_policy.all_40_records_required, true);
+  assert.match(holdout.reference_rule, /USE ONLY SYMBOL N/);
+  assert.ok(holdout.required_reporting.subgroups.length > 0);
+  assert.match(holdout.required_reporting.per_record, /WORST_RECORD/);
+  assert.strictEqual(result.dataset.holdout_now_consumed, true);
+  assert.strictEqual(result.holdout_criteria.outcome, "HOLDOUT_ENGINEERING_TARGETS_NOT_MET");
+  assert.strictEqual(result.decision.holdout_may_be_reopened_for_candidate_selection, false);
+  assert.strictEqual(result.decision.detector_configuration_promotion_eligible, false);
+});
+
 console.log(JSON.stringify({
   schema:"ekg-preclinical-validation-checkpoint-tests-v1",
   pass:true,
