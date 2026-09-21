@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const { DEFAULT_QRS_V2_CONFIG, QRS_V2_ALGORITHM } = require("../lib/qrs_detector_v2");
 const config = require("../evaluation/protocols/QRS_DETECTOR_V2_ENGINEERING_CONFIG.json");
+const checkpoint = require("../manifests/QRS_DETECTOR_V2_ENGINEERING_CHECKPOINT_V1.json");
 
 const root = path.join(__dirname, "..");
 const frozenV1 = Object.freeze({
@@ -43,6 +44,20 @@ test("development cohort excludes locked MIT-BIH signals and annotations", () =>
   assert.strictEqual(cohort.relationship_to_locked_evaluation.contains_locked_annotations, false);
   assert.strictEqual(cohort.source.project_gold, false);
   assert.match(cohort.external_development_corpus_gate.state, /^BLOCKED_/);
+});
+
+test("engineering checkpoint remains fail-closed for locked V2 evaluation", () => {
+  assert.strictEqual(checkpoint.detector_code_under_test.algorithm, QRS_V2_ALGORITHM);
+  assert.strictEqual(checkpoint.detector_code_under_test.configuration_id, config.configuration_id);
+  assert.strictEqual(checkpoint.verification.github_actions.head_sha, checkpoint.detector_code_under_test.commit);
+  assert.strictEqual(checkpoint.verification.github_actions.conclusion, "success");
+  assert.strictEqual(checkpoint.development_evidence.synthetic_only, true);
+  assert.strictEqual(checkpoint.frozen_v1_preservation.locked_cohort_used_for_v2_parameter_selection, false);
+  assert.strictEqual(checkpoint.frozen_v1_preservation.locked_v2_evaluation_executed, false);
+  assert.match(checkpoint.real_signal_development_gate.state, /^BLOCKED_/);
+  assert.strictEqual(checkpoint.governance.runtime_authority, false);
+  assert.strictEqual(checkpoint.governance.clinical_validity_inferred, false);
+  assert.strictEqual(checkpoint.locked_v2_readiness, "NOT_READY_FOR_LOCKED_V2_EVALUATION");
 });
 
 if (process.exitCode) process.exit(process.exitCode);
