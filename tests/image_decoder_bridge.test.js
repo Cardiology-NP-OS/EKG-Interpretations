@@ -232,6 +232,36 @@ test("bridge regular-file reads detect replacement between stat and open", () =>
   }
 });
 
+test("bridge reads bound growth after open and close descriptors on rejection", () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-bridge-growth-"));
+  const file = path.join(temp, "artifact.bin");
+  fs.writeFileSync(file, "original");
+  const original = { openSync: fs.openSync, readSync: fs.readSync, closeSync: fs.closeSync };
+  let descriptor;
+  let closed = false;
+  let allocation = 0;
+  try {
+    fs.openSync = (...args) => {
+      const fd = original.openSync(...args);
+      if (args[1] === "r") descriptor = fd;
+      return fd;
+    };
+    fs.readSync = (fd, buffer, ...args) => {
+      allocation = Math.max(allocation, buffer.length);
+      const count = original.readSync(fd, buffer, ...args);
+      if (allocation && !closed && fs.statSync(file).size === 8) fs.appendFileSync(file, "growth");
+      return count;
+    };
+    fs.closeSync = fd => { if (fd === descriptor) closed = true; return original.closeSync(fd); };
+    assert.throws(() => readRegularFile(file, 8, "IMAGE_DECODER_TEST_READ"), /IMAGE_DECODER_TEST_READ/);
+    assert.strictEqual(allocation, 9);
+    assert.strictEqual(closed, true);
+  } finally {
+    Object.assign(fs, original);
+    fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
 test("manifest validation independently enforces aggregate pixel budget", () => {
   const manifest = {
     schema: "ekg-image-decoder-result-v1",
@@ -794,6 +824,50 @@ test("decoded file intake rejects a page index outside the decoded document", ()
     }), /IMAGE_FILE_INTAKE_PAGE_INDEX/);
   });
 });
+
+for (const format of ["jpeg", "pdf"]) {
+  test(`generated ${format} strict traces persist pixel bounds and require gated analysis`, () => {
+    withEncodedFixture(format, ({ temp, paper, encoded }) => {
+      const sourceKind = format === "pdf" ? "original_digital_ecg_pdf" : "phone_photo";
+      const decoded = decodeImageSourceFile({ sourcePath: encoded, pdfDpi: 72 });
+      const input = {
+        sourcePath: encoded, sourceKind, pdfDpi: 72, expectedRois: paper.rois,
+        paperSpeedMmPerS: 25, gainMmPerMv: 10, roiLeadIdentityVerified: true,
+        strictTraceMaxThicknessPx: 100,
+        preflight: externalPreflight(decoded.pages[0].raster, sourceKind, format),
+        provenance: { locator: `case://strict-${format}`, projectGold: false },
+      };
+      const root = path.join(temp, "strict-cases");
+      const persisted = runAndPersistImageFileIntake(root, input);
+      const result = persisted.fileIntake.result;
+      assert.ok(result.digitized.leads.every(lead => lead.quality.tracePolicy === "SINGLE_CONTIGUOUS_DARK_TRACE"));
+      const receipt = persistImageExtraction(persisted.caseReceipt.path, result);
+      const extraction = readImageExtraction(persisted.caseReceipt.path, receipt.extractionId);
+      assert.deepStrictEqual(extraction.leads.map(lead => lead.quality), result.digitized.leads.map(lead => lead.quality));
+      assert.strictEqual(persistImageExtraction(persisted.caseReceipt.path, result).idempotent, true);
+      const config = analysisConfig();
+      Object.assign(config.quality, { maxAmplitudeUncertaintyMv: 1, maxTimePixelUncertaintyMs: 4 });
+      const analysis = runImageSignalAnalysis(extraction, config);
+      assert.strictEqual(analysis.status, "COMPLETE");
+      assert.strictEqual(analysis.processedLeadCount, 12);
+      assert.strictEqual(analysis.runtimeAuthority, false);
+      const saved = persistImageAnalysis(persisted.caseReceipt.path, analysis);
+      const reopened = readImageAnalysis(persisted.caseReceipt.path, saved.analysisId);
+      assert.deepStrictEqual(reopened.qualityPolicy, config.quality);
+      assert.deepStrictEqual(reopened.leadAnalyses, analysis.leadAnalyses);
+      const processResult = cp.spawnSync(process.execPath, ["-e",
+        "const x=require('./lib/image_analysis_store').readImageAnalysis(process.argv[1],process.argv[2]);process.stdout.write(JSON.stringify({id:x.analysisId,quality:x.qualityPolicy}));",
+        persisted.caseReceipt.path, saved.analysisId,
+      ], { cwd: path.resolve(__dirname, ".."), encoding: "utf8", timeout: 30000 });
+      assert.strictEqual(processResult.status, 0, processResult.stderr);
+      assert.deepStrictEqual(JSON.parse(processResult.stdout), { id: saved.analysisId, quality: config.quality });
+      const rejectedRoot = path.join(temp, "rejected-cases");
+      assert.throws(() => runAndPersistImageFileIntake(rejectedRoot, { ...input, strictTraceMaxThicknessPx: 1 }), /DIGITIZATION_TRACE_THICKNESS/);
+      assert.strictEqual(fs.existsSync(rejectedRoot), false);
+      assert.deepStrictEqual(fs.readFileSync(path.join(path.dirname(persisted.caseReceipt.path), "original.bin")), fs.readFileSync(encoded));
+    });
+  });
+}
 
 if (process.exitCode) process.exit(process.exitCode);
 console.log(JSON.stringify({
