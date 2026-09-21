@@ -1,0 +1,100 @@
+{
+  "schema": "ekg-clinical-validation-protocol-v1",
+  "protocol_id": "MITBIH-RPEAK-FULL-V1",
+  "state": "PREDECLARED_BEFORE_FULL_COHORT_RESULTS",
+  "relationship_to_pilot": {
+    "pilot_id": "MITBIH-RPEAK-PILOT-V1",
+    "pilot_results_observed": true,
+    "detector_retuned_after_pilot": false,
+    "cohort_rule_changed_after_pilot": false,
+    "note": "The full run expands the exact frozen detector/configuration from the first-five-record pilot to every record in the canonical PhysioNet RECORDS file."
+  },
+  "code_under_test": {
+    "repository": "Cardiology-NP-OS/EKG-Interpretations",
+    "commit": "32e74373523512c3fcf3921fcb8e2501b8ea2bbb",
+    "tree": "8134669d78b125adbca7d68c3e1f52c7fce63603",
+    "immutable": true,
+    "target_entrypoint": "lib/signal_measurement_contract.js::detectCandidateRPeaks"
+  },
+  "dataset": {
+    "dataset_id": "ECG-DATASET-MITBIH-ARRHYTHMIA",
+    "name": "MIT-BIH Arrhythmia Database",
+    "version": "1.0.0",
+    "physionet_directory": "mitdb/1.0.0",
+    "records_file": "RECORDS",
+    "expected_record_count": 48,
+    "doi": "10.13026/C2F305",
+    "access": "OPEN",
+    "license": "Open Data Commons Attribution License v1.0",
+    "source_labels_project_gold": false,
+    "project_gold": false,
+    "runtime_authority": false
+  },
+  "cohort": {
+    "selection_rule": "ALL_RECORD_IDS_IN_VERSION_PINNED_PHYSIONET_RECORDS_FILE_NO_RESULT_BASED_EXCLUSIONS",
+    "expected_record_count": 48,
+    "signal_selection": "FIRST_SIGNAL_CHANNEL_AS_STORED_BY_SOURCE",
+    "reference_annotation": "atr",
+    "reference_event_scope": "BEAT_ANNOTATIONS_ONLY",
+    "record_exclusions": []
+  },
+  "target_configuration": {
+    "source": "evaluation/fixtures/SYNTHETIC_EXECUTABLE_PIPELINE_CONFIG.json",
+    "detector": {
+      "minAbsoluteDeviation": 0.9,
+      "refractoryMs": 200
+    },
+    "frozen_before_full_results": true,
+    "post_pilot_retuning": false
+  },
+  "matching": {
+    "tolerance_ms": 150,
+    "policy": "SORTED_ONE_TO_ONE_WITHIN_TOLERANCE"
+  },
+  "metrics": {
+    "primary": [
+      "micro_sensitivity",
+      "micro_positive_predictive_value",
+      "micro_f1"
+    ],
+    "timing": [
+      "timing_mean_absolute_error_ms",
+      "timing_median_absolute_error_ms"
+    ],
+    "count": [
+      "false_positive_count",
+      "false_negative_count",
+      "matched_event_count"
+    ],
+    "record_distribution": [
+      "record_sensitivity_median",
+      "record_sensitivity_min",
+      "record_positive_predictive_value_median",
+      "record_positive_predictive_value_min",
+      "record_f1_median",
+      "record_f1_min"
+    ],
+    "uncertainty": [
+      "event_level_wilson_95_ci_for_micro_sensitivity",
+      "event_level_wilson_95_ci_for_micro_positive_predictive_value"
+    ],
+    "descriptive_subgroups": [
+      "first_signal_lead_name"
+    ],
+    "uncertainty_note": "Event-level Wilson intervals are descriptive and do not treat beats within a record/patient as statistically independent clinical subjects."
+  },
+  "package_boundary": {
+    "validation_only_reader": "wfdb==4.3.1",
+    "production_dependency_added": false,
+    "production_wfdb_loader_changed": false
+  },
+  "result_authority": {
+    "reportable": false,
+    "evidence_admission": "NOT_ADMITTED",
+    "diagnostic_runtime": "GOVERNED_INACTIVE",
+    "clinical_validity_inferred": false,
+    "activation": "NOT_ELIGIBLE",
+    "project_gold_creation_authorized": false,
+    "note": "This is a quarantined full-database detector benchmark, not final clinical validation of the complete ECG interpretation system."
+  }
+}
