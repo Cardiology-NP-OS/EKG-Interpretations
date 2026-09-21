@@ -1,68 +1,86 @@
 # QRS detector V2 engineering handoff
 
-## Canonical stopping point
+## Live checkpoint
 
-The commit containing this file is the handoff checkpoint on `eng/rpeak-qrs-detector-v2`. Its predeclared real-signal protocol parent is commit `a216fa831f96f7539fe353adced6b633953f37e2`, tree `4808ed45d788177a2dcbfcaae16a5900a0f73b24`. Draft pull request 21 is the GitHub review surface.
+- Repository: `Cardiology-NP-OS/EKG-Interpretations`
+- Live main commit/tree: `55792ee32b90542184d530937865f29dfe79149e` / `709b9f41f7e7c639516a6ee3fe308275635e7b83`
+- Working branch: `eng/rpeak-qrs-detector-v2`
+- Exact result commit/tree: `ef2efdcb559e0264fc0721f8c0c2283ce12b0113` / `08dd37b6c23b7f4db62ec9f2d66fdb954045761c`
+- Review surface: draft PR #21; keep it draft
+- Unrelated draft PR #20 / `work/specialist-provider-v1-20260920` was not touched
+- The commit containing this file is a handoff-only continuation of the exact result commit above; the live PR head remains the source of truth for its own identity.
 
-Development is intentionally stopped after the first predeclared LUDB 1.0.1 training-split run. The 40-record internal holdout annotations have not been parsed or scored. The locked 48-record MIT-BIH cohort has not been run with V2 and remains prohibited for parameter selection.
+The detector remains `target-owned-adaptive-qrs-energy-v2`, opt-in and governed inactive. V1 remains the default and its locked artifacts remain SHA-256 guarded.
 
-## Implemented state
+## Completed in this continuation
 
-- V1 remains the default and is byte-hash guarded by `tests/qrs_v2_preservation.test.js`.
-- V2 is opt-in through `target-owned-adaptive-qrs-energy-v2` and is runtime inactive.
-- The detector uses QRS-band filtering, slope energy and integration, adaptive signal/noise thresholds, morphology screening, pacing-spike association, refractory replacement, search-back, calibrated-waveform fiducial refinement, and deterministic lead-quality selection with failover.
-- Event matcher V2 provides deterministic maximum-cardinality, minimum-total-error, one-to-one assignment within an inclusive tolerance.
-- Synthetic regression fixtures cover the named low-amplitude, P/T, pacing, noise, morphology, refractory, search-back, timing, and multilead failure mechanisms.
-- LUDB dataset/version/license, source hashes, split, lead rule, annotations, matcher, metrics, and authority boundary were frozen before the first cohort-wide training result.
+The LUDB evaluator boundary was repaired before detector tuning. Protocol `LUDB-QRS-V2-ANNOTATION-COVERAGE-V2` was committed at `11ac6712ab52ed802c49d6f4bc2c896fe08adc03`, tree `e98a715129bb89ca979d86cf7074f984ca2c61b6`, before the new aggregate was observed. Deterministic evaluator tests were also committed before execution.
 
-## First real-signal training result
+The protocol defines a closed annotation-observable core interval from the first through last selected-lead `N` reference. Predictions exactly on either boundary are included. Matcher tolerance may rescue an outside prediction only by matching it to a boundary reference; an unmatched prediction before or after the core interval is excluded and counted separately. Empty, malformed, duplicate/nonmonotonic, and single-reference coverage fail closed.
 
-The immutable compact receipt is `validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json`. The full record-level result remains outside Git because it contains source-label comparisons:
+The detector implementation, configuration, lead selection, source cohort, split, and matcher were unchanged. The historical full-record view was reproduced exactly before the coverage-aware view was accepted.
 
-- result file: `ludb-qrs-v2-train-v1.json`
-- SHA-256: `a7d5500b481d37807f40798695d017332dd4aff3036e63eeff95d976bd4a077e`
-- records: 160 training, 40 internal holdout unopened
-- events: 1,466 reference, 1,797 predicted, 1,465 matched, 332 FP, 1 FN
-- sensitivity: `0.9993178717598908`
-- PPV: `0.8152476349471341`
-- F1: `0.8979466748391052`
-- timing mean absolute error: `14.501023890784984 ms`
-- timing median absolute error: `4 ms`
-- worst-record sensitivity: `0.9`
-- worst-record PPV: `0.5833333333333334`
-- worst-record F1: `0.7368421052631579`
+## Historical versus coverage-aware result
 
-These are nonclinical development observations and remain `NOT_REPORTABLE`; source labels are not project gold.
+| Metric | Historical full record | Annotation observable |
+|---|---:|---:|
+| References | 1,466 | 1,466 |
+| Predictions | 1,797 | 1,466 |
+| Matched | 1,465 | 1,465 |
+| False positives | 332 | 1 |
+| False negatives | 1 | 1 |
+| Sensitivity | 0.9993178717598908 | 0.9993178717598908 |
+| PPV | 0.8152476349471341 | 0.9993178717598908 |
+| F1 | 0.8979466748391052 | 0.9993178717598908 |
+| Timing MAE | 14.501023890784984 ms | 14.501023890784984 ms |
+| Timing median | 4 ms | 4 ms |
 
-## Important evaluator finding
+Of the historical 332 apparent false positives, 331 were unmatched detections outside annotation-observable coverage: 167 before the first selected-lead reference and 164 after the last. One internal false positive remains. Ordered matched pairs were identical, so timing did not change. Median observable record PPV/F1 is `1`; minimum observable record PPV is `0.875`, minimum F1 is `0.9333333333333333`, and minimum sensitivity is `0.9`. No record is catastrophic under the predeclared rule of sensitivity strictly below `0.9`.
 
-Inspection of selected training records found that LUDB's manual QRS annotations may start after the signal begins or end before it finishes. The predeclared V1 development evaluator scores the full ten-second signal, so detections outside the first-to-last annotated-QRS interval become false positives even when the edge waveform may contain a real or partial complex. At least one inspected false positive was internal, so this does not explain every error.
+Aggregate subgroup inspection found no residual FP in the pacing, bundle-branch, ventricular-extrasystole, or sinus-tachycardia metadata groups. The one remaining FP occurs in the sinus-bradycardia metadata group; the one FN occurs in overlapping bundle-branch and ventricular-extrasystole metadata. The two errors occur on selected V5 and V3 respectively, which is insufficient to infer a lead-selection pattern.
 
-Do not rewrite the initial result. The next evaluator must be a newly versioned, predeclared development protocol with an annotation-observable interval and a separate full-record detection count. It must produce a side-by-side comparison artifact. Detector tuning should resume only after that scoring boundary is frozen.
+## Remaining detector failure modes
 
-## Reproduction
+Train-only inspection found:
 
-The external dataset root must be the independently hash-verified LUDB 1.0.1 distribution and the validation-only environment must contain `wfdb==4.3.1`.
+1. One FN: an early, morphology-qualified selected-lead candidate was below the adaptive primary threshold. It was above the secondary threshold, but search-back was not yet armed because too little accepted RR history existed. Source metadata includes bundle-branch and ventricular-extrasystole descriptors; no causal clinical inference is made.
+2. One internal FP: a low-strength accepted selected-lead event between annotated QRS references. Its broad raw half-height morphology and position before an annotated P-wave interval make non-QRS waveform or noise confusion plausible, but source labels do not establish a definitive mechanism.
 
-```sh
-npm run test:qrs-v2
-npm test
-npm run gate:ci
-python tools/ep5_pkt09_terminal_specialist_completion_gate.py
-git diff --check
-python3 validation/development/run_ludb_qrs_v2_dev.py \
-  --dataset-root /absolute/path/to/ludb-1.0.1 \
-  --output /absolute/path/to/ludb-qrs-v2-train-v1.json
-```
+The unchanged detector meets all predeclared open-train aggregate targets and has no catastrophic record. Detector tuning is therefore not justified at this checkpoint; changing parameters for two residual errors would risk train overfit. Preserve these mechanisms as candidates for future synthetic regressions if a later evidence-based configuration change is proposed.
 
-The repository runner has no split argument and asserts that the protocol authorizes only `train` while the holdout is closed.
+## Evidence identities
 
-## External coordination boundary
+- Protocol: `evaluation/protocols/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2.json`, SHA-256 `63d7023fd3ae535df1d427bf13b6cc52cf999f93bbf6048f9e7a1528565e15a1`
+- Compact result receipt: `validation/development/results/LUDB_QRS_V2_ANNOTATION_COVERAGE_V2_TRAIN_RECEIPT.json`, SHA-256 `44747991a5dcc4d576e003dd0bf46e20c382bf4d4f204e50dc175961d34cb872`
+- Compact comparison: `validation/development/results/LUDB_QRS_V2_EVALUATOR_V1_V2_COMPARISON.json`, SHA-256 `de3fd47f94b55d5921569a69a5715cefd943595fa7b4fa963e44b4a193333134`
+- Historical receipt remains unchanged: `validation/development/results/LUDB_QRS_V2_TRAIN_V1_RECEIPT.json`, SHA-256 `34738b112f033a9cb699afc1ea840c89ef79f5e0a4d47c6c2b0a02aa5bb58daf`
+- Outside-Git record-level result: `ludb-qrs-v2-coverage-v2-train-result.json`, 292,616 bytes, SHA-256 `ec3842a6654666426129e4055f813567e02f63bd4ca020d66de9cf91c3a34acb`
+- Outside-Git record-level comparison: `ludb-qrs-v2-evaluator-v1-v2-comparison.json`, 12,236 bytes, SHA-256 `d2c7e5bb03fb46ae0728b59c11c4bbf188a66d98bc7bf1f63b6e499d5cc3b7c4`
 
-GitHub is the code and evidence source of truth. Neon project `sparkling-morning-59395715` may receive only an idempotent system coordination event through `public.system_append_event`. Do not write ECG bytes, annotations, predictions, project gold, clinical claims, or a new immutable release identity to Neon. The Neon event identifier and hash are recorded in the final session report rather than this file because the event is appended only after the exact Git commit exists.
+The outside-Git artifacts contain the per-record source-label comparisons, poor-record identities, sample-level accounting, and worst-record ordering. They were not committed.
 
-## Resume point
+## Data access statement
 
-The single highest-value next action is to predeclare and test an annotation-coverage-aware LUDB development evaluator V2, then rerun the already-open training split to separate edge-coverage accounting from detector false positives. Keep the internal holdout and locked MIT-BIH cohort closed.
+- Executed corpus: LUDB 1.0.1, existing frozen `train` split only, 160 records.
+- LUDB archive SHA-256: `d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06`.
+- All 2,805 manifest entries were byte-hash verified against source manifest SHA-256 `cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f`.
+- The 40-record LUDB internal holdout was not parsed, scored, or used for selection. Whole-archive cryptographic verification read source bytes only; no holdout WFDB annotation loader call occurred.
+- The locked 48-record MIT-BIH cohort was not run, parsed, or used for V2 evaluator or detector selection. Repository preservation tests only rechecked the committed locked-artifact byte hashes.
+- Source labels remain external labels, not project gold.
 
-Locked-evaluation state: `NOT_READY_FOR_LOCKED_V2_EVALUATION`.
+## Verification
+
+- `npm run test:qrs-v2`: 66/66 focused assertions passed across detector, matcher, preservation, LUDB V1, evaluator, protocol, and result suites.
+- `npm test`: exit 0; all wired suites passed.
+- `npm run gate:ci`: 30/30; `synthetic-contract-ci-only`; no clinical accuracy claim.
+- `python tools/ep5_pkt09_terminal_specialist_completion_gate.py`: 360/360.
+- `git diff --check`: exit 0.
+- LUDB train command: exit 0; historical aggregate reproduced exactly; holdout and MIT-BIH non-use emitted in the result.
+- Predeclaration exact-SHA CI: run `35598586487`, commit `11ac6712ab52ed802c49d6f4bc2c896fe08adc03`, success.
+- Result exact-SHA CI: run `35599645055`, commit `ef2efdcb559e0264fc0721f8c0c2283ce12b0113`, success.
+
+## Governance and next gate
+
+State remains: `diagnostic_runtime = GOVERNED_INACTIVE`, `evidence_admission = NOT_ADMITTED`, `metrics = NOT_REPORTABLE`, `activation = NOT_ELIGIBLE`, `clinical_validity = NOT_INFERRED`, project gold absent, locked V2 evaluation `NOT_READY_FOR_LOCKED_V2_EVALUATION`.
+
+The first unfinished gate is a separately predeclared LUDB internal-holdout protocol and immutable receipt path for the frozen detector/configuration/evaluator candidate. Do not improvise a holdout run. Keep PR #21 draft while that owner-reviewed gate remains unfinished. DONOR-015 remains pending in the root donor queue and was not started in this branch.
