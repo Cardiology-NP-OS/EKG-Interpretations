@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { publishDevelopmentAttemptStart, publishDevelopmentAttemptTerminal, validateRunBinding, verifyCompletedDevelopmentAttempt, verifyDevelopmentAttempt } = require("../lib/development_attempt_store");
+const { ATTEMPT_RESOURCE_LIMITS, publishDevelopmentAttemptStart, publishDevelopmentAttemptTerminal, validateRunBinding, verifyCompletedDevelopmentAttempt, verifyDevelopmentAttempt } = require("../lib/development_attempt_store");
 const { publishEvaluationBundle, REQUIRED_ARTIFACTS } = require("../lib/evaluation_artifact_store");
 const { payloadSha256 } = require("../lib/evaluation_signatures");
 const { CANDIDATE_LAUNCH_POLICY_SHA256, deriveCandidateIsolationExpectation } = require("../lib/development_candidate_isolation");
@@ -81,6 +81,83 @@ try {
   assert.equal(verified.executionStatus, "FAILED");
   assert.equal(verified.terminal.failureCode, "DEVELOPMENT_SIGNAL_HASH");
   assert.equal(JSON.stringify(verified).includes("secret"), false);
+  assert.deepEqual(verified.attemptResourceLimits, ATTEMPT_RESOURCE_LIMITS);
+  assert.ok(verified.verifiedBytes > 0 && verified.verifiedBytes <= ATTEMPT_RESOURCE_LIMITS.maxAttemptBytes);
+  const startPath = path.resolve(handle.path, "start.json");
+  const originalOpenSync = fs.openSync;
+  let startOpenCount = 0;
+  fs.openSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === startPath) startOpenCount += 1;
+    return originalOpenSync.call(fs, file, ...args);
+  };
+  try {
+    assert.equal(verifyDevelopmentAttempt(handle.path, publicKey, { expectedSignerKeyId: "test-signer" }).pass, true);
+  } finally {
+    fs.openSync = originalOpenSync;
+  }
+  assert.equal(startOpenCount, 1);
+  let substitutedDescriptor = null;
+  let substitutedClosed = false;
+  const originalCloseSync = fs.closeSync;
+  fs.openSync = function(file, flags, mode) {
+    if (typeof file === "string" && path.resolve(file) === startPath) {
+      substitutedDescriptor = originalOpenSync.call(fs, path.join(handle.path, "start.signature.json"), flags, mode);
+      return substitutedDescriptor;
+    }
+    return originalOpenSync.call(fs, file, flags, mode);
+  };
+  fs.closeSync = function(descriptor) {
+    if (descriptor === substitutedDescriptor) substitutedClosed = true;
+    return originalCloseSync.call(fs, descriptor);
+  };
+  try {
+    assert.throws(() => verifyDevelopmentAttempt(handle.path, publicKey, { expectedSignerKeyId: "test-signer" }), /DEVELOPMENT_ATTEMPT_READ_RACE/);
+  } finally {
+    fs.openSync = originalOpenSync;
+    fs.closeSync = originalCloseSync;
+  }
+  assert.equal(substitutedClosed, true);
+  const oversizedParent = path.join(root, "oversized-attempt-copy");
+  const oversizedAttempt = path.join(oversizedParent, path.basename(handle.path));
+  fs.mkdirSync(oversizedParent);
+  fs.cpSync(handle.path, oversizedAttempt, { recursive: true });
+  fs.writeFileSync(path.join(oversizedAttempt, "start.signature.json"), "x".repeat(ATTEMPT_RESOURCE_LIMITS.maxSignatureBytes + 1));
+  assert.throws(() => verifyDevelopmentAttempt(oversizedAttempt, publicKey, { expectedSignerKeyId: "test-signer" }), /DEVELOPMENT_ATTEMPT_CONTROL_FILE/);
+  const growthParent = path.join(root, "growth-attempt-copy");
+  const growthAttempt = path.join(growthParent, path.basename(handle.path));
+  fs.mkdirSync(growthParent);
+  fs.cpSync(handle.path, growthAttempt, { recursive: true });
+  const growthPath = path.resolve(growthAttempt, "start.json");
+  const originalReadSync = fs.readSync;
+  let growthDescriptor = null;
+  let growthClosed = false;
+  let growthInjected = false;
+  fs.openSync = function(file, flags, mode) {
+    const descriptor = originalOpenSync.call(fs, file, flags, mode);
+    if (typeof file === "string" && path.resolve(file) === growthPath) growthDescriptor = descriptor;
+    return descriptor;
+  };
+  fs.readSync = function(descriptor, buffer, ...args) {
+    const count = originalReadSync.call(fs, descriptor, buffer, ...args);
+    if (descriptor === growthDescriptor && !growthInjected) {
+      growthInjected = true;
+      fs.appendFileSync(growthPath, "x");
+    }
+    return count;
+  };
+  fs.closeSync = function(descriptor) {
+    if (descriptor === growthDescriptor) growthClosed = true;
+    return originalCloseSync.call(fs, descriptor);
+  };
+  try {
+    assert.throws(() => verifyDevelopmentAttempt(growthAttempt, publicKey, { expectedSignerKeyId: "test-signer" }), /DEVELOPMENT_ATTEMPT_READ_RACE/);
+  } finally {
+    fs.openSync = originalOpenSync;
+    fs.readSync = originalReadSync;
+    fs.closeSync = originalCloseSync;
+  }
+  assert.equal(growthInjected, true);
+  assert.equal(growthClosed, true);
   assert.throws(() => publishDevelopmentAttemptTerminal(handle, {
     endedAtUtc: "2026-09-22T12:02:00Z",
     executionStatus: "FAILED",
