@@ -148,6 +148,13 @@ try {
   assert.throws(() => workerBudget.nextWorkerTimeoutMs(), /DEVELOPMENT_CANDIDATE_TOTAL_TIMEOUT/);
   assert.throws(() => createCandidateWorkerBudget({ budgetMs: CANDIDATE_TOTAL_WORKER_BUDGET_MS + 1, nowMs: () => 0 }), /DEVELOPMENT_CANDIDATE_TOTAL_BUDGET_CONFIG/);
   assert.ok(CANDIDATE_TOTAL_WORKER_BUDGET_MS > CANDIDATE_WORKER_TIMEOUT_MS);
+  const realClockBudget = createCandidateWorkerBudget({ budgetMs: 100 });
+  const realClockStarted = process.hrtime.bigint();
+  const timedOutWorker = childProcess.spawnSync(process.execPath, ["-e", "setInterval(() => {}, 1000)"], { encoding: "utf8", timeout: realClockBudget.nextWorkerTimeoutMs(), windowsHide: true });
+  const realClockElapsedMs = Number(process.hrtime.bigint() - realClockStarted) / 1e6;
+  assert.equal(timedOutWorker.error && timedOutWorker.error.code, "ETIMEDOUT");
+  assert.ok(realClockElapsedMs < 10000);
+  assert.throws(() => realClockBudget.assertRemaining(), /DEVELOPMENT_CANDIDATE_TOTAL_TIMEOUT/);
   const missingInputConfigPath = path.join(temporaryRoot, "missing-input-candidate-config.json");
   const missingInputHandoffPath = path.join(temporaryRoot, "missing-input-handoff.json");
   fs.writeFileSync(missingInputConfigPath, JSON.stringify({ ...candidateConfig(config), executionInputRoot: path.join(temporaryRoot, "missing-input") }));
