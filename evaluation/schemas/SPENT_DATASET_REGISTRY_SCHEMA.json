@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-spent-registry-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "sequence", "createdAtUtc", "appendOnly", "clinicalAccuracyClaimed", "entries"],
+  "properties": {
+    "schema": {"const": "ekg-spent-registry-v1"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "createdAtUtc": {"type": "string"},
+    "appendOnly": {"const": true},
+    "clinicalAccuracyClaimed": {"const": false},
+    "entries": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["benchmarkId", "state", "spendReason", "mayExecute", "mayUseForParameterSelection", "aliases", "deniedIdentities", "protocolSha256", "reportSha256", "approverSignatures"],
+        "properties": {
+          "benchmarkId": {"type": "string", "minLength": 1},
+          "state": {"enum": ["SPENT", "FAILED_SPENT"]},
+          "mayExecute": {"const": false},
+          "mayUseForParameterSelection": {"const": false},
+          "aliases": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "deniedIdentities": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+          "protocolSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "reportSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

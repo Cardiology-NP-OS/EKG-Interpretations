@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-manifest-v1",
+  "type": "object",
+  "required": ["schema", "benchmarkId", "benchmarkVersion", "splitRole", "clinicalAccuracyClaimed", "datasetIdentity", "rights", "records", "manifestPayloadSha256"],
+  "properties": {
+    "schema": {"const": "ekg-development-manifest-v1"},
+    "splitRole": {"const": "development"},
+    "clinicalAccuracyClaimed": {"const": false},
+    "datasetIdentity": {
+      "type": "object",
+      "required": ["datasetId", "datasetRelease", "sourceManifestSha256"]
+    },
+    "rights": {
+      "type": "object",
+      "required": ["verificationStatus", "commercialProductImprovement", "rawRedistributionInRepository", "licenseSpdxOrName", "sourceUri", "licenseFileSha256", "verifiedAtUtc"]
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["recordHmacSha256", "patientHmacSha256", "splitRole", "patientIndependence", "taskEligibility", "sourceFileSha256", "labelSnapshotSha256", "sampleRateHz", "durationSeconds", "subgroups"]
+      }
+    },
+    "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

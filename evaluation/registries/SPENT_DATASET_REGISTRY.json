@@ -1,0 +1,68 @@
+{
+  "schema": "ekg-spent-registry-v1",
+  "sequence": 1,
+  "createdAtUtc": "2026-09-22T00:00:00Z",
+  "appendOnly": true,
+  "clinicalAccuracyClaimed": false,
+  "entries": [
+    {
+      "benchmarkId": "MIT-BIH-RPEAK-FULL-V1",
+      "state": "SPENT",
+      "spentAtUtc": "2026-09-18T00:00:00Z",
+      "spendReason": "Full locked MIT-BIH R-peak result was disclosed and is permanently spent.",
+      "mayExecute": false,
+      "mayUseForParameterSelection": false,
+      "aliases": [
+        "MIT-BIH-RPEAK-FULL-V1",
+        "MIT-BIH Arrhythmia Database",
+        "MITBIH",
+        "mitdb/1.0.0",
+        "ECG-DATASET-MITBIH-ARRHYTHMIA"
+      ],
+      "deniedIdentities": [
+        {
+          "datasetId": "ECG-DATASET-MITBIH-ARRHYTHMIA",
+          "datasetFamily": "MIT-BIH Arrhythmia Database",
+          "datasetRelease": "1.0.0",
+          "canonicalSource": "https://physionet.org/content/mitdb/1.0.0/"
+        },
+        {
+          "contentSha256": [
+            "c753b85dfa42c5cfd5caf38748eec106cab89353018de6e2cdd77ee15ae1413b"
+          ]
+        }
+      ],
+      "protocolSha256": "6af59c2cebd1899ef12e493e0e5ec76e19af0c53743f1d490c485fc54caeb826",
+      "reportSha256": "08dc1f4be4b51a05b29e4c22791ed0c9cd7e4d6cb1d138f143a7d23c4ff6c84a",
+      "approverSignatures": ["BOOTSTRAP_SEAL_ONLY"]
+    },
+    {
+      "benchmarkId": "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+      "state": "FAILED_SPENT",
+      "spentAtUtc": "2026-09-20T00:00:00Z",
+      "spendReason": "One-shot LUDB holdout result was disclosed, failed engineering targets, and is permanently spent.",
+      "mayExecute": false,
+      "mayUseForParameterSelection": false,
+      "aliases": [
+        "LUDB-QRS-V2-COVERAGE-V2-HOLDOUT-V1",
+        "LUDB holdout",
+        "Lobachevsky University Electrocardiography Database",
+        "ludb/1.0.1",
+        "ECG-DATASET-LUDB"
+      ],
+      "deniedIdentities": [
+        {
+          "datasetId": "ECG-DATASET-LUDB",
+          "datasetFamily": "Lobachevsky University Electrocardiography Database",
+          "datasetRelease": "1.0.1",
+          "canonicalSource": "https://physionet.org/content/ludb/1.0.1/",
+          "archiveSha256": "d03192c7361ab5deeaba3f0d46e274b9ecb0b74c9caf8964151e20f1b5a7df06",
+          "sourceManifestSha256": "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f"
+        }
+      ],
+      "protocolSha256": "5e5dd8dfbd20c1129fbbafac701b4490aab92e1f3997ae1d38045b8cea78fa88",
+      "reportSha256": "da6a51e7cac19f8f4bdecf5d1c671c9578cb6b547f37acf4f50ec59cab985d7d",
+      "approverSignatures": ["BOOTSTRAP_SEAL_ONLY"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "ekg-evaluation-trust-store-v1",
+  "keys": [
+    {
+      "keyId": "spent-registry-bootstrap-2026-09-22",
+      "algorithm": "Ed25519",
+      "status": "TRUSTED",
+      "purpose": "Bootstrap seal for the initial immutable spent-dataset registry; private key destroyed after signing.",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAPyZXqVpuHm8NedDChe+6h0xqW2BTj6KL9EK//gfO27A=\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}
