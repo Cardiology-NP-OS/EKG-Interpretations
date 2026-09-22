@@ -8,7 +8,7 @@ const os = require("os");
 const path = require("path");
 const { createCandidateWorkerBudget, gitIdentity, implementationDigest, loadEvaluationRecord, runDevelopmentCandidateExecution, runDevelopmentEvaluation, validateCandidateRunConfig, validateRunConfig } = require("../lib/development_evaluation_runner");
 const { MANDATORY_INTEGRITY_CONTROLS, deriveDevelopmentGateStatus, finalizeDevelopmentEvaluationAttempt, isDevelopmentPolicyReady, startDevelopmentEvaluationAttempt } = require("../lib/development_evaluation_signer");
-const { REQUIRED_ARTIFACTS, publishEvaluationBundle, verifyEvaluationBundle } = require("../lib/evaluation_artifact_store");
+const { BUNDLE_RESOURCE_LIMITS, REQUIRED_ARTIFACTS, bundleDigest, publishEvaluationBundle, verifyEvaluationBundle } = require("../lib/evaluation_artifact_store");
 const { verifyCompletedDevelopmentAttempt, verifyDevelopmentAttempt } = require("../lib/development_attempt_store");
 const { CANDIDATE_LAUNCH_POLICY_SHA256, CANDIDATE_TOTAL_WORKER_BUDGET_MS, CANDIDATE_WORKER_TIMEOUT_MS } = require("../lib/development_candidate_isolation");
 const { readDevelopmentExecutionHandoff, writeDevelopmentExecutionHandoff } = require("../lib/development_execution_handoff");
@@ -339,20 +339,173 @@ try {
   assert.equal(verifiedInternalResult.artifacts["internal-result.restricted.json"].currentEngine.candidateId, "target-owned-local-extrema-absolute-deviation-v1");
   assert.throws(() => verifyEvaluationBundle(receipt.path, publicKeyPem, { requestedArtifactNames: ["undeclared.json"] }), /EVALUATION_BUNDLE_ARTIFACT_REQUEST/);
   const runManifestPath = path.resolve(receipt.path, "run-manifest.json");
-  const originalReadFileSync = fs.readFileSync;
-  let runManifestReadCount = 0;
-  fs.readFileSync = function(file, ...args) {
-    if (typeof file === "string" && path.resolve(file) === runManifestPath && ++runManifestReadCount > 1) throw new Error("UNVERIFIED_RUN_MANIFEST_REREAD");
-    return originalReadFileSync.call(fs, file, ...args);
+  const originalOpenSync = fs.openSync;
+  let runManifestOpenCount = 0;
+  fs.openSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === runManifestPath && ++runManifestOpenCount > 1) throw new Error("UNVERIFIED_RUN_MANIFEST_REOPEN");
+    return originalOpenSync.call(fs, file, ...args);
   };
   let snapshotVerified;
   try {
     snapshotVerified = verifyEvaluationBundle(receipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId });
   } finally {
-    fs.readFileSync = originalReadFileSync;
+    fs.openSync = originalOpenSync;
   }
-  assert.equal(runManifestReadCount, 1);
+  assert.equal(runManifestOpenCount, 1);
   assert.equal(snapshotVerified.runManifest.executionHandoffSha256, verified.runManifest.executionHandoffSha256);
+  assert.deepEqual(receipt.bundleResourceLimits, BUNDLE_RESOURCE_LIMITS);
+  assert.deepEqual(verified.bundleResourceLimits, BUNDLE_RESOURCE_LIMITS);
+  assert.ok(verified.verifiedBytes > 0 && verified.verifiedBytes <= BUNDLE_RESOURCE_LIMITS.maxTotalBytes);
+  const bundleNames = fs.readdirSync(receipt.path);
+  const bundleSizes = Object.fromEntries(bundleNames.map(name => [name, fs.statSync(path.join(receipt.path, name)).size]));
+  const exactResourceLimits = {
+    maxChecksumBytes: bundleSizes["checksums.sha256"],
+    maxSignatureBytes: bundleSizes["signature.json"],
+    maxRunManifestBytes: bundleSizes["run-manifest.json"],
+    maxArtifactBytes: Math.max(...REQUIRED_ARTIFACTS.map(name => bundleSizes[name])),
+    maxTotalBytes: Object.values(bundleSizes).reduce((sum, value) => sum + value, 0),
+  };
+  assert.equal(verifyEvaluationBundle(receipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId, resourceLimits: exactResourceLimits }).verifiedBytes, exactResourceLimits.maxTotalBytes);
+  for (const field of Object.keys(exactResourceLimits)) {
+    assert.throws(() => verifyEvaluationBundle(receipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId, resourceLimits: { ...exactResourceLimits, [field]: exactResourceLimits[field] - 1 } }), field === "maxTotalBytes" ? /EVALUATION_BUNDLE_TOTAL_SIZE/ : /EVALUATION_BUNDLE_FILE_SIZE/);
+  }
+  assert.throws(() => verifyEvaluationBundle(receipt.path, publicKeyPem, { resourceLimits: { ...BUNDLE_RESOURCE_LIMITS, maxTotalBytes: BUNDLE_RESOURCE_LIMITS.maxTotalBytes + 1 } }), /EVALUATION_BUNDLE_RESOURCE_LIMITS/);
+  const accessorCalls = {};
+  const accessorLimits = {};
+  for (const [name, value] of Object.entries(exactResourceLimits)) {
+    accessorCalls[name] = 0;
+    Object.defineProperty(accessorLimits, name, { enumerable: true, get() { accessorCalls[name] += 1; return accessorCalls[name] === 1 ? value : BUNDLE_RESOURCE_LIMITS[name] + 1; } });
+  }
+  assert.equal(verifyEvaluationBundle(receipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId, resourceLimits: accessorLimits }).pass, true);
+  assert.equal(Object.values(accessorCalls).every(count => count === 1), true);
+  const originalOpendirSync = fs.opendirSync;
+  let inventoryReads = 0;
+  let inventoryClosed = false;
+  fs.opendirSync = function(directory) {
+    if (path.resolve(String(directory)) !== path.resolve(receipt.path)) return originalOpendirSync.call(fs, directory);
+    return {
+      readSync() {
+        inventoryReads += 1;
+        return { name: `unexpected-${inventoryReads}` };
+      },
+      closeSync() { inventoryClosed = true; },
+    };
+  };
+  try {
+    assert.throws(() => verifyEvaluationBundle(receipt.path, publicKeyPem), /EVALUATION_BUNDLE_UNDECLARED_FILE/);
+  } finally {
+    fs.opendirSync = originalOpendirSync;
+  }
+  assert.equal(inventoryReads, REQUIRED_ARTIFACTS.length + 4);
+  assert.equal(inventoryClosed, true);
+  const copyBundle = name => {
+    const parent = path.join(temporaryRoot, name);
+    const destination = path.join(parent, path.basename(receipt.path));
+    fs.mkdirSync(parent);
+    fs.cpSync(receipt.path, destination, { recursive: true });
+    return destination;
+  };
+  const unauthenticatedBundle = copyBundle("unauthenticated-checksum");
+  const unauthenticatedChecksum = path.join(unauthenticatedBundle, "checksums.sha256");
+  const checksumText = fs.readFileSync(unauthenticatedChecksum, "ascii");
+  fs.writeFileSync(unauthenticatedChecksum, `${checksumText[0] === "0" ? "1" : "0"}${checksumText.slice(1)}`, "ascii");
+  const artifactPaths = new Set([...REQUIRED_ARTIFACTS, "run-manifest.json"].map(name => path.resolve(unauthenticatedBundle, name)));
+  let unauthenticatedArtifactOpens = 0;
+  fs.openSync = function(file, ...args) {
+    if (typeof file === "string" && artifactPaths.has(path.resolve(file))) unauthenticatedArtifactOpens += 1;
+    return originalOpenSync.call(fs, file, ...args);
+  };
+  try {
+    assert.throws(() => verifyEvaluationBundle(unauthenticatedBundle, publicKeyPem), /EVALUATION_BUNDLE_MERKLE_ROOT/);
+  } finally {
+    fs.openSync = originalOpenSync;
+  }
+  assert.equal(unauthenticatedArtifactOpens, 0);
+  const duplicateChecksumBundle = copyBundle("duplicate-checksum");
+  const duplicateChecksumPath = path.join(duplicateChecksumBundle, "checksums.sha256");
+  const duplicateRows = fs.readFileSync(duplicateChecksumPath, "ascii").trim().split("\n");
+  fs.appendFileSync(duplicateChecksumPath, `${duplicateRows[0]}\n`);
+  assert.throws(() => verifyEvaluationBundle(duplicateChecksumBundle, publicKeyPem), /EVALUATION_BUNDLE_CHECKSUM_DUPLICATE/);
+  const malformedBundle = copyBundle("malformed-unrequested-artifact");
+  const malformedArtifactPath = path.join(malformedBundle, "logs.json");
+  fs.writeFileSync(malformedArtifactPath, "undefined\n");
+  const malformedHashes = Object.fromEntries(fs.readFileSync(path.join(malformedBundle, "checksums.sha256"), "ascii").trim().split("\n").map(row => {
+    const match = /^([0-9a-f]{64})  (.+)$/.exec(row);
+    return [match[2], match[1]];
+  }));
+  malformedHashes["logs.json"] = crypto.createHash("sha256").update(fs.readFileSync(malformedArtifactPath)).digest("hex");
+  fs.writeFileSync(path.join(malformedBundle, "checksums.sha256"), `${Object.entries(malformedHashes).sort(([left], [right]) => left.localeCompare(right)).map(([name, hash]) => `${hash}  ${name}`).join("\n")}\n`, "ascii");
+  const malformedMerkleRoot = bundleDigest(malformedHashes);
+  const malformedSignature = JSON.parse(fs.readFileSync(path.join(malformedBundle, "signature.json"), "utf8"));
+  malformedSignature.merkleRootSha256 = malformedMerkleRoot;
+  malformedSignature.signatureBase64 = crypto.sign(null, Buffer.from(malformedMerkleRoot, "ascii"), privateKeyPem).toString("base64");
+  fs.writeFileSync(path.join(malformedBundle, "signature.json"), `${JSON.stringify(malformedSignature, null, 2)}\n`);
+  assert.throws(() => verifyEvaluationBundle(malformedBundle, publicKeyPem), /EVALUATION_BUNDLE_ARTIFACT_JSON/);
+  const substitutionTarget = path.resolve(receipt.path, "gates.json");
+  let substitutionDescriptor = null;
+  let substitutionClosed = false;
+  const originalCloseSync = fs.closeSync;
+  fs.openSync = function(file, flags, mode) {
+    if (typeof file === "string" && path.resolve(file) === substitutionTarget) {
+      substitutionDescriptor = originalOpenSync.call(fs, path.join(receipt.path, "run-manifest.json"), flags, mode);
+      return substitutionDescriptor;
+    }
+    return originalOpenSync.call(fs, file, flags, mode);
+  };
+  fs.closeSync = function(descriptor) {
+    if (descriptor === substitutionDescriptor) substitutionClosed = true;
+    return originalCloseSync.call(fs, descriptor);
+  };
+  try {
+    assert.throws(() => verifyEvaluationBundle(receipt.path, publicKeyPem), /EVALUATION_BUNDLE_READ_RACE/);
+  } finally {
+    fs.openSync = originalOpenSync;
+    fs.closeSync = originalCloseSync;
+  }
+  assert.equal(substitutionClosed, true);
+  const growthBundle = copyBundle("growth-race");
+  const growthTarget = path.resolve(growthBundle, "gates.json");
+  const originalReadSync = fs.readSync;
+  let growthDescriptor = null;
+  let growthClosed = false;
+  let growthInjected = false;
+  fs.openSync = function(file, flags, mode) {
+    const descriptor = originalOpenSync.call(fs, file, flags, mode);
+    if (typeof file === "string" && path.resolve(file) === growthTarget) growthDescriptor = descriptor;
+    return descriptor;
+  };
+  fs.readSync = function(descriptor, buffer, ...args) {
+    const count = originalReadSync.call(fs, descriptor, buffer, ...args);
+    if (descriptor === growthDescriptor && !growthInjected) {
+      growthInjected = true;
+      fs.appendFileSync(growthTarget, "x");
+    }
+    return count;
+  };
+  fs.closeSync = function(descriptor) {
+    if (descriptor === growthDescriptor) growthClosed = true;
+    return originalCloseSync.call(fs, descriptor);
+  };
+  try {
+    assert.throws(() => verifyEvaluationBundle(growthBundle, publicKeyPem), /EVALUATION_BUNDLE_READ_RACE/);
+  } finally {
+    fs.openSync = originalOpenSync;
+    fs.readSync = originalReadSync;
+    fs.closeSync = originalCloseSync;
+  }
+  assert.equal(growthInjected, true);
+  assert.equal(growthClosed, true);
+  const symlinkBundle = copyBundle("symlink-artifact");
+  const symlinkArtifact = path.join(symlinkBundle, "gates.json");
+  const symlinkTarget = path.join(temporaryRoot, "outside-gates.json");
+  fs.copyFileSync(symlinkArtifact, symlinkTarget);
+  fs.rmSync(symlinkArtifact);
+  try {
+    fs.symlinkSync(symlinkTarget, symlinkArtifact);
+    assert.throws(() => verifyEvaluationBundle(symlinkBundle, publicKeyPem), /EVALUATION_BUNDLE_ARTIFACT_FILE/);
+  } catch (error) {
+    if (!error || !["EPERM", "EACCES"].includes(error.code)) throw error;
+  }
   const completedAttempt = verifyCompletedDevelopmentAttempt(path.join(artifactRoot, "attempts", "2026", "09", "22", config.attemptId), artifactRoot, publicKeyPem, { expectedSignerKeyId: config.signerKeyId });
   assert.equal(completedAttempt.executionStatus, "COMPLETED");
   assert.equal(Object.hasOwn(completedAttempt.start.runBinding, "candidateReferenceIsolation"), false);
@@ -379,9 +532,62 @@ try {
   const publishedText = fs.readdirSync(receipt.path).filter(name => name.endsWith(".json")).map(name => fs.readFileSync(path.join(receipt.path, name), "utf8")).join("\n");
   for (const row of cleanPartition.rows.filter(row => row.splitRole !== "development")) for (const field of ["recordHmacSha256", "patientHmacSha256", "sourceFileSha256", "nearDuplicateGroupSha256"]) assert.equal(publishedText.includes(row[field]), false);
   fs.rmSync(path.join(artifactRoot, "attempts", "2026", "09", "22", config.attemptId, "terminal"), { recursive: true });
-  assert.equal(finalizeDevelopmentEvaluationAttempt(config, handoff, privateKeyPem).runId, receipt.runId);
+  const recoveredReceipt = finalizeDevelopmentEvaluationAttempt(config, handoff, privateKeyPem);
+  assert.equal(recoveredReceipt.runId, receipt.runId);
+  assert.deepEqual(recoveredReceipt.bundleResourceLimits, BUNDLE_RESOURCE_LIMITS);
 
   const publishedArtifacts = Object.fromEntries(REQUIRED_ARTIFACTS.map(name => [name, JSON.parse(fs.readFileSync(path.join(receipt.path, name), "utf8"))]));
+  const nonEnumerableArtifacts = { ...publishedArtifacts };
+  const hiddenLogs = nonEnumerableArtifacts["logs.json"];
+  delete nonEnumerableArtifacts["logs.json"];
+  Object.defineProperty(nonEnumerableArtifacts, "logs.json", { enumerable: false, value: hiddenLogs });
+  assert.throws(() => publishEvaluationBundle(artifactRoot, {
+    storageMode: config.storageMode,
+    startedAtUtc: "2026-09-22T12:00:10Z",
+    runManifest: { ...verified.runManifest, runId: null, runIdentityDigest: crypto.createHash("sha256").update("hidden-required-artifact").digest("hex") },
+    artifacts: nonEnumerableArtifacts,
+    signingPrivateKeyPem: privateKeyPem,
+    signerKeyId: config.signerKeyId,
+  }), /EVALUATION_ARTIFACT_REQUIRED/);
+  let nestedManifestReads = 0;
+  let runIdentityReads = 0;
+  const mutableManifestField = {};
+  Object.defineProperty(mutableManifestField, "value", { enumerable: true, get() { nestedManifestReads += 1; return nestedManifestReads === 1 ? "bounded" : "x".repeat(BUNDLE_RESOURCE_LIMITS.maxRunManifestBytes); } });
+  const snapshottedRunManifest = { ...verified.runManifest, runId: null, mutableManifestField };
+  Object.defineProperty(snapshottedRunManifest, "runIdentityDigest", { enumerable: true, get() { runIdentityReads += 1; return runIdentityReads === 1 ? "a".repeat(64) : "b".repeat(64); } });
+  let startedAtReads = 0;
+  let artifactsReads = 0;
+  const snapshottedInput = { storageMode: config.storageMode, runManifest: snapshottedRunManifest, signingPrivateKeyPem: privateKeyPem, signerKeyId: config.signerKeyId };
+  Object.defineProperty(snapshottedInput, "startedAtUtc", { enumerable: true, get() { startedAtReads += 1; return startedAtReads === 1 ? "2026-09-22T12:00:15Z" : "2027-10-23T01:02:03Z"; } });
+  Object.defineProperty(snapshottedInput, "artifacts", { enumerable: true, get() { artifactsReads += 1; return artifactsReads === 1 ? publishedArtifacts : {}; } });
+  const snapshottedPublication = publishEvaluationBundle(artifactRoot, snapshottedInput);
+  const snapshottedVerification = verifyEvaluationBundle(snapshottedPublication.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId });
+  assert.equal(nestedManifestReads, 1);
+  assert.equal(runIdentityReads, 1);
+  assert.equal(startedAtReads, 1);
+  assert.equal(artifactsReads, 1);
+  assert.match(snapshottedPublication.path, /2026[\\/]09[\\/]22/);
+  assert.match(snapshottedPublication.runId, /_a{16}$/);
+  assert.equal(snapshottedPublication.runDigest, snapshottedVerification.runDigest);
+  assert.equal(snapshottedVerification.runManifest.runIdentityDigest, "a".repeat(64));
+  assert.equal(snapshottedVerification.runManifest.mutableManifestField.value, "bounded");
+  assert.throws(() => publishEvaluationBundle(artifactRoot, {
+    storageMode: config.storageMode,
+    startedAtUtc: "2026-09-22T12:00:20Z",
+    runManifest: { ...verified.runManifest, runId: null, runIdentityDigest: crypto.createHash("sha256").update("invalid-json-value").digest("hex") },
+    artifacts: { ...publishedArtifacts, "logs.json": undefined },
+    signingPrivateKeyPem: privateKeyPem,
+    signerKeyId: config.signerKeyId,
+  }), /EVALUATION_BUNDLE_JSON_VALUE/);
+  assert.throws(() => publishEvaluationBundle(artifactRoot, {
+    storageMode: config.storageMode,
+    startedAtUtc: "2026-09-22T12:00:30Z",
+    runManifest: { ...verified.runManifest, runId: null, runIdentityDigest: crypto.createHash("sha256").update("oversized-signature-envelope").digest("hex") },
+    artifacts: publishedArtifacts,
+    signingPrivateKeyPem: privateKeyPem,
+    signerKeyId: "x".repeat(BUNDLE_RESOURCE_LIMITS.maxSignatureBytes),
+  }), /EVALUATION_BUNDLE_FILE_SIZE/);
+  assert.equal(fs.readdirSync(path.join(artifactRoot, "2026", "09", "22")).some(name => name.startsWith(".staging-")), false);
   const approvedPrior = publishEvaluationBundle(artifactRoot, {
     storageMode: config.storageMode,
     startedAtUtc: "2026-09-22T12:01:00Z",
@@ -394,24 +600,18 @@ try {
   start(priorConfig);
   const priorHandoff = runDevelopmentCandidateExecution(candidateConfig(priorConfig));
   const priorResultPath = path.resolve(approvedPrior.path, "internal-result.restricted.json");
-  const originalPriorResult = fs.readFileSync(priorResultPath);
-  const forgedPriorResult = JSON.parse(originalPriorResult.toString("utf8"));
-  forgedPriorResult.currentEngine.benchmarkVersion = "FORGED_AFTER_VERIFICATION";
-  let priorResultReadCount = 0;
-  fs.readFileSync = function(file, ...args) {
-    if (typeof file === "string" && path.resolve(file) === priorResultPath) {
-      priorResultReadCount += 1;
-      if (priorResultReadCount > 1) return args[0] ? `${JSON.stringify(forgedPriorResult)}\n` : Buffer.from(`${JSON.stringify(forgedPriorResult)}\n`, "utf8");
-    }
-    return originalReadFileSync.call(fs, file, ...args);
+  let priorResultOpenCount = 0;
+  fs.openSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === priorResultPath && ++priorResultOpenCount > 1) throw new Error("UNVERIFIED_PRIOR_RESULT_REOPEN");
+    return originalOpenSync.call(fs, file, ...args);
   };
   let priorComparisonReceipt;
   try {
     priorComparisonReceipt = finalizeDevelopmentEvaluationAttempt(priorConfig, priorHandoff, privateKeyPem);
   } finally {
-    fs.readFileSync = originalReadFileSync;
+    fs.openSync = originalOpenSync;
   }
-  assert.equal(priorResultReadCount, 1);
+  assert.equal(priorResultOpenCount, 1);
   const priorComparisonBundle = verifyEvaluationBundle(priorComparisonReceipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId, requestedArtifactNames: ["internal-result.restricted.json"] });
   assert.equal(priorComparisonBundle.artifacts["internal-result.restricted.json"].versusPreviousApprovedRun.status, "PASSED");
   assert.equal(priorComparisonBundle.artifacts["internal-result.restricted.json"].versusPreviousApprovedRun.baselineCandidateId, "target-owned-local-extrema-absolute-deviation-v1");
