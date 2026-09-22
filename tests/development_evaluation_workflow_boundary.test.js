@@ -62,6 +62,10 @@ for (const requiredPath of [
 const evaluationHarnessTests = Array.from(packageJson.scripts["test:evaluation-harness"].matchAll(/\bnode\s+(tests\/[^\s&]+)/g), match => match[1]);
 assert.ok(evaluationHarnessTests.length > 0);
 for (const testPath of evaluationHarnessTests) assert.ok(configuredPushPaths.some(pattern => pathMatches(pattern, testPath)), `push trigger excludes ${testPath}`);
+const workflowPreamble = workflow.split(/^jobs:\s*$/m)[0];
+const fullDevelopmentJob = workflow.split("  full-development:")[1];
+assert.equal(/^concurrency:/m.test(workflowPreamble), false);
+assert.match(fullDevelopmentJob, /^    concurrency:\r?\n      group: development-ecg-evaluation-full\r?\n      cancel-in-progress: false/m);
 assert.match(workflow, /runs-on: \[self-hosted, linux, x64, ecg-development\]/);
 assert.match(workflow, /APPLICATION_WRITE_ONCE_SIGNED/);
 assert.match(workflow, /manifest-trust-store\.json/);

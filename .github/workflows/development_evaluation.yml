@@ -24,10 +24,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: development-ecg-evaluation
-  cancel-in-progress: false
-
 jobs:
   synthetic-boundary:
     runs-on: ubuntu-latest
@@ -42,6 +38,9 @@ jobs:
       - run: npm run test:evaluation-harness
 
   full-development:
+    concurrency:
+      group: development-ecg-evaluation-full
+      cancel-in-progress: false
     needs: synthetic-boundary
     runs-on: [self-hosted, linux, x64, ecg-development]
     timeout-minutes: 360
