@@ -120,6 +120,32 @@ try {
   };
   const attempt = (attemptId, overrides = {}) => ({ ...config, ...overrides, attemptId, executionInputRoot: path.join(temporaryRoot, "inputs", attemptId) });
   const candidateConfig = signerConfig => ({ executionInputRoot: signerConfig.executionInputRoot, candidateManifestPath: path.join(controlsRoot, "candidate-manifest.json"), candidateSignaturePath: path.join(controlsRoot, "candidate-manifest.sig.json"), candidateTrustStorePath: path.join(controlsRoot, "candidate-trust-store.json"), expectedCandidateTrustStoreSha256: signerConfig.expectedCandidateTrustStoreSha256, repositoryRoot, candidateRoot: repositoryRoot, inputMountMode: "READ_ONLY", networkIsolation: "SYNTHETIC_TEST_PROCESS", candidateRuntimeImageDigest: null, candidateLaunchPolicySha256: CANDIDATE_LAUNCH_POLICY_SHA256, candidateExpectedUid: null, candidateExpectedGid: null });
+  const createDriftedCandidate = (name, mutate) => {
+    const candidateRoot = path.join(temporaryRoot, `${name}-candidate`);
+    const controlRoot = path.join(temporaryRoot, `${name}-controls`);
+    for (const artifact of candidateManifest.artifacts) {
+      const target = path.join(candidateRoot, artifact.file);
+      fs.mkdirSync(path.dirname(target), { recursive: true });
+      fs.copyFileSync(path.join(repositoryRoot, artifact.file), target);
+    }
+    mutate(candidateRoot);
+    const manifest = JSON.parse(JSON.stringify(candidateManifest));
+    manifest.candidateId = `${candidateManifest.candidateId}-${name}`;
+    manifest.artifacts = manifest.artifacts.map(artifact => {
+      const bytes = fs.readFileSync(path.join(candidateRoot, artifact.file));
+      return { file: artifact.file, bytes: bytes.length, sha256: crypto.createHash("sha256").update(bytes).digest("hex") };
+    });
+    manifest.executionIdentitySha256 = require("../lib/evaluation_signatures").payloadSha256({ schema: "ekg-development-execution-identity-v1", task: manifest.task, candidateId: manifest.candidateId, loadingPolicy: "PRIVATE_COMMONJS_EXACT_UTF8_BYTES", entryFiles: ENTRY_FILES.slice(), artifacts: manifest.artifacts });
+    delete manifest.manifestPayloadSha256;
+    manifest.manifestPayloadSha256 = require("../lib/evaluation_signatures").payloadSha256(manifest);
+    const signature = { schema: "ekg-detached-signature-v1", algorithm: "Ed25519", keyId: candidateTrustStore.keys[0].keyId, payloadSha256: manifest.manifestPayloadSha256, signatureBase64: crypto.sign(null, Buffer.from(require("../lib/evaluation_runtime").stableJson(canonicalCandidatePayload(manifest))), candidateKeys.privateKey).toString("base64") };
+    fs.mkdirSync(controlRoot);
+    const manifestPath = path.join(controlRoot, "candidate-manifest.json");
+    const signaturePath = path.join(controlRoot, "candidate-manifest.sig.json");
+    fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+    fs.writeFileSync(signaturePath, `${JSON.stringify(signature, null, 2)}\n`);
+    return { candidateRoot, manifestPath, signaturePath };
+  };
   const start = signerConfig => { fs.mkdirSync(signerConfig.executionInputRoot, { recursive: true }); return startDevelopmentEvaluationAttempt(signerConfig, privateKeyPem); };
   assert.throws(() => validateRunConfig({ ...config, signingPrivateKeyPem: privateKeyPem }), /DEVELOPMENT_RUN_CONFIG_UNKNOWN_FIELD/);
   assert.throws(() => validateRunConfig({ ...config, previousApprovedBundlePath: "prior" }), /DEVELOPMENT_PREVIOUS_BASELINE_CONFIG/);
@@ -173,6 +199,31 @@ try {
   fs.writeFileSync(path.join(preparationBlock.executionInputRoot, "undeclared.json"), "{}\n");
   assert.throws(() => startDevelopmentEvaluationAttempt(preparationBlock, privateKeyPem), /DEVELOPMENT_EXECUTION_INPUT_NOT_EMPTY/);
   assert.equal(fs.existsSync(path.join(artifactRoot, "attempts", "2026", "09", "22", preparationBlock.attemptId)), false);
+
+  const protocolDrift = createDriftedCandidate("protocol-drift", candidateRoot => {
+    const protocolPath = path.join(candidateRoot, "evaluation", "protocols", "DEVELOPMENT_RPEAK_EVALUATION_V1.json");
+    const protocol = JSON.parse(fs.readFileSync(protocolPath, "utf8"));
+    protocol.primaryToleranceMs += 1;
+    protocol.sensitivityToleranceMs = [protocol.primaryToleranceMs];
+    fs.writeFileSync(protocolPath, `${JSON.stringify(protocol, null, 2)}\n`);
+  });
+  const protocolDriftConfig = attempt("signer-protocol-drift", { repositoryRoot: protocolDrift.candidateRoot, candidateRoot: protocolDrift.candidateRoot, candidateManifestPath: protocolDrift.manifestPath, candidateSignaturePath: protocolDrift.signaturePath });
+  assert.throws(() => start(protocolDriftConfig), /DEVELOPMENT_SIGNER_CONTROL_ARTIFACT_MISMATCH/);
+  assert.equal(fs.existsSync(path.join(artifactRoot, "attempts", "2026", "09", "22", protocolDriftConfig.attemptId)), false);
+  assert.deepEqual(fs.readdirSync(protocolDriftConfig.executionInputRoot), []);
+
+  const policyDrift = createDriftedCandidate("policy-drift", candidateRoot => {
+    const policyPath = path.join(candidateRoot, "evaluation", "protocols", "DEVELOPMENT_RPEAK_REGRESSION_POLICY_V1.json");
+    const policy = JSON.parse(fs.readFileSync(policyPath, "utf8"));
+    policy.approvalStatus = "APPROVED";
+    policy.gates = [{ id: "candidate-selected-floor", metricPath: "summary.micro.sensitivity", direction: "higher", blocking: true, absoluteFloor: 0.000001 }];
+    policy.bootstrap = { replicates: Number.MAX_SAFE_INTEGER };
+    fs.writeFileSync(policyPath, `${JSON.stringify(policy, null, 2)}\n`);
+  });
+  const policyDriftConfig = attempt("signer-policy-drift", { repositoryRoot: policyDrift.candidateRoot, candidateRoot: policyDrift.candidateRoot, candidateManifestPath: policyDrift.manifestPath, candidateSignaturePath: policyDrift.signaturePath });
+  assert.throws(() => start(policyDriftConfig), /DEVELOPMENT_SIGNER_CONTROL_ARTIFACT_MISMATCH/);
+  assert.equal(fs.existsSync(path.join(artifactRoot, "attempts", "2026", "09", "22", policyDriftConfig.attemptId)), false);
+  assert.deepEqual(fs.readdirSync(policyDriftConfig.executionInputRoot), []);
 
   const cleanPartition = JSON.parse(fs.readFileSync(config.partitionIndexPath, "utf8"));
   const invalidPartition = JSON.parse(JSON.stringify(cleanPartition));
