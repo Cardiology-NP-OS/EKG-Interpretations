@@ -16,6 +16,12 @@ const candidateDockerfile = fs.readFileSync(path.join(root, "evaluation", "candi
 const candidateWorker = fs.readFileSync(path.join(root, "lib", "development_candidate_worker.js"), "utf8");
 const candidateIsolationSchema = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "schemas", "DEVELOPMENT_CANDIDATE_ISOLATION_EVIDENCE_SCHEMA.json"), "utf8"));
 const combinedExecutableSurface = `${workflow}\n${runner}\n${signer}`;
+const externalActionReferences = source => Array.from(source.matchAll(/uses:\s*([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+)@([^\s]+)/g), match => ({ action: match[1], reference: match[2] }));
+const workflowActions = externalActionReferences(workflow);
+const watchdogActions = externalActionReferences(watchdog);
+assert.deepEqual(workflowActions.map(row => row.action), ["actions/checkout", "actions/setup-node", "actions/checkout"]);
+assert.deepEqual(watchdogActions.map(row => row.action), ["actions/checkout", "actions/upload-artifact"]);
+for (const row of [...workflowActions, ...watchdogActions]) assert.match(row.reference, /^[0-9a-f]{40}$/, `mutable action reference: ${row.action}@${row.reference}`);
 const prohibited = ["run_mitbih_rpeak_pilot.py", "run_mitbih_rpeak_full.py", "run_ludb_qrs_v2_dev.py", "run_ludb_qrs_v2_coverage_v2_dev.py", "run_ludb_qrs_v2_coverage_v2_holdout.py", "clinical_accuracy_pilot.yml", "validate:qrs-v2-ludb-train", "validate:qrs-v2-ludb-coverage-v2-train", "validate:qrs-v2-ludb-coverage-v2-holdout"];
 for (const value of prohibited) assert.equal(combinedExecutableSurface.includes(value), false, `prohibited executable reference: ${value}`);
 assert.match(workflow, /schedule:/);
