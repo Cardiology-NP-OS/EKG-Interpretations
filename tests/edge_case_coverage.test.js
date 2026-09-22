@@ -5,5 +5,5 @@ const c=read("ECG_EDGE_CASE_COVERAGE.json");
 check("edge coverage remains governed inactive",()=>{assert.strictEqual(c.authority.diagnostic_runtime,"GOVERNED_INACTIVE");assert.strictEqual(c.authority.project_gold,false);assert.strictEqual(c.authority.metrics,"NOT_REPORTABLE")});
 check("edge categories are unique and broad",()=>{assert.ok(c.categories.length>=14);assert.strictEqual(new Set(c.categories.map(x=>x.id)).size,c.categories.length)});
 check("every declared edge test exists",()=>{for(const x of c.categories)for(const t of x.tests)assert.ok(fs.existsSync(path.join(root,t)),`${x.id}: ${t}`)});
-check("critical adversarial domains are explicit",()=>{for(const id of ["SOURCE-PROVENANCE","STRUCTURED-INPUT-ADVERSARIAL","WFDB-FORMAT","DATASET-SPLITS","MODEL-ASSETS","GOVERNANCE","HANDOFF-CONTINUITY"])assert.ok(c.categories.some(x=>x.id===id),id)});
+check("critical adversarial domains are explicit",()=>{for(const id of ["SOURCE-PROVENANCE","STRUCTURED-INPUT-ADVERSARIAL","WFDB-FORMAT","DATASET-SPLITS","MODEL-ASSETS","GOVERNANCE","HANDOFF-CONTINUITY","DEVELOPMENT-EVALUATION-ACCOUNTING"])assert.ok(c.categories.some(x=>x.id===id),id)});
 console.log(JSON.stringify({schema:"ekg-edge-case-coverage-tests-v1",pass:true,passed,total:passed,categories:c.categories.length}));

@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ekg-development-run-config-v1",
+  "$id": "ekg-development-run-config-v2",
   "type": "object",
   "additionalProperties": false,
-  "required": ["manifestPath", "manifestSignaturePath", "manifestTrustStorePath", "expectedManifestTrustStoreSha256", "partitionIndexPath", "candidateManifestPath", "candidateSignaturePath", "candidateTrustStorePath", "expectedCandidateTrustStoreSha256", "corpusRoot", "artifactRoot", "inputMountMode", "networkIsolation", "storageMode", "startedAtUtc", "trigger", "signerKeyId", "environmentImageDigest"],
+  "required": ["manifestPath", "manifestSignaturePath", "manifestTrustStorePath", "expectedManifestTrustStoreSha256", "partitionIndexPath", "candidateManifestPath", "candidateSignaturePath", "candidateTrustStorePath", "expectedCandidateTrustStoreSha256", "corpusRoot", "artifactRoot", "inputMountMode", "networkIsolation", "storageMode", "startedAtUtc", "trigger", "signerKeyId", "environmentImageDigest", "attemptId", "workflowRunId", "workflowRunAttempt", "workflowSha"],
   "properties": {
     "manifestPath": {"type": "string", "minLength": 1},
     "manifestSignaturePath": {"type": "string", "minLength": 1},
@@ -34,7 +34,11 @@
     "previousBundlePublicKeyPem": {"type": ["string", "null"], "minLength": 1},
     "previousBundleSignerKeyId": {"type": ["string", "null"], "minLength": 1},
     "signerKeyId": {"type": "string", "minLength": 1},
-    "environmentImageDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    "environmentImageDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "attemptId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "workflowRunId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "workflowRunAttempt": {"type": "integer", "minimum": 1},
+    "workflowSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
   },
   "dependentRequired": {
     "previousApprovedBundlePath": ["previousBundlePublicKeyPem", "previousBundleSignerKeyId"],

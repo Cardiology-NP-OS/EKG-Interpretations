@@ -1,6 +1,7 @@
 "use strict";
 
 const assert = require("assert");
+const childProcess = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
@@ -38,6 +39,12 @@ assert.match(workflow, /EKG_DEVELOPMENT_CANDIDATE_TRUST_STORE_SHA256/);
 assert.match(workflow, /expectedCandidateTrustStoreSha256/);
 assert.match(workflow, /previousBundleSignerKeyId/);
 assert.match(workflow, /environmentImageDigest/);
+assert.match(workflow, /attemptId:'github-'/);
+assert.match(workflow, /workflowRunId:process\.env\.GITHUB_RUN_ID/);
+assert.match(workflow, /workflowRunAttempt:Number\(process\.env\.GITHUB_RUN_ATTEMPT\)/);
+assert.match(workflow, /workflowSha:process\.env\.GITHUB_SHA/);
+assert.match(workflow, /Reconcile signed attempt terminal state\n        if: always\(\)/);
+assert.match(workflow, /verify_development_attempt\.js/);
 assert.match(workflow, /--network none/);
 assert.match(workflow, /node:22@sha256:/);
 assert.match(workflow, /weekly\?10000:2000/);
@@ -48,4 +55,10 @@ assert.match(watchdog, /--limit 20/);
 assert.match(watchdog, /rows\.some/);
 assert.match(watchdog, /30\*60\*60\*1000/);
 assert.match(watchdog, /issue create/);
+const runnerUsage = childProcess.spawnSync(process.execPath, [path.join(root, "tools", "run_development_evaluation.js")], { encoding: "utf8" });
+assert.equal(runnerUsage.status, 1);
+assert.equal(runnerUsage.stderr, "USAGE\n");
+const verifierUsage = childProcess.spawnSync(process.execPath, [path.join(root, "tools", "verify_development_attempt.js")], { encoding: "utf8" });
+assert.equal(verifierUsage.status, 1);
+assert.equal(verifierUsage.stderr, "DEVELOPMENT_ATTEMPT_VERIFY_USAGE\n");
 console.log("development evaluation workflow boundary tests passed");

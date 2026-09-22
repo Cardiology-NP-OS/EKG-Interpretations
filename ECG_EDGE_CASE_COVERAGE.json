@@ -1,6 +1,6 @@
 {
   "schema": "ekg-edge-case-coverage-v1",
-  "updated_date": "2026-09-19",
+  "updated_date": "2026-09-22",
   "status": "REQUIRED_COVERAGE_ACTIVE",
   "authority": {
     "diagnostic_runtime": "GOVERNED_INACTIVE",
@@ -154,6 +154,16 @@
       "scope": "frozen code-under-test commit/tree, exact-main CI evidence, donor-frontier drift, image capability truth, zero project-gold state, validation quarantine and authority separation",
       "tests": [
         "tests/preclinical_validation_checkpoint.test.js"
+      ]
+    },
+    {
+      "id": "DEVELOPMENT-EVALUATION-ACCOUNTING",
+      "scope": "bounded failure codes, per-record primary/replay terminal outcomes, excluded and not-run accounting, immutable signed attempt starts and terminal states, retry identity, publication collisions, incomplete-attempt detection, execution/gate separation and protected-row non-disclosure",
+      "tests": [
+        "tests/development_run_accounting.test.js",
+        "tests/development_attempt_store.test.js",
+        "tests/development_evaluation_runner.test.js",
+        "tests/development_evaluation_workflow_boundary.test.js"
       ]
     }
   ],

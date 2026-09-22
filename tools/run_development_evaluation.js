@@ -3,7 +3,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { runDevelopmentEvaluation } = require("../lib/development_evaluation_runner");
+const { normalizeFailureCode, runDevelopmentEvaluation } = require("../lib/development_evaluation_runner");
 
 function fail(message) {
   process.stderr.write(`${message}\n`);
@@ -25,5 +25,5 @@ try {
   process.stdout.write(`${JSON.stringify(result)}\n`);
   if (result.gateStatus === "FAILED") process.exitCode = 2;
 } catch (error) {
-  fail(error && error.message ? error.message : String(error));
+  fail(normalizeFailureCode(error, "DEVELOPMENT_EVALUATION_CLI_FAILURE"));
 }
