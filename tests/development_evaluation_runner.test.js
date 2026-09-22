@@ -6,7 +6,8 @@ const crypto = require("crypto");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { createCandidateWorkerBudget, gitIdentity, implementationDigest, loadEvaluationRecord, runDevelopmentCandidateExecution, runDevelopmentEvaluation, validateCandidateRunConfig, validateRunConfig } = require("../lib/development_evaluation_runner");
+const { createCandidateWorkerBudget, gitIdentity, implementationDigest, loadDevelopmentGovernance, loadEvaluationRecord, runDevelopmentCandidateExecution, runDevelopmentEvaluation, validateCandidateRunConfig, validateRunConfig } = require("../lib/development_evaluation_runner");
+const { DEVELOPMENT_CONTROL_RESOURCE_LIMITS, createDevelopmentControlBudget, readDevelopmentControlJson, readDevelopmentControlSnapshot } = require("../lib/development_control_snapshot");
 const { MANDATORY_INTEGRITY_CONTROLS, deriveDevelopmentGateStatus, finalizeDevelopmentEvaluationAttempt, isDevelopmentPolicyReady, startDevelopmentEvaluationAttempt } = require("../lib/development_evaluation_signer");
 const { BUNDLE_RESOURCE_LIMITS, REQUIRED_ARTIFACTS, bundleDigest, publishEvaluationBundle, verifyEvaluationBundle } = require("../lib/evaluation_artifact_store");
 const { verifyCompletedDevelopmentAttempt, verifyDevelopmentAttempt } = require("../lib/development_attempt_store");
@@ -189,6 +190,111 @@ try {
   assert.match(missingInputResult.stderr, /^DEVELOPMENT_EXECUTION_INPUT_MISSING\r?\n$/);
   assert.deepEqual(readDevelopmentExecutionHandoff(missingInputHandoffPath), { schema: "ekg-development-candidate-process-failure-v1", failureCode: "DEVELOPMENT_EXECUTION_INPUT_MISSING" });
 
+  assert.deepEqual(DEVELOPMENT_CONTROL_RESOURCE_LIMITS, { maxConfigBytes: 4 * 1024 * 1024, maxManifestBytes: 16 * 1024 * 1024, maxSignatureBytes: 64 * 1024, maxTrustStoreBytes: 4 * 1024 * 1024, maxPartitionIndexBytes: 16 * 1024 * 1024, maxRegistryBytes: 16 * 1024 * 1024, maxPrivateKeyBytes: 64 * 1024, maxSignerControlBytes: 4 * 1024 * 1024, maxTotalBytes: 64 * 1024 * 1024 });
+  const controlSnapshotRoot = path.join(temporaryRoot, "control-snapshots");
+  fs.mkdirSync(controlSnapshotRoot);
+  const controlPath = path.join(controlSnapshotRoot, "control.json");
+  fs.writeFileSync(controlPath, "{}");
+  const exactControlBudget = createDevelopmentControlBudget(2);
+  const exactControl = readDevelopmentControlJson(controlPath, 2, exactControlBudget, "DEVELOPMENT_TEST_CONTROL_JSON");
+  assert.deepEqual(exactControl.value, {});
+  assert.equal(exactControl.bytes.toString("utf8"), "{}");
+  assert.equal(exactControl.sha256, crypto.createHash("sha256").update("{}").digest("hex"));
+  assert.equal(exactControlBudget.totalBytes, 2);
+  assert.throws(() => readDevelopmentControlSnapshot(controlPath, 1, createDevelopmentControlBudget(), "DEVELOPMENT_TEST_CONTROL_JSON"), /DEVELOPMENT_CONTROL_FILE_SIZE/);
+  assert.throws(() => readDevelopmentControlSnapshot(controlPath, 2, createDevelopmentControlBudget(1), "DEVELOPMENT_TEST_CONTROL_JSON"), /DEVELOPMENT_CONTROL_TOTAL_SIZE/);
+  assert.throws(() => readDevelopmentControlSnapshot(controlPath, 2, { maxBytes: DEVELOPMENT_CONTROL_RESOURCE_LIMITS.maxTotalBytes + 1, totalBytes: -1 }, "DEVELOPMENT_TEST_CONTROL_JSON"), /DEVELOPMENT_CONTROL_RESOURCE_LIMITS/);
+  const controlOriginalOpenSync = fs.openSync;
+  let controlOpenCount = 0;
+  fs.openSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === path.resolve(controlPath)) controlOpenCount += 1;
+    return controlOriginalOpenSync.call(fs, file, ...args);
+  };
+  try {
+    assert.deepEqual(readDevelopmentControlJson(controlPath, 2, createDevelopmentControlBudget(), "DEVELOPMENT_TEST_CONTROL_JSON").value, {});
+  } finally {
+    fs.openSync = controlOriginalOpenSync;
+  }
+  assert.equal(controlOpenCount, 1);
+  const alternateControlPath = path.join(controlSnapshotRoot, "alternate.json");
+  fs.writeFileSync(alternateControlPath, "[]");
+  let substitutedDescriptor = null;
+  let substitutedClosed = false;
+  const controlOriginalCloseSync = fs.closeSync;
+  fs.openSync = function(file, flags, mode) {
+    if (typeof file === "string" && path.resolve(file) === path.resolve(controlPath)) {
+      substitutedDescriptor = controlOriginalOpenSync.call(fs, alternateControlPath, flags, mode);
+      return substitutedDescriptor;
+    }
+    return controlOriginalOpenSync.call(fs, file, flags, mode);
+  };
+  fs.closeSync = function(descriptor) {
+    if (descriptor === substitutedDescriptor) substitutedClosed = true;
+    return controlOriginalCloseSync.call(fs, descriptor);
+  };
+  try {
+    assert.throws(() => readDevelopmentControlSnapshot(controlPath, 2, createDevelopmentControlBudget(), "DEVELOPMENT_TEST_CONTROL_JSON"), /DEVELOPMENT_CONTROL_READ_RACE/);
+  } finally {
+    fs.openSync = controlOriginalOpenSync;
+    fs.closeSync = controlOriginalCloseSync;
+  }
+  assert.equal(substitutedClosed, true);
+  const growthControlPath = path.join(controlSnapshotRoot, "growth.json");
+  fs.writeFileSync(growthControlPath, "{}");
+  const controlOriginalReadSync = fs.readSync;
+  let controlGrowthDescriptor = null;
+  let controlGrowthClosed = false;
+  let controlGrowthInjected = false;
+  fs.openSync = function(file, flags, mode) {
+    const descriptor = controlOriginalOpenSync.call(fs, file, flags, mode);
+    if (typeof file === "string" && path.resolve(file) === path.resolve(growthControlPath)) controlGrowthDescriptor = descriptor;
+    return descriptor;
+  };
+  fs.readSync = function(descriptor, buffer, ...args) {
+    const count = controlOriginalReadSync.call(fs, descriptor, buffer, ...args);
+    if (descriptor === controlGrowthDescriptor && !controlGrowthInjected) {
+      controlGrowthInjected = true;
+      fs.appendFileSync(growthControlPath, "x");
+    }
+    return count;
+  };
+  fs.closeSync = function(descriptor) {
+    if (descriptor === controlGrowthDescriptor) controlGrowthClosed = true;
+    return controlOriginalCloseSync.call(fs, descriptor);
+  };
+  try {
+    assert.throws(() => readDevelopmentControlSnapshot(growthControlPath, 3, createDevelopmentControlBudget(), "DEVELOPMENT_TEST_CONTROL_JSON"), /DEVELOPMENT_CONTROL_READ_RACE/);
+  } finally {
+    fs.openSync = controlOriginalOpenSync;
+    fs.readSync = controlOriginalReadSync;
+    fs.closeSync = controlOriginalCloseSync;
+  }
+  assert.equal(controlGrowthInjected, true);
+  assert.equal(controlGrowthClosed, true);
+  const symlinkControlPath = path.join(controlSnapshotRoot, "symlink.json");
+  try {
+    fs.symlinkSync(controlPath, symlinkControlPath);
+    assert.throws(() => readDevelopmentControlSnapshot(symlinkControlPath, 2, createDevelopmentControlBudget(), "DEVELOPMENT_TEST_CONTROL_JSON"), /DEVELOPMENT_CONTROL_FILE_SIZE/);
+  } catch (error) {
+    if (!error || !["EPERM", "EACCES", "ENOSYS"].includes(error.code)) throw error;
+  }
+  const manifestTrustPath = path.resolve(config.manifestTrustStorePath);
+  let manifestTrustOpenCount = 0;
+  fs.openSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === manifestTrustPath) manifestTrustOpenCount += 1;
+    return controlOriginalOpenSync.call(fs, file, ...args);
+  };
+  let governance;
+  try {
+    governance = loadDevelopmentGovernance(config, repositoryRoot, true);
+  } finally {
+    fs.openSync = controlOriginalOpenSync;
+  }
+  assert.equal(manifestTrustOpenCount, 1);
+  assert.equal(governance.manifestTrustStoreSha256, config.expectedManifestTrustStoreSha256);
+  assert.ok(governance.verifiedControlBytes > 0 && governance.verifiedControlBytes <= DEVELOPMENT_CONTROL_RESOURCE_LIMITS.maxTotalBytes);
+  assert.deepEqual(governance.controlResourceLimits, DEVELOPMENT_CONTROL_RESOURCE_LIMITS);
+
   const trustBlock = attempt("manifest-trust-block", { expectedManifestTrustStoreSha256: "0".repeat(64) });
   fs.mkdirSync(trustBlock.executionInputRoot, { recursive: true });
   assert.throws(() => startDevelopmentEvaluationAttempt(trustBlock, privateKeyPem), /DEVELOPMENT_MANIFEST_TRUST_JSON_HASH/);
@@ -268,6 +374,31 @@ try {
   const runtimeLoadTerminal = verifyDevelopmentAttempt(path.join(artifactRoot, "attempts", "2026", "09", "22", runtimeLoadBlock.attemptId), publicKeyPem, { expectedSignerKeyId: config.signerKeyId });
   assert.equal(runtimeLoadTerminal.executionStatus, "BLOCKED");
   assert.equal(runtimeLoadTerminal.terminal.failureCode, "DEVELOPMENT_CANDIDATE_ARTIFACT_IDENTITY_MISMATCH");
+
+  const workerControlRace = attempt("worker-control-race");
+  start(workerControlRace);
+  const workerControlRoot = path.join(temporaryRoot, "worker-control-race-controls");
+  fs.mkdirSync(workerControlRoot);
+  for (const name of ["candidate-manifest.json", "candidate-manifest.sig.json", "candidate-trust-store.json"]) fs.copyFileSync(path.join(controlsRoot, name), path.join(workerControlRoot, name));
+  const workerControlConfig = { ...candidateConfig(workerControlRace), candidateManifestPath: path.join(workerControlRoot, "candidate-manifest.json"), candidateSignaturePath: path.join(workerControlRoot, "candidate-manifest.sig.json"), candidateTrustStorePath: path.join(workerControlRoot, "candidate-trust-store.json") };
+  const originalSpawnSyncForControlRace = childProcess.spawnSync;
+  let workerControlMutationInjected = false;
+  childProcess.spawnSync = function(command, args, options) {
+    if (!workerControlMutationInjected && Array.isArray(args) && args[0] === path.join(repositoryRoot, "lib", "development_candidate_worker.js")) {
+      workerControlMutationInjected = true;
+      fs.appendFileSync(workerControlConfig.candidateManifestPath, " ");
+    }
+    return originalSpawnSyncForControlRace.call(childProcess, command, args, options);
+  };
+  let workerControlHandoff;
+  try {
+    workerControlHandoff = runDevelopmentCandidateExecution(workerControlConfig);
+  } finally {
+    childProcess.spawnSync = originalSpawnSyncForControlRace;
+  }
+  assert.equal(workerControlMutationInjected, true);
+  assert.equal(workerControlHandoff.handoffStatus, "FAILED");
+  assert.equal(workerControlHandoff.failureCode, "DEVELOPMENT_CANDIDATE_MANIFEST_JSON_HASH");
 
   const hostileBaseline = createDriftedCandidate("hostile-baseline", candidateRoot => {
     const detectorPath = path.join(candidateRoot, "lib", "pan_tompkins_detector.js");

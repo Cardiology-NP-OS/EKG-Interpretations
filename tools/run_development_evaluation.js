@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 "use strict";
 
-const fs = require("fs");
 const path = require("path");
+const { DEVELOPMENT_CONTROL_RESOURCE_LIMITS, createDevelopmentControlBudget, readDevelopmentControlJson } = require("../lib/development_control_snapshot");
 const { writeCandidateProcessFailure, writeDevelopmentExecutionHandoff } = require("../lib/development_execution_handoff");
 const { normalizeFailureCode, runDevelopmentCandidateExecution } = require("../lib/development_evaluation_runner");
 
@@ -18,9 +18,9 @@ try {
   const offset = args[0] === "--phase" && args[1] === "candidate" ? 2 : 0;
   if (args.length !== offset + 4 || args[offset] !== "--config" || args[offset + 2] !== "--handoff") throw new Error("DEVELOPMENT_CANDIDATE_USAGE");
   handoffPath = path.resolve(args[offset + 3]);
-  let config;
-  try { config = JSON.parse(fs.readFileSync(path.resolve(args[offset + 1]), "utf8")); } catch (_) { throw new Error("DEVELOPMENT_CANDIDATE_CONFIG_JSON"); }
-  const handoff = runDevelopmentCandidateExecution(config);
+  const controlBudget = createDevelopmentControlBudget();
+  const config = readDevelopmentControlJson(path.resolve(args[offset + 1]), DEVELOPMENT_CONTROL_RESOURCE_LIMITS.maxConfigBytes, controlBudget, "DEVELOPMENT_CANDIDATE_CONFIG_JSON").value;
+  const handoff = runDevelopmentCandidateExecution(config, { controlBudget });
   const receipt = writeDevelopmentExecutionHandoff(handoffPath, handoff);
   process.stdout.write(`${JSON.stringify({ schema: handoff.schema, attemptId: handoff.attemptId, handoffStatus: handoff.handoffStatus, bytes: receipt.bytes })}\n`);
   if (handoff.handoffStatus !== "EXECUTED") process.exitCode = 1;

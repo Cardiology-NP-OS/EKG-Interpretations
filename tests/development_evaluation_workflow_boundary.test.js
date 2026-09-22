@@ -158,6 +158,7 @@ assert.deepEqual(candidateImageSources, [
   "lib/development_candidate_isolation.js",
   "lib/development_candidate_runtime_attestation.js",
   "lib/development_candidate_worker.js",
+  "lib/development_control_snapshot.js",
   "lib/development_evaluation_runner.js",
   "lib/development_execution_handoff.js",
   "lib/development_execution_identity.js",
