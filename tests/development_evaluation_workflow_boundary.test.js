@@ -15,8 +15,32 @@ const signerDockerfile = fs.readFileSync(path.join(root, "evaluation", "signer",
 const candidateDockerfile = fs.readFileSync(path.join(root, "evaluation", "candidate", "Dockerfile"), "utf8");
 const candidateWorker = fs.readFileSync(path.join(root, "lib", "development_candidate_worker.js"), "utf8");
 const candidateIsolationSchema = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "schemas", "DEVELOPMENT_CANDIDATE_ISOLATION_EVIDENCE_SCHEMA.json"), "utf8"));
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const combinedExecutableSurface = `${workflow}\n${runner}\n${signer}`;
 const externalActionReferences = source => Array.from(source.matchAll(/uses:\s*([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+)@([^\s]+)/g), match => ({ action: match[1], reference: match[2] }));
+const pushPaths = source => {
+  const lines = source.split(/\r?\n/);
+  const pushIndex = lines.indexOf("  push:");
+  const pushEnd = lines.findIndex((line, index) => index > pushIndex && /^  \S/.test(line));
+  const pathsIndex = lines.findIndex((line, index) => index > pushIndex && (pushEnd === -1 || index < pushEnd) && line === "    paths:");
+  assert.ok(pushIndex >= 0);
+  assert.ok(pathsIndex > pushIndex);
+  const values = [];
+  for (let index = pathsIndex + 1; index < lines.length && lines[index].startsWith("      - "); index += 1) values.push(JSON.parse(lines[index].slice(8)));
+  return values;
+};
+const pathMatches = (pattern, candidate) => {
+  let expression = "^";
+  for (let index = 0; index < pattern.length; index += 1) {
+    if (pattern[index] === "*" && pattern[index + 1] === "*") {
+      expression += ".*";
+      index += 1;
+    } else if (pattern[index] === "*") expression += "[^/]*";
+    else if (pattern[index] === "?") expression += "[^/]";
+    else expression += pattern[index].replace(/[\\^$.*+?()[\]{}|]/g, "\\$&");
+  }
+  return new RegExp(`${expression}$`).test(candidate);
+};
 const workflowActions = externalActionReferences(workflow);
 const watchdogActions = externalActionReferences(watchdog);
 assert.deepEqual(workflowActions.map(row => row.action), ["actions/checkout", "actions/setup-node", "actions/checkout"]);
@@ -26,6 +50,18 @@ const prohibited = ["run_mitbih_rpeak_pilot.py", "run_mitbih_rpeak_full.py", "ru
 for (const value of prohibited) assert.equal(combinedExecutableSurface.includes(value), false, `prohibited executable reference: ${value}`);
 assert.match(workflow, /schedule:/);
 assert.match(workflow, /push:/);
+const configuredPushPaths = pushPaths(workflow);
+for (const requiredPath of [
+  ".github/workflows/development_evaluation.yml",
+  ".github/workflows/development_evaluation_watchdog.yml",
+  "tools/run_development_evaluation.js",
+  "tools/sign_development_evaluation.js",
+  "tools/verify_development_attempt.js",
+  "tools/record_development_workflow_attempt.js",
+]) assert.ok(configuredPushPaths.some(pattern => pathMatches(pattern, requiredPath)), `push trigger excludes ${requiredPath}`);
+const evaluationHarnessTests = Array.from(packageJson.scripts["test:evaluation-harness"].matchAll(/\bnode\s+(tests\/[^\s&]+)/g), match => match[1]);
+assert.ok(evaluationHarnessTests.length > 0);
+for (const testPath of evaluationHarnessTests) assert.ok(configuredPushPaths.some(pattern => pathMatches(pattern, testPath)), `push trigger excludes ${testPath}`);
 assert.match(workflow, /runs-on: \[self-hosted, linux, x64, ecg-development\]/);
 assert.match(workflow, /APPLICATION_WRITE_ONCE_SIGNED/);
 assert.match(workflow, /manifest-trust-store\.json/);

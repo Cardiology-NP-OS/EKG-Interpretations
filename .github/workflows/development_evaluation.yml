@@ -4,11 +4,17 @@ on:
   push:
     branches: [main]
     paths:
+      - ".github/workflows/development_evaluation.yml"
+      - ".github/workflows/development_evaluation_watchdog.yml"
       - "lib/**"
       - "evaluation/**"
       - "tools/run_development_evaluation.js"
       - "tools/sign_development_evaluation.js"
       - "tools/verify_development_attempt.js"
+      - "tools/record_development_workflow_attempt.js"
+      - "tests/development_*.test.js"
+      - "tests/pan_tompkins_detector.test.js"
+      - "tests/rpeak_development_metrics.test.js"
       - "package.json"
   schedule:
     - cron: "23 3 * * 1-6"
