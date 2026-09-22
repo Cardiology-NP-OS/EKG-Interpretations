@@ -1,0 +1,26 @@
+{
+  "schema": "ekg-development-rpeak-regression-policy-v1",
+  "policyId": "DEVELOPMENT-RPEAK-REGRESSION-V1",
+  "approvalStatus": "PENDING_OWNER_CLINICAL_STATISTICAL_APPROVAL",
+  "mandatoryIntegrityBlocks": [
+    "RIGHTS_FAILURE",
+    "SPENT_STATE_FAILURE",
+    "SIGNATURE_FAILURE",
+    "HASH_FAILURE",
+    "PATIENT_LEAKAGE",
+    "WAVEFORM_DUPLICATE_LEAKAGE",
+    "RECORD_OR_DENOMINATOR_DRIFT",
+    "NONDETERMINISTIC_PREDICTIONS",
+    "INVALID_OUTPUT",
+    "UNDECLARED_CONTRACT_CHANGE"
+  ],
+  "gates": [],
+  "advisoryRegressionDetection": {
+    "flagAnyNegativePairedRecordDelta": true,
+    "requiredTailMetrics": ["record sensitivity p05", "record sensitivity minimum", "record sensitivity p50"],
+    "historicalCatastrophicSensitivityContext": 0.0729,
+    "historicalValueIsNotAReleaseThreshold": true
+  },
+  "clinicalAccuracyClaimed": false,
+  "capabilityNotClaim": true
+}

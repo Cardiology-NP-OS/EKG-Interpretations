@@ -1,0 +1,33 @@
+{
+  "schema": "ekg-development-rpeak-protocol-v1",
+  "protocolId": "DEVELOPMENT-RPEAK-CONTINUOUS-V1",
+  "authorizedRole": "development",
+  "forbiddenRoles": ["selection", "holdout"],
+  "primaryToleranceMs": 100,
+  "sensitivityToleranceMs": [50, 75, 100, 150],
+  "matcher": "ordered-max-cardinality-minimum-absolute-error-v2",
+  "matchingPriority": ["maximum-cardinality", "minimum-total-absolute-error"],
+  "technicalFailurePolicy": "ALL_REFERENCE_EVENTS_COUNT_AS_FALSE_NEGATIVES",
+  "emptyReferenceSensitivity": "UNDEFINED",
+  "emptyPredictionPpv": "UNDEFINED",
+  "independentSamplingUnit": "patient",
+  "routineBootstrapReplicates": 2000,
+  "finalBootstrapReplicates": 10000,
+  "bootstrapSeed": 20260922,
+  "requiredDetectors": ["current-engine", "target-owned-pan-tompkins-classical-baseline-v1"],
+  "identicalPipelineRequirements": ["records", "lead-policy", "samples", "sample-rate", "references", "matcher", "tolerances", "metrics"],
+  "panTompkinsReference": {
+    "title": "A Real-Time QRS Detection Algorithm",
+    "authors": "Pan J, Tompkins WJ",
+    "year": 1985,
+    "doi": "10.1109/TBME.1985.325532",
+    "paperScoreImportedAsGate": false
+  },
+  "ec57ConformanceClaimed": false,
+  "clinicalAccuracyClaimed": false,
+  "capabilityNotClaim": true,
+  "projectGold": false,
+  "sourceLabelsAreProjectGold": false,
+  "reportable": false,
+  "runtimeAuthority": false
+}
