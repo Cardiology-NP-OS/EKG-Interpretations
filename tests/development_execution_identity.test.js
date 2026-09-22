@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { canonicalCandidatePayload, loadDevelopmentExecution, validateCandidateManifest } = require("../lib/development_execution_identity");
+const { canonicalCandidatePayload, loadDevelopmentExecution, validateCandidateManifest, verifyDevelopmentExecutionPackage } = require("../lib/development_execution_identity");
 const { payloadSha256 } = require("../lib/evaluation_signatures");
 const ambientMeasurement = require("../lib/signal_measurement_contract");
 
@@ -17,6 +17,9 @@ const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const signature = JSON.parse(fs.readFileSync(signaturePath, "utf8"));
 const trustStore = JSON.parse(fs.readFileSync(trustStorePath, "utf8"));
 
+const verifiedPackage = verifyDevelopmentExecutionPackage(manifest, signature, trustStore, { repositoryRoot: root });
+assert.equal(verifiedPackage.signatureVerification.verified, true);
+assert.equal(verifiedPackage.executionIdentitySha256, manifest.executionIdentitySha256);
 const loaded = loadDevelopmentExecution(manifest, signature, trustStore, { repositoryRoot: root });
 assert.equal(loaded.signatureVerification.verified, true);
 assert.equal(loaded.executionIdentitySha256, manifest.executionIdentitySha256);
@@ -72,6 +75,31 @@ function sign(value) {
   };
 }
 
+const nonExecutingRoot = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-development-identity-nonexecuting-"));
+try {
+  for (const artifact of manifest.artifacts) {
+    const target = path.join(nonExecutingRoot, artifact.file);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(path.join(root, artifact.file), target);
+  }
+  const sideEffectFile = path.join(nonExecutingRoot, "lib", "signal_measurement_contract.js");
+  fs.appendFileSync(sideEffectFile, "\nglobal.__nonExecutingVerificationSideEffect = true;\n");
+  const nonExecutingManifest = JSON.parse(JSON.stringify(manifest));
+  const sideEffectBytes = fs.readFileSync(sideEffectFile);
+  const sideEffectArtifact = nonExecutingManifest.artifacts.find(row => row.file === "lib/signal_measurement_contract.js");
+  sideEffectArtifact.bytes = sideEffectBytes.length;
+  sideEffectArtifact.sha256 = crypto.createHash("sha256").update(sideEffectBytes).digest("hex");
+  nonExecutingManifest.executionIdentitySha256 = payloadSha256({ ...verifiedPackage.executionIdentity, artifacts: nonExecutingManifest.artifacts });
+  const signedNonExecuting = sign(nonExecutingManifest);
+  delete global.__nonExecutingVerificationSideEffect;
+  const verifiedNonExecuting = verifyDevelopmentExecutionPackage(signedNonExecuting.manifest, signedNonExecuting.signature, testTrust, { repositoryRoot: nonExecutingRoot });
+  assert.equal(verifiedNonExecuting.signatureVerification.verified, true);
+  assert.equal(global.__nonExecutingVerificationSideEffect, undefined);
+} finally {
+  delete global.__nonExecutingVerificationSideEffect;
+  fs.rmSync(nonExecutingRoot, { recursive: true, force: true });
+}
+
 const wrongHash = JSON.parse(JSON.stringify(manifest));
 wrongHash.artifacts[0].sha256 = "0".repeat(64);
 const signedWrongHash = sign(wrongHash);
@@ -80,14 +108,14 @@ assert.throws(() => loadDevelopmentExecution(signedWrongHash.manifest, signedWro
 const missingArtifact = JSON.parse(JSON.stringify(manifest));
 missingArtifact.artifacts.pop();
 const signedMissing = sign(missingArtifact);
-assert.throws(() => loadDevelopmentExecution(signedMissing.manifest, signedMissing.signature, testTrust, { repositoryRoot: root }), /DEVELOPMENT_EXECUTION_DEPENDENCY_UNDECLARED/);
+assert.throws(() => loadDevelopmentExecution(signedMissing.manifest, signedMissing.signature, testTrust, { repositoryRoot: root }), /DEVELOPMENT_CANDIDATE_EXECUTION_IDENTITY_MISMATCH/);
 
 const extraArtifact = JSON.parse(JSON.stringify(manifest));
 const extraBytes = fs.readFileSync(path.join(root, "lib", "development_execution_identity.js"));
 extraArtifact.artifacts.push({ file: "lib/development_execution_identity.js", bytes: extraBytes.length, sha256: crypto.createHash("sha256").update(extraBytes).digest("hex") });
 extraArtifact.artifacts.sort((left, right) => left.file.localeCompare(right.file));
 const signedExtra = sign(extraArtifact);
-assert.throws(() => loadDevelopmentExecution(signedExtra.manifest, signedExtra.signature, testTrust, { repositoryRoot: root }), /DEVELOPMENT_CANDIDATE_ARTIFACT_IDENTITY_MISMATCH/);
+assert.throws(() => loadDevelopmentExecution(signedExtra.manifest, signedExtra.signature, testTrust, { repositoryRoot: root }), /DEVELOPMENT_CANDIDATE_EXECUTION_IDENTITY_MISMATCH/);
 
 const reordered = JSON.parse(JSON.stringify(manifest));
 [reordered.artifacts[0], reordered.artifacts[1]] = [reordered.artifacts[1], reordered.artifacts[0]];

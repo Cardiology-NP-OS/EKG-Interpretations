@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-execution-handoff-v1",
+  "$comment": "This schema validates the standalone wire shape. validateDevelopmentExecutionHandoff is mandatory for manifest-relative record membership, exact outcome-matrix completeness, identity uniqueness, prediction ordering and range, and transition-time ordering.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "attemptId", "workflowRunId", "workflowRunAttempt", "workflowSha", "startedAtUtc", "runConfigurationSha256", "handoffStatus", "failureCode", "lastPhase", "stateTransitions", "candidateManifestPayloadSha256", "executionIdentitySha256", "manifestPayloadSha256", "outcomes", "clinicalAccuracyClaimed", "capabilityNotClaim", "reportable", "runtimeAuthority", "projectGold", "sourceLabelsAreProjectGold"],
+  "properties": {
+    "schema": {"const": "ekg-development-execution-handoff-v1"},
+    "attemptId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "workflowRunId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+    "workflowRunAttempt": {"type": "integer", "minimum": 1},
+    "workflowSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "startedAtUtc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"},
+    "runConfigurationSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "handoffStatus": {"enum": ["EXECUTED", "FAILED", "BLOCKED"]},
+    "failureCode": {"type": ["string", "null"], "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+    "lastPhase": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+    "stateTransitions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["state", "atUtc"],
+        "properties": {
+          "state": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+          "atUtc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"}
+        }
+      }
+    },
+    "candidateManifestPayloadSha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "executionIdentitySha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "manifestPayloadSha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "outcomes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["recordHmacSha256", "detector", "pass", "status", "failureCode", "predictedSampleIndices", "algorithm", "latencyMs", "peakMemoryBytes"],
+        "properties": {
+          "recordHmacSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "detector": {"enum": ["CURRENT_ENGINE", "PAN_TOMPKINS"]},
+          "pass": {"enum": ["PRIMARY", "REPLAY"]},
+          "status": {"enum": ["SUCCESS", "TECHNICAL_FAILURE", "ABSTAINED"]},
+          "failureCode": {"type": ["string", "null"], "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+          "predictedSampleIndices": {"type": "array", "uniqueItems": true, "items": {"type": "integer", "minimum": 0}},
+          "algorithm": {"type": ["string", "null"], "maxLength": 256},
+          "latencyMs": {"type": "number", "minimum": 0, "maximum": 86400000},
+          "peakMemoryBytes": {"type": "integer", "minimum": 0}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"status": {"const": "SUCCESS"}}, "required": ["status"]},
+            "then": {"properties": {"failureCode": {"type": "null"}, "algorithm": {"type": "string", "minLength": 1, "maxLength": 256}}},
+            "else": {"properties": {"failureCode": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"}, "predictedSampleIndices": {"maxItems": 0}, "algorithm": {"type": "null"}}}
+          }
+        ]
+      }
+    },
+    "clinicalAccuracyClaimed": {"const": false},
+    "capabilityNotClaim": {"const": true},
+    "reportable": {"const": false},
+    "runtimeAuthority": {"const": false},
+    "projectGold": {"const": false},
+    "sourceLabelsAreProjectGold": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"handoffStatus": {"const": "EXECUTED"}}, "required": ["handoffStatus"]},
+      "then": {
+        "properties": {
+          "failureCode": {"type": "null"},
+          "lastPhase": {"const": "RUNNING"},
+          "candidateManifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "executionIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "stateTransitions": {
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              {"properties": {"state": {"const": "VALIDATING"}}},
+              {"properties": {"state": {"const": "RUNNING"}}},
+              {"properties": {"state": {"const": "EXECUTED"}}}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"handoffStatus": {"const": "FAILED"}}, "required": ["handoffStatus"]},
+      "then": {
+        "properties": {
+          "failureCode": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+          "lastPhase": {"const": "RUNNING"},
+          "candidateManifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "executionIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "stateTransitions": {
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              {"properties": {"state": {"const": "VALIDATING"}}},
+              {"properties": {"state": {"const": "RUNNING"}}},
+              {"properties": {"state": {"const": "FAILED"}}}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"handoffStatus": {"const": "BLOCKED"}}, "required": ["handoffStatus"]},
+      "then": {
+        "properties": {
+          "failureCode": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
+          "lastPhase": {"const": "VALIDATING"},
+          "stateTransitions": {
+            "minItems": 2,
+            "maxItems": 2,
+            "prefixItems": [
+              {"properties": {"state": {"const": "VALIDATING"}}},
+              {"properties": {"state": {"const": "BLOCKED"}}}
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

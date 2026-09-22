@@ -7,6 +7,7 @@ on:
       - "lib/**"
       - "evaluation/**"
       - "tools/run_development_evaluation.js"
+      - "tools/sign_development_evaluation.js"
       - "tools/verify_development_attempt.js"
       - "package.json"
   schedule:
@@ -26,7 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -45,18 +48,20 @@ jobs:
       EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH: ${{ vars.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH }}
       EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64: ${{ secrets.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64 }}
       EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID: ${{ vars.EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID }}
-      EKG_EVALUATION_SIGNING_KEY_PEM_BASE64: ${{ secrets.EKG_EVALUATION_SIGNING_KEY_PEM_BASE64 }}
       EKG_EVALUATION_SIGNER_KEY_ID: ${{ vars.EKG_EVALUATION_SIGNER_KEY_ID }}
       EKG_EVALUATION_IMAGE_DIGEST: ${{ vars.EKG_EVALUATION_IMAGE_DIGEST }}
+      EKG_EVALUATION_SIGNER_IMAGE: ${{ vars.EKG_EVALUATION_SIGNER_IMAGE }}
       EKG_EVALUATION_NETWORK_DISABLED: "1"
       GITHUB_EVENT_SCHEDULE_VALUE: ${{ github.event.schedule }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
       - name: Require governed external resources
         shell: bash
         run: |
           set -euo pipefail
-          for name in EKG_DEVELOPMENT_GOVERNANCE_ROOT EKG_DEVELOPMENT_CORPUS_ROOT EKG_DEVELOPMENT_MANIFEST_TRUST_STORE_SHA256 EKG_DEVELOPMENT_CANDIDATE_TRUST_STORE_SHA256 EKG_EVALUATION_ARTIFACT_ROOT EKG_EVALUATION_SIGNING_KEY_PEM_BASE64 EKG_EVALUATION_SIGNER_KEY_ID EKG_EVALUATION_IMAGE_DIGEST; do
+          for name in EKG_DEVELOPMENT_GOVERNANCE_ROOT EKG_DEVELOPMENT_CORPUS_ROOT EKG_DEVELOPMENT_MANIFEST_TRUST_STORE_SHA256 EKG_DEVELOPMENT_CANDIDATE_TRUST_STORE_SHA256 EKG_EVALUATION_ARTIFACT_ROOT EKG_EVALUATION_SIGNER_KEY_ID EKG_EVALUATION_IMAGE_DIGEST EKG_EVALUATION_SIGNER_IMAGE; do
             test -n "${!name:-}" || { echo "BLOCKED_MISSING_GOVERNED_RESOURCE:$name" >&2; exit 1; }
           done
           test -f "$EKG_DEVELOPMENT_GOVERNANCE_ROOT/manifest.json"
@@ -68,52 +73,76 @@ jobs:
           test -f "$EKG_DEVELOPMENT_GOVERNANCE_ROOT/candidate-trust-store.json"
           test "$(printf '%s' "$EKG_EVALUATION_IMAGE_DIGEST" | tr -d '0-9a-f')" = ""
           test "${#EKG_EVALUATION_IMAGE_DIGEST}" = "64"
+          printf '%s' "$EKG_EVALUATION_SIGNER_IMAGE" | grep -Eq '@sha256:[0-9a-f]{64}$' || { echo "BLOCKED_UNPINNED_SIGNER_IMAGE" >&2; exit 1; }
           configured_previous=0
           for name in EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64 EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID; do
             test -z "${!name:-}" || configured_previous=$((configured_previous + 1))
           done
           test "$configured_previous" = "0" || test "$configured_previous" = "3" || { echo "BLOCKED_INCOMPLETE_PREVIOUS_BASELINE" >&2; exit 1; }
-      - name: Prepare ephemeral signing key
-        shell: bash
-        run: |
-          umask 077
-          printf '%s' "$EKG_EVALUATION_SIGNING_KEY_PEM_BASE64" | base64 --decode > "$RUNNER_TEMP/evaluation-signing-key.pem"
       - name: Build ephemeral run configuration
         shell: bash
         run: |
-          node -e "const fs=require('fs');const weekly=process.env.GITHUB_EVENT_SCHEDULE_VALUE==='23 4 * * 0';const prior=process.env.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH?'/artifacts/'+process.env.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH:null;const key=process.env.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64?Buffer.from(process.env.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64,'base64').toString('utf8'):null;const config={manifestPath:'/governance/manifest.json',manifestSignaturePath:'/governance/manifest.sig.json',manifestTrustStorePath:'/governance/manifest-trust-store.json',expectedManifestTrustStoreSha256:process.env.EKG_DEVELOPMENT_MANIFEST_TRUST_STORE_SHA256,partitionIndexPath:'/governance/partition-index.json',candidateManifestPath:'/governance/candidate-manifest.json',candidateSignaturePath:'/governance/candidate-manifest.sig.json',candidateTrustStorePath:'/governance/candidate-trust-store.json',expectedCandidateTrustStoreSha256:process.env.EKG_DEVELOPMENT_CANDIDATE_TRUST_STORE_SHA256,corpusRoot:'/corpus',artifactRoot:'/artifacts',inputMountMode:'READ_ONLY',networkIsolation:'CONTAINER_NETWORK_NONE',storageMode:'APPLICATION_WRITE_ONCE_SIGNED',startedAtUtc:new Date().toISOString().replace(/\.\d{3}Z$/,'Z'),attemptId:'github-'+process.env.GITHUB_RUN_ID+'-'+process.env.GITHUB_RUN_ATTEMPT,workflowRunId:process.env.GITHUB_RUN_ID,workflowRunAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),workflowSha:process.env.GITHUB_SHA,trigger:weekly?'weekly':'merge-or-nightly',bootstrap:{replicates:weekly?10000:2000,seed:20260922},previousApprovedBundlePath:prior,previousBundlePublicKeyPem:key,previousBundleSignerKeyId:process.env.EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID||null,signerKeyId:process.env.EKG_EVALUATION_SIGNER_KEY_ID,environmentImageDigest:process.env.EKG_EVALUATION_IMAGE_DIGEST};fs.writeFileSync(process.env.RUNNER_TEMP+'/ekg-development-run.json',JSON.stringify(config));"
+          set -euo pipefail
+          umask 077
+          mkdir -p "$RUNNER_TEMP/ekg-run-config" "$RUNNER_TEMP/ekg-execution-handoff"
+          node -e "const fs=require('fs');const crypto=require('crypto');const cp=require('child_process');const git=args=>cp.execFileSync('git',['-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null',...args],{encoding:'utf8'}).trim();const engineCommitDigest=git(['rev-parse','HEAD']);const engineTreeDigest=git(['rev-parse','HEAD^{tree}']);const worktreeStatus=git(['status','--porcelain=v1','--untracked-files=all']);if(worktreeStatus)throw new Error('DEVELOPMENT_WORKTREE_NOT_CLEAN');const worktreeStatusSha256=crypto.createHash('sha256').update(JSON.stringify(worktreeStatus)).digest('hex');const weekly=process.env.GITHUB_EVENT_SCHEDULE_VALUE==='23 4 * * 0';const prior=process.env.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH?'/artifacts/'+process.env.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH:null;const key=process.env.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64?Buffer.from(process.env.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64,'base64').toString('utf8'):null;const config={manifestPath:'/governance/manifest.json',manifestSignaturePath:'/governance/manifest.sig.json',manifestTrustStorePath:'/governance/manifest-trust-store.json',expectedManifestTrustStoreSha256:process.env.EKG_DEVELOPMENT_MANIFEST_TRUST_STORE_SHA256,partitionIndexPath:'/governance/partition-index.json',candidateManifestPath:'/governance/candidate-manifest.json',candidateSignaturePath:'/governance/candidate-manifest.sig.json',candidateTrustStorePath:'/governance/candidate-trust-store.json',expectedCandidateTrustStoreSha256:process.env.EKG_DEVELOPMENT_CANDIDATE_TRUST_STORE_SHA256,corpusRoot:'/corpus',artifactRoot:'/artifacts',candidateRoot:'/candidate',inputMountMode:'READ_ONLY',networkIsolation:'CONTAINER_NETWORK_NONE',storageMode:'APPLICATION_WRITE_ONCE_SIGNED',startedAtUtc:new Date().toISOString().replace(/\.\d{3}Z$/,'Z'),attemptId:'github-'+process.env.GITHUB_RUN_ID+'-'+process.env.GITHUB_RUN_ATTEMPT,workflowRunId:process.env.GITHUB_RUN_ID,workflowRunAttempt:Number(process.env.GITHUB_RUN_ATTEMPT),workflowSha:process.env.GITHUB_SHA,engineCommitDigest,engineTreeDigest,worktreeClean:worktreeStatus.length===0,worktreeStatusSha256,trigger:weekly?'weekly':'merge-or-nightly',bootstrap:{replicates:weekly?10000:2000,seed:20260922},previousApprovedBundlePath:prior,previousBundlePublicKeyPem:key,previousBundleSignerKeyId:process.env.EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID||null,signerKeyId:process.env.EKG_EVALUATION_SIGNER_KEY_ID,environmentImageDigest:process.env.EKG_EVALUATION_IMAGE_DIGEST,signerImageDigest:process.env.EKG_EVALUATION_SIGNER_IMAGE.split('@sha256:')[1]};fs.writeFileSync(process.env.RUNNER_TEMP+'/ekg-run-config/ekg-development-run.json',JSON.stringify(config));"
+      - name: Prepare ephemeral signing key
+        shell: bash
+        env:
+          EKG_EVALUATION_SIGNING_KEY_PEM_BASE64: ${{ secrets.EKG_EVALUATION_SIGNING_KEY_PEM_BASE64 }}
+        run: |
+          set -euo pipefail
+          test -n "$EKG_EVALUATION_SIGNING_KEY_PEM_BASE64" || { echo "BLOCKED_MISSING_GOVERNED_RESOURCE:EKG_EVALUATION_SIGNING_KEY_PEM_BASE64" >&2; exit 1; }
+          umask 077
+          mkdir -p "$RUNNER_TEMP/ekg-signing"
+          printf '%s' "$EKG_EVALUATION_SIGNING_KEY_PEM_BASE64" | base64 --decode > "$RUNNER_TEMP/ekg-signing/evaluation-signing-key.pem"
+      - name: Sign immutable attempt start
+        shell: bash
+        run: |
+          docker run --rm --network none --read-only \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/candidate,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-run-config/ekg-development-run.json,target=/runconfig/ekg-development-run.json,readonly" \
+            --mount "type=bind,source=$EKG_DEVELOPMENT_GOVERNANCE_ROOT,target=/governance,readonly" \
+            --mount "type=bind,source=$EKG_EVALUATION_ARTIFACT_ROOT,target=/artifacts" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-signing/evaluation-signing-key.pem,target=/runsecrets/evaluation-signing-key.pem,readonly" \
+            --env EKG_EVALUATION_NETWORK_DISABLED=1 \
+            --env EKG_EVALUATION_SIGNING_KEY_FILE=/runsecrets/evaluation-signing-key.pem \
+            --workdir /opt/ekg-evaluation-signer \
+            "$EKG_EVALUATION_SIGNER_IMAGE" node tools/sign_development_evaluation.js --phase start --config /runconfig/ekg-development-run.json
       - name: Run isolated current-engine and Pan-Tompkins evaluation
         shell: bash
         run: |
           docker run --rm --network none --read-only \
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace,readonly" \
-            --mount "type=bind,source=$RUNNER_TEMP,target=/runconfig,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-run-config/ekg-development-run.json,target=/runconfig/ekg-development-run.json,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-execution-handoff,target=/handoff" \
             --mount "type=bind,source=$EKG_DEVELOPMENT_GOVERNANCE_ROOT,target=/governance,readonly" \
             --mount "type=bind,source=$EKG_DEVELOPMENT_CORPUS_ROOT,target=/corpus,readonly" \
-            --mount "type=bind,source=$EKG_EVALUATION_ARTIFACT_ROOT,target=/artifacts" \
-            --mount "type=bind,source=$RUNNER_TEMP/evaluation-signing-key.pem,target=/runsecrets/evaluation-signing-key.pem,readonly" \
             --env EKG_EVALUATION_NETWORK_DISABLED=1 \
-            --env EKG_EVALUATION_SIGNING_KEY_FILE=/runsecrets/evaluation-signing-key.pem \
             --env GIT_CONFIG_COUNT=1 \
             --env GIT_CONFIG_KEY_0=safe.directory \
             --env GIT_CONFIG_VALUE_0=/workspace \
             --workdir /workspace \
-            "node:22@sha256:$EKG_EVALUATION_IMAGE_DIGEST" node tools/run_development_evaluation.js --config /runconfig/ekg-development-run.json
+            "node:22@sha256:$EKG_EVALUATION_IMAGE_DIGEST" node tools/run_development_evaluation.js --phase candidate --config /runconfig/ekg-development-run.json --handoff /handoff/execution.json
       - name: Reconcile signed attempt terminal state
         if: always()
         shell: bash
         run: |
-          test -f "$RUNNER_TEMP/ekg-development-run.json" || { echo "BLOCKED_ATTEMPT_CONFIG_NOT_CREATED" >&2; exit 1; }
-          test -f "$RUNNER_TEMP/evaluation-signing-key.pem" || { echo "BLOCKED_ATTEMPT_SIGNING_KEY_NOT_CREATED" >&2; exit 1; }
+          test -f "$RUNNER_TEMP/ekg-run-config/ekg-development-run.json" || { echo "BLOCKED_ATTEMPT_CONFIG_NOT_CREATED" >&2; exit 1; }
+          test -f "$RUNNER_TEMP/ekg-signing/evaluation-signing-key.pem" || { echo "BLOCKED_ATTEMPT_SIGNING_KEY_NOT_CREATED" >&2; exit 1; }
           docker run --rm --network none --read-only \
-            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace,readonly" \
-            --mount "type=bind,source=$RUNNER_TEMP,target=/runconfig,readonly" \
-            --mount "type=bind,source=$EKG_EVALUATION_ARTIFACT_ROOT,target=/artifacts,readonly" \
-            --mount "type=bind,source=$RUNNER_TEMP/evaluation-signing-key.pem,target=/runsecrets/evaluation-signing-key.pem,readonly" \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/candidate,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-run-config/ekg-development-run.json,target=/runconfig/ekg-development-run.json,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-execution-handoff,target=/handoff,readonly" \
+            --mount "type=bind,source=$EKG_DEVELOPMENT_GOVERNANCE_ROOT,target=/governance,readonly" \
+            --mount "type=bind,source=$EKG_DEVELOPMENT_CORPUS_ROOT,target=/corpus,readonly" \
+            --mount "type=bind,source=$EKG_EVALUATION_ARTIFACT_ROOT,target=/artifacts" \
+            --mount "type=bind,source=$RUNNER_TEMP/ekg-signing/evaluation-signing-key.pem,target=/runsecrets/evaluation-signing-key.pem,readonly" \
+            --env EKG_EVALUATION_NETWORK_DISABLED=1 \
             --env EKG_EVALUATION_SIGNING_KEY_FILE=/runsecrets/evaluation-signing-key.pem \
-            --workdir /workspace \
-            "node:22@sha256:$EKG_EVALUATION_IMAGE_DIGEST" node tools/verify_development_attempt.js --config /runconfig/ekg-development-run.json
+            --workdir /opt/ekg-evaluation-signer \
+            "$EKG_EVALUATION_SIGNER_IMAGE" node tools/sign_development_evaluation.js --phase finalize --config /runconfig/ekg-development-run.json --handoff /handoff/execution.json
       - name: Remove ephemeral signing key
         if: always()
         shell: bash
-        run: rm -f "$RUNNER_TEMP/evaluation-signing-key.pem"
+        run: rm -rf "$RUNNER_TEMP/ekg-signing" "$RUNNER_TEMP/ekg-run-config" "$RUNNER_TEMP/ekg-execution-handoff"
