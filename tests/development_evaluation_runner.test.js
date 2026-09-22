@@ -36,6 +36,10 @@ try {
     manifestPath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V2.json"),
     manifestSignaturePath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V2.sig"),
     partitionIndexPath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_PARTITION_INDEX_V2.json"),
+    candidateManifestPath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_CANDIDATE_V1.json"),
+    candidateSignaturePath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_CANDIDATE_V1.sig"),
+    candidateTrustStorePath: path.join(repositoryRoot, "evaluation", "keys", "DEVELOPMENT_CANDIDATE_SIGNERS.json"),
+    expectedCandidateTrustStoreSha256: "2df8894d1ffa708307f47d0d58ee0be1f640edef6e786698704395bc8843969d",
     corpusRoot,
     artifactRoot,
     inputMountMode: "READ_ONLY",
@@ -50,6 +54,7 @@ try {
   };
   assert.throws(() => validateRunConfig({ ...config, previousApprovedBundlePath: "prior" }), /DEVELOPMENT_PREVIOUS_BASELINE_CONFIG/);
   assert.throws(() => runDevelopmentEvaluation({ ...config, networkIsolation: "CONTAINER_NETWORK_NONE", trigger: "merge-or-nightly", bootstrap: { replicates: 2000, seed: 11 }, environmentImageDigest: "a".repeat(64) }), /DEVELOPMENT_EXTERNAL_MANIFEST_TRUST_REQUIRED/);
+  assert.throws(() => runDevelopmentEvaluation({ ...config, expectedCandidateTrustStoreSha256: "0".repeat(64) }), /DEVELOPMENT_CANDIDATE_TRUST_JSON_HASH/);
   assert.throws(() => runDevelopmentEvaluation({ ...config, expectedManifestTrustStoreSha256: "0".repeat(64) }), /DEVELOPMENT_MANIFEST_TRUST_JSON_HASH/);
   const signalPath = path.join(corpusRoot, "signals", "record-1.json");
   const originalSignalBytes = fs.readFileSync(signalPath);
@@ -81,6 +86,11 @@ try {
   assert.equal(report.currentEngine.denominators.nRecords, 1);
   assert.equal(report.panTompkins.denominators.nRecords, 1);
   assert.equal(report.currentEngine.records, undefined);
+  const candidateDigests = JSON.parse(fs.readFileSync(path.join(receipt.path, "candidate-digests.json"), "utf8"));
+  assert.equal(candidateDigests.candidateManifest.manifestPayloadSha256, "f7b2940b02d328739c4296384fb8be2851647837c601467dab820179ec7d6d24");
+  assert.equal(candidateDigests.candidateSignature.keyId, "synthetic-development-candidate-2026-09-22");
+  assert.equal(candidateDigests.candidateTrustStoreSha256, config.expectedCandidateTrustStoreSha256);
+  assert.match(candidateDigests.candidateSignerPublicKeySha256, /^[0-9a-f]{64}$/);
   const publishedText = fs.readdirSync(receipt.path).filter(name => name.endsWith(".json")).map(name => fs.readFileSync(path.join(receipt.path, name), "utf8")).join("\n");
   const protectedRows = cleanPartition.rows.filter(row => row.splitRole !== "development");
   for (const row of protectedRows) {

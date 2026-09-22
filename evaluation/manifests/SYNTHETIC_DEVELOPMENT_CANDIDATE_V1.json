@@ -1,0 +1,28 @@
+{
+  "schema": "ekg-development-candidate-manifest-v1",
+  "candidateId": "synthetic-development-rpeak-execution-v1",
+  "task": "R_PEAK_DETECTION",
+  "createdAtUtc": "2026-09-22T00:00:00Z",
+  "clinicalAccuracyClaimed": false,
+  "runtimeAuthority": false,
+  "artifacts": [
+    {"file":"evaluation/protocols/DEVELOPMENT_RPEAK_EVALUATION_V1.json","bytes":1593,"sha256":"75632b14b7e8cfafd0e0329c19519ad01d0806751af64647e4b64cbf3468d526"},
+    {"file":"evaluation/protocols/DEVELOPMENT_RPEAK_REGRESSION_POLICY_V1.json","bytes":875,"sha256":"4f5579bf5bb6c87a2dcb4926610fd911e7aefe833fa1a4a3f62d0b2e9f892613"},
+    {"file":"lib/development_evaluation_preflight.js","bytes":16128,"sha256":"e01f75dfda9a084d865dd7e0f18aa90d7597a09586f385a4b39c528b69ff1575"},
+    {"file":"lib/development_partition_verifier.js","bytes":9437,"sha256":"0ae75cf8c88d4178e5cca139383620d7818997751181b8b07ed621406f5b6009"},
+    {"file":"lib/development_run_comparison.js","bytes":11445,"sha256":"e3e5bae23421b564c8581d442c69b5b55385a419511213a7a86cb8f0e9cf8ba2"},
+    {"file":"lib/evaluation_contract.js","bytes":3304,"sha256":"506139bd99a721ce7d0ab47ca0a05b4524c957e51cf40da0cae809fd7a437d92"},
+    {"file":"lib/evaluation_runtime.js","bytes":14685,"sha256":"28e5263722d3e380e15f1c3f4b12e7199757ea6a152d9b5e6efffce8a631861e"},
+    {"file":"lib/evaluation_signatures.js","bytes":2779,"sha256":"b8fa4d6725507996a2190912c3953179f94b7dc1f18ef90351471dd90bd158ef"},
+    {"file":"lib/event_matcher_v2.js","bytes":5017,"sha256":"0bfe788815dec1edf14ea07ed0ea7e23605f692272bcc434e6570680c0319e83"},
+    {"file":"lib/local_dataset_loader.js","bytes":5228,"sha256":"8059b712498ff8b91d129101e7548a0b4d37c9835e03fe42646bd22a6570e96b"},
+    {"file":"lib/pan_tompkins_detector.js","bytes":5742,"sha256":"d308724d87a7e4417dc81afad8b1a5bd54bbfc95952108f67a6d0b8040a08fba"},
+    {"file":"lib/rpeak_development_metrics.js","bytes":14571,"sha256":"534583f693c461b9ce9c295c539182a7fe039b01ce0a32e0beb446e4fef07f60"},
+    {"file":"lib/signal_dsp_filtering.js","bytes":9622,"sha256":"2f66790c4a3b10b8cf93c038e6fde7d1b01063b34e102a43f21eb8cb5703e7c0"},
+    {"file":"lib/signal_measurement_contract.js","bytes":10073,"sha256":"78a20eb8682883c8b91efeb4a26d920981d2d7d8d935d89122f77bf2d634592a"},
+    {"file":"lib/spent_dataset_registry.js","bytes":5577,"sha256":"cf7e70af912640895a0d8cda88225e15afcd5b891af747474501893a8fa9eede"},
+    {"file":"lib/wfdb_signal.js","bytes":6441,"sha256":"0a3d1c5f07304e0eb5bdde3ad3961c1784f73de2943046bc5b79a56538ee707f"}
+  ],
+  "executionIdentitySha256": "f58b3994ad5ea99ac239abd157790157a02fbaa459e3e45cc23acd591fc1baff",
+  "manifestPayloadSha256": "f7b2940b02d328739c4296384fb8be2851647837c601467dab820179ec7d6d24"
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "ekg-development-candidate-trust-store-v1",
+  "keys": [
+    {
+      "keyId": "synthetic-development-candidate-2026-09-22",
+      "algorithm": "Ed25519",
+      "status": "TRUSTED",
+      "candidateAuthority": true,
+      "productionAuthority": false,
+      "allowedTasks": ["R_PEAK_DETECTION"],
+      "purpose": "Synthetic development execution identity fixture only; private key destroyed after signing.",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAI+hK2jkHVs6N4Am0Sgz1BAeG6uG86aVjps/TP3JyI1o=\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}
