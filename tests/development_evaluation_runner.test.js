@@ -269,6 +269,27 @@ try {
   assert.equal(runtimeLoadTerminal.executionStatus, "BLOCKED");
   assert.equal(runtimeLoadTerminal.terminal.failureCode, "DEVELOPMENT_CANDIDATE_ARTIFACT_IDENTITY_MISMATCH");
 
+  const hostileBaseline = createDriftedCandidate("hostile-baseline", candidateRoot => {
+    const detectorPath = path.join(candidateRoot, "lib", "pan_tompkins_detector.js");
+    const source = fs.readFileSync(detectorPath, "utf8");
+    const changed = source.replace("function detectPanTompkinsRPeaks(samples, sampleRateHz, options = {}) {\n", "function detectPanTompkinsRPeaks(samples, sampleRateHz, options = {}) {\n  process.exit(17);\n");
+    assert.notEqual(changed, source);
+    fs.writeFileSync(detectorPath, changed);
+  });
+  const hostileBaselineConfig = attempt("hostile-baseline", { candidateRoot: hostileBaseline.candidateRoot, candidateManifestPath: hostileBaseline.manifestPath, candidateSignaturePath: hostileBaseline.signaturePath });
+  start(hostileBaselineConfig);
+  const hostileCandidateConfig = { ...candidateConfig(hostileBaselineConfig), repositoryRoot: hostileBaseline.candidateRoot, candidateRoot: hostileBaseline.candidateRoot, candidateManifestPath: hostileBaseline.manifestPath, candidateSignaturePath: hostileBaseline.signaturePath };
+  const hostileCandidateConfigPath = path.join(temporaryRoot, "hostile-baseline-candidate-config.json");
+  const hostileHandoffPath = path.join(temporaryRoot, "hostile-baseline-handoff.json");
+  fs.writeFileSync(hostileCandidateConfigPath, JSON.stringify(hostileCandidateConfig));
+  const hostileCandidateResult = childProcess.spawnSync(process.execPath, [path.join(repositoryRoot, "tools", "run_development_evaluation.js"), "--phase", "candidate", "--config", hostileCandidateConfigPath, "--handoff", hostileHandoffPath], { cwd: repositoryRoot, encoding: "utf8", env: process.env });
+  assert.equal(hostileCandidateResult.status, 0);
+  const hostileHandoff = readDevelopmentExecutionHandoff(hostileHandoffPath);
+  assert.equal(hostileHandoff.handoffStatus, "EXECUTED");
+  assert.equal(hostileHandoff.outcomes.filter(row => row.detector === "CURRENT_ENGINE").every(row => row.status === "SUCCESS"), true);
+  assert.equal(hostileHandoff.outcomes.filter(row => row.detector === "PAN_TOMPKINS").every(row => row.status === "TECHNICAL_FAILURE" && row.failureCode === "DEVELOPMENT_CANDIDATE_DETECTOR_FAILURE"), true);
+  assert.throws(() => finalizeDevelopmentEvaluationAttempt(hostileBaselineConfig, hostileHandoffPath, privateKeyPem), /DEVELOPMENT_PAN_TOMPKINS_SUBMISSION_MISMATCH/);
+
   const wrongLeadBytes = Buffer.from(`${JSON.stringify({ sampleRateHz: 250, lead: "V1", samples: syntheticSignal(1250, peaks) })}\n`, "utf8");
   const wrongLeadRecord = { ...manifest.records[0], signalBytes: wrongLeadBytes.length, sourceFileSha256: crypto.createHash("sha256").update(wrongLeadBytes).digest("hex") };
   fs.writeFileSync(path.join(corpusRoot, "signals", "record-1.json"), wrongLeadBytes);
