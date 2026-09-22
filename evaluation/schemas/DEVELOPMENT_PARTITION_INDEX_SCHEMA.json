@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-partition-index-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "benchmarkId", "benchmarkVersion", "clinicalAccuracyClaimed", "patientHmacKeyId", "patientCanonicalizationVersion", "waveformFingerprintVersion", "rows"],
+  "properties": {
+    "schema": {"const": "ekg-development-partition-index-v1"},
+    "benchmarkId": {"type": "string", "minLength": 1},
+    "benchmarkVersion": {"type": "string", "minLength": 1},
+    "clinicalAccuracyClaimed": {"const": false},
+    "patientHmacKeyId": {"type": "string", "minLength": 1},
+    "patientCanonicalizationVersion": {"type": "string", "minLength": 1},
+    "waveformFingerprintVersion": {"type": "string", "minLength": 1},
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["recordHmacSha256", "patientHmacSha256", "parentRecordHmacSha256", "splitRole", "patientIndependence", "taskEligibility", "sourceFileSha256", "nearDuplicateGroupSha256"],
+        "properties": {
+          "recordHmacSha256": {"$ref": "#/$defs/sha256"},
+          "patientHmacSha256": {"$ref": "#/$defs/sha256"},
+          "parentRecordHmacSha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+          "splitRole": {"enum": ["development", "selection", "locked-holdout"]},
+          "patientIndependence": {"enum": ["VERIFIED", "UNVERIFIED"]},
+          "taskEligibility": {"enum": ["ELIGIBLE", "EXCLUDED"]},
+          "sourceFileSha256": {"$ref": "#/$defs/sha256"},
+          "nearDuplicateGroupSha256": {"$ref": "#/$defs/sha256"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

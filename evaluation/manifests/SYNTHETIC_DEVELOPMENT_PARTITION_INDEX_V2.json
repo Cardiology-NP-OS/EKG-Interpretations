@@ -1,0 +1,41 @@
+{
+  "schema": "ekg-development-partition-index-v1",
+  "benchmarkId": "SYNTHETIC-DEVELOPMENT-RPEAK-V2",
+  "benchmarkVersion": "2",
+  "clinicalAccuracyClaimed": false,
+  "patientHmacKeyId": "synthetic-partition-hmac-v1",
+  "patientCanonicalizationVersion": "synthetic-patient-id-v1",
+  "waveformFingerprintVersion": "sha256-source-bytes-plus-near-duplicate-v1",
+  "rows": [
+    {
+      "recordHmacSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "patientHmacSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "parentRecordHmacSha256": null,
+      "splitRole": "development",
+      "patientIndependence": "VERIFIED",
+      "taskEligibility": "ELIGIBLE",
+      "sourceFileSha256": "e8211f5af89a16abda107e43e5a700a671878cef8e46e2d23f593f6350df8305",
+      "nearDuplicateGroupSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    {
+      "recordHmacSha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "patientHmacSha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "parentRecordHmacSha256": null,
+      "splitRole": "selection",
+      "patientIndependence": "VERIFIED",
+      "taskEligibility": "ELIGIBLE",
+      "sourceFileSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "nearDuplicateGroupSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "recordHmacSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "patientHmacSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "parentRecordHmacSha256": null,
+      "splitRole": "locked-holdout",
+      "patientIndependence": "VERIFIED",
+      "taskEligibility": "ELIGIBLE",
+      "sourceFileSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "nearDuplicateGroupSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  ]
+}

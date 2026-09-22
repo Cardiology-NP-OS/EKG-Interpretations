@@ -33,8 +33,9 @@ try {
   process.env.EKG_EVALUATION_NETWORK_DISABLED = "1";
   const config = {
     repositoryRoot,
-    manifestPath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.json"),
-    manifestSignaturePath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.sig"),
+    manifestPath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V2.json"),
+    manifestSignaturePath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V2.sig"),
+    partitionIndexPath: path.join(repositoryRoot, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_PARTITION_INDEX_V2.json"),
     corpusRoot,
     artifactRoot,
     inputMountMode: "READ_ONLY",
@@ -48,9 +49,17 @@ try {
     allowDirtySyntheticTest: true,
   };
   assert.throws(() => validateRunConfig({ ...config, previousApprovedBundlePath: "prior" }), /DEVELOPMENT_PREVIOUS_BASELINE_CONFIG/);
+  assert.throws(() => runDevelopmentEvaluation({ ...config, networkIsolation: "CONTAINER_NETWORK_NONE", trigger: "merge-or-nightly", bootstrap: { replicates: 2000, seed: 11 }, environmentImageDigest: "a".repeat(64) }), /DEVELOPMENT_EXTERNAL_MANIFEST_TRUST_REQUIRED/);
+  assert.throws(() => runDevelopmentEvaluation({ ...config, expectedManifestTrustStoreSha256: "0".repeat(64) }), /DEVELOPMENT_MANIFEST_TRUST_JSON_HASH/);
   const signalPath = path.join(corpusRoot, "signals", "record-1.json");
   const originalSignalBytes = fs.readFileSync(signalPath);
+  const cleanPartition = JSON.parse(fs.readFileSync(config.partitionIndexPath, "utf8"));
+  const invalidPartition = JSON.parse(JSON.stringify(cleanPartition));
+  invalidPartition.rows[1].patientHmacSha256 = invalidPartition.rows[0].patientHmacSha256;
+  const invalidPartitionPath = path.join(temporaryRoot, "invalid-partition.json");
+  fs.writeFileSync(invalidPartitionPath, JSON.stringify(invalidPartition));
   fs.writeFileSync(signalPath, Buffer.concat([originalSignalBytes, Buffer.from(" ")]));
+  assert.throws(() => runDevelopmentEvaluation({ ...config, partitionIndexPath: invalidPartitionPath }), /DEVELOPMENT_PARTITION_PATIENT_LEAKAGE/);
   assert.throws(() => runDevelopmentEvaluation(config), /DEVELOPMENT_SIGNAL_BYTES/);
   assert.equal(fs.existsSync(artifactRoot), false);
   fs.writeFileSync(signalPath, originalSignalBytes);
@@ -72,6 +81,11 @@ try {
   assert.equal(report.currentEngine.denominators.nRecords, 1);
   assert.equal(report.panTompkins.denominators.nRecords, 1);
   assert.equal(report.currentEngine.records, undefined);
+  const publishedText = fs.readdirSync(receipt.path).filter(name => name.endsWith(".json")).map(name => fs.readFileSync(path.join(receipt.path, name), "utf8")).join("\n");
+  const protectedRows = cleanPartition.rows.filter(row => row.splitRole !== "development");
+  for (const row of protectedRows) {
+    for (const field of ["recordHmacSha256", "patientHmacSha256", "sourceFileSha256", "nearDuplicateGroupSha256"]) assert.equal(publishedText.includes(row[field]), false);
+  }
   assert.throws(() => runDevelopmentEvaluation(config), /EVALUATION_BUNDLE_IMMUTABLE_COLLISION/);
   const gatesPath = path.join(receipt.path, "gates.json");
   const original = fs.readFileSync(gatesPath);

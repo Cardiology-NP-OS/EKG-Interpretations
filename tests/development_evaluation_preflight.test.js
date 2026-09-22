@@ -5,7 +5,8 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const { canonicalManifestPayload, preflightDevelopmentRun, validateDevelopmentManifest, validateManifestSignerAuthority } = require("../lib/development_evaluation_preflight");
-const { payloadSha256 } = require("../lib/evaluation_signatures");
+const { payloadSha256, verifySignedPayload } = require("../lib/evaluation_signatures");
+const { partitionDigests, verifyDevelopmentPartition } = require("../lib/development_partition_verifier");
 const { assertDevelopmentIdentityAllowed, validateSpentRegistry } = require("../lib/spent_dataset_registry");
 const { stableJson } = require("../lib/evaluation_runtime");
 
@@ -13,6 +14,7 @@ const root = path.join(__dirname, "..");
 const registry = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "registries", "SPENT_DATASET_REGISTRY.json"), "utf8"));
 const registrySignature = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "registries", "SPENT_DATASET_REGISTRY.sig"), "utf8"));
 const spentTrustStore = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "keys", "SPENT_REGISTRY_SIGNERS.json"), "utf8"));
+const developmentTrustStore = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "keys", "DEVELOPMENT_MANIFEST_SIGNERS.json"), "utf8"));
 
 function sign(payload, keyId = "synthetic-development-signer") {
   const { publicKey, privateKey } = crypto.generateKeyPairSync("ed25519");
@@ -26,6 +28,33 @@ function sign(payload, keyId = "synthetic-development-signer") {
     trustStore: {
       keys: [{ keyId, algorithm: "Ed25519", status: "TRUSTED", rightsAuthority: true, patientPartitionAuthority: true, allowedDatasetIds: ["ECG-DATASET-SYNTHETIC-DEVELOPMENT"], publicKeyPem: publicKey.export({ type: "spki", format: "pem" }) }],
     },
+  };
+}
+
+function makePartition(manifest) {
+  const developmentRows = manifest.records.map(record => ({
+    recordHmacSha256: record.recordHmacSha256,
+    patientHmacSha256: record.patientHmacSha256,
+    parentRecordHmacSha256: record.parentRecordHmacSha256,
+    splitRole: record.splitRole,
+    patientIndependence: record.patientIndependence,
+    taskEligibility: record.taskEligibility,
+    sourceFileSha256: record.sourceFileSha256,
+    nearDuplicateGroupSha256: record.nearDuplicateGroupSha256,
+  }));
+  return {
+    schema: "ekg-development-partition-index-v1",
+    benchmarkId: manifest.benchmarkId,
+    benchmarkVersion: manifest.benchmarkVersion,
+    clinicalAccuracyClaimed: false,
+    patientHmacKeyId: "synthetic-partition-hmac-v1",
+    patientCanonicalizationVersion: "synthetic-patient-id-v1",
+    waveformFingerprintVersion: "sha256-source-bytes-plus-near-duplicate-v1",
+    rows: [
+      ...developmentRows,
+      { recordHmacSha256: "8".repeat(64), patientHmacSha256: "9".repeat(64), parentRecordHmacSha256: null, splitRole: "selection", patientIndependence: "VERIFIED", taskEligibility: "ELIGIBLE", sourceFileSha256: "a".repeat(64), nearDuplicateGroupSha256: "b".repeat(64) },
+      { recordHmacSha256: "c".repeat(64), patientHmacSha256: "d".repeat(64), parentRecordHmacSha256: null, splitRole: "locked-holdout", patientIndependence: "VERIFIED", taskEligibility: "ELIGIBLE", sourceFileSha256: "e".repeat(64), nearDuplicateGroupSha256: "f".repeat(64) },
+    ].sort((left, right) => left.recordHmacSha256.localeCompare(right.recordHmacSha256)),
   };
 }
 
@@ -68,6 +97,7 @@ function makeManifest() {
       waveformDuplicateAuditSha256: "f".repeat(64),
       splitAlgorithmNameAndVersion: "synthetic-v1",
       independentApprover: "Synthetic test",
+      roleRecordCounts: { development: 1, selection: 1, lockedHoldout: 1 },
       crossRolePatientOverlapCount: 0,
       crossRoleExactWaveformOverlapCount: 0,
       crossRoleNearDuplicateOverlapCount: 0,
@@ -97,6 +127,7 @@ function makeManifest() {
       },
     ],
   };
+  Object.assign(manifest.partitionAttestation, partitionDigests(makePartition(manifest)));
   manifest.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(manifest));
   return manifest;
 }
@@ -107,6 +138,11 @@ const registryResult = validateSpentRegistry(registry, registrySignature, spentT
 });
 assert.equal(registryResult.pass, true);
 assert.equal(registryResult.entryCount, 2);
+
+const historicalManifest = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.json"), "utf8"));
+const historicalManifestSignature = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.sig"), "utf8"));
+assert.equal(validateDevelopmentManifest(historicalManifest).recordCount, 1);
+assert.equal(verifySignedPayload(canonicalManifestPayload(historicalManifest), historicalManifestSignature, developmentTrustStore, { expectedPayloadSha256: historicalManifest.manifestPayloadSha256 }).verified, true);
 
 assert.throws(
   () => assertDevelopmentIdentityAllowed({ datasetId: "RENAMED-SAFE-BENCHMARK", sourceManifestSha256: "cccef1f3529519db8f26a333c97a6872a7d0e3e5c64a1448b76b161fd87fb75f" }, registry),
@@ -135,6 +171,7 @@ assert.throws(
 );
 
 const manifest = makeManifest();
+const partitionIndex = makePartition(manifest);
 const signedManifest = sign(canonicalManifestPayload(manifest));
 const result = preflightDevelopmentRun({
   spentRegistry: registry,
@@ -145,11 +182,25 @@ const result = preflightDevelopmentRun({
   manifest,
   manifestSignature: signedManifest.signature,
   manifestTrustStore: signedManifest.trustStore,
+  partitionIndex,
 });
 assert.equal(result.pass, true);
 assert.equal(result.recordCount, 1);
 assert.equal(result.patientCount, 1);
+assert.equal(result.partition.totalRecordCount, 3);
+assert.equal(result.partition.selectionRecordCount, 1);
+assert.equal(result.partition.lockedHoldoutRecordCount, 1);
 assert.equal(result.clinicalAccuracyClaimed, false);
+assert.equal(JSON.stringify(result).includes("9999999999999999"), false);
+assert.equal(JSON.stringify(result).includes("dddddddddddddddd"), false);
+
+const spentPartition = makePartition(manifest);
+spentPartition.rows[1].sourceFileSha256 = "c753b85dfa42c5cfd5caf38748eec106cab89353018de6e2cdd77ee15ae1413b";
+const spentPartitionManifest = makeManifest();
+Object.assign(spentPartitionManifest.partitionAttestation, partitionDigests(spentPartition));
+spentPartitionManifest.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(spentPartitionManifest));
+const spentPartitionSignature = sign(canonicalManifestPayload(spentPartitionManifest));
+assert.throws(() => preflightDevelopmentRun({ spentRegistry: registry, spentRegistrySignature: registrySignature, spentTrustStore, minimumSpentRegistrySequence: 1, expectedSpentRegistrySha256: registrySignature.payloadSha256, manifest: spentPartitionManifest, manifestSignature: spentPartitionSignature.signature, manifestTrustStore: spentPartitionSignature.trustStore, partitionIndex: spentPartition }), /SPENT_DATASET_DENIED:MIT-BIH-RPEAK-FULL-V1/);
 
 const unauthorizedSigner = sign(canonicalManifestPayload(manifest));
 unauthorizedSigner.trustStore.keys[0].rightsAuthority = false;
@@ -213,5 +264,40 @@ const malformedSubgroup = makeManifest();
 malformedSubgroup.records[0].subgroups.source = { hidden: true };
 malformedSubgroup.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(malformedSubgroup));
 assert.throws(() => validateDevelopmentManifest(malformedSubgroup), /DEVELOPMENT_SUBGROUP_VALUE/);
+
+const clonePartition = () => JSON.parse(JSON.stringify(partitionIndex));
+const patientLeak = clonePartition();
+patientLeak.rows[1].patientHmacSha256 = patientLeak.rows[0].patientHmacSha256;
+assert.throws(() => verifyDevelopmentPartition(patientLeak, manifest), /DEVELOPMENT_PARTITION_PATIENT_LEAKAGE/);
+const holdoutPatientLeak = clonePartition();
+holdoutPatientLeak.rows[2].patientHmacSha256 = holdoutPatientLeak.rows[0].patientHmacSha256;
+assert.throws(() => verifyDevelopmentPartition(holdoutPatientLeak, manifest), /DEVELOPMENT_PARTITION_PATIENT_LEAKAGE/);
+const waveformLeak = clonePartition();
+waveformLeak.rows[1].sourceFileSha256 = waveformLeak.rows[0].sourceFileSha256;
+assert.throws(() => verifyDevelopmentPartition(waveformLeak, manifest), /DEVELOPMENT_PARTITION_WAVEFORM_LEAKAGE/);
+const nearDuplicateLeak = clonePartition();
+nearDuplicateLeak.rows[1].nearDuplicateGroupSha256 = nearDuplicateLeak.rows[0].nearDuplicateGroupSha256;
+assert.throws(() => verifyDevelopmentPartition(nearDuplicateLeak, manifest), /DEVELOPMENT_PARTITION_NEAR_DUPLICATE_LEAKAGE/);
+const parentRoleLeak = clonePartition();
+parentRoleLeak.rows[1].parentRecordHmacSha256 = parentRoleLeak.rows[0].recordHmacSha256;
+assert.throws(() => verifyDevelopmentPartition(parentRoleLeak, manifest), /DEVELOPMENT_PARTITION_PARENT_ROLE_MISMATCH/);
+const unverifiedProtectedPatient = clonePartition();
+unverifiedProtectedPatient.rows[1].patientIndependence = "UNVERIFIED";
+assert.throws(() => verifyDevelopmentPartition(unverifiedProtectedPatient, manifest), /DEVELOPMENT_PARTITION_PROTECTED_IDENTITY_UNVERIFIED/);
+const missingDevelopmentRecord = clonePartition();
+missingDevelopmentRecord.rows.shift();
+assert.throws(() => verifyDevelopmentPartition(missingDevelopmentRecord, manifest), /DEVELOPMENT_PARTITION_MANIFEST_MISMATCH/);
+const extraDevelopmentRecord = clonePartition();
+extraDevelopmentRecord.rows[1].splitRole = "development";
+assert.throws(() => verifyDevelopmentPartition(extraDevelopmentRecord, manifest), /DEVELOPMENT_PARTITION_MANIFEST_MISMATCH/);
+const badFullPartitionDigest = JSON.parse(JSON.stringify(manifest));
+badFullPartitionDigest.partitionAttestation.fullPartitionSha256 = "0".repeat(64);
+assert.throws(() => verifyDevelopmentPartition(partitionIndex, badFullPartitionDigest), /DEVELOPMENT_FULL_PARTITION_DIGEST_MISMATCH/);
+const badPatientRoleDigest = JSON.parse(JSON.stringify(manifest));
+badPatientRoleDigest.partitionAttestation.patientRoleSetsSha256 = "0".repeat(64);
+assert.throws(() => verifyDevelopmentPartition(partitionIndex, badPatientRoleDigest), /DEVELOPMENT_PATIENT_ROLE_SETS_DIGEST_MISMATCH/);
+const badDuplicateAuditDigest = JSON.parse(JSON.stringify(manifest));
+badDuplicateAuditDigest.partitionAttestation.waveformDuplicateAuditSha256 = "0".repeat(64);
+assert.throws(() => verifyDevelopmentPartition(partitionIndex, badDuplicateAuditDigest), /DEVELOPMENT_DUPLICATE_AUDIT_DIGEST_MISMATCH/);
 
 console.log("development evaluation preflight tests passed");

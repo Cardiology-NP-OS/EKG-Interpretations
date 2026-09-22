@@ -62,6 +62,16 @@
         "waveformDuplicateAuditSha256": {"$ref": "#/$defs/sha256"},
         "splitAlgorithmNameAndVersion": {"$ref": "#/$defs/nonempty"},
         "independentApprover": {"$ref": "#/$defs/nonempty"},
+        "roleRecordCounts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["development", "selection", "lockedHoldout"],
+          "properties": {
+            "development": {"type": "integer", "minimum": 1},
+            "selection": {"type": "integer", "minimum": 1},
+            "lockedHoldout": {"type": "integer", "minimum": 1}
+          }
+        },
         "crossRolePatientOverlapCount": {"const": 0},
         "crossRoleExactWaveformOverlapCount": {"const": 0},
         "crossRoleNearDuplicateOverlapCount": {"const": 0},
