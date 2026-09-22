@@ -8,7 +8,7 @@ const os = require("os");
 const path = require("path");
 const { createCandidateWorkerBudget, gitIdentity, implementationDigest, loadEvaluationRecord, runDevelopmentCandidateExecution, runDevelopmentEvaluation, validateCandidateRunConfig, validateRunConfig } = require("../lib/development_evaluation_runner");
 const { MANDATORY_INTEGRITY_CONTROLS, deriveDevelopmentGateStatus, finalizeDevelopmentEvaluationAttempt, isDevelopmentPolicyReady, startDevelopmentEvaluationAttempt } = require("../lib/development_evaluation_signer");
-const { verifyEvaluationBundle } = require("../lib/evaluation_artifact_store");
+const { REQUIRED_ARTIFACTS, publishEvaluationBundle, verifyEvaluationBundle } = require("../lib/evaluation_artifact_store");
 const { verifyCompletedDevelopmentAttempt, verifyDevelopmentAttempt } = require("../lib/development_attempt_store");
 const { CANDIDATE_LAUNCH_POLICY_SHA256, CANDIDATE_TOTAL_WORKER_BUDGET_MS, CANDIDATE_WORKER_TIMEOUT_MS } = require("../lib/development_candidate_isolation");
 const { readDevelopmentExecutionHandoff, writeDevelopmentExecutionHandoff } = require("../lib/development_execution_handoff");
@@ -333,6 +333,26 @@ try {
   assert.equal(verified.runManifest.candidateIsolationExpectationSha256, handoff.candidateIsolationExpectationSha256);
   assert.equal(verified.runManifest.candidateRuntimeAttestationSha256, handoff.candidateRuntimeAttestationSha256);
   assert.equal(verified.runManifest.candidateRuntimeAttestation.candidateReferenceIsolation, false);
+  assert.deepEqual(verified.artifacts, {});
+  const verifiedInternalResult = verifyEvaluationBundle(receipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId, requestedArtifactNames: ["internal-result.restricted.json"] });
+  assert.deepEqual(Object.keys(verifiedInternalResult.artifacts), ["internal-result.restricted.json"]);
+  assert.equal(verifiedInternalResult.artifacts["internal-result.restricted.json"].currentEngine.candidateId, "target-owned-local-extrema-absolute-deviation-v1");
+  assert.throws(() => verifyEvaluationBundle(receipt.path, publicKeyPem, { requestedArtifactNames: ["undeclared.json"] }), /EVALUATION_BUNDLE_ARTIFACT_REQUEST/);
+  const runManifestPath = path.resolve(receipt.path, "run-manifest.json");
+  const originalReadFileSync = fs.readFileSync;
+  let runManifestReadCount = 0;
+  fs.readFileSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === runManifestPath && ++runManifestReadCount > 1) throw new Error("UNVERIFIED_RUN_MANIFEST_REREAD");
+    return originalReadFileSync.call(fs, file, ...args);
+  };
+  let snapshotVerified;
+  try {
+    snapshotVerified = verifyEvaluationBundle(receipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId });
+  } finally {
+    fs.readFileSync = originalReadFileSync;
+  }
+  assert.equal(runManifestReadCount, 1);
+  assert.equal(snapshotVerified.runManifest.executionHandoffSha256, verified.runManifest.executionHandoffSha256);
   const completedAttempt = verifyCompletedDevelopmentAttempt(path.join(artifactRoot, "attempts", "2026", "09", "22", config.attemptId), artifactRoot, publicKeyPem, { expectedSignerKeyId: config.signerKeyId });
   assert.equal(completedAttempt.executionStatus, "COMPLETED");
   assert.equal(Object.hasOwn(completedAttempt.start.runBinding, "candidateReferenceIsolation"), false);
@@ -360,6 +380,41 @@ try {
   for (const row of cleanPartition.rows.filter(row => row.splitRole !== "development")) for (const field of ["recordHmacSha256", "patientHmacSha256", "sourceFileSha256", "nearDuplicateGroupSha256"]) assert.equal(publishedText.includes(row[field]), false);
   fs.rmSync(path.join(artifactRoot, "attempts", "2026", "09", "22", config.attemptId, "terminal"), { recursive: true });
   assert.equal(finalizeDevelopmentEvaluationAttempt(config, handoff, privateKeyPem).runId, receipt.runId);
+
+  const publishedArtifacts = Object.fromEntries(REQUIRED_ARTIFACTS.map(name => [name, JSON.parse(fs.readFileSync(path.join(receipt.path, name), "utf8"))]));
+  const approvedPrior = publishEvaluationBundle(artifactRoot, {
+    storageMode: config.storageMode,
+    startedAtUtc: "2026-09-22T12:01:00Z",
+    runManifest: { ...verified.runManifest, runId: null, runIdentityDigest: crypto.createHash("sha256").update("approved-prior-snapshot").digest("hex"), baselineApproval: "APPROVED" },
+    artifacts: publishedArtifacts,
+    signingPrivateKeyPem: privateKeyPem,
+    signerKeyId: config.signerKeyId,
+  });
+  const priorConfig = attempt("verified-prior-snapshot", { startedAtUtc: "2026-09-22T12:02:00Z", previousApprovedBundlePath: approvedPrior.path, previousBundlePublicKeyPem: publicKeyPem, previousBundleSignerKeyId: config.signerKeyId });
+  start(priorConfig);
+  const priorHandoff = runDevelopmentCandidateExecution(candidateConfig(priorConfig));
+  const priorResultPath = path.resolve(approvedPrior.path, "internal-result.restricted.json");
+  const originalPriorResult = fs.readFileSync(priorResultPath);
+  const forgedPriorResult = JSON.parse(originalPriorResult.toString("utf8"));
+  forgedPriorResult.currentEngine.benchmarkVersion = "FORGED_AFTER_VERIFICATION";
+  let priorResultReadCount = 0;
+  fs.readFileSync = function(file, ...args) {
+    if (typeof file === "string" && path.resolve(file) === priorResultPath) {
+      priorResultReadCount += 1;
+      if (priorResultReadCount > 1) return args[0] ? `${JSON.stringify(forgedPriorResult)}\n` : Buffer.from(`${JSON.stringify(forgedPriorResult)}\n`, "utf8");
+    }
+    return originalReadFileSync.call(fs, file, ...args);
+  };
+  let priorComparisonReceipt;
+  try {
+    priorComparisonReceipt = finalizeDevelopmentEvaluationAttempt(priorConfig, priorHandoff, privateKeyPem);
+  } finally {
+    fs.readFileSync = originalReadFileSync;
+  }
+  assert.equal(priorResultReadCount, 1);
+  const priorComparisonBundle = verifyEvaluationBundle(priorComparisonReceipt.path, publicKeyPem, { expectedSignerKeyId: config.signerKeyId, requestedArtifactNames: ["internal-result.restricted.json"] });
+  assert.equal(priorComparisonBundle.artifacts["internal-result.restricted.json"].versusPreviousApprovedRun.status, "PASSED");
+  assert.equal(priorComparisonBundle.artifacts["internal-result.restricted.json"].versusPreviousApprovedRun.baselineCandidateId, "target-owned-local-extrema-absolute-deviation-v1");
 
   const predictionOrderConfig = attempt("tampered-handoff");
   start(predictionOrderConfig);
