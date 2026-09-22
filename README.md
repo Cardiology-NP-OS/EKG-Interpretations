@@ -12,6 +12,10 @@ The product goal is to accept photographs or PDF images of ECGs and produce cali
 
 The current engineering path can bounded-decode PNG/JPEG/PDF source files, normalize selected pages, require external-input preflight, digitize governed traces, preserve the original source and normalized raster, and create immutable extraction/analysis generations. JPEG/PDF decoding runs through a pinned Pillow/pypdfium2 worker process and is separately exercised in CI.
 
+Strict analyses now bind the eight compatibility hashes and a versioned transitive JS/JSON execution identity to the exact UTF-8 bytes compiled by a private CommonJS loader, independent of the ambient module cache. Generation, persistence and normal reopening reject missing artifacts, changed loaded bytes, false hashes and mismatched execution identities. This is source-byte provenance, not actor authentication, extraction replay, native-binary attestation or clinical validation.
+
+Previously stored strict analyses retain their original bytes and hashes. `auditImageAnalysis(casePath, analysisId)` in `lib/image_analysis_store.js` checks stored content/source identities without loading the analysis implementation or rerunning measurements; it explicitly reports implementation provenance `NOT_VERIFIED` and semantic validation `NOT_PERFORMED`. Normal reopening requires the current exact implementation identity; old or differently versioned records are audit-only, never silently relabeled as current. Non-strict legacy records retain their existing validation path. No stored records are migrated or overwritten.
+
 This is generated-fixture engineering evidence, not clinical validation. Bounded automatic perspective detection, supported printed-label lead identity, trace-baseline verification, calibrated digitization, immutable extraction/analysis, and temporally scoped multi-lead aggregation are implemented for governed engineering fixtures. Real-photo/reference-case clinical accuracy, evidence-backed clinical interpretation, diagnostic runtime, project gold, and reportable clinical metrics remain inactive/unestablished.
 
 ## Live operating state
@@ -96,6 +100,8 @@ npm run test:image-decoder
 ```
 
 Set `EKG_IMAGE_PYTHON` to the same interpreter for the Node bridge. These commands test generated fixtures, not a clinical cohort. Do not dispatch `clinical_accuracy_pilot.yml` or run `validate:qrs-v2-ludb-coverage-v2-holdout`: MITBIH-RPEAK-FULL-V1 is immutable and the LUDB holdout is SPENT/FAILED; V1 remains the default. Contract/preservation tests do not authorise retuning or repeating those evaluations.
+
+The unchanged independent R10 probe and the negative execution/legacy compatibility tests are included in `npm test`; focused commands are `node tests/review_adversarial_strict_provenance.test.js`, `node tests/image_analysis_provenance.test.js` and `node tests/image_analysis_store.test.js`. The legacy fixture preserves an actual synthetic analysis generated at `f3e38bb87d93c937e5ba457ee8e4ffc8a03d6b75`, not a replay using the repaired implementation. Existing synchronization-failure, collision and race assertions remain intact.
 
 Also run donor-focused tests and exact-SHA GitHub CI. Fresh-clone verification is required when available. Skipped/unavailable evidence is not PASS.
 
