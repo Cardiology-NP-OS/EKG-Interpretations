@@ -1,0 +1,98 @@
+name: Development ECG evaluation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lib/**"
+      - "evaluation/**"
+      - "tools/run_development_evaluation.js"
+      - "package.json"
+  schedule:
+    - cron: "23 3 * * 1-6"
+    - cron: "23 4 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: development-ecg-evaluation
+  cancel-in-progress: false
+
+jobs:
+  synthetic-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm run test:evaluation-harness
+
+  full-development:
+    needs: synthetic-boundary
+    runs-on: [self-hosted, linux, x64, ecg-development]
+    timeout-minutes: 360
+    env:
+      EKG_DEVELOPMENT_GOVERNANCE_ROOT: ${{ vars.EKG_DEVELOPMENT_GOVERNANCE_ROOT }}
+      EKG_DEVELOPMENT_CORPUS_ROOT: ${{ vars.EKG_DEVELOPMENT_CORPUS_ROOT }}
+      EKG_EVALUATION_ARTIFACT_ROOT: ${{ vars.EKG_EVALUATION_ARTIFACT_ROOT }}
+      EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH: ${{ vars.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH }}
+      EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64: ${{ secrets.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64 }}
+      EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID: ${{ vars.EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID }}
+      EKG_EVALUATION_SIGNING_KEY_PEM_BASE64: ${{ secrets.EKG_EVALUATION_SIGNING_KEY_PEM_BASE64 }}
+      EKG_EVALUATION_SIGNER_KEY_ID: ${{ vars.EKG_EVALUATION_SIGNER_KEY_ID }}
+      EKG_EVALUATION_IMAGE_DIGEST: ${{ vars.EKG_EVALUATION_IMAGE_DIGEST }}
+      EKG_EVALUATION_NETWORK_DISABLED: "1"
+      GITHUB_EVENT_SCHEDULE_VALUE: ${{ github.event.schedule }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require governed external resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in EKG_DEVELOPMENT_GOVERNANCE_ROOT EKG_DEVELOPMENT_CORPUS_ROOT EKG_EVALUATION_ARTIFACT_ROOT EKG_EVALUATION_SIGNING_KEY_PEM_BASE64 EKG_EVALUATION_SIGNER_KEY_ID EKG_EVALUATION_IMAGE_DIGEST; do
+            test -n "${!name:-}" || { echo "BLOCKED_MISSING_GOVERNED_RESOURCE:$name" >&2; exit 1; }
+          done
+          test -f "$EKG_DEVELOPMENT_GOVERNANCE_ROOT/manifest.json"
+          test -f "$EKG_DEVELOPMENT_GOVERNANCE_ROOT/manifest.sig.json"
+          test -f "$EKG_DEVELOPMENT_GOVERNANCE_ROOT/manifest-trust-store.json"
+          test "$(printf '%s' "$EKG_EVALUATION_IMAGE_DIGEST" | tr -d '0-9a-f')" = ""
+          test "${#EKG_EVALUATION_IMAGE_DIGEST}" = "64"
+          configured_previous=0
+          for name in EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64 EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID; do
+            test -z "${!name:-}" || configured_previous=$((configured_previous + 1))
+          done
+          test "$configured_previous" = "0" || test "$configured_previous" = "3" || { echo "BLOCKED_INCOMPLETE_PREVIOUS_BASELINE" >&2; exit 1; }
+      - name: Prepare ephemeral signing key
+        shell: bash
+        run: |
+          umask 077
+          printf '%s' "$EKG_EVALUATION_SIGNING_KEY_PEM_BASE64" | base64 --decode > "$RUNNER_TEMP/evaluation-signing-key.pem"
+      - name: Build ephemeral run configuration
+        shell: bash
+        run: |
+          node -e "const fs=require('fs');const weekly=process.env.GITHUB_EVENT_SCHEDULE_VALUE==='23 4 * * 0';const prior=process.env.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH?'/artifacts/'+process.env.EKG_PREVIOUS_APPROVED_BUNDLE_RELATIVE_PATH:null;const key=process.env.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64?Buffer.from(process.env.EKG_PREVIOUS_BUNDLE_PUBLIC_KEY_PEM_BASE64,'base64').toString('utf8'):null;const config={manifestPath:'/governance/manifest.json',manifestSignaturePath:'/governance/manifest.sig.json',manifestTrustStorePath:'/governance/manifest-trust-store.json',corpusRoot:'/corpus',artifactRoot:'/artifacts',inputMountMode:'READ_ONLY',networkIsolation:'CONTAINER_NETWORK_NONE',storageMode:'APPLICATION_WRITE_ONCE_SIGNED',startedAtUtc:new Date().toISOString().replace(/\.\d{3}Z$/,'Z'),trigger:weekly?'weekly':'merge-or-nightly',bootstrap:{replicates:weekly?10000:2000,seed:20260922},previousApprovedBundlePath:prior,previousBundlePublicKeyPem:key,previousBundleSignerKeyId:process.env.EKG_PREVIOUS_BUNDLE_SIGNER_KEY_ID||null,signerKeyId:process.env.EKG_EVALUATION_SIGNER_KEY_ID,environmentImageDigest:process.env.EKG_EVALUATION_IMAGE_DIGEST};fs.writeFileSync(process.env.RUNNER_TEMP+'/ekg-development-run.json',JSON.stringify(config));"
+      - name: Run isolated current-engine and Pan-Tompkins evaluation
+        shell: bash
+        run: |
+          docker run --rm --network none --read-only \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/workspace,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP,target=/runconfig,readonly" \
+            --mount "type=bind,source=$EKG_DEVELOPMENT_GOVERNANCE_ROOT,target=/governance,readonly" \
+            --mount "type=bind,source=$EKG_DEVELOPMENT_CORPUS_ROOT,target=/corpus,readonly" \
+            --mount "type=bind,source=$EKG_EVALUATION_ARTIFACT_ROOT,target=/artifacts" \
+            --mount "type=bind,source=$RUNNER_TEMP/evaluation-signing-key.pem,target=/runsecrets/evaluation-signing-key.pem,readonly" \
+            --env EKG_EVALUATION_NETWORK_DISABLED=1 \
+            --env EKG_EVALUATION_SIGNING_KEY_FILE=/runsecrets/evaluation-signing-key.pem \
+            --env GIT_CONFIG_COUNT=1 \
+            --env GIT_CONFIG_KEY_0=safe.directory \
+            --env GIT_CONFIG_VALUE_0=/workspace \
+            --workdir /workspace \
+            "node:22@sha256:$EKG_EVALUATION_IMAGE_DIGEST" node tools/run_development_evaluation.js --config /runconfig/ekg-development-run.json
+      - name: Remove ephemeral signing key
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/evaluation-signing-key.pem"

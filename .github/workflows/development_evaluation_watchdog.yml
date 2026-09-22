@@ -1,0 +1,33 @@
+name: Development ECG evaluation watchdog
+
+on:
+  schedule:
+    - cron: "53 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+jobs:
+  detect-missed-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check latest scheduled evaluation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          recent="$(gh run list --workflow development_evaluation.yml --event schedule --limit 20 --json createdAt,conclusion,status,url)"
+          node -e "const rows=JSON.parse(process.argv[1]);const cutoff=Date.now()-30*60*60*1000;if(!rows.some(row=>Date.parse(row.createdAt)>=cutoff&&row.status==='completed'&&row.conclusion==='success'))process.exit(2)" "$recent" || {
+            title="Development ECG evaluation missed or failed"
+            existing="$(gh issue list --state open --search "in:title $title" --json number --jq 'length')"
+            if [ "$existing" = "0" ]; then
+              gh issue create --title "$title" --body "The scheduled development-only ECG evaluation has no successful completed run in the last 30 hours. Inspect the self-hosted runner and governed corpus/WORM configuration. This is an engineering capability alert, not a clinical result."
+            fi
+            exit 1
+          }

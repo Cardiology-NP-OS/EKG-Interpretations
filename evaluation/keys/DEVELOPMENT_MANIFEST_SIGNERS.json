@@ -1,0 +1,16 @@
+{
+  "schema": "ekg-development-manifest-trust-store-v1",
+  "keys": [
+    {
+      "keyId": "synthetic-development-manifest-2026-09-22",
+      "algorithm": "Ed25519",
+      "status": "TRUSTED",
+      "rightsAuthority": true,
+      "patientPartitionAuthority": true,
+      "productionAuthority": false,
+      "allowedDatasetIds": ["ECG-DATASET-SYNTHETIC-DEVELOPMENT"],
+      "purpose": "Synthetic harness acceptance fixture only; private key destroyed after signing.",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA271oTVkCctlbhuRD0dbtZwPZPmgdPHbaRwVyhSRjzy0=\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}

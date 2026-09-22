@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-run-config-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifestPath", "manifestSignaturePath", "manifestTrustStorePath", "corpusRoot", "artifactRoot", "inputMountMode", "networkIsolation", "storageMode", "startedAtUtc", "trigger", "signerKeyId", "environmentImageDigest"],
+  "properties": {
+    "manifestPath": {"type": "string", "minLength": 1},
+    "manifestSignaturePath": {"type": "string", "minLength": 1},
+    "manifestTrustStorePath": {"type": "string", "minLength": 1},
+    "corpusRoot": {"type": "string", "minLength": 1},
+    "artifactRoot": {"type": "string", "minLength": 1},
+    "inputMountMode": {"const": "READ_ONLY"},
+    "networkIsolation": {"const": "CONTAINER_NETWORK_NONE"},
+    "storageMode": {"const": "APPLICATION_WRITE_ONCE_SIGNED"},
+    "startedAtUtc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"},
+    "trigger": {"type": "string", "minLength": 1},
+    "bootstrap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["replicates", "seed"],
+      "properties": {
+        "replicates": {"type": "integer", "minimum": 1},
+        "seed": {"type": "integer"}
+      }
+    },
+    "previousApprovedBundlePath": {"type": ["string", "null"], "minLength": 1},
+    "previousBundlePublicKeyPem": {"type": ["string", "null"], "minLength": 1},
+    "previousBundleSignerKeyId": {"type": ["string", "null"], "minLength": 1},
+    "signerKeyId": {"type": "string", "minLength": 1},
+    "environmentImageDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "dependentRequired": {
+    "previousApprovedBundlePath": ["previousBundlePublicKeyPem", "previousBundleSignerKeyId"],
+    "previousBundlePublicKeyPem": ["previousApprovedBundlePath", "previousBundleSignerKeyId"],
+    "previousBundleSignerKeyId": ["previousApprovedBundlePath", "previousBundlePublicKeyPem"]
+  }
+}

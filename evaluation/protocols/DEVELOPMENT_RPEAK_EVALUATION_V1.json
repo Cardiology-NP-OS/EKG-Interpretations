@@ -14,7 +14,14 @@
   "routineBootstrapReplicates": 2000,
   "finalBootstrapReplicates": 10000,
   "bootstrapSeed": 20260922,
-  "requiredDetectors": ["current-engine", "target-owned-pan-tompkins-classical-baseline-v1"],
+  "currentEngine": {
+    "algorithm": "target-owned-local-extrema-absolute-deviation-v1",
+    "configuration": {
+      "minAbsoluteDeviation": 0.9,
+      "refractoryMs": 200
+    }
+  },
+  "requiredDetectors": ["target-owned-local-extrema-absolute-deviation-v1", "target-owned-pan-tompkins-classical-baseline-v1"],
   "identicalPipelineRequirements": ["records", "lead-policy", "samples", "sample-rate", "references", "matcher", "tolerances", "metrics"],
   "panTompkinsReference": {
     "title": "A Real-Time QRS Detection Algorithm",
