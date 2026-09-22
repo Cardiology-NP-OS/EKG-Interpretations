@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-candidate-runtime-identity-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "task", "candidateId", "loadingPolicy", "entryFiles", "artifacts"],
+  "properties": {
+    "schema": {"const": "ekg-development-candidate-runtime-identity-v1"},
+    "task": {"const": "R_PEAK_DETECTION"},
+    "candidateId": {"type": "string", "minLength": 1},
+    "loadingPolicy": {"const": "PRIVATE_COMMONJS_EXACT_DETECTOR_CLOSURE_V1"},
+    "entryFiles": {
+      "const": ["lib/signal_measurement_contract.js", "lib/pan_tompkins_detector.js", "evaluation/protocols/DEVELOPMENT_RPEAK_EVALUATION_V1.json"]
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {"$ref": "#/$defs/artifact", "properties": {"file": {"const": "evaluation/protocols/DEVELOPMENT_RPEAK_EVALUATION_V1.json"}}},
+        {"$ref": "#/$defs/artifact", "properties": {"file": {"const": "lib/pan_tompkins_detector.js"}}},
+        {"$ref": "#/$defs/artifact", "properties": {"file": {"const": "lib/signal_dsp_filtering.js"}}},
+        {"$ref": "#/$defs/artifact", "properties": {"file": {"const": "lib/signal_measurement_contract.js"}}},
+        {"$ref": "#/$defs/artifact", "properties": {"file": {"const": "lib/wfdb_signal.js"}}}
+      ],
+      "items": false
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "bytes", "sha256"],
+      "properties": {
+        "file": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1, "maximum": 2097152},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

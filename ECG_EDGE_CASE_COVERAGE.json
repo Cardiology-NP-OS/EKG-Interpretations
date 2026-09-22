@@ -158,9 +158,11 @@
     },
     {
       "id": "DEVELOPMENT-EVALUATION-ACCOUNTING",
-      "scope": "bounded failure codes, per-record primary/replay terminal outcomes, excluded and not-run accounting, immutable signed attempt starts and terminal states, retry identity, publication collisions, incomplete-attempt detection, execution/gate separation, protected-row non-disclosure, a bounded exact-identity execution handoff, candidate-process isolation from signing keys and artifact publication, independent non-executing candidate-byte verification and semantic rescoring before signature, and sanitized GitHub-hosted control-plane receipts for exact workflow run/retry failures before evaluator launch",
+      "scope": "bounded failure codes, per-record primary/replay terminal outcomes, excluded and not-run accounting, immutable signed attempt starts and terminal states, retry identity, publication collisions, incomplete-attempt detection, execution/gate separation, protected-row non-disclosure, canonical signal-only candidate input with opaque attempt-scoped identities and exact inventory/hash/size/count/rate enforcement, a bounded exact-identity execution handoff, synthetic-mode non-isolation, pre-launch pending isolation state, digest-pinned dedicated candidate-image launch identity, candidate-local isolation observations explicitly marked non-authoritative, mandatory false reference-isolation state absent an external control-plane attestor and exclusive OCI provenance, detector execution in a bounded sandboxed child process without ambient process, require, filesystem or cryptography access, candidate-container separation from references, governance, corpus, signing keys and artifact publication, signer-owned deterministic Pan-Tompkins replay and semantic rescoring before signature, and sanitized GitHub-hosted control-plane receipts for exact workflow run/retry failures before evaluator launch",
       "tests": [
         "tests/development_run_accounting.test.js",
+        "tests/development_candidate_runtime_attestation.test.js",
+        "tests/development_execution_input.test.js",
         "tests/development_execution_handoff.test.js",
         "tests/development_attempt_store.test.js",
         "tests/development_workflow_attempt_receipt.test.js",

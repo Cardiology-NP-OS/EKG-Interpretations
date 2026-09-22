@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-candidate-isolation-expectation-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "attestationState", "isolationMode", "candidateInputMode", "candidateRuntimeImageDigest", "candidateLaunchPolicySha256", "expectedUid", "expectedGid"],
+  "properties": {
+    "schema": {"const": "ekg-development-candidate-isolation-expectation-v1"},
+    "attestationState": {"const": "PENDING_EXTERNAL_CONTROL_PLANE_ATTESTATION"},
+    "isolationMode": {"enum": ["SYNTHETIC_IN_PROCESS", "PINNED_SIGNAL_ONLY_CONTAINER"]},
+    "candidateInputMode": {"const": "SIGNAL_ONLY_READ_ONLY_V1"},
+    "candidateRuntimeImageDigest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "candidateLaunchPolicySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "expectedUid": {"type": ["integer", "null"], "minimum": 0},
+    "expectedGid": {"type": ["integer", "null"], "minimum": 0}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"isolationMode": {"const": "SYNTHETIC_IN_PROCESS"}}, "required": ["isolationMode"]},
+      "then": {"properties": {"candidateRuntimeImageDigest": {"type": "null"}, "expectedUid": {"type": "null"}, "expectedGid": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"isolationMode": {"const": "PINNED_SIGNAL_ONLY_CONTAINER"}}, "required": ["isolationMode"]},
+      "then": {"properties": {"candidateRuntimeImageDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "expectedUid": {"type": "integer", "minimum": 0}, "expectedGid": {"type": "integer", "minimum": 0}}}
+    }
+  ]
+}

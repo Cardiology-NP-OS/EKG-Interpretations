@@ -1,18 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ekg-development-execution-handoff-v1",
-  "$comment": "This schema validates the standalone wire shape. validateDevelopmentExecutionHandoff is mandatory for manifest-relative record membership, exact outcome-matrix completeness, identity uniqueness, prediction ordering and range, and transition-time ordering.",
+  "$id": "ekg-development-execution-handoff-v2",
+  "$comment": "This schema validates the standalone wire shape. validateDevelopmentExecutionHandoff is mandatory for execution-input inventory membership, exact outcome-matrix completeness, identity uniqueness, prediction ordering and range, and transition-time ordering.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "attemptId", "workflowRunId", "workflowRunAttempt", "workflowSha", "startedAtUtc", "runConfigurationSha256", "handoffStatus", "failureCode", "lastPhase", "stateTransitions", "candidateManifestPayloadSha256", "executionIdentitySha256", "manifestPayloadSha256", "outcomes", "clinicalAccuracyClaimed", "capabilityNotClaim", "reportable", "runtimeAuthority", "projectGold", "sourceLabelsAreProjectGold"],
+  "required": ["schema", "attemptId", "workflowRunId", "workflowRunAttempt", "workflowSha", "startedAtUtc", "runConfigurationSha256", "executionInputSha256", "candidateRuntimeIdentitySha256", "candidateIsolationExpectationSha256", "candidateRuntimeAttestation", "candidateRuntimeAttestationSha256", "handoffStatus", "failureCode", "lastPhase", "stateTransitions", "candidateManifestPayloadSha256", "executionIdentitySha256", "manifestPayloadSha256", "outcomes", "clinicalAccuracyClaimed", "capabilityNotClaim", "reportable", "runtimeAuthority", "projectGold", "sourceLabelsAreProjectGold"],
   "properties": {
-    "schema": {"const": "ekg-development-execution-handoff-v1"},
+    "schema": {"const": "ekg-development-execution-handoff-v2"},
     "attemptId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
     "workflowRunId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
     "workflowRunAttempt": {"type": "integer", "minimum": 1},
     "workflowSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "startedAtUtc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"},
     "runConfigurationSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "executionInputSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidateRuntimeIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidateIsolationExpectationSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidateRuntimeAttestation": {"$ref": "DEVELOPMENT_CANDIDATE_ISOLATION_EVIDENCE_SCHEMA.json"},
+    "candidateRuntimeAttestationSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "handoffStatus": {"enum": ["EXECUTED", "FAILED", "BLOCKED"]},
     "failureCode": {"type": ["string", "null"], "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
     "lastPhase": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
@@ -30,18 +35,18 @@
         }
       }
     },
-    "candidateManifestPayloadSha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
-    "executionIdentitySha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
-    "manifestPayloadSha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "candidateManifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "executionIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "outcomes": {
       "type": "array",
       "uniqueItems": true,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["recordHmacSha256", "detector", "pass", "status", "failureCode", "predictedSampleIndices", "algorithm", "latencyMs", "peakMemoryBytes"],
+        "required": ["executionRecordId", "detector", "pass", "status", "failureCode", "predictedSampleIndices", "algorithm", "latencyMs", "peakMemoryBytes"],
         "properties": {
-          "recordHmacSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "executionRecordId": {"type": "string", "pattern": "^record-[0-9]{6}$"},
           "detector": {"enum": ["CURRENT_ENGINE", "PAN_TOMPKINS"]},
           "pass": {"enum": ["PRIMARY", "REPLAY"]},
           "status": {"enum": ["SUCCESS", "TECHNICAL_FAILURE", "ABSTAINED"]},
@@ -76,6 +81,7 @@
           "lastPhase": {"const": "RUNNING"},
           "candidateManifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "executionIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "candidateRuntimeIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "stateTransitions": {
             "minItems": 3,
@@ -97,6 +103,7 @@
           "lastPhase": {"const": "RUNNING"},
           "candidateManifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "executionIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "candidateRuntimeIdentitySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
           "stateTransitions": {
             "minItems": 3,
@@ -116,6 +123,7 @@
         "properties": {
           "failureCode": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$"},
           "lastPhase": {"const": "VALIDATING"},
+          "outcomes": {"maxItems": 0},
           "stateTransitions": {
             "minItems": 2,
             "maxItems": 2,

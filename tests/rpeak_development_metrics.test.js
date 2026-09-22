@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const { compareDevelopmentRuns } = require("../lib/development_run_comparison");
+const { compareDevelopmentRuns, validatePolicy } = require("../lib/development_run_comparison");
 const { evaluateRPeakRecords } = require("../lib/rpeak_development_metrics");
 
 function record(id, patient, reference, predicted, extras = {}) {
@@ -105,6 +105,14 @@ const insufficientDenominator = compareDevelopmentRuns(candidate, baseline, {
   ],
 });
 assert.deepEqual(insufficientDenominator.gates[0].reasons, ["MINIMUM_DENOMINATOR"]);
+assert.equal(validatePolicy({ gates: [{ id: "advisory-denominator", metricPath: "summary.micro.sensitivity", direction: "higher", minimumDenominator: 3, denominatorPath: "denominators.nPatients", blocking: false }] }).length, 1);
+assert.throws(() => validatePolicy({ gates: [{ id: "reversed", metricPath: "summary.micro.sensitivity", direction: "lower", absoluteFloor: 0.8, blocking: true }] }), /RUN_COMPARISON_GATE_DIRECTION/);
+assert.throws(() => validatePolicy({ gates: [{ id: "out-of-domain", metricPath: "summary.micro.sensitivity", direction: "higher", absoluteFloor: 1.1, blocking: true }] }), /RUN_COMPARISON_GATE_ABSOLUTE_FLOOR_DOMAIN/);
+assert.throws(() => validatePolicy({ gates: [{ id: "vacuous-higher", metricPath: "summary.micro.sensitivity", direction: "higher", absoluteFloor: 0, blocking: true }] }), /RUN_COMPARISON_GATE_ABSOLUTE_FLOOR_VACUOUS/);
+assert.throws(() => validatePolicy({ gates: [{ id: "vacuous-lower", metricPath: "summary.technicalFailureRate", direction: "lower", absoluteFloor: 1, blocking: true }] }), /RUN_COMPARISON_GATE_ABSOLUTE_FLOOR_VACUOUS/);
+assert.throws(() => validatePolicy({ gates: [{ id: "out-of-domain-margin", metricPath: "summary.micro.ppv", direction: "higher", noninferiorityMargin: 1.1, blocking: true }] }), /RUN_COMPARISON_GATE_MARGIN_DOMAIN/);
+assert.throws(() => validatePolicy({ gates: [{ id: "vacuous-margin", metricPath: "summary.micro.ppv", direction: "higher", noninferiorityMargin: 1, blocking: true }] }), /RUN_COMPARISON_GATE_MARGIN_VACUOUS/);
+assert.throws(() => validatePolicy({ gates: [{ id: "authority", metricPath: "summary.micro.f1", direction: "higher", absoluteFloor: 0.8, blocking: true, runtimeAuthority: true }] }), /RUN_COMPARISON_GATE_FIELDS/);
 
 assert.throws(() => compareDevelopmentRuns(candidate, baseline, { gates: [
   { id: "unknown-metric", metricPath: "summary.patientMacro.sensitivity.mean", direction: "higher", blocking: true },

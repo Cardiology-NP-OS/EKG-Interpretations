@@ -52,9 +52,9 @@ const names = {
   signingKey: "Prepare ephemeral signing key",
   runConfiguration: "Build ephemeral run configuration",
   attemptStart: "Sign immutable attempt start",
-  evaluation: "Run isolated current-engine and Pan-Tompkins evaluation",
+  evaluation: "Run isolated signal-only candidate evaluation",
   reconciliation: "Reconcile signed attempt terminal state",
-  cleanup: "Remove ephemeral signing key",
+  cleanup: "Remove ephemeral evaluation inputs",
 };
 
 function classify(sourceRun, rows) {

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-candidate-isolation-evidence-v2",
+  "$comment": "Candidate-local observations are non-authoritative. This repository has no independently provisioned control-plane attestor or exclusive image/mount provenance, so candidateReferenceIsolation is always false.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "evidenceState", "evidenceAuthority", "isolationMode", "candidateInputMode", "candidateIsolationExpectationSha256", "externalAttestorKeyId", "externalAttestationSignature", "limitations", "candidateReferenceIsolation"],
+  "properties": {
+    "schema": {"const": "ekg-development-candidate-isolation-evidence-v2"},
+    "evidenceState": {"enum": ["SYNTHETIC_NON_AUTHORITATIVE", "CONTAINER_LOCAL_NON_AUTHORITATIVE"]},
+    "evidenceAuthority": {"const": "CANDIDATE_LOCAL_OBSERVATION_ONLY"},
+    "isolationMode": {"enum": ["SYNTHETIC_IN_PROCESS", "PINNED_SIGNAL_ONLY_CONTAINER"]},
+    "candidateInputMode": {"const": "SIGNAL_ONLY_READ_ONLY_V1"},
+    "candidateIsolationExpectationSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "externalAttestorKeyId": {"type": "null"},
+    "externalAttestationSignature": {"type": "null"},
+    "limitations": {"const": ["NO_INDEPENDENT_CONTROL_PLANE_ATTESTOR", "NO_EXCLUSIVE_IMAGE_PROVENANCE", "NO_EXCLUSIVE_MOUNT_PROVENANCE"]},
+    "candidateReferenceIsolation": {"const": false}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"isolationMode": {"const": "SYNTHETIC_IN_PROCESS"}}, "required": ["isolationMode"]},
+      "then": {"properties": {"evidenceState": {"const": "SYNTHETIC_NON_AUTHORITATIVE"}}}
+    },
+    {
+      "if": {"properties": {"isolationMode": {"const": "PINNED_SIGNAL_ONLY_CONTAINER"}}, "required": ["isolationMode"]},
+      "then": {"properties": {"evidenceState": {"const": "CONTAINER_LOCAL_NON_AUTHORITATIVE"}}}
+    }
+  ]
+}

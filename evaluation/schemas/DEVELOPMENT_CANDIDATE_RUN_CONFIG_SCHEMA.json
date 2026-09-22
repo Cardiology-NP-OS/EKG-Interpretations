@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ekg-development-candidate-run-config-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["executionInputRoot", "candidateManifestPath", "candidateSignaturePath", "candidateTrustStorePath", "expectedCandidateTrustStoreSha256", "repositoryRoot", "candidateRoot", "inputMountMode", "networkIsolation", "candidateRuntimeImageDigest", "candidateLaunchPolicySha256", "candidateExpectedUid", "candidateExpectedGid"],
+  "properties": {
+    "executionInputRoot": {"type": "string", "minLength": 1},
+    "candidateManifestPath": {"type": "string", "minLength": 1},
+    "candidateSignaturePath": {"type": "string", "minLength": 1},
+    "candidateTrustStorePath": {"type": "string", "minLength": 1},
+    "expectedCandidateTrustStoreSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "repositoryRoot": {"type": "string", "minLength": 1},
+    "candidateRoot": {"type": "string", "minLength": 1},
+    "inputMountMode": {"const": "READ_ONLY"},
+    "networkIsolation": {"enum": ["CONTAINER_NETWORK_NONE", "SYNTHETIC_TEST_PROCESS"]},
+    "candidateRuntimeImageDigest": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "candidateLaunchPolicySha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidateExpectedUid": {"type": ["integer", "null"], "minimum": 0},
+    "candidateExpectedGid": {"type": ["integer", "null"], "minimum": 0}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"networkIsolation": {"const": "SYNTHETIC_TEST_PROCESS"}}, "required": ["networkIsolation"]},
+      "then": {"properties": {"candidateRuntimeImageDigest": {"type": "null"}, "candidateExpectedUid": {"type": "null"}, "candidateExpectedGid": {"type": "null"}}}
+    },
+    {
+      "if": {"properties": {"networkIsolation": {"const": "CONTAINER_NETWORK_NONE"}}, "required": ["networkIsolation"]},
+      "then": {"properties": {"candidateRuntimeImageDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "candidateExpectedUid": {"type": "integer", "minimum": 0}, "candidateExpectedGid": {"type": "integer", "minimum": 0}}}
+    }
+  ]
+}

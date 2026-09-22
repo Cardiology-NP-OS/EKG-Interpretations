@@ -5,7 +5,7 @@
   "description": "Recovered V12 semantic baseline with V13 evidence-bounded execution",
   "scripts": {
     "test": "npm run test:ci && npm run test:evaluation-harness",
-    "test:evaluation-harness": "node tests/development_evaluation_preflight.test.js && node tests/development_execution_identity.test.js && node tests/development_execution_handoff.test.js && node tests/pan_tompkins_detector.test.js && node tests/rpeak_development_metrics.test.js && node tests/development_run_accounting.test.js && node tests/development_attempt_store.test.js && node tests/development_workflow_attempt_receipt.test.js && node tests/development_evaluation_runner.test.js && node tests/development_evaluation_workflow_boundary.test.js",
+    "test:evaluation-harness": "node tests/development_evaluation_preflight.test.js && node tests/development_execution_identity.test.js && node tests/development_candidate_runtime_attestation.test.js && node tests/development_execution_input.test.js && node tests/development_execution_handoff.test.js && node tests/pan_tompkins_detector.test.js && node tests/rpeak_development_metrics.test.js && node tests/development_run_accounting.test.js && node tests/development_attempt_store.test.js && node tests/development_workflow_attempt_receipt.test.js && node tests/development_evaluation_runner.test.js && node tests/development_evaluation_workflow_boundary.test.js",
     "evaluate:development": "node tools/run_development_evaluation.js",
     "evaluate:development:candidate": "node tools/run_development_evaluation.js --phase candidate",
     "evaluate:development:signer": "node tools/sign_development_evaluation.js",

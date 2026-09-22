@@ -139,8 +139,12 @@ const registryResult = validateSpentRegistry(registry, registrySignature, spentT
 assert.equal(registryResult.pass, true);
 assert.equal(registryResult.entryCount, 2);
 
-const historicalManifest = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.json"), "utf8"));
-const historicalManifestSignature = JSON.parse(fs.readFileSync(path.join(root, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.sig"), "utf8"));
+const historicalManifestPath = path.join(root, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.json");
+const historicalManifestSignaturePath = path.join(root, "evaluation", "manifests", "SYNTHETIC_DEVELOPMENT_MANIFEST_V1.sig");
+assert.equal(crypto.createHash("sha256").update(fs.readFileSync(historicalManifestPath)).digest("hex"), "060083e1035ac3217825ecca10666a58a3983326fb0b83bc6227c1ef004f067a");
+assert.equal(crypto.createHash("sha256").update(fs.readFileSync(historicalManifestSignaturePath)).digest("hex"), "427aeac4a16f2c10586214c2ffa1956b96722fb038bd54b5b71fb38f1352ac55");
+const historicalManifest = JSON.parse(fs.readFileSync(historicalManifestPath, "utf8"));
+const historicalManifestSignature = JSON.parse(fs.readFileSync(historicalManifestSignaturePath, "utf8"));
 assert.equal(validateDevelopmentManifest(historicalManifest).recordCount, 1);
 assert.equal(verifySignedPayload(canonicalManifestPayload(historicalManifest), historicalManifestSignature, developmentTrustStore, { expectedPayloadSha256: historicalManifest.manifestPayloadSha256 }).verified, true);
 
