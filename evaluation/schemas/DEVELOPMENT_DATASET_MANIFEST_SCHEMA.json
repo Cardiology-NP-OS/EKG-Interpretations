@@ -2,27 +2,131 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "ekg-development-manifest-v1",
   "type": "object",
-  "required": ["schema", "benchmarkId", "benchmarkVersion", "splitRole", "clinicalAccuracyClaimed", "datasetIdentity", "rights", "records", "manifestPayloadSha256"],
+  "additionalProperties": false,
+  "required": ["schema", "benchmarkId", "benchmarkVersion", "splitRole", "clinicalAccuracyClaimed", "leadPolicy", "createdAtUtc", "cohortCutoff", "creator", "independentApprover", "sourceInventorySha256", "licenceBundleSha256", "ontologyMappingSha256", "previousManifestSha256", "datasetIdentity", "rights", "partitionAttestation", "sealedCounts", "records", "manifestPayloadSha256"],
   "properties": {
     "schema": {"const": "ekg-development-manifest-v1"},
+    "benchmarkId": {"$ref": "#/$defs/nonempty"},
+    "benchmarkVersion": {"$ref": "#/$defs/nonempty"},
     "splitRole": {"const": "development"},
     "clinicalAccuracyClaimed": {"const": false},
+    "leadPolicy": {"$ref": "#/$defs/nonempty"},
+    "createdAtUtc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "cohortCutoff": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "creator": {"$ref": "#/$defs/nonempty"},
+    "independentApprover": {"$ref": "#/$defs/nonempty"},
+    "sourceInventorySha256": {"$ref": "#/$defs/sha256"},
+    "licenceBundleSha256": {"$ref": "#/$defs/sha256"},
+    "ontologyMappingSha256": {"$ref": "#/$defs/sha256"},
+    "previousManifestSha256": {
+      "anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]
+    },
     "datasetIdentity": {
       "type": "object",
-      "required": ["datasetId", "datasetRelease", "sourceManifestSha256"]
+      "additionalProperties": false,
+      "required": ["datasetId", "datasetFamily", "datasetRelease", "canonicalSource", "sourceManifestSha256", "aliases"],
+      "properties": {
+        "datasetId": {"$ref": "#/$defs/nonempty"},
+        "datasetFamily": {"$ref": "#/$defs/nonempty"},
+        "datasetRelease": {"$ref": "#/$defs/nonempty"},
+        "canonicalSource": {"$ref": "#/$defs/nonempty"},
+        "sourceManifestSha256": {"$ref": "#/$defs/sha256"},
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/nonempty"}
+        }
+      }
     },
     "rights": {
       "type": "object",
-      "required": ["verificationStatus", "commercialProductImprovement", "rawRedistributionInRepository", "licenseSpdxOrName", "sourceUri", "licenseFileSha256", "verifiedAtUtc"]
+      "additionalProperties": false,
+      "required": ["verificationStatus", "commercialProductImprovement", "rawRedistributionInRepository", "licenseSpdxOrName", "sourceUri", "licenseFileSha256", "verifiedAtUtc"],
+      "properties": {
+        "verificationStatus": {"const": "VERIFIED"},
+        "commercialProductImprovement": {"const": "PERMITTED"},
+        "rawRedistributionInRepository": {"const": false},
+        "licenseSpdxOrName": {"$ref": "#/$defs/nonempty"},
+        "sourceUri": {"$ref": "#/$defs/nonempty"},
+        "licenseFileSha256": {"$ref": "#/$defs/sha256"},
+        "verifiedAtUtc": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"}
+      }
+    },
+    "partitionAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullPartitionSha256", "patientRoleSetsSha256", "waveformDuplicateAuditSha256", "splitAlgorithmNameAndVersion", "independentApprover", "crossRolePatientOverlapCount", "crossRoleExactWaveformOverlapCount", "crossRoleNearDuplicateOverlapCount", "selectionAndHoldoutPatientIdentityVerified"],
+      "properties": {
+        "fullPartitionSha256": {"$ref": "#/$defs/sha256"},
+        "patientRoleSetsSha256": {"$ref": "#/$defs/sha256"},
+        "waveformDuplicateAuditSha256": {"$ref": "#/$defs/sha256"},
+        "splitAlgorithmNameAndVersion": {"$ref": "#/$defs/nonempty"},
+        "independentApprover": {"$ref": "#/$defs/nonempty"},
+        "crossRolePatientOverlapCount": {"const": 0},
+        "crossRoleExactWaveformOverlapCount": {"const": 0},
+        "crossRoleNearDuplicateOverlapCount": {"const": 0},
+        "selectionAndHoldoutPatientIdentityVerified": {"const": true}
+      }
+    },
+    "sealedCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["patients", "records", "referenceEvents", "durationSeconds"],
+      "properties": {
+        "patients": {"type": "integer", "minimum": 0},
+        "records": {"type": "integer", "minimum": 0},
+        "referenceEvents": {"type": "integer", "minimum": 0},
+        "durationSeconds": {"type": "number", "minimum": 0}
+      }
     },
     "records": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["recordHmacSha256", "patientHmacSha256", "splitRole", "patientIndependence", "taskEligibility", "sourceFileSha256", "labelSnapshotSha256", "sampleRateHz", "durationSeconds", "subgroups"]
+        "additionalProperties": false,
+        "required": ["recordHmacSha256", "patientHmacSha256", "parentRecordHmacSha256", "splitRole", "patientIndependence", "taskEligibility", "exclusionCode", "sourceFileSha256", "labelSnapshotSha256", "signalPath", "referencePath", "signalBytes", "referenceBytes", "referenceEventCount", "nearDuplicateGroupSha256", "sampleRateHz", "durationSeconds", "subgroups"],
+        "properties": {
+          "recordHmacSha256": {"$ref": "#/$defs/sha256"},
+          "patientHmacSha256": {"$ref": "#/$defs/sha256"},
+          "parentRecordHmacSha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+          "splitRole": {"const": "development"},
+          "patientIndependence": {"const": "VERIFIED"},
+          "taskEligibility": {"enum": ["ELIGIBLE", "EXCLUDED"]},
+          "exclusionCode": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/nonempty"}]},
+          "sourceFileSha256": {"$ref": "#/$defs/sha256"},
+          "labelSnapshotSha256": {"$ref": "#/$defs/sha256"},
+          "signalPath": {"$ref": "#/$defs/nonempty"},
+          "referencePath": {"$ref": "#/$defs/nonempty"},
+          "signalBytes": {"type": "integer", "minimum": 1},
+          "referenceBytes": {"type": "integer", "minimum": 1},
+          "referenceEventCount": {"type": "integer", "minimum": 0},
+          "nearDuplicateGroupSha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/sha256"}]},
+          "sampleRateHz": {"type": "number", "exclusiveMinimum": 0},
+          "durationSeconds": {"type": "number", "exclusiveMinimum": 0},
+          "subgroups": {
+            "type": "object",
+            "additionalProperties": {
+              "type": ["string", "number", "boolean", "null"]
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"taskEligibility": {"const": "ELIGIBLE"}}},
+            "then": {"properties": {"exclusionCode": {"type": "null"}}}
+          },
+          {
+            "if": {"properties": {"taskEligibility": {"const": "EXCLUDED"}}},
+            "then": {"properties": {"exclusionCode": {"$ref": "#/$defs/nonempty"}}}
+          }
+        ]
       }
     },
-    "manifestPayloadSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    "manifestPayloadSha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "nonempty": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
   }
 }

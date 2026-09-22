@@ -4,7 +4,7 @@ const assert = require("assert");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
-const { canonicalManifestPayload, preflightDevelopmentRun, validateDevelopmentManifest } = require("../lib/development_evaluation_preflight");
+const { canonicalManifestPayload, preflightDevelopmentRun, validateDevelopmentManifest, validateManifestSignerAuthority } = require("../lib/development_evaluation_preflight");
 const { payloadSha256 } = require("../lib/evaluation_signatures");
 const { assertDevelopmentIdentityAllowed, validateSpentRegistry } = require("../lib/spent_dataset_registry");
 const { stableJson } = require("../lib/evaluation_runtime");
@@ -24,7 +24,7 @@ function sign(payload, keyId = "synthetic-development-signer") {
       signatureBase64: crypto.sign(null, Buffer.from(stableJson(payload), "utf8"), privateKey).toString("base64"),
     },
     trustStore: {
-      keys: [{ keyId, algorithm: "Ed25519", status: "TRUSTED", publicKeyPem: publicKey.export({ type: "spki", format: "pem" }) }],
+      keys: [{ keyId, algorithm: "Ed25519", status: "TRUSTED", rightsAuthority: true, patientPartitionAuthority: true, allowedDatasetIds: ["ECG-DATASET-SYNTHETIC-DEVELOPMENT"], publicKeyPem: publicKey.export({ type: "spki", format: "pem" }) }],
     },
   };
 }
@@ -36,6 +36,15 @@ function makeManifest() {
     benchmarkVersion: "1",
     splitRole: "development",
     clinicalAccuracyClaimed: false,
+    leadPolicy: "fixed-manifest-lead",
+    createdAtUtc: "2026-09-22T00:00:00Z",
+    cohortCutoff: "2026-09-22",
+    creator: "Synthetic test",
+    independentApprover: "Synthetic test",
+    sourceInventorySha256: "a".repeat(64),
+    licenceBundleSha256: "b".repeat(64),
+    ontologyMappingSha256: "c".repeat(64),
+    previousManifestSha256: null,
     datasetIdentity: {
       datasetId: "ECG-DATASET-SYNTHETIC-DEVELOPMENT",
       datasetFamily: "Synthetic development fixture",
@@ -53,6 +62,18 @@ function makeManifest() {
       licenseFileSha256: "2".repeat(64),
       verifiedAtUtc: "2026-09-22T00:00:00Z",
     },
+    partitionAttestation: {
+      fullPartitionSha256: "d".repeat(64),
+      patientRoleSetsSha256: "e".repeat(64),
+      waveformDuplicateAuditSha256: "f".repeat(64),
+      splitAlgorithmNameAndVersion: "synthetic-v1",
+      independentApprover: "Synthetic test",
+      crossRolePatientOverlapCount: 0,
+      crossRoleExactWaveformOverlapCount: 0,
+      crossRoleNearDuplicateOverlapCount: 0,
+      selectionAndHoldoutPatientIdentityVerified: true,
+    },
+    sealedCounts: { patients: 1, records: 1, referenceEvents: 4, durationSeconds: 10 },
     records: [
       {
         recordHmacSha256: "3".repeat(64),
@@ -61,8 +82,14 @@ function makeManifest() {
         splitRole: "development",
         patientIndependence: "VERIFIED",
         taskEligibility: "ELIGIBLE",
+        exclusionCode: null,
         sourceFileSha256: "5".repeat(64),
         labelSnapshotSha256: "6".repeat(64),
+        signalPath: "signals/record-1.json",
+        referencePath: "references/record-1.json",
+        signalBytes: 128,
+        referenceBytes: 64,
+        referenceEventCount: 4,
         nearDuplicateGroupSha256: "7".repeat(64),
         sampleRateHz: 250,
         durationSeconds: 10,
@@ -90,6 +117,15 @@ assert.throws(
   /SPENT_DATASET_DENIED:MIT-BIH-RPEAK-FULL-V1/,
 );
 assert.throws(
+  () => assertDevelopmentIdentityAllowed({ aliases: ["MITBIH"] }, registry),
+  /SPENT_DATASET_DENIED:MIT-BIH-RPEAK-FULL-V1/,
+);
+assert.equal(assertDevelopmentIdentityAllowed({ datasetId: "ECG-DATASET-UNRELATED", datasetRelease: "1.0.0" }, registry), true);
+assert.throws(
+  () => assertDevelopmentIdentityAllowed({ datasetRelease: "1.0.0" }, registry),
+  /SPENT_REGISTRY_REQUEST_IDENTITY_REQUIRED/,
+);
+assert.throws(
   () => validateSpentRegistry({ ...registry, sequence: 2 }, registrySignature, spentTrustStore),
   /EVAL_SIGNATURE_PAYLOAD_DIGEST_MISMATCH/,
 );
@@ -115,13 +151,30 @@ assert.equal(result.recordCount, 1);
 assert.equal(result.patientCount, 1);
 assert.equal(result.clinicalAccuracyClaimed, false);
 
+const unauthorizedSigner = sign(canonicalManifestPayload(manifest));
+unauthorizedSigner.trustStore.keys[0].rightsAuthority = false;
+assert.throws(
+  () => validateManifestSignerAuthority(manifest, unauthorizedSigner.signature, unauthorizedSigner.trustStore),
+  /DEVELOPMENT_MANIFEST_SIGNER_AUTHORITY/,
+);
+const outOfScopeSigner = sign(canonicalManifestPayload(manifest));
+outOfScopeSigner.trustStore.keys[0].allowedDatasetIds = ["ECG-DATASET-OTHER"];
+assert.throws(
+  () => validateManifestSignerAuthority(manifest, outOfScopeSigner.signature, outOfScopeSigner.trustStore),
+  /DEVELOPMENT_MANIFEST_SIGNER_SCOPE/,
+);
+assert.throws(
+  () => validateManifestSignerAuthority(manifest, {}, {}),
+  /DEVELOPMENT_MANIFEST_SIGNATURE/,
+);
+
 const selection = makeManifest();
 selection.records[0].splitRole = "selection";
 selection.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(selection));
 assert.throws(() => validateDevelopmentManifest(selection), /DEVELOPMENT_ROLE_ONLY/);
 
 const leaked = makeManifest();
-leaked.records.push({ ...leaked.records[0], recordHmacSha256: "8".repeat(64), sourceFileSha256: "9".repeat(64), splitRole: "holdout" });
+leaked.partitionAttestation = { ...leaked.partitionAttestation, crossRolePatientOverlapCount: 1 };
 leaked.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(leaked));
 assert.throws(() => validateDevelopmentManifest(leaked), /DEVELOPMENT_PATIENT_LEAKAGE/);
 
@@ -129,5 +182,36 @@ const unverifiedRights = makeManifest();
 unverifiedRights.rights = { ...unverifiedRights.rights, verificationStatus: "UNVERIFIED" };
 unverifiedRights.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(unverifiedRights));
 assert.throws(() => validateDevelopmentManifest(unverifiedRights), /DEVELOPMENT_RIGHTS_UNVERIFIED/);
+
+const excluded = makeManifest();
+excluded.records.push({
+  ...excluded.records[0],
+  recordHmacSha256: "8".repeat(64),
+  patientHmacSha256: "9".repeat(64),
+  taskEligibility: "EXCLUDED",
+  exclusionCode: "MISSING_REQUIRED_LEAD",
+  sourceFileSha256: "a".repeat(64),
+  labelSnapshotSha256: "b".repeat(64),
+  signalPath: "signals/excluded.json",
+  referencePath: "references/excluded.json",
+  nearDuplicateGroupSha256: "c".repeat(64),
+});
+excluded.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(excluded));
+assert.equal(validateDevelopmentManifest(excluded).excludedCount, 1);
+
+const unknownField = makeManifest();
+unknownField.unreviewedOverride = true;
+unknownField.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(unknownField));
+assert.throws(() => validateDevelopmentManifest(unknownField), /DEVELOPMENT_MANIFEST_UNKNOWN_FIELD/);
+
+const badTimestamp = makeManifest();
+badTimestamp.createdAtUtc = "not-a-timestamp";
+badTimestamp.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(badTimestamp));
+assert.throws(() => validateDevelopmentManifest(badTimestamp), /DEVELOPMENT_CREATED_AT/);
+
+const malformedSubgroup = makeManifest();
+malformedSubgroup.records[0].subgroups.source = { hidden: true };
+malformedSubgroup.manifestPayloadSha256 = payloadSha256(canonicalManifestPayload(malformedSubgroup));
+assert.throws(() => validateDevelopmentManifest(malformedSubgroup), /DEVELOPMENT_SUBGROUP_VALUE/);
 
 console.log("development evaluation preflight tests passed");
