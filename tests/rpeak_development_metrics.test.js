@@ -74,14 +74,60 @@ assert.equal(candidate.summary.recordMacro.sensitivity.minimum, 0.25);
 const comparison = compareDevelopmentRuns(candidate, baseline, {
   bootstrap: { replicates: 100, seed: 23 },
   gates: [
-    { id: "tail-floor", metricPath: "summary.recordMacro.sensitivity.minimum", direction: "higher", absoluteFloor: 0.5, blocking: true },
+    { id: "tail-floor", metricPath: "summary.recordMacro.sensitivity.minimum", direction: "higher", absoluteFloor: 0.5, noninferiorityMargin: 0.1, ciRule: "PAIRED_95", minimumDenominator: 2, denominatorPath: "denominators.nPatients", blocking: true },
     { id: "median-floor", metricPath: "summary.recordMacro.sensitivity.p50", direction: "higher", absoluteFloor: 0.9, blocking: false },
   ],
 });
 assert.equal(comparison.status, "FAILED");
 assert.equal(comparison.recordCounts.regressed, 1);
 assert.equal(comparison.gates.find(row => row.id === "tail-floor").failed, true);
-assert.equal(comparison.pairedIntervals.sensitivity.method, "paired-patient-cluster-percentile");
+assert.equal(comparison.pairedIntervals["summary.micro.sensitivity"].method, "paired-patient-cluster-percentile");
+assert.equal(comparison.gates.find(row => row.id === "tail-floor").paired95.method, "paired-patient-cluster-percentile");
+
+const noisyCandidate = evaluate("noisy", [
+  record("1", "a", [100, 200, 300, 400], [100, 200, 300, 500]),
+  record("2", "b", [100, 200, 300, 400], [100, 200, 300, 400, 500]),
+  record("3", "b", [100, 200], [100, 200, 500]),
+]);
+const lowerIsBetter = compareDevelopmentRuns(noisyCandidate, baseline, {
+  bootstrap: { replicates: 100, seed: 29 },
+  gates: [
+    { id: "false-detection-margin", metricPath: "summary.micro.falseDetectionsPerHour", direction: "lower", noninferiorityMargin: 0, ciRule: "POINT_ESTIMATE", blocking: true },
+  ],
+});
+assert.equal(lowerIsBetter.status, "FAILED");
+assert.deepEqual(lowerIsBetter.gates[0].reasons, ["NONINFERIORITY_MARGIN"]);
+
+const insufficientDenominator = compareDevelopmentRuns(candidate, baseline, {
+  bootstrap: { replicates: 20, seed: 31 },
+  gates: [
+    { id: "patient-count", metricPath: "summary.micro.sensitivity", direction: "higher", minimumDenominator: 3, denominatorPath: "denominators.nPatients", blocking: true },
+  ],
+});
+assert.deepEqual(insufficientDenominator.gates[0].reasons, ["MINIMUM_DENOMINATOR"]);
+
+assert.throws(() => compareDevelopmentRuns(candidate, baseline, { gates: [
+  { id: "unknown-metric", metricPath: "summary.patientMacro.sensitivity.mean", direction: "higher", blocking: true },
+] }), /RUN_COMPARISON_GATE_METRIC/);
+assert.throws(() => compareDevelopmentRuns(candidate, baseline, { gates: [
+  { id: "unknown-denominator", metricPath: "summary.micro.sensitivity", direction: "higher", denominatorPath: "denominators.missing", blocking: true },
+] }), /RUN_COMPARISON_GATE_DENOMINATOR/);
+assert.throws(() => compareDevelopmentRuns(candidate, baseline, { gates: [
+  { id: "unknown-ci", metricPath: "summary.micro.sensitivity", direction: "higher", ciRule: "UNPAIRED_95", blocking: true },
+] }), /RUN_COMPARISON_GATE_CI_RULE/);
+assert.throws(() => compareDevelopmentRuns(candidate, baseline, { bootstrap: { replicates: 20, seed: 1.5 } }), /RUN_COMPARISON_BOOTSTRAP_SEED/);
+
+const undefinedPpvBaseline = evaluate("empty-baseline", [record("5", "d", [100, 200], [])]);
+const undefinedPpvCandidate = evaluate("empty-candidate", [record("5", "d", [100, 200], [])]);
+const undefinedPpvComparison = compareDevelopmentRuns(undefinedPpvCandidate, undefinedPpvBaseline, { bootstrap: { replicates: 20, seed: 37 } });
+assert.equal(undefinedPpvComparison.aggregateDeltas.ppv, null);
+assert.equal(undefinedPpvComparison.pairedIntervals["summary.micro.ppv"].method, "NOT_EVALUABLE");
+assert.throws(() => compareDevelopmentRuns(undefinedPpvCandidate, undefinedPpvBaseline, {
+  bootstrap: { replicates: 20, seed: 37 },
+  gates: [
+    { id: "undefined-ppv", metricPath: "summary.micro.ppv", direction: "higher", blocking: true },
+  ],
+}), /RUN_COMPARISON_CANDIDATE_METRIC/);
 
 const incompatible = { ...candidate, metricVersion: "different" };
 assert.deepEqual(compareDevelopmentRuns(incompatible, baseline).status, "NOT_COMPARABLE");
