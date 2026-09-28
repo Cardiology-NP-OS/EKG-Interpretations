@@ -8,9 +8,9 @@
   "prior_control_sha": "00172a9fe80f9e6a56c40b6f38f2acc036d77c66",
   "status": "PARTIAL_UNQUARANTINE_MANIFEST_SCOPE_BLOCKED",
   "base_sha": "f8fec586abf795b7d0fa096eae3cf9e6c4e41434",
-  "head_sha": "5451ac61676bd5f600359a06c2ee502e547b3108",
-  "tree_sha": "1081c49adb7666af1a2e789c4112f9413912a0ad",
-  "head_sha_scope": "Exact verified incoming HEAD. Existing implementation verification is retained below. Resumed AGENTS/checkpoint edits require new exact-head verification before publication; a tracked checkpoint cannot embed its own commit hash.",
+  "head_sha": "80c5179309365acc17324cd14b455b3a69bc050b",
+  "tree_sha": "457cea067a5e58592573cb17f8625c6cc14d8ade",
+  "head_sha_scope": "Exact clean resumed AGENTS/checkpoint HEAD verified by all six acceptance commands. This verification-only checkpoint is a descendant; its own hash cannot be embedded in its contents. Rerun all six commands at the publishing commit and bind its exact hash/results in draft PR #46.",
   "writer": "EK1 sole repository writer; subagents performed read-only exploration and review",
   "ownership": {
     "owned_paths": ["**/*", ".ai_worker/**"],
@@ -90,8 +90,8 @@
       "status": "BLOCKED",
       "reason": "No root or nested module.json exists in EKG. The pinned EK1 contract and instruction do not identify a manifest path, creation schema or exact old-to-new runtime-field values. Existing clinical-control artifacts are not substitute runtime manifests.",
       "tool_evidence": ["Read-only filename search found no module.json", "git ls-files '*module.json' '*modules.json' returned no paths", "AGENTS.md and README.md explicitly record the missing root manifest", "Pinned control/lanes/EK1.json authorizes engineering unquarantine but specifies no manifest path or replacement field values"],
-      "last_verified_commit": "5451ac61676bd5f600359a06c2ee502e547b3108",
-      "last_verified_tree": "1081c49adb7666af1a2e789c4112f9413912a0ad",
+      "last_verified_commit": "80c5179309365acc17324cd14b455b3a69bc050b",
+      "last_verified_tree": "457cea067a5e58592573cb17f8625c6cc14d8ade",
       "safe_next_action": "Controller supplies the exact intended manifest path and runtime-field old-to-new mapping, or explicit authority and schema to create a new EKG manifest. Do not fabricate a module.json or edit Platform from EK1."
     },
     {
@@ -109,7 +109,7 @@
     "Preexisting native decoder source-versus-artifact byte ceiling mismatch, provider input/resource bounds and extraction structural validation need separately verified follow-up increments.",
     "Real-image paired-reference accuracy, clinician correction UI, clinical interpretation/reporting and production PHI controls remain unestablished."
   ],
-  "next_action": "Verify the scoped AGENTS owner-decision clarification at its exact new head, preserve the results here, push normally and update draft PR #46. Hand back the unresolved manifest path/schema/field mapping to the controller with a clean synchronized lane.",
+  "next_action": "Publish this verification-only checkpoint after exact-head acceptance, update draft PR #46 with the publishing SHA, local results and live exact-head CI, and leave the lane clean and synchronized. Controller must provide the intended module.json path/schema and runtime-field mapping before the blocked manifest work can resume.",
   "resume": {
     "instruction_utc": "2026-09-28T20:05:28Z",
     "session_id": "ses_f168bb1c8ffenfsUGU3mmOs9PM",
@@ -144,7 +144,26 @@
       "is_draft": true,
       "base": "main"
     },
-    "verification": {"status": "NOT RUN", "reason": "New scoped edits are not committed yet; existing exact-head evidence above is not reused as a new-head pass."}
+    "verification": {
+      "status": "PASS",
+      "tested_head_sha": "80c5179309365acc17324cd14b455b3a69bc050b",
+      "tested_tree_sha": "457cea067a5e58592573cb17f8625c6cc14d8ade",
+      "environment": "Same Windows / Node 22.23.2 / Python 3.12.10 / pinned Pillow 12.3.0 and pypdfium2 5.13.0 environment recorded above; existing isolated interpreter reused.",
+      "commands_serial": [
+        {"command": "npm test", "status": "PASS", "exit_code": 0},
+        {"command": "npm run gate:ci", "status": "PASS", "exit_code": 0, "assertions": "30/30"},
+        {"command": "python tools/ep5_pkt09_terminal_specialist_completion_gate.py", "status": "PASS", "exit_code": 0, "assertions": "360/360"},
+        {"command": "npm run test:image-decoder", "status": "PASS", "exit_code": 0, "assertions": "7 Python and 18 bridge tests"},
+        {"command": "npm run test:qrs-v2", "status": "PASS", "exit_code": 0, "assertions": "88/88 synthetic and preservation checks"},
+        {"command": "git diff --check", "status": "PASS", "exit_code": 0}
+      ],
+      "committed_diff_check": {"command": "git diff --check 5451ac61676bd5f600359a06c2ee502e547b3108 HEAD", "status": "PASS", "exit_code": 0},
+      "worktree_clean_after_tests": true,
+      "review": {"status": "PASS", "reviewed_head_sha": "80c5179309365acc17324cd14b455b3a69bc050b", "scope": "Read-only AGENTS/checkpoint review; exact E5/E6/E7 and prior code/test preservation confirmed; no blocking findings in implemented scope"},
+      "not_run": ["Clinical dataset execution and exposed/locked holdout optimization are prohibited", "No lint/typecheck command is configured", "Fresh-clone verification not repeated for this documentation-only resume; earlier clone evidence remains separately bound to 7ea571e"],
+      "publication_ci_at_checkpoint_creation": {"status": "NOT RUN", "reason": "Publishing checkpoint commit is not yet pushed. Check and report exact publishing-head CI on draft PR #46; incoming 5451ac CI is not reused as new-head evidence."},
+      "limitations": ["Passing engineering checks do not resolve the missing runtime-manifest definition", "Local Windows checks do not establish new Ubuntu results or clinical validation", "Existing optional native file-symlink privilege coverage limitations remain unchanged"]
+    }
   },
   "clinical_boundary": {
     "disclaimer": "Engineering output - not clinically validated. Clinician review required.",
