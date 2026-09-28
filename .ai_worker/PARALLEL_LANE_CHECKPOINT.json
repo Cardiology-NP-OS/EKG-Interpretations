@@ -1,0 +1,120 @@
+{
+  "schema": "cardiology-parallel-lane-checkpoint.v1",
+  "lane": "EK1",
+  "repository": "Cardiology-NP-OS/EKG-Interpretations",
+  "branch": "lane/ek1-ekg-completion-20260928",
+  "control_contract": "control/lanes/EK1.json",
+  "control_sha": "00172a9fe80f9e6a56c40b6f38f2acc036d77c66",
+  "status": "ENGINEERING_INCREMENT_VERIFIED_EXTERNAL_CI_BLOCKED",
+  "base_sha": "f8fec586abf795b7d0fa096eae3cf9e6c4e41434",
+  "head_sha": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
+  "tree_sha": "23f909ed7d5125577eff1964f37dd87c3966ea5f",
+  "head_sha_scope": "Exact clean implementation HEAD tested before this checkpoint-only commit. A tracked checkpoint cannot embed its own commit hash. Resolve the publishing checkpoint commit from Git and rerun the acceptance commands at that exact HEAD before push.",
+  "writer": "EK1 sole repository writer; subagents performed read-only exploration and review",
+  "ownership": {
+    "owned_paths": ["**/*", ".ai_worker/**"],
+    "excluded_paths": [".github/**"],
+    "outside_owned_path_needed": false,
+    "branch_bootstrap": "Controller had already created the requested lane at exact live main; clean HEAD and remote main both matched base_sha before implementation. No checkpoint of preexisting changes was needed.",
+    "remote_main_last_verified": "f8fec586abf795b7d0fa096eae3cf9e6c4e41434"
+  },
+  "completed": [
+    "Canonical analysis persistence accounts for every selected lead, rejects preferred rhythm/panel source substitution and preserves denied twelve-lead permission.",
+    "Provider exposes source-bound engineering measurements, quality, temporal groups, permissions, strict implementation provenance and separate canonical/supplemental failures with system-derived/unreviewed labels.",
+    "Provider results and newly generated development artifacts carry the exact engineering disclaimer; all clinical authority fields remain unchanged.",
+    "Unknown detector identifiers fail closed without silent V1 fallback; V1 remains default and explicit QRS-v2 is exercised through real generated JPEG/PDF provider dispatch, JSON stdin and immutable reopening.",
+    "Development failure accounting separates statuses, missed references, unmatched predictions, undefined denominators, scoring-stage exclusions and supplied signed-manifest exclusions. Public reports exclude record-level identities and reasons.",
+    "Catastrophic classification is explicitly NOT_EVALUATED/POLICY_UNAVAILABLE with null policy and count. Existing blocking record gates cannot be overridden by aggregate improvement.",
+    "Large finite metric distributions avoid argument-spread stack exhaustion without changing quantile definitions, bootstrap replicates or seeds.",
+    "README and edge-case coverage describe actual implemented behavior and limitations. Frozen detectors, protocols, fixtures, receipts, clinical controls and workflows are unchanged."
+  ],
+  "environment": {
+    "platform": "Windows win32",
+    "shell": "Windows PowerShell 5.1",
+    "node": "22.23.2",
+    "npm": "10.9.8",
+    "python": "3.12.10",
+    "Pillow": "12.3.0",
+    "pypdfium2": "5.13.0",
+    "EKG_IMAGE_PYTHON": "C:\\Users\\sethb\\AppData\\Local\\Temp\\opencode\\ek1-image-20260928\\Scripts\\python.exe",
+    "path_prepend": "C:\\Users\\sethb\\AppData\\Local\\Temp\\opencode\\ek1-image-20260928\\Scripts",
+    "dependency_install": "python -m pip install --disable-pip-version-check -r requirements-image.txt",
+    "dependency_install_status": "PASS in an isolated temporary virtual environment"
+  },
+  "verification": {
+    "tested_head_sha": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
+    "tested_tree_sha": "23f909ed7d5125577eff1964f37dd87c3966ea5f",
+    "worktree_clean_after_tests": true,
+    "commands_serial": [
+      {"command": "npm test", "status": "PASS", "exit_code": 0, "scope": "Full synthetic/contract/preservation and development-harness suites"},
+      {"command": "npm run gate:ci", "status": "PASS", "exit_code": 0, "assertions": "30/30"},
+      {"command": "python tools/ep5_pkt09_terminal_specialist_completion_gate.py", "status": "PASS", "exit_code": 0, "assertions": "360/360"},
+      {"command": "npm run test:image-decoder", "status": "PASS", "exit_code": 0, "assertions": "7 Python tests and 18 bridge tests including JPEG/PDF provider V1/V2/V1"},
+      {"command": "npm run test:qrs-v2", "status": "PASS", "exit_code": 0, "assertions": "88/88 synthetic and preservation checks; no clinical dataset runner execution"},
+      {"command": "git diff --check", "status": "PASS", "exit_code": 0}
+    ],
+    "focused_commands_also_passed": [
+      "node tests/image_analysis_store.test.js",
+      "node tests/specialist_provider.test.js",
+      "node tests/qrs_detector_v2.test.js",
+      "node tests/rpeak_development_metrics.test.js",
+      "node tests/development_evaluation_runner.test.js"
+    ],
+    "fresh_clone": {
+      "status": "PASS",
+      "kind": "Fresh local clone with --no-hardlinks; not a GitHub CI run",
+      "head_sha": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
+      "tree_sha": "23f909ed7d5125577eff1964f37dd87c3966ea5f",
+      "commands_serial": ["npm test", "npm run gate:ci", "python tools/ep5_pkt09_terminal_specialist_completion_gate.py", "npm run test:image-decoder", "git diff --check"],
+      "all_exit_codes": 0,
+      "worktree_clean_after_tests": true
+    },
+    "review": {
+      "status": "PASS",
+      "scope": "Read-only engineering review, not clinical review",
+      "reviewed_head_sha": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
+      "findings": "Two initial accounting ambiguities resolved; reviewer confirmed no remaining issues in the reviewed scope."
+    },
+    "preserved_red_phase": [
+      {"command": "node tests/image_analysis_store.test.js", "status": "FAIL", "revision": "base_sha plus new regression tests before repair", "reason": "Canonical omission accepted; permission-false twelve-lead analyses rejected in legacy and strict persistence"},
+      {"command": "node tests/qrs_detector_v2.test.js", "status": "FAIL", "revision": "base_sha plus new regression test before repair", "reason": "Unsupported detector identifier silently fell back to V1"}
+    ],
+    "lint_typecheck": {"status": "NOT RUN", "reason": "No lint or typecheck command is configured; none invented"},
+    "clinical_dataset_execution": {"status": "NOT RUN", "reason": "Not authorized; LUDB remains spent/failed and MITBIH-RPEAK-FULL-V1 remains immutable"},
+    "platform_gaps": ["Ubuntu-specific verification was not run locally. Existing Windows tests can omit native file-symlink creation checks when privileges are unavailable; no independent privileged-symlink coverage claim is made."]
+  },
+  "blocked_by": [
+    {
+      "gate": "EXACT_SHA_GITHUB_CI",
+      "status": "BLOCKED",
+      "reason": "GitHub CLI executable is unavailable on PATH; gh run list failed with CommandNotFoundException for the exact implementation SHA. Local passing checks are not remote CI evidence.",
+      "last_verified_commit": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
+      "last_verified_tree": "23f909ed7d5125577eff1964f37dd87c3966ea5f",
+      "safe_next_action": "Controller verifies exact publishing-head GitHub CI before integration; no workflow edit is requested."
+    },
+    {
+      "gate": "CATASTROPHIC_CLASSIFICATION_AND_REAL_DEVELOPMENT_EVALUATION",
+      "status": "BLOCKED",
+      "reason": "Applicable approved catastrophic/regression policy, governed new development corpus, approved baseline and externally attested candidate isolation are not established. This increment adds accounting only.",
+      "safe_next_action": "Obtain separately authorized policy/data/infrastructure before classification or real-corpus evaluation; never reuse the spent holdout."
+    }
+  ],
+  "remaining_work": [
+    "Controller review and exact-head GitHub CI before integration; no merge or PR was requested.",
+    "Approved catastrophic classification policy and new governed QRS development evaluation remain external gates.",
+    "Preexisting native decoder source-versus-artifact byte ceiling mismatch, provider input/resource bounds and extraction structural validation need separately verified follow-up increments.",
+    "Real-image paired-reference accuracy, clinician correction UI, clinical interpretation/reporting and production PHI controls remain unestablished."
+  ],
+  "next_action": "Commit this checkpoint only, rerun acceptance checks at the resulting exact publishing HEAD, push the lane normally, fetch origin, verify an empty git status --porcelain and HEAD equality with origin/lane/ek1-ekg-completion-20260928, then hand back to controller.",
+  "clinical_boundary": {
+    "disclaimer": "Engineering output - not clinically validated. Clinician review required.",
+    "clinical_validity": "NOT_INFERRED",
+    "clinical_release_authorized": false,
+    "quarantine_markers_changed": false,
+    "E7_commit_line_required": false,
+    "E7_reason": "No quarantine marker was changed; no missing owner-decision wording was guessed.",
+    "project_gold_count": 0,
+    "clinical_accuracy_claimed": false,
+    "synthetic_only": true
+  }
+}
