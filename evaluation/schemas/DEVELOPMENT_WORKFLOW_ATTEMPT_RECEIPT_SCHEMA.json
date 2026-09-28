@@ -45,18 +45,19 @@
       "additionalProperties": false,
       "required": ["phase", "preLaunchFailure", "evidence"],
       "properties": {
-        "phase": {"enum": ["SYNTHETIC_BOUNDARY_NOT_PASSED", "FULL_DEVELOPMENT_NOT_STARTED", "GOVERNED_RESOURCE_PREFLIGHT_NOT_PASSED", "SIGNING_KEY_NOT_PREPARED", "RUN_CONFIGURATION_NOT_CREATED", "RUN_CONFIGURATION_STEP_COMPLETED", "EVALUATION_STEP_REACHED", "SOURCE_WORKFLOW_COMPLETED", "OBSERVATION_INCOMPLETE"]},
+        "phase": {"enum": ["SYNTHETIC_BOUNDARY_NOT_PASSED", "FULL_DEVELOPMENT_NOT_STARTED", "GOVERNED_RESOURCE_PREFLIGHT_NOT_PASSED", "SIGNING_KEY_NOT_PREPARED", "RUN_CONFIGURATION_NOT_CREATED", "ATTEMPT_START_NOT_SIGNED", "ATTEMPT_START_SIGNED", "EVALUATION_STEP_REACHED", "SOURCE_WORKFLOW_COMPLETED", "OBSERVATION_INCOMPLETE"]},
         "preLaunchFailure": {"type": ["boolean", "null"]},
         "evidence": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["syntheticBoundaryConclusion", "fullDevelopmentConclusion", "governedResourcePreflight", "signingKeyPreparation", "runConfigurationStep", "evaluationStep", "reconciliationStep", "cleanupStep"],
+          "required": ["syntheticBoundaryConclusion", "fullDevelopmentConclusion", "governedResourcePreflight", "signingKeyPreparation", "runConfigurationStep", "attemptStartStep", "evaluationStep", "reconciliationStep", "cleanupStep"],
           "properties": {
             "syntheticBoundaryConclusion": {"enum": ["SUCCESS", "FAILURE", "CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "NEUTRAL", "SKIPPED", "STALE", "STARTUP_FAILURE", "NOT_OBSERVED"]},
             "fullDevelopmentConclusion": {"enum": ["SUCCESS", "FAILURE", "CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "NEUTRAL", "SKIPPED", "STALE", "STARTUP_FAILURE", "NOT_OBSERVED"]},
             "governedResourcePreflight": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]},
             "signingKeyPreparation": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]},
             "runConfigurationStep": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]},
+            "attemptStartStep": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]},
             "evaluationStep": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]},
             "reconciliationStep": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]},
             "cleanupStep": {"enum": ["PASSED", "NOT_PASSED", "NOT_OBSERVED"]}

@@ -51,6 +51,7 @@ const names = {
   preflight: "Require governed external resources",
   signingKey: "Prepare ephemeral signing key",
   runConfiguration: "Build ephemeral run configuration",
+  attemptStart: "Sign immutable attempt start",
   evaluation: "Run isolated current-engine and Pan-Tompkins evaluation",
   reconciliation: "Reconcile signed attempt terminal state",
   cleanup: "Remove ephemeral signing key",
@@ -74,24 +75,28 @@ receipt = classify(preflightSource, [job(preflightSource, "synthetic-boundary", 
 assert.equal(receipt.classification.phase, "GOVERNED_RESOURCE_PREFLIGHT_NOT_PASSED");
 
 const signingSource = source();
-receipt = classify(signingSource, [job(signingSource, "synthetic-boundary", "success"), job(signingSource, "full-development", "failure", [step(names.preflight), step(names.signingKey, "failure")])]);
+receipt = classify(signingSource, [job(signingSource, "synthetic-boundary", "success"), job(signingSource, "full-development", "failure", [step(names.preflight), step(names.runConfiguration), step(names.signingKey, "failure")])]);
 assert.equal(receipt.classification.phase, "SIGNING_KEY_NOT_PREPARED");
 
 const configSource = source();
-receipt = classify(configSource, [job(configSource, "synthetic-boundary", "success"), job(configSource, "full-development", "failure", [step(names.preflight), step(names.signingKey), step(names.runConfiguration, "failure")])]);
+receipt = classify(configSource, [job(configSource, "synthetic-boundary", "success"), job(configSource, "full-development", "failure", [step(names.preflight), step(names.runConfiguration, "failure")])]);
 assert.equal(receipt.classification.phase, "RUN_CONFIGURATION_NOT_CREATED");
 
+const beforeStartSource = source({ conclusion: "failure" });
+receipt = classify(beforeStartSource, [job(beforeStartSource, "synthetic-boundary", "success"), job(beforeStartSource, "full-development", "failure", [step(names.preflight), step(names.runConfiguration), step(names.signingKey), step(names.attemptStart, "failure")])]);
+assert.equal(receipt.classification.phase, "ATTEMPT_START_NOT_SIGNED");
+
 const beforeEvaluationSource = source({ conclusion: "cancelled" });
-receipt = classify(beforeEvaluationSource, [job(beforeEvaluationSource, "synthetic-boundary", "success"), job(beforeEvaluationSource, "full-development", "cancelled", [step(names.preflight), step(names.signingKey), step(names.runConfiguration), step(names.evaluation, "skipped", false)])]);
-assert.equal(receipt.classification.phase, "RUN_CONFIGURATION_STEP_COMPLETED");
+receipt = classify(beforeEvaluationSource, [job(beforeEvaluationSource, "synthetic-boundary", "success"), job(beforeEvaluationSource, "full-development", "cancelled", [step(names.preflight), step(names.runConfiguration), step(names.signingKey), step(names.attemptStart), step(names.evaluation, "skipped", false)])]);
+assert.equal(receipt.classification.phase, "ATTEMPT_START_SIGNED");
 
 const evaluationSource = source();
-receipt = classify(evaluationSource, [job(evaluationSource, "synthetic-boundary", "success"), job(evaluationSource, "full-development", "failure", [step(names.preflight), step(names.signingKey), step(names.runConfiguration), step(names.evaluation, "failure"), step(names.reconciliation, "failure")])]);
+receipt = classify(evaluationSource, [job(evaluationSource, "synthetic-boundary", "success"), job(evaluationSource, "full-development", "failure", [step(names.preflight), step(names.runConfiguration), step(names.signingKey), step(names.attemptStart), step(names.evaluation, "failure"), step(names.reconciliation, "failure")])]);
 assert.equal(receipt.classification.phase, "EVALUATION_STEP_REACHED");
 assert.equal(receipt.classification.preLaunchFailure, false);
 
 const successSource = source({ conclusion: "success", run_attempt: 2, updated_at: "2026-09-22T12:06:00Z", html_url: "https://github.com/Cardiology-NP-OS/EKG-Interpretations/actions/runs/35704941042/attempts/2" });
-const successSteps = [step(names.preflight), step(names.signingKey), step(names.runConfiguration), step(names.evaluation), step(names.reconciliation), step(names.cleanup)];
+const successSteps = [step(names.preflight), step(names.runConfiguration), step(names.signingKey), step(names.attemptStart), step(names.evaluation), step(names.reconciliation), step(names.cleanup)];
 receipt = classify(successSource, [job(successSource, "synthetic-boundary", "success"), job(successSource, "full-development", "success", successSteps)]);
 assert.equal(receipt.classification.phase, "SOURCE_WORKFLOW_COMPLETED");
 assert.equal(receipt.receiptId.endsWith(":35704941042:2"), true);
@@ -103,7 +108,7 @@ assert.equal(JSON.stringify(receipt).includes("secret"), false);
 const firstBytes = serializeDevelopmentWorkflowAttemptReceipt(receipt);
 const secondBytes = serializeDevelopmentWorkflowAttemptReceipt(classify(successSource, [job(successSource, "synthetic-boundary", "success"), job(successSource, "full-development", "success", successSteps)]));
 assert.equal(firstBytes.equals(secondBytes), true);
-assert.equal(developmentWorkflowAttemptReceiptSha256(receipt), "3ddb63cb3f0432a032c26a3aee69fa36becb06be26039115f8967e22be9b519d");
+assert.equal(developmentWorkflowAttemptReceiptSha256(receipt), "3644ba6d3a700823f2cee80962ae8d3ab89a5284920253d8dcb65da90d0b8aac");
 
 const rerun = classify(source({ run_attempt: 3, html_url: "https://github.com/Cardiology-NP-OS/EKG-Interpretations/actions/runs/35704941042/attempts/3" }), []);
 assert.equal(rerun.classification.phase, "OBSERVATION_INCOMPLETE");
