@@ -280,6 +280,59 @@ test("analysis persists as an immutable content-addressed generation", () => {
   assert.strictEqual(reopened.runtimeAuthority, false);
 });
 
+test("persistence requires every canonical lead and its preferred source", () => {
+  const fx = fixture("case://canonical-accounting");
+  try {
+    const result = JSON.parse(JSON.stringify(fx.result));
+    result.digitized.leads.find(lead => lead.lead === "I").quality.heldColumnCount = 999;
+    const receipt = persistImageExtraction(fx.caseReceipt.path, result);
+    const extraction = readImageExtraction(fx.caseReceipt.path, receipt.extractionId);
+    const partial = runImageSignalAnalysis(extraction, analysisConfig());
+    assert.strictEqual(partial.status, "PARTIAL");
+    assert.deepStrictEqual(partial.failures, [{ leadName: "I", reason: "IMAGE_ANALYSIS_QUALITY_GATE" }]);
+    const saved = persistImageAnalysis(fx.caseReceipt.path, partial);
+    assert.deepStrictEqual(readImageAnalysis(fx.caseReceipt.path, saved.analysisId).failures, partial.failures);
+    const omitted = { ...partial, failures: [], attemptedLeadCount: 11, status: "COMPLETE" };
+    assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, omitted), /IMAGE_ANALYSIS_CANONICAL_ACCOUNTING/);
+    const missingSuccess = JSON.parse(JSON.stringify(fx.analysis));
+    missingSuccess.leadAnalyses.pop();
+    missingSuccess.processedLeadCount -= 1;
+    missingSuccess.attemptedLeadCount -= 1;
+    assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, missingSuccess), /IMAGE_ANALYSIS_CANONICAL_ACCOUNTING/);
+    const substituted = JSON.parse(JSON.stringify(fx.analysis));
+    const panel = substituted.supplementalPaperWindowAnalyses[0];
+    substituted.leadAnalyses[substituted.leadAnalyses.findIndex(row => row.leadName === panel.leadName)] = panel;
+    assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, substituted), /IMAGE_ANALYSIS_LEAD_SOURCE/);
+    const duplicate = JSON.parse(JSON.stringify(partial));
+    duplicate.failures[0].leadName = duplicate.leadAnalyses[0].leadName;
+    assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, duplicate), /IMAGE_ANALYSIS_DUPLICATE_LEAD/);
+  } finally {
+    fs.rmSync(fx.root, { recursive: true, force: true });
+  }
+});
+
+for (const strict of [undefined, 100]) {
+  test(`twelve-lead permission remains false through persistence in ${strict ? "strict" : "legacy"} analysis`, () => {
+    const fx = fixture(`case://twelve-lead-permission-${strict || "legacy"}`, strict);
+    try {
+      const result = JSON.parse(JSON.stringify(fx.result));
+      result.report.analysisPermissions.twelveLeadClaimsAllowed = false;
+      const receipt = persistImageExtraction(fx.caseReceipt.path, result);
+      const extraction = readImageExtraction(fx.caseReceipt.path, receipt.extractionId);
+      const config = analysisConfig();
+      if (strict) Object.assign(config.quality, { maxAmplitudeUncertaintyMv: 1, maxTimePixelUncertaintyMs: 4 });
+      const analysis = runImageSignalAnalysis(extraction, config);
+      assert.strictEqual(analysis.processedLeadCount, 12);
+      assert.strictEqual(analysis.completeStandardTwelveLead, false);
+      const saved = persistImageAnalysis(fx.caseReceipt.path, analysis);
+      assert.strictEqual(readImageAnalysis(fx.caseReceipt.path, saved.analysisId).completeStandardTwelveLead, false);
+      assert.throws(() => persistImageAnalysis(fx.caseReceipt.path, { ...analysis, completeStandardTwelveLead: true }), /IMAGE_ANALYSIS_TWELVE_LEAD/);
+    } finally {
+      fs.rmSync(fx.root, { recursive: true, force: true });
+    }
+  });
+}
+
 test("identical analysis persistence is idempotent", () => {
   const fx = fixture("case://analysis-store-idempotent");
   const first = persistImageAnalysis(fx.caseReceipt.path, fx.analysis);
