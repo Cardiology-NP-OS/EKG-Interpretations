@@ -4,12 +4,13 @@
   "repository": "Cardiology-NP-OS/EKG-Interpretations",
   "branch": "lane/ek1-ekg-completion-20260928",
   "control_contract": "control/lanes/EK1.json",
-  "control_sha": "00172a9fe80f9e6a56c40b6f38f2acc036d77c66",
-  "status": "ENGINEERING_INCREMENT_VERIFIED_EXTERNAL_CI_BLOCKED",
+  "control_sha": "738007b57efce9f6ed32db5bc266878324bb45be",
+  "prior_control_sha": "00172a9fe80f9e6a56c40b6f38f2acc036d77c66",
+  "status": "PARTIAL_UNQUARANTINE_MANIFEST_SCOPE_BLOCKED",
   "base_sha": "f8fec586abf795b7d0fa096eae3cf9e6c4e41434",
-  "head_sha": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
-  "tree_sha": "23f909ed7d5125577eff1964f37dd87c3966ea5f",
-  "head_sha_scope": "Exact clean implementation HEAD tested before this checkpoint-only commit. A tracked checkpoint cannot embed its own commit hash. Resolve the publishing checkpoint commit from Git and rerun the acceptance commands at that exact HEAD before push.",
+  "head_sha": "5451ac61676bd5f600359a06c2ee502e547b3108",
+  "tree_sha": "1081c49adb7666af1a2e789c4112f9413912a0ad",
+  "head_sha_scope": "Exact verified incoming HEAD. Existing implementation verification is retained below. Resumed AGENTS/checkpoint edits require new exact-head verification before publication; a tracked checkpoint cannot embed its own commit hash.",
   "writer": "EK1 sole repository writer; subagents performed read-only exploration and review",
   "ownership": {
     "owned_paths": ["**/*", ".ai_worker/**"],
@@ -85,12 +86,13 @@
   },
   "blocked_by": [
     {
-      "gate": "EXACT_SHA_GITHUB_CI",
+      "gate": "INTENDED_MODULE_JSON_RUNTIME_FIELDS",
       "status": "BLOCKED",
-      "reason": "GitHub CLI executable is unavailable on PATH; gh run list failed with CommandNotFoundException for the exact implementation SHA. Local passing checks are not remote CI evidence.",
-      "last_verified_commit": "7ea571e6871e08a02bc36f5fa74c5ee5d448e108",
-      "last_verified_tree": "23f909ed7d5125577eff1964f37dd87c3966ea5f",
-      "safe_next_action": "Controller verifies exact publishing-head GitHub CI before integration; no workflow edit is requested."
+      "reason": "No root or nested module.json exists in EKG. The pinned EK1 contract and instruction do not identify a manifest path, creation schema or exact old-to-new runtime-field values. Existing clinical-control artifacts are not substitute runtime manifests.",
+      "tool_evidence": ["Read-only filename search found no module.json", "git ls-files '*module.json' '*modules.json' returned no paths", "AGENTS.md and README.md explicitly record the missing root manifest", "Pinned control/lanes/EK1.json authorizes engineering unquarantine but specifies no manifest path or replacement field values"],
+      "last_verified_commit": "5451ac61676bd5f600359a06c2ee502e547b3108",
+      "last_verified_tree": "1081c49adb7666af1a2e789c4112f9413912a0ad",
+      "safe_next_action": "Controller supplies the exact intended manifest path and runtime-field old-to-new mapping, or explicit authority and schema to create a new EKG manifest. Do not fabricate a module.json or edit Platform from EK1."
     },
     {
       "gate": "CATASTROPHIC_CLASSIFICATION_AND_REAL_DEVELOPMENT_EVALUATION",
@@ -100,19 +102,66 @@
     }
   ],
   "remaining_work": [
-    "Controller review and exact-head GitHub CI before integration; no merge or PR was requested.",
+    "Resolve the intended module.json path/schema/runtime-field mapping before any manifest mutation; no manifest was fabricated.",
+    "Controller review and exact-head GitHub CI before integration; keep existing PR #46 draft and update it at each pushed head. No merge is authorized.",
+    "README and AI_HANDOFF still contain older blanket wording; this resume is limited to AGENTS.md and intended manifest fields, so broader documentation reconciliation was not performed.",
     "Approved catastrophic classification policy and new governed QRS development evaluation remain external gates.",
     "Preexisting native decoder source-versus-artifact byte ceiling mismatch, provider input/resource bounds and extraction structural validation need separately verified follow-up increments.",
     "Real-image paired-reference accuracy, clinician correction UI, clinical interpretation/reporting and production PHI controls remain unestablished."
   ],
-  "next_action": "Commit this checkpoint only, rerun acceptance checks at the resulting exact publishing HEAD, push the lane normally, fetch origin, verify an empty git status --porcelain and HEAD equality with origin/lane/ek1-ekg-completion-20260928, then hand back to controller.",
+  "next_action": "Verify the scoped AGENTS owner-decision clarification at its exact new head, preserve the results here, push normally and update draft PR #46. Hand back the unresolved manifest path/schema/field mapping to the controller with a clean synchronized lane.",
+  "resume": {
+    "instruction_utc": "2026-09-28T20:05:28Z",
+    "session_id": "ses_f168bb1c8ffenfsUGU3mmOs9PM",
+    "incoming_head": "5451ac61676bd5f600359a06c2ee502e547b3108",
+    "branch_recreated": false,
+    "prior_implementation_and_review_preserved": true,
+    "changed_scope": ["AGENTS.md EKG quarantine paragraph", ".ai_worker/PARALLEL_LANE_CHECKPOINT.json"],
+    "runtime_fields_changed": [],
+    "manifest_created": false,
+    "wrapper": "Existing resume.ps1 targets the same session and appends run.jsonl, run.err and run.exit; it was inspected read-only and not changed.",
+    "incoming_ci": {
+      "status": "PASS",
+      "source": "Live gh run view, not only the controller assertion",
+      "run_id": 36475546821,
+      "head_sha": "5451ac61676bd5f600359a06c2ee502e547b3108",
+      "workflow": "EKG Recovery CI",
+      "conclusion": "success",
+      "jobs_passed": 4,
+      "url": "https://github.com/Cardiology-NP-OS/EKG-Interpretations/actions/runs/36475546821",
+      "limitation": "Ubuntu skips the Windows-only persistence step; the Windows job ran it successfully. Synthetic and contract CI is not clinical evidence."
+    },
+    "resolved_prior_blocker": {
+      "gate": "EXACT_SHA_GITHUB_CI",
+      "prior_status": "BLOCKED",
+      "prior_reason": "gh was unavailable on PATH in the prior run",
+      "resolution": "Located gh-portable/bin/gh.exe and used the existing GitHub Git credential in process memory only. No credential was printed, persisted or committed. Incoming exact-head CI is now independently verified."
+    },
+    "draft_pr": {
+      "number": 46,
+      "url": "https://github.com/Cardiology-NP-OS/EKG-Interpretations/pull/46",
+      "state": "OPEN",
+      "is_draft": true,
+      "base": "main"
+    },
+    "verification": {"status": "NOT RUN", "reason": "New scoped edits are not committed yet; existing exact-head evidence above is not reused as a new-head pass."}
+  },
   "clinical_boundary": {
     "disclaimer": "Engineering output - not clinically validated. Clinician review required.",
     "clinical_validity": "NOT_INFERRED",
     "clinical_release_authorized": false,
-    "quarantine_markers_changed": false,
-    "E7_commit_line_required": false,
-    "E7_reason": "No quarantine marker was changed; no missing owner-decision wording was guessed.",
+    "quarantine_markers_changed": true,
+    "E7_commit_line_required": true,
+    "E7_commit_line": "Owner decision 2026-09-28T18:30Z: EKG unquarantined.",
+    "E7_reason": "AGENTS.md now distinguishes owner-authorized engineering unquarantine from unchanged clinical controls; no runtime manifest field was guessed.",
+    "E5": {
+      "clinical_validity": "NOT_INFERRED",
+      "metrics": "NOT_REPORTABLE",
+      "evidence_admission": "NOT_ADMITTED",
+      "real_clinical_image_validation_established": false,
+      "approved_adjudicated_gold_count": 0,
+      "clinical_release_authorized": false
+    },
     "project_gold_count": 0,
     "clinical_accuracy_claimed": false,
     "synthetic_only": true
