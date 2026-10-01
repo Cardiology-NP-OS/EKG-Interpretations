@@ -653,8 +653,19 @@ try {
   assert.equal(completedAttempt.terminal.accounting.byDetectorAndPass.every(row => row.SUCCESS === 1 && row.NOT_RUN === 0), true);
   const report = JSON.parse(fs.readFileSync(path.join(receipt.path, "development-report.json"), "utf8"));
   assert.equal(report.clinicalAccuracyClaimed, false);
+  assert.equal(report.disclaimer, "Engineering output - not clinically validated. Clinician review required.");
   assert.equal(report.currentEngine.denominators.nRecords, 1);
   assert.equal(report.currentEngine.records, undefined);
+  for (const result of [report.currentEngine, report.panTompkins]) {
+    assert.equal(result.failureAnalysis.nRecords, 1);
+    assert.deepEqual(result.failureAnalysis.statusCounts, { SUCCESS: 1, TECHNICAL_FAILURE: 0, ABSTAINED: 0 });
+    assert.equal(result.failureAnalysis.nonSuccessCount, result.denominators.technicalFailureCount);
+    assert.equal(result.failureAnalysis.manifestExcludedRecordCount, manifest.records.filter(row => row.taskEligibility === "EXCLUDED").length);
+    assert.equal(result.failureAnalysis.scoringStageExcludedCount, 0);
+    assert.deepEqual(result.failureAnalysis.catastrophicErrors, { status: "NOT_EVALUATED", reason: "POLICY_UNAVAILABLE", policySha256: null, recordCount: null });
+    assert.equal(result.failureAnalysis.recordOutcomes, undefined);
+  }
+  for (const field of ["recordHmacSha256", "patientHmacSha256", "referenceSampleIndices", "SENTINEL_PROTECTED_METADATA"]) assert.equal(JSON.stringify(report).includes(field), false);
   const candidateDigests = JSON.parse(fs.readFileSync(path.join(receipt.path, "candidate-digests.json"), "utf8"));
   assert.equal(candidateDigests.candidateSignature.keyId, "synthetic-development-candidate-2026-09-22");
   assert.equal(candidateDigests.metricCodeDigest, implementationDigest([path.join(repositoryRoot, "lib", "rpeak_development_metrics.js"), path.join(repositoryRoot, "lib", "event_matcher_v2.js")]));

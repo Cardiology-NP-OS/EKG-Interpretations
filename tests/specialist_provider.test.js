@@ -9,6 +9,8 @@ const { renderPaperEcgRaster, syntheticLeadMap } = require("../lib/paper_ecg_ras
 const { runImageIntakePipeline } = require("../lib/image_intake_pipeline");
 const { buildExtraction } = require("../lib/image_extraction_store");
 const { dispatch } = require("../tools/specialist_provider");
+const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
+const DISCLAIMER = "Engineering output - not clinically validated. Clinician review required.";
 
 let passed = 0;
 function test(name, fn) {
@@ -40,7 +42,7 @@ function analysisConfig() {
   };
 }
 
-function extractionFixture() {
+function extractionFixture(mutate = () => {}) {
   const paper = renderPaperEcgRaster({
     leads: syntheticLeadMap(250, 10),
     sampleRateHz: 250,
@@ -56,6 +58,7 @@ function extractionFixture() {
     gainMmPerMv: 10,
     provenance: { locator: "provider-test://image", projectGold: false },
   });
+  mutate(result);
   return buildExtraction({ caseId: result.report.caseId }, result);
 }
 test("provider status exposes full specialist surfaces without authority", () => {
@@ -93,6 +96,46 @@ test("provider CLI uses JSON stdin and emits one governed JSON result", () => {
   const out = JSON.parse(run.stdout);
   assert.strictEqual(out.schema, "ekg-specialist-provider-status-v1");
   assert.strictEqual(out.clinicalValidityInferred, false);
+});
+
+test("provider preserves measurements, provenance and separate canonical and supplemental failures", () => {
+  for (const failedSource of [null, "canonical", "supplemental"]) {
+    const extraction = extractionFixture(result => {
+      if (failedSource) {
+        const lead = result.digitized.leads.find(row => row.lead === (failedSource === "canonical" ? "I" : "II") && !row.rhythmStrip);
+        lead.quality.heldColumnCount = 999;
+      }
+    });
+    const request = { operation: "image_review", extraction, analysisConfig: analysisConfig() };
+    const review = runImageSignalAnalysis(extraction, request.analysisConfig);
+    const out = dispatch(request);
+    assert.strictEqual(out.disclaimer, DISCLAIMER);
+    assert.deepStrictEqual(out.review, { ...review, disclaimer: DISCLAIMER, origin: "SYSTEM_DERIVED", reviewState: "UNREVIEWED" });
+    assert.strictEqual(out.review.status, failedSource === "canonical" ? "PARTIAL" : "COMPLETE");
+    assert.strictEqual(out.review.failures.length, failedSource === "canonical" ? 1 : 0);
+    assert.strictEqual(out.review.supplementalPaperWindowFailures.length, failedSource === "supplemental" ? 1 : 0);
+    for (const row of out.review.leadAnalyses) {
+      assert.ok(row.measurement.provenance.locator.includes(extraction.extractionId));
+      assert.strictEqual(row.measurement.diagnosticInterpretationIncluded, false);
+    }
+    const cli = cp.spawnSync(process.execPath, [path.join(__dirname, "..", "tools", "specialist_provider.js")], {
+      input: JSON.stringify(request), encoding: "utf8", timeout: 30000, maxBuffer: 4 * 1024 * 1024,
+    });
+    assert.strictEqual(cli.status, 0, cli.stderr);
+    assert.deepStrictEqual(JSON.parse(cli.stdout), out);
+  }
+});
+
+test("provider rejects invalid detector configuration before creating a case", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "ekg-provider-invalid-config-"));
+  try {
+    const config = analysisConfig();
+    config.measurement.detector.algorithm = "MISSPELLED_V2";
+    assert.throws(() => dispatch({ operation: "image_case_pipeline", caseRoot: path.join(root, "cases"), input: {}, analysisConfig: config }), /PIPELINE_DETECTOR_ALGORITHM/);
+    assert.deepStrictEqual(fs.readdirSync(root), []);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test("unknown provider operations fail closed", () => {

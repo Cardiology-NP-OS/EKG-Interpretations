@@ -17,6 +17,8 @@ const { projectRectangleToQuadrilateral } = require("../lib/image_geometry_norma
 const { renderLeadLabel } = require("../lib/image_lead_identity");
 const { runImageIntakePipeline } = require("../lib/image_intake_pipeline");
 const { persistImageAnalysis, readImageAnalysis } = require("../lib/image_analysis_store");
+const { dispatch } = require("../tools/specialist_provider");
+const { detectCandidateRPeaksV2, QRS_V2_ALGORITHM } = require("../lib/qrs_detector_v2");
 
 let passed = 0;
 function test(name, fn) {
@@ -865,6 +867,38 @@ for (const format of ["jpeg", "pdf"]) {
       assert.throws(() => runAndPersistImageFileIntake(rejectedRoot, { ...input, strictTraceMaxThicknessPx: 1 }), /DIGITIZATION_TRACE_THICKNESS/);
       assert.strictEqual(fs.existsSync(rejectedRoot), false);
       assert.deepStrictEqual(fs.readFileSync(path.join(path.dirname(persisted.caseReceipt.path), "original.bin")), fs.readFileSync(encoded));
+      const v2Config = JSON.parse(JSON.stringify(config));
+      v2Config.measurement.detector = { algorithm: QRS_V2_ALGORITHM };
+      const outputs = [];
+      for (const selectedConfig of [config, v2Config, config]) {
+        const request = { operation: "image_case_pipeline", caseRoot: root, input, analysisConfig: selectedConfig };
+        const out = dispatch(request);
+        const stored = readImageAnalysis(persisted.caseReceipt.path, out.analysis.analysisId);
+        const { analysisId, ...storedReview } = stored;
+        assert.deepStrictEqual(out.review, { ...storedReview, disclaimer: "Engineering output - not clinically validated. Clinician review required.", origin: "SYSTEM_DERIVED", reviewState: "UNREVIEWED" });
+        assert.strictEqual(out.case.caseId, persisted.caseReceipt.caseId);
+        assert.strictEqual(out.extraction.extractionId, extraction.extractionId);
+        assert.strictEqual(out.review.diagnosticInterpretationIncluded, false);
+        assert.deepStrictEqual(out.review.implementations, stored.implementations);
+        const cli = cp.spawnSync(process.execPath, [path.join(__dirname, "..", "tools", "specialist_provider.js")], {
+          input: JSON.stringify(request), encoding: "utf8", timeout: 60000, maxBuffer: 4 * 1024 * 1024,
+        });
+        assert.strictEqual(cli.status, 0, cli.stderr);
+        assert.deepStrictEqual(JSON.parse(cli.stdout).review, out.review);
+        if (selectedConfig === v2Config) {
+          for (const row of stored.leadAnalyses) {
+            const source = extraction.leads.find(lead => lead.lead === row.leadName && lead.rhythmStrip === row.rhythmStrip);
+            const direct = detectCandidateRPeaksV2(source.samples, source.sampleRateHz, { provenance: row.measurement.provenance });
+            assert.strictEqual(row.measurement.candidateRPeaks.algorithm, QRS_V2_ALGORITHM);
+            assert.deepStrictEqual(row.measurement.candidateRPeaks.events, direct.events);
+          }
+        }
+        outputs.push(out);
+      }
+      assert.deepStrictEqual(outputs[0].review, outputs[2].review);
+      assert.strictEqual(outputs[0].analysis.analysisId, outputs[2].analysis.analysisId);
+      assert.notStrictEqual(outputs[0].analysis.analysisId, outputs[1].analysis.analysisId);
+      assert.strictEqual(config.measurement.detector.algorithm, undefined);
     });
   });
 }

@@ -211,6 +211,24 @@ test("provider preserves V1 before and after explicit V2 opt-in through dispatch
   }
 });
 
+test("measurement pipeline rejects unknown detector identifiers instead of silently using V1", () => {
+  const fixture = fixtureById("CLEAN_NORMAL_QRS");
+  const input = {
+    physicalLead: { record: "synthetic-detector-selection", leadName: "II", sampleRateHz: fixture.sampleRateHz, samples: fixture.samples, unit: "mV" },
+    config: JSON.parse(JSON.stringify(executionConfig.measurement)),
+    provenance: fixture.provenance,
+  };
+  const original = runPhysicalLeadMeasurementPipeline(input);
+  for (const algorithm of ["UNSUPPORTED_DETECTOR", "", null, 2, {}, [], undefined]) {
+    input.config.detector.algorithm = algorithm;
+    assert.throws(() => runPhysicalLeadMeasurementPipeline(input), /PIPELINE_DETECTOR_ALGORITHM/);
+  }
+  input.config.detector.algorithm = "target-owned-local-extrema-absolute-deviation-v1";
+  assert.deepStrictEqual(runPhysicalLeadMeasurementPipeline(input), original);
+  delete input.config.detector.algorithm;
+  assert.deepStrictEqual(runPhysicalLeadMeasurementPipeline(input), original);
+});
+
 test("invalid samples and incompatible sample rates fail closed", () => {
   const fixture = fixtureById("CLEAN_NORMAL_QRS");
   const bad = fixture.samples.slice(); bad[50] = NaN;
