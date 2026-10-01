@@ -109,7 +109,15 @@ test("the review page shows the critical result and refuses an evidence-backed d
     assert.equal(stored.clinicalReleaseAuthorized, false);
     assert.equal(stored.evidenceBacked, false);
     assert.equal(reopened.html, page.html);
+    assert.equal(reopened.analysisSha256, interpretation.analysisSha256);
     assert.equal(reopened.result, "FAIL_CRITICAL");
+    const analysisFile = path.join(path.dirname(fx.caseReceipt.path), "analyses", fx.analysisReceipt.analysisId, "analysis.json");
+    const analysisBytes = fs.readFileSync(analysisFile);
+    const flipped = Buffer.from(analysisBytes);
+    flipped[0] ^= 1;
+    fs.writeFileSync(analysisFile, flipped);
+    assert.throws(() => readClinicianReviewPage(fx.caseReceipt.path, fx.analysisReceipt.analysisId, bundle.bundleId), /REVIEW_PAGE_ANALYSIS_MUTATED/);
+    fs.writeFileSync(analysisFile, analysisBytes);
     assert.equal(reopened.criticalError, true);
     const tampered = path.join(path.dirname(stored.path), "page.html");
     const original = fs.readFileSync(tampered);
