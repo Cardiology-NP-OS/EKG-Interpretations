@@ -18,6 +18,7 @@ const { addSessionScore, closeClinicianReviewSession, openClinicianReviewSession
 const { persistClinicianReviewBundle } = require("../lib/clinician_review_bundle");
 const { buildEvidenceBackedInterpretation } = require("../lib/evidence_backed_interpretation");
 const { renderClinicianReviewUi } = require("../lib/clinician_review_ui");
+const { persistClinicianReviewPage, readClinicianReviewPage } = require("../lib/clinician_review_page");
 
 let passed = 0;
 function test(name, fn) {
@@ -103,6 +104,17 @@ test("the review page shows the critical result and refuses an evidence-backed d
     assert.equal(page.html.includes("Cited engineering intervals are not a diagnosis."), true);
     assert.equal(page.clinicalReleaseAuthorized, false);
     assert.equal(page.evidenceBacked, false);
+    const stored = persistClinicianReviewPage(fx.caseReceipt.path, fx.analysisReceipt.analysisId, bundle.bundleId);
+    const reopened = readClinicianReviewPage(fx.caseReceipt.path, fx.analysisReceipt.analysisId, bundle.bundleId);
+    assert.equal(stored.clinicalReleaseAuthorized, false);
+    assert.equal(stored.evidenceBacked, false);
+    assert.equal(reopened.html, page.html);
+    assert.equal(reopened.result, "FAIL_CRITICAL");
+    assert.equal(reopened.criticalError, true);
+    const tampered = path.join(path.dirname(stored.path), "page.html");
+    const original = fs.readFileSync(tampered);
+    fs.writeFileSync(tampered, Buffer.concat([original, Buffer.from(" ")]));
+    assert.throws(() => readClinicianReviewPage(fx.caseReceipt.path, fx.analysisReceipt.analysisId, bundle.bundleId), /REVIEW_PAGE_HASH_MISMATCH/);
     const printed = spawnSync(process.execPath, [path.join(__dirname, "..", "bin", "print-review-ui.js"), fx.caseReceipt.path, fx.analysisReceipt.analysisId, bundle.bundleId], { encoding: "utf8" });
     assert.equal(printed.status, 0);
     assert.equal(printed.stdout, page.html);
