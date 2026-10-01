@@ -4,9 +4,12 @@ const fs = require("fs");
 const path = require("path");
 const { runAndPersistImageFileIntake, runImageFileIntake } = require("../lib/image_file_intake");
 const { persistImageExtraction, readImageExtraction } = require("../lib/image_extraction_store");
-const { runImageSignalAnalysis } = require("../lib/image_signal_analysis");
+const { runImageSignalAnalysis, validateConfig } = require("../lib/image_signal_analysis");
+const { validateMeasurementConfig } = require("../lib/signal_measurement_pipeline");
 const { persistImageAnalysis } = require("../lib/image_analysis_store");
 const { writeExecution } = require("./run_ecg_pipeline");
+
+const ENGINEERING_DISCLAIMER = "Engineering output - not clinically validated. Clinician review required.";
 
 const AUTHORITY = Object.freeze({
   diagnosticRuntime: "GOVERNED_INACTIVE",
@@ -58,30 +61,17 @@ function status() {
       immutableAnalyses: true,
       multileadReview: true,
     },
+    disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
   };
 }
 
 function summarizeReview(review) {
   return {
-    schema: review.schema,
-    caseId: review.caseId,
-    extractionId: review.extractionId,
-    status: review.status,
-    attemptedLeadCount: review.attemptedLeadCount,
-    processedLeadCount: review.processedLeadCount,
-    completeStandardTwelveLead: review.completeStandardTwelveLead,
-    crossLeadAggregationPerformed: review.crossLeadAggregationPerformed,
-    simultaneousLeadComparisonPerformed: review.simultaneousLeadComparisonPerformed,
-    crossLeadCandidateEvidence: review.crossLeadCandidateEvidence,
-    failures: review.failures,
-    thresholdAuthority: review.thresholdAuthority,
-    diagnosticInterpretationIncluded: review.diagnosticInterpretationIncluded,
-    runtimeAuthority: review.runtimeAuthority,
-    projectGold: review.projectGold,
-    metrics: review.metrics,
-    activation: review.activation,
-    clinicalValidityInferred: review.clinicalValidityInferred,
+    ...review,
+    disclaimer: ENGINEERING_DISCLAIMER,
+    origin: "SYSTEM_DERIVED",
+    reviewState: "UNREVIEWED",
   };
 }
 
@@ -99,6 +89,8 @@ function assertInactive(result) {
 function runImageReview(request) {
   requireCondition(request.extraction && typeof request.extraction === "object", "PROVIDER_EXTRACTION_REQUIRED");
   requireCondition(request.analysisConfig && typeof request.analysisConfig === "object", "PROVIDER_ANALYSIS_CONFIG_REQUIRED");
+  validateConfig(request.analysisConfig);
+  validateMeasurementConfig(request.analysisConfig.measurement);
   return assertInactive(runImageSignalAnalysis(request.extraction, request.analysisConfig));
 }
 
@@ -109,6 +101,7 @@ function runImageFile(request) {
     schema: "ekg-specialist-image-file-intake-result-v1",
     decoder: out.decoder,
     report: out.result.report,
+    disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
   };
 }
@@ -117,6 +110,8 @@ function runImageCasePipeline(request) {
   requireCondition(request.input && typeof request.input === "object", "PROVIDER_IMAGE_INPUT_REQUIRED");
   requireCondition(request.analysisConfig && typeof request.analysisConfig === "object", "PROVIDER_ANALYSIS_CONFIG_REQUIRED");
 
+  validateConfig(request.analysisConfig);
+  validateMeasurementConfig(request.analysisConfig.measurement);
   const persisted = runAndPersistImageFileIntake(request.caseRoot, request.input);
   const extractionReceipt = persistImageExtraction(persisted.caseReceipt.path, persisted.fileIntake.result);
   const extraction = readImageExtraction(persisted.caseReceipt.path, extractionReceipt.extractionId);
@@ -129,6 +124,7 @@ function runImageCasePipeline(request) {
     extraction: stripPath(extractionReceipt),
     analysis: stripPath(analysisReceipt),
     review: summarizeReview(review),
+    disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
   };
 }
@@ -144,6 +140,7 @@ function runWaveform(request) {
     renderingSha256: out.renderingSha256,
     diagnosticRuntime: out.diagnosticRuntime,
     clinicalAuthorityAdded: out.clinicalAuthorityAdded,
+    disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
   };
 }
@@ -157,6 +154,7 @@ function dispatch(request) {
     case "image_review": return {
       schema: "ekg-specialist-image-review-result-v1",
       review: summarizeReview(runImageReview(request)),
+      disclaimer: ENGINEERING_DISCLAIMER,
       ...AUTHORITY,
     };
     default: throw new Error("PROVIDER_OPERATION_UNSUPPORTED");
@@ -176,6 +174,7 @@ if (require.main === module) {
     process.stderr.write(JSON.stringify({
       schema: "ekg-specialist-provider-error-v1",
       error: String(error && error.message ? error.message : error),
+      disclaimer: ENGINEERING_DISCLAIMER,
       ...AUTHORITY,
     }) + "\n");
     process.exit(1);
