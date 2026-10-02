@@ -92,7 +92,8 @@ test("structured reader binds waveform preview measurements quality and exact pe
     assert.strictEqual(lead.waveform.preview.points.at(-1).index, source.samples.length - 1);
     for (const point of lead.waveform.preview.points) assert.strictEqual(point.value, source.samples[point.index]);
     assert.strictEqual(lead.measurement.schema, "ekg-waveform-measurement-pipeline-v1");
-    assert.ok(Array.isArray(lead.measurement.intervalMeasurements));
+    assert.strictEqual(lead.measurement.intervalMeasurements.schema, "ekg-fiducial-measurement-set-v1");
+    assert.ok(Array.isArray(lead.measurement.intervalMeasurements.measurements));
     assert.ok(Array.isArray(lead.measurement.amplitudeMeasurements));
     assert.strictEqual(lead.measurement.diagnosticInterpretationIncluded, false);
     assert.ok(Buffer.byteLength(JSON.stringify(out), "utf8") < 4 * 1024 * 1024);
