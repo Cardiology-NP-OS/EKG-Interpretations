@@ -135,8 +135,9 @@ test("specialist provider advertises and returns the structured reader without p
     const status = dispatch({ operation: "status" });
     assert.strictEqual(status.operations.clinician_reader.available, true);
     assert.strictEqual(status.imageCapabilities.structuredClinicianReader, true);
-    const out = dispatch({ operation: "clinician_reader", casePath: fx.caseReceipt.path, analysisId: fx.analysisReceipt.analysisId });
+    const out = dispatch({ operation: "clinician_reader", caseRoot: fx.root, caseId: fx.caseReceipt.caseId, analysisId: fx.analysisReceipt.analysisId });
     assert.strictEqual(out.schema, "ekg-specialist-clinician-reader-result-v1");
+    assert.deepStrictEqual(out.caseRef, { caseId: fx.caseReceipt.caseId, analysisId: fx.analysisReceipt.analysisId });
     assert.strictEqual(out.reader.analysisId, fx.analysisReceipt.analysisId);
     assert.strictEqual(out.reader.leads.length, 12);
     assert.strictEqual(out.reader.runtimeAuthority, false);

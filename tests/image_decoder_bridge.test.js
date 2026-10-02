@@ -878,13 +878,31 @@ for (const format of ["jpeg", "pdf"]) {
         assert.deepStrictEqual(out.review, { ...storedReview, disclaimer: "Engineering output - not clinically validated. Clinician review required.", origin: "SYSTEM_DERIVED", reviewState: "UNREVIEWED" });
         assert.strictEqual(out.case.caseId, persisted.caseReceipt.caseId);
         assert.strictEqual(out.extraction.extractionId, extraction.extractionId);
+        assert.deepStrictEqual(out.caseRef, { caseId: out.case.caseId, analysisId: out.analysis.analysisId });
+        assert.strictEqual(out.reader.caseId, out.case.caseId);
+        assert.strictEqual(out.reader.analysisId, out.analysis.analysisId);
+        assert.strictEqual(out.reader.bindings.analysisSha256, out.analysis.sha256);
+        assert.strictEqual(out.reader.diagnosticInterpretationIncluded, false);
+        assert.strictEqual(out.reader.runtimeAuthority, false);
         assert.strictEqual(out.review.diagnosticInterpretationIncluded, false);
         assert.deepStrictEqual(out.review.implementations, stored.implementations);
+        const reopenedByRef = dispatch({
+          operation: "clinician_reader",
+          caseRoot: root,
+          caseId: out.case.caseId,
+          analysisId: out.analysis.analysisId,
+        });
+        assert.deepStrictEqual(reopenedByRef.caseRef, out.caseRef);
+        assert.deepStrictEqual(reopenedByRef.reader, out.reader);
+        assert.strictEqual(JSON.stringify(reopenedByRef).includes(root), false);
         const cli = cp.spawnSync(process.execPath, [path.join(__dirname, "..", "tools", "specialist_provider.js")], {
           input: JSON.stringify(request), encoding: "utf8", timeout: 60000, maxBuffer: 4 * 1024 * 1024,
         });
         assert.strictEqual(cli.status, 0, cli.stderr);
-        assert.deepStrictEqual(JSON.parse(cli.stdout).review, out.review);
+        const cliOut = JSON.parse(cli.stdout);
+        assert.deepStrictEqual(cliOut.review, out.review);
+        assert.deepStrictEqual(cliOut.reader, out.reader);
+        assert.deepStrictEqual(cliOut.caseRef, out.caseRef);
         if (selectedConfig === v2Config) {
           for (const row of stored.leadAnalyses) {
             const source = extraction.leads.find(lead => lead.lead === row.leadName && lead.rhythmStrip === row.rhythmStrip);
@@ -898,6 +916,30 @@ for (const format of ["jpeg", "pdf"]) {
       assert.deepStrictEqual(outputs[0].review, outputs[2].review);
       assert.strictEqual(outputs[0].analysis.analysisId, outputs[2].analysis.analysisId);
       assert.notStrictEqual(outputs[0].analysis.analysisId, outputs[1].analysis.analysisId);
+      const corrected = dispatch({
+        operation: "clinician_correction_append",
+        caseRoot: root,
+        caseId: outputs[0].case.caseId,
+        analysisId: outputs[0].analysis.analysisId,
+        reviewerId: "synthetic-decoder-reviewer",
+        statement: `Synthetic ${format} provider end-to-end correction.`,
+      });
+      assert.strictEqual(corrected.reader.corrections.items.length, 1);
+      assert.deepStrictEqual(corrected.caseRef, outputs[0].caseRef);
+      assert.strictEqual(JSON.stringify(corrected).includes(root), false);
+      const reopenedAfterCorrection = dispatch({
+        operation: "clinician_reader",
+        caseRoot: root,
+        caseId: outputs[0].case.caseId,
+        analysisId: outputs[0].analysis.analysisId,
+      });
+      assert.deepStrictEqual(reopenedAfterCorrection.reader, corrected.reader);
+      const legacyReopen = dispatch({
+        operation: "clinician_reader",
+        casePath: persisted.caseReceipt.path,
+        analysisId: outputs[0].analysis.analysisId,
+      });
+      assert.deepStrictEqual(legacyReopen.reader, corrected.reader);
       assert.strictEqual(config.measurement.detector.algorithm, undefined);
     });
   });

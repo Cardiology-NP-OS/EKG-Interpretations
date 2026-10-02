@@ -13,6 +13,8 @@ const { writeExecution } = require("./run_ecg_pipeline");
 
 const ENGINEERING_DISCLAIMER = "Engineering output - not clinically validated. Clinician review required.";
 
+const CASE_ID_RE = /^[a-f0-9]{64}$/;
+
 const AUTHORITY = Object.freeze({
   diagnosticRuntime: "GOVERNED_INACTIVE",
   evidenceAdmission: "NOT_ADMITTED",
@@ -35,6 +37,25 @@ function stripPath(receipt) {
   delete out.path;
   return out;
 }
+
+function resolveCasePath(request, prefix) {
+  const hasLegacyPath = Object.prototype.hasOwnProperty.call(request, "casePath");
+  const hasRootOrId =
+    Object.prototype.hasOwnProperty.call(request, "caseRoot") ||
+    Object.prototype.hasOwnProperty.call(request, "caseId");
+  requireCondition(!(hasLegacyPath && hasRootOrId), `${prefix}_CASE_LOCATOR_AMBIGUOUS`);
+  if (hasLegacyPath) {
+    requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, `${prefix}_CASE_PATH_REQUIRED`);
+    return request.casePath;
+  }
+  requireCondition(typeof request.caseRoot === "string" && request.caseRoot.length > 0, `${prefix}_CASE_ROOT_REQUIRED`);
+  requireCondition(typeof request.caseId === "string" && CASE_ID_RE.test(request.caseId), `${prefix}_CASE_ID_REQUIRED`);
+  const root = path.resolve(request.caseRoot);
+  const resolved = path.join(root, `case-${request.caseId}`);
+  requireCondition(path.dirname(resolved) === root, `${prefix}_CASE_LOCATOR_INVALID`);
+  requireCondition(path.basename(resolved) === `case-${request.caseId}`, `${prefix}_CASE_LOCATOR_INVALID`);
+  return resolved;
+}
 function status() {
   return {
     schema: "ekg-specialist-provider-status-v1",
@@ -46,8 +67,8 @@ function status() {
       image_file_intake: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: false },
       image_case_pipeline: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: true },
       image_review: { available: true, input: "CONTENT_ADDRESSED_EXTRACTION" },
-      clinician_reader: { available: true, input: "PERSISTED_CASE_PATH_AND_ANALYSIS_ID", persistence: false },
-      clinician_correction_append: { available: true, input: "PERSISTED_CASE_PATH_ANALYSIS_ID_REVIEWER_STATEMENT", persistence: true, appendOnly: true },
+      clinician_reader: { available: true, input: "PERSISTED_CASE_ROOT_CASE_ID_ANALYSIS_ID", legacyCasePathAccepted: true, persistence: false },
+      clinician_correction_append: { available: true, input: "PERSISTED_CASE_ROOT_CASE_ID_ANALYSIS_ID_REVIEWER_STATEMENT", legacyCasePathAccepted: true, persistence: true, appendOnly: true },
     },
     imageCapabilities: {
       png: true,
@@ -66,6 +87,7 @@ function status() {
       multileadReview: true,
       structuredClinicianReader: true,
       appendOnlyClinicianCorrectionProvider: true,
+      providerCaseReference: true,
     },
     disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
@@ -123,24 +145,33 @@ function runImageCasePipeline(request) {
   const extraction = readImageExtraction(persisted.caseReceipt.path, extractionReceipt.extractionId);
   const review = assertInactive(runImageSignalAnalysis(extraction, request.analysisConfig));
   const analysisReceipt = persistImageAnalysis(persisted.caseReceipt.path, review);
+  const reader = assertInactive(buildClinicianReaderModel(persisted.caseReceipt.path, analysisReceipt.analysisId));
 
   return {
     schema: "ekg-specialist-image-case-pipeline-result-v1",
+    caseRef: {
+      caseId: persisted.caseReceipt.caseId,
+      analysisId: analysisReceipt.analysisId,
+    },
     case: stripPath(persisted.caseReceipt),
     extraction: stripPath(extractionReceipt),
     analysis: stripPath(analysisReceipt),
     review: summarizeReview(review),
+    reader,
     disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
   };
 }
 
 function runClinicianReader(request) {
-  requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, "PROVIDER_READER_CASE_PATH_REQUIRED");
+  const allowed = new Set(["operation", "caseRoot", "caseId", "casePath", "analysisId"]);
+  requireCondition(Object.keys(request).every(key => allowed.has(key)), "PROVIDER_READER_FIELDS");
   requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_READER_ANALYSIS_ID_REQUIRED");
-  const reader = assertInactive(buildClinicianReaderModel(request.casePath, request.analysisId));
+  const casePath = resolveCasePath(request, "PROVIDER_READER");
+  const reader = assertInactive(buildClinicianReaderModel(casePath, request.analysisId));
   return {
     schema: "ekg-specialist-clinician-reader-result-v1",
+    caseRef: { caseId: reader.caseId, analysisId: reader.analysisId },
     reader,
     disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
@@ -148,22 +179,23 @@ function runClinicianReader(request) {
 }
 
 function runClinicianCorrection(request) {
-  const allowed = new Set(["operation", "casePath", "analysisId", "reviewerId", "statement", "supersedes"]);
+  const allowed = new Set(["operation", "caseRoot", "caseId", "casePath", "analysisId", "reviewerId", "statement", "supersedes"]);
   requireCondition(Object.keys(request).every(key => allowed.has(key)), "PROVIDER_CORRECTION_FIELDS");
-  requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, "PROVIDER_CORRECTION_CASE_PATH_REQUIRED");
   requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_CORRECTION_ANALYSIS_ID_REQUIRED");
   requireCondition(typeof request.reviewerId === "string" && request.reviewerId.length > 0, "PROVIDER_CORRECTION_REVIEWER_REQUIRED");
   requireCondition(typeof request.statement === "string" && request.statement.length > 0, "PROVIDER_CORRECTION_STATEMENT_REQUIRED");
+  const casePath = resolveCasePath(request, "PROVIDER_CORRECTION");
   const input = {
     analysisId: request.analysisId,
     reviewerId: request.reviewerId,
     statement: request.statement,
     ...(Object.hasOwn(request, "supersedes") ? { supersedes: request.supersedes } : {}),
   };
-  const correction = persistClinicianCorrection(request.casePath, input);
-  const reader = assertInactive(buildClinicianReaderModel(request.casePath, request.analysisId));
+  const correction = persistClinicianCorrection(casePath, input);
+  const reader = assertInactive(buildClinicianReaderModel(casePath, request.analysisId));
   return {
     schema: "ekg-specialist-clinician-correction-result-v1",
+    caseRef: { caseId: reader.caseId, analysisId: reader.analysisId },
     correction: stripPath(correction),
     reader,
     disclaimer: ENGINEERING_DISCLAIMER,

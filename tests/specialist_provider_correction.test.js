@@ -66,12 +66,14 @@ test("provider appends correction and returns refreshed reader without path leak
     const before = fs.readFileSync(fx.analysisReceipt.path);
     const first = dispatch({
       operation: "clinician_correction_append",
-      casePath: fx.caseReceipt.path,
+      caseRoot: fx.root,
+      caseId: fx.caseReceipt.caseId,
       analysisId: fx.analysisReceipt.analysisId,
       reviewerId: "synthetic-reviewer-1",
       statement: "Synthetic reviewer correction one.",
     });
     assert.strictEqual(first.schema, "ekg-specialist-clinician-correction-result-v1");
+    assert.deepStrictEqual(first.caseRef, { caseId: fx.caseReceipt.caseId, analysisId: fx.analysisReceipt.analysisId });
     assert.strictEqual(first.correction.analysisId, fx.analysisReceipt.analysisId);
     assert.ok(first.correction.file === "correction.json");
     assert.strictEqual(Object.hasOwn(first.correction, "path"), false);
@@ -83,7 +85,8 @@ test("provider appends correction and returns refreshed reader without path leak
 
     const second = dispatch({
       operation: "clinician_correction_append",
-      casePath: fx.caseReceipt.path,
+      caseRoot: fx.root,
+      caseId: fx.caseReceipt.caseId,
       analysisId: fx.analysisReceipt.analysisId,
       reviewerId: "synthetic-reviewer-1",
       statement: "Synthetic reviewer correction two.",
@@ -107,11 +110,14 @@ test("provider correction operation rejects unknown fields and authority claims"
   try {
     const base = {
       operation: "clinician_correction_append",
-      casePath: fx.caseReceipt.path,
+      caseRoot: fx.root,
+      caseId: fx.caseReceipt.caseId,
       analysisId: fx.analysisReceipt.analysisId,
       reviewerId: "synthetic-reviewer-1",
       statement: "Synthetic reviewer note.",
     };
+    assert.throws(() => dispatch({ ...base, casePath: fx.caseReceipt.path }), /PROVIDER_CORRECTION_CASE_LOCATOR_AMBIGUOUS/);
+    assert.throws(() => dispatch({ ...base, caseId: "../escape" }), /PROVIDER_CORRECTION_CASE_ID_REQUIRED/);
     assert.throws(() => dispatch({ ...base, patientId: "forbidden" }), /PROVIDER_CORRECTION_FIELDS/);
     assert.throws(() => dispatch({ ...base, statement: "This is clinically validated." }), /CLINICIAN_CORRECTION_AUTHORITY_CLAIM/);
     assert.throws(() => dispatch({ ...base, supersedes: "correction-" + "a".repeat(64) }), /CLINICIAN_CORRECTION_/);
