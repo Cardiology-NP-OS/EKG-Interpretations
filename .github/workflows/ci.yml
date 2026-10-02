@@ -33,6 +33,10 @@ jobs:
         env:
           EKG_IMAGE_PYTHON: python
         run: npm run test:image-decoder
+      - name: Exercise real-file persisted provider workflow
+        env:
+          EKG_IMAGE_PYTHON: python
+        run: npm run test:provider-e2e
       - name: Exercise Windows persistence and contract regressions
         if: runner.os == 'Windows'
         run: npm test
