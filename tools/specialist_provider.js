@@ -7,6 +7,7 @@ const { persistImageExtraction, readImageExtraction } = require("../lib/image_ex
 const { runImageSignalAnalysis, validateConfig } = require("../lib/image_signal_analysis");
 const { validateMeasurementConfig } = require("../lib/signal_measurement_pipeline");
 const { persistImageAnalysis } = require("../lib/image_analysis_store");
+const { buildClinicianReaderModel } = require("../lib/clinician_reader_model");
 const { writeExecution } = require("./run_ecg_pipeline");
 
 const ENGINEERING_DISCLAIMER = "Engineering output - not clinically validated. Clinician review required.";
@@ -44,6 +45,7 @@ function status() {
       image_file_intake: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: false },
       image_case_pipeline: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: true },
       image_review: { available: true, input: "CONTENT_ADDRESSED_EXTRACTION" },
+      clinician_reader: { available: true, input: "PERSISTED_CASE_PATH_AND_ANALYSIS_ID", persistence: false },
     },
     imageCapabilities: {
       png: true,
@@ -60,6 +62,7 @@ function status() {
       immutableExtractions: true,
       immutableAnalyses: true,
       multileadReview: true,
+      structuredClinicianReader: true,
     },
     disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
@@ -129,6 +132,18 @@ function runImageCasePipeline(request) {
   };
 }
 
+function runClinicianReader(request) {
+  requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, "PROVIDER_READER_CASE_PATH_REQUIRED");
+  requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_READER_ANALYSIS_ID_REQUIRED");
+  const reader = assertInactive(buildClinicianReaderModel(request.casePath, request.analysisId));
+  return {
+    schema: "ekg-specialist-clinician-reader-result-v1",
+    reader,
+    disclaimer: ENGINEERING_DISCLAIMER,
+    ...AUTHORITY,
+  };
+}
+
 function runWaveform(request) {
   requireCondition(request.args && typeof request.args === "object", "PROVIDER_WAVEFORM_ARGS_REQUIRED");
   const out = writeExecution(request.args);
@@ -151,6 +166,7 @@ function dispatch(request) {
     case "waveform_execute": return runWaveform(request);
     case "image_file_intake": return runImageFile(request);
     case "image_case_pipeline": return runImageCasePipeline(request);
+    case "clinician_reader": return runClinicianReader(request);
     case "image_review": return {
       schema: "ekg-specialist-image-review-result-v1",
       review: summarizeReview(runImageReview(request)),
