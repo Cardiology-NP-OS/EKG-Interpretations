@@ -1,0 +1,41 @@
+{
+  "schema": "cardiology-module-manifest-v1",
+  "module_id": "ekg",
+  "label": "EKG Interpretations",
+  "version": "13.0.0-recovery.5",
+  "capabilities": [
+    "photo_pdf_ecg_intake",
+    "bounded_geometry_normalization",
+    "lead_identity_evidence",
+    "grid_calibration",
+    "trace_digitization",
+    "per_lead_signal_analysis",
+    "multilead_review",
+    "immutable_case_storage",
+    "immutable_extraction_storage",
+    "immutable_analysis_storage",
+    "non_diagnostic_specialist_provider",
+    "clinician_review_report",
+    "six_axis_review_score",
+    "two_reviewer_session",
+    "clinician_review_bundle",
+    "append_only_clinician_correction"
+  ],
+  "safety": {
+    "no_phi": false,
+    "clinical_accuracy_claimed": false,
+    "requires_source_provenance": true,
+    "clinical_interpretation": false,
+    "treatment_logic": false,
+    "prescribing_authority": false,
+    "clinical_authority_transfer": false,
+    "patient_scoped_operation_execution": false,
+    "automatic_action_allowed": false,
+    "diagnostic_runtime_active": false,
+    "evidence_admitted": false,
+    "reportable_clinical_metrics": false,
+    "project_gold_admitted": false,
+    "clinical_release_authorized": false,
+    "real_clinical_image_validation_established": false
+  }
+}
