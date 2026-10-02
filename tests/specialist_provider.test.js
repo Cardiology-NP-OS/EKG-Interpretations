@@ -66,6 +66,8 @@ test("provider status exposes full specialist surfaces without authority", () =>
   assert.strictEqual(out.operations.waveform_execute.available, true);
   assert.strictEqual(out.operations.image_file_intake.available, true);
   assert.strictEqual(out.operations.image_case_pipeline.available, true);
+  assert.strictEqual(out.operations.image_case_reader_pipeline.available, true);
+  assert.strictEqual(out.operations.image_case_reader_pipeline.returnsStructuredReader, true);
   assert.strictEqual(out.operations.image_review.available, true);
   assert.strictEqual(out.operations.clinician_reader.available, true);
   assert.strictEqual(out.operations.clinician_correction_append.available, true);
@@ -74,6 +76,7 @@ test("provider status exposes full specialist surfaces without authority", () =>
   assert.strictEqual(out.imageCapabilities.multileadReview, true);
   assert.strictEqual(out.imageCapabilities.structuredClinicianReader, true);
   assert.strictEqual(out.imageCapabilities.appendOnlyClinicianCorrectionProvider, true);
+  assert.strictEqual(out.imageCapabilities.endToEndPersistedReaderWorkflow, true);
   assert.strictEqual(out.diagnosticRuntime, "GOVERNED_INACTIVE");
   assert.strictEqual(out.runtimeAuthority, false);
 });

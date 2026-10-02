@@ -37,6 +37,7 @@
     "validate:qrs-v2-development": "node validation/development/run_qrs_v2_synthetic_dev.js",
     "validate:qrs-v2-ludb-train": "python3 validation/development/run_ludb_qrs_v2_dev.py",
     "validate:qrs-v2-ludb-coverage-v2-train": "python3 validation/development/run_ludb_qrs_v2_coverage_v2_dev.py",
-    "validate:qrs-v2-ludb-coverage-v2-holdout": "python3 validation/development/run_ludb_qrs_v2_coverage_v2_holdout.py"
+    "validate:qrs-v2-ludb-coverage-v2-holdout": "python3 validation/development/run_ludb_qrs_v2_coverage_v2_holdout.py",
+    "test:provider-e2e": "node tests/specialist_provider_end_to_end.test.js"
   }
 }

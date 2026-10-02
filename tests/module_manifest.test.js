@@ -33,6 +33,7 @@ const expectedCapabilities = [
   "append_only_clinician_correction",
   "structured_clinician_reader_model",
   "provider_clinician_correction_append",
+  "provider_end_to_end_persisted_reader_workflow",
 ];
 for (const capability of expectedCapabilities) assert.ok(manifest.capabilities.includes(capability), capability);
 
