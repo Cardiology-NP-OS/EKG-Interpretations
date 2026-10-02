@@ -103,6 +103,30 @@ test("a clinician correction is append-only and leaves the analysis bytes unchan
   }
 });
 
+test("correction staging remains at the case root instead of the deep content-addressed parent", () => {
+  const fx = fixture();
+  const realMkdtempSync = fs.mkdtempSync;
+  let observedPrefix = null;
+  try {
+    fs.mkdtempSync = prefix => {
+      observedPrefix = prefix;
+      return realMkdtempSync(prefix);
+    };
+    const receipt = persistClinicianCorrection(fx.caseReceipt.path, {
+      analysisId: fx.analysisReceipt.analysisId,
+      reviewerId: "synthetic-reviewer-1",
+      statement: "Synthetic review note for Windows staging-path verification.",
+    });
+    const caseDir = path.dirname(fx.caseReceipt.path);
+    assert.strictEqual(observedPrefix, path.join(caseDir, ".correction-staging-"));
+    assert.ok(!observedPrefix.includes(path.join("analyses", fx.analysisReceipt.analysisId, "corrections")));
+    assert.ok(fs.existsSync(receipt.path));
+  } finally {
+    fs.mkdtempSync = realMkdtempSync;
+    fs.rmSync(fx.root, { recursive: true, force: true });
+  }
+});
+
 test("corrections reject authority claims, patient fields and a missing analysis", () => {
   const fx = fixture();
   try {
