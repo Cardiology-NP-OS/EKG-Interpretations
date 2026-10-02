@@ -19,7 +19,8 @@
     "six_axis_review_score",
     "two_reviewer_session",
     "clinician_review_bundle",
-    "append_only_clinician_correction"
+    "append_only_clinician_correction",
+    "structured_clinician_reader_model"
   ],
   "safety": {
     "no_phi": false,

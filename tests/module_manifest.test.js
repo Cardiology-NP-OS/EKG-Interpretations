@@ -31,6 +31,7 @@ const expectedCapabilities = [
   "two_reviewer_session",
   "clinician_review_bundle",
   "append_only_clinician_correction",
+  "structured_clinician_reader_model",
 ];
 for (const capability of expectedCapabilities) assert.ok(manifest.capabilities.includes(capability), capability);
 
@@ -51,6 +52,7 @@ const analysis = require("../lib/image_analysis_store");
 const corrections = require("../lib/clinician_correction_store");
 const bundle = require("../lib/clinician_review_bundle");
 const provider = require("../tools/specialist_provider");
+const reader = require("../lib/clinician_reader_model");
 
 assert.strictEqual(typeof intake.runImageIntakePipeline, "function");
 assert.strictEqual(typeof analysis.persistImageAnalysis, "function");
@@ -61,6 +63,7 @@ assert.strictEqual(typeof bundle.persistClinicianReviewBundle, "function");
 assert.strictEqual(typeof bundle.readClinicianReviewBundle, "function");
 assert.strictEqual(typeof provider.dispatch, "function");
 assert.strictEqual(typeof provider.status, "function");
+assert.strictEqual(typeof reader.buildClinicianReaderModel, "function");
 
 const status = provider.status();
 assert.strictEqual(status.diagnosticRuntime, "GOVERNED_INACTIVE");
