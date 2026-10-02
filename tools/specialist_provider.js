@@ -7,6 +7,7 @@ const { persistImageExtraction, readImageExtraction } = require("../lib/image_ex
 const { runImageSignalAnalysis, validateConfig } = require("../lib/image_signal_analysis");
 const { validateMeasurementConfig } = require("../lib/signal_measurement_pipeline");
 const { persistImageAnalysis } = require("../lib/image_analysis_store");
+const CASE_ID_RE = /^[a-f0-9]{64}$/;
 const { buildClinicianReaderModel } = require("../lib/clinician_reader_model");
 const { persistClinicianCorrection } = require("../lib/clinician_correction_store");
 const { writeExecution } = require("./run_ecg_pipeline");
@@ -45,6 +46,7 @@ function status() {
       waveform_execute: { available: true, input: "LOCAL_WFDB_FILES" },
       image_file_intake: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: false },
       image_case_pipeline: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: true },
+      image_case_reader_pipeline: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: true, returnsStructuredReader: true },
       image_review: { available: true, input: "CONTENT_ADDRESSED_EXTRACTION" },
       clinician_reader: { available: true, input: "PERSISTED_CASE_PATH_AND_ANALYSIS_ID", persistence: false },
       clinician_correction_append: { available: true, input: "PERSISTED_CASE_PATH_ANALYSIS_ID_REVIEWER_STATEMENT", persistence: true, appendOnly: true },
@@ -66,6 +68,7 @@ function status() {
       multileadReview: true,
       structuredClinicianReader: true,
       appendOnlyClinicianCorrectionProvider: true,
+      endToEndPersistedReaderWorkflow: true,
     },
     disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
@@ -135,10 +138,50 @@ function runImageCasePipeline(request) {
   };
 }
 
+function resolveCasePath(request, code) {
+  const hasPath = typeof request.casePath === "string" && request.casePath.length > 0;
+  const hasHandle =
+    typeof request.caseRoot === "string" && request.caseRoot.length > 0 &&
+    typeof request.caseId === "string" && request.caseId.length > 0;
+  requireCondition(hasPath !== hasHandle, code + "_CASE_LOCATOR");
+  if (hasPath) return request.casePath;
+  requireCondition(CASE_ID_RE.test(request.caseId), code + "_CASE_ID");
+  return path.join(path.resolve(request.caseRoot), `case-${request.caseId}`, "manifest.json");
+}
+
+function runImageCaseReaderPipeline(request) {
+  requireCondition(typeof request.caseRoot === "string" && request.caseRoot.length > 0, "PROVIDER_CASE_ROOT_REQUIRED");
+  requireCondition(request.input && typeof request.input === "object", "PROVIDER_IMAGE_INPUT_REQUIRED");
+  requireCondition(request.analysisConfig && typeof request.analysisConfig === "object", "PROVIDER_ANALYSIS_CONFIG_REQUIRED");
+  validateConfig(request.analysisConfig);
+  validateMeasurementConfig(request.analysisConfig.measurement);
+
+  const persisted = runAndPersistImageFileIntake(request.caseRoot, request.input);
+  const extractionReceipt = persistImageExtraction(persisted.caseReceipt.path, persisted.fileIntake.result);
+  const extraction = readImageExtraction(persisted.caseReceipt.path, extractionReceipt.extractionId);
+  const review = assertInactive(runImageSignalAnalysis(extraction, request.analysisConfig));
+  const analysisReceipt = persistImageAnalysis(persisted.caseReceipt.path, review);
+  const reader = assertInactive(buildClinicianReaderModel(persisted.caseReceipt.path, analysisReceipt.analysisId));
+
+  return {
+    schema: "ekg-specialist-image-case-reader-pipeline-result-v1",
+    caseHandle: {
+      caseId: persisted.caseReceipt.caseId,
+      analysisId: analysisReceipt.analysisId,
+    },
+    case: stripPath(persisted.caseReceipt),
+    extraction: stripPath(extractionReceipt),
+    analysis: stripPath(analysisReceipt),
+    reader,
+    disclaimer: ENGINEERING_DISCLAIMER,
+    ...AUTHORITY,
+  };
+}
+
 function runClinicianReader(request) {
-  requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, "PROVIDER_READER_CASE_PATH_REQUIRED");
+  const casePath = resolveCasePath(request, "PROVIDER_READER");
   requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_READER_ANALYSIS_ID_REQUIRED");
-  const reader = assertInactive(buildClinicianReaderModel(request.casePath, request.analysisId));
+  const reader = assertInactive(buildClinicianReaderModel(casePath, request.analysisId));
   return {
     schema: "ekg-specialist-clinician-reader-result-v1",
     reader,
@@ -148,9 +191,9 @@ function runClinicianReader(request) {
 }
 
 function runClinicianCorrection(request) {
-  const allowed = new Set(["operation", "casePath", "analysisId", "reviewerId", "statement", "supersedes"]);
+  const allowed = new Set(["operation", "casePath", "caseRoot", "caseId", "analysisId", "reviewerId", "statement", "supersedes"]);
   requireCondition(Object.keys(request).every(key => allowed.has(key)), "PROVIDER_CORRECTION_FIELDS");
-  requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, "PROVIDER_CORRECTION_CASE_PATH_REQUIRED");
+  const casePath = resolveCasePath(request, "PROVIDER_CORRECTION");
   requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_CORRECTION_ANALYSIS_ID_REQUIRED");
   requireCondition(typeof request.reviewerId === "string" && request.reviewerId.length > 0, "PROVIDER_CORRECTION_REVIEWER_REQUIRED");
   requireCondition(typeof request.statement === "string" && request.statement.length > 0, "PROVIDER_CORRECTION_STATEMENT_REQUIRED");
@@ -160,8 +203,8 @@ function runClinicianCorrection(request) {
     statement: request.statement,
     ...(Object.hasOwn(request, "supersedes") ? { supersedes: request.supersedes } : {}),
   };
-  const correction = persistClinicianCorrection(request.casePath, input);
-  const reader = assertInactive(buildClinicianReaderModel(request.casePath, request.analysisId));
+  const correction = persistClinicianCorrection(casePath, input);
+  const reader = assertInactive(buildClinicianReaderModel(casePath, request.analysisId));
   return {
     schema: "ekg-specialist-clinician-correction-result-v1",
     correction: stripPath(correction),
@@ -193,6 +236,7 @@ function dispatch(request) {
     case "waveform_execute": return runWaveform(request);
     case "image_file_intake": return runImageFile(request);
     case "image_case_pipeline": return runImageCasePipeline(request);
+    case "image_case_reader_pipeline": return runImageCaseReaderPipeline(request);
     case "clinician_reader": return runClinicianReader(request);
     case "clinician_correction_append": return runClinicianCorrection(request);
     case "image_review": return {
