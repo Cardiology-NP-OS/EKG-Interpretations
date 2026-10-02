@@ -8,6 +8,7 @@ const { runImageSignalAnalysis, validateConfig } = require("../lib/image_signal_
 const { validateMeasurementConfig } = require("../lib/signal_measurement_pipeline");
 const { persistImageAnalysis } = require("../lib/image_analysis_store");
 const { buildClinicianReaderModel } = require("../lib/clinician_reader_model");
+const { persistClinicianCorrection } = require("../lib/clinician_correction_store");
 const { writeExecution } = require("./run_ecg_pipeline");
 
 const ENGINEERING_DISCLAIMER = "Engineering output - not clinically validated. Clinician review required.";
@@ -46,6 +47,7 @@ function status() {
       image_case_pipeline: { available: true, input: "PNG_JPEG_PDF_FILE", persistence: true },
       image_review: { available: true, input: "CONTENT_ADDRESSED_EXTRACTION" },
       clinician_reader: { available: true, input: "PERSISTED_CASE_PATH_AND_ANALYSIS_ID", persistence: false },
+      clinician_correction_append: { available: true, input: "PERSISTED_CASE_PATH_ANALYSIS_ID_REVIEWER_STATEMENT", persistence: true, appendOnly: true },
     },
     imageCapabilities: {
       png: true,
@@ -63,6 +65,7 @@ function status() {
       immutableAnalyses: true,
       multileadReview: true,
       structuredClinicianReader: true,
+      appendOnlyClinicianCorrectionProvider: true,
     },
     disclaimer: ENGINEERING_DISCLAIMER,
     ...AUTHORITY,
@@ -144,6 +147,30 @@ function runClinicianReader(request) {
   };
 }
 
+function runClinicianCorrection(request) {
+  const allowed = new Set(["operation", "casePath", "analysisId", "reviewerId", "statement", "supersedes"]);
+  requireCondition(Object.keys(request).every(key => allowed.has(key)), "PROVIDER_CORRECTION_FIELDS");
+  requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, "PROVIDER_CORRECTION_CASE_PATH_REQUIRED");
+  requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_CORRECTION_ANALYSIS_ID_REQUIRED");
+  requireCondition(typeof request.reviewerId === "string" && request.reviewerId.length > 0, "PROVIDER_CORRECTION_REVIEWER_REQUIRED");
+  requireCondition(typeof request.statement === "string" && request.statement.length > 0, "PROVIDER_CORRECTION_STATEMENT_REQUIRED");
+  const input = {
+    analysisId: request.analysisId,
+    reviewerId: request.reviewerId,
+    statement: request.statement,
+    ...(Object.hasOwn(request, "supersedes") ? { supersedes: request.supersedes } : {}),
+  };
+  const correction = persistClinicianCorrection(request.casePath, input);
+  const reader = assertInactive(buildClinicianReaderModel(request.casePath, request.analysisId));
+  return {
+    schema: "ekg-specialist-clinician-correction-result-v1",
+    correction: stripPath(correction),
+    reader,
+    disclaimer: ENGINEERING_DISCLAIMER,
+    ...AUTHORITY,
+  };
+}
+
 function runWaveform(request) {
   requireCondition(request.args && typeof request.args === "object", "PROVIDER_WAVEFORM_ARGS_REQUIRED");
   const out = writeExecution(request.args);
@@ -167,6 +194,7 @@ function dispatch(request) {
     case "image_file_intake": return runImageFile(request);
     case "image_case_pipeline": return runImageCasePipeline(request);
     case "clinician_reader": return runClinicianReader(request);
+    case "clinician_correction_append": return runClinicianCorrection(request);
     case "image_review": return {
       schema: "ekg-specialist-image-review-result-v1",
       review: summarizeReview(runImageReview(request)),
