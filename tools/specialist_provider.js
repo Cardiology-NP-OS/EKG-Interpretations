@@ -139,13 +139,19 @@ function runImageCasePipeline(request) {
 }
 
 function resolveCasePath(request, code) {
-  const hasPath = typeof request.casePath === "string" && request.casePath.length > 0;
-  const hasHandle =
-    typeof request.caseRoot === "string" && request.caseRoot.length > 0 &&
-    typeof request.caseId === "string" && request.caseId.length > 0;
-  requireCondition(hasPath !== hasHandle, code + "_CASE_LOCATOR");
-  if (hasPath) return request.casePath;
-  requireCondition(CASE_ID_RE.test(request.caseId), code + "_CASE_ID");
+  // Locator presence, not its truthy value, determines mutually exclusive routes.
+  // Reject mixed/partial handles before any persisted-case filesystem access.
+  const hasPath = Object.hasOwn(request, "casePath");
+  const hasRoot = Object.hasOwn(request, "caseRoot");
+  const hasId = Object.hasOwn(request, "caseId");
+  requireCondition(!(hasPath && (hasRoot || hasId)), code + "_CASE_LOCATOR");
+  if (hasPath) {
+    requireCondition(typeof request.casePath === "string" && request.casePath.length > 0, code + "_CASE_PATH_REQUIRED");
+    return request.casePath;
+  }
+  requireCondition(hasRoot && hasId, code + "_CASE_LOCATOR");
+  requireCondition(typeof request.caseRoot === "string" && request.caseRoot.length > 0, code + "_CASE_ROOT_REQUIRED");
+  requireCondition(typeof request.caseId === "string" && CASE_ID_RE.test(request.caseId), code + "_CASE_ID");
   return path.join(path.resolve(request.caseRoot), `case-${request.caseId}`, "manifest.json");
 }
 
@@ -179,6 +185,8 @@ function runImageCaseReaderPipeline(request) {
 }
 
 function runClinicianReader(request) {
+  const allowed = new Set(["operation", "casePath", "caseRoot", "caseId", "analysisId"]);
+  requireCondition(Object.keys(request).every(key => allowed.has(key)), "PROVIDER_READER_FIELDS");
   const casePath = resolveCasePath(request, "PROVIDER_READER");
   requireCondition(typeof request.analysisId === "string" && request.analysisId.length > 0, "PROVIDER_READER_ANALYSIS_ID_REQUIRED");
   const reader = assertInactive(buildClinicianReaderModel(casePath, request.analysisId));
