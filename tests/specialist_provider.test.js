@@ -81,6 +81,30 @@ test("provider status exposes full specialist surfaces without authority", () =>
   assert.strictEqual(out.runtimeAuthority, false);
 });
 
+test("provider case locators reject ambiguous, partial and unrelated fields before storage", () => {
+  const root = path.join(os.tmpdir(), "ekg-provider-synthetic-nonexistent-" + "a".repeat(64));
+  const caseId = "a".repeat(64);
+  const pathOnly = { operation: "clinician_reader", casePath: path.join(root, "missing.json"), analysisId: "synthetic-analysis" };
+  const byHandle = { operation: "clinician_reader", caseRoot: root, caseId, analysisId: "synthetic-analysis" };
+  const correction = {
+    operation: "clinician_correction_append",
+    caseRoot: root, caseId, analysisId: "synthetic-analysis",
+    reviewerId: "synthetic-reviewer", statement: "Synthetic correction only.",
+  };
+  assert.throws(() => dispatch({ ...byHandle, casePath: "" }), /PROVIDER_READER_CASE_LOCATOR/);
+  assert.throws(() => dispatch({ ...pathOnly, caseId: "BAD" }), /PROVIDER_READER_CASE_LOCATOR/);
+  assert.throws(() => dispatch({ ...pathOnly, patientId: "synthetic-forbidden" }), /PROVIDER_READER_FIELDS/);
+  assert.throws(() => dispatch({ operation: "clinician_reader", caseRoot: root, analysisId: "synthetic-analysis" }), /PROVIDER_READER_CASE_LOCATOR/);
+  assert.throws(() => dispatch({ ...pathOnly, casePath: "" }), /PROVIDER_READER_CASE_PATH_REQUIRED/);
+  assert.throws(() => dispatch({ ...correction, casePath: "" }), /PROVIDER_CORRECTION_CASE_LOCATOR/);
+  assert.throws(() => dispatch({
+    operation: "clinician_correction_append", casePath: path.join(root, "missing.json"),
+    caseId: "BAD", analysisId: "synthetic-analysis", reviewerId: "synthetic-reviewer",
+    statement: "Synthetic correction only.",
+  }), /PROVIDER_CORRECTION_CASE_LOCATOR/);
+  assert.throws(() => dispatch({ ...correction, caseId: "BAD" }), /PROVIDER_CORRECTION_CASE_ID/);
+});
+
 test("provider image review executes existing specialist analysis", () => {
   const out = dispatch({
     operation: "image_review",
